@@ -5,6 +5,10 @@ export default {
   content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
   prefix: "",
   theme: {
+    fontFamily: {
+      sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+      display: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+    },
     container: {
       center: true,
       padding: "2rem",
@@ -22,6 +26,12 @@ export default {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
+          deep: "hsl(var(--primary-deep))",
+          soft: "hsl(var(--primary-soft))",
+        },
+        brand: {
+          green: "#39b44a",
+          orange: "#ff9b17",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
