@@ -5,6 +5,9 @@ import { Solutions } from "@/components/site/Solutions";
 import { Sharp } from "@/components/site/Sharp";
 import { Trust } from "@/components/site/Trust";
 import { Mobile } from "@/components/site/Mobile";
+import { Partners } from "@/components/site/Partners";
+import { CaseStudies } from "@/components/site/CaseStudies";
+import { FAQ } from "@/components/site/FAQ";
 import { CTASection } from "@/components/site/CTASection";
 import { Footer } from "@/components/site/Footer";
 import { ChatBubble } from "@/components/site/ChatBubble";
@@ -31,7 +34,10 @@ const Index = () => {
       <Solutions />
       <Sharp />
       <Trust />
+      <CaseStudies />
+      <Partners />
       <Mobile />
+      <FAQ />
       <CTASection />
       <Footer />
       <ChatBubble />
