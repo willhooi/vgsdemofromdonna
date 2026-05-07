@@ -57,9 +57,9 @@ export const Hero = () => {
 
           <dl className="mt-12 grid max-w-xl grid-cols-3 gap-6 border-t border-border pt-8 animate-fade-up" style={{ animationDelay: "320ms" }}>
             {[
-              { k: "76+", v: "Enterprise clients" },
-              { k: "15", v: "Years of heritage" },
-              { k: "5M", v: "Messages / day" },
+              { k: "5M+", v: "Messages / day" },
+              { k: "15+", v: "Years of heritage" },
+              { k: "5,000+", v: "Brands trusted" },
             ].map((s) => (
               <div key={s.k}>
                 <dt className="text-2xl md:text-3xl font-extrabold tracking-tight text-foreground">{s.k}</dt>
