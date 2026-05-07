@@ -32,7 +32,6 @@ const Index = () => {
       <LogoMarquee />
       <Solutions />
       <Sharp />
-      <Trust />
       <CaseStudies />
       <Partners />
       <Mobile />
