@@ -81,7 +81,7 @@ export const Trust = () => (
         <div className="grid grid-cols-2 gap-4">
           {[
             { k: "5,000+", v: "Brands trusted across banking, retail, airlines & telco" },
-            { k: "15+", v: "Years of messaging heritage in Vietnam" },
+            { k: "19", v: "Years of messaging heritage in Vietnam" },
             { k: "5M+", v: "Messages delivered every single day" },
             { k: "99.9%", v: "Platform availability, monitored 24/7" },
           ].map((s, i) => (

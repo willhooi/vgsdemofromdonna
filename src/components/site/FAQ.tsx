@@ -16,7 +16,7 @@ const faqs = [
   },
   {
     q: "Quy mô vận hành của VietGuys ra sao?",
-    a: "Hơn 15 năm kinh nghiệm, phục vụ hơn 5,000 nhãn hàng và gửi đi khoảng 5,000,000 tin nhắn SMS & Email mỗi ngày. Đội ngũ chuyên gia hỗ trợ khách hàng 24/7.",
+    a: "Hơn 19 năm kinh nghiệm, phục vụ hơn 5,000 nhãn hàng và gửi đi khoảng 5,000,000 tin nhắn SMS & Email mỗi ngày. Đội ngũ chuyên gia hỗ trợ khách hàng 24/7.",
   },
   {
     q: "Lợi ích sau khi VietGuys M&A với Accrete Inc. (Nhật Bản) là gì?",
