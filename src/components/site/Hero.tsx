@@ -23,12 +23,13 @@ export const Hero = () => {
             </span>
           </h1>
           <p
-            className="mt-6 max-w-xl text-lg text-muted-foreground text-balance animate-fade-up"
+            className="mt-6 max-w-xl text-muted-foreground text-balance animate-fade-up text-base"
             style={{ animationDelay: "160ms" }}
           >
-            VietGuys converges 15+ years of messaging infrastructure, a licensed telecom operator,
-            and modern AI — across SMS, Zalo, Viber, Email and ZNS — built to Japanese standards
-            of precision and trust.
+            Founded in 2007, VietGuys is Vietnam’s leading AI-powered customer engagement platform,
+            helping 5,000+ brands optimize customer connections through SMS, Zalo, and omnichannel
+            solutions. Backed by Accrete Inc. (Japan), we combine trusted messaging infrastructure,
+            advanced AI, and local expertise to deliver smarter customer experiences.
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-3 animate-fade-up" style={{ animationDelay: "240ms" }}>
