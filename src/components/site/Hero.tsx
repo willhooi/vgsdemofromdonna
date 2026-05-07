@@ -70,57 +70,8 @@ export const Hero = () => {
         </div>
 
         <div className="relative lg:col-span-5">
-          <div className="relative grid grid-cols-6 grid-rows-6 gap-3 h-[420px] md:h-[480px]">
-            <div className="col-span-4 row-span-4 relative overflow-hidden rounded-3xl border border-border shadow-[var(--shadow-card)] animate-fade-up">
-              <img
-                src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=900&q=80"
-                alt="Customer engagement team collaborating in a modern office"
-                loading="lazy"
-                className="h-full w-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 via-transparent to-transparent" />
-            </div>
-            <div className="col-span-2 row-span-3 col-start-5 row-start-1 overflow-hidden rounded-2xl border border-border shadow-[var(--shadow-card)] animate-fade-up" style={{ animationDelay: "120ms" }}>
-              <img
-                src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=600&q=80"
-                alt="Customer support specialist smiling on a call"
-                loading="lazy"
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <div className="col-span-2 row-span-2 col-start-1 row-start-5 overflow-hidden rounded-2xl border border-border shadow-[var(--shadow-card)] animate-fade-up" style={{ animationDelay: "200ms" }}>
-              <img
-                src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=600&q=80"
-                alt="Person using a smartphone receiving brand messages"
-                loading="lazy"
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <div className="col-span-4 row-span-2 col-start-3 row-start-5 overflow-hidden rounded-2xl border border-border shadow-[var(--shadow-card)] animate-fade-up" style={{ animationDelay: "280ms" }}>
-              <img
-                src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=900&q=80"
-                alt="Diverse Vietnamese business team meeting"
-                loading="lazy"
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <div className="absolute -left-3 top-6 hidden md:flex items-center gap-2 rounded-full border border-border bg-background/90 px-3 py-2 shadow-[var(--shadow-card)] backdrop-blur animate-fade-up" style={{ animationDelay: "360ms" }}>
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-              </span>
-              <span className="text-[11px] font-semibold text-foreground">5M msgs delivered today</span>
-            </div>
-            <div className="absolute -right-3 bottom-24 hidden md:block rounded-2xl border border-border bg-background/95 px-3 py-2 shadow-[var(--shadow-card)] backdrop-blur animate-fade-up" style={{ animationDelay: "440ms" }}>
-              <div className="flex items-center gap-2">
-                <div className="flex -space-x-2">
-                  <img src="https://i.pravatar.cc/40?img=12" alt="" className="h-6 w-6 rounded-full border-2 border-background" />
-                  <img src="https://i.pravatar.cc/40?img=32" alt="" className="h-6 w-6 rounded-full border-2 border-background" />
-                  <img src="https://i.pravatar.cc/40?img=47" alt="" className="h-6 w-6 rounded-full border-2 border-background" />
-                </div>
-                <span className="text-[11px] font-semibold text-foreground">5,000+ brands trust us</span>
-              </div>
-            </div>
+          <div className="animate-float">
+            <AICore />
           </div>
           <a
             href="https://www.accrete-inc.com/"
