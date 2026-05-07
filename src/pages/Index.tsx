@@ -15,7 +15,7 @@ import { useEffect } from "react";
 const Index = () => {
   useEffect(() => {
     document.title = "VietGuys — AI-Powered Customer Engagement for Vietnam's Enterprises";
-    const desc = "VietGuys: AI-powered SMS, Zalo, ZNS, Viber & Email engagement. 15+ years, 5M messages daily, ISO 27001. Backed by Accrete Inc., Japan.";
+    const desc = "VietGuys: AI-powered SMS, Zalo, ZNS, Viber & Email engagement. 19 years, 5M messages daily, ISO 27001. Backed by Accrete Inc., Japan.";
     let m = document.querySelector('meta[name="description"]');
     if (!m) {
       m = document.createElement("meta");
