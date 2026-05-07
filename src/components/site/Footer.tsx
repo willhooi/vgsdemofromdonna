@@ -12,7 +12,7 @@ export const Footer = () => (
       </div>
       {[
         { h: "Solutions", l: ["Core Messaging", "PangoCDP", "Behavioural AI", "Account Intelligence"] },
-        { h: "Company", l: ["About VietGuys", "SHARP Methodology", "Accrete Inc.", "Careers"] },
+        { h: "Company", l: [{ t: "About VietGuys", h: "/about" }, { t: "SHARP Methodology", h: "/#sharp" }, { t: "Accrete Inc.", h: "https://www.accrete-inc.com/" }, { t: "Careers", h: "#" }] as any },
         { h: "Resources", l: ["Insights", "Case Studies", "Security · ISO 27001", "Contact Sales"] },
       ].map((c) => (
         <div key={c.h}>
