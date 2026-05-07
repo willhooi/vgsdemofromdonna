@@ -14,10 +14,10 @@ export const Hero = () => {
             <Sparkles className="h-3.5 w-3.5" /> AI-Powered Customer Engagement
           </span>
           <h1 className="heading-display mt-6 text-balance animate-fade-up" style={{ animationDelay: "80ms" }}>
-            The intelligent way Vietnam&apos;s enterprises{" "}
+            The intelligent way{" "}
             <span className="relative inline-block">
               <span className="relative z-10 bg-[var(--gradient-brand)] bg-clip-text text-transparent">
-                speak to customers.
+                brands connect with customers.
               </span>
               <span
                 className="absolute -bottom-1 left-0 right-0 h-1.5 rounded-full bg-[hsl(var(--accent))]/70 animate-underline"
