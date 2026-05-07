@@ -13,17 +13,26 @@ export const Hero = () => {
           <span className="eyebrow animate-fade-up">
             <Sparkles className="h-3.5 w-3.5" /> AI-Powered Customer Engagement
           </span>
-          <h1 className="heading-display mt-6 text-balance animate-fade-up" style={{ animationDelay: "80ms" }}>
-            The intelligent way{" "}
+          <h1 className="heading-display mt-6 text-balance" style={{ animationDelay: "80ms" }}>
+            <span className="inline-block animate-fade-up" style={{ animationDelay: "60ms" }}>The</span>{" "}
+            <span className="inline-block animate-fade-up" style={{ animationDelay: "140ms" }}>intelligent</span>{" "}
+            <span className="inline-block animate-fade-up" style={{ animationDelay: "220ms" }}>way</span>{" "}
+            <span className="inline-block animate-fade-up" style={{ animationDelay: "300ms" }}>for</span>{" "}
+            <span className="inline-block animate-fade-up" style={{ animationDelay: "380ms" }}>brands</span>{" "}
             <span className="relative inline-block">
-              <span className="relative z-10 bg-[var(--gradient-brand)] bg-clip-text text-transparent">
-                brands connect with customers.
+              <span
+                className="relative z-10 inline-block bg-[var(--gradient-brand)] bg-clip-text text-transparent animate-connect"
+                style={{ animationDelay: "520ms" }}
+              >
+                to connect
               </span>
               <span
                 className="absolute -bottom-1 left-0 right-0 h-1.5 rounded-full bg-[hsl(var(--accent))]/70 animate-underline"
-                style={{ animationDelay: "700ms" }}
+                style={{ animationDelay: "900ms" }}
               />
-            </span>
+            </span>{" "}
+            <span className="inline-block animate-fade-up" style={{ animationDelay: "700ms" }}>with</span>{" "}
+            <span className="inline-block animate-fade-up" style={{ animationDelay: "780ms" }}>customers.</span>
           </h1>
           <p
             className="mt-6 max-w-xl text-muted-foreground text-balance animate-fade-up text-base"
