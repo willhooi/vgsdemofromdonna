@@ -1,4 +1,4 @@
-import { ShieldCheck, Building2, Languages, BadgeCheck } from "lucide-react";
+import { ShieldCheck, Building2, Languages } from "lucide-react";
 import accreteLogo from "@/assets/accrete-logo.svg";
 
 export const Trust = () => (
@@ -16,50 +16,7 @@ export const Trust = () => (
           reliability to Vietnam&apos;s leading enterprises.
         </p>
 
-        {/* Strategic highlight: Accrete backing */}
-        <a
-          href="https://www.accrete-inc.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group relative mt-8 block overflow-hidden rounded-3xl border border-border bg-background p-5 shadow-[var(--shadow-card)] transition-all hover:-translate-y-0.5 hover:shadow-[var(--shadow-elegant)] sm:p-6"
-        >
-          <div
-            className="pointer-events-none absolute inset-0 opacity-[0.07]"
-            style={{ background: "var(--gradient-brand)" }}
-          />
-          <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full blur-3xl opacity-30" style={{ background: "var(--gradient-brand)" }} />
-          <div className="relative flex flex-col gap-4 sm:flex-row sm:items-center">
-            <div className="flex h-16 w-32 shrink-0 items-center justify-center rounded-xl border border-border bg-white p-2 sm:h-20 sm:w-40">
-              <img
-                src={accreteLogo}
-                alt="Accrete Inc. logo"
-                loading="lazy"
-                className="h-full w-full object-contain"
-              />
-            </div>
-            <div className="min-w-0 flex-1">
-              <div className="flex items-center gap-2">
-                <BadgeCheck className="h-4 w-4 text-primary" />
-                <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                  Strategic backing
-                </span>
-              </div>
-              <p className="mt-1.5 text-sm font-bold text-foreground sm:text-base">
-                Backed by Accrete Inc.
-              </p>
-              <p className="mt-0.5 text-xs text-muted-foreground sm:text-sm">
-                Tokyo Stock Exchange-listed · Japan
-              </p>
-            </div>
-            <div className="hidden shrink-0 sm:block">
-              <span className="inline-flex items-center gap-1 rounded-full border border-border bg-background/80 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-foreground/80 backdrop-blur">
-                TSE: 4395
-              </span>
-            </div>
-          </div>
-        </a>
-
-        <div className="mt-6 grid gap-3 sm:grid-cols-3">
+        <div className="mt-8 grid gap-3 sm:grid-cols-3">
           {[
             { i: ShieldCheck, t: "ISO 27001:2013", d: "Information security certified" },
             { i: Building2, t: "Accrete Inc.", d: "Tokyo Stock Exchange-listed" },
