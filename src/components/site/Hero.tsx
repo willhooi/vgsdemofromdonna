@@ -44,38 +44,7 @@ export const Hero = () => {
             solutions. Backed by Accrete Inc. (Japan), we combine trusted messaging infrastructure,
             advanced AI, and local expertise to deliver smarter customer experiences.
           </p>
-
-          <a
-            href="https://www.accrete-inc.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group relative mt-6 flex max-w-xl items-center gap-3 overflow-hidden rounded-2xl border border-border bg-background/80 p-3 shadow-[var(--shadow-card)] backdrop-blur transition-all hover:-translate-y-0.5 hover:shadow-[var(--shadow-elegant)] animate-fade-up sm:p-3.5"
-            style={{ animationDelay: "200ms" }}
-          >
-            <div
-              className="pointer-events-none absolute inset-0 opacity-[0.06]"
-              style={{ background: "var(--gradient-brand)" }}
-            />
-            <div className="relative flex h-10 w-20 shrink-0 items-center justify-center rounded-lg border border-border bg-white p-1 sm:h-11 sm:w-24">
-              <img src={accreteLogo} alt="Accrete Inc. logo" loading="lazy" className="h-full w-full object-contain" />
-            </div>
-            <div className="relative min-w-0 flex-1">
-              <div className="flex items-center gap-1.5">
-                <BadgeCheck className="h-3.5 w-3.5 text-primary" />
-                <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-                  Strategic backing
-                </span>
-              </div>
-              <p className="mt-0.5 truncate text-sm font-bold text-foreground">
-                Backed by Accrete Inc. <span className="font-medium text-muted-foreground">· Tokyo Stock Exchange-listed</span>
-              </p>
-            </div>
-            <span className="relative hidden shrink-0 rounded-full border border-border bg-background/80 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-foreground/80 sm:inline-flex">
-              TSE: 4395
-            </span>
-          </a>
-
-          <div className="mt-7 flex flex-wrap items-center gap-3 animate-fade-up" style={{ animationDelay: "240ms" }}>
+          <div className="mt-9 flex flex-wrap items-center gap-3 animate-fade-up" style={{ animationDelay: "240ms" }}>
             <Button variant="cta" size="lg" asChild>
               <a href="#contact">
                 Book a Demo <ArrowRight className="h-4 w-4" />
