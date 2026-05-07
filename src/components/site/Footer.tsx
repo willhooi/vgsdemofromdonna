@@ -10,18 +10,33 @@ export const Footer = () => (
           Backed by Accrete Inc., Japan.
         </p>
       </div>
-      {[
-        { h: "Solutions", l: ["Core Messaging", "PangoCDP", "Behavioural AI", "Account Intelligence"] },
-        { h: "Company", l: ["About VietGuys", "SHARP Methodology", "Accrete Inc.", "Careers"] },
-        { h: "Resources", l: ["Insights", "Case Studies", "Security · ISO 27001", "Contact Sales"] },
-      ].map((c) => (
+      {([
+        { h: "Solutions", l: [
+          { t: "Core Messaging", h: "/#solutions" },
+          { t: "PangoCDP", h: "/#solutions" },
+          { t: "Behavioural AI", h: "/#sharp" },
+          { t: "Account Intelligence", h: "/#sharp" },
+        ]},
+        { h: "Company", l: [
+          { t: "About VietGuys", h: "/about" },
+          { t: "SHARP Methodology", h: "/#sharp" },
+          { t: "Accrete Inc.", h: "https://www.accrete-inc.com/" },
+          { t: "Careers", h: "#" },
+        ]},
+        { h: "Resources", l: [
+          { t: "Insights", h: "/#insights" },
+          { t: "Case Studies", h: "/#insights" },
+          { t: "Security · ISO 27001", h: "/#trust" },
+          { t: "Contact Sales", h: "/#contact" },
+        ]},
+      ]).map((c) => (
         <div key={c.h}>
           <h4 className="text-xs font-bold uppercase tracking-[0.18em] text-foreground">{c.h}</h4>
           <ul className="mt-4 space-y-2.5">
             {c.l.map((i) => (
-              <li key={i}>
-                <a href="#" className="text-sm text-muted-foreground transition-colors hover:text-primary">
-                  {i}
+              <li key={i.t}>
+                <a href={i.h} className="text-sm text-muted-foreground transition-colors hover:text-primary">
+                  {i.t}
                 </a>
               </li>
             ))}
