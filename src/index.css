@@ -154,3 +154,22 @@
   transform-origin: left center;
   animation: underline-grow 0.9s var(--ease-smooth) both;
 }
+@keyframes connect-in {
+  0%   { opacity: 0; transform: translateY(8px) scale(0.96); letter-spacing: 0.06em; }
+  60%  { opacity: 1; transform: translateY(0) scale(1.02); letter-spacing: 0; }
+  100% { opacity: 1; transform: translateY(0) scale(1); letter-spacing: 0; }
+}
+.animate-connect {
+  animation: connect-in 0.9s var(--ease-smooth) both;
+}
+@keyframes dash-flow {
+  to { stroke-dashoffset: -200; }
+}
+.animate-dash-flow {
+  animation: dash-flow 6s linear infinite;
+}
+@keyframes signal-pulse {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50%      { opacity: 1; transform: scale(1.15); }
+}
+.animate-signal { animation: signal-pulse 2.4s ease-in-out infinite; transform-origin: center; }
