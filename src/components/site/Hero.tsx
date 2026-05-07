@@ -21,8 +21,8 @@ export const Hero = () => {
             <span className="inline-block animate-fade-up" style={{ animationDelay: "380ms" }}>brands</span>{" "}
             <span className="relative inline-block">
               <span
-                className="relative z-10 inline-block bg-[var(--gradient-brand)] bg-clip-text text-transparent animate-connect"
-                style={{ animationDelay: "520ms" }}
+                className="relative z-10 inline-block bg-clip-text text-transparent animate-connect"
+                style={{ animationDelay: "520ms", backgroundImage: "var(--gradient-brand)" }}
               >
                 to connect
               </span>
