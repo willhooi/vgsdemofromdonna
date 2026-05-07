@@ -1,4 +1,4 @@
-import { ShieldCheck, Building2, Languages, BadgeCheck } from "lucide-react";
+import { ShieldCheck, Building2, Languages } from "lucide-react";
 import accreteLogo from "@/assets/accrete-logo.svg";
 
 export const Trust = () => (
