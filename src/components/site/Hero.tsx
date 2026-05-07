@@ -104,13 +104,33 @@ export const Hero = () => {
           <div className="animate-float">
             <AICore />
           </div>
-          <div className="absolute -bottom-2 left-2 hidden rounded-2xl border border-border bg-background/90 p-4 shadow-[var(--shadow-card)] backdrop-blur md:block">
-            <div className="flex items-center gap-3">
-              <span className="h-2 w-2 animate-pulse rounded-full bg-primary" />
-              <p className="text-xs font-semibold text-foreground">5,000,000 messages today</p>
+          <a
+            href="https://www.accrete-inc.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Backed by Accrete Inc., Tokyo Stock Exchange-listed"
+            className="group relative mt-6 flex items-center gap-3 overflow-hidden rounded-2xl border border-border bg-background/90 p-3 shadow-[var(--shadow-card)] backdrop-blur transition-all hover:-translate-y-0.5 hover:shadow-[var(--shadow-elegant)] md:absolute md:-bottom-4 md:left-2 md:right-2 md:mt-0"
+          >
+            <div
+              className="pointer-events-none absolute inset-0 opacity-[0.07]"
+              style={{ background: "var(--gradient-brand)" }}
+            />
+            <div className="relative flex h-11 w-20 shrink-0 items-center justify-center rounded-lg border border-border bg-white p-1">
+              <img src={accreteLogo} alt="Accrete Inc. logo" loading="lazy" className="h-full w-full object-contain" />
             </div>
-            <p className="mt-1 text-[11px] text-muted-foreground">Live across SMS · Zalo · Viber · ZNS</p>
-          </div>
+            <div className="relative min-w-0 flex-1">
+              <div className="flex items-center gap-1.5">
+                <BadgeCheck className="h-3.5 w-3.5 text-primary" />
+                <span className="text-[10px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                  Strategic backing
+                </span>
+              </div>
+              <p className="mt-0.5 text-sm font-bold text-foreground leading-tight">
+                Backed by Accrete Inc.
+                <span className="ml-1 font-medium text-muted-foreground">· TSE-listed</span>
+              </p>
+            </div>
+          </a>
         </div>
       </div>
     </section>
