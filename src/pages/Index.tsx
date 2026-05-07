@@ -6,6 +6,7 @@ import { Sharp } from "@/components/site/Sharp";
 import { CaseStudies } from "@/components/site/CaseStudies";
 import { Partners } from "@/components/site/Partners";
 import { Mobile } from "@/components/site/Mobile";
+import { Team } from "@/components/site/Team";
 import { FAQ } from "@/components/site/FAQ";
 import { CTASection } from "@/components/site/CTASection";
 import { Footer } from "@/components/site/Footer";
@@ -35,6 +36,7 @@ const Index = () => {
       <CaseStudies />
       <Partners />
       <Mobile />
+      <Team />
       <FAQ />
       <CTASection />
       <Footer />
