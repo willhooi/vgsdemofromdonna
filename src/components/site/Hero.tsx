@@ -19,7 +19,10 @@ export const Hero = () => {
               <span className="relative z-10 bg-[var(--gradient-brand)] bg-clip-text text-transparent">
                 speak to customers.
               </span>
-              <span className="absolute -bottom-1 left-0 right-0 h-1.5 rounded-full bg-[hsl(var(--accent))]/70" />
+              <span
+                className="absolute -bottom-1 left-0 right-0 h-1.5 rounded-full bg-[hsl(var(--accent))]/70 animate-underline"
+                style={{ animationDelay: "700ms" }}
+              />
             </span>
           </h1>
           <p
