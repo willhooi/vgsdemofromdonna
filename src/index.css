@@ -146,3 +146,11 @@
   0%   { box-shadow: 0 0 0 0 hsl(var(--accent) / 0.45); }
   100% { box-shadow: 0 0 0 18px hsl(var(--accent) / 0); }
 }
+@keyframes underline-grow {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+.animate-underline {
+  transform-origin: left center;
+  animation: underline-grow 0.9s var(--ease-smooth) both;
+}
