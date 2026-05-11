@@ -4,6 +4,7 @@ import { TrustBar } from "@/components/site/TrustBar";
 import { LogoMarquee } from "@/components/site/LogoMarquee";
 import { Solutions } from "@/components/site/Solutions";
 import { Industries } from "@/components/site/Industries";
+import { WhyVietGuys } from "@/components/site/WhyVietGuys";
 import { Sharp } from "@/components/site/Sharp";
 import { CaseStudies } from "@/components/site/CaseStudies";
 import { Partners } from "@/components/site/Partners";
@@ -35,6 +36,7 @@ const Index = () => {
       <LogoMarquee />
       <Solutions />
       <Industries />
+      <WhyVietGuys />
       <Sharp />
       <CaseStudies />
       <Partners />
