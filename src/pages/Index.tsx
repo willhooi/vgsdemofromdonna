@@ -3,6 +3,7 @@ import { Hero } from "@/components/site/Hero";
 import { TrustBar } from "@/components/site/TrustBar";
 import { LogoMarquee } from "@/components/site/LogoMarquee";
 import { Solutions } from "@/components/site/Solutions";
+import { Industries } from "@/components/site/Industries";
 import { Sharp } from "@/components/site/Sharp";
 import { CaseStudies } from "@/components/site/CaseStudies";
 import { Partners } from "@/components/site/Partners";
