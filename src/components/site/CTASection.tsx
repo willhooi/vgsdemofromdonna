@@ -1,5 +1,6 @@
 import { ArrowRight, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { trackDemoRequest, trackProfileDownload, trackContactClick } from "@/lib/analytics";
 
 export const CTASection = () => (
   <section id="contact" className="py-20 md:py-28">
