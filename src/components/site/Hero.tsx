@@ -18,7 +18,6 @@ const channels: Channel[] = [
   { label: "SMS Brandname" },
   { label: "Zalo ZBS", tag: "Featured" },
   { label: "AI Campaign Services", tag: "New" },
-  { label: "Zalo ZNS" },
   { label: "OTP and Alerts" },
   { label: "PangoCDP" },
 ];
