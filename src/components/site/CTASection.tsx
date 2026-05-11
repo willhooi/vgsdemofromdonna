@@ -20,12 +20,12 @@ export const CTASection = () => (
           </div>
           <div className="flex flex-col gap-3">
             <Button variant="cta" size="xl" asChild>
-              <a href="#book">
+              <a href="#book" onClick={() => trackDemoRequest("cta_strip")}>
                 Book a Demo <ArrowRight className="h-4 w-4" />
               </a>
             </Button>
             <Button variant="outline" size="xl" asChild>
-              <a href="tel:+842839868899">
+              <a href="tel:+842839868899" onClick={() => trackContactClick("phone")}>
                 <Phone className="h-4 w-4" /> Speak to Sales
               </a>
             </Button>
