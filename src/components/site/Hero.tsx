@@ -47,7 +47,7 @@ export const Hero = () => {
           </p>
           <div className="mt-9 flex flex-wrap items-center gap-3 animate-fade-up" style={{ animationDelay: "240ms" }}>
             <Button variant="cta" size="lg" asChild>
-              <a href="#contact">
+              <a href="#contact" onClick={() => trackDemoRequest("hero_cta")}>
                 Book a Demo <ArrowRight className="h-4 w-4" />
               </a>
             </Button>
