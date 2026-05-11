@@ -12,5 +12,5 @@ export const Logo = ({ className }: Props) => (
         Customer Engagement
       </span>
     </span>
-  </a>
+  </span>
 );
