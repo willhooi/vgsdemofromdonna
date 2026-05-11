@@ -1,5 +1,6 @@
 import { Header } from "@/components/site/Header";
 import { Hero } from "@/components/site/Hero";
+import { TrustBar } from "@/components/site/TrustBar";
 import { LogoMarquee } from "@/components/site/LogoMarquee";
 import { Solutions } from "@/components/site/Solutions";
 import { Sharp } from "@/components/site/Sharp";
@@ -29,6 +30,7 @@ const Index = () => {
     <main className="min-h-screen bg-background">
       <Header />
       <Hero />
+      <TrustBar />
       <LogoMarquee />
       <Solutions />
       <Sharp />
