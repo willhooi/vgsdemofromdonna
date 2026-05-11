@@ -1,5 +1,6 @@
 import { ArrowRight, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { trackDemoRequest, trackContactClick } from "@/lib/analytics";
 
 export const CTASection = () => (
   <section id="contact" className="py-20 md:py-28">
@@ -19,12 +20,12 @@ export const CTASection = () => (
           </div>
           <div className="flex flex-col gap-3">
             <Button variant="cta" size="xl" asChild>
-              <a href="#book">
+              <a href="#book" onClick={() => trackDemoRequest("cta_strip")}>
                 Book a Demo <ArrowRight className="h-4 w-4" />
               </a>
             </Button>
             <Button variant="outline" size="xl" asChild>
-              <a href="tel:+842839868899">
+              <a href="tel:+842839868899" onClick={() => trackContactClick("phone")}>
                 <Phone className="h-4 w-4" /> Speak to Sales
               </a>
             </Button>
