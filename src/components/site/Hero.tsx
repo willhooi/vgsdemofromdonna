@@ -1,6 +1,7 @@
 import { ArrowRight, Sparkles, BadgeCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AICore } from "./AICore";
+import { trackDemoRequest } from "@/lib/analytics";
 import accreteLogo from "@/assets/accrete-logo.svg";
 
 export const Hero = () => {
