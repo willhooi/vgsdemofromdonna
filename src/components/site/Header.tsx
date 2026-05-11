@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Menu, X, Globe } from "lucide-react";
+import { Menu, X, Globe, ArrowRight } from "lucide-react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Logo } from "./Logo";
@@ -46,6 +46,15 @@ export const Header = () => {
           : "bg-transparent",
       )}
     >
+      {/* Mobile announcement bar */}
+      <Link
+        to="/demo"
+        className="flex md:hidden items-center justify-center gap-1.5 bg-green-600 py-1.5 text-center text-xs font-medium text-white"
+      >
+        Talk to our enterprise team — Request a Demo
+        <ArrowRight className="h-3 w-3" />
+      </Link>
+
       <div className="container-tight flex h-16 items-center justify-between gap-2 md:h-20">
         {/* Left: Logo */}
         <Link to="/" aria-label="VietGuys home" className="shrink-0">
