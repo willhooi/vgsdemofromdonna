@@ -7,6 +7,7 @@ import { Industries } from "@/components/site/Industries";
 import { WhyVietGuys } from "@/components/site/WhyVietGuys";
 import { Sharp } from "@/components/site/Sharp";
 import { CaseStudies } from "@/components/site/CaseStudies";
+import { Partners } from "@/components/site/Partners";
 import { Mobile } from "@/components/site/Mobile";
 import { FAQ } from "@/components/site/FAQ";
 import { CTASection } from "@/components/site/CTASection";
@@ -35,6 +36,7 @@ const Index = () => {
       <LogoMarquee />
       <Solutions />
       <Industries />
+      <WhyVietGuys />
       <Sharp />
       <CaseStudies />
       <Partners />
