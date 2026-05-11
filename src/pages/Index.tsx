@@ -34,6 +34,7 @@ const Index = () => {
       <TrustBar />
       <LogoMarquee />
       <Solutions />
+      <Industries />
       <Sharp />
       <CaseStudies />
       <Partners />
