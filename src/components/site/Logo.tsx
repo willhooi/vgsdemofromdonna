@@ -1,7 +1,7 @@
 type Props = { className?: string };
 
 export const Logo = ({ className }: Props) => (
-  <a href="#top" className={`group inline-flex items-center gap-2.5 ${className ?? ""}`}>
+  <span className={`group inline-flex items-center gap-2.5 ${className ?? ""}`}>
     <span className="relative grid h-9 w-9 place-items-center rounded-xl bg-primary text-primary-foreground shadow-[var(--shadow-soft)]">
       <span className="text-sm font-extrabold tracking-tight">VG</span>
       <span className="absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-[hsl(var(--accent))] ring-2 ring-background" />
@@ -12,5 +12,5 @@ export const Logo = ({ className }: Props) => (
         Customer Engagement
       </span>
     </span>
-  </a>
+  </span>
 );
