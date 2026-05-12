@@ -31,7 +31,7 @@ const values = [
 
 const About = () => {
   useEffect(() => {
-    document.title = "About VietGuys — Short Steps on a Long Journey";
+    document.title = "About — VietGuys | Enterprise Messaging Vietnam";
     const desc = "Since 2007, VietGuys has built Vietnam's most trusted enterprise messaging platform. Backed by Accrete Inc., Japan. Meet the people, milestones and values behind the brand.";
     let m = document.querySelector('meta[name="description"]');
     if (!m) {
