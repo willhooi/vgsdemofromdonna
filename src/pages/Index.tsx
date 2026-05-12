@@ -11,6 +11,7 @@ import { Partners } from "@/components/site/Partners";
 import { Mobile } from "@/components/site/Mobile";
 import { FAQ } from "@/components/site/FAQ";
 import { CTASection } from "@/components/site/CTASection";
+import { CTABottom } from "@/components/site/CTABottom";
 import { Footer } from "@/components/site/Footer";
 import { ChatBubble } from "@/components/site/ChatBubble";
 import { useEffect } from "react";
