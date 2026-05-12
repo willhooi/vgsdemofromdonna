@@ -3,4 +3,4 @@ Allow: /
 Disallow: /demo
 Disallow: /download
 
-Sitemap: https://vietguys.vn/sitemap.xml
+Sitemap: https://vietguys.biz/sitemap.xml
