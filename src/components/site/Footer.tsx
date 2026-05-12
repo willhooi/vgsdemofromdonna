@@ -82,7 +82,7 @@ export const Footer = () => (
           </li>
           <li className="flex items-start gap-2">
             <MapPin className="mt-0.5 h-4 w-4 shrink-0" />
-            <span>Level 8, 123 Nguyen Dinh Chieu, District 3, Ho Chi Minh City</span>
+            <span>1st Floor & T Floor, HBT Building, 456–458 Hai Ba Trung Street, Tan Dinh Ward, Ho Chi Minh City, Vietnam</span>
           </li>
         </ul>
         <Button variant="cta" size="default" asChild className="mt-5">
