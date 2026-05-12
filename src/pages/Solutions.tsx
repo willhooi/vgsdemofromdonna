@@ -94,7 +94,7 @@ const industries = [
 
 const Solutions = () => {
   useEffect(() => {
-    document.title = "Solutions — VietGuys Enterprise Messaging & CDP";
+    document.title = "Solutions — VietGuys | Enterprise Messaging Vietnam";
     const desc =
       "Explore VietGuys' 4-tier solution stack: SMS Brandname, Zalo ZNS, Viber, Email, OTPBox, PangoCDP and Behavioural AI — orchestrated by the SHARP methodology.";
     let m = document.querySelector('meta[name="description"]');
