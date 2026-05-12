@@ -160,6 +160,9 @@ export const Partners = () => {
                 src={`${BASE}/${src}`}
                 alt={src.split("/").pop()?.replace(".png", "") || "partner"}
                 loading="lazy"
+                decoding="async"
+                width={180}
+                height={120}
                 className="max-h-12 w-full object-contain opacity-70 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0"
               />
             </div>

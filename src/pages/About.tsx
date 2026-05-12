@@ -78,6 +78,9 @@ const About = () => {
               src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80"
               alt="VietGuys team collaborating"
               loading="lazy"
+              decoding="async"
+              width={1200}
+              height={900}
               className="h-full w-full object-cover"
             />
           </div>

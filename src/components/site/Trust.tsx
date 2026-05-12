@@ -56,7 +56,7 @@ export const Trust = () => (
           ))}
         </div>
         <div className="absolute -bottom-4 right-4 flex items-center gap-2 rounded-full border border-border bg-background px-3 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground shadow-[var(--shadow-soft)]">
-          <img src={accreteLogo} alt="" className="h-4 w-auto" aria-hidden />
+          <img src={accreteLogo} alt="" width={80} height={16} loading="lazy" decoding="async" className="h-4 w-auto" aria-hidden />
           <span>Backed by Accrete Inc. · Japan</span>
         </div>
       </div>

@@ -51,6 +51,9 @@ export const Team = () => (
                 src={m.img}
                 alt={`${m.name}, ${m.role} at VietGuys`}
                 loading="lazy"
+                decoding="async"
+                width={400}
+                height={500}
                 className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
               <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-background/80 to-transparent" />
