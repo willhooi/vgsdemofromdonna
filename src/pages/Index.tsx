@@ -44,6 +44,7 @@ const Index = () => {
       <Mobile />
       <FAQ />
       <CTASection />
+      <CTABottom />
       <Footer />
       <ChatBubble />
     </main>
