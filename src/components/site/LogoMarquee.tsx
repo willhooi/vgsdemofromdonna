@@ -23,6 +23,9 @@ export const LogoMarquee = () => (
             src={c.src}
             alt={c.alt}
             loading="lazy"
+            decoding="async"
+            width={160}
+            height={80}
             className="h-14 w-auto object-contain sm:h-16 md:h-20 transition-opacity hover:opacity-100 opacity-90"
           />
         ))}
