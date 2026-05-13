@@ -1,5 +1,6 @@
 import { Landmark, Plane, ShoppingCart, Truck, ArrowUpRight, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { VWatermark } from "@/components/brand/VWatermark";
 
 const cards = [
   {
@@ -30,15 +31,19 @@ const cards = [
 
 export const Industries = () => {
   return (
-    <section id="industries" className="py-24 md:py-32">
-      <div className="container-tight">
+    <section id="industries" className="relative overflow-hidden bg-secondary/30 py-24 md:py-32">
+      <VWatermark
+        tone="orange"
+        className="absolute -right-16 bottom-12 h-[360px] w-[360px] opacity-[0.04]"
+      />
+      <div className="container-tight relative">
         <div className="max-w-2xl">
-          <span className="eyebrow">Industries</span>
+          <span className="chapter-eyebrow">04 — Cho ai</span>
           <h2 className="heading-section mt-4 text-balance">
-            Built for Vietnam's leading sectors
+            Được xây dựng cho các ngành dẫn đầu Việt Nam
           </h2>
           <p className="mt-4 text-base text-muted-foreground">
-            Sector-specific use cases and 19 years of enterprise client experience.
+            Use case theo ngành, đúc kết từ 19 năm phục vụ enterprise.
           </p>
         </div>
 

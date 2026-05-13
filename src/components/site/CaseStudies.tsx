@@ -1,4 +1,5 @@
 import { ArrowUpRight, TrendingUp, Users, Zap } from "lucide-react";
+import { VWatermark } from "@/components/brand/VWatermark";
 
 const cases = [
   {
@@ -43,13 +44,17 @@ const cases = [
 ];
 
 export const CaseStudies = () => (
-  <section id="case-studies" className="bg-secondary/40 py-20 md:py-28">
-    <div className="container-tight">
+  <section id="case-studies" className="relative overflow-hidden bg-secondary/40 py-20 md:py-28">
+    <VWatermark
+      tone="brand"
+      className="absolute -left-24 -top-10 h-[400px] w-[400px] opacity-[0.035]"
+    />
+    <div className="container-tight relative">
       <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
         <div className="max-w-2xl">
-          <span className="eyebrow">Case studies</span>
+          <span className="chapter-eyebrow">06 — Kết quả thật</span>
           <h2 className="heading-section mt-3">
-            Kết quả thực tế từ các <span className="text-primary">enterprise</span> hàng đầu
+            Kết quả thực tế từ các <span className="italic text-[hsl(var(--accent-deep))]">enterprise</span> hàng đầu
           </h2>
           <p className="mt-4 text-base text-muted-foreground">
             Mỗi giải pháp được đo lường bằng KPI kinh doanh cụ thể — không phải chỉ là số tin nhắn gửi đi.
