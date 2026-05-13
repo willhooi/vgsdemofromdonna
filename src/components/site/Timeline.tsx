@@ -8,7 +8,7 @@ type Item = { year: string; title: string; body: string; stat: string };
 
 export const Timeline = () => {
   const { t, lang } = useT();
-  const items = (lang === "vi" ? vi.timeline.items : en.timeline.items) as Item[];
+  const items = (lang === "vi" ? vi.timeline.items : en.timeline.items) as readonly Item[];
 
   const [active, setActive] = useState<number>(0);
   const railRef = useRef<HTMLDivElement>(null);

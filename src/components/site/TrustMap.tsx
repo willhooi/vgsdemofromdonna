@@ -6,7 +6,7 @@ import { vi } from "@/locales/vi";
 
 export const TrustMap = () => {
   const { t, lang } = useT();
-  const certs = (lang === "vi" ? vi.trust.certs : en.trust.certs) as { name: string; body: string }[];
+  const certs = (lang === "vi" ? vi.trust.certs : en.trust.certs) as readonly { name: string; body: string }[];
 
   const ref = useRef<SVGSVGElement>(null);
   const [lit, setLit] = useState(false);
