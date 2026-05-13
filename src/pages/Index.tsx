@@ -1,26 +1,22 @@
+import { useEffect } from "react";
 import { Header } from "@/components/site/Header";
 import { Hero } from "@/components/site/Hero";
-import { TrustBar } from "@/components/site/TrustBar";
-import { LogoMarquee } from "@/components/site/LogoMarquee";
+import { Timeline } from "@/components/site/Timeline";
 import { Solutions } from "@/components/site/Solutions";
-import { Industries } from "@/components/site/Industries";
-import { HumanStory } from "@/components/site/HumanStory";
-import { WhyVietGuys } from "@/components/site/WhyVietGuys";
-import { Sharp } from "@/components/site/Sharp";
+import { TrustMap } from "@/components/site/TrustMap";
+import { JapanBridge } from "@/components/site/JapanBridge";
 import { CaseStudies } from "@/components/site/CaseStudies";
-import { Partners } from "@/components/site/Partners";
-import { Mobile } from "@/components/site/Mobile";
+import { HumanStory } from "@/components/site/HumanStory";
 import { FAQ } from "@/components/site/FAQ";
 import { CTASection } from "@/components/site/CTASection";
-import { CTABottom } from "@/components/site/CTABottom";
 import { Footer } from "@/components/site/Footer";
 import { ChatBubble } from "@/components/site/ChatBubble";
-import { useEffect } from "react";
 
 const Index = () => {
   useEffect(() => {
     document.title = "Enterprise Messaging — VietGuys | Enterprise Messaging Vietnam";
-    const desc = "VietGuys: AI-powered SMS, Zalo, ZNS, Viber & Email engagement. 19 years, 5M messages daily, ISO 27001. Backed by Accrete Inc., Japan.";
+    const desc =
+      "VietGuys: where customer conversations become business growth. SMS, Zalo, Viber, Email & AI campaigns, 19 years, 5M messages daily, ISO 27001. Backed by Accrete Inc., Japan.";
     let m = document.querySelector('meta[name="description"]');
     if (!m) {
       m = document.createElement("meta");
@@ -34,19 +30,14 @@ const Index = () => {
     <main className="min-h-screen bg-background">
       <Header />
       <Hero />
-      <TrustBar />
-      <LogoMarquee />
+      <Timeline />
       <Solutions />
-      <Industries />
-      <HumanStory />
+      <TrustMap />
+      <JapanBridge />
       <CaseStudies />
-      <WhyVietGuys />
-      <Sharp />
-      <Partners />
-      <Mobile />
+      <HumanStory />
       <FAQ />
       <CTASection />
-      <CTABottom />
       <Footer />
       <ChatBubble />
     </main>
