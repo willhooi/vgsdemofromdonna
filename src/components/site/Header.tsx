@@ -52,7 +52,7 @@ export const Header = () => {
         to="/demo"
         className="flex md:hidden items-center justify-center gap-1.5 bg-green-600 py-1.5 text-center text-xs font-medium text-white"
       >
-        Talk to our enterprise team — Request a Demo
+        {t("nav.demoBar")}
         <ArrowRight className="h-3 w-3" />
       </Link>
 
@@ -74,18 +74,18 @@ export const Header = () => {
         {/* Right */}
         <div className="flex items-center gap-2">
           <button
-            onClick={() => setLang((l) => (l === "EN" ? "VI" : "EN"))}
+            onClick={toggle}
             className="hidden items-center gap-1.5 rounded-full px-3 py-2 text-xs font-semibold text-muted-foreground hover:text-foreground md:inline-flex"
             aria-label="Toggle language"
           >
             <Globe className="h-3.5 w-3.5" />
-            <span className={cn(lang === "EN" && "text-foreground")}>EN</span>
+            <span className={cn(lang === "en" && "text-foreground")}>EN</span>
             <span className="text-border">|</span>
-            <span className={cn(lang === "VI" && "text-foreground")}>VI</span>
+            <span className={cn(lang === "vi" && "text-foreground")}>VI</span>
           </button>
 
           <Button variant="cta" size="default" asChild>
-            <Link to="/contact">Contact Us</Link>
+            <Link to="/contact">{t("nav.contact")}</Link>
           </Button>
 
           <button
@@ -118,13 +118,13 @@ export const Header = () => {
               </NavLink>
             ))}
             <button
-              onClick={() => setLang((l) => (l === "EN" ? "VI" : "EN"))}
+              onClick={toggle}
               className="mt-1 inline-flex items-center gap-1.5 rounded-lg px-3 py-3 text-sm font-medium text-foreground hover:bg-secondary"
             >
               <Globe className="h-4 w-4" />
-              <span className={cn(lang === "EN" && "font-semibold")}>EN</span>
+              <span className={cn(lang === "en" && "font-semibold")}>EN</span>
               <span className="text-border">|</span>
-              <span className={cn(lang === "VI" && "font-semibold")}>VI</span>
+              <span className={cn(lang === "vi" && "font-semibold")}>VI</span>
             </button>
           </div>
         </div>
