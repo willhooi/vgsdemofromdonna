@@ -201,3 +201,30 @@
   50%      { opacity: 1; transform: scale(1.15); }
 }
 .animate-signal { animation: signal-pulse 2.4s ease-in-out infinite; transform-origin: center; }
+
+/* Brand storytelling — Signature Artwork System */
+@keyframes signal-ring {
+  0%   { transform: scale(0.4); opacity: 0; }
+  20%  { opacity: 0.7; }
+  100% { transform: scale(1.25); opacity: 0; }
+}
+@keyframes dot-bloom {
+  0%, 100% { opacity: 0.12; }
+  50%      { opacity: 0.65; }
+}
+@keyframes heart-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(1.18); opacity: 0.65; }
+}
+.heart-pulse {
+  animation: heart-pulse 1.2s ease-in-out infinite;
+}
+@keyframes vg-glow {
+  0%, 100% { box-shadow: 0 0 0 0 hsl(var(--primary) / 0); }
+  50%      { box-shadow: 0 0 0 14px hsl(var(--primary) / 0); filter: drop-shadow(0 0 18px hsl(var(--primary) / 0.55)); }
+}
+.vg-glow { animation: vg-glow 3.2s ease-in-out infinite; }
+
+/* Hide horizontal scrollbar visually but keep scroll */
+.scrollbar-thin::-webkit-scrollbar { height: 6px; }
+.scrollbar-thin::-webkit-scrollbar-thumb { background: hsl(var(--border)); border-radius: 999px; }

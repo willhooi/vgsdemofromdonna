@@ -4,19 +4,20 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Logo } from "./Logo";
 import { cn } from "@/lib/utils";
-
-const nav = [
-  { label: "Solutions", href: "/solutions" },
-  { label: "Industries", href: "/industries" },
-  { label: "About", href: "/about" },
-  { label: "Resources", href: "/resources" },
-];
+import { useT } from "@/lib/i18n";
 
 export const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const [lang, setLang] = useState<"EN" | "VI">("EN");
+  const { t, lang, toggle } = useT();
   const location = useLocation();
+
+  const nav = [
+    { label: t("nav.solutions"), href: "/solutions" },
+    { label: t("nav.industries"), href: "/industries" },
+    { label: t("nav.about"), href: "/about" },
+    { label: t("nav.resources"), href: "/resources" },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);

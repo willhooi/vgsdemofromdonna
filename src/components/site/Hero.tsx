@@ -1,145 +1,94 @@
-import { Check, Sparkles } from "lucide-react";
+import { ArrowRight, Smartphone } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { trackDemoRequest } from "@/lib/analytics";
-import { VWatermark } from "@/components/brand/VWatermark";
-
-const trustSignals = [
-  "Zalo Trusted Partner",
-  "ISO/IEC Certified",
-  "PDPL Compliant",
-  "76 enterprise clients",
-  "Since 2007",
-];
-
-const clientLogos = ["Vietnam Airlines", "Shopee", "GHTK", "ByteTech"];
-
-type Channel = { label: string; tag?: "Featured" | "New" };
-const channels: Channel[] = [
-  { label: "SMS Brandname" },
-  { label: "Zalo ZBS", tag: "Featured" },
-  { label: "AI Campaign Services", tag: "New" },
-  { label: "OTP and Alerts" },
-  { label: "PangoCDP" },
-];
-
-const stats = [
-  { k: "19+", v: "Years in Vietnam" },
-  { k: "76", v: "Enterprise clients" },
-  { k: "PDPL", v: "Compliant" },
-];
+import { SignalWave } from "@/components/brand/SignalArt";
+import { useT } from "@/lib/i18n";
+import { useCountUp } from "@/hooks/use-count-up";
 
 export const Hero = () => {
+  const { t } = useT();
+  const count = useCountUp(5_000_000, 2200);
+  const formatted = count.toLocaleString("en-US");
+
   return (
     <section id="top" className="relative overflow-hidden pt-28 md:pt-36">
       <div className="pointer-events-none absolute inset-0 -z-10" style={{ background: "var(--gradient-hero)" }} />
-      <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[640px] grid-bg opacity-50" />
-      {/* Oversized brand watermark — the V/L mark anchoring the page */}
-      <VWatermark
-        tone="brand"
-        className="pointer-events-none absolute -right-32 -top-10 -z-10 h-[560px] w-[560px] opacity-[0.05] md:opacity-[0.06] animate-float"
-      />
+      <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[640px] grid-bg opacity-40" />
 
       <div className="container-tight grid gap-12 pb-20 lg:grid-cols-12 lg:gap-10 lg:pb-28">
-        {/* LEFT COLUMN */}
+        {/* LEFT — narrative */}
         <div className="lg:col-span-7">
-          <span className="chapter-eyebrow animate-fade-up">
-            01 — Lời chào
-          </span>
-          <span className="eyebrow mt-4 flex animate-fade-up text-[hsl(var(--accent-deep))]">
-            <Sparkles className="h-3.5 w-3.5" />
-            Zalo Trusted Partner · ISO Certified · Direct Carrier Connections
-          </span>
+          <span className="chapter-eyebrow animate-fade-up">{t("hero.eyebrow")}</span>
 
-          <h1 className="heading-display mt-6 text-[28px] leading-tight md:text-5xl lg:text-6xl text-balance animate-fade-up" style={{ animationDelay: "80ms" }}>
-            Chào khách hàng Việt{" "}
-            <span className="bg-clip-text text-transparent italic" style={{ backgroundImage: "var(--gradient-brand)" }}>
-              theo cách của họ.
-            </span>{" "}
-            Mọi kênh. Mọi lúc.
+          <h1
+            className="heading-display mt-6 text-[30px] leading-tight md:text-5xl lg:text-[58px] text-balance animate-fade-up"
+            style={{ animationDelay: "80ms" }}
+          >
+            {t("hero.headline").split("conversations").length === 2 ? (
+              <>
+                {t("hero.headline").split("conversations")[0]}
+                <span className="bg-clip-text text-transparent italic" style={{ backgroundImage: "var(--gradient-brand)" }}>
+                  conversations
+                </span>
+                {t("hero.headline").split("conversations")[1]}
+              </>
+            ) : (
+              t("hero.headline")
+            )}
           </h1>
 
-          <p
-            className="mt-6 max-w-xl text-base text-muted-foreground text-balance animate-fade-up md:text-lg"
-            style={{ animationDelay: "160ms" }}
-          >
-            VietGuys connects your brand to customers via SMS, Zalo ZBS, and AI-powered campaigns —
-            backed by 19 years of direct carrier relationships and Vietnam's most trusted enterprise
-            messaging network.
+          <p className="mt-6 max-w-xl text-base text-muted-foreground text-balance animate-fade-up md:text-lg" style={{ animationDelay: "160ms" }}>
+            {t("hero.sub")}
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3 animate-fade-up" style={{ animationDelay: "240ms" }}>
             <Button variant="cta" size="lg" asChild>
-              <Link to="/demo" onClick={() => trackDemoRequest("hero_cta")}>
-                Request a Demo
+              <Link to="/contact" onClick={() => trackDemoRequest("hero_contact_experts")}>
+                {t("hero.cta")}
+                <ArrowRight className="ml-1 h-4 w-4" />
               </Link>
             </Button>
-            <Button variant="outline" size="lg" asChild>
-              <Link to="/solutions">See Our Solutions</Link>
-            </Button>
+            <a
+              href="#timeline"
+              className="text-sm font-semibold text-foreground underline-offset-4 hover:underline"
+            >
+              {t("hero.secondary")} →
+            </a>
           </div>
 
-          <ul className="mt-8 flex flex-wrap gap-x-5 gap-y-2 animate-fade-up" style={{ animationDelay: "320ms" }}>
-            {trustSignals.map((t) => (
-              <li key={t} className="inline-flex items-center gap-1.5 text-sm font-medium text-foreground">
-                <Check className="h-4 w-4 text-primary" />
-                {t}
-              </li>
-            ))}
-          </ul>
-
-          <div className="mt-10 border-t border-border pt-6 animate-fade-up" style={{ animationDelay: "400ms" }}>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-              Trusted by
-            </p>
-            <p className="mt-2 text-sm font-semibold text-foreground">
-              {clientLogos.join("  ·  ")}
-              <span className="ml-2 font-normal text-muted-foreground">+ 72 more</span>
-            </p>
+          {/* Live heartbeat counter */}
+          <div className="mt-12 inline-flex items-center gap-4 rounded-2xl border border-border bg-background/80 px-5 py-4 shadow-[var(--shadow-soft)] backdrop-blur animate-fade-up" style={{ animationDelay: "360ms" }}>
+            <span className="relative grid h-10 w-10 place-items-center">
+              <span className="absolute inset-0 rounded-full bg-[hsl(var(--accent))]/20 heart-pulse" />
+              <span className="relative h-2.5 w-2.5 rounded-full bg-[hsl(var(--accent))]" />
+            </span>
+            <div>
+              <div className="font-display text-2xl font-extrabold tracking-tight text-foreground md:text-3xl tabular-nums">
+                {formatted}
+              </div>
+              <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                {t("hero.counterLabel")} · {t("hero.pulseTag")}
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* RIGHT COLUMN — Visual panel */}
+        {/* RIGHT — phone + signal artwork */}
         <div className="lg:col-span-5">
-          <div className="relative rounded-3xl border border-border bg-background/90 p-6 shadow-[var(--shadow-card)] backdrop-blur md:p-8">
-            <div
-              className="pointer-events-none absolute inset-0 rounded-3xl opacity-[0.06]"
-              style={{ background: "var(--gradient-brand)" }}
-            />
+          <div className="relative aspect-square w-full">
+            {/* Signal waves radiating from the phone */}
+            <SignalWave intensity={4} tone="brand" className="absolute inset-0 animate-fade-up" />
 
-            <div className="relative">
-              <h2 className="text-lg font-bold text-foreground md:text-xl">Channels we deliver</h2>
+            {/* Phone */}
+            <div className="absolute left-1/2 top-1/2 grid h-32 w-20 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-[28px] border-2 border-foreground/80 bg-background shadow-[var(--shadow-card)]">
+              <Smartphone className="h-7 w-7 text-foreground/80" />
+              <span className="absolute -top-1 left-1/2 h-1 w-8 -translate-x-1/2 rounded-full bg-foreground/30" />
+            </div>
 
-              <div className="mt-5 flex flex-wrap gap-2.5">
-                {channels.map((c) => (
-                  <span
-                    key={c.label}
-                    className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-3.5 py-1.5 text-sm font-semibold text-foreground shadow-[var(--shadow-soft)]"
-                  >
-                    {c.label}
-                    {c.tag && (
-                      <span
-                        className={`rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${
-                          c.tag === "Featured"
-                            ? "bg-primary text-primary-foreground"
-                            : "bg-[hsl(var(--accent))] text-[hsl(var(--accent-foreground))]"
-                        }`}
-                      >
-                        {c.tag}
-                      </span>
-                    )}
-                  </span>
-                ))}
-              </div>
-
-              <dl className="mt-7 grid grid-cols-3 gap-3 border-t border-border pt-6">
-                {stats.map((s) => (
-                  <div key={s.v} className="rounded-xl border border-border bg-background/70 p-3 text-center">
-                    <dt className="text-xl font-extrabold tracking-tight text-foreground md:text-2xl">{s.k}</dt>
-                    <dd className="mt-1 text-[11px] font-medium leading-tight text-muted-foreground">{s.v}</dd>
-                  </div>
-                ))}
-              </dl>
+            {/* VietGuys mark glow target — top-right */}
+            <div className="absolute right-2 top-2 grid h-16 w-16 place-items-center rounded-2xl border border-border bg-background shadow-[var(--shadow-soft)] vg-glow">
+              <span className="font-display text-2xl font-extrabold tracking-tight text-[hsl(var(--primary-deep))]">VG</span>
             </div>
           </div>
         </div>
