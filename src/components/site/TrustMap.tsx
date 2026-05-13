@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { ShieldCheck, BadgeCheck, Radio } from "lucide-react";
 import { useT } from "@/lib/i18n";
+import { en } from "@/locales/en";
+import { vi } from "@/locales/vi";
 
 export const TrustMap = () => {
   const { t, lang } = useT();
-  const certs = (lang === "vi"
-    ? require("@/locales/vi").vi.trust.certs
-    : require("@/locales/en").en.trust.certs) as { name: string; body: string }[];
+  const certs = (lang === "vi" ? vi.trust.certs : en.trust.certs) as { name: string; body: string }[];
 
   const ref = useRef<SVGSVGElement>(null);
   const [lit, setLit] = useState(false);

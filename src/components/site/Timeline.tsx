@@ -1,15 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { useT } from "@/lib/i18n";
 import { SignalWave, SignalGrid } from "@/components/brand/SignalArt";
+import { en } from "@/locales/en";
+import { vi } from "@/locales/vi";
 
 type Item = { year: string; title: string; body: string; stat: string };
 
 export const Timeline = () => {
   const { t, lang } = useT();
-  // pull localized items
-  const items = (lang === "vi"
-    ? require("@/locales/vi").vi.timeline.items
-    : require("@/locales/en").en.timeline.items) as Item[];
+  const items = (lang === "vi" ? vi.timeline.items : en.timeline.items) as Item[];
 
   const [active, setActive] = useState<number>(0);
   const railRef = useRef<HTMLDivElement>(null);
