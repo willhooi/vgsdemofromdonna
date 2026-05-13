@@ -2,6 +2,7 @@ import { Check, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { trackDemoRequest } from "@/lib/analytics";
+import { VWatermark } from "@/components/brand/VWatermark";
 
 const trustSignals = [
   "Zalo Trusted Partner",
@@ -33,21 +34,29 @@ export const Hero = () => {
     <section id="top" className="relative overflow-hidden pt-28 md:pt-36">
       <div className="pointer-events-none absolute inset-0 -z-10" style={{ background: "var(--gradient-hero)" }} />
       <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[640px] grid-bg opacity-50" />
+      {/* Oversized brand watermark — the V/L mark anchoring the page */}
+      <VWatermark
+        tone="brand"
+        className="pointer-events-none absolute -right-32 -top-10 -z-10 h-[560px] w-[560px] opacity-[0.05] md:opacity-[0.06] animate-float"
+      />
 
       <div className="container-tight grid gap-12 pb-20 lg:grid-cols-12 lg:gap-10 lg:pb-28">
         {/* LEFT COLUMN */}
         <div className="lg:col-span-7">
-          <span className="eyebrow animate-fade-up text-[hsl(var(--accent-deep))]">
+          <span className="chapter-eyebrow animate-fade-up">
+            01 — Lời chào
+          </span>
+          <span className="eyebrow mt-4 flex animate-fade-up text-[hsl(var(--accent-deep))]">
             <Sparkles className="h-3.5 w-3.5" />
             Zalo Trusted Partner · ISO Certified · Direct Carrier Connections
           </span>
 
           <h1 className="heading-display mt-6 text-[28px] leading-tight md:text-5xl lg:text-6xl text-balance animate-fade-up" style={{ animationDelay: "80ms" }}>
-            Reach every Vietnamese customer.{" "}
-            <span className="bg-clip-text text-transparent" style={{ backgroundImage: "var(--gradient-brand)" }}>
-              On every channel.
+            Chào khách hàng Việt{" "}
+            <span className="bg-clip-text text-transparent italic" style={{ backgroundImage: "var(--gradient-brand)" }}>
+              theo cách của họ.
             </span>{" "}
-            Every time.
+            Mọi kênh. Mọi lúc.
           </h1>
 
           <p
