@@ -1,5 +1,6 @@
 import { MessageSquare, Sparkles, Brain, Database, ArrowUpRight, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { VWatermark } from "@/components/brand/VWatermark";
 
 const cards = [
   {
@@ -34,15 +35,19 @@ const cards = [
 
 export const Solutions = () => {
   return (
-    <section id="solutions" className="py-24 md:py-32">
-      <div className="container-tight">
+    <section id="solutions" className="relative overflow-hidden py-24 md:py-32">
+      <VWatermark
+        tone="green"
+        className="absolute -left-20 top-24 h-[380px] w-[380px] opacity-[0.035]"
+      />
+      <div className="container-tight relative">
         <div className="max-w-2xl">
-          <span className="eyebrow">Solutions</span>
+          <span className="chapter-eyebrow">03 — Chúng tôi làm gì</span>
           <h2 className="heading-section mt-4 text-balance">
-            Everything your brand needs to reach customers in Vietnam
+            Mọi điều thương hiệu cần để chạm tới khách hàng Việt
           </h2>
           <p className="mt-4 text-base text-muted-foreground">
-            From transactional alerts to AI-powered campaign orchestration.
+            Từ tin xác thực đến cả chiến dịch điều phối bằng AI — tất cả trên một nền tảng.
           </p>
         </div>
 
