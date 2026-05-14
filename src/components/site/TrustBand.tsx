@@ -1,4 +1,6 @@
+import { useEffect, useRef, useState } from "react";
 import { Send, Calendar, ShieldCheck } from "lucide-react";
+import { useCountUp } from "@/hooks/use-count-up";
 import isoLogo from "@/assets/certs/iso-27001.svg";
 import vncertLogo from "@/assets/certs/vncert.svg";
 import vntaLogo from "@/assets/certs/vnta.svg";
