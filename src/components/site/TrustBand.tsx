@@ -1,4 +1,8 @@
-import { ShieldCheck, Award, Radio, Users, Send, Calendar } from "lucide-react";
+import { Send, Calendar, ShieldCheck } from "lucide-react";
+import isoLogo from "@/assets/certs/iso-27001.svg";
+import vncertLogo from "@/assets/certs/vncert.svg";
+import vntaLogo from "@/assets/certs/vnta.svg";
+import zaloLogo from "@/assets/certs/zalo-trusted.svg";
 
 /**
  * TrustBand — Infobip-style "trust at a glance" strip.
