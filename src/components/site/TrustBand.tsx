@@ -111,7 +111,7 @@ export const TrustBand = () => {
               {certifications.map((c) => (
                 <div
                   key={c.name}
-                  className="group flex flex-col rounded-2xl border border-white bg-white shadow-[0_8px_30px_-12px_rgba(15,40,80,0.25)] transition-all hover:-translate-y-1 hover:shadow-[0_14px_40px_-12px_rgba(15,40,80,0.4)]"
+                  className="group flex flex-col rounded-2xl border border-white bg-white shadow-[0_8px_30px_-12px_rgba(20,80,30,0.25)] transition-all hover:-translate-y-1 hover:shadow-[0_14px_40px_-12px_rgba(57,180,74,0.45)]"
                 >
                   <div className="flex h-24 items-center justify-center px-5 pt-5 md:h-28">
                     <img
@@ -125,7 +125,7 @@ export const TrustBand = () => {
                     className="mt-3 flex-1 rounded-b-2xl px-4 py-3 text-center"
                     style={{
                       background:
-                        "linear-gradient(135deg, hsl(215 80% 18%) 0%, hsl(220 75% 26%) 100%)",
+                        "linear-gradient(135deg, hsl(128 55% 18%) 0%, hsl(128 50% 28%) 100%)",
                     }}
                   >
                     <p className="text-xs font-bold leading-tight text-white md:text-sm">
