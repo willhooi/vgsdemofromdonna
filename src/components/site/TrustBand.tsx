@@ -185,3 +185,57 @@ const BrandRow = ({
     </div>
   );
 };
+
+type StatCardProps = {
+  icon: React.ComponentType<{ className?: string }>;
+  eyebrow: string;
+  target: number;
+  suffix: string;
+  label: string;
+};
+
+const StatCard = ({ icon: Icon, eyebrow, target, suffix, label }: StatCardProps) => {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    if (!ref.current || inView) return;
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            setInView(true);
+            obs.disconnect();
+          }
+        });
+      },
+      { threshold: 0.35 }
+    );
+    obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, [inView]);
+
+  const value = useCountUp(target, 1800, inView);
+  const display = target >= 1000 ? value.toLocaleString() : value.toString();
+
+  return (
+    <div
+      ref={ref}
+      className="group relative flex flex-col rounded-3xl border border-border bg-card p-7 transition-all hover:-translate-y-1 hover:border-[hsl(var(--accent))]/60 hover:shadow-[0_18px_50px_-20px_hsl(var(--accent)/0.45)]"
+    >
+      <span className="grid h-11 w-11 place-items-center rounded-2xl bg-[hsl(var(--accent))]/15 text-[hsl(var(--accent))]">
+        <Icon className="h-5 w-5" />
+      </span>
+      <p className="mt-5 text-[11px] font-semibold uppercase tracking-[0.22em] text-[hsl(var(--accent))]">
+        {eyebrow}
+      </p>
+      <p className="mt-2 font-display text-4xl font-extrabold leading-none text-foreground md:text-5xl tabular-nums">
+        {display}
+        <span className="text-[hsl(var(--accent))]">{suffix}</span>
+      </p>
+      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+        {label}
+      </p>
+    </div>
+  );
+};
