@@ -7,7 +7,7 @@ export default {
   theme: {
     fontFamily: {
       sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
-      display: ['"Phudu"', '"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+      display: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
     },
     container: {
       center: true,
