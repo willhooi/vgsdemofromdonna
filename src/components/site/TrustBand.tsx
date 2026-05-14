@@ -1,4 +1,8 @@
-import { ShieldCheck, Award, Radio, Users, Send, Calendar } from "lucide-react";
+import { Send, Calendar, ShieldCheck } from "lucide-react";
+import isoLogo from "@/assets/certs/iso-27001.svg";
+import vncertLogo from "@/assets/certs/vncert.svg";
+import vntaLogo from "@/assets/certs/vnta.svg";
+import zaloLogo from "@/assets/certs/zalo-trusted.svg";
 
 /**
  * TrustBand — Infobip-style "trust at a glance" strip.
@@ -22,19 +26,30 @@ const stats = [
     headline: "5M+",
     label: "SMS, Zalo & email messages delivered every single day across Vietnam.",
   },
-  {
-    icon: ShieldCheck,
-    eyebrow: "Certified",
-    headline: "ISO 27001",
-    label: "Plus VNCERT, MIC telecom licence and Zalo Trusted Partner status.",
-  },
 ];
 
-const certBadges = [
-  { icon: ShieldCheck, label: "ISO/IEC 27001:2013" },
-  { icon: Award, label: "VNCERT Certified" },
-  { icon: Radio, label: "MIC Telecom Licence" },
-  { icon: Users, label: "Zalo Trusted Partner" },
+// Certifications — easy to extend: just append a new entry with logo + label + description.
+const certifications = [
+  {
+    logo: isoLogo,
+    name: "ISO/IEC 27001:2013",
+    description: "Information Security Management",
+  },
+  {
+    logo: vncertLogo,
+    name: "VNCERT",
+    description: "Vietnam Computer Emergency Response Team",
+  },
+  {
+    logo: vntaLogo,
+    name: "VNTA Telecom Licence",
+    description: "License to Provide Telecommunication Services Without Network Infrastructure",
+  },
+  {
+    logo: zaloLogo,
+    name: "Zalo Trusted Partner",
+    description: "Official ZNS Provider",
+  },
 ];
 
 const BRANDS_ROW_1 = [
@@ -70,7 +85,7 @@ export const TrustBand = () => {
           }}
         />
         <div className="container-tight relative">
-          <div className="grid gap-5 md:grid-cols-3">
+          <div className="grid gap-5 md:grid-cols-2">
             {stats.map(({ icon: Icon, eyebrow, headline, label }) => (
               <div
                 key={headline}
@@ -92,17 +107,48 @@ export const TrustBand = () => {
             ))}
           </div>
 
-          {/* certification chips */}
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-2 md:gap-3">
-            {certBadges.map(({ icon: Icon, label }) => (
-              <span
-                key={label}
-                className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-semibold text-white/85"
-              >
-                <Icon className="h-3.5 w-3.5 text-[hsl(var(--accent))]" />
-                {label}
-              </span>
-            ))}
+          {/* Certifications frame */}
+          <div className="mt-5 rounded-3xl border border-white/10 bg-white/[0.04] p-7 backdrop-blur-sm md:p-8">
+            <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+              <div>
+                <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-[hsl(var(--accent))]/15 text-[hsl(var(--accent))]">
+                  <ShieldCheck className="h-5 w-5" />
+                </span>
+                <p className="mt-5 text-[11px] font-semibold uppercase tracking-[0.22em] text-[hsl(var(--accent))]">
+                  Certifications & Licences
+                </p>
+                <p className="mt-2 font-display text-2xl font-extrabold leading-tight text-white md:text-3xl">
+                  Recognized & licenced to operate at enterprise scale.
+                </p>
+              </div>
+              <p className="text-sm text-white/60 md:max-w-xs md:text-right">
+                Our certifications are issued by international and Vietnamese authorities.
+              </p>
+            </div>
+
+            <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-4">
+              {certifications.map((c) => (
+                <div
+                  key={c.name}
+                  className="group flex flex-col items-center rounded-2xl border border-white/10 bg-white p-4 text-center transition-all hover:-translate-y-1 hover:border-[hsl(var(--accent))]/60"
+                >
+                  <div className="flex h-16 w-full items-center justify-center">
+                    <img
+                      src={c.logo}
+                      alt={c.name}
+                      className="max-h-16 w-auto max-w-full object-contain"
+                      loading="lazy"
+                    />
+                  </div>
+                  <p className="mt-3 text-xs font-bold leading-tight text-foreground">
+                    {c.name}
+                  </p>
+                  <p className="mt-1 text-[10px] leading-snug text-muted-foreground">
+                    {c.description}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
