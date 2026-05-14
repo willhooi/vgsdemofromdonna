@@ -79,43 +79,39 @@ export const TrustBand = () => {
         </div>
       </div>
 
-      {/* Dark green certification band */}
+      {/* Light blue certification band */}
       <div
-        className="relative overflow-hidden py-14 md:py-20"
+        className="relative overflow-hidden py-12 md:py-16"
         style={{
           background:
-            "linear-gradient(135deg, hsl(145 100% 16%) 0%, hsl(145 100% 22%) 50%, hsl(145 100% 18%) 100%)",
+            "linear-gradient(135deg, hsl(210 60% 96%) 0%, hsl(205 70% 92%) 50%, hsl(200 65% 94%) 100%)",
         }}
       >
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 opacity-30"
+          className="pointer-events-none absolute inset-0 opacity-40"
           style={{
             backgroundImage:
-              "radial-gradient(hsl(0 0% 100% / 0.18) 1px, transparent 1px)",
+              "radial-gradient(hsl(210 60% 30% / 0.10) 1px, transparent 1px)",
             backgroundSize: "22px 22px",
             maskImage:
               "radial-gradient(ellipse at center, black 40%, transparent 80%)",
           }}
         />
         <div className="container-tight relative">
-          {/* Certifications — separate row, each badge in its own frame */}
-          <div className="mt-10 md:mt-12">
+          <div>
             <div className="flex flex-col items-center gap-2 text-center">
-              <span className="inline-flex items-center gap-2 rounded-full border border-[hsl(var(--accent))]/40 bg-[hsl(var(--accent))]/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-[hsl(var(--accent))]">
+              <span className="inline-flex items-center gap-2 rounded-full border border-[hsl(210_80%_30%)]/30 bg-white/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-[hsl(210_80%_25%)]">
                 <ShieldCheck className="h-3.5 w-3.5" />
                 Certifications & Licences
               </span>
-              <p className="text-sm text-white/70">
-                Issued by international and Vietnamese authorities.
-              </p>
             </div>
 
             <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 md:mt-8 md:grid-cols-4">
               {certifications.map((c) => (
                 <div
                   key={c.name}
-                  className="group flex flex-col rounded-2xl border border-white/15 bg-white shadow-[0_8px_30px_-12px_rgba(0,0,0,0.45)] transition-all hover:-translate-y-1 hover:border-[hsl(var(--accent))] hover:shadow-[0_12px_40px_-12px_hsl(var(--accent)/0.5)]"
+                  className="group flex flex-col rounded-2xl border border-white bg-white shadow-[0_8px_30px_-12px_rgba(15,40,80,0.25)] transition-all hover:-translate-y-1 hover:shadow-[0_14px_40px_-12px_rgba(15,40,80,0.4)]"
                 >
                   <div className="flex h-24 items-center justify-center px-5 pt-5 md:h-28">
                     <img
@@ -125,11 +121,17 @@ export const TrustBand = () => {
                       loading="lazy"
                     />
                   </div>
-                  <div className="mt-3 flex-1 rounded-b-2xl bg-foreground px-4 py-3 text-center">
-                    <p className="text-xs font-bold leading-tight text-background md:text-sm">
+                  <div
+                    className="mt-3 flex-1 rounded-b-2xl px-4 py-3 text-center"
+                    style={{
+                      background:
+                        "linear-gradient(135deg, hsl(215 80% 18%) 0%, hsl(220 75% 26%) 100%)",
+                    }}
+                  >
+                    <p className="text-xs font-bold leading-tight text-white md:text-sm">
                       {c.name}
                     </p>
-                    <p className="mt-1 text-[10px] leading-snug text-background/65 md:text-[11px]">
+                    <p className="mt-1 text-[10px] leading-snug text-white/70 md:text-[11px]">
                       {c.description}
                     </p>
                   </div>
