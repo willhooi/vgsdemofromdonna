@@ -21,7 +21,7 @@ export const Hero = () => {
               <>
                 {parts[0]}
                 <span
-                  className="bg-clip-text text-transparent italic"
+                  className="bg-clip-text text-transparent"
                   style={{ backgroundImage: "var(--gradient-brand)" }}
                 >
                   conversations
