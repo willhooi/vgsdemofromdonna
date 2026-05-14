@@ -182,7 +182,7 @@ const BrandRow = ({
   brands,
   direction,
 }: {
-  brands: string[];
+  brands: Brand[];
   direction: "left" | "right";
 }) => {
   // duplicate for seamless loop
@@ -197,10 +197,30 @@ const BrandRow = ({
       >
         {items.map((b, i) => (
           <span
-            key={`${b}-${i}`}
-            className="inline-flex shrink-0 items-center rounded-2xl border border-border bg-card px-5 py-3 font-display text-base font-bold tracking-tight text-muted-foreground transition-colors hover:text-foreground"
+            key={`${b.name}-${i}`}
+            title={b.name}
+            className="inline-flex h-16 w-40 shrink-0 items-center justify-center rounded-2xl border border-border bg-card px-5 py-3 transition-all hover:-translate-y-0.5 hover:shadow-[0_10px_30px_-12px_rgba(0,0,0,0.18)]"
           >
-            {b}
+            <img
+              src={`https://logo.clearbit.com/${b.domain}`}
+              alt={b.name}
+              loading="lazy"
+              decoding="async"
+              className="max-h-10 w-auto max-w-full object-contain"
+              onError={(e) => {
+                const el = e.currentTarget;
+                el.style.display = "none";
+                const parent = el.parentElement;
+                if (parent && !parent.querySelector("[data-fallback]")) {
+                  const span = document.createElement("span");
+                  span.dataset.fallback = "true";
+                  span.className =
+                    "font-display text-base font-bold tracking-tight text-muted-foreground";
+                  span.textContent = b.name;
+                  parent.appendChild(span);
+                }
+              }}
+            />
           </span>
         ))}
       </div>
