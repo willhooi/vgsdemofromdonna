@@ -2,11 +2,9 @@ import { useEffect } from "react";
 import { Header } from "@/components/site/Header";
 import { Hero } from "@/components/site/Hero";
 import { MediaShowcase } from "@/components/site/MediaShowcase";
+import { TrustBand } from "@/components/site/TrustBand";
 import { Solutions } from "@/components/site/Solutions";
 import { Industries } from "@/components/site/Industries";
-import { TrustMap } from "@/components/site/TrustMap";
-import { JapanBridge } from "@/components/site/JapanBridge";
-import { CaseStudies } from "@/components/site/CaseStudies";
 import { FAQ } from "@/components/site/FAQ";
 import { CTASection } from "@/components/site/CTASection";
 import { Footer } from "@/components/site/Footer";
@@ -31,13 +29,9 @@ const Index = () => {
       <Header />
       <Hero />
       <MediaShowcase />
+      <TrustBand />
       <Solutions />
       <Industries />
-      <TrustMap />
-      <div className="bg-[hsl(var(--primary-soft)/0.35)]">
-        <CaseStudies />
-      </div>
-      <JapanBridge />
       <div className="bg-muted">
         <FAQ />
       </div>
