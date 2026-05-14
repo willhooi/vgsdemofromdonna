@@ -2,7 +2,7 @@ import accreteLogo from "@/assets/brand/accrete-logo.png";
 
 export const AccreteBacking = () => {
   return (
-    <section className="bg-background py-14 md:py-20">
+    <section className="bg-background pt-14 pb-6 md:pt-20 md:pb-8">
       <div className="container-tight">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="heading-display flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-3xl md:text-5xl">

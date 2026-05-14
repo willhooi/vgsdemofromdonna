@@ -69,9 +69,9 @@ export const TrustBand = () => {
   return (
     <section className="relative">
       {/* Light stats band — matches AccreteBacking */}
-      <div className="bg-background py-14 md:py-20">
+      <div className="bg-background pt-2 pb-10 md:pt-4 md:pb-16">
         <div className="container-tight">
-          <div className="grid gap-5 md:grid-cols-2">
+          <div className="grid gap-3 sm:gap-4 md:gap-5 grid-cols-2">
             {stats.map((s) => (
               <StatCard key={s.eyebrow} {...s} />
             ))}
@@ -79,43 +79,39 @@ export const TrustBand = () => {
         </div>
       </div>
 
-      {/* Dark green certification band */}
+      {/* Light blue certification band */}
       <div
-        className="relative overflow-hidden py-14 md:py-20"
+        className="relative overflow-hidden py-12 md:py-16"
         style={{
           background:
-            "linear-gradient(135deg, hsl(145 100% 16%) 0%, hsl(145 100% 22%) 50%, hsl(145 100% 18%) 100%)",
+            "linear-gradient(135deg, hsl(210 60% 96%) 0%, hsl(205 70% 92%) 50%, hsl(200 65% 94%) 100%)",
         }}
       >
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 opacity-30"
+          className="pointer-events-none absolute inset-0 opacity-40"
           style={{
             backgroundImage:
-              "radial-gradient(hsl(0 0% 100% / 0.18) 1px, transparent 1px)",
+              "radial-gradient(hsl(210 60% 30% / 0.10) 1px, transparent 1px)",
             backgroundSize: "22px 22px",
             maskImage:
               "radial-gradient(ellipse at center, black 40%, transparent 80%)",
           }}
         />
         <div className="container-tight relative">
-          {/* Certifications — separate row, each badge in its own frame */}
-          <div className="mt-10 md:mt-12">
+          <div>
             <div className="flex flex-col items-center gap-2 text-center">
-              <span className="inline-flex items-center gap-2 rounded-full border border-[hsl(var(--accent))]/40 bg-[hsl(var(--accent))]/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-[hsl(var(--accent))]">
+              <span className="inline-flex items-center gap-2 rounded-full border border-[hsl(210_80%_30%)]/30 bg-white/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-[hsl(210_80%_25%)]">
                 <ShieldCheck className="h-3.5 w-3.5" />
                 Certifications & Licences
               </span>
-              <p className="text-sm text-white/70">
-                Issued by international and Vietnamese authorities.
-              </p>
             </div>
 
             <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 md:mt-8 md:grid-cols-4">
               {certifications.map((c) => (
                 <div
                   key={c.name}
-                  className="group flex flex-col rounded-2xl border border-white/15 bg-white shadow-[0_8px_30px_-12px_rgba(0,0,0,0.45)] transition-all hover:-translate-y-1 hover:border-[hsl(var(--accent))] hover:shadow-[0_12px_40px_-12px_hsl(var(--accent)/0.5)]"
+                  className="group flex flex-col rounded-2xl border border-white bg-white shadow-[0_8px_30px_-12px_rgba(15,40,80,0.25)] transition-all hover:-translate-y-1 hover:shadow-[0_14px_40px_-12px_rgba(15,40,80,0.4)]"
                 >
                   <div className="flex h-24 items-center justify-center px-5 pt-5 md:h-28">
                     <img
@@ -125,11 +121,17 @@ export const TrustBand = () => {
                       loading="lazy"
                     />
                   </div>
-                  <div className="mt-3 flex-1 rounded-b-2xl bg-foreground px-4 py-3 text-center">
-                    <p className="text-xs font-bold leading-tight text-background md:text-sm">
+                  <div
+                    className="mt-3 flex-1 rounded-b-2xl px-4 py-3 text-center"
+                    style={{
+                      background:
+                        "linear-gradient(135deg, hsl(215 80% 18%) 0%, hsl(220 75% 26%) 100%)",
+                    }}
+                  >
+                    <p className="text-xs font-bold leading-tight text-white md:text-sm">
                       {c.name}
                     </p>
-                    <p className="mt-1 text-[10px] leading-snug text-background/65 md:text-[11px]">
+                    <p className="mt-1 text-[10px] leading-snug text-white/70 md:text-[11px]">
                       {c.description}
                     </p>
                   </div>
@@ -221,19 +223,19 @@ const StatCard = ({ icon: Icon, eyebrow, target, suffix, label }: StatCardProps)
   return (
     <div
       ref={ref}
-      className="group relative flex flex-col rounded-3xl border border-border bg-card p-7 transition-all hover:-translate-y-1 hover:border-[hsl(var(--accent))]/60 hover:shadow-[0_18px_50px_-20px_hsl(var(--accent)/0.45)]"
+      className="group relative flex flex-col rounded-2xl border border-border bg-card p-4 sm:p-5 md:p-7 transition-all hover:-translate-y-1 hover:border-[hsl(var(--accent))]/60 hover:shadow-[0_18px_50px_-20px_hsl(var(--accent)/0.45)]"
     >
-      <span className="grid h-11 w-11 place-items-center rounded-2xl bg-[hsl(var(--accent))]/15 text-[hsl(var(--accent))]">
-        <Icon className="h-5 w-5" />
+      <span className="grid h-8 w-8 md:h-11 md:w-11 place-items-center rounded-xl md:rounded-2xl bg-[hsl(var(--accent))]/15 text-[hsl(var(--accent))]">
+        <Icon className="h-4 w-4 md:h-5 md:w-5" />
       </span>
-      <p className="mt-5 text-[11px] font-semibold uppercase tracking-[0.22em] text-[hsl(var(--accent))]">
+      <p className="mt-3 md:mt-5 text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.18em] md:tracking-[0.22em] text-[hsl(var(--accent))]">
         {eyebrow}
       </p>
-      <p className="mt-2 font-display text-4xl font-extrabold leading-none text-foreground md:text-5xl tabular-nums">
+      <p className="mt-1 md:mt-2 font-display text-2xl sm:text-3xl md:text-5xl font-extrabold leading-none text-foreground tabular-nums">
         {display}
         <span className="text-[hsl(var(--accent))]">{suffix}</span>
       </p>
-      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+      <p className="mt-2 md:mt-3 text-xs md:text-sm leading-relaxed text-muted-foreground">
         {label}
       </p>
     </div>
