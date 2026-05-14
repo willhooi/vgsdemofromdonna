@@ -84,7 +84,12 @@ export const Header = () => {
             <span className={cn(lang === "vi" && "text-foreground")}>VI</span>
           </button>
 
-          <Button variant="cta" size="default" asChild>
+          <Button
+            variant="cta"
+            size="default"
+            asChild
+            className="bg-[#39b44a] text-white shadow-[0_8px_24px_-8px_rgba(57,180,74,0.6)] hover:bg-[#2fa040] hover:brightness-100"
+          >
             <Link to="/contact">{t("nav.contact")}</Link>
           </Button>
 

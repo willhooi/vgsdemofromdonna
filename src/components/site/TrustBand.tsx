@@ -56,13 +56,33 @@ const certifications = [
   },
 ];
 
-const BRANDS_ROW_1 = [
-  "Vietcombank", "Techcombank", "VPBank", "BIDV", "ACB", "Sacombank",
-  "MB Bank", "TPBank", "HDBank", "VIB",
+// Brand logos rendered in full color via Clearbit Logo API.
+// To add a brand, append { name, domain }. Domain should be the company's primary website.
+type Brand = { name: string; domain: string };
+
+const BRANDS_ROW_1: Brand[] = [
+  { name: "Vietcombank", domain: "vietcombank.com.vn" },
+  { name: "Techcombank", domain: "techcombank.com.vn" },
+  { name: "VPBank", domain: "vpbank.com.vn" },
+  { name: "BIDV", domain: "bidv.com.vn" },
+  { name: "ACB", domain: "acb.com.vn" },
+  { name: "Sacombank", domain: "sacombank.com.vn" },
+  { name: "MB Bank", domain: "mbbank.com.vn" },
+  { name: "TPBank", domain: "tpb.vn" },
+  { name: "HDBank", domain: "hdbank.com.vn" },
+  { name: "VIB", domain: "vib.com.vn" },
 ];
-const BRANDS_ROW_2 = [
-  "Vietnam Airlines", "Vietjet", "Bamboo Airways", "Saigon Co.op", "Thế Giới Di Động",
-  "FPT", "Viettel", "Lotte", "AEON", "Grab",
+const BRANDS_ROW_2: Brand[] = [
+  { name: "Vietnam Airlines", domain: "vietnamairlines.com" },
+  { name: "Vietjet", domain: "vietjetair.com" },
+  { name: "Bamboo Airways", domain: "bambooairways.com" },
+  { name: "Saigon Co.op", domain: "saigonco-op.com.vn" },
+  { name: "Thế Giới Di Động", domain: "thegioididong.com" },
+  { name: "FPT", domain: "fpt.com" },
+  { name: "Viettel", domain: "viettel.com.vn" },
+  { name: "Lotte", domain: "lotte.vn" },
+  { name: "AEON", domain: "aeon.com.vn" },
+  { name: "Grab", domain: "grab.com" },
 ];
 
 export const TrustBand = () => {
@@ -162,7 +182,7 @@ const BrandRow = ({
   brands,
   direction,
 }: {
-  brands: string[];
+  brands: Brand[];
   direction: "left" | "right";
 }) => {
   // duplicate for seamless loop
@@ -177,10 +197,30 @@ const BrandRow = ({
       >
         {items.map((b, i) => (
           <span
-            key={`${b}-${i}`}
-            className="inline-flex shrink-0 items-center rounded-2xl border border-border bg-card px-5 py-3 font-display text-base font-bold tracking-tight text-muted-foreground transition-colors hover:text-foreground"
+            key={`${b.name}-${i}`}
+            title={b.name}
+            className="inline-flex h-16 w-40 shrink-0 items-center justify-center rounded-2xl border border-border bg-card px-5 py-3 transition-all hover:-translate-y-0.5 hover:shadow-[0_10px_30px_-12px_rgba(0,0,0,0.18)]"
           >
-            {b}
+            <img
+              src={`https://logo.clearbit.com/${b.domain}`}
+              alt={b.name}
+              loading="lazy"
+              decoding="async"
+              className="max-h-10 w-auto max-w-full object-contain"
+              onError={(e) => {
+                const el = e.currentTarget;
+                el.style.display = "none";
+                const parent = el.parentElement;
+                if (parent && !parent.querySelector("[data-fallback]")) {
+                  const span = document.createElement("span");
+                  span.dataset.fallback = "true";
+                  span.className =
+                    "font-display text-base font-bold tracking-tight text-muted-foreground";
+                  span.textContent = b.name;
+                  parent.appendChild(span);
+                }
+              }}
+            />
           </span>
         ))}
       </div>
@@ -225,17 +265,17 @@ const StatCard = ({ icon: Icon, eyebrow, target, suffix, label }: StatCardProps)
       ref={ref}
       className="group relative flex flex-col rounded-2xl border border-border bg-card p-4 sm:p-5 md:p-7 transition-all hover:-translate-y-1 hover:border-[hsl(var(--accent))]/60 hover:shadow-[0_18px_50px_-20px_hsl(var(--accent)/0.45)]"
     >
-      <span className="grid h-8 w-8 md:h-11 md:w-11 place-items-center rounded-xl md:rounded-2xl bg-[hsl(var(--accent))]/15 text-[hsl(var(--accent))]">
+      <span className="grid h-8 w-8 md:h-11 md:w-11 place-items-center rounded-xl md:rounded-2xl bg-foreground/10 text-foreground">
         <Icon className="h-4 w-4 md:h-5 md:w-5" />
       </span>
-      <p className="mt-3 md:mt-5 text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.18em] md:tracking-[0.22em] text-[hsl(var(--accent))]">
+      <p className="mt-3 md:mt-5 text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.18em] md:tracking-[0.22em] text-foreground">
         {eyebrow}
       </p>
       <p className="mt-1 md:mt-2 font-display text-2xl sm:text-3xl md:text-5xl font-extrabold leading-none text-foreground tabular-nums">
         {display}
-        <span className="text-[hsl(var(--accent))]">{suffix}</span>
+        <span className="text-foreground">{suffix}</span>
       </p>
-      <p className="mt-2 md:mt-3 text-xs md:text-sm leading-relaxed text-muted-foreground">
+      <p className="mt-2 md:mt-3 text-xs md:text-sm leading-relaxed text-foreground/80">
         {label}
       </p>
     </div>
