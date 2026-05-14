@@ -22,6 +22,7 @@ type MediaItem =
 
 import banner1 from "@/assets/banners/banner-1.jpg";
 import banner2 from "@/assets/banners/banner-2.jpg";
+import banner3 from "@/assets/banners/banner-3.jpg";
 
 const media: MediaItem[] = [
   {
@@ -35,6 +36,12 @@ const media: MediaItem[] = [
     src: banner2,
     alt: "Customer engagement team operating multi-channel messaging in Vietnam",
     caption: "SMS · Zalo · Viber · Email · AI — one trusted partner for enterprise messaging.",
+  },
+  {
+    type: "image",
+    src: banner3,
+    alt: "Japan–Vietnam enterprise partnership bridging global expertise and local reach",
+    caption: "Bridging Japan's expertise with Vietnam's enterprise growth.",
   },
 ];
 
