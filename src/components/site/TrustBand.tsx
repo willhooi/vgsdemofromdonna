@@ -145,6 +145,8 @@ export const TrustBand = () => {
               ))}
             </div>
           </div>
+        </div>
+      </div>
 
       {/* Brand marquee */}
       <div className="border-b border-border bg-background py-10 md:py-12">
