@@ -68,7 +68,18 @@ const BRANDS_ROW_2 = [
 export const TrustBand = () => {
   return (
     <section className="relative">
-      {/* Dark green stat band */}
+      {/* Light stats band — matches AccreteBacking */}
+      <div className="bg-background py-14 md:py-20">
+        <div className="container-tight">
+          <div className="grid gap-5 md:grid-cols-2">
+            {stats.map((s) => (
+              <StatCard key={s.eyebrow} {...s} />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Dark green certification band */}
       <div
         className="relative overflow-hidden py-14 md:py-20"
         style={{
@@ -76,7 +87,6 @@ export const TrustBand = () => {
             "linear-gradient(135deg, hsl(145 100% 16%) 0%, hsl(145 100% 22%) 50%, hsl(145 100% 18%) 100%)",
         }}
       >
-        {/* subtle dot overlay */}
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-30"
@@ -89,28 +99,6 @@ export const TrustBand = () => {
           }}
         />
         <div className="container-tight relative">
-          <div className="grid gap-5 md:grid-cols-2">
-            {stats.map(({ icon: Icon, eyebrow, headline, label }) => (
-              <div
-                key={headline}
-                className="group relative flex flex-col rounded-3xl border border-white/10 bg-white/[0.04] p-7 backdrop-blur-sm transition-all hover:-translate-y-1 hover:border-[hsl(var(--accent))]/50 hover:bg-white/[0.07]"
-              >
-                <span className="grid h-11 w-11 place-items-center rounded-2xl bg-[hsl(var(--accent))]/15 text-[hsl(var(--accent))]">
-                  <Icon className="h-5 w-5" />
-                </span>
-                <p className="mt-5 text-[11px] font-semibold uppercase tracking-[0.22em] text-[hsl(var(--accent))]">
-                  {eyebrow}
-                </p>
-                <p className="mt-2 font-display text-4xl font-extrabold leading-none text-white md:text-5xl">
-                  {headline}
-                </p>
-                <p className="mt-3 text-sm leading-relaxed text-white/75">
-                  {label}
-                </p>
-              </div>
-            ))}
-          </div>
-
           {/* Certifications — separate row, each badge in its own frame */}
           <div className="mt-10 md:mt-12">
             <div className="flex flex-col items-center gap-2 text-center">
