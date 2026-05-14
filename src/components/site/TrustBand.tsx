@@ -79,12 +79,12 @@ export const TrustBand = () => {
         </div>
       </div>
 
-      {/* Light blue certification band */}
+      {/* Light green certification band */}
       <div
         className="relative overflow-hidden py-12 md:py-16"
         style={{
           background:
-            "linear-gradient(135deg, hsl(210 60% 96%) 0%, hsl(205 70% 92%) 50%, hsl(200 65% 94%) 100%)",
+            "linear-gradient(135deg, hsl(128 55% 95%) 0%, hsl(132 60% 90%) 50%, hsl(128 55% 93%) 100%)",
         }}
       >
         <div
@@ -92,7 +92,7 @@ export const TrustBand = () => {
           className="pointer-events-none absolute inset-0 opacity-40"
           style={{
             backgroundImage:
-              "radial-gradient(hsl(210 60% 30% / 0.10) 1px, transparent 1px)",
+              "radial-gradient(hsl(128 55% 25% / 0.10) 1px, transparent 1px)",
             backgroundSize: "22px 22px",
             maskImage:
               "radial-gradient(ellipse at center, black 40%, transparent 80%)",
@@ -101,7 +101,7 @@ export const TrustBand = () => {
         <div className="container-tight relative">
           <div>
             <div className="flex flex-col items-center gap-2 text-center">
-              <span className="inline-flex items-center gap-2 rounded-full border border-[hsl(210_80%_30%)]/30 bg-white/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-[hsl(210_80%_25%)]">
+              <span className="inline-flex items-center gap-2 rounded-full border border-[hsl(128_45%_30%)]/30 bg-white/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-[hsl(128_55%_22%)]">
                 <ShieldCheck className="h-3.5 w-3.5" />
                 Certifications & Licences
               </span>
