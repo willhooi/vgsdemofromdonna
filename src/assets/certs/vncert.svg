@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 80" role="img" aria-label="VNCERT">
+  <rect x="2" y="2" width="136" height="76" rx="8" fill="#f4f7ff" stroke="#d97706" stroke-width="1.5"/>
+  <g transform="translate(12,14)">
+    <path d="M2 4 L26 4 L26 28 L14 50 L2 28 Z" fill="#1e40af" stroke="#d97706" stroke-width="1.5"/>
+    <text x="14" y="24" text-anchor="middle" font-family="Arial Black, Arial" font-size="11" font-weight="900" fill="#ffffff">VN</text>
+    <text x="14" y="36" text-anchor="middle" font-family="Arial Black, Arial" font-size="9" font-weight="900" fill="#fbbf24">CERT</text>
+  </g>
+  <text x="80" y="48" text-anchor="middle" font-family="Arial Black, Arial" font-size="20" font-weight="900" fill="#1e40af">VNCERT</text>
+</svg>

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 80" role="img" aria-label="VNTA Telecommunications Authority">
+  <path d="M10 50 Q 90 -10 170 50" fill="none" stroke="#dc2626" stroke-width="3.5"/>
+  <path d="M16 52 Q 90 -2 164 52" fill="none" stroke="#1d4ed8" stroke-width="3.5"/>
+  <text x="90" y="50" text-anchor="middle" font-family="Arial Black, Arial" font-size="22" font-weight="900" fill="#1d4ed8" letter-spacing="1">VNTA</text>
+  <text x="90" y="62" text-anchor="middle" font-family="Arial" font-size="8" font-weight="700" fill="#dc2626" letter-spacing="2">CỤC VIỄN THÔNG</text>
+  <text x="90" y="72" text-anchor="middle" font-family="Arial" font-size="6" font-weight="600" fill="#1d4ed8">Viet Nam Telecommunications Authority</text>
+</svg>
