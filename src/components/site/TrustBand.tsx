@@ -265,7 +265,7 @@ const StatCard = ({ icon: Icon, eyebrow, target, suffix, label }: StatCardProps)
       ref={ref}
       className="group relative flex flex-col rounded-2xl border border-border bg-card p-4 sm:p-5 md:p-7 transition-all hover:-translate-y-1 hover:border-[hsl(var(--accent))]/60 hover:shadow-[0_18px_50px_-20px_hsl(var(--accent)/0.45)]"
     >
-      <span className="grid h-8 w-8 md:h-11 md:w-11 place-items-center rounded-xl md:rounded-2xl bg-foreground/10 text-foreground">
+      <span className="grid h-8 w-8 md:h-11 md:w-11 place-items-center rounded-xl md:rounded-2xl bg-[#04da7a]/10 text-[#04da7a]">
         <Icon className="h-4 w-4 md:h-5 md:w-5" />
       </span>
       <p className="mt-3 md:mt-5 text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.18em] md:tracking-[0.22em] text-foreground">
