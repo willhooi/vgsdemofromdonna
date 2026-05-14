@@ -19,13 +19,15 @@ const stats = [
   {
     icon: Calendar,
     eyebrow: "Since 2007",
-    headline: "5,000+",
+    target: 5000,
+    suffix: "+",
     label: "enterprise brands trust VietGuys to power their customer conversations.",
   },
   {
     icon: Send,
     eyebrow: "Daily volume",
-    headline: "5M+",
+    target: 5,
+    suffix: "M+",
     label: "SMS, Zalo & email messages delivered every single day across Vietnam.",
   },
 ];
