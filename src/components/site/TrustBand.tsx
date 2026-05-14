@@ -79,12 +79,12 @@ export const TrustBand = () => {
         </div>
       </div>
 
-      {/* Light blue certification band */}
+      {/* Light green certification band */}
       <div
         className="relative overflow-hidden py-12 md:py-16"
         style={{
           background:
-            "linear-gradient(135deg, hsl(210 60% 96%) 0%, hsl(205 70% 92%) 50%, hsl(200 65% 94%) 100%)",
+            "linear-gradient(135deg, hsl(128 55% 95%) 0%, hsl(132 60% 90%) 50%, hsl(128 55% 93%) 100%)",
         }}
       >
         <div
@@ -92,7 +92,7 @@ export const TrustBand = () => {
           className="pointer-events-none absolute inset-0 opacity-40"
           style={{
             backgroundImage:
-              "radial-gradient(hsl(210 60% 30% / 0.10) 1px, transparent 1px)",
+              "radial-gradient(hsl(128 55% 25% / 0.10) 1px, transparent 1px)",
             backgroundSize: "22px 22px",
             maskImage:
               "radial-gradient(ellipse at center, black 40%, transparent 80%)",
@@ -101,7 +101,7 @@ export const TrustBand = () => {
         <div className="container-tight relative">
           <div>
             <div className="flex flex-col items-center gap-2 text-center">
-              <span className="inline-flex items-center gap-2 rounded-full border border-[hsl(210_80%_30%)]/30 bg-white/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-[hsl(210_80%_25%)]">
+              <span className="inline-flex items-center gap-2 rounded-full border border-[hsl(128_45%_30%)]/30 bg-white/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-[hsl(128_55%_22%)]">
                 <ShieldCheck className="h-3.5 w-3.5" />
                 Certifications & Licences
               </span>
@@ -111,7 +111,7 @@ export const TrustBand = () => {
               {certifications.map((c) => (
                 <div
                   key={c.name}
-                  className="group flex flex-col rounded-2xl border border-white bg-white shadow-[0_8px_30px_-12px_rgba(15,40,80,0.25)] transition-all hover:-translate-y-1 hover:shadow-[0_14px_40px_-12px_rgba(15,40,80,0.4)]"
+                  className="group flex flex-col rounded-2xl border border-white bg-white shadow-[0_8px_30px_-12px_rgba(20,80,30,0.25)] transition-all hover:-translate-y-1 hover:shadow-[0_14px_40px_-12px_rgba(57,180,74,0.45)]"
                 >
                   <div className="flex h-24 items-center justify-center px-5 pt-5 md:h-28">
                     <img
@@ -125,7 +125,7 @@ export const TrustBand = () => {
                     className="mt-3 flex-1 rounded-b-2xl px-4 py-3 text-center"
                     style={{
                       background:
-                        "linear-gradient(135deg, hsl(215 80% 18%) 0%, hsl(220 75% 26%) 100%)",
+                        "linear-gradient(135deg, hsl(128 55% 18%) 0%, hsl(128 50% 28%) 100%)",
                     }}
                   >
                     <p className="text-xs font-bold leading-tight text-white md:text-sm">
