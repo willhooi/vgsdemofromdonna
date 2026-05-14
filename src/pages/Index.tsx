@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { Header } from "@/components/site/Header";
 import { Hero } from "@/components/site/Hero";
-import { Timeline } from "@/components/site/Timeline";
+import { MediaShowcase } from "@/components/site/MediaShowcase";
 import { Solutions } from "@/components/site/Solutions";
+import { Industries } from "@/components/site/Industries";
 import { TrustMap } from "@/components/site/TrustMap";
 import { JapanBridge } from "@/components/site/JapanBridge";
 import { CaseStudies } from "@/components/site/CaseStudies";
-import { HumanStory } from "@/components/site/HumanStory";
 import { FAQ } from "@/components/site/FAQ";
 import { CTASection } from "@/components/site/CTASection";
 import { Footer } from "@/components/site/Footer";
@@ -16,7 +16,7 @@ const Index = () => {
   useEffect(() => {
     document.title = "Enterprise Messaging — VietGuys | Enterprise Messaging Vietnam";
     const desc =
-      "VietGuys: where customer conversations become business growth. SMS, Zalo, Viber, Email & AI campaigns, 19 years, 5M messages daily, ISO 27001. Backed by Accrete Inc., Japan.";
+      "VietGuys: where customer conversations become business growth. SMS, Zalo, Viber, Email & AI campaigns, 19 years, 5M messages daily, ISO 27001. A member of Accrete Inc., Japan.";
     let m = document.querySelector('meta[name="description"]');
     if (!m) {
       m = document.createElement("meta");
@@ -30,13 +30,17 @@ const Index = () => {
     <main className="min-h-screen bg-background">
       <Header />
       <Hero />
-      <Timeline />
+      <MediaShowcase />
       <Solutions />
+      <Industries />
       <TrustMap />
+      <div className="bg-[hsl(var(--primary-soft)/0.35)]">
+        <CaseStudies />
+      </div>
       <JapanBridge />
-      <CaseStudies />
-      <HumanStory />
-      <FAQ />
+      <div className="bg-muted">
+        <FAQ />
+      </div>
       <CTASection />
       <Footer />
       <ChatBubble />

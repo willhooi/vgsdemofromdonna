@@ -1,116 +1,116 @@
-# VietGuys — Brand Storytelling Overhaul
+# Infobip-style restructure on VietGuys brand
 
-Transform the site from a vendor listing into a living, breathing trusted partner with a 19-year heartbeat. EN-first bilingual, with a Signature Artwork System (signal waves × Southeast-Asian patterns) running through every act of the scroll.
+Goal: clean, white, modular layout inspired by infobip.com, executed strictly with VietGuys palette (green #39b44a primary, orange #ff9b17 accent, white base) and current Fraunces + Plus Jakarta typography. Easy to extend with new services. Bilingual EN-first preserved.
 
----
+## 1. Hero — strip back to brand essentials
 
-## 1. Signature Artwork System (foundation)
+Replace `Hero.tsx` content (keep file). Layout: centered, white background, minimal.
 
-A reusable SVG/Canvas language used across all sections. One source of truth, multiple expressions.
+- Eyebrow: removed.
+- H1 (Fraunces, large): **"Where customer conversations become business growth."** — word "conversations" in green→deep-green gradient, italic.
+- Sub-line: **"A member of [Accrete logo] from Japan"** — inline `<img>` of Accrete logo (placeholder SVG in `src/assets/brand/accrete.svg`, request user to swap real asset later) sized to cap-height, vertically centered, with `alt="Accrete Inc."`.
+- Single CTA: orange `Button variant="cta"` → **"Contact Experts"** → `/contact`.
+- No sub-paragraph, no animated phone, no signal waves, no live counter, no secondary link, no chip cloud. Just headline + accrete line + CTA on white with a very soft `--gradient-hero` wash.
 
-**New file:** `src/components/brand/SignalArt.tsx`
-- `<SignalWave />` — concentric arcs radiating from a point, animated `stroke-dashoffset` pulse. Props: `intensity` (1–5), `tone` ("brand" | "accent" | "muted"), `density`.
-- `<SignalGrid />` — dot-matrix lattice, dots light up in a wave (used in Trust map + About timeline late-years).
-- `<SeaPattern />` — subtle Đông Nam Á–inspired geometric motif (lozenges + arcs derived from Đông Sơn drum / batik), stroked in brand color at 6–10% opacity, used as background plate.
-- `<TwoWavesBridge />` — two opposing wave sources meeting at a central glow point (Japan Bridge act).
+## 2. New Media section (right after Hero)
 
-**Tokens added to `src/index.css`:**
-- `--signal-glow: 0 0 40px hsl(var(--primary) / 0.35)`
-- `@keyframes signal-pulse`, `@keyframes dot-bloom`, `@keyframes wave-meet`
-- `.heart-pulse` utility for the live counter
+New component `src/components/site/MediaShowcase.tsx`. Configurable via a single `media` config object at top of file so the user can swap easily.
 
-All artwork uses existing brand HSL tokens — no new colors.
-
----
-
-## 2. Bilingual (EN-first)
-
-**New:** `src/lib/i18n.ts` — minimal in-house dictionary + `useT()` hook reading `localStorage.lang` with default `"en"`. No new dependency.
-- `src/locales/en.ts` (primary, written first, fully populated)
-- `src/locales/vi.ts` (mirror, populated for Hero/About/Solutions/Trust/Japan Bridge keys)
-- Header gets a compact `EN | VI` toggle (replaces nothing else).
-
-Existing hard-coded VI/EN strings in target sections move into the dictionary. Other pages stay as-is for now.
-
----
-
-## 3. Storytelling Arc — Section by section
-
-### Act 1 — Hero (rewrite `src/components/site/Hero.tsx`)
-- Headline: **"Where customer conversations become business growth."**
-- Sub: short, human, one line.
-- Single CTA: **"Contact Experts"** → `/contact`. Secondary link "See how we connect" scrolls to About.
-- Visual: a stylized phone on the right; `<SignalWave intensity={4} />` radiates outward; when the wave reaches the VietGuys mark (top-left of panel), the mark briefly **glows** (CSS filter animation on logo).
-- **Live heart-beat counter**: "5,000,000 messages/day" with `.heart-pulse` (1.05 scale every 1.2s, eased). Number animates up on mount via `requestAnimationFrame` count-up.
-- Remove: channel chip cloud, stat trio, multi-CTA, trust-signal checklist (those move/dedupe — see §4).
-
-### Act 2 — About / Timeline (new `src/components/site/Timeline.tsx`, replaces nothing; inserted after Hero)
-- Horizontal scroll-snap rail of milestones (2007 founding → 2012 first carrier deal → 2016 Zalo partner → 2019 ISO 27001 → 2022 PangoCDP → 2024 Accrete M&A → 2026 today).
-- Each card: year, one-line story, one stat. On enter-viewport: pulse + `<SignalWave>` behind card.
-- Background artwork **evolves**: early years use a single thin wave; later years swap to `<SignalGrid>` denser lattice — visual metaphor of growth.
-- Mobile: vertical stack with same pulse-on-enter.
-
-### Act 3 — Solutions (rewrite `src/components/site/Solutions.tsx` as hex constellation)
-- Central hex = VietGuys mark. Six surrounding hexes = SMS, Zalo ZNS, Viber, Email, OTP/Alerts, AI Campaigns. Thin animated connector lines from each hex to center (SVG `stroke-dasharray` flow).
-- Click a hex → inline detail panel slides in below (no route change), showing: 1-line value prop, 3 bullets, "Learn more" link to existing solution route.
-- Keyboard accessible (tab + enter), aria-expanded.
-- Removes the current grid card layout.
-
-### Act 4 — Trust (new `src/components/site/TrustMap.tsx`, replaces current `TrustBar` + `WhyVietGuys` industry visuals — see §4)
-- Stylized Vietnam map rendered as a dot matrix (`<SignalGrid>` clipped to a simplified VN silhouette path). Dots illuminate progressively on scroll (IntersectionObserver + staggered class toggle), representing nationwide reach.
-- Three certification chips beneath: **ISO/IEC 27001**, **VNCERT**, **Telecom License (MIC)** — each with short proof line.
-- Single sentence: "Trusted by 76 enterprises across banking, airlines, retail, logistics."
-
-### Act 5 — Japan Bridge (new `src/components/site/JapanBridge.tsx`)
-- Headline: **"Global strength, local fluency."**
-- Visual: `<TwoWavesBridge />` — left wave originates from a small VN flag dot, right wave from a JP flag dot, they meet center → bright glow ring.
-- Copy: 2 short paragraphs on the Accrete Inc. partnership: what it unlocks (capital, governance, APAC reach) + what stays local (team, carrier relationships, language). Professional tone, no hype.
-- CTA: "Read the partnership story" → `/about` (anchor `#accrete`).
-
----
-
-## 4. Dedupe pass
-
-Remove or merge to avoid repetition. Edits to `src/pages/Index.tsx` section order:
-
-```text
-Hero → Timeline → Solutions (hex) → TrustMap → JapanBridge → CaseStudies → HumanStory → FAQ → CTASection → Footer
+```ts
+type MediaItem =
+  | { type: "video"; src: string; poster?: string; }
+  | { type: "image"; src: string; alt: string; caption?: string; href?: string };
+const media: MediaItem[] = [ /* default: 1 banner image placeholder */ ];
 ```
 
-Removed from Index:
-- `TrustBar` (merged into TrustMap)
-- `LogoMarquee` (kept once — moved inside TrustMap as a thin strip below certs)
-- `WhyVietGuys`, `Sharp`, `Mobile`, `Partners`, `CTABottom` — content overlaps with Solutions/Trust/JapanBridge/CTASection. Files kept on disk (not deleted) in case other pages import them; just unmounted from Index.
-- Hero's old chip cloud, stat trio, trust checklist (those facts now live in TrustMap + Timeline counter).
+Behavior:
+- If `media.length === 1` and it's a video → full-width 16:9 `<video autoplay muted loop playsinline>` with poster.
+- If image → full-width banner with optional caption overlay.
+- If `media.length > 1` → slide carousel (reuse existing `components/ui/carousel.tsx`, autoplay 6s, dots + arrows).
+- Container: `container-tight`, rounded-3xl, `shadow-card`, light green-tint background band (`bg-[hsl(var(--primary-soft))]/40`) so the white hero contrasts with a soft green section.
+- Comment block at top documents how to add/replace media.
 
----
+## 3. Section structure (Infobip-inspired, modular)
 
-## 5. Files
+`src/pages/Index.tsx` order — alternating white / soft-tint bands for visual rhythm:
+
+1. Hero — white
+2. MediaShowcase — soft green band
+3. **Solutions** (rewritten as Infobip-style "Channels" grid) — white
+4. **Industries** — soft orange band (`bg-[hsl(var(--accent-soft))]/50`)
+5. **Trust / Certifications** (TrustMap, simplified) — white
+6. **Case Studies** — soft green band
+7. **Japan Bridge** (Accrete story, slimmed since hero already mentions it) — white
+8. FAQ — soft gray (`bg-muted`)
+9. CTASection — gradient-brand band
+10. Footer
+
+Drop from homepage: Timeline (move to /about later), HumanStory (kept in repo, unmounted), CaseBubble stays via ChatBubble component.
+
+## 4. Solutions — extensible card grid (Infobip pattern)
+
+Rewrite `Solutions.tsx`:
+- Driven by single `services` array → adding a new service = appending one object.
+  ```ts
+  type Service = { id: string; icon: LucideIcon; name: string; tagline: string; bullets: string[]; href: string; };
+  ```
+- Layout: responsive grid `grid-cols-1 md:grid-cols-2 lg:grid-cols-3`, each card = white, border, hover lifts with green glow, icon in green-soft circle, orange "Learn more →" link.
+- Section header: small green eyebrow "Solutions", Fraunces H2 "One brand. Every channel your customers use.", short sub.
+- No more hex constellation (overkill, hard to extend). Documented in code comment that adding a service = one array entry.
+
+## 5. Industries / Trust / Bridge — visual unification
+
+- Industries: same card-grid pattern as Solutions, icon tinted orange.
+- TrustMap: keep dot map but on white, certification chips below in a horizontal row.
+- JapanBridge: shorter — just the two-waves SVG + 2 paragraphs + link to /about. Title preserved.
+
+## 6. Brand discipline (palette + type)
+
+- All colors via existing tokens — no new hex literals in components.
+- White is dominant; green = primary surfaces (CTAs secondary state, eyebrows, bullet-V, soft band backgrounds via `--primary-soft`); orange reserved for the **single primary CTA per view** + accent micro-elements (link arrows, chapter eyebrow rule).
+- Section bands: alternate `bg-background` ↔ `bg-[hsl(var(--primary-soft))]/40` ↔ `bg-[hsl(var(--accent-soft))]/40` ↔ `bg-muted` for contrast on all devices.
+- Typography unchanged: Fraunces display, Plus Jakarta body. All headings use `.heading-display` / `.heading-section`.
+
+## 7. ChatBubble — Web vs Zalo choice
+
+Rewrite `ChatBubble.tsx`:
+- Floating orange round button (unchanged).
+- On click → small popover with two large options:
+  1. **"Chat on this site"** → opens existing inline chat panel (current UI moves into a sub-view).
+  2. **"Chat via Zalo"** → opens `https://zalo.me/<vietguys-oa-id>` in new tab. ID held in a const at top of file with TODO comment for the user to replace.
+- Back arrow in inline chat returns to the choice screen.
+- Accessible labels, keyboard close on Esc.
+
+## 8. i18n updates
+
+`src/locales/en.ts` + `vi.ts`:
+- `hero`: keep `headline` + `cta`; add `accreteLine: "A member of {accrete} from Japan"` with `{accrete}` replaced by the logo `<img>` at render time. Drop `eyebrow`, `sub`, `secondary`, `counterLabel`, `pulseTag` from rendered hero (leave keys for backward compat or remove).
+- Add `media.title` (optional caption), `chat.choose`, `chat.web`, `chat.zalo`, `chat.back`.
+- Solutions/industries/trust/bridge copy untouched (already EN-first).
+
+## 9. Files
 
 **Create**
-- `src/components/brand/SignalArt.tsx`
-- `src/components/site/Timeline.tsx`
-- `src/components/site/TrustMap.tsx`
-- `src/components/site/JapanBridge.tsx`
-- `src/lib/i18n.ts`, `src/locales/en.ts`, `src/locales/vi.ts`
-- `src/hooks/use-count-up.ts`
+- `src/components/site/MediaShowcase.tsx`
+- `src/assets/brand/accrete.svg` (placeholder text-logo, user can replace)
 
 **Edit**
-- `src/components/site/Hero.tsx` (rewrite)
-- `src/components/site/Solutions.tsx` (rewrite as hex)
-- `src/components/site/Header.tsx` (EN|VI toggle)
-- `src/pages/Index.tsx` (new section order, dedupe)
-- `src/index.css` (animations + glow token)
+- `src/components/site/Hero.tsx` (strip down)
+- `src/components/site/Solutions.tsx` (rewrite as extensible grid)
+- `src/components/site/Industries.tsx` (align card style with Solutions)
+- `src/components/site/TrustMap.tsx` (white bg, simpler cert row)
+- `src/components/site/JapanBridge.tsx` (slim down)
+- `src/components/site/ChatBubble.tsx` (web ↔ Zalo choice)
+- `src/pages/Index.tsx` (new section order + alternating bands)
+- `src/locales/en.ts`, `src/locales/vi.ts` (hero + chat keys)
+- `src/index.css` only if a new utility is needed (likely none)
 
 **Untouched**
-- `HumanStory`, `CaseStudies`, `FAQ`, `CTASection`, `Footer`, `ChatBubble`, all `/solutions/*` and `/about` subroutes, sitemap, robots, SEO titles.
+- Header, Footer, FAQ, CTASection, CaseStudies, HumanStory (kept on disk, unmounted), Timeline (kept), routes, sitemap, robots, SEO titles, About/Solutions pages.
 
----
+## 10. Out of scope
 
-## 6. Out of scope
-
-- Full VI translation of CaseStudies/FAQ (only the new arc sections are bilingual now).
-- New routes or backend.
-- Changes to existing `/about`, `/contact`, `/solutions/*` page bodies (the hex links to them as-is).
-
-Approve and I'll build it end-to-end in one pass.
+- Real Accrete logo asset (user provides).
+- Real Zalo OA URL (user provides ID).
+- Real video/banner assets for MediaShowcase (placeholder image shipped).
+- Multilingual VI translation of any new English copy beyond hero/chat keys.
