@@ -15,7 +15,7 @@ export const AccreteBacking = () => {
               decoding="async"
             />
           </h2>
-          <p className="mt-6 text-base leading-relaxed text-muted-foreground md:text-lg">
+          <p className="mt-6 text-base leading-relaxed text-muted-foreground md:text-base">
             Backed by Japan's leading SMS gateway group, recognized by{" "}
             <span className="font-semibold text-foreground">Forbes Asia</span> among Asia's{" "}
             <span className="font-semibold text-foreground">"Best Under A Billion"</span> companies —
