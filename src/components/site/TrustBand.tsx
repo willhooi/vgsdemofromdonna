@@ -107,51 +107,44 @@ export const TrustBand = () => {
             ))}
           </div>
 
-          {/* Certifications frame */}
-          <div className="mt-5 rounded-3xl border border-white/10 bg-white/[0.04] p-7 backdrop-blur-sm md:p-8">
-            <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
-              <div>
-                <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-[hsl(var(--accent))]/15 text-[hsl(var(--accent))]">
-                  <ShieldCheck className="h-5 w-5" />
-                </span>
-                <p className="mt-5 text-[11px] font-semibold uppercase tracking-[0.22em] text-[hsl(var(--accent))]">
-                  Certifications & Licences
-                </p>
-                <p className="mt-2 font-display text-2xl font-extrabold leading-tight text-white md:text-3xl">
-                  Recognized & licenced to operate at enterprise scale.
-                </p>
-              </div>
-              <p className="text-sm text-white/60 md:max-w-xs md:text-right">
-                Our certifications are issued by international and Vietnamese authorities.
+          {/* Certifications — separate row, each badge in its own frame */}
+          <div className="mt-10 md:mt-12">
+            <div className="flex flex-col items-center gap-2 text-center">
+              <span className="inline-flex items-center gap-2 rounded-full border border-[hsl(var(--accent))]/40 bg-[hsl(var(--accent))]/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-[hsl(var(--accent))]">
+                <ShieldCheck className="h-3.5 w-3.5" />
+                Certifications & Licences
+              </span>
+              <p className="text-sm text-white/70">
+                Issued by international and Vietnamese authorities.
               </p>
             </div>
 
-            <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-4">
+            <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 md:mt-8 md:grid-cols-4">
               {certifications.map((c) => (
                 <div
                   key={c.name}
-                  className="group flex flex-col items-center rounded-2xl border border-white/10 bg-white p-4 text-center transition-all hover:-translate-y-1 hover:border-[hsl(var(--accent))]/60"
+                  className="group flex flex-col rounded-2xl border border-white/15 bg-white shadow-[0_8px_30px_-12px_rgba(0,0,0,0.45)] transition-all hover:-translate-y-1 hover:border-[hsl(var(--accent))] hover:shadow-[0_12px_40px_-12px_hsl(var(--accent)/0.5)]"
                 >
-                  <div className="flex h-16 w-full items-center justify-center">
+                  <div className="flex h-24 items-center justify-center px-5 pt-5 md:h-28">
                     <img
                       src={c.logo}
                       alt={c.name}
-                      className="max-h-16 w-auto max-w-full object-contain"
+                      className="max-h-full w-auto max-w-full object-contain"
                       loading="lazy"
                     />
                   </div>
-                  <p className="mt-3 text-xs font-bold leading-tight text-foreground">
-                    {c.name}
-                  </p>
-                  <p className="mt-1 text-[10px] leading-snug text-muted-foreground">
-                    {c.description}
-                  </p>
+                  <div className="mt-3 flex-1 rounded-b-2xl bg-foreground px-4 py-3 text-center">
+                    <p className="text-xs font-bold leading-tight text-background md:text-sm">
+                      {c.name}
+                    </p>
+                    <p className="mt-1 text-[10px] leading-snug text-background/65 md:text-[11px]">
+                      {c.description}
+                    </p>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
-        </div>
-      </div>
 
       {/* Brand marquee */}
       <div className="border-b border-border bg-background py-10 md:py-12">
