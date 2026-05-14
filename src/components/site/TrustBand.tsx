@@ -69,9 +69,9 @@ export const TrustBand = () => {
   return (
     <section className="relative">
       {/* Light stats band — matches AccreteBacking */}
-      <div className="bg-background py-14 md:py-20">
+      <div className="bg-background pt-2 pb-10 md:pt-4 md:pb-16">
         <div className="container-tight">
-          <div className="grid gap-5 md:grid-cols-2">
+          <div className="grid gap-3 sm:gap-4 md:gap-5 grid-cols-2">
             {stats.map((s) => (
               <StatCard key={s.eyebrow} {...s} />
             ))}
