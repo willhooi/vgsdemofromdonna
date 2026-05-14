@@ -56,13 +56,33 @@ const certifications = [
   },
 ];
 
-const BRANDS_ROW_1 = [
-  "Vietcombank", "Techcombank", "VPBank", "BIDV", "ACB", "Sacombank",
-  "MB Bank", "TPBank", "HDBank", "VIB",
+// Brand logos rendered in full color via Clearbit Logo API.
+// To add a brand, append { name, domain }. Domain should be the company's primary website.
+type Brand = { name: string; domain: string };
+
+const BRANDS_ROW_1: Brand[] = [
+  { name: "Vietcombank", domain: "vietcombank.com.vn" },
+  { name: "Techcombank", domain: "techcombank.com.vn" },
+  { name: "VPBank", domain: "vpbank.com.vn" },
+  { name: "BIDV", domain: "bidv.com.vn" },
+  { name: "ACB", domain: "acb.com.vn" },
+  { name: "Sacombank", domain: "sacombank.com.vn" },
+  { name: "MB Bank", domain: "mbbank.com.vn" },
+  { name: "TPBank", domain: "tpb.vn" },
+  { name: "HDBank", domain: "hdbank.com.vn" },
+  { name: "VIB", domain: "vib.com.vn" },
 ];
-const BRANDS_ROW_2 = [
-  "Vietnam Airlines", "Vietjet", "Bamboo Airways", "Saigon Co.op", "Thế Giới Di Động",
-  "FPT", "Viettel", "Lotte", "AEON", "Grab",
+const BRANDS_ROW_2: Brand[] = [
+  { name: "Vietnam Airlines", domain: "vietnamairlines.com" },
+  { name: "Vietjet", domain: "vietjetair.com" },
+  { name: "Bamboo Airways", domain: "bambooairways.com" },
+  { name: "Saigon Co.op", domain: "saigonco-op.com.vn" },
+  { name: "Thế Giới Di Động", domain: "thegioididong.com" },
+  { name: "FPT", domain: "fpt.com" },
+  { name: "Viettel", domain: "viettel.com.vn" },
+  { name: "Lotte", domain: "lotte.vn" },
+  { name: "AEON", domain: "aeon.com.vn" },
+  { name: "Grab", domain: "grab.com" },
 ];
 
 export const TrustBand = () => {
