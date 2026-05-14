@@ -98,18 +98,18 @@
     @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary;
   }
   .heading-display {
-    font-family: 'Phudu', 'Plus Jakarta Sans', system-ui, sans-serif;
-    @apply text-4xl md:text-6xl font-extrabold tracking-tight leading-[1.04];
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    @apply text-[32px] md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.04];
   }
   .heading-section {
-    font-family: 'Phudu', 'Plus Jakarta Sans', system-ui, sans-serif;
-    @apply text-3xl md:text-4xl font-bold tracking-tight leading-[1.1];
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    @apply text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight leading-[1.1];
   }
   .font-display {
-    font-family: 'Phudu', 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   }
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Phudu', 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
   }
   .chapter-eyebrow {
     @apply inline-flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground;
