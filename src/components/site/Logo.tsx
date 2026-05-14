@@ -1,8 +1,13 @@
-import { BrandMark } from "@/components/brand/BrandMark";
+import logoImg from "@/assets/brand/vietguys-accrete-horizontal.png";
 
 type Props = { className?: string };
 
-/** Backwards-compatible wrapper — uses the real BrandMark internally. */
 export const Logo = ({ className }: Props) => (
-  <BrandMark variant="horizontal" className={className} />
+  <img
+    src={logoImg}
+    alt="VietGuys — A member of Accrete from Japan"
+    className={className ?? "h-10 w-auto md:h-12"}
+    loading="eager"
+    decoding="async"
+  />
 );

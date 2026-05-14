@@ -33,7 +33,7 @@ const faqs = [
 ];
 
 export const FAQ = () => (
-  <section id="faq" className="py-20 md:py-28">
+  <section id="faq" className="py-14 md:py-20">
     <div className="container-tight grid gap-12 lg:grid-cols-[1fr_1.4fr]">
       <div>
         <span className="eyebrow">FAQ</span>

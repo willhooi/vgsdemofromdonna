@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Phudu:wght@400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -98,19 +98,18 @@
     @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-primary;
   }
   .heading-display {
-    font-family: 'Fraunces', Georgia, serif;
-    font-optical-sizing: auto;
-    font-variation-settings: "opsz" 96, "SOFT" 50;
+    font-family: 'Phudu', 'Plus Jakarta Sans', system-ui, sans-serif;
     @apply text-4xl md:text-6xl font-extrabold tracking-tight leading-[1.04];
   }
   .heading-section {
-    font-family: 'Fraunces', Georgia, serif;
-    font-optical-sizing: auto;
+    font-family: 'Phudu', 'Plus Jakarta Sans', system-ui, sans-serif;
     @apply text-3xl md:text-4xl font-bold tracking-tight leading-[1.1];
   }
   .font-display {
-    font-family: 'Fraunces', Georgia, serif;
-    font-optical-sizing: auto;
+    font-family: 'Phudu', 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Phudu', 'Plus Jakarta Sans', system-ui, sans-serif;
   }
   .chapter-eyebrow {
     @apply inline-flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground;
@@ -228,3 +227,29 @@
 /* Hide horizontal scrollbar visually but keep scroll */
 .scrollbar-thin::-webkit-scrollbar { height: 6px; }
 .scrollbar-thin::-webkit-scrollbar-thumb { background: hsl(var(--border)); border-radius: 999px; }
+
+@keyframes marquee-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes marquee-right {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+
+/* Galaxy / constellation shimmer for Solutions */
+@keyframes star-twinkle {
+  0%, 100% { opacity: 0.3; }
+  50%      { opacity: 1; }
+}
+@keyframes node-pulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.08); }
+}
+@keyframes orbit-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes line-flow {
+  to { stroke-dashoffset: -400; }
+}

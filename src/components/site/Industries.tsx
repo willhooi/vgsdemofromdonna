@@ -33,7 +33,7 @@ export const Industries = () => {
   return (
     <section
       id="industries"
-      className="relative overflow-hidden py-24 md:py-32"
+      className="relative overflow-hidden py-16 md:py-20"
       style={{ background: "hsl(var(--accent-soft) / 0.4)" }}
     >
       <VWatermark

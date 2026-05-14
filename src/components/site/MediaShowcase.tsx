@@ -20,12 +20,21 @@ type MediaItem =
   | { type: "video"; src: string; poster?: string; caption?: string }
   | { type: "image"; src: string; alt: string; caption?: string; href?: string };
 
+import banner1 from "@/assets/banners/banner-1.jpg";
+import banner2 from "@/assets/banners/banner-2.jpg";
+
 const media: MediaItem[] = [
   {
     type: "image",
-    src: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=2000&q=80",
-    alt: "Enterprise team reviewing customer engagement dashboards",
-    caption: "From SMS to Zalo to AI campaigns — one platform powering Vietnam's enterprise messaging.",
+    src: banner1,
+    alt: "Vietnamese enterprise teams connecting customers across messaging channels",
+    caption: "Where every customer conversation becomes business growth.",
+  },
+  {
+    type: "image",
+    src: banner2,
+    alt: "Customer engagement team operating multi-channel messaging in Vietnam",
+    caption: "SMS · Zalo · Viber · Email · AI — one trusted partner for enterprise messaging.",
   },
 ];
 
@@ -33,7 +42,7 @@ export const MediaShowcase = () => {
   return (
     <section
       id="media"
-      className="relative overflow-hidden py-16 md:py-20"
+      className="relative overflow-hidden py-10 md:py-14"
       style={{ background: "hsl(var(--primary-soft) / 0.45)" }}
     >
       <div className="container-tight">

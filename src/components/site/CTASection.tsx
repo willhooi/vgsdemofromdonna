@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { trackDemoRequest, trackContactClick } from "@/lib/analytics";
 
 export const CTASection = () => (
-  <section id="contact" className="py-20 md:py-28">
+  <section id="contact" className="py-14 md:py-20">
     <div className="container-tight">
       <div className="relative overflow-hidden rounded-[2rem] border border-border bg-background p-10 shadow-[var(--shadow-card)] md:p-16">
         <div className="pointer-events-none absolute inset-0 opacity-60" style={{ background: "var(--gradient-hero)" }} />
