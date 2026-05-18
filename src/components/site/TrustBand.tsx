@@ -4,7 +4,7 @@ import { useCountUp } from "@/hooks/use-count-up";
 import isoLogo from "@/assets/certs/iso-27001-v2.png";
 import vncertLogo from "@/assets/certs/vncert-new.jpg";
 import vntaLogo from "@/assets/certs/vnta-new.png";
-import zaloTrophy from "@/assets/certs/zalo-trophy.png";
+import zaloLogo from "@/assets/certs/zalo-trusted.svg";
 import accreteLogo from "@/assets/brand/accrete-logo.png";
 
 /**
