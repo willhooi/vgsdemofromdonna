@@ -381,15 +381,18 @@ const IndustryCard = ({
   );
 };
 
-const BrandLogo = ({ brand }: { brand: Brand }) => {
+const BrandLogo = ({ brand, size = "md" }: { brand: Brand; size?: "sm" | "md" }) => {
   const [failed, setFailed] = useState(false);
+  const isSm = size === "sm";
   return (
     <span
       title={brand.name}
-      className="inline-flex h-16 w-40 shrink-0 items-center justify-center rounded-2xl border border-border bg-card px-5 py-3 transition-all hover:-translate-y-0.5 hover:shadow-[0_10px_30px_-12px_rgba(0,0,0,0.18)]"
+      className={`inline-flex shrink-0 items-center justify-center rounded-lg border border-border bg-card transition-all hover:-translate-y-0.5 hover:shadow-[0_8px_22px_-12px_rgba(0,0,0,0.18)] ${
+        isSm ? "h-10 w-[72px] px-2 py-1" : "h-16 w-40 px-5 py-3"
+      }`}
     >
       {failed ? (
-        <span className="font-display text-base font-bold tracking-tight text-muted-foreground">
+        <span className={`font-display font-bold tracking-tight text-muted-foreground ${isSm ? "text-[10px]" : "text-base"}`}>
           {brand.name}
         </span>
       ) : (
@@ -398,7 +401,7 @@ const BrandLogo = ({ brand }: { brand: Brand }) => {
           alt={brand.name}
           loading="lazy"
           decoding="async"
-          className="max-h-10 w-auto max-w-full object-contain"
+          className={`w-auto max-w-full object-contain ${isSm ? "max-h-6" : "max-h-10"}`}
           onError={() => setFailed(true)}
         />
       )}
