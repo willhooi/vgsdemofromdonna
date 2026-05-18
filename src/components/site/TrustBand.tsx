@@ -40,11 +40,6 @@ const certifications = [
     description: "Enterprise-grade data security with BSI-certified, ANAB-accredited ISO/IEC 27001:2022 standards.",
   },
   {
-    logo: vncertLogo,
-    name: "VNCERT Certification",
-    description: "Strong and transparent legal foundation for enterprise SMS services",
-  },
-  {
     logo: vntaLogo,
     name: "Non-Facility-Based Telecom Service License",
     description: "Strong and transparent legal foundation for enterprise SMS services.",
@@ -127,7 +122,7 @@ export const TrustBand = () => {
               </span>
             </div>
 
-            <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 md:mt-8 md:grid-cols-4">
+            <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 md:mt-8 md:grid-cols-3">
               {certifications.map((c) => (
                 <div
                   key={c.name}
