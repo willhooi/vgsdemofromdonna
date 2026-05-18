@@ -4,7 +4,7 @@ import { useCountUp } from "@/hooks/use-count-up";
 import isoLogo from "@/assets/certs/iso-27001-v2.png";
 import vncertLogo from "@/assets/certs/vncert-new.jpg";
 import vntaLogo from "@/assets/certs/vnta-new.png";
-import zaloLogo from "@/assets/certs/zalo-trusted-new.png";
+import zaloTrophy from "@/assets/certs/zalo-trophy.png";
 
 /**
  * TrustBand — Infobip-style "trust at a glance" strip.
@@ -32,22 +32,40 @@ const stats = [
   },
 ];
 
-// Certifications — easy to extend: just append a new entry with logo + label + description.
+// Certifications — easy to extend: just append a new entry.
 const certifications = [
   {
     logo: isoLogo,
     name: "ISO/IEC 27001:2022",
-    description: "Enterprise-grade data security with BSI-certified, ANAB-accredited ISO/IEC 27001:2022 standards.",
+    description: "Enterprise-grade data security, BSI-certified, ANAB-accredited.",
+    issuer: "Bureau Veritas · Renewed 2024",
+    tag: "Gold standard",
+    accent: "#ff9b17",
+    tagBg: "rgba(255,155,23,0.2)",
+    tagColor: "#ffbe6a",
+    tagBorder: "rgba(255,155,23,0.5)",
   },
   {
     logo: vntaLogo,
-    name: "Non-Facility-Based Telecom Service License",
-    description: "Strong legal foundation for Enterprise SMS Services, licensed by VNTA under Decision No. 39/GP-CVT.",
+    name: "Non-Facility-Based Telecom License",
+    description: "Legal foundation for Enterprise SMS, licensed by VNTA · Decision No. 39/GP-CVT.",
+    issuer: "Ministry of Information · Since 2007",
+    tag: "Gov. issued",
+    accent: "#8fdc60",
+    tagBg: "rgba(143,220,96,0.15)",
+    tagColor: "#8fdc60",
+    tagBorder: "rgba(143,220,96,0.5)",
   },
   {
-    logo: zaloLogo,
+    logo: vncertLogo,
     name: "VNCERT Certification",
     description: "Exceptional security capabilities with rigorous information security compliance.",
+    issuer: "Vietnam Cybersecurity Authority",
+    tag: "Cyber security",
+    accent: "rgba(255,255,255,0.35)",
+    tagBg: "rgba(255,255,255,0.12)",
+    tagColor: "rgba(255,255,255,0.7)",
+    tagBorder: "rgba(255,255,255,0.2)",
   },
 ];
 
@@ -114,44 +132,125 @@ export const TrustBand = () => {
           }}
         />
         <div className="container-tight relative">
-          <div>
-            <div className="flex flex-col items-center gap-2 text-center">
-              <span className="inline-flex items-center gap-2 rounded-full border border-[hsl(128_45%_30%)]/30 bg-white/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-[hsl(128_55%_22%)]">
-                <ShieldCheck className="h-3.5 w-3.5" />
-                Certifications & Licences
-              </span>
+          <div className="flex flex-col items-center gap-2 text-center mb-6">
+            <span className="inline-flex items-center gap-2 rounded-full border border-[hsl(128_45%_30%)]/30 bg-white/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-[hsl(128_55%_22%)]">
+              <ShieldCheck className="h-3.5 w-3.5" />
+              Certifications & Licences
+            </span>
+          </div>
+
+          <div className="mx-auto max-w-5xl rounded-[20px] bg-white p-4 sm:p-5 md:p-8 shadow-[0_10px_40px_-15px_rgba(20,80,30,0.2)]">
+            {/* Title with gradient frame */}
+            <div className="flex flex-col items-center mb-7">
+              <div
+                className="rounded-[10px] px-5 py-2"
+                style={{
+                  background:
+                    "linear-gradient(90deg, rgba(255,155,23,0.06), rgba(57,180,74,0.06))",
+                  border: "1.5px solid transparent",
+                  backgroundImage:
+                    "linear-gradient(90deg, rgba(255,155,23,0.06), rgba(57,180,74,0.06)), linear-gradient(90deg, #ff9b17, #39b44a)",
+                  backgroundOrigin: "border-box",
+                  backgroundClip: "padding-box, border-box",
+                }}
+              >
+                <h3
+                  className="text-[15px] sm:text-[17px] md:text-[20px] font-semibold m-0"
+                  style={{
+                    backgroundImage: "linear-gradient(90deg, #ff9b17, #39b44a)",
+                    WebkitBackgroundClip: "text",
+                    backgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    color: "transparent",
+                  }}
+                >
+                  Certifications & Awards
+                </h3>
+              </div>
+              <div className="mt-3 flex items-center gap-1.5">
+                <span className="h-1.5 w-1.5 rounded-full" style={{ background: "#ff9b17" }} />
+                <span
+                  className="h-px w-10"
+                  style={{ background: "linear-gradient(90deg, #ff9b17, #39b44a)" }}
+                />
+                <span className="h-1.5 w-1.5 rounded-full" style={{ background: "#39b44a" }} />
+              </div>
             </div>
 
-            <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 md:mt-8 md:grid-cols-3">
-              {certifications.map((c) => (
-                <div
-                  key={c.name}
-                  className="group flex flex-col rounded-2xl border border-white bg-white shadow-[0_8px_30px_-12px_rgba(20,80,30,0.25)] transition-all hover:-translate-y-1 hover:shadow-[0_14px_40px_-12px_rgba(57,180,74,0.45)]"
-                >
-                  <div className="flex h-24 items-center justify-center px-5 pt-5 md:h-28">
-                    <img
-                      src={c.logo}
-                      alt={c.name}
-                      className="max-h-full w-auto max-w-full object-contain"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div
-                    className="mt-3 flex-1 rounded-b-2xl px-4 py-3 text-center"
-                    style={{
-                      background:
-                        "linear-gradient(135deg, hsl(128 55% 18%) 0%, hsl(128 50% 28%) 100%)",
-                    }}
-                  >
-                    <p className="text-xs font-bold leading-tight text-white md:text-sm">
-                      {c.name}
-                    </p>
-                    <p className="mt-1 text-[10px] leading-snug text-white/70 md:text-[11px]">
-                      {c.description}
-                    </p>
-                  </div>
+            {/* Responsive grid */}
+            <div className="grid gap-2.5 grid-cols-1 sm:grid-cols-[160px_1fr] md:grid-cols-[210px_1fr]">
+              {/* Trophy column */}
+              <div className="overflow-hidden rounded-[14px] border border-[#e0e0e0] bg-[#f7f7f7] flex flex-col h-[280px] sm:h-auto">
+                <div className="flex-1 overflow-hidden">
+                  <img
+                    src={zaloTrophy}
+                    alt="Zalo Business Solutions 2025 Trusted Partner trophy awarded to VietGuys"
+                    className="h-full w-full object-cover"
+                    style={{ objectPosition: "center 10%" }}
+                    loading="lazy"
+                  />
                 </div>
-              ))}
+                <div className="bg-white px-3 py-3.5 border-t border-[#efefef] text-center">
+                  <div className="flex items-center justify-center gap-1.5">
+                    <span className="h-1 w-1 rounded-full" style={{ background: "#ff9b17" }} />
+                    <span className="text-[9px] uppercase tracking-wider text-[#888]">
+                      2025 · Official Award
+                    </span>
+                    <span className="h-1 w-1 rounded-full" style={{ background: "#39b44a" }} />
+                  </div>
+                  <p className="mt-1 text-[12px] font-medium text-[#1a1a1a] leading-tight">
+                    Zalo Business Solutions Trusted Partner
+                  </p>
+                  <p className="mt-0.5 text-[10px] text-[#aaa]">
+                    In appreciation of VietGuys
+                  </p>
+                </div>
+              </div>
+
+              {/* Cert cards column */}
+              <div className="flex flex-col gap-2.5">
+                {certifications.map((c) => (
+                  <div
+                    key={c.name}
+                    className="flex overflow-hidden rounded-[12px]"
+                    style={{ background: "#1e5c2a" }}
+                  >
+                    <div style={{ width: 4, background: c.accent, flexShrink: 0 }} />
+                    <div
+                      className="flex w-[70px] md:w-[90px] shrink-0 items-center justify-center bg-white p-2"
+                      style={{ borderRight: "0.5px solid rgba(0,0,0,0.06)" }}
+                    >
+                      <img
+                        src={c.logo}
+                        alt={c.name}
+                        className="max-h-12 w-auto max-w-full object-contain"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="flex flex-1 flex-col gap-[3px] px-4 py-3.5">
+                      <span
+                        className="self-start rounded-[4px] border px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider"
+                        style={{
+                          background: c.tagBg,
+                          color: c.tagColor,
+                          borderColor: c.tagBorder,
+                        }}
+                      >
+                        {c.tag}
+                      </span>
+                      <p className="text-[13px] font-medium text-white leading-tight">
+                        {c.name}
+                      </p>
+                      <p className="text-[11px] leading-snug" style={{ color: "rgba(255,255,255,0.55)" }}>
+                        {c.description}
+                      </p>
+                      <p className="text-[10px]" style={{ color: "rgba(255,255,255,0.3)" }}>
+                        {c.issuer}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
