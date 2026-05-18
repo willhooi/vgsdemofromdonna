@@ -122,7 +122,7 @@ export const TrustBand = () => {
               </span>
             </div>
 
-            <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 md:mt-8 md:grid-cols-4">
+            <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 md:mt-8 md:grid-cols-3">
               {certifications.map((c) => (
                 <div
                   key={c.name}
