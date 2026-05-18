@@ -42,7 +42,7 @@ const certifications = [
   {
     logo: vntaLogo,
     name: "Non-Facility-Based Telecom Service License",
-    description: "Exceptional security capabilities with rigorous information security compliance.",
+    description: "Strong and transparent legal foundation for Enterprise SMS Services.",
   },
   {
     logo: zaloLogo,
