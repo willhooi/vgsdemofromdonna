@@ -88,6 +88,8 @@ const INDUSTRIES: IndustryGroup[] = [
   {
     id: "finance",
     name: "Finance & Banking",
+    accent: "#1e5cb3",
+    tint: "#eaf2fc",
     brands: [
       { name: "Vietcombank", domain: "vietcombank.com.vn" },
       { name: "Techcombank", domain: "techcombank.com.vn" },
@@ -104,6 +106,8 @@ const INDUSTRIES: IndustryGroup[] = [
   {
     id: "ecommerce",
     name: "E-Commerce",
+    accent: "#ff6b35",
+    tint: "#fff1ea",
     brands: [
       { name: "Tiki", domain: "tiki.vn" },
       { name: "Shopee", domain: "shopee.vn" },
@@ -115,6 +119,8 @@ const INDUSTRIES: IndustryGroup[] = [
   {
     id: "retail",
     name: "Retail",
+    accent: "#d4377a",
+    tint: "#fceaf2",
     brands: [
       { name: "Saigon Co.op", domain: "saigonco-op.com.vn" },
       { name: "Thế Giới Di Động", domain: "thegioididong.com" },
@@ -126,6 +132,8 @@ const INDUSTRIES: IndustryGroup[] = [
   {
     id: "fmcg",
     name: "FMCG",
+    accent: "#f5b400",
+    tint: "#fff7df",
     brands: [
       { name: "Vinamilk", domain: "vinamilk.com.vn" },
       { name: "Masan", domain: "masangroup.com" },
@@ -137,6 +145,8 @@ const INDUSTRIES: IndustryGroup[] = [
   {
     id: "fashion",
     name: "Fashion & Beauty",
+    accent: "#a64dff",
+    tint: "#f4ebff",
     brands: [
       { name: "Routine", domain: "routine.vn" },
       { name: "Canifa", domain: "canifa.com" },
@@ -148,6 +158,8 @@ const INDUSTRIES: IndustryGroup[] = [
   {
     id: "pharma",
     name: "Medicine & Pharmacy",
+    accent: "#0ea5a5",
+    tint: "#e3f6f6",
     brands: [
       { name: "Pharmacity", domain: "pharmacity.vn" },
       { name: "Long Châu", domain: "nhathuoclongchau.com.vn" },
@@ -159,6 +171,8 @@ const INDUSTRIES: IndustryGroup[] = [
   {
     id: "hospitality",
     name: "Hospitality",
+    accent: "#0288d1",
+    tint: "#e4f3fb",
     brands: [
       { name: "Vietnam Airlines", domain: "vietnamairlines.com" },
       { name: "Vietjet", domain: "vietjetair.com" },
@@ -170,6 +184,8 @@ const INDUSTRIES: IndustryGroup[] = [
   {
     id: "education",
     name: "Education",
+    accent: "#39b44a",
+    tint: "#e7f6e9",
     brands: [
       { name: "FPT Education", domain: "fpt.edu.vn" },
       { name: "VUS", domain: "vus.edu.vn" },
