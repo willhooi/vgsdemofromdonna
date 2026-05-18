@@ -1,116 +1,74 @@
-# Infobip-style restructure on VietGuys brand
+# Gộp Accrete + Certifications thành một section
 
-Goal: clean, white, modular layout inspired by infobip.com, executed strictly with VietGuys palette (green #39b44a primary, orange #ff9b17 accent, white base) and current Fraunces + Plus Jakarta typography. Easy to extend with new services. Bilingual EN-first preserved.
+## Mục tiêu
+Hợp nhất hai section đang đứng riêng (`AccreteBacking` và phần Certifications trong `TrustBand`) thành một block thống nhất, bố cục 2 cột giống hình mẫu: bên trái là branding + stats với "red accent bar", bên phải là trophy + 3 cert cards.
 
-## 1. Hero — strip back to brand essentials
+## Bố cục mới (desktop ≥1024px)
 
-Replace `Hero.tsx` content (keep file). Layout: centered, white background, minimal.
-
-- Eyebrow: removed.
-- H1 (Fraunces, large): **"Where customer conversations become business growth."** — word "conversations" in green→deep-green gradient, italic.
-- Sub-line: **"A member of [Accrete logo] from Japan"** — inline `<img>` of Accrete logo (placeholder SVG in `src/assets/brand/accrete.svg`, request user to swap real asset later) sized to cap-height, vertically centered, with `alt="Accrete Inc."`.
-- Single CTA: orange `Button variant="cta"` → **"Contact Experts"** → `/contact`.
-- No sub-paragraph, no animated phone, no signal waves, no live counter, no secondary link, no chip cloud. Just headline + accrete line + CTA on white with a very soft `--gradient-hero` wash.
-
-## 2. New Media section (right after Hero)
-
-New component `src/components/site/MediaShowcase.tsx`. Configurable via a single `media` config object at top of file so the user can swap easily.
-
-```ts
-type MediaItem =
-  | { type: "video"; src: string; poster?: string; }
-  | { type: "image"; src: string; alt: string; caption?: string; href?: string };
-const media: MediaItem[] = [ /* default: 1 banner image placeholder */ ];
+```
+┌─────────────────────────────────────────────────────────────────┐
+│  Outer wrapper trắng, border-radius 20px, padding 32px          │
+│  ┌───────────────────────────┬─────────────────────────────┐    │
+│  │ LEFT (≈55%)               │ RIGHT (≈45%)                │    │
+│  │                           │ ┌─────────────────────────┐ │    │
+│  │ A member of [Accrete]     │ │  TROPHY ZALO (lớn)      │ │    │
+│  │ (heading typo giữ nguyên) │ │  ảnh cúp + footer caption│ │    │
+│  │                           │ └─────────────────────────┘ │    │
+│  │ Mô tả Forbes Asia /       │ ┌─────────────────────────┐ │    │
+│  │ Best Under A Billion ...  │ │ Cert card 1 (ISO)       │ │    │
+│  │                           │ ├─────────────────────────┤ │    │
+│  │ ┌──┬─────────┐ ┌──┬────┐  │ │ Cert card 2 (VNTA)      │ │    │
+│  │ │██│ 5000+   │ │██│5M+ │  │ ├─────────────────────────┤ │    │
+│  │ │  │ since   │ │  │msg │  │ │ Cert card 3 (VNCERT)    │ │    │
+│  │ └──┴─────────┘ └──┴────┘  │ └─────────────────────────┘ │    │
+│  └───────────────────────────┴─────────────────────────────┘    │
+└─────────────────────────────────────────────────────────────────┘
 ```
 
-Behavior:
-- If `media.length === 1` and it's a video → full-width 16:9 `<video autoplay muted loop playsinline>` with poster.
-- If image → full-width banner with optional caption overlay.
-- If `media.length > 1` → slide carousel (reuse existing `components/ui/carousel.tsx`, autoplay 6s, dots + arrows).
-- Container: `container-tight`, rounded-3xl, `shadow-card`, light green-tint background band (`bg-[hsl(var(--primary-soft))]/40`) so the white hero contrasts with a soft green section.
-- Comment block at top documents how to add/replace media.
+## Chi tiết từng phần
 
-## 3. Section structure (Infobip-inspired, modular)
+### Wrapper
+- Nền trắng `#ffffff`, border-radius 20px, padding `32px` desktop / `20px` mobile, shadow nhẹ.
+- Section background bên ngoài giữ light-green gradient hiện có của TrustBand để hai cụm hoà vào nhau.
+- Vẫn đặt chip "Certifications & Licences" + heading "Certifications & Awards" (frame gradient cam→xanh) ở đầu phần phải, hoặc ẩn đi tuỳ chọn (mặc định: ẩn heading trùng lặp, giữ chip trên cùng wrapper).
 
-`src/pages/Index.tsx` order — alternating white / soft-tint bands for visual rhythm:
+### Cột trái — Branding + Stats
+- **Heading**: giữ nguyên typo hiện tại của AccreteBacking — `heading-display`, `text-3xl md:text-5xl`, "A member of" + logo Accrete inline.
+- **Mô tả**: giữ nguyên đoạn Forbes Asia / Best Under A Billion, `text-base text-muted-foreground`.
+- **2 stat cards** xếp ngang (grid 2 cột), phong cách "red accent bar" giống hình mẫu:
+  - Bỏ card border + shadow hiện tại, đổi sang layout flex: thanh dọc 2px màu `brand.orange` (#ff9b17) bên trái + nội dung.
+  - Số lớn (`5000+`, `5M+`) màu `brand.orange`, font-display, đậm.
+  - Label nhỏ bên dưới, muted.
+  - Bỏ icon tròn xanh để gọn giống mẫu (hoặc giữ nhỏ ở góc — mặc định bỏ).
+  - Vẫn dùng `useCountUp` đang có.
 
-1. Hero — white
-2. MediaShowcase — soft green band
-3. **Solutions** (rewritten as Infobip-style "Channels" grid) — white
-4. **Industries** — soft orange band (`bg-[hsl(var(--accent-soft))]/50`)
-5. **Trust / Certifications** (TrustMap, simplified) — white
-6. **Case Studies** — soft green band
-7. **Japan Bridge** (Accrete story, slimmed since hero already mentions it) — white
-8. FAQ — soft gray (`bg-muted`)
-9. CTASection — gradient-brand band
-10. Footer
+### Cột phải — Trophy + 3 Cert cards
+- **Trophy Zalo (trên cùng)**: card lớn full width của cột phải, dùng layout hiện có (ảnh cúp object-cover + footer trắng với 3 dòng caption). Chiều cao ~260–300px.
+- **3 Cert cards** xếp dọc bên dưới trophy, gap 10px. Giữ nguyên thiết kế hiện tại: nền xanh đậm `#1e5c2a`, accent bar trái theo màu (cam / lime / trắng mờ), logo box trắng, tag uppercase + tên + mô tả + issuer.
 
-Drop from homepage: Timeline (move to /about later), HumanStory (kept in repo, unmounted), CaseBubble stays via ChatBubble component.
+## Responsive
 
-## 4. Solutions — extensible card grid (Infobip pattern)
+- **≥1024px**: grid `1fr 1fr` (hoặc `1.1fr 1fr`), gap 32px.
+- **768–1023px**: grid 2 cột nhưng co lại; stats giữ 2 cột; trophy + certs co theo.
+- **<768px**: chuyển thành 1 cột:
+  1. Heading "A member of Accrete" + mô tả (center).
+  2. 2 stats 2 cột nhỏ.
+  3. Trophy full width, height 280px.
+  4. 3 cert cards xếp dọc.
+- Padding wrapper giảm về 16–20px ở mobile.
 
-Rewrite `Solutions.tsx`:
-- Driven by single `services` array → adding a new service = appending one object.
-  ```ts
-  type Service = { id: string; icon: LucideIcon; name: string; tagline: string; bullets: string[]; href: string; };
-  ```
-- Layout: responsive grid `grid-cols-1 md:grid-cols-2 lg:grid-cols-3`, each card = white, border, hover lifts with green glow, icon in green-soft circle, orange "Learn more →" link.
-- Section header: small green eyebrow "Solutions", Fraunces H2 "One brand. Every channel your customers use.", short sub.
-- No more hex constellation (overkill, hard to extend). Documented in code comment that adding a service = one array entry.
+## Thay đổi file
 
-## 5. Industries / Trust / Bridge — visual unification
+- **`src/pages/Index.tsx`**: xoá `<AccreteBacking />` riêng (nội dung được gộp vào TrustBand).
+- **`src/components/site/TrustBand.tsx`**:
+  - Import logo Accrete.
+  - Tạo wrapper trắng mới chứa 2 cột.
+  - Cột trái: render heading + mô tả Accrete + 2 `StatCard` (restyle theo red-bar).
+  - Cột phải: giữ block trophy + 3 cert cards hiện tại, nhét vào cột phải thay vì grid `[210px 1fr]`.
+  - Xoá phần stats band cũ ở đầu component (đã chuyển sang trong wrapper).
+- **`src/components/site/AccreteBacking.tsx`**: có thể xoá hoặc giữ lại (không dùng nữa). Đề xuất xoá để giữ codebase sạch.
 
-- Industries: same card-grid pattern as Solutions, icon tinted orange.
-- TrustMap: keep dot map but on white, certification chips below in a horizontal row.
-- JapanBridge: shorter — just the two-waves SVG + 2 paragraphs + link to /about. Title preserved.
-
-## 6. Brand discipline (palette + type)
-
-- All colors via existing tokens — no new hex literals in components.
-- White is dominant; green = primary surfaces (CTAs secondary state, eyebrows, bullet-V, soft band backgrounds via `--primary-soft`); orange reserved for the **single primary CTA per view** + accent micro-elements (link arrows, chapter eyebrow rule).
-- Section bands: alternate `bg-background` ↔ `bg-[hsl(var(--primary-soft))]/40` ↔ `bg-[hsl(var(--accent-soft))]/40` ↔ `bg-muted` for contrast on all devices.
-- Typography unchanged: Fraunces display, Plus Jakarta body. All headings use `.heading-display` / `.heading-section`.
-
-## 7. ChatBubble — Web vs Zalo choice
-
-Rewrite `ChatBubble.tsx`:
-- Floating orange round button (unchanged).
-- On click → small popover with two large options:
-  1. **"Chat on this site"** → opens existing inline chat panel (current UI moves into a sub-view).
-  2. **"Chat via Zalo"** → opens `https://zalo.me/<vietguys-oa-id>` in new tab. ID held in a const at top of file with TODO comment for the user to replace.
-- Back arrow in inline chat returns to the choice screen.
-- Accessible labels, keyboard close on Esc.
-
-## 8. i18n updates
-
-`src/locales/en.ts` + `vi.ts`:
-- `hero`: keep `headline` + `cta`; add `accreteLine: "A member of {accrete} from Japan"` with `{accrete}` replaced by the logo `<img>` at render time. Drop `eyebrow`, `sub`, `secondary`, `counterLabel`, `pulseTag` from rendered hero (leave keys for backward compat or remove).
-- Add `media.title` (optional caption), `chat.choose`, `chat.web`, `chat.zalo`, `chat.back`.
-- Solutions/industries/trust/bridge copy untouched (already EN-first).
-
-## 9. Files
-
-**Create**
-- `src/components/site/MediaShowcase.tsx`
-- `src/assets/brand/accrete.svg` (placeholder text-logo, user can replace)
-
-**Edit**
-- `src/components/site/Hero.tsx` (strip down)
-- `src/components/site/Solutions.tsx` (rewrite as extensible grid)
-- `src/components/site/Industries.tsx` (align card style with Solutions)
-- `src/components/site/TrustMap.tsx` (white bg, simpler cert row)
-- `src/components/site/JapanBridge.tsx` (slim down)
-- `src/components/site/ChatBubble.tsx` (web ↔ Zalo choice)
-- `src/pages/Index.tsx` (new section order + alternating bands)
-- `src/locales/en.ts`, `src/locales/vi.ts` (hero + chat keys)
-- `src/index.css` only if a new utility is needed (likely none)
-
-**Untouched**
-- Header, Footer, FAQ, CTASection, CaseStudies, HumanStory (kept on disk, unmounted), Timeline (kept), routes, sitemap, robots, SEO titles, About/Solutions pages.
-
-## 10. Out of scope
-
-- Real Accrete logo asset (user provides).
-- Real Zalo OA URL (user provides ID).
-- Real video/banner assets for MediaShowcase (placeholder image shipped).
-- Multilingual VI translation of any new English copy beyond hero/chat keys.
+## Giữ nguyên
+- Toàn bộ section "Brand marquee" (BRANDS_ROW_1/2) bên dưới — không động vào.
+- Nội dung text, ảnh, logo của cả 6 khối — không đổi.
+- Typo của heading "A member of Accrete" — không đổi font/size, chỉ đặt vào cột trái.
