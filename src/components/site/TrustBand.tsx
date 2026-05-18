@@ -122,36 +122,63 @@ export const TrustBand = () => {
               </span>
             </div>
 
-            <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 md:mt-8 md:grid-cols-3">
-              {certifications.map((c) => (
-                <div
-                  key={c.name}
-                  className="group flex flex-col rounded-2xl border border-white bg-white shadow-[0_8px_30px_-12px_rgba(20,80,30,0.25)] transition-all hover:-translate-y-1 hover:shadow-[0_14px_40px_-12px_rgba(57,180,74,0.45)]"
-                >
-                  <div className="flex h-24 items-center justify-center px-5 pt-5 md:h-28">
-                    <img
-                      src={c.logo}
-                      alt={c.name}
-                      className="max-h-full w-auto max-w-full object-contain"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div
-                    className="mt-3 flex-1 rounded-b-2xl px-4 py-3 text-center"
-                    style={{
-                      background:
-                        "linear-gradient(135deg, hsl(128 55% 18%) 0%, hsl(128 50% 28%) 100%)",
-                    }}
-                  >
-                    <p className="text-xs font-bold leading-tight text-white md:text-sm">
-                      {c.name}
-                    </p>
-                    <p className="mt-1 text-[10px] leading-snug text-white/70 md:text-[11px]">
-                      {c.description}
-                    </p>
-                  </div>
+            <div className="mt-6 grid gap-4 md:mt-8 md:grid-cols-[minmax(220px,1fr)_2fr] md:gap-6">
+              {/* Trophy showcase */}
+              <div
+                className="group relative overflow-hidden rounded-2xl border border-white shadow-[0_8px_30px_-12px_rgba(20,80,30,0.25)] transition-all hover:-translate-y-1 hover:shadow-[0_14px_40px_-12px_rgba(57,180,74,0.45)]"
+                style={{
+                  background:
+                    "linear-gradient(160deg, hsl(220 40% 12%) 0%, hsl(220 60% 22%) 100%)",
+                }}
+              >
+                <img
+                  src={zaloTrophy}
+                  alt="Zalo Business Solutions 2025 Trusted Partner Award — VietGuys"
+                  loading="lazy"
+                  className="mx-auto h-full max-h-[420px] w-auto object-contain p-4 md:max-h-none md:p-6"
+                />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-4 py-3 text-center">
+                  <p className="text-xs font-bold leading-tight text-white md:text-sm">
+                    Zalo Trusted Partner 2025
+                  </p>
+                  <p className="mt-1 text-[10px] leading-snug text-white/80 md:text-[11px]">
+                    Official Zalo Business Solutions Partner
+                  </p>
                 </div>
-              ))}
+              </div>
+
+              {/* 3 certification cards */}
+              <div className="grid gap-3 sm:gap-4 sm:grid-cols-3">
+                {certifications.map((c) => (
+                  <div
+                    key={c.name}
+                    className="group flex flex-col rounded-2xl border border-white bg-white shadow-[0_8px_30px_-12px_rgba(20,80,30,0.25)] transition-all hover:-translate-y-1 hover:shadow-[0_14px_40px_-12px_rgba(57,180,74,0.45)]"
+                  >
+                    <div className="flex h-24 items-center justify-center px-5 pt-5 md:h-28">
+                      <img
+                        src={c.logo}
+                        alt={c.name}
+                        className="max-h-full w-auto max-w-full object-contain"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div
+                      className="mt-3 flex-1 rounded-b-2xl px-4 py-3 text-center"
+                      style={{
+                        background:
+                          "linear-gradient(135deg, hsl(128 55% 18%) 0%, hsl(128 50% 28%) 100%)",
+                      }}
+                    >
+                      <p className="text-xs font-bold leading-tight text-white md:text-sm">
+                        {c.name}
+                      </p>
+                      <p className="mt-1 text-[10px] leading-snug text-white/70 md:text-[11px]">
+                        {c.description}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
