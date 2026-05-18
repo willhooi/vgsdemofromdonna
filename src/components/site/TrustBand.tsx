@@ -4,7 +4,7 @@ import { useCountUp } from "@/hooks/use-count-up";
 import isoLogo from "@/assets/certs/iso-27001-v2.png";
 import vncertLogo from "@/assets/certs/vncert-new.jpg";
 import vntaLogo from "@/assets/certs/vnta-new.png";
-import zaloTrophy from "@/assets/certs/zalo-trophy.png";
+import zaloLogo from "@/assets/certs/zalo-trusted.svg";
 import accreteLogo from "@/assets/brand/accrete-logo.png";
 
 /**
@@ -65,6 +65,17 @@ const certifications = [
     tagBg: "rgba(255,255,255,0.12)",
     tagColor: "rgba(255,255,255,0.7)",
     tagBorder: "rgba(255,255,255,0.2)",
+  },
+  {
+    logo: zaloLogo,
+    name: "Zalo Business Solutions 2025",
+    description: "Officially recognized Trusted Partner for enterprise Zalo OA messaging.",
+    issuer: "Zalo · Awarded 2025",
+    tag: "Trusted partner",
+    accent: "#0068ff",
+    tagBg: "rgba(0,104,255,0.2)",
+    tagColor: "#6aa9ff",
+    tagBorder: "rgba(0,104,255,0.5)",
   },
 ];
 
@@ -157,44 +168,16 @@ export const TrustBand = () => {
             </div>
 
             {/* 3-column grid: stats | trophy | certs */}
-            <div className="grid gap-5 md:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.05fr_0.85fr_1.1fr] items-stretch">
+            <div className="grid gap-5 md:gap-6 grid-cols-1 lg:grid-cols-[0.9fr_1.6fr] items-stretch">
               {/* Col 1 — Stats stacked */}
-              <div className="flex flex-col gap-5 justify-center">
+              <div className="grid grid-cols-2 lg:grid-cols-1 gap-5 justify-center content-center">
                 {stats.map((s) => (
                   <StatCard key={s.eyebrow} {...s} />
                 ))}
               </div>
 
-              {/* Col 2 — Trophy (vertical) */}
-              <div className="overflow-hidden rounded-[14px] border border-[#e0e0e0] bg-[#f7f7f7] flex flex-col min-h-[240px] md:min-h-[280px] max-w-[260px] w-full mx-auto lg:max-w-none">
-                <div className="flex-1 overflow-hidden">
-                  <img
-                    src={zaloTrophy}
-                    alt="Zalo Business Solutions 2025 Trusted Partner trophy awarded to VietGuys"
-                    className="h-full w-full object-cover"
-                    style={{ objectPosition: "center 10%" }}
-                    loading="lazy"
-                  />
-                </div>
-                <div className="bg-white px-3 py-2.5 border-t border-[#efefef] text-center">
-                  <div className="flex items-center justify-center gap-1.5">
-                    <span className="h-1 w-1 rounded-full" style={{ background: "#ff9b17" }} />
-                    <span className="text-[9px] uppercase tracking-wider text-[#888]">
-                      2025 · Official Award
-                    </span>
-                    <span className="h-1 w-1 rounded-full" style={{ background: "#39b44a" }} />
-                  </div>
-                  <p className="mt-1 text-[12px] font-semibold text-[#1a1a1a] leading-tight">
-                    Zalo Business Solutions Trusted Partner
-                  </p>
-                  <p className="mt-0.5 text-[10px] text-[#888]">
-                    In appreciation of VietGuys
-                  </p>
-                </div>
-              </div>
-
-              {/* Col 3 — 3 cert cards */}
-              <div className="flex flex-col gap-2.5 md:col-span-2 lg:col-span-1">
+              {/* Col 2 — 4 cert cards in 2x2 grid */}
+              <div className="grid gap-2.5 grid-cols-1 sm:grid-cols-2">
                 {certifications.map((c) => (
                   <div
                     key={c.name}
