@@ -18,18 +18,16 @@ import accreteLogo from "@/assets/brand/accrete-logo.png";
 
 const stats = [
   {
-    icon: Calendar,
     eyebrow: "Since 2007",
     target: 5000,
     suffix: "+",
-    label: "enterprise brands trust VietGuys to power their customer conversations.",
+    label: "enterprise brands trust VietGuys.",
   },
   {
-    icon: Send,
     eyebrow: "Daily volume",
     target: 5,
     suffix: "M+",
-    label: "SMS, Zalo & email messages delivered every single day across Vietnam.",
+    label: "SMS, Zalo & email delivered daily.",
   },
 ];
 
