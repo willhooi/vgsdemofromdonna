@@ -26,7 +26,7 @@ const stats = [
   {
     eyebrow: "Daily volume",
     target: 5,
-    suffix: "M+",
+    suffix: "+",
     label: "SMS, Zalo & email messages delivered every single day across Vietnam",
   },
 ];
