@@ -115,11 +115,72 @@ export const TrustBand = () => {
         />
         <div className="container-tight relative">
           <div>
-            <div className="flex flex-col items-center gap-2 text-center">
-              <span className="inline-flex items-center gap-2 rounded-full border border-[hsl(128_45%_30%)]/30 bg-white/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-[hsl(128_55%_22%)]">
-                <ShieldCheck className="h-3.5 w-3.5" />
-                Certifications & Licences
-              </span>
+            <div className="flex flex-col items-center text-center">
+              {/* Engraved metallic plaque heading */}
+              <div className="relative group inline-block">
+                {/* Outer bi-metallic glow border */}
+                <div
+                  aria-hidden
+                  className="absolute -inset-1 rounded-sm opacity-40 blur-md"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, #ff9b17 0%, #39b44a 50%, #ff9b17 100%)",
+                  }}
+                />
+                {/* Plaque body */}
+                <div
+                  className="relative px-8 py-5 md:px-12 md:py-6 border border-white/10 shadow-2xl flex flex-col items-center"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #111111 100%)",
+                  }}
+                >
+                  {/* Corner brackets */}
+                  <span aria-hidden className="absolute top-1.5 left-1.5 w-3 h-3 border-t-2 border-l-2 border-[#ff9b17]/50" />
+                  <span aria-hidden className="absolute top-1.5 right-1.5 w-3 h-3 border-t-2 border-r-2 border-[#ff9b17]/50" />
+                  <span aria-hidden className="absolute bottom-1.5 left-1.5 w-3 h-3 border-b-2 border-l-2 border-[#ff9b17]/50" />
+                  <span aria-hidden className="absolute bottom-1.5 right-1.5 w-3 h-3 border-b-2 border-r-2 border-[#ff9b17]/50" />
+
+                  {/* Top accent */}
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="h-px w-10 bg-gradient-to-r from-transparent to-[#39b44a]" />
+                    <span className="w-1.5 h-1.5 rotate-45 border border-[#39b44a] bg-[#39b44a]/30" />
+                    <span className="h-px w-10 bg-gradient-to-l from-transparent to-[#39b44a]" />
+                  </div>
+
+                  {/* Engraved title */}
+                  <h2 style={{ fontFamily: "'Cinzel', serif" }} className="text-center">
+                    <span className="block text-[9px] md:text-[10px] tracking-[0.5em] font-semibold uppercase text-[#ff9b17]/80 mb-1.5">
+                      Official
+                    </span>
+                    <span
+                      className="block text-xl md:text-3xl font-extrabold tracking-tight text-transparent bg-clip-text uppercase"
+                      style={{
+                        backgroundImage:
+                          "linear-gradient(180deg, #ffedda 0%, #ff9b17 55%, #8a540d 100%)",
+                        filter: "drop-shadow(0 2px 2px rgba(0,0,0,0.85))",
+                      }}
+                    >
+                      Certifications & Licenses
+                    </span>
+                  </h2>
+
+                  {/* Bottom seal */}
+                  <div className="mt-3 flex items-center gap-4">
+                    <span className="h-px w-12 bg-gradient-to-r from-transparent via-[#ff9b17]/60 to-transparent" />
+                    <span className="grid h-7 w-7 place-items-center rounded-full border border-[#39b44a]/40 bg-gradient-to-b from-[#39b44a]/15 to-transparent">
+                      <ShieldCheck className="h-4 w-4 text-[#39b44a]" />
+                    </span>
+                    <span className="h-px w-12 bg-gradient-to-l from-transparent via-[#ff9b17]/60 to-transparent" />
+                  </div>
+
+                  {/* Polished sheen */}
+                  <span
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent"
+                  />
+                </div>
+              </div>
             </div>
 
             <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-4 md:mt-8 md:grid-cols-3">
