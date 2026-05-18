@@ -128,77 +128,77 @@ export const TrustBand = () => {
           </div>
 
           <div className="mx-auto max-w-6xl rounded-[20px] bg-white p-5 sm:p-6 md:p-8 shadow-[0_10px_40px_-15px_rgba(20,80,30,0.2)]">
-            <div className="grid gap-6 md:gap-8 grid-cols-1 lg:grid-cols-[1.1fr_1fr]">
-              {/* LEFT: Accrete branding + stats */}
-              <div className="flex flex-col">
-                <h2 className="heading-display flex flex-wrap items-baseline gap-x-4 gap-y-2 text-3xl md:text-4xl lg:text-5xl">
-                  <span>A member of</span>
-                  <a
-                    href="https://www.accrete-inc.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label="Accrete Inc. (opens in new tab)"
-                    className="inline-flex items-center transition-opacity hover:opacity-80"
-                  >
-                    <img
-                      src={accreteLogo}
-                      alt="Accrete Inc."
-                      className="inline-block h-10 w-auto md:h-14 lg:h-16"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </a>
-                </h2>
-                <p className="mt-5 text-sm md:text-base leading-relaxed text-muted-foreground">
-                  Backed by Japan's leading SMS gateway group, recognized by{" "}
-                  <span className="font-semibold text-foreground">Forbes Asia</span> among Asia's{" "}
-                  <span className="font-semibold text-foreground">"Best Under A Billion"</span> companies —
-                  empowering VietGuys with global expertise and scalable enterprise messaging capabilities.
-                </p>
+            {/* Heading block — full width, centered */}
+            <div className="mx-auto max-w-3xl text-center mb-8 md:mb-10">
+              <h2 className="heading-display flex flex-wrap items-baseline justify-center gap-x-4 gap-y-2 text-3xl md:text-4xl lg:text-5xl">
+                <span>A member of</span>
+                <a
+                  href="https://www.accrete-inc.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Accrete Inc. (opens in new tab)"
+                  className="inline-flex items-center transition-opacity hover:opacity-80"
+                >
+                  <img
+                    src={accreteLogo}
+                    alt="Accrete Inc."
+                    className="inline-block h-10 w-auto md:h-14 lg:h-16"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </a>
+              </h2>
+              <p className="mt-5 text-sm md:text-base leading-relaxed text-muted-foreground">
+                Backed by Japan's leading SMS gateway group, recognized by{" "}
+                <span className="font-semibold text-foreground">Forbes Asia</span> among Asia's{" "}
+                <span className="font-semibold text-foreground">"Best Under A Billion"</span> companies —
+                empowering VietGuys with global expertise and scalable enterprise messaging capabilities.
+              </p>
+            </div>
 
-                {/* Stats — red-bar style */}
-                <div className="mt-auto grid grid-cols-2 gap-5 pt-7">
-                  {stats.map((s) => (
-                    <StatCard key={s.eyebrow} {...s} />
-                  ))}
+            {/* 3-column grid: stats | trophy | certs */}
+            <div className="grid gap-5 md:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-[0.9fr_1fr_1.4fr] items-stretch">
+              {/* Col 1 — Stats stacked */}
+              <div className="flex flex-col gap-5 justify-center">
+                {stats.map((s) => (
+                  <StatCard key={s.eyebrow} {...s} />
+                ))}
+              </div>
+
+              {/* Col 2 — Trophy (vertical) */}
+              <div className="overflow-hidden rounded-[14px] border border-[#e0e0e0] bg-[#f7f7f7] flex flex-col min-h-[280px] md:min-h-[360px]">
+                <div className="flex-1 overflow-hidden">
+                  <img
+                    src={zaloTrophy}
+                    alt="Zalo Business Solutions 2025 Trusted Partner trophy awarded to VietGuys"
+                    className="h-full w-full object-cover"
+                    style={{ objectPosition: "center 10%" }}
+                    loading="lazy"
+                  />
+                </div>
+                <div className="bg-white px-4 py-3.5 border-t border-[#efefef] text-center">
+                  <div className="flex items-center justify-center gap-1.5">
+                    <span className="h-1 w-1 rounded-full" style={{ background: "#ff9b17" }} />
+                    <span className="text-[9px] uppercase tracking-wider text-[#888]">
+                      2025 · Official Award
+                    </span>
+                    <span className="h-1 w-1 rounded-full" style={{ background: "#39b44a" }} />
+                  </div>
+                  <p className="mt-1 text-[13px] font-semibold text-[#1a1a1a] leading-tight">
+                    Zalo Business Solutions Trusted Partner
+                  </p>
+                  <p className="mt-0.5 text-[11px] text-[#888]">
+                    In appreciation of VietGuys
+                  </p>
                 </div>
               </div>
 
-              {/* RIGHT: Trophy + 3 cert cards */}
-              <div className="flex flex-col gap-2.5">
-                {/* Trophy */}
-                <div className="overflow-hidden rounded-[14px] border border-[#e0e0e0] bg-[#f7f7f7] flex flex-row sm:flex-row h-[160px] sm:h-[180px]">
-                  <div className="h-full w-[42%] sm:w-[40%] overflow-hidden flex-shrink-0">
-                    <img
-                      src={zaloTrophy}
-                      alt="Zalo Business Solutions 2025 Trusted Partner trophy awarded to VietGuys"
-                      className="h-full w-full object-cover"
-                      style={{ objectPosition: "center 10%" }}
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="flex-1 bg-white px-4 py-3 border-l border-[#efefef] flex flex-col justify-center">
-                    <div className="flex items-center gap-1.5">
-                      <span className="h-1 w-1 rounded-full" style={{ background: "#ff9b17" }} />
-                      <span className="text-[9px] uppercase tracking-wider text-[#888]">
-                        2025 · Official Award
-                      </span>
-                      <span className="h-1 w-1 rounded-full" style={{ background: "#39b44a" }} />
-                    </div>
-                    <p className="mt-1 text-[13px] font-semibold text-[#1a1a1a] leading-tight">
-                      Zalo Business Solutions Trusted Partner
-                    </p>
-                    <p className="mt-0.5 text-[11px] text-[#888]">
-                      In appreciation of VietGuys
-                    </p>
-                  </div>
-                </div>
-
-                {/* Cert cards */}
+              {/* Col 3 — 3 cert cards */}
+              <div className="flex flex-col gap-2.5 md:col-span-2 lg:col-span-1">
                 {certifications.map((c) => (
                   <div
                     key={c.name}
-                    className="flex overflow-hidden rounded-[12px]"
+                    className="flex flex-1 overflow-hidden rounded-[12px]"
                     style={{ background: "#1e5c2a" }}
                   >
                     <div style={{ width: 4, background: c.accent, flexShrink: 0 }} />
@@ -213,7 +213,7 @@ export const TrustBand = () => {
                         loading="lazy"
                       />
                     </div>
-                    <div className="flex flex-1 flex-col gap-[3px] px-4 py-3">
+                    <div className="flex flex-1 flex-col justify-center gap-[3px] px-4 py-3">
                       <span
                         className="self-start rounded-[4px] border px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider"
                         style={{
