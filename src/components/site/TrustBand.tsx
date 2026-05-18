@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Send, Calendar, ShieldCheck } from "lucide-react";
 import { useCountUp } from "@/hooks/use-count-up";
-import isoLogo from "@/assets/certs/iso-27001.svg";
+import isoLogo from "@/assets/certs/iso-27001-new.png";
 import vncertLogo from "@/assets/certs/vncert.svg";
 import vntaLogo from "@/assets/certs/vnta.svg";
 import zaloLogo from "@/assets/certs/zalo-trusted.svg";
@@ -37,11 +37,11 @@ const certifications = [
   {
     logo: isoLogo,
     name: "ISO/IEC 27001:2022",
-    description: "Enterprise-grade data security with BSI-certified, ANAB-accredited ISO/IEC 27001:2022 standards.",
+    description: "Strong and transparent legal foundation for enterprise SMS services.",
   },
   {
     logo: vncertLogo,
-    name: "VNCERT",
+    name: "Non-Facility-Based Telecom Service License",
     description: "Vietnam Computer Emergency Response Team",
   },
   {
