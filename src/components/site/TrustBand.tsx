@@ -32,22 +32,40 @@ const stats = [
   },
 ];
 
-// Certifications — easy to extend: just append a new entry with logo + label + description.
+// Certifications — easy to extend: just append a new entry.
 const certifications = [
   {
     logo: isoLogo,
     name: "ISO/IEC 27001:2022",
-    description: "Enterprise-grade data security with BSI-certified, ANAB-accredited ISO/IEC 27001:2022 standards.",
+    description: "Enterprise-grade data security, BSI-certified, ANAB-accredited.",
+    issuer: "Bureau Veritas · Renewed 2024",
+    tag: "Gold standard",
+    accent: "#ff9b17",
+    tagBg: "rgba(255,155,23,0.2)",
+    tagColor: "#ffbe6a",
+    tagBorder: "rgba(255,155,23,0.5)",
   },
   {
     logo: vntaLogo,
-    name: "Non-Facility-Based Telecom Service License",
-    description: "Strong legal foundation for Enterprise SMS Services, licensed by VNTA under Decision No. 39/GP-CVT.",
+    name: "Non-Facility-Based Telecom License",
+    description: "Legal foundation for Enterprise SMS, licensed by VNTA · Decision No. 39/GP-CVT.",
+    issuer: "Ministry of Information · Since 2007",
+    tag: "Gov. issued",
+    accent: "#8fdc60",
+    tagBg: "rgba(143,220,96,0.15)",
+    tagColor: "#8fdc60",
+    tagBorder: "rgba(143,220,96,0.5)",
   },
   {
-    logo: zaloLogo,
+    logo: vncertLogo,
     name: "VNCERT Certification",
     description: "Exceptional security capabilities with rigorous information security compliance.",
+    issuer: "Vietnam Cybersecurity Authority",
+    tag: "Cyber security",
+    accent: "rgba(255,255,255,0.35)",
+    tagBg: "rgba(255,255,255,0.12)",
+    tagColor: "rgba(255,255,255,0.7)",
+    tagBorder: "rgba(255,255,255,0.2)",
   },
 ];
 
