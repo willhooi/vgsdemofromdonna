@@ -21,7 +21,7 @@ const stats = [
     eyebrow: "Since 2007",
     target: 5000,
     suffix: "+",
-    label: "enterprise brands trust VietGuys.",
+    label: "Enterprise brands trust VietGuys to power their customer conversations.",
   },
   {
     eyebrow: "Daily volume",
