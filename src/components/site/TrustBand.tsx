@@ -46,8 +46,8 @@ const certifications = [
   },
   {
     logo: vntaLogo,
-    name: "VNTA Telecom Licence",
-    description: "License to Provide Telecommunication Services Without Network Infrastructure",
+    name: "Non-Facility-Based Telecom Service License",
+    description: "Strong and transparent legal foundation for enterprise SMS services.",
   },
   {
     logo: zaloLogo,
