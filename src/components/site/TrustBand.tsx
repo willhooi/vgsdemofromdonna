@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Send, Calendar, ShieldCheck } from "lucide-react";
 import { useCountUp } from "@/hooks/use-count-up";
 import isoLogo from "@/assets/certs/iso-27001-v2.png";
-import vncertLogo from "@/assets/certs/vncert-new.jpg";
+import vncertLogo from "@/assets/certs/vncert.svg";
 import vntaLogo from "@/assets/certs/vnta.svg";
 import zaloLogo from "@/assets/certs/zalo-trusted.svg";
 
@@ -41,7 +41,7 @@ const certifications = [
   },
   {
     logo: vncertLogo,
-    name: "VNCERT Certification",
+    name: "Non-Facility-Based Telecom Service License",
     description: "Strong and transparent legal foundation for enterprise SMS services",
   },
   {
