@@ -337,7 +337,7 @@ const StatCard = ({ eyebrow, target, suffix, label }: StatCardProps) => {
         {eyebrow.toLowerCase().includes("since") ? (
           <span className="legacy-badge mt-2 self-start inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-[#ff9b17] to-[#ffb84d] px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white">
             <span className="inline-block h-1.5 w-1.5 rounded-full bg-white shadow-[0_0_6px_rgba(255,255,255,0.9)]" />
-            {eyebrow} · {new Date().getFullYear() - 2007} yrs
+            {eyebrow.toUpperCase()}
           </span>
         ) : (
           <p className="mt-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-foreground">
