@@ -157,7 +157,7 @@ export const TrustBand = () => {
             </div>
 
             {/* 3-column grid: stats | trophy | certs */}
-            <div className="grid gap-5 md:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-[0.9fr_1fr_1.4fr] items-stretch">
+            <div className="grid gap-5 md:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-[1.05fr_0.85fr_1.1fr] items-stretch">
               {/* Col 1 — Stats stacked */}
               <div className="flex flex-col gap-5 justify-center">
                 {stats.map((s) => (
@@ -166,7 +166,7 @@ export const TrustBand = () => {
               </div>
 
               {/* Col 2 — Trophy (vertical) */}
-              <div className="overflow-hidden rounded-[14px] border border-[#e0e0e0] bg-[#f7f7f7] flex flex-col min-h-[280px] md:min-h-[360px]">
+              <div className="overflow-hidden rounded-[14px] border border-[#e0e0e0] bg-[#f7f7f7] flex flex-col min-h-[240px] md:min-h-[280px] max-w-[260px] w-full mx-auto lg:max-w-none">
                 <div className="flex-1 overflow-hidden">
                   <img
                     src={zaloTrophy}
@@ -176,7 +176,7 @@ export const TrustBand = () => {
                     loading="lazy"
                   />
                 </div>
-                <div className="bg-white px-4 py-3.5 border-t border-[#efefef] text-center">
+                <div className="bg-white px-3 py-2.5 border-t border-[#efefef] text-center">
                   <div className="flex items-center justify-center gap-1.5">
                     <span className="h-1 w-1 rounded-full" style={{ background: "#ff9b17" }} />
                     <span className="text-[9px] uppercase tracking-wider text-[#888]">
@@ -184,10 +184,10 @@ export const TrustBand = () => {
                     </span>
                     <span className="h-1 w-1 rounded-full" style={{ background: "#39b44a" }} />
                   </div>
-                  <p className="mt-1 text-[13px] font-semibold text-[#1a1a1a] leading-tight">
+                  <p className="mt-1 text-[12px] font-semibold text-[#1a1a1a] leading-tight">
                     Zalo Business Solutions Trusted Partner
                   </p>
-                  <p className="mt-0.5 text-[11px] text-[#888]">
+                  <p className="mt-0.5 text-[10px] text-[#888]">
                     In appreciation of VietGuys
                   </p>
                 </div>
@@ -203,17 +203,17 @@ export const TrustBand = () => {
                   >
                     <div style={{ width: 4, background: c.accent, flexShrink: 0 }} />
                     <div
-                      className="flex w-[70px] md:w-[90px] shrink-0 items-center justify-center bg-white p-2"
+                      className="flex w-[100px] md:w-[120px] shrink-0 items-center justify-center bg-white p-2.5"
                       style={{ borderRight: "0.5px solid rgba(0,0,0,0.06)" }}
                     >
                       <img
                         src={c.logo}
                         alt={c.name}
-                        className="max-h-12 w-auto max-w-full object-contain"
+                        className="max-h-16 w-auto max-w-full object-contain"
                         loading="lazy"
                       />
                     </div>
-                    <div className="flex flex-1 flex-col justify-center gap-[3px] px-4 py-3">
+                    <div className="flex flex-1 flex-col justify-center gap-[3px] px-3 py-2.5">
                       <span
                         className="self-start rounded-[4px] border px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider"
                         style={{
@@ -224,13 +224,13 @@ export const TrustBand = () => {
                       >
                         {c.tag}
                       </span>
-                      <p className="text-[13px] font-medium text-white leading-tight">
+                      <p className="text-[12px] font-medium text-white leading-tight">
                         {c.name}
                       </p>
-                      <p className="text-[11px] leading-snug" style={{ color: "rgba(255,255,255,0.55)" }}>
+                      <p className="text-[10px] leading-snug" style={{ color: "rgba(255,255,255,0.55)" }}>
                         {c.description}
                       </p>
-                      <p className="text-[10px]" style={{ color: "rgba(255,255,255,0.3)" }}>
+                      <p className="text-[9px]" style={{ color: "rgba(255,255,255,0.3)" }}>
                         {c.issuer}
                       </p>
                     </div>
