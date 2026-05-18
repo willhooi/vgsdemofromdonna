@@ -40,11 +40,6 @@ const certifications = [
     description: "Enterprise-grade data security with BSI-certified, ANAB-accredited ISO/IEC 27001:2022 standards.",
   },
   {
-    logo: vncertLogo,
-    name: "VNCERT Certification",
-    description: "Strong and transparent legal foundation for enterprise SMS services",
-  },
-  {
     logo: vntaLogo,
     name: "Non-Facility-Based Telecom Service License",
     description: "Strong and transparent legal foundation for enterprise SMS services.",
