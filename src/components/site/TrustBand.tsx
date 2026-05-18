@@ -69,7 +69,7 @@ const certifications = [
   {
     logo: zaloLogo,
     name: "Zalo Business Solutions 2025",
-    description: "Officially recognized Trusted Partner for enterprise Zalo OA messaging.",
+    description: "Trusted for stable, compliant, and scalable enterprise messaging solutions within the Zalo ecosystem.",
     issuer: "Zalo · Awarded 2025",
     tag: "Trusted partner",
     accent: "#0068ff",
