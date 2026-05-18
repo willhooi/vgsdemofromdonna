@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { Send, Calendar, ShieldCheck } from "lucide-react";
+import { ShieldCheck } from "lucide-react";
 import { useCountUp } from "@/hooks/use-count-up";
 import isoLogo from "@/assets/certs/iso-27001-v2.png";
 import vncertLogo from "@/assets/certs/vncert-new.jpg";
 import vntaLogo from "@/assets/certs/vnta-new.png";
 import zaloTrophy from "@/assets/certs/zalo-trophy.png";
+import accreteLogo from "@/assets/brand/accrete-logo.png";
 
 /**
  * TrustBand — Infobip-style "trust at a glance" strip.
