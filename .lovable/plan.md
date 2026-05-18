@@ -1,65 +1,76 @@
-# Tối giản khối Trust: 2 Stats + 4 Cert Cards
+## Goal
+Thay marquee 2 hàng logo brand hiện tại trong `src/components/site/TrustBand.tsx` bằng một grid các **thẻ ngành** (industry cards). Mỗi thẻ:
+- Hiển thị **tên ngành** + **2 logo đại diện**.
+- Khi **hover** (desktop) hoặc **tap** (mobile/tablet) → mở rộng để show **toàn bộ logo còn lại** trong ngành đó.
 
-## Mục tiêu
-Bỏ cột trophy Zalo riêng biệt với ảnh cúp. Chuyển giải thưởng Zalo thành **1 cert card** đồng dạng với ISO / VNTA / VNCERT, để toàn bộ khối chỉ còn 2 thành phần gọn gàng:
-- **Stats** (2 ô): Since 2007, Daily volume.
-- **Certifications** (4 ô đồng nhất): ISO 27001, VNTA, VNCERT, Zalo Business Solutions.
+## Industry groups (8 thẻ)
 
-## Bố cục mới (desktop ≥1024px)
+Đề xuất phân bổ brand (có thể chỉnh sau khi user duyệt):
 
+1. **E-Commerce** — Tiki, Shopee, Lazada, Sendo, Adayroi
+2. **Retail** — Saigon Co.op, Thế Giới Di Động, AEON, Lotte, Nguyễn Kim
+3. **FMCG** — Vinamilk, Masan, Unilever, Nestlé, Suntory PepsiCo
+4. **Fashion & Beauty** — Routine, Canifa, L'Oréal, Sociolla, Juno
+5. **Medicine & Pharmacy** — Pharmacity, Long Châu, An Khang, Hapacol, Sanofi
+6. **Hospitality** — Vietnam Airlines, Vietjet, Bamboo Airways, Mường Thanh, Vinpearl
+7. **Education** — FPT Education, VUS, ILA, Topica, Apollo
+8. **Finance & Banking** — Vietcombank, Techcombank, VPBank, BIDV, MB Bank, ACB, TPBank, HDBank, VIB, Sacombank
+
+> User sẽ confirm danh sách brand chính thức ở câu hỏi cuối plan. Logo tiếp tục load qua Clearbit API (`logo.clearbit.com/<domain>`), fallback chữ khi lỗi (giữ pattern `BrandLogo` hiện có).
+
+## Layout & tương tác
+
+```text
+┌──────────────────────────────────────────────────────────────┐
+│  Trusted by Vietnam's enterprise leaders                     │
+│                                                              │
+│  ┌──────────────┐ ┌──────────────┐ ┌──────────────┐ ┌──────┐ │
+│  │ Finance &    │ │ E-Commerce   │ │ Retail       │ │ ...  │ │
+│  │ Banking      │ │              │ │              │ │      │ │
+│  │ [logo][logo] │ │ [logo][logo] │ │ [logo][logo] │ │      │ │
+│  │ +8 more      │ │ +3 more      │ │ +3 more      │ │      │ │
+│  └──────────────┘ └──────────────┘ └──────────────┘ └──────┘ │
+└──────────────────────────────────────────────────────────────┘
+
+Hover state (1 card mở rộng inline, các card khác giữ nguyên):
+┌──────────────────────────────────────────────┐
+│ Finance & Banking                            │
+│ [VCB] [TCB] [VPB] [BIDV] [MB] [ACB] [TPB]…   │
+└──────────────────────────────────────────────┘
 ```
-┌──────────────────────────────────────────────────────────────────┐
-│  Wrapper trắng, radius 20px                                      │
-│                                                                  │
-│         A member of [Accrete logo]      (heading center)         │
-│         Mô tả Forbes Asia ... (center, max-w-3xl)                │
-│                                                                  │
-│  ┌──────────────────┬─────────────────────────────────────────┐  │
-│  │ STATS (≈35%)     │ CERTS 2×2 (≈65%)                        │  │
-│  │                  │                                         │  │
-│  │ ┌──┬──────────┐  │ ┌──────────────────┬──────────────────┐ │  │
-│  │ │██│ 5000+    │  │ │ ISO 27001        │ VNTA License     │ │  │
-│  │ │  │ Since…   │  │ ├──────────────────┼──────────────────┤ │  │
-│  │ └──┴──────────┘  │ │ VNCERT           │ Zalo Trusted     │ │  │
-│  │                  │ │                  │ Partner          │ │  │
-│  │ ┌──┬──────────┐  │ └──────────────────┴──────────────────┘ │  │
-│  │ │██│ 5M+      │  │                                         │  │
-│  │ │  │ Daily…   │  │                                         │  │
-│  │ └──┴──────────┘  │                                         │  │
-│  └──────────────────┴─────────────────────────────────────────┘  │
-└──────────────────────────────────────────────────────────────────┘
-```
 
-Grid: `lg:grid-cols-[0.9fr_1.6fr]`, gap 5–6.
-- **Cột trái**: 2 StatCard xếp dọc (giữ style red-bar cam hiện tại, không đổi).
-- **Cột phải**: 4 cert cards trong grid `grid-cols-1 sm:grid-cols-2` (2×2). Tất cả cùng style: nền `#1e5c2a`, accent bar trái, logo box trắng, tag + tên + mô tả + issuer.
+- Grid: `grid-cols-2 sm:grid-cols-3 lg:grid-cols-4`, gap 3–4.
+- Card mặc định: nền trắng, border mỏng `border-border`, radius 14px, padding 4, min-height đồng đều.
+- Card content: tên ngành (font-semibold, text-sm) + hàng 2 logo đại diện (h-8, object-contain) + dòng meta nhỏ "+N more" màu muted.
+- **Hover (desktop)**: card scale nhẹ + shadow tăng + thay 2 logo bằng wrap-grid hiển thị **tất cả** logo trong ngành (max 5 cột, gap 2, mỗi logo h-7). Transition `200ms ease`.
+- **Mobile/tablet (không hover)**: tap để toggle expanded state (controlled bằng `useState<activeId | null>`). Tap card khác → đóng card cũ, mở card mới. Tap lại card đang mở → đóng.
+- Accessibility: card là `<button type="button">`, có `aria-expanded`, focus ring dùng `--ring`.
 
-## Cert card thứ 4 (Zalo) — nội dung đề xuất
+## File changes
 
-- **logo**: dùng `zalo-trusted.svg` đã có sẵn trong `src/assets/certs/` (logo Zalo trên nền trắng), không dùng ảnh cúp `zalo-trophy.png` nữa.
-- **tag**: `Trusted partner`
-- **name**: `Zalo Business Solutions 2025`
-- **description**: `Officially recognized Trusted Partner for enterprise Zalo OA messaging.`
-- **issuer**: `Zalo · Awarded 2025`
-- **accent / tagBg / tagColor / tagBorder**: dùng tông xanh dương Zalo, ví dụ `#0068ff` cho accent + tag pill phối tương ứng (giống pattern 3 cert hiện có).
+Chỉ sửa `src/components/site/TrustBand.tsx`:
 
-## Responsive
-- **≥1024px**: 2 cột tổng, cert grid 2×2.
-- **640–1023px (tablet)**: stats 1 hàng 2 cột nhỏ trên cùng, cert grid 2×2 bên dưới.
-- **<640px (mobile)**: 1 cột — stats (2 ô), tiếp 4 cert cards xếp dọc.
-
-## Thay đổi file
-
-Chỉ sửa **`src/components/site/TrustBand.tsx`**:
-1. Thêm 1 entry vào mảng `certifications` (Zalo, dùng `zalo-trusted.svg`).
-2. Xoá toàn bộ block "Col 2 — Trophy" (div min-h, ảnh cúp + footer caption).
-3. Đổi grid từ 3 cột `[1.05fr_0.85fr_1.1fr]` → 2 cột `[0.9fr_1.6fr]` (md fallback `grid-cols-1`).
-4. Bọc cột cert cards bằng grid trong `sm:grid-cols-2` để xếp 2×2 thay vì 1 cột dọc.
-5. Bỏ import `zaloTrophy` (không còn dùng).
+1. **Xóa** `BRANDS_ROW_1`, `BRANDS_ROW_2`, `BrandRow` component và 2 `<BrandRow>` calls.
+2. **Thêm** type + dữ liệu:
+   ```ts
+   type IndustryGroup = {
+     id: string;
+     name: string;            // "Finance & Banking"
+     brands: Brand[];         // full list
+   };
+   const INDUSTRIES: IndustryGroup[] = [ … 8 groups … ];
+   ```
+3. **Thêm** component `IndustryCard` (dùng lại `BrandLogo` hiện có cho Clearbit + fallback chữ). Quản lý expanded state ở parent qua prop `isOpen` + callback `onToggle`.
+4. **Thay** block `{/* Brand marquee */}` (line 222–233) bằng grid `IndustryCard` mới.
+5. **Giữ** heading "Trusted by Vietnam's enterprise leaders" + style nền + border-bottom của section wrapper.
+6. **Có thể bỏ** keyframes `marquee-left/right` trong `index.css` (không bắt buộc — không gây side-effect nếu giữ lại).
 
 ## Giữ nguyên
-- Heading "A member of Accrete" + mô tả Forbes Asia.
-- StatCard style (red-bar cam, count-up, text đen/cam).
-- Style từng cert card (nền xanh đậm, accent bar, logo box trắng, tag pill, hierarchy text).
-- Brand marquee 2 hàng bên dưới.
-- Chip "Backing & Certifications" trên cùng.
+- Toàn bộ Accrete heading + stats + 4 cert cards phía trên.
+- Color palette, typography, container width, spacing rhythm của section.
+- Cơ chế load logo qua Clearbit + fallback text.
+
+## Câu hỏi cần user confirm trước khi build
+1. Danh sách brand cho từng ngành — đặc biệt 6 ngành **không phải Banking** (Banking đã có domain sẵn). User có muốn mình tự đề xuất domain Clearbit hay sẽ cung cấp danh sách chính thức?
+2. Có cần thêm/bớt ngành nào ngoài 8 thẻ liệt kê không?
+3. Order các thẻ — alphabet, theo tầm quan trọng, hay theo grouping nội bộ VietGuys?

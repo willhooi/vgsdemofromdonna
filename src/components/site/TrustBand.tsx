@@ -80,32 +80,104 @@ const certifications = [
 ];
 
 // Brand logos rendered in full color via Clearbit Logo API.
-// To add a brand, append { name, domain }. Domain should be the company's primary website.
+// To add a brand, append { name, domain } to the relevant industry group.
 type Brand = { name: string; domain: string };
+type IndustryGroup = { id: string; name: string; brands: Brand[] };
 
-const BRANDS_ROW_1: Brand[] = [
-  { name: "Vietcombank", domain: "vietcombank.com.vn" },
-  { name: "Techcombank", domain: "techcombank.com.vn" },
-  { name: "VPBank", domain: "vpbank.com.vn" },
-  { name: "BIDV", domain: "bidv.com.vn" },
-  { name: "ACB", domain: "acb.com.vn" },
-  { name: "Sacombank", domain: "sacombank.com.vn" },
-  { name: "MB Bank", domain: "mbbank.com.vn" },
-  { name: "TPBank", domain: "tpb.vn" },
-  { name: "HDBank", domain: "hdbank.com.vn" },
-  { name: "VIB", domain: "vib.com.vn" },
-];
-const BRANDS_ROW_2: Brand[] = [
-  { name: "Vietnam Airlines", domain: "vietnamairlines.com" },
-  { name: "Vietjet", domain: "vietjetair.com" },
-  { name: "Bamboo Airways", domain: "bambooairways.com" },
-  { name: "Saigon Co.op", domain: "saigonco-op.com.vn" },
-  { name: "Thế Giới Di Động", domain: "thegioididong.com" },
-  { name: "FPT", domain: "fpt.com" },
-  { name: "Viettel", domain: "viettel.com.vn" },
-  { name: "Lotte", domain: "lotte.vn" },
-  { name: "AEON", domain: "aeon.com.vn" },
-  { name: "Grab", domain: "grab.com" },
+const INDUSTRIES: IndustryGroup[] = [
+  {
+    id: "finance",
+    name: "Finance & Banking",
+    brands: [
+      { name: "Vietcombank", domain: "vietcombank.com.vn" },
+      { name: "Techcombank", domain: "techcombank.com.vn" },
+      { name: "VPBank", domain: "vpbank.com.vn" },
+      { name: "BIDV", domain: "bidv.com.vn" },
+      { name: "MB Bank", domain: "mbbank.com.vn" },
+      { name: "ACB", domain: "acb.com.vn" },
+      { name: "TPBank", domain: "tpb.vn" },
+      { name: "HDBank", domain: "hdbank.com.vn" },
+      { name: "VIB", domain: "vib.com.vn" },
+      { name: "Sacombank", domain: "sacombank.com.vn" },
+    ],
+  },
+  {
+    id: "ecommerce",
+    name: "E-Commerce",
+    brands: [
+      { name: "Tiki", domain: "tiki.vn" },
+      { name: "Shopee", domain: "shopee.vn" },
+      { name: "Lazada", domain: "lazada.vn" },
+      { name: "Sendo", domain: "sendo.vn" },
+      { name: "Adayroi", domain: "adayroi.com" },
+    ],
+  },
+  {
+    id: "retail",
+    name: "Retail",
+    brands: [
+      { name: "Saigon Co.op", domain: "saigonco-op.com.vn" },
+      { name: "Thế Giới Di Động", domain: "thegioididong.com" },
+      { name: "AEON", domain: "aeon.com.vn" },
+      { name: "Lotte", domain: "lotte.vn" },
+      { name: "Nguyễn Kim", domain: "nguyenkim.com" },
+    ],
+  },
+  {
+    id: "fmcg",
+    name: "FMCG",
+    brands: [
+      { name: "Vinamilk", domain: "vinamilk.com.vn" },
+      { name: "Masan", domain: "masangroup.com" },
+      { name: "Unilever", domain: "unilever.com" },
+      { name: "Nestlé", domain: "nestle.com.vn" },
+      { name: "Suntory PepsiCo", domain: "suntorypepsico.vn" },
+    ],
+  },
+  {
+    id: "fashion",
+    name: "Fashion & Beauty",
+    brands: [
+      { name: "Routine", domain: "routine.vn" },
+      { name: "Canifa", domain: "canifa.com" },
+      { name: "L'Oréal", domain: "loreal.com" },
+      { name: "Sociolla", domain: "sociolla.vn" },
+      { name: "Juno", domain: "juno.vn" },
+    ],
+  },
+  {
+    id: "pharma",
+    name: "Medicine & Pharmacy",
+    brands: [
+      { name: "Pharmacity", domain: "pharmacity.vn" },
+      { name: "Long Châu", domain: "nhathuoclongchau.com.vn" },
+      { name: "An Khang", domain: "nhathuocankhang.com" },
+      { name: "Hapacol", domain: "hapacol.vn" },
+      { name: "Sanofi", domain: "sanofi.com" },
+    ],
+  },
+  {
+    id: "hospitality",
+    name: "Hospitality",
+    brands: [
+      { name: "Vietnam Airlines", domain: "vietnamairlines.com" },
+      { name: "Vietjet", domain: "vietjetair.com" },
+      { name: "Bamboo Airways", domain: "bambooairways.com" },
+      { name: "Mường Thanh", domain: "muongthanh.com" },
+      { name: "Vinpearl", domain: "vinpearl.com" },
+    ],
+  },
+  {
+    id: "education",
+    name: "Education",
+    brands: [
+      { name: "FPT Education", domain: "fpt.edu.vn" },
+      { name: "VUS", domain: "vus.edu.vn" },
+      { name: "ILA", domain: "ila.edu.vn" },
+      { name: "Topica", domain: "topica.edu.vn" },
+      { name: "Apollo", domain: "apollo.edu.vn" },
+    ],
+  },
 ];
 
 export const TrustBand = () => {
