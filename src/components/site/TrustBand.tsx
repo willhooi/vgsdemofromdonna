@@ -159,11 +159,8 @@ export const TrustBand = () => {
                   />
                 </a>
               </h2>
-              <p className="mt-4 md:mt-5 text-[13px] sm:text-sm md:text-base leading-relaxed text-muted-foreground">
-                Backed by Japan's leading SMS gateway group, recognized by{" "}
-                <span className="font-semibold text-foreground">Forbes Asia</span> among Asia's{" "}
-                <span className="font-semibold text-foreground">"Best Under A Billion"</span> companies —
-                empowering VietGuys with global expertise and scalable enterprise messaging capabilities.
+              <p className="mt-4 md:mt-5 text-[13px] sm:text-sm leading-relaxed text-muted-foreground md:text-sm">
+                Backed by Japan’s leading SMS gateway group, recognized by <span className="font-semibold text-foreground">Forbes Asia</span> among Asia’s <span className="font-semibold text-foreground">Best Under A Billion</span> companies, empowering VietGuys with global expertise and scalable enterprise messaging capabilities.
               </p>
             </div>
 
