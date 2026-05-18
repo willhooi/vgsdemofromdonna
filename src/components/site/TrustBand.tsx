@@ -186,17 +186,17 @@ export const TrustBand = () => {
                   >
                     <div style={{ width: 4, background: c.accent, flexShrink: 0 }} />
                     <div
-                      className="flex w-[100px] md:w-[120px] shrink-0 items-center justify-center bg-white p-2.5"
+                      className="flex w-[84px] sm:w-[100px] md:w-[120px] shrink-0 items-center justify-center bg-white p-2 sm:p-2.5"
                       style={{ borderRight: "0.5px solid rgba(0,0,0,0.06)" }}
                     >
                       <img
                         src={c.logo}
                         alt={c.name}
-                        className="max-h-16 w-auto max-w-full object-contain"
+                        className="max-h-12 sm:max-h-16 w-auto max-w-full object-contain"
                         loading="lazy"
                       />
                     </div>
-                    <div className="flex flex-1 flex-col justify-center gap-[3px] px-3 py-2.5">
+                    <div className="flex flex-1 flex-col justify-center gap-[3px] px-2.5 sm:px-3 py-2 sm:py-2.5 min-w-0">
                       <span
                         className="self-start rounded-[4px] border px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider"
                         style={{
