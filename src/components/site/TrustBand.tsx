@@ -132,7 +132,7 @@ export const TrustBand = () => {
         />
         <div className="container-tight relative">
           <div className="flex flex-col items-center gap-2 text-center mb-6">
-            <span className="inline-flex items-center gap-2 rounded-full border border-[hsl(128_45%_30%)]/30 bg-white/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-[hsl(128_55%_22%)]">
+            <span className="shimmer-chip inline-flex items-center gap-2 rounded-full border border-[hsl(128_45%_30%)]/30 bg-gradient-to-r from-white via-[hsl(128_40%_96%)] to-white px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-[hsl(128_55%_22%)] shadow-[0_2px_10px_-4px_rgba(20,80,30,0.25)]">
               <ShieldCheck className="h-3.5 w-3.5" />
               Corporate Strength & Certifications
             </span>
