@@ -210,9 +210,6 @@ export const TrustBand = () => {
                       <p className="text-[10px] leading-snug" style={{ color: "rgba(255,255,255,0.55)" }}>
                         {c.description}
                       </p>
-                      <p className="text-[9px]" style={{ color: "rgba(255,255,255,0.3)" }}>
-                        {c.issuer}
-                      </p>
                     </div>
                   </div>
                 ))}
