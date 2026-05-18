@@ -82,7 +82,7 @@ const certifications = [
 // Brand logos rendered in full color via Clearbit Logo API.
 // To add a brand, append { name, domain } to the relevant industry group.
 type Brand = { name: string; domain: string };
-type IndustryGroup = { id: string; name: string; brands: Brand[] };
+type IndustryGroup = { id: string; name: string; tint: string; accent: string; brands: Brand[] };
 
 const INDUSTRIES: IndustryGroup[] = [
   {
