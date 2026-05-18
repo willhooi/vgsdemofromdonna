@@ -20,17 +20,11 @@ type MediaItem =
   | { type: "video"; src: string; poster?: string; caption?: string }
   | { type: "image"; src: string; alt: string; caption?: string; href?: string };
 
-import banner1 from "@/assets/banners/banner-1.jpg";
+
 import banner2 from "@/assets/banners/banner-2-new.png";
 import banner3 from "@/assets/banners/banner-3.jpg";
 
 const media: MediaItem[] = [
-  {
-    type: "image",
-    src: banner1,
-    alt: "Vietnamese enterprise teams connecting customers across messaging channels",
-    caption: "Where every customer conversation becomes business growth.",
-  },
   {
     type: "image",
     src: banner2,
