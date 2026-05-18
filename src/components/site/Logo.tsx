@@ -6,7 +6,7 @@ export const Logo = ({ className }: Props) => (
   <img
     src={logoImg}
     alt="VietGuys — A member of Accrete from Japan"
-    className={className ?? "h-10 w-auto md:h-12"}
+    className={className ?? "h-10 w-auto md:h-12 object-contain"}
     loading="eager"
     decoding="async"
   />
