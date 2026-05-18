@@ -100,18 +100,7 @@ const BRANDS_ROW_2: Brand[] = [
 export const TrustBand = () => {
   return (
     <section className="relative">
-      {/* Light stats band — matches AccreteBacking */}
-      <div className="bg-background pt-2 pb-10 md:pt-4 md:pb-16">
-        <div className="container-tight">
-          <div className="grid gap-3 sm:gap-4 md:gap-5 grid-cols-2">
-            {stats.map((s) => (
-              <StatCard key={s.eyebrow} {...s} />
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Light green certification band */}
+      {/* Combined Accrete + Certifications band */}
       <div
         className="relative overflow-hidden py-12 md:py-16"
         style={{
@@ -134,80 +123,78 @@ export const TrustBand = () => {
           <div className="flex flex-col items-center gap-2 text-center mb-6">
             <span className="inline-flex items-center gap-2 rounded-full border border-[hsl(128_45%_30%)]/30 bg-white/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-[hsl(128_55%_22%)]">
               <ShieldCheck className="h-3.5 w-3.5" />
-              Certifications & Licences
+              Backing & Certifications
             </span>
           </div>
 
-          <div className="mx-auto max-w-5xl rounded-[20px] bg-white p-4 sm:p-5 md:p-8 shadow-[0_10px_40px_-15px_rgba(20,80,30,0.2)]">
-            {/* Title with gradient frame */}
-            <div className="flex flex-col items-center mb-7">
-              <div
-                className="rounded-[10px] px-5 py-2"
-                style={{
-                  background:
-                    "linear-gradient(90deg, rgba(255,155,23,0.06), rgba(57,180,74,0.06))",
-                  border: "1.5px solid transparent",
-                  backgroundImage:
-                    "linear-gradient(90deg, rgba(255,155,23,0.06), rgba(57,180,74,0.06)), linear-gradient(90deg, #ff9b17, #39b44a)",
-                  backgroundOrigin: "border-box",
-                  backgroundClip: "padding-box, border-box",
-                }}
-              >
-                <h3
-                  className="text-[15px] sm:text-[17px] md:text-[20px] font-semibold m-0"
-                  style={{
-                    backgroundImage: "linear-gradient(90deg, #ff9b17, #39b44a)",
-                    WebkitBackgroundClip: "text",
-                    backgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    color: "transparent",
-                  }}
-                >
-                  Certifications & Awards
-                </h3>
-              </div>
-              <div className="mt-3 flex items-center gap-1.5">
-                <span className="h-1.5 w-1.5 rounded-full" style={{ background: "#ff9b17" }} />
-                <span
-                  className="h-px w-10"
-                  style={{ background: "linear-gradient(90deg, #ff9b17, #39b44a)" }}
-                />
-                <span className="h-1.5 w-1.5 rounded-full" style={{ background: "#39b44a" }} />
-              </div>
-            </div>
+          <div className="mx-auto max-w-6xl rounded-[20px] bg-white p-5 sm:p-6 md:p-8 shadow-[0_10px_40px_-15px_rgba(20,80,30,0.2)]">
+            <div className="grid gap-6 md:gap-8 grid-cols-1 lg:grid-cols-[1.1fr_1fr]">
+              {/* LEFT: Accrete branding + stats */}
+              <div className="flex flex-col">
+                <h2 className="heading-display flex flex-wrap items-baseline gap-x-4 gap-y-2 text-3xl md:text-4xl lg:text-5xl">
+                  <span>A member of</span>
+                  <a
+                    href="https://www.accrete-inc.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Accrete Inc. (opens in new tab)"
+                    className="inline-flex items-center transition-opacity hover:opacity-80"
+                  >
+                    <img
+                      src={accreteLogo}
+                      alt="Accrete Inc."
+                      className="inline-block h-10 w-auto md:h-14 lg:h-16"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </a>
+                </h2>
+                <p className="mt-5 text-sm md:text-base leading-relaxed text-muted-foreground">
+                  Backed by Japan's leading SMS gateway group, recognized by{" "}
+                  <span className="font-semibold text-foreground">Forbes Asia</span> among Asia's{" "}
+                  <span className="font-semibold text-foreground">"Best Under A Billion"</span> companies —
+                  empowering VietGuys with global expertise and scalable enterprise messaging capabilities.
+                </p>
 
-            {/* Responsive grid */}
-            <div className="grid gap-2.5 grid-cols-1 sm:grid-cols-[160px_1fr] md:grid-cols-[210px_1fr]">
-              {/* Trophy column */}
-              <div className="overflow-hidden rounded-[14px] border border-[#e0e0e0] bg-[#f7f7f7] flex flex-col h-[280px] sm:h-auto">
-                <div className="flex-1 overflow-hidden">
-                  <img
-                    src={zaloTrophy}
-                    alt="Zalo Business Solutions 2025 Trusted Partner trophy awarded to VietGuys"
-                    className="h-full w-full object-cover"
-                    style={{ objectPosition: "center 10%" }}
-                    loading="lazy"
-                  />
-                </div>
-                <div className="bg-white px-3 py-3.5 border-t border-[#efefef] text-center">
-                  <div className="flex items-center justify-center gap-1.5">
-                    <span className="h-1 w-1 rounded-full" style={{ background: "#ff9b17" }} />
-                    <span className="text-[9px] uppercase tracking-wider text-[#888]">
-                      2025 · Official Award
-                    </span>
-                    <span className="h-1 w-1 rounded-full" style={{ background: "#39b44a" }} />
-                  </div>
-                  <p className="mt-1 text-[12px] font-medium text-[#1a1a1a] leading-tight">
-                    Zalo Business Solutions Trusted Partner
-                  </p>
-                  <p className="mt-0.5 text-[10px] text-[#aaa]">
-                    In appreciation of VietGuys
-                  </p>
+                {/* Stats — red-bar style */}
+                <div className="mt-auto grid grid-cols-2 gap-5 pt-7">
+                  {stats.map((s) => (
+                    <StatCard key={s.eyebrow} {...s} />
+                  ))}
                 </div>
               </div>
 
-              {/* Cert cards column */}
+              {/* RIGHT: Trophy + 3 cert cards */}
               <div className="flex flex-col gap-2.5">
+                {/* Trophy */}
+                <div className="overflow-hidden rounded-[14px] border border-[#e0e0e0] bg-[#f7f7f7] flex flex-row sm:flex-row h-[160px] sm:h-[180px]">
+                  <div className="h-full w-[42%] sm:w-[40%] overflow-hidden flex-shrink-0">
+                    <img
+                      src={zaloTrophy}
+                      alt="Zalo Business Solutions 2025 Trusted Partner trophy awarded to VietGuys"
+                      className="h-full w-full object-cover"
+                      style={{ objectPosition: "center 10%" }}
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="flex-1 bg-white px-4 py-3 border-l border-[#efefef] flex flex-col justify-center">
+                    <div className="flex items-center gap-1.5">
+                      <span className="h-1 w-1 rounded-full" style={{ background: "#ff9b17" }} />
+                      <span className="text-[9px] uppercase tracking-wider text-[#888]">
+                        2025 · Official Award
+                      </span>
+                      <span className="h-1 w-1 rounded-full" style={{ background: "#39b44a" }} />
+                    </div>
+                    <p className="mt-1 text-[13px] font-semibold text-[#1a1a1a] leading-tight">
+                      Zalo Business Solutions Trusted Partner
+                    </p>
+                    <p className="mt-0.5 text-[11px] text-[#888]">
+                      In appreciation of VietGuys
+                    </p>
+                  </div>
+                </div>
+
+                {/* Cert cards */}
                 {certifications.map((c) => (
                   <div
                     key={c.name}
@@ -226,7 +213,7 @@ export const TrustBand = () => {
                         loading="lazy"
                       />
                     </div>
-                    <div className="flex flex-1 flex-col gap-[3px] px-4 py-3.5">
+                    <div className="flex flex-1 flex-col gap-[3px] px-4 py-3">
                       <span
                         className="self-start rounded-[4px] border px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider"
                         style={{
