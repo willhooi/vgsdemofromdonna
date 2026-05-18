@@ -21,7 +21,7 @@ type MediaItem =
   | { type: "image"; src: string; alt: string; caption?: string; href?: string };
 
 import banner1 from "@/assets/banners/banner-1.jpg";
-import banner2 from "@/assets/banners/banner-2.jpg";
+import banner2 from "@/assets/banners/banner-2-new.png";
 import banner3 from "@/assets/banners/banner-3.jpg";
 
 const media: MediaItem[] = [
