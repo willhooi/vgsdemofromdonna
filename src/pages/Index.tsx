@@ -30,7 +30,7 @@ const Index = () => {
       <Header />
       <Hero />
       <MediaShowcase />
-      <AccreteBacking />
+      
       <TrustBand />
       <Solutions />
       <Industries />
