@@ -37,12 +37,12 @@ const certifications = [
   {
     logo: isoLogo,
     name: "ISO/IEC 27001:2022",
-    description: "Strong and transparent legal foundation for enterprise SMS services.",
+    description: "Enterprise-grade data security with BSI-certified, ANAB-accredited ISO/IEC 27001:2022 standards.",
   },
   {
     logo: vncertLogo,
     name: "Non-Facility-Based Telecom Service License",
-    description: "Vietnam Computer Emergency Response Team",
+    description: "Strong and transparent legal foundation for enterprise SMS services",
   },
   {
     logo: vntaLogo,
