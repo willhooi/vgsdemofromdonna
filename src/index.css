@@ -253,3 +253,37 @@
 @keyframes line-flow {
   to { stroke-dashoffset: -400; }
 }
+
+/* Metallic shimmer sweep across a chip/badge */
+@keyframes metallic-sweep {
+  0%   { transform: translateX(-150%) skewX(-20deg); }
+  60%  { transform: translateX(250%) skewX(-20deg); }
+  100% { transform: translateX(250%) skewX(-20deg); }
+}
+.shimmer-chip { position: relative; overflow: hidden; isolation: isolate; }
+.shimmer-chip::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 0;
+  width: 45%;
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    rgba(255,255,255,0.0) 30%,
+    rgba(255,255,255,0.85) 50%,
+    rgba(255,255,255,0.0) 70%,
+    transparent 100%
+  );
+  transform: translateX(-150%) skewX(-20deg);
+  animation: metallic-sweep 4.5s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Pulsing soft glow ring for the flagship 'Since 2007' badge */
+@keyframes legacy-glow {
+  0%, 100% { box-shadow: 0 0 0 0 hsl(38 95% 55% / 0.45), 0 4px 14px -6px hsl(38 95% 45% / 0.4); }
+  50%      { box-shadow: 0 0 0 6px hsl(38 95% 55% / 0), 0 6px 18px -6px hsl(38 95% 45% / 0.55); }
+}
+.legacy-badge { animation: legacy-glow 2.6s ease-in-out infinite; }
