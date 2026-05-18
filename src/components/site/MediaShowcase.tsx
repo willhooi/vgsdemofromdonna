@@ -27,12 +27,6 @@ import banner3 from "@/assets/banners/banner-3.jpg";
 const media: MediaItem[] = [
   {
     type: "image",
-    src: banner1,
-    alt: "Vietnamese enterprise teams connecting customers across messaging channels",
-    caption: "Where every customer conversation becomes business growth.",
-  },
-  {
-    type: "image",
     src: banner2,
     alt: "Customer engagement team operating multi-channel messaging in Vietnam",
     caption: "SMS · Zalo · Viber · Email · AI — one trusted partner for enterprise messaging.",
