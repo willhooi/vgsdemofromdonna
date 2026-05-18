@@ -36,8 +36,8 @@ const stats = [
 const certifications = [
   {
     logo: isoLogo,
-    name: "ISO/IEC 27001:2013",
-    description: "Information Security Management",
+    name: "ISO/IEC 27001:2022",
+    description: "Enterprise-grade data security with BSI-certified, ANAB-accredited ISO/IEC 27001:2022 standards.",
   },
   {
     logo: vncertLogo,
