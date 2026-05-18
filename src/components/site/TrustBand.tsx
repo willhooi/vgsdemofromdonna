@@ -132,7 +132,7 @@ export const TrustBand = () => {
         />
         <div className="container-tight relative">
           <div className="flex flex-col items-center gap-2 text-center mb-6">
-            <span className="inline-flex items-center gap-2 rounded-full border border-[hsl(128_45%_30%)]/30 bg-white/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-[hsl(128_55%_22%)]">
+            <span className="shimmer-chip inline-flex items-center gap-2 rounded-full border border-[hsl(128_45%_30%)]/30 bg-gradient-to-r from-white via-[hsl(128_40%_96%)] to-white px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-[hsl(128_55%_22%)] shadow-[0_2px_10px_-4px_rgba(20,80,30,0.25)]">
               <ShieldCheck className="h-3.5 w-3.5" />
               Corporate Strength & Certifications
             </span>
@@ -334,9 +334,16 @@ const StatCard = ({ eyebrow, target, suffix, label }: StatCardProps) => {
           {display}
           <span>{suffix}</span>
         </p>
-        <p className="mt-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-foreground">
-          {eyebrow}
-        </p>
+        {eyebrow.toLowerCase().includes("since") ? (
+          <span className="legacy-badge mt-2 self-start inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-[#ff9b17] to-[#ffb84d] px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white">
+            <span className="inline-block h-1.5 w-1.5 rounded-full bg-white shadow-[0_0_6px_rgba(255,255,255,0.9)]" />
+            {eyebrow} · {new Date().getFullYear() - 2007} yrs
+          </span>
+        ) : (
+          <p className="mt-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-foreground">
+            {eyebrow}
+          </p>
+        )}
         <p className="mt-1 text-xs md:text-sm leading-relaxed text-muted-foreground">
           {label}
         </p>
