@@ -291,44 +291,93 @@ export const TrustBand = () => {
         </div>
       </div>
 
-      {/* Brand marquee */}
-      <div className="border-b border-border bg-background py-10 md:py-12">
+      {/* Industry-grouped trust cards */}
+      <div className="border-b border-border bg-background py-10 md:py-14">
         <div className="container-tight">
           <p className="text-center text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
             Trusted by Vietnam's enterprise leaders
           </p>
-        </div>
-        <div className="mt-6 space-y-4">
-          <BrandRow brands={BRANDS_ROW_1} direction="left" />
-          <BrandRow brands={BRANDS_ROW_2} direction="right" />
+          <IndustryGrid />
         </div>
       </div>
     </section>
   );
 };
 
-const BrandRow = ({
-  brands,
-  direction,
-}: {
-  brands: Brand[];
-  direction: "left" | "right";
-}) => {
-  // duplicate for seamless loop
-  const items = [...brands, ...brands];
+const IndustryGrid = () => {
+  const [openId, setOpenId] = useState<string | null>(null);
   return (
-    <div className="group relative overflow-hidden">
+    <div className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
+      {INDUSTRIES.map((group) => (
+        <IndustryCard
+          key={group.id}
+          group={group}
+          isOpen={openId === group.id}
+          onToggle={() =>
+            setOpenId((prev) => (prev === group.id ? null : group.id))
+          }
+        />
+      ))}
+    </div>
+  );
+};
+
+const IndustryCard = ({
+  group,
+  isOpen,
+  onToggle,
+}: {
+  group: IndustryGroup;
+  isOpen: boolean;
+  onToggle: () => void;
+}) => {
+  const preview = group.brands.slice(0, 2);
+  const remaining = group.brands.length - preview.length;
+  return (
+    <button
+      type="button"
+      onClick={onToggle}
+      aria-expanded={isOpen}
+      className={`group/card relative flex flex-col items-start gap-3 rounded-[14px] border bg-card p-4 text-left transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-[0_12px_32px_-14px_rgba(20,80,30,0.25)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+        isOpen ? "border-primary/40 shadow-[0_12px_32px_-14px_rgba(20,80,30,0.25)]" : "border-border"
+      }`}
+    >
+      <div className="flex w-full items-center justify-between gap-2">
+        <h3 className="text-[13px] font-semibold leading-tight text-foreground sm:text-sm">
+          {group.name}
+        </h3>
+        <span className="shrink-0 rounded-full bg-muted px-2 py-0.5 text-[10px] font-semibold text-muted-foreground">
+          {group.brands.length}
+        </span>
+      </div>
+
+      {/* Preview state — hidden on hover (desktop) or when open */}
       <div
-        className="flex w-max gap-4 will-change-transform"
-        style={{
-          animation: `${direction === "left" ? "marquee-left" : "marquee-right"} 38s linear infinite`,
-        }}
+        className={`flex w-full flex-wrap items-center gap-2 transition-opacity duration-150 ${
+          isOpen ? "hidden" : "group-hover/card:hidden"
+        }`}
       >
-        {items.map((b, i) => (
-          <BrandLogo key={`${b.name}-${i}`} brand={b} />
+        {preview.map((b) => (
+          <BrandLogo key={b.name} brand={b} size="sm" />
+        ))}
+        {remaining > 0 && (
+          <span className="text-[11px] font-medium text-muted-foreground">
+            +{remaining} more
+          </span>
+        )}
+      </div>
+
+      {/* Expanded state — shown on hover (desktop) or when open (mobile tap) */}
+      <div
+        className={`w-full flex-wrap items-center gap-2 ${
+          isOpen ? "flex" : "hidden group-hover/card:flex"
+        }`}
+      >
+        {group.brands.map((b) => (
+          <BrandLogo key={b.name} brand={b} size="sm" />
         ))}
       </div>
-    </div>
+    </button>
   );
 };
 
