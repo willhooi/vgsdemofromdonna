@@ -41,7 +41,7 @@ const certifications = [
   },
   {
     logo: vncertLogo,
-    name: "Non-Facility-Based Telecom Service License",
+    name: "VNCERT Certification",
     description: "Strong and transparent legal foundation for enterprise SMS services",
   },
   {
