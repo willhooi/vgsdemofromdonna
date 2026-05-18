@@ -66,6 +66,17 @@ const certifications = [
     tagColor: "rgba(255,255,255,0.7)",
     tagBorder: "rgba(255,255,255,0.2)",
   },
+  {
+    logo: zaloLogo,
+    name: "Zalo Business Solutions 2025",
+    description: "Officially recognized Trusted Partner for enterprise Zalo OA messaging.",
+    issuer: "Zalo · Awarded 2025",
+    tag: "Trusted partner",
+    accent: "#0068ff",
+    tagBg: "rgba(0,104,255,0.2)",
+    tagColor: "#6aa9ff",
+    tagBorder: "rgba(0,104,255,0.5)",
+  },
 ];
 
 // Brand logos rendered in full color via Clearbit Logo API.
