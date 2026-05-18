@@ -323,14 +323,14 @@ const StatCard = ({ eyebrow, target, suffix, label }: StatCardProps) => {
   const display = target >= 1000 ? value.toLocaleString() : value.toString();
 
   return (
-    <div ref={ref} className="flex gap-3">
+    <div ref={ref} className="flex gap-3 min-w-0">
       <span
         aria-hidden
         className="shrink-0 self-stretch rounded-full"
         style={{ width: 2, background: "#ff9b17" }}
       />
-      <div className="flex flex-col">
-        <p className="font-display text-3xl md:text-4xl font-extrabold leading-none tabular-nums" style={{ color: "#ff9b17" }}>
+      <div className="flex flex-col min-w-0 flex-1">
+        <p className="font-display text-[22px] sm:text-3xl md:text-4xl font-extrabold leading-none tabular-nums break-all" style={{ color: "#ff9b17" }}>
           {display}
           <span>{suffix}</span>
         </p>
