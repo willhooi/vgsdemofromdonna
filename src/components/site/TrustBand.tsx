@@ -46,8 +46,8 @@ const certifications = [
   },
   {
     logo: zaloLogo,
-    name: "Zalo Trusted Partner",
-    description: "Official ZNS Provider",
+    name: "VNCERT Certification",
+    description: "Exceptional security capabilities with rigorous information security compliance.",
   },
 ];
 
