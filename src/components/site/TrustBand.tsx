@@ -309,14 +309,13 @@ const BrandRow = ({
 };
 
 type StatCardProps = {
-  icon: React.ComponentType<{ className?: string }>;
   eyebrow: string;
   target: number;
   suffix: string;
   label: string;
 };
 
-const StatCard = ({ icon: Icon, eyebrow, target, suffix, label }: StatCardProps) => {
+const StatCard = ({ eyebrow, target, suffix, label }: StatCardProps) => {
   const ref = useRef<HTMLDivElement | null>(null);
   const [inView, setInView] = useState(false);
 
@@ -341,23 +340,24 @@ const StatCard = ({ icon: Icon, eyebrow, target, suffix, label }: StatCardProps)
   const display = target >= 1000 ? value.toLocaleString() : value.toString();
 
   return (
-    <div
-      ref={ref}
-      className="group relative flex flex-col rounded-2xl border border-border bg-card p-4 sm:p-5 md:p-7 transition-all hover:-translate-y-1 hover:border-[hsl(var(--accent))]/60 hover:shadow-[0_18px_50px_-20px_hsl(var(--accent)/0.45)]"
-    >
-      <span className="grid h-8 w-8 md:h-11 md:w-11 place-items-center rounded-xl md:rounded-2xl bg-[#04da7a]/10 text-[#04da7a]">
-        <Icon className="h-4 w-4 md:h-5 md:w-5" />
-      </span>
-      <p className="mt-3 md:mt-5 text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.18em] md:tracking-[0.22em] text-foreground">
-        {eyebrow}
-      </p>
-      <p className="mt-1 md:mt-2 font-display text-2xl sm:text-3xl md:text-5xl font-extrabold leading-none text-foreground tabular-nums">
-        {display}
-        <span className="text-foreground">{suffix}</span>
-      </p>
-      <p className="mt-2 md:mt-3 text-xs md:text-sm leading-relaxed text-foreground/80">
-        {label}
-      </p>
+    <div ref={ref} className="flex gap-3">
+      <span
+        aria-hidden
+        className="shrink-0 self-stretch rounded-full"
+        style={{ width: 2, background: "#ff9b17" }}
+      />
+      <div className="flex flex-col">
+        <p className="font-display text-3xl md:text-4xl font-extrabold leading-none tabular-nums" style={{ color: "#ff9b17" }}>
+          {display}
+          <span>{suffix}</span>
+        </p>
+        <p className="mt-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-foreground">
+          {eyebrow}
+        </p>
+        <p className="mt-1 text-xs md:text-sm leading-relaxed text-muted-foreground">
+          {label}
+        </p>
+      </div>
     </div>
   );
 };
