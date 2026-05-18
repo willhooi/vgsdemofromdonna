@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Send, Calendar, ShieldCheck } from "lucide-react";
 import { useCountUp } from "@/hooks/use-count-up";
 import isoLogo from "@/assets/certs/iso-27001-v2.png";
-import vncertLogo from "@/assets/certs/vncert.svg";
+import vncertLogo from "@/assets/certs/vncert-new.jpg";
 import vntaLogo from "@/assets/certs/vnta.svg";
 import zaloLogo from "@/assets/certs/zalo-trusted.svg";
 
