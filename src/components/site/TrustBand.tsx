@@ -138,10 +138,10 @@ export const TrustBand = () => {
             </span>
           </div>
 
-          <div className="mx-auto max-w-6xl rounded-[20px] bg-white p-5 sm:p-6 md:p-8 shadow-[0_10px_40px_-15px_rgba(20,80,30,0.2)]">
+          <div className="mx-auto max-w-6xl rounded-[20px] bg-white p-4 sm:p-6 md:p-8 shadow-[0_10px_40px_-15px_rgba(20,80,30,0.2)]">
             {/* Heading block — full width, centered */}
-            <div className="mx-auto max-w-3xl text-center mb-8 md:mb-10">
-              <h2 className="heading-display flex flex-wrap items-baseline justify-center gap-x-4 gap-y-2 text-3xl md:text-4xl lg:text-5xl">
+            <div className="mx-auto max-w-3xl text-center mb-6 md:mb-10">
+              <h2 className="heading-display flex flex-wrap items-baseline justify-center gap-x-3 sm:gap-x-4 gap-y-2 text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
                 <span>A member of</span>
                 <a
                   href="https://www.accrete-inc.com/"
@@ -153,13 +153,13 @@ export const TrustBand = () => {
                   <img
                     src={accreteLogo}
                     alt="Accrete Inc."
-                    className="inline-block h-10 w-auto md:h-14 lg:h-16"
+                    className="inline-block h-8 sm:h-10 w-auto md:h-14 lg:h-16"
                     loading="lazy"
                     decoding="async"
                   />
                 </a>
               </h2>
-              <p className="mt-5 text-sm md:text-base leading-relaxed text-muted-foreground">
+              <p className="mt-4 md:mt-5 text-[13px] sm:text-sm md:text-base leading-relaxed text-muted-foreground">
                 Backed by Japan's leading SMS gateway group, recognized by{" "}
                 <span className="font-semibold text-foreground">Forbes Asia</span> among Asia's{" "}
                 <span className="font-semibold text-foreground">"Best Under A Billion"</span> companies —
@@ -169,8 +169,8 @@ export const TrustBand = () => {
 
             {/* 3-column grid: stats | trophy | certs */}
             <div className="grid gap-5 md:gap-6 grid-cols-1 lg:grid-cols-[0.9fr_1.6fr] items-stretch">
-              {/* Col 1 — Stats stacked */}
-              <div className="grid grid-cols-2 lg:grid-cols-1 gap-5 justify-center content-center">
+              {/* Col 1 — Stats stacked on mobile + desktop, side-by-side on tablet */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4 sm:gap-5 justify-center content-center">
                 {stats.map((s) => (
                   <StatCard key={s.eyebrow} {...s} />
                 ))}
