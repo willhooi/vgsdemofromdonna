@@ -17,8 +17,10 @@ export const Hero = () => {
 
       <div className="container-tight w-full">
         <div className="grid items-center gap-10 md:gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
-          {/* Left — headline + chip */}
+          {/* Left — chip eyebrow + headline */}
           <div className="mx-auto max-w-2xl text-center lg:mx-0 lg:text-left">
+            <AccreteFlightChip />
+
             <h1 className="heading-display text-[32px] leading-[1.08] sm:text-[40px] md:text-5xl lg:text-[56px] xl:text-6xl text-balance animate-fade-up">
               {parts.length === 2 ? (
                 <>
@@ -35,8 +37,6 @@ export const Hero = () => {
                 headline
               )}
             </h1>
-
-            <AccreteFlightChip />
           </div>
 
           {/* Right — animation (compact on mobile, full on desktop) */}
