@@ -190,12 +190,11 @@ export const AccreteFlightChip = () => {
       <div
         ref={placeholderRef}
         aria-hidden="true"
-        className="accrete-chip-slot mb-4 md:mb-5 flex justify-center lg:justify-start"
+        className="accrete-chip-slot mt-5 md:mt-6 flex justify-center lg:justify-start"
       >
         <span className="invisible inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-semibold">
           <span>A member of</span>
           <img src={accreteLogo} alt="" aria-hidden className="h-[14px] w-auto" />
-          <JapanFlag className="h-[10px] w-[14px]" />
         </span>
       </div>
 
