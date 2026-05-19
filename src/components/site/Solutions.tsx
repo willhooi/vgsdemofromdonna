@@ -451,12 +451,12 @@ const MetricItem = ({
   item: { v: number; suf: string; lbl: string; compact?: boolean; decimals?: number };
   visible: boolean;
 }) => {
-  const n = useCountUp(visible ? item.v : 0, 1600);
+  const n = useCountUp(visible ? Math.round(item.v) : 0, 1600);
   const display = item.compact
     ? `${(n / 1_000_000).toFixed(n >= 1_000_000 ? 1 : 0)}M`
     : item.decimals
-    ? n.toFixed(item.decimals)
-    : Math.round(n).toLocaleString();
+    ? item.v.toFixed(item.decimals)
+    : n.toLocaleString();
   return (
     <div className="text-center">
       <div className="font-display text-2xl font-extrabold tabular-nums text-foreground md:text-3xl">
