@@ -380,25 +380,41 @@ body.accrete-morph-active [data-accrete-target] > * {
   transition: none;
 }
 
-/* Concentric pulse rings — slow sonar ping behind the chip */
+/* Shared brand color cycle: Japan red → VietGuys orange → teal → VietGuys green */
+@keyframes accrete-color-cycle {
+  0%   { --brand-cycle: #bc002d; }   /* Japan red */
+  33%  { --brand-cycle: #ff6b00; }   /* VietGuys orange */
+  66%  { --brand-cycle: hsl(168 60% 52%); } /* Accrete teal */
+  100% { --brand-cycle: #39b44a; }   /* VietGuys green */
+}
+@property --brand-cycle {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #bc002d;
+}
+
+/* Concentric pulse rings — sonar ping, color blends with dot */
 .accrete-pulse-ring {
   position: absolute;
   inset: 0;
   border-radius: 9999px;
-  border: 1px solid hsl(168 60% 52% / 0.5);
+  border: 1px solid var(--brand-cycle, hsl(168 60% 52%));
+  opacity: 0.55;
   transform-origin: 50% 50%;
-  animation: accrete-pulse 4.2s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
+  animation:
+    accrete-pulse 4.2s cubic-bezier(0.22, 0.61, 0.36, 1) infinite,
+    accrete-color-cycle 8s linear infinite;
   pointer-events: none;
 }
-.accrete-pulse-ring-1 { animation-delay: 0s; }
-.accrete-pulse-ring-2 { animation-delay: 1.6s; }
+.accrete-pulse-ring-1 { animation-delay: 0s, 0s; }
+.accrete-pulse-ring-2 { animation-delay: 1.6s, 0s; }
 @keyframes accrete-pulse {
   0%   { transform: scale(1);    opacity: 0.55; }
   70%  { transform: scale(1.55); opacity: 0; }
   100% { transform: scale(1.55); opacity: 0; }
 }
 
-/* Orbiting dot — runs along the rounded-pill perimeter (Accrete signature) */
+/* Orbiting dot — runs along rounded-pill perimeter, color cycles with rings */
 .accrete-orbit-dot {
   position: absolute;
   width: 5px;
@@ -409,8 +425,11 @@ body.accrete-morph-active [data-accrete-target] > * {
   offset-path: inset(0 round 9999px);
   offset-distance: 0%;
   offset-rotate: 0deg;
-  animation: accrete-orbit 5.5s linear infinite;
-  box-shadow: 0 0 6px hsl(168 60% 52% / 0.6);
+  background: var(--brand-cycle, hsl(168 60% 52%)) !important;
+  box-shadow: 0 0 6px var(--brand-cycle, hsl(168 60% 52% / 0.6));
+  animation:
+    accrete-orbit 5.5s linear infinite,
+    accrete-color-cycle 8s linear infinite;
 }
 @keyframes accrete-orbit {
   to { offset-distance: 100%; }
