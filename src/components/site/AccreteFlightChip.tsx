@@ -126,7 +126,8 @@ export const AccreteFlightChip = () => {
           const endXVp = logoRect.right + gap;
           const endYVp = logoRect.top + logoRect.height / 2;
           // Flag travel uses its own eased progress (front-loaded so it lands before headline does)
-          const fp = easeInOutCubic(clamp01(rawProgress / 0.95));
+          // Slight lead vs headline + smooth deceleration → flag glides in just before logo settles.
+          const fp = easeOutQuart(clamp01(rawProgress / 0.82));
           const fx = lerp(startXVp, endXVp, fp);
           const fy = lerp(startYVp, endYVp, fp);
           // Shape morph — flag final size scales with logo height
