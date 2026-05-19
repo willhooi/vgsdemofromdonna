@@ -474,6 +474,8 @@ export const HeroChatAnimation = () => {
                 );
               })}
             </div>
+              </div>
+            </div>
           </div>
         </div>
 
