@@ -349,3 +349,61 @@
   .accrete-chip-arrow,
   .accrete-heading-shimmer::after { animation: none !important; }
 }
+
+/* Luxury metallic chip — champagne/gold surface with slow specular sweep */
+.accrete-chip-metallic {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    linear-gradient(135deg,
+      hsl(40 50% 99%) 0%,
+      hsl(38 55% 93%) 45%,
+      hsl(38 45% 88%) 65%,
+      hsl(40 55% 96%) 100%);
+  border: 1px solid hsl(38 45% 72% / 0.75);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1px 0 hsl(35 50% 70% / 0.35),
+    0 6px 18px -8px hsl(35 70% 30% / 0.35),
+    0 1px 2px rgba(0, 0, 0, 0.05);
+}
+.accrete-chip-metallic::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(120% 80% at 15% 0%, rgba(255, 255, 255, 0.7) 0%, transparent 55%),
+    radial-gradient(140% 100% at 85% 100%, hsl(35 80% 60% / 0.18) 0%, transparent 60%);
+}
+.accrete-chip-metallic::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  bottom: -50%;
+  left: 0;
+  width: 40%;
+  pointer-events: none;
+  z-index: 1;
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0) 30%,
+    rgba(255, 255, 255, 0.85) 50%,
+    rgba(255, 240, 200, 0.4) 60%,
+    rgba(255, 255, 255, 0) 70%,
+    transparent 100%
+  );
+  transform: translateX(-150%) skewX(-22deg);
+  animation: accrete-metallic-sweep 4.8s ease-in-out infinite;
+}
+@keyframes accrete-metallic-sweep {
+  0%   { transform: translateX(-150%) skewX(-22deg); }
+  55%  { transform: translateX(280%) skewX(-22deg); }
+  100% { transform: translateX(280%) skewX(-22deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .accrete-chip-metallic::after { animation: none !important; opacity: 0; }
+}

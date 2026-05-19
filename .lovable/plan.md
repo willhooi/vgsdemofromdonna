@@ -1,56 +1,41 @@
-## Mục tiêu
-Tạo một "shared-element" giữa CTA Hero và section "A member of Accrete" — một chip nhỏ xuất hiện cạnh nút **Contact Experts**, rồi khi user bắt đầu scroll, chip đó bay xuống và morph thành heading của TrustBand. Tác dụng: dẫn mắt + chuyển tải thông điệp "VietGuys được Accrete bảo chứng" ngay tại điểm chuyển đổi từ pitch → trust.
+## Scope
+Two small, presentation-only edits to the Hero area.
 
-## Trải nghiệm người dùng
+### 1. Remove "Contact Experts" button
+File: `src/components/site/Hero.tsx`
+- Delete the `<Button variant="cta">…</Button>` block (and its wrapping `<div className="mt-4 md:mt-5 …">`).
+- Remove now-unused imports: `ArrowRight`, `Link`, `Button`, `trackDemoRequest`.
+- Keep `AccreteFlightChip` directly under the headline as the sole CTA-area element. Tighten its top margin slightly (`mt-5 md:mt-6`) so the chip breathes without the button below it.
 
-```text
-[ Where conversations… ]
-[ Contact Experts → ]  ◀ "A member of [Accrete]"   ← chip tĩnh, pulse nhẹ
-        │
-   user scrolls
-        │  chip rời vị trí, bay xuống theo đường cong
-        ▼
-┌─────────────────────────────────┐
-│  A member of [Accrete logo]     │ ← chip morph vào đúng heading
-│  Backed by Japan's leading…     │
-└─────────────────────────────────┘
-```
+Note: The flight animation (chip flying into TrustBand heading on scroll) still works — it's driven by `AccreteFlightChip` + `[data-accrete-target]`, not by the button.
 
-1. **Trạng thái nghỉ (Hero in view):** Chip nằm bên phải/below nút CTA, kích thước nhỏ (~ 11–12px text + logo Accrete cao ~18px), border mảnh, glow nhẹ. Có một mũi tên ↓ rất subtle, pulse 1 nhịp/3s để gợi ý "có gì đó bên dưới".
-2. **Khi user scroll qua một ngưỡng** (Hero rời viewport ~20%): chip detach khỏi layout, chuyển sang `position: fixed`, di chuyển theo đường cong (cubic ease-out) về vị trí heading TrustBand bằng FLIP technique (đo bounding rect target). Trong lúc bay, font-size + logo height scale dần lên kích thước heading.
-3. **Khi tới đích:** chip fade-out, heading thật của TrustBand đồng thời fade-in + có một vệt sáng (shimmer) quét qua một lần để đánh dấu "đã đến nơi". Sau đó chip không xuất hiện lại trong phiên này.
-4. **Reduced motion:** bỏ animation bay, chỉ giữ chip tĩnh + scroll bình thường. Heading TrustBand vẫn shimmer 1 lần khi vào view.
-5. **Mobile:** chip hiển thị thành 1 dòng nhỏ ngay dưới CTA (full-width text-center) thay vì cạnh phải, animation y hệt.
+### 2. Luxury metallic effect on the Accrete chip
+File: `src/components/site/AccreteFlightChip.tsx` + `src/index.css`
 
-## Thay đổi code
+Goal: make the inline chip feel premium — soft brushed-gold/champagne surface, faint inner sheen, and a slow continuous metallic sweep (similar in spirit to `.shimmer-chip` already used on TrustBand, but more refined and always-on for the Hero chip).
 
-### Component mới: `src/components/site/AccreteFlightChip.tsx`
-- Render chip với text "A member of" + logo Accrete (dùng cùng asset đang import trong TrustBand) + arrow xuống.
-- Quản lý 3 state: `idle` → `flying` → `landed`.
-- Đọc `data-accrete-target` của heading trong TrustBand qua `document.querySelector` để lấy bounding rect đích.
-- Dùng `IntersectionObserver` trên Hero section để detect "Hero rời viewport ~20%" → trigger flight.
-- Animation thuần CSS transform (translate + scale) trên một wrapper `position: fixed`, không dùng library mới.
-- Tôn trọng `prefers-reduced-motion`.
-- Lưu `sessionStorage` flag để không replay khi user scroll lên rồi xuống lại.
+Changes in `ChipContent`:
+- Add class `accrete-chip-metallic` to the chip span.
+- Keep existing layout (border, padding, text, logo). Slightly upgrade: thin gradient border, subtle inset highlight, denser shadow.
 
-### `src/components/site/Hero.tsx`
-- Mount `<AccreteFlightChip />` ngay sau khối `<Button> Contact Experts </Button>` (cùng container CTA), để chip thừa hưởng vị trí khởi đầu cạnh CTA. Không đổi gì khác về layout/text.
+New CSS in `src/index.css`:
+- `.accrete-chip-metallic` — base surface:
+  - background: linear-gradient between champagne white `hsl(40 30% 98%)` → warm ivory `hsl(38 40% 94%)` → champagne white, with a 1px inner top highlight via `box-shadow: inset 0 1px 0 rgba(255,255,255,0.9)`.
+  - border: 1px solid `hsl(38 40% 78% / 0.7)` (warm metallic edge), replacing current green border.
+  - shadow: `0 6px 18px -8px hsl(38 60% 30% / 0.35), 0 1px 2px rgba(0,0,0,0.06)`.
+  - text color stays brand green for contrast.
+  - `position: relative; overflow: hidden; isolation: isolate;`
+- `.accrete-chip-metallic::before` — soft radial sheen anchored top-left (static), low opacity, gives the chip a "polished" feel.
+- `.accrete-chip-metallic::after` — moving specular highlight: diagonal white gradient band, `@keyframes accrete-metallic-sweep` translating from `-150%` to `250%` with `skewX(-22deg)`, 4.5s ease-in-out infinite, with a generous pause at the end (use keyframe stops 0% → 55% movement, 55–100% hold) so the shimmer feels intentional, not frantic.
+- Respect `prefers-reduced-motion`: disable the `::after` animation.
 
-### `src/components/site/TrustBand.tsx`
-- Thêm `data-accrete-target` + `id="accrete-heading"` lên `<h2>` "A member of [logo]" để chip biết đích.
-- Thêm class kích hoạt shimmer-once khi chip "landed" (lắng nghe custom event `accrete:landed` trên window). Shimmer dùng keyframe `metallic-sweep` đã có sẵn trong `index.css`.
+The existing flight-into-TrustBand behavior, landing shimmer on the destination heading, and chevron arrow hint are unchanged.
 
-### `src/index.css`
-- Thêm util `accrete-chip` (border, glow, pulse arrow) và keyframe `chip-arrow-pulse`. Không đụng token màu — dùng brand green/orange hiện có.
+## Out of scope
+- No copy changes, no layout changes outside Hero.
+- No changes to TrustBand, header, or routing.
 
-## Edge cases & QA
-- User scroll cực nhanh → clamp animation duration tối đa 700ms, snap về landed.
-- Target chưa mount (TrustBand lazy) → fallback: chip fade out tại chỗ thay vì bay.
-- Resize giữa lúc bay → recompute target rect on `resize`.
-- SSR safe: mọi DOM access trong `useEffect`.
-- Kiểm tra trên viewport 360px, 768px, 1088px (hiện tại), 1440px.
-
-## Ngoài phạm vi
-- Không đổi copy của CTA hoặc heading.
-- Không đổi màu nền / gradient giữa 2 section (đã có gradient white→green).
-- Không thêm dependency mới (Framer Motion etc.) — dùng CSS transform thuần.
+## Verification
+- Visual check at desktop (1088px current viewport) and mobile widths: chip centered on mobile, left-aligned on desktop, no button below.
+- Confirm scroll trigger still flies the chip into the "A member of Accrete" heading.
+- Confirm reduced-motion users see a static, still-premium chip.
