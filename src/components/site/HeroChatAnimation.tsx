@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from "react";
-import { Gift, Lock, RotateCcw, Move } from "lucide-react";
+import { Gift, Lock, RotateCcw, Move, Star } from "lucide-react";
 
 import smsIcon from "@/assets/hero-icons/sms.png";
 import zaloIcon from "@/assets/hero-icons/zalo.png";
