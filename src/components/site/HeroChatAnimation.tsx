@@ -9,7 +9,7 @@ import rewardsIcon from "@/assets/hero-icons/rewards.png";
 import voiceIcon from "@/assets/hero-icons/voice.png";
 import customizedIcon from "@/assets/hero-icons/customized.png";
 import miniappIcon from "@/assets/hero-icons/miniapp.png";
-import phoneFrame from "@/assets/hero/phone-frame.png";
+
 import vlAvatar from "@/assets/hero/vl-avatar.png";
 
 /**
@@ -376,19 +376,44 @@ export const HeroChatAnimation = () => {
           );
         })}
 
-        {/* Phone — uses uploaded frame image */}
+        {/* Phone — drawn with CSS (no external frame image) */}
         <div
-          className="phone-float absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[62%] aspect-[392/720]"
+          className="phone-float absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[58%] aspect-[392/780]"
           style={{ containerType: "inline-size" }}
         >
-          <img
-            src={phoneFrame}
-            alt=""
-            draggable={false}
-            className="pointer-events-none absolute inset-0 h-full w-full object-contain"
-          />
-          {/* Screen safe area inside the frame (tuned to the uploaded mockup). */}
-          <div className="absolute inset-[7.5%_4%_15%_4%] flex flex-col overflow-hidden rounded-[6%] bg-white">
+          {/* Outer body */}
+          <div
+            className="absolute inset-0 rounded-[14%/7%] bg-gradient-to-b from-neutral-800 to-neutral-950 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.45),0_8px_20px_-8px_rgba(0,0,0,0.35)]"
+            style={{ padding: "2.2cqw" }}
+          >
+            {/* Inner bezel */}
+            <div className="relative h-full w-full rounded-[12%/6%] bg-black ring-1 ring-white/10">
+              {/* Side buttons */}
+              <span className="absolute -left-[1.2cqw] top-[18%] h-[6%] w-[1.2cqw] rounded-l-full bg-neutral-800" />
+              <span className="absolute -left-[1.2cqw] top-[28%] h-[10%] w-[1.2cqw] rounded-l-full bg-neutral-800" />
+              <span className="absolute -left-[1.2cqw] top-[42%] h-[10%] w-[1.2cqw] rounded-l-full bg-neutral-800" />
+              <span className="absolute -right-[1.2cqw] top-[26%] h-[14%] w-[1.2cqw] rounded-r-full bg-neutral-800" />
+
+              {/* Dynamic island / notch */}
+              <div
+                className="absolute left-1/2 top-[1.8%] z-20 -translate-x-1/2 rounded-full bg-black"
+                style={{ width: "28%", height: "3.6%" }}
+              />
+
+              {/* Screen */}
+              <div className="absolute inset-[1.4%] flex flex-col overflow-hidden rounded-[11%/5.5%] bg-white">
+                {/* Status bar */}
+                <div
+                  className="flex shrink-0 items-center justify-between text-foreground/80"
+                  style={{ padding: "1.8cqw 5cqw 0.8cqw", fontSize: "2.8cqw" }}
+                >
+                  <span className="font-semibold">9:41</span>
+                  <span className="flex items-center" style={{ gap: "1cqw" }}>
+                    <span className="inline-block rounded-sm bg-foreground/70" style={{ width: "3cqw", height: "1.6cqw" }} />
+                    <span className="inline-block rounded-full bg-foreground/70" style={{ width: "1.6cqw", height: "1.6cqw" }} />
+                    <span className="inline-block rounded-[0.4cqw] border border-foreground/70" style={{ width: "4cqw", height: "1.8cqw" }} />
+                  </span>
+                </div>
             {/* Header — anchored to top of screen, fully inside safe area */}
             <div
               className="flex shrink-0 items-center border-b border-border/70 bg-white/95 backdrop-blur"
@@ -448,6 +473,8 @@ export const HeroChatAnimation = () => {
                   </div>
                 );
               })}
+            </div>
+              </div>
             </div>
           </div>
         </div>
