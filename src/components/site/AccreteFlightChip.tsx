@@ -119,10 +119,11 @@ export const AccreteFlightChip = () => {
           // Start: current chip center in viewport
           const startXVp = phRect.left + phRect.width / 2;
           const startYVp = phRect.top + phRect.height / 2;
-          // End: just to the right of the Accrete logo, vertically centered on its baseline
+          // End: anchor strictly to the logo's bbox — gap scales with logo height,
+          // vertical center = bbox center (independent of font/line-height).
           const gap = Math.max(8, logoRect.height * 0.22);
           const endXVp = logoRect.right + gap;
-          const endYVp = logoRect.top + logoRect.height * 0.62;
+          const endYVp = logoRect.top + logoRect.height / 2;
           // Flag travel uses its own eased progress (front-loaded so it lands before headline does)
           const fp = easeInOutCubic(clamp01(rawProgress / 0.55));
           const fx = lerp(startXVp, endXVp, fp);
