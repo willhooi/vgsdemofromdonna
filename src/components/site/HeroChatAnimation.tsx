@@ -131,20 +131,36 @@ const savePositions = (p: PositionMap) => {
   }
 };
 
+const ADMIN_KEY = "vg_admin";
+
 export const HeroChatAnimation = () => {
   const [visibleCount, setVisibleCount] = useState(1);
   const [activeChip, setActiveChip] = useState(0);
   const [editMode, setEditMode] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [positions, setPositions] = useState<PositionMap>(() => loadPositions());
   const containerRef = useRef<HTMLDivElement>(null);
   const dragRef = useRef<{ id: string; offX: number; offY: number } | null>(null);
 
-  // Allow ?edit=1 to open editor on load
+  // Admin gate: ?admin=1 unlocks (persists in localStorage), ?admin=0 revokes.
+  // Public viewers never see the Edit toolbar.
   useEffect(() => {
     if (typeof window === "undefined") return;
     const params = new URLSearchParams(window.location.search);
-    if (params.get("edit") === "1") setEditMode(true);
+    const flag = params.get("admin");
+    try {
+      if (flag === "1") window.localStorage.setItem(ADMIN_KEY, "1");
+      if (flag === "0") window.localStorage.removeItem(ADMIN_KEY);
+    } catch {
+      /* noop */
+    }
+    const unlocked = (() => {
+      try { return window.localStorage.getItem(ADMIN_KEY) === "1"; } catch { return false; }
+    })();
+    setIsAdmin(unlocked);
+    if (unlocked && params.get("edit") === "1") setEditMode(true);
   }, []);
+
 
   // Chat bubble sequence
   useEffect(() => {
