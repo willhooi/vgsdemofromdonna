@@ -131,20 +131,36 @@ const savePositions = (p: PositionMap) => {
   }
 };
 
+const ADMIN_KEY = "vg_admin";
+
 export const HeroChatAnimation = () => {
   const [visibleCount, setVisibleCount] = useState(1);
   const [activeChip, setActiveChip] = useState(0);
   const [editMode, setEditMode] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [positions, setPositions] = useState<PositionMap>(() => loadPositions());
   const containerRef = useRef<HTMLDivElement>(null);
   const dragRef = useRef<{ id: string; offX: number; offY: number } | null>(null);
 
-  // Allow ?edit=1 to open editor on load
+  // Admin gate: ?admin=1 unlocks (persists in localStorage), ?admin=0 revokes.
+  // Public viewers never see the Edit toolbar.
   useEffect(() => {
     if (typeof window === "undefined") return;
     const params = new URLSearchParams(window.location.search);
-    if (params.get("edit") === "1") setEditMode(true);
+    const flag = params.get("admin");
+    try {
+      if (flag === "1") window.localStorage.setItem(ADMIN_KEY, "1");
+      if (flag === "0") window.localStorage.removeItem(ADMIN_KEY);
+    } catch {
+      /* noop */
+    }
+    const unlocked = (() => {
+      try { return window.localStorage.getItem(ADMIN_KEY) === "1"; } catch { return false; }
+    })();
+    setIsAdmin(unlocked);
+    if (unlocked && params.get("edit") === "1") setEditMode(true);
   }, []);
+
 
   // Chat bubble sequence
   useEffect(() => {
@@ -221,35 +237,38 @@ export const HeroChatAnimation = () => {
 
   return (
     <div className="relative">
-      {/* Edit-mode floating toolbar */}
-      <div className="absolute -top-2 right-0 z-20 flex items-center gap-1.5">
-        <button
-          type="button"
-          onClick={() => {
-            if (editMode) savePositions(positions);
-            setEditMode((v) => !v);
-          }}
-          className={`flex items-center gap-1 rounded-full border px-2.5 py-1 text-[11px] font-semibold shadow-sm transition-colors ${
-            editMode
-              ? "border-[#39b44a] bg-[#39b44a] text-white"
-              : "border-border bg-white/90 text-foreground hover:bg-white"
-          }`}
-          aria-label={editMode ? "Lock icons" : "Edit icon positions"}
-        >
-          {editMode ? <Lock className="h-3 w-3" /> : <Move className="h-3 w-3" />}
-          {editMode ? "Done" : "Edit"}
-        </button>
-        {editMode && (
+      {/* Edit-mode floating toolbar — admin only */}
+      {isAdmin && (
+        <div className="absolute -top-2 right-0 z-20 flex items-center gap-1.5">
           <button
             type="button"
-            onClick={resetPositions}
-            className="flex items-center gap-1 rounded-full border border-border bg-white/90 px-2.5 py-1 text-[11px] font-semibold text-foreground shadow-sm hover:bg-white"
-            aria-label="Reset positions"
+            onClick={() => {
+              if (editMode) savePositions(positions);
+              setEditMode((v) => !v);
+            }}
+            className={`flex items-center gap-1 rounded-full border px-2.5 py-1 text-[11px] font-semibold shadow-sm transition-colors ${
+              editMode
+                ? "border-[#39b44a] bg-[#39b44a] text-white"
+                : "border-border bg-white/90 text-foreground hover:bg-white"
+            }`}
+            aria-label={editMode ? "Lock icons" : "Edit icon positions"}
           >
-            <RotateCcw className="h-3 w-3" /> Reset
+            {editMode ? <Lock className="h-3 w-3" /> : <Move className="h-3 w-3" />}
+            {editMode ? "Done" : "Edit"}
           </button>
-        )}
-      </div>
+          {editMode && (
+            <button
+              type="button"
+              onClick={resetPositions}
+              className="flex items-center gap-1 rounded-full border border-border bg-white/90 px-2.5 py-1 text-[11px] font-semibold text-foreground shadow-sm hover:bg-white"
+              aria-label="Reset positions"
+            >
+              <RotateCcw className="h-3 w-3" /> Reset
+            </button>
+          )}
+        </div>
+      )}
+
 
       <div
         ref={containerRef}
