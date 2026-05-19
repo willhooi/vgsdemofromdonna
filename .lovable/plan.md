@@ -1,82 +1,102 @@
-## Vision
+## Mục tiêu
 
-Chuyển section "Solutions" từ **danh sách dịch vụ** sang **kiến trúc nền tảng enterprise** — visual hoá data flow theo 3 lớp: Inputs → CDP brain → Channels (outputs). Tham chiếu phong cách: Twilio Segment, Braze, Infobip platform diagram.
+Chuyển section "Solutions" từ kiến trúc 3 cột thiên về kỹ thuật (Inputs → CDP → Channels) sang **outcome-first storytelling** đúng tinh thần hero: *"where customer conversations become business growth"*.
 
-Mục tiêu perception: VietGuys không bán "tin SMS" — VietGuys vận hành một **enterprise communication platform** mà ByteTech CDP là bộ não.
+- Nhân vật trung tâm: end-user vui mừng mua sắm + nhận thông báo (ảnh minh hoạ user upload).
+- Các dịch vụ VietGuys = những "outcome moments" xảy ra quanh khách hàng.
+- PangoCDP × ByteTech = bổ trợ (supporting strip ở dưới), không còn là trục chính.
 
-## Layout (desktop)
+## Layout mới (desktop)
 
 ```text
-┌─────────────────────────────────────────────────────────────────┐
-│  EYEBROW: The Platform                                          │
-│  H2: One ecosystem. Every conversation, orchestrated.           │
-│  Sub: Data in → intelligence → message out. At enterprise scale.│
-└─────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────────┐
+│ EYEBROW: The Outcome                                                 │
+│ H2: Every conversation, a moment of growth.                          │
+│ Sub: SMS, Zalo, Viber, Email, OTP — when they land right,            │
+│      customers buy, return, and recommend.                           │
+└──────────────────────────────────────────────────────────────────────┘
 
-┌──────────────┐      ┌──────────────────────┐      ┌──────────────┐
-│  INPUTS      │ ───▶ │   CDP CORE           │ ───▶ │  CHANNELS    │
-│  (left rail) │      │   (center, dominant) │      │  (right rail)│
-│              │      │                      │      │              │
-│ • CRM        │      │  [ByteTech logo]     │      │  SMS         │
-│ • Web/App    │      │  PangoCDP            │      │  Zalo        │
-│ • POS        │      │  ───────────────     │      │  Viber       │
-│ • E-com      │      │  Mini live dashboard │      │  Email       │
-│ • Survey     │      │   ├ Unified profiles │      │  OTP         │
-│ • Ads        │      │   ├ Segments live    │      │  Voice       │
-│              │      │   ├ Journeys 24/7    │      │  Smart Warr. │
-│              │      │   └ AI next-best     │      │  Rewards     │
-│              │      │                      │      │  Custom      │
-│              │      │  "Strategic partner  │      │              │
-│              │      │   with ByteTech"     │      │              │
-└──────────────┘      └──────────────────────┘      └──────────────┘
-       ▲                       ▲                          │
-       │                       │                          ▼
-       └────── feedback loop (events, attribution) ◀──────┘
+┌─────────────────────────────┐   ┌────────────────────────────────────┐
+│  STAGE (left, 0.95fr)       │   │  OUTCOME RAIL (right, 1.05fr)      │
+│                             │   │                                    │
+│   [Happy shopper photo      │   │  Outcome cards (2×2 grid):         │
+│    cut-out, blue blob bg]   │   │  ┌──────────┐ ┌──────────┐         │
+│   Floating pop-ups:         │   │  │ 5★ Review│ │ Order ✓  │         │
+│   · ★★★★★ review            │   │  │ +18% NPS │ │ -42% calls│        │
+│   · Trạng thái đơn hàng     │   │  └──────────┘ └──────────┘         │
+│   · Mã OTP 371235           │   │  ┌──────────┐ ┌──────────┐         │
+│                             │   │  │ OTP <2s  │ │ Reward   │         │
+│   Channel chips orbit photo │   │  │ 99.95%   │ │ +27% LTV │         │
+│   (SMS·Zalo·Viber·Email·OTP)│   │  └──────────┘ └──────────┘         │
+│                             │   │                                    │
+│                             │   │  → "See all 9 services"            │
+└─────────────────────────────┘   └────────────────────────────────────┘
 
-┌─────────────────────────────────────────────────────────────────┐
-│  FOOTER STRIP: 5M msgs/day · 76 enterprises · 99.95% SLA · ...  │
-└─────────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────────────┐
+│ SUPPORT STRIP — Powered by PangoCDP × ByteTech                       │
+│ [bytetech logo]  Unified profiles · Real-time segments · AI next-best│
+│ "Strategic CDP partnership →"                                        │
+└──────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────┐
+│ METRICS STRIP (giữ nguyên): 5M/day · 76 clients · 99.95% · 9 channels│
+└──────────────────────────────────────────────────────────────────────┘
 ```
 
-Animated connector lines (dashed, flowing dots) chạy từ Inputs → CDP → Channels, và một loop nhỏ vòng ngược lại = feedback. Cho cảm giác "platform đang chạy".
+## Breakdown từng khối
 
-## Section breakdown
+**1. Header** — đổi positioning từ "platform diagram" sang "outcome":
+- Eyebrow: `The Outcome`
+- H2: `Every conversation, a moment of growth.`
+- Sub: nối thẳng vào key message hero.
 
-**1. Header block**
-- Eyebrow: "The Platform"
-- H2: "One ecosystem. Every conversation, orchestrated."
-- Sub: positioning enterprise platform, không phải vendor.
+**2. Stage (cột trái)** — sân khấu cảm xúc
+- Ảnh cô gái vui mừng cầm điện thoại (re-generate hoặc dùng ảnh user upload làm reference) đặt trên blob xanh-cam mềm.
+- 3 pop-up nổi với typography rõ ràng tiếng Việt:
+  - `★★★★★ "Giao hàng siêu nhanh!"`
+  - `Trạng thái đơn hàng · Đã xác nhận`
+  - `Mã xác thực: 371235`
+- 5 channel chip nhỏ (SMS · Zalo · Viber · Email · OTP) lượn quanh theo orbit nhẹ — mỗi chip có pulse dot màu thương hiệu, hover hiện tooltip "Powered by VietGuys".
 
-**2. Architecture diagram (core)**
-3 cột grid `[0.9fr_1.4fr_0.9fr]` desktop / stack vertical mobile.
+**3. Outcome rail (cột phải)** — 4 outcome card lớn, mỗi card = 1 service kể bằng kết quả kinh doanh, không phải tính năng:
+| Card | Service | Outcome metric |
+|------|---------|----------------|
+| 5★ Review | Zalo ZNS post-purchase | +18% NPS |
+| Order Confirmed | SMS Brandname + Email | −42% support calls |
+| OTP < 2s | OTPBox multi-channel | 99.95% deliverability |
+| Reward Unlocked | Rewards + Smart Warranty | +27% repeat LTV |
 
-- **Inputs column** (left): 6 small cards (CRM, Web/App, POS, E-commerce, Survey, Ads) — icon + label, viền mảnh, animation fade-in tuần tự.
-- **CDP Core** (center): khối lớn nhất, glow nhẹ. Header có logo ByteTech + "PangoCDP — Strategic CDP Partner". Bên trong là **mock dashboard tile**: 4 widgets nhỏ (Unified Profiles 2.4M, Active Segments 142, Live Journeys 38, AI Recommendations 89%) với số đếm animate. Footer khối: dòng "Powered by VietGuys × ByteTech" + link.
-- **Channels column** (right): 9 dịch vụ dạng pill cards xếp dọc (SMS, Zalo, Viber, Email, OTP, Voice, Smart Warranty, Rewards, Customized Solutions). Mỗi pill có dot pulse màu thương hiệu kênh.
+Mỗi card có icon kênh, headline outcome (số đếm count-up), 1 dòng giải thích, link `Learn more`. Card thứ 5 (collapsed): `+ 5 more services` → `/solutions`.
 
-**3. Flow connectors**
-SVG overlay nối Inputs↔CDP↔Channels bằng dashed line + moving dots (đã có pattern `line-flow` trong codebase). Một đường cong dưới cùng = feedback loop từ Channels về Inputs.
+**4. Support strip — ByteTech CDP** (bổ trợ, không chiếm spotlight)
+- 1 hàng ngang full-width, nền `hsl(145 50% 97%)`, viền mảnh.
+- Trái: logo ByteTech + dòng `Powered by PangoCDP — Strategic CDP partnership with ByteTech`.
+- Giữa: 3 capability bullet inline (Unified profiles · Real-time segments · AI next-best action).
+- Phải: link `Read the partnership →`.
+- Không còn live dashboard widgets / throughput bar (chuyển thành chi tiết phụ, giảm tải visual).
 
-**4. Footer metrics strip**
-4 KPIs nhỏ: messages/day · enterprises · uptime · channels. Reinforce scale.
+**5. Metrics strip + CTA** — giữ nguyên 4 KPI và nút `Explore the platform`.
 
-## Mobile behaviour
+## Mobile
 
-Stack dọc theo thứ tự: Inputs grid 2 cột → CDP card full-width (dashboard rút gọn còn 2 widgets) → Channels grid 2 cột → metrics strip. Connectors ẩn hoặc chuyển thành dấu chevron dọc giữa các block.
+Stack dọc: Header → Stage (photo + pop-ups stack tự nhiên, channel chips ẩn) → Outcome rail (2×2 grid) → Support strip (logo + text 2 dòng) → Metrics → CTA.
 
 ## Files affected
 
-- `src/components/site/Solutions.tsx` — viết lại hoàn toàn.
-- `src/locales/en.ts` & `vi.ts` — thêm copy cho inputs, CDP dashboard widgets, 9 channels, footer metrics. Service list đổi sang đúng 9 mục yêu cầu.
-- `src/index.css` — thêm keyframes cho flow dots + dashboard count-up glow nếu chưa có.
-- Asset: tái sử dụng `src/assets/brand/bytetech.svg`.
+- `src/components/site/Solutions.tsx` — refactor lớn: bỏ `Column` 3 cột, thay bằng `OutcomeStage` + `OutcomeRail` + `CDPSupportStrip`. Giữ `useCountUp`, `MetricsStrip`, `ConnectorSVG` (có thể bỏ hoặc đổi thành đường cong nối Stage → Rail).
+- `src/assets/channels-girl.png` — re-generate ảnh end-user vui mừng theo style hình user upload (blob xanh, pop-up sạch, không text gibberish — render text overlay bằng HTML thay vì để AI sinh chữ trong ảnh).
+- `src/locales/en.ts` & `vi.ts` — thêm copy cho outcome cards, eyebrow mới, support strip.
+- Không động đến Hero, TrustBand, các section khác.
 
-## Out of scope
+## Technical notes
 
-- Không thay đổi Hero, TrustBand, hay các section khác.
-- Không build trang `/solutions` con — chỉ refactor section trên Index.
+- Pop-up cards và channel chips dùng `absolute` positioning trên container `relative`; viewport `<lg` thì chuyển flex stack.
+- Count-up cho metric trong outcome card kích hoạt qua `IntersectionObserver` đã có.
+- Ảnh nhân vật cần background trong suốt (transparent PNG) để layer blob xanh sau lưng.
+- Giữ tone palette hiện tại (primary green + accent orange) — không thêm xanh dương đậm như reference; reference chỉ để mô phỏng *bố cục* (nhân vật + pop-up + blob).
 
 ## Câu hỏi xác nhận trước khi build
 
-1. Mock dashboard widgets — dùng số minh hoạ (2.4M profiles, 142 segments...) hay để placeholder generic ("Live")?
-2. Footer metrics strip — giữ trong section Solutions hay bỏ vì đã có TrustBand stats?
+1. Outcome metrics (+18% NPS, −42% calls, +27% LTV) — dùng số minh hoạ kiểu này hay cần con số thật từ case study?
+2. Có giữ link `/solutions` ở cuối section không, hay đổi thành CTA `Book a demo`?
+3. Ảnh nhân vật: re-generate (AI) theo style hình upload, hay user sẽ cung cấp ảnh thật?
