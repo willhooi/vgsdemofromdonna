@@ -2,52 +2,28 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
-  Database,
-  Globe,
-  Store,
-  ShoppingCart,
-  MessageSquareText,
-  Megaphone,
-  Users,
-  Layers,
-  Workflow,
+  Star,
+  PackageCheck,
+  ShieldCheck,
+  Gift,
   Sparkles,
+  MessageCircle,
+  Mail,
+  Phone,
+  Smartphone,
 } from "lucide-react";
 import bytetechLogo from "@/assets/brand/bytetech.svg";
-import channelsGirl from "@/assets/channels-girl.png";
+import shopperImg from "@/assets/channels-girl.png";
 import { useCountUp } from "@/hooks/use-count-up";
 
 /**
- * Solutions — Enterprise Communication Ecosystem
+ * Solutions — Outcome-first storytelling
  *
- * Three-tier architecture diagram: Inputs → CDP Core (ByteTech) → Channels.
- * Positions VietGuys as an enterprise platform, not a vendor list.
+ * Hero key message: "where customer conversations become business growth."
+ * Stage: happy shopper + live conversation pop-ups.
+ * Outcome rail: 4 service moments, each phrased as a business result.
+ * Support strip: PangoCDP × ByteTech (supporting, not lead).
  */
-
-type Input = { id: string; label: string; Icon: typeof Database };
-type Channel = { id: string; label: string; dot: string };
-
-const INPUTS: Input[] = [
-  { id: "crm", label: "CRM", Icon: Database },
-  { id: "web", label: "Web & App", Icon: Globe },
-  { id: "pos", label: "POS", Icon: Store },
-  { id: "ecom", label: "E-commerce", Icon: ShoppingCart },
-  { id: "survey", label: "Surveys", Icon: MessageSquareText },
-  { id: "ads", label: "Ads & Social", Icon: Megaphone },
-];
-
-// Brand-correct dot colors (Tailwind arbitrary values OK in className)
-const CHANNELS: Channel[] = [
-  { id: "sms", label: "SMS Brandname", dot: "#39b44a" },
-  { id: "zalo", label: "Zalo ZNS", dot: "#0068ff" },
-  { id: "viber", label: "Viber Business", dot: "#7360f2" },
-  { id: "email", label: "Email", dot: "#ff9b17" },
-  { id: "otp", label: "OTP & 2FA", dot: "#e11d48" },
-  { id: "voice", label: "Voice", dot: "#0ea5e9" },
-  { id: "warranty", label: "Smart Warranty", dot: "#14b8a6" },
-  { id: "rewards", label: "Rewards", dot: "#f59e0b" },
-  { id: "custom", label: "Customized Solutions", dot: "#64748b" },
-];
 
 export const Solutions = () => {
   const ref = useRef<HTMLElement>(null);
@@ -57,7 +33,7 @@ export const Solutions = () => {
     if (!ref.current) return;
     const io = new IntersectionObserver(
       (entries) => entries.forEach((e) => e.isIntersecting && setVisible(true)),
-      { threshold: 0.2 },
+      { threshold: 0.15 },
     );
     io.observe(ref.current);
     return () => io.disconnect();
@@ -76,13 +52,13 @@ export const Solutions = () => {
       {/* Subtle grid backdrop */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.35]"
+        className="pointer-events-none absolute inset-0 opacity-[0.3]"
         style={{
           backgroundImage:
             "linear-gradient(hsl(145 30% 88%) 1px, transparent 1px), linear-gradient(90deg, hsl(145 30% 88%) 1px, transparent 1px)",
           backgroundSize: "44px 44px",
           maskImage:
-            "radial-gradient(ellipse at 50% 40%, black 30%, transparent 75%)",
+            "radial-gradient(ellipse at 50% 40%, black 25%, transparent 75%)",
         }}
       />
 
@@ -90,50 +66,28 @@ export const Solutions = () => {
         {/* Header */}
         <div className="mx-auto max-w-2xl text-center">
           <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-[hsl(var(--primary-deep))]">
-            <Sparkles className="h-3.5 w-3.5" /> The Platform
+            <Sparkles className="h-3.5 w-3.5" /> The Outcome
           </span>
           <h2 className="heading-display mt-3 text-balance text-[26px] sm:text-3xl md:text-4xl lg:text-[44px] text-foreground">
-            One ecosystem.{" "}
-            <span className="text-[hsl(var(--primary))]">Every conversation</span>,
-            orchestrated.
+            Every conversation,{" "}
+            <span className="text-[hsl(var(--primary))]">a moment of growth</span>.
           </h2>
           <p className="mt-3 text-sm sm:text-base text-muted-foreground">
-            Data in. Intelligence in the middle. The right message out — at
-            enterprise scale.
+            SMS, Zalo, Viber, Email, OTP — when they land right, customers buy,
+            return, and recommend.
           </p>
         </div>
 
-        {/* Architecture diagram */}
+        {/* Stage + Outcome rail */}
         <div className="relative mx-auto mt-10 md:mt-14 max-w-6xl">
-          {/* Desktop connector overlay */}
-          <ConnectorSVG visible={visible} />
-
-          <div className="relative grid gap-4 md:gap-6 grid-cols-1 lg:grid-cols-[0.9fr_1.5fr_0.9fr] items-stretch">
-            {/* Column 1 — Inputs */}
-            <Column title="Inputs" subtitle="Data sources" tone="muted">
-              <div className="grid grid-cols-2 lg:grid-cols-1 gap-2.5">
-                {INPUTS.map((i, idx) => (
-                  <InputCard key={i.id} input={i} index={idx} visible={visible} />
-                ))}
-              </div>
-            </Column>
-
-            {/* Column 2 — CDP Core */}
-            <CDPCore visible={visible} />
-
-            {/* Column 3 — Channels */}
-            <Column title="Channels" subtitle="Outputs" tone="muted" align="right">
-              <ChannelsShowcase visible={visible} />
-            </Column>
-          </div>
-
-          {/* Feedback loop caption */}
-          <div className="mt-6 flex items-center justify-center gap-2 text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
-            <span className="h-px w-8 bg-muted-foreground/30" />
-            Feedback loop · events, attribution, AI learning
-            <span className="h-px w-8 bg-muted-foreground/30" />
+          <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-10 items-center">
+            <OutcomeStage visible={visible} />
+            <OutcomeRail visible={visible} />
           </div>
         </div>
+
+        {/* Support strip — PangoCDP × ByteTech */}
+        <CDPSupportStrip visible={visible} />
 
         {/* Footer metrics strip */}
         <MetricsStrip visible={visible} />
@@ -151,325 +105,360 @@ export const Solutions = () => {
   );
 };
 
-/* ---------- Subcomponents ---------- */
+/* ---------- Stage (left) ---------- */
 
-const Column = ({
-  title,
-  subtitle,
-  children,
-  align = "left",
-}: {
-  title: string;
-  subtitle: string;
-  tone?: "muted";
-  align?: "left" | "right";
-  children: React.ReactNode;
-}) => (
-  <div className="flex flex-col">
+const CHANNEL_CHIPS = [
+  { id: "sms", label: "SMS", dot: "#39b44a", Icon: MessageCircle },
+  { id: "zalo", label: "Zalo", dot: "#0068ff", Icon: Smartphone },
+  { id: "viber", label: "Viber", dot: "#7360f2", Icon: MessageCircle },
+  { id: "email", label: "Email", dot: "#ff9b17", Icon: Mail },
+  { id: "otp", label: "OTP", dot: "#e11d48", Icon: Phone },
+] as const;
+
+const OutcomeStage = ({ visible }: { visible: boolean }) => (
+  <div
+    className="relative mx-auto w-full max-w-[480px] lg:max-w-none"
+    style={{
+      opacity: visible ? 1 : 0,
+      transform: visible ? "translateY(0)" : "translateY(12px)",
+      transition: "opacity 700ms ease-out, transform 700ms ease-out",
+    }}
+  >
+    {/* Soft blob backdrop */}
     <div
-      className={`mb-3 flex items-baseline gap-2 ${
-        align === "right" ? "lg:justify-end" : ""
-      }`}
+      aria-hidden
+      className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[78%] w-[78%] -translate-x-1/2 -translate-y-1/2 rounded-full"
+      style={{
+        background:
+          "radial-gradient(circle at 50% 50%, hsl(145 65% 78%) 0%, hsl(145 65% 70%) 55%, hsl(145 65% 60% / 0) 75%)",
+      }}
+    />
+    <div
+      aria-hidden
+      className="pointer-events-none absolute right-[6%] top-[12%] -z-10 h-24 w-24 rounded-full opacity-70 blur-2xl"
+      style={{ background: "hsl(35 100% 65%)" }}
+    />
+
+    {/* Shopper photo */}
+    <img
+      src={shopperImg}
+      alt="Vietnamese customer joyfully receiving order updates and rewards from VietGuys-powered brands"
+      width={896}
+      height={1024}
+      loading="lazy"
+      className="relative mx-auto aspect-square w-full max-w-[460px] object-contain drop-shadow-[0_25px_40px_rgba(0,0,0,0.12)]"
+    />
+
+    {/* Floating pop-ups */}
+    <Popup
+      className="absolute left-[2%] top-[18%] sm:left-[4%]"
+      delay={300}
+      visible={visible}
     >
-      <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[hsl(var(--primary-deep))]">
-        {title}
-      </span>
-      <span className="text-[11px] text-muted-foreground">{subtitle}</span>
+      <div className="flex items-center gap-2">
+        <div className="flex">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <Star
+              key={i}
+              className="h-3.5 w-3.5 fill-[#ff9b17] text-[#ff9b17]"
+            />
+          ))}
+        </div>
+        <span className="text-[11px] font-semibold text-foreground">5.0</span>
+      </div>
+      <p className="mt-1 text-[11px] text-muted-foreground">
+        "Giao hàng siêu nhanh!"
+      </p>
+    </Popup>
+
+    <Popup
+      className="absolute right-[-2%] top-[6%] sm:right-[0%]"
+      delay={500}
+      visible={visible}
+      accent="primary"
+    >
+      <div className="text-[10px] font-bold uppercase tracking-wider text-[hsl(var(--primary-deep))]">
+        Trạng thái đơn hàng
+      </div>
+      <div className="mt-1 flex items-center gap-1.5">
+        <PackageCheck className="h-3.5 w-3.5 text-[hsl(var(--primary))]" />
+        <span className="text-[12px] font-semibold text-foreground">
+          Đã xác nhận
+        </span>
+      </div>
+    </Popup>
+
+    <Popup
+      className="absolute right-[-2%] bottom-[14%] sm:right-[2%]"
+      delay={700}
+      visible={visible}
+      accent="accent"
+    >
+      <div className="text-[10px] font-bold uppercase tracking-wider text-[hsl(35_100%_45%)]">
+        Mã xác thực
+      </div>
+      <div className="mt-1 font-mono text-[15px] font-extrabold tracking-[0.18em] text-foreground">
+        371 235
+      </div>
+    </Popup>
+
+    {/* Channel orbit chips — hidden on small screens */}
+    <div className="pointer-events-none absolute inset-0 hidden lg:block">
+      {CHANNEL_CHIPS.map((c, i) => {
+        const positions = [
+          { left: "-2%", top: "48%" },
+          { left: "6%", bottom: "12%" },
+          { right: "10%", bottom: "4%" },
+          { left: "38%", top: "-3%" },
+          { right: "-2%", top: "44%" },
+        ];
+        const p = positions[i];
+        return (
+          <div
+            key={c.id}
+            className="absolute pointer-events-auto"
+            style={{
+              ...p,
+              opacity: visible ? 1 : 0,
+              transform: visible ? "scale(1)" : "scale(0.85)",
+              transition: `opacity 500ms ease-out ${600 + i * 100}ms, transform 500ms ease-out ${600 + i * 100}ms`,
+            }}
+          >
+            <div className="group flex items-center gap-1.5 rounded-full border border-border bg-white/95 px-2.5 py-1 shadow-[0_6px_18px_-8px_rgba(0,0,0,0.18)] backdrop-blur transition-transform hover:-translate-y-0.5">
+              <span className="relative grid h-2 w-2 place-items-center">
+                <span
+                  className="absolute inset-0 rounded-full opacity-60"
+                  style={{
+                    background: c.dot,
+                    animation: "signal-pulse 2.4s ease-out infinite",
+                  }}
+                />
+                <span
+                  className="h-2 w-2 rounded-full"
+                  style={{ background: c.dot }}
+                />
+              </span>
+              <span className="text-[10.5px] font-semibold text-foreground">
+                {c.label}
+              </span>
+            </div>
+          </div>
+        );
+      })}
     </div>
-    {children}
   </div>
 );
 
-const InputCard = ({
-  input,
-  index,
+const Popup = ({
+  children,
+  className = "",
+  delay = 0,
   visible,
+  accent,
 }: {
-  input: Input;
-  index: number;
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
   visible: boolean;
+  accent?: "primary" | "accent";
 }) => {
-  const { Icon, label } = input;
+  const ring =
+    accent === "primary"
+      ? "ring-[hsl(var(--primary))]/30"
+      : accent === "accent"
+        ? "ring-[hsl(35_100%_55%)]/30"
+        : "ring-border";
   return (
     <div
-      className="group flex items-center gap-2.5 rounded-xl border border-border bg-white px-3 py-2.5 shadow-[0_2px_8px_-4px_rgba(0,0,0,0.06)] transition-all hover:border-[hsl(var(--primary))]/40 hover:shadow-[0_6px_18px_-8px_hsl(128_52%_40%/0.3)]"
+      className={`rounded-xl bg-white/95 px-3 py-2 shadow-[0_12px_30px_-14px_rgba(0,0,0,0.25)] backdrop-blur ring-1 ${ring} ${className}`}
       style={{
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(8px)",
-        transition: `opacity 500ms ease-out ${index * 70}ms, transform 500ms ease-out ${index * 70}ms`,
+        transition: `opacity 600ms ease-out ${delay}ms, transform 600ms ease-out ${delay}ms`,
       }}
     >
-      <span className="grid h-7 w-7 place-items-center rounded-lg bg-[hsl(145_60%_94%)] text-[hsl(var(--primary-deep))]">
-        <Icon className="h-3.5 w-3.5" />
-      </span>
-      <span className="text-[12.5px] font-medium text-foreground">{label}</span>
+      {children}
     </div>
   );
 };
 
-const ChannelsShowcase = ({ visible }: { visible: boolean }) => (
-  <div
-    className="flex flex-col gap-4"
-    style={{
-      opacity: visible ? 1 : 0,
-      transform: visible ? "translateY(0)" : "translateY(8px)",
-      transition: "opacity 700ms ease-out 200ms, transform 700ms ease-out 200ms",
-    }}
-  >
-    {/* Hero illustration */}
-    <div className="relative overflow-hidden rounded-2xl border border-border bg-gradient-to-b from-white to-[hsl(145_50%_97%)] p-2 shadow-[0_10px_30px_-18px_hsl(128_52%_30%/0.35)]">
+/* ---------- Outcome rail (right) ---------- */
+
+type Outcome = {
+  id: string;
+  Icon: typeof Star;
+  tag: string;
+  service: string;
+  metric: number;
+  suffix: string;
+  prefix?: string;
+  body: string;
+  decimals?: number;
+};
+
+const OUTCOMES: Outcome[] = [
+  {
+    id: "review",
+    Icon: Star,
+    tag: "5★ Review",
+    service: "Zalo ZNS · post-purchase",
+    metric: 18,
+    suffix: "%",
+    prefix: "+",
+    body: "Lifted NPS by turning every delivery into a branded touchpoint.",
+  },
+  {
+    id: "order",
+    Icon: PackageCheck,
+    tag: "Order Confirmed",
+    service: "SMS Brandname + Email",
+    metric: 42,
+    suffix: "%",
+    prefix: "−",
+    body: "Cut inbound support calls with proactive status updates.",
+  },
+  {
+    id: "otp",
+    Icon: ShieldCheck,
+    tag: "OTP < 2s",
+    service: "OTPBox · multi-channel",
+    metric: 99.95,
+    suffix: "%",
+    decimals: 2,
+    body: "Authentication that lands first time, every time — fallback built in.",
+  },
+  {
+    id: "reward",
+    Icon: Gift,
+    tag: "Reward Unlocked",
+    service: "Rewards + Smart Warranty",
+    metric: 27,
+    suffix: "%",
+    prefix: "+",
+    body: "Repeat-customer LTV from loyalty journeys customers actually open.",
+  },
+];
+
+const OutcomeRail = ({ visible }: { visible: boolean }) => (
+  <div className="flex flex-col gap-3">
+    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+      {OUTCOMES.map((o, i) => (
+        <OutcomeCard key={o.id} o={o} index={i} visible={visible} />
+      ))}
+    </div>
+    <Link
+      to="/solutions"
+      className="group mt-1 inline-flex items-center justify-center gap-1.5 rounded-xl border border-dashed border-border bg-white/60 px-4 py-3 text-[12.5px] font-semibold text-[hsl(var(--primary-deep))] transition-colors hover:border-[hsl(var(--primary))]/50 hover:bg-white"
+    >
+      + 5 more services — see the full stack
+      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+    </Link>
+  </div>
+);
+
+const OutcomeCard = ({
+  o,
+  index,
+  visible,
+}: {
+  o: Outcome;
+  index: number;
+  visible: boolean;
+}) => {
+  const target = o.decimals ? Math.round(o.metric * 100) : o.metric;
+  const n = useCountUp(visible ? target : 0, 1400);
+  const display = o.decimals ? (n / 100).toFixed(o.decimals) : n.toLocaleString();
+  const { Icon } = o;
+  return (
+    <article
+      className="group relative overflow-hidden rounded-2xl border border-border bg-white p-4 shadow-[0_4px_14px_-8px_rgba(0,0,0,0.08)] transition-all hover:-translate-y-0.5 hover:border-[hsl(var(--primary))]/40 hover:shadow-[0_18px_36px_-18px_hsl(128_52%_40%/0.35)]"
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(10px)",
+        transition: `opacity 500ms ease-out ${200 + index * 90}ms, transform 500ms ease-out ${200 + index * 90}ms`,
+      }}
+    >
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(ellipse at 60% 40%, hsl(35 100% 70% / 0.18), transparent 60%), radial-gradient(ellipse at 30% 70%, hsl(145 60% 70% / 0.22), transparent 60%)",
-        }}
+        className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100"
+        style={{ background: "hsl(128 52% 60% / 0.35)" }}
       />
-      <img
-        src={channelsGirl}
-        alt="Happy customer receiving messages across SMS, Zalo, Viber and Email"
-        width={896}
-        height={1024}
-        loading="lazy"
-        className="relative mx-auto aspect-square w-full max-w-[320px] object-contain"
-      />
-    </div>
+      <div className="relative flex items-center gap-2">
+        <span className="grid h-7 w-7 place-items-center rounded-lg bg-[hsl(145_60%_94%)] text-[hsl(var(--primary-deep))]">
+          <Icon className="h-3.5 w-3.5" />
+        </span>
+        <span className="text-[10.5px] font-bold uppercase tracking-[0.18em] text-muted-foreground">
+          {o.tag}
+        </span>
+      </div>
+      <div className="relative mt-2 font-display text-[26px] font-extrabold tabular-nums leading-none text-foreground sm:text-[28px]">
+        {o.prefix}
+        {display}
+        {o.suffix}
+      </div>
+      <div className="relative mt-1 text-[10.5px] font-semibold uppercase tracking-wider text-[hsl(var(--primary-deep))]">
+        {o.service}
+      </div>
+      <p className="relative mt-2 text-[12px] leading-snug text-muted-foreground">
+        {o.body}
+      </p>
+    </article>
+  );
+};
 
-    {/* Circle service buttons */}
-    <div className="grid grid-cols-3 gap-2.5">
-      {CHANNELS.map((c, idx) => (
-        <ChannelCircle key={c.id} channel={c} index={idx} visible={visible} />
-      ))}
+/* ---------- Support strip ---------- */
+
+const CDPSupportStrip = ({ visible }: { visible: boolean }) => (
+  <div
+    className="mt-10 rounded-2xl border border-[hsl(var(--primary))]/15 bg-[hsl(145_50%_97%)] p-4 md:mt-12 md:p-5"
+    style={{
+      opacity: visible ? 1 : 0,
+      transform: visible ? "translateY(0)" : "translateY(10px)",
+      transition: "opacity 600ms ease-out 400ms, transform 600ms ease-out 400ms",
+    }}
+  >
+    <div className="flex flex-col items-start gap-3 md:flex-row md:items-center md:justify-between md:gap-6">
+      <div className="flex items-center gap-3">
+        <img
+          src={bytetechLogo}
+          alt="ByteTech"
+          className="h-6 w-auto md:h-7"
+          loading="lazy"
+        />
+        <div>
+          <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-[hsl(var(--primary-deep))]">
+            Powered by PangoCDP
+          </div>
+          <div className="text-[12.5px] font-semibold text-foreground">
+            Strategic CDP partnership with ByteTech
+          </div>
+        </div>
+      </div>
+
+      <ul className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[11.5px] text-muted-foreground">
+        {["Unified profiles", "Real-time segments", "AI next-best action"].map(
+          (t) => (
+            <li key={t} className="flex items-center gap-1.5">
+              <span className="h-1.5 w-1.5 rounded-full bg-[hsl(var(--primary))]" />
+              {t}
+            </li>
+          ),
+        )}
+      </ul>
+
+      <a
+        href="https://bytetech.io/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-1 text-[12px] font-semibold text-[hsl(var(--primary-deep))] hover:underline"
+      >
+        Read the partnership <ArrowRight className="h-3.5 w-3.5" />
+      </a>
     </div>
   </div>
 );
 
-const ChannelCircle = ({
-  channel,
-  index,
-  visible,
-}: {
-  channel: Channel;
-  index: number;
-  visible: boolean;
-}) => (
-  <a
-    href={`/solutions#${channel.id}`}
-    aria-label={channel.label}
-    className="group relative flex aspect-square flex-col items-center justify-center gap-1 rounded-full border border-border bg-white p-2 text-center shadow-[0_2px_8px_-4px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-[hsl(var(--primary))]/50 hover:shadow-[0_14px_30px_-12px_hsl(128_52%_40%/0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--primary))]/60 cursor-pointer"
-    style={{
-      opacity: visible ? 1 : 0,
-      transform: visible ? "translateY(0) scale(1)" : "translateY(8px) scale(0.95)",
-      transition: `opacity 450ms ease-out ${index * 60 + 300}ms, transform 450ms ease-out ${index * 60 + 300}ms`,
-    }}
-  >
-    <span
-      aria-hidden
-      className="absolute inset-0 rounded-full opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-      style={{
-        background: `radial-gradient(circle at 50% 30%, ${channel.dot}22, transparent 70%)`,
-      }}
-    />
-    <span className="relative grid h-2.5 w-2.5 place-items-center" aria-hidden>
-      <span
-        className="absolute inset-0 rounded-full opacity-60"
-        style={{
-          background: channel.dot,
-          animation: "signal-pulse 2.4s ease-out infinite",
-        }}
-      />
-      <span
-        className="h-2.5 w-2.5 rounded-full"
-        style={{ background: channel.dot }}
-      />
-    </span>
-    <span className="relative text-[10.5px] font-semibold leading-tight text-foreground transition-colors group-hover:text-[hsl(var(--primary-deep))]">
-      {channel.label}
-    </span>
-  </a>
-);
-
-const CDPCore = ({ visible }: { visible: boolean }) => {
-  return (
-    <div
-      className="relative flex flex-col rounded-2xl border border-[hsl(var(--primary))]/25 bg-gradient-to-b from-white to-[hsl(145_50%_97%)] p-4 sm:p-5 md:p-6 shadow-[0_24px_60px_-30px_hsl(128_52%_30%/0.45)]"
-      style={{
-        opacity: visible ? 1 : 0,
-        transform: visible ? "translateY(0) scale(1)" : "translateY(8px) scale(0.98)",
-        transition: "opacity 700ms ease-out 150ms, transform 700ms ease-out 150ms",
-      }}
-    >
-      {/* Soft glow */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -inset-px rounded-2xl"
-        style={{
-          background:
-            "radial-gradient(ellipse at 50% 0%, hsl(128 52% 60% / 0.18), transparent 65%)",
-        }}
-      />
-
-      {/* Header */}
-      <div className="relative flex items-center justify-between gap-3">
-        <div>
-          <div className="text-[10px] font-bold uppercase tracking-[0.22em] text-[hsl(var(--primary-deep))]">
-            CDP Core · The Brain
-          </div>
-          <div className="mt-1 flex items-baseline gap-2">
-            <span className="font-display text-xl font-extrabold text-foreground sm:text-2xl">
-              PangoCDP
-            </span>
-            <span className="text-[11px] text-muted-foreground">by</span>
-            <img
-              src={bytetechLogo}
-              alt="ByteTech"
-              className="h-5 w-auto sm:h-6"
-              loading="lazy"
-            />
-          </div>
-        </div>
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-[hsl(145_60%_94%)] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-[hsl(var(--primary-deep))]">
-          <span className="h-1.5 w-1.5 rounded-full bg-[hsl(var(--primary))] animate-pulse" />
-          Live
-        </span>
-      </div>
-
-      {/* Dashboard widgets */}
-      <div className="relative mt-4 grid grid-cols-2 gap-2.5">
-        <Widget label="Unified profiles" value={2_400_000} suffix="" format="compact" visible={visible} />
-        <Widget label="Active segments" value={142} suffix="" visible={visible} />
-        <Widget label="Live journeys" value={38} suffix="" visible={visible} />
-        <Widget label="AI accuracy" value={89} suffix="%" visible={visible} />
-      </div>
-
-      {/* Mini activity bar */}
-      <div className="relative mt-4 overflow-hidden rounded-lg border border-border/70 bg-white/70 p-3">
-        <div className="flex items-center justify-between text-[10px] uppercase tracking-wider text-muted-foreground">
-          <span>Message throughput · last 60s</span>
-          <span className="text-[hsl(var(--primary-deep))]">Healthy</span>
-        </div>
-        <div className="mt-2 flex h-8 items-end gap-[2px]">
-          {Array.from({ length: 32 }).map((_, i) => {
-            const h = 30 + Math.round(Math.abs(Math.sin(i * 0.7)) * 60 + (i % 5) * 4);
-            return (
-              <span
-                key={i}
-                className="flex-1 rounded-[2px]"
-                style={{
-                  height: `${h}%`,
-                  background: "linear-gradient(to top, hsl(128 52% 46%), hsl(128 52% 70%))",
-                  opacity: visible ? 1 : 0,
-                  transition: `opacity 400ms ease-out ${300 + i * 20}ms`,
-                }}
-              />
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Capability bullets */}
-      <ul className="relative mt-4 grid grid-cols-2 gap-x-3 gap-y-1.5 text-[11.5px] text-muted-foreground">
-        {[
-          { Icon: Users, t: "Unified profiles" },
-          { Icon: Layers, t: "Real-time segments" },
-          { Icon: Workflow, t: "Lifecycle journeys" },
-          { Icon: Sparkles, t: "AI next-best action" },
-        ].map(({ Icon, t }) => (
-          <li key={t} className="flex items-center gap-1.5">
-            <Icon className="h-3.5 w-3.5 text-[hsl(var(--primary-deep))]" />
-            {t}
-          </li>
-        ))}
-      </ul>
-
-      {/* Footer caption */}
-      <div className="relative mt-4 border-t border-border/70 pt-3 text-center">
-        <a
-          href="https://bytetech.io/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-[11px] font-semibold text-[hsl(var(--primary-deep))] hover:underline"
-        >
-          Strategic CDP partnership · VietGuys × ByteTech →
-        </a>
-      </div>
-    </div>
-  );
-};
-
-const Widget = ({
-  label,
-  value,
-  suffix = "",
-  format,
-  visible,
-}: {
-  label: string;
-  value: number;
-  suffix?: string;
-  format?: "compact";
-  visible: boolean;
-}) => {
-  const n = useCountUp(visible ? value : 0, 1400);
-  const display =
-    format === "compact"
-      ? `${(n / 1_000_000).toFixed(n >= 1_000_000 ? 1 : 0)}M`
-      : n.toLocaleString();
-  return (
-    <div className="rounded-lg border border-border/70 bg-white px-3 py-2.5">
-      <div className="text-[10px] uppercase tracking-wider text-muted-foreground">
-        {label}
-      </div>
-      <div className="mt-1 font-display text-lg font-extrabold tabular-nums text-foreground sm:text-xl">
-        {display}
-        {suffix}
-      </div>
-    </div>
-  );
-};
-
-const ConnectorSVG = ({ visible }: { visible: boolean }) => (
-  <svg
-    aria-hidden
-    className="pointer-events-none absolute inset-0 hidden h-full w-full lg:block"
-    preserveAspectRatio="none"
-    viewBox="0 0 100 100"
-  >
-    <defs>
-      <linearGradient id="flow-in" x1="0" x2="1" y1="0" y2="0">
-        <stop offset="0%" stopColor="hsl(145 50% 70%)" stopOpacity="0.1" />
-        <stop offset="100%" stopColor="hsl(128 52% 46%)" stopOpacity="0.7" />
-      </linearGradient>
-      <linearGradient id="flow-out" x1="0" x2="1" y1="0" y2="0">
-        <stop offset="0%" stopColor="hsl(128 52% 46%)" stopOpacity="0.7" />
-        <stop offset="100%" stopColor="hsl(35 100% 60%)" stopOpacity="0.6" />
-      </linearGradient>
-    </defs>
-    {/* Inputs → CDP */}
-    <line
-      x1="22" y1="50" x2="38" y2="50"
-      stroke="url(#flow-in)" strokeWidth="0.4"
-      strokeDasharray="1 1.4"
-      style={{
-        opacity: visible ? 1 : 0,
-        transition: "opacity 800ms ease-out",
-        animation: "line-flow 14s linear infinite",
-      }}
-    />
-    {/* CDP → Channels */}
-    <line
-      x1="62" y1="50" x2="78" y2="50"
-      stroke="url(#flow-out)" strokeWidth="0.4"
-      strokeDasharray="1 1.4"
-      style={{
-        opacity: visible ? 1 : 0,
-        transition: "opacity 800ms ease-out 200ms",
-        animation: "line-flow 14s linear infinite reverse",
-      }}
-    />
-  </svg>
-);
+/* ---------- Metrics strip ---------- */
 
 const MetricsStrip = ({ visible }: { visible: boolean }) => {
   const items = [
@@ -479,7 +468,7 @@ const MetricsStrip = ({ visible }: { visible: boolean }) => {
     { v: 9, suf: "", lbl: "Channels in one API" },
   ];
   return (
-    <div className="mt-10 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-white p-4 md:mt-12 md:grid-cols-4 md:p-5">
+    <div className="mt-6 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-white p-4 md:grid-cols-4 md:p-5">
       {items.map((it) => (
         <MetricItem key={it.lbl} item={it} visible={visible} />
       ))}
@@ -498,8 +487,8 @@ const MetricItem = ({
   const display = item.compact
     ? `${(n / 1_000_000).toFixed(n >= 1_000_000 ? 1 : 0)}M`
     : item.decimals
-    ? item.v.toFixed(item.decimals)
-    : n.toLocaleString();
+      ? item.v.toFixed(item.decimals)
+      : n.toLocaleString();
   return (
     <div className="text-center">
       <div className="font-display text-2xl font-extrabold tabular-nums text-foreground md:text-3xl">
