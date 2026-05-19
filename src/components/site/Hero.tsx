@@ -17,7 +17,7 @@ export const Hero = () => {
     >
       <div className="pointer-events-none absolute inset-0 -z-10" style={{ background: "var(--gradient-hero)" }} />
 
-      <div className="container-tight pb-12 md:pb-16">
+      <div className="container-tight pb-4 md:pb-6">
         <div className="mx-auto max-w-4xl text-center">
           <h1 className="heading-display text-[34px] leading-tight md:text-6xl lg:text-[68px] text-balance animate-fade-up">
             {parts.length === 2 ? (

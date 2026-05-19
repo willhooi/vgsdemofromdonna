@@ -43,7 +43,7 @@ export const MediaShowcase = () => {
   return (
     <section
       id="media"
-      className="relative overflow-hidden py-10 md:py-14"
+      className="relative overflow-hidden py-4 md:py-6"
       style={{ background: "hsl(var(--primary-soft) / 0.45)" }}
     >
       <div className="container-tight">
@@ -88,7 +88,7 @@ const MediaCarousel = ({ items }: { items: MediaItem[] }) => {
           ))}
         </CarouselContent>
       </Carousel>
-      <div className="mt-5 flex justify-center gap-2">
+      <div className="mt-3 flex justify-center gap-2">
         {items.map((_, i) => (
           <button
             key={i}
