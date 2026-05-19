@@ -73,7 +73,7 @@ export const AccreteFlightChip = () => {
 
       const tgLogo = target.querySelector<HTMLImageElement>("[data-accrete-logo]");
       const tgLogoH = tgLogo?.getBoundingClientRect().height || 56;
-      const chipLogoH = 20;
+      const chipLogoH = 16;
       const maxScale = Math.max(2, tgLogoH / chipLogoH);
       const scale = lerp(1, maxScale, progress);
 
