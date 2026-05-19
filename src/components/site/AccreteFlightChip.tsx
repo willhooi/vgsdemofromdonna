@@ -158,6 +158,15 @@ export const AccreteFlightChip = () => {
       } else {
         morph.classList.remove("accrete-morph-idle");
       }
+
+      // Dispatch landed event once when crossing into landing zone
+      const landed = rawProgress >= 0.98;
+      if (landed && !landedRef.current) {
+        landedRef.current = true;
+        window.dispatchEvent(new CustomEvent("accrete:landed"));
+      } else if (!landed && landedRef.current && rawProgress < 0.9) {
+        landedRef.current = false;
+      }
     };
 
     const onScroll = () => {
