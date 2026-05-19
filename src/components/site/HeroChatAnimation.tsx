@@ -237,35 +237,38 @@ export const HeroChatAnimation = () => {
 
   return (
     <div className="relative">
-      {/* Edit-mode floating toolbar */}
-      <div className="absolute -top-2 right-0 z-20 flex items-center gap-1.5">
-        <button
-          type="button"
-          onClick={() => {
-            if (editMode) savePositions(positions);
-            setEditMode((v) => !v);
-          }}
-          className={`flex items-center gap-1 rounded-full border px-2.5 py-1 text-[11px] font-semibold shadow-sm transition-colors ${
-            editMode
-              ? "border-[#39b44a] bg-[#39b44a] text-white"
-              : "border-border bg-white/90 text-foreground hover:bg-white"
-          }`}
-          aria-label={editMode ? "Lock icons" : "Edit icon positions"}
-        >
-          {editMode ? <Lock className="h-3 w-3" /> : <Move className="h-3 w-3" />}
-          {editMode ? "Done" : "Edit"}
-        </button>
-        {editMode && (
+      {/* Edit-mode floating toolbar — admin only */}
+      {isAdmin && (
+        <div className="absolute -top-2 right-0 z-20 flex items-center gap-1.5">
           <button
             type="button"
-            onClick={resetPositions}
-            className="flex items-center gap-1 rounded-full border border-border bg-white/90 px-2.5 py-1 text-[11px] font-semibold text-foreground shadow-sm hover:bg-white"
-            aria-label="Reset positions"
+            onClick={() => {
+              if (editMode) savePositions(positions);
+              setEditMode((v) => !v);
+            }}
+            className={`flex items-center gap-1 rounded-full border px-2.5 py-1 text-[11px] font-semibold shadow-sm transition-colors ${
+              editMode
+                ? "border-[#39b44a] bg-[#39b44a] text-white"
+                : "border-border bg-white/90 text-foreground hover:bg-white"
+            }`}
+            aria-label={editMode ? "Lock icons" : "Edit icon positions"}
           >
-            <RotateCcw className="h-3 w-3" /> Reset
+            {editMode ? <Lock className="h-3 w-3" /> : <Move className="h-3 w-3" />}
+            {editMode ? "Done" : "Edit"}
           </button>
-        )}
-      </div>
+          {editMode && (
+            <button
+              type="button"
+              onClick={resetPositions}
+              className="flex items-center gap-1 rounded-full border border-border bg-white/90 px-2.5 py-1 text-[11px] font-semibold text-foreground shadow-sm hover:bg-white"
+              aria-label="Reset positions"
+            >
+              <RotateCcw className="h-3 w-3" /> Reset
+            </button>
+          )}
+        </div>
+      )}
+
 
       <div
         ref={containerRef}
