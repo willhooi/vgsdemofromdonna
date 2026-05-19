@@ -45,23 +45,11 @@ export const AccreteFlightChip = () => {
       setPhase("morphing");
     };
 
-    const target = document.querySelector<HTMLElement>("[data-accrete-target]");
-    if (!target) {
-      const onScroll = () => {
-        if (window.scrollY > 120) trigger();
-      };
-      window.addEventListener("scroll", onScroll, { passive: true });
-      return () => window.removeEventListener("scroll", onScroll);
-    }
-
-    const io = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((e) => e.isIntersecting)) trigger();
-      },
-      { rootMargin: "-10% 0px -45% 0px", threshold: 0 }
-    );
-    io.observe(target);
-    return () => io.disconnect();
+    const onScroll = () => {
+      if (window.scrollY > 24) trigger();
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
