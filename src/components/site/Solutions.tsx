@@ -464,7 +464,7 @@ const CDPSupportStrip = ({ visible }: { visible: boolean }) => (
 
 /* ---------- Leading sectors strip ---------- */
 
-import { Landmark, ShoppingBag, HeartPulse, Plane } from "lucide-react";
+
 
 const SECTORS = [
   {
