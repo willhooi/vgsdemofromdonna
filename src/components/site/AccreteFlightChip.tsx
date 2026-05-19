@@ -69,7 +69,12 @@ export const AccreteFlightChip = () => {
       const target = document.querySelector<HTMLElement>("[data-accrete-target]");
       if (!placeholder || !morph || !target) return;
 
-      const phRect = placeholder.getBoundingClientRect();
+      // Measure the inner sized span (true chip box) instead of the full-width
+      // flex placeholder — so on desktop the chip aligns to the same left edge
+      // as the headline, while on mobile/tablet it follows the center justify.
+      const phInner =
+        placeholder.querySelector<HTMLElement>("[data-chip-anchor]") || placeholder;
+      const phRect = phInner.getBoundingClientRect();
       const tgRect = target.getBoundingClientRect();
       const scrollY = window.scrollY;
       const vh = window.innerHeight;
@@ -202,7 +207,7 @@ export const AccreteFlightChip = () => {
         aria-hidden="true"
         className="accrete-chip-slot mt-5 md:mt-6 flex justify-center lg:justify-start"
       >
-        <span className="invisible inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-semibold">
+        <span data-chip-anchor className="invisible inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-semibold">
           <span>A member of</span>
           <img src={accreteLogo} alt="" aria-hidden className="h-[14px] w-auto" />
         </span>
