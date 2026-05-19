@@ -458,23 +458,66 @@ const CDPSupportStrip = ({ visible }: { visible: boolean }) => (
   </div>
 );
 
-/* ---------- Metrics strip ---------- */
+/* ---------- Leading sectors strip ---------- */
 
-const MetricsStrip = ({ visible }: { visible: boolean }) => {
-  const items = [
-    { v: 5_000_000, suf: "+", lbl: "Messages / day", compact: true },
-    { v: 76, suf: "+", lbl: "Enterprise clients" },
-    { v: 99.95, suf: "%", lbl: "Network uptime", decimals: 2 },
-    { v: 9, suf: "", lbl: "Channels in one API" },
-  ];
-  return (
-    <div className="mt-6 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-white p-4 md:grid-cols-4 md:p-5">
-      {items.map((it) => (
-        <MetricItem key={it.lbl} item={it} visible={visible} />
-      ))}
-    </div>
-  );
-};
+import { Landmark, ShoppingBag, HeartPulse, Plane } from "lucide-react";
+
+const SECTORS = [
+  {
+    Icon: Landmark,
+    tag: "Banking & Finance",
+    body: "OTP, transaction alerts and onboarding journeys for Vietnam's top banks.",
+  },
+  {
+    Icon: ShoppingBag,
+    tag: "Retail & E-commerce",
+    body: "Order updates, loyalty and post-purchase care that lift repeat revenue.",
+  },
+  {
+    Icon: HeartPulse,
+    tag: "Insurance & Healthcare",
+    body: "Compliant notifications, policy reminders and care follow-ups at scale.",
+  },
+  {
+    Icon: Plane,
+    tag: "Travel & Logistics",
+    body: "Real-time bookings, shipment tracking and service alerts across channels.",
+  },
+];
+
+const MetricsStrip = ({ visible }: { visible: boolean }) => (
+  <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-4">
+    {SECTORS.map((s, i) => {
+      const { Icon } = s;
+      return (
+        <article
+          key={s.tag}
+          className="group relative overflow-hidden rounded-2xl border border-border bg-white p-4 shadow-[0_4px_14px_-8px_rgba(0,0,0,0.08)] transition-all hover:-translate-y-0.5 hover:border-[hsl(var(--primary))]/40 hover:shadow-[0_18px_36px_-18px_hsl(128_52%_40%/0.35)]"
+          style={{
+            opacity: visible ? 1 : 0,
+            transform: visible ? "translateY(0)" : "translateY(10px)",
+            transition: `opacity 500ms ease-out ${200 + i * 90}ms, transform 500ms ease-out ${200 + i * 90}ms`,
+          }}
+        >
+          <div className="flex items-center gap-2">
+            <span className="grid h-7 w-7 place-items-center rounded-lg bg-[hsl(145_60%_94%)] text-[hsl(var(--primary-deep))]">
+              <Icon className="h-3.5 w-3.5" />
+            </span>
+            <span className="text-[10.5px] font-bold uppercase tracking-[0.18em] text-muted-foreground">
+              Leading Sector
+            </span>
+          </div>
+          <div className="mt-2 font-display text-[15px] font-extrabold leading-tight text-foreground sm:text-base">
+            {s.tag}
+          </div>
+          <p className="mt-2 text-[12px] leading-snug text-muted-foreground">
+            {s.body}
+          </p>
+        </article>
+      );
+    })}
+  </div>
+);
 
 const MetricItem = ({
   item,
