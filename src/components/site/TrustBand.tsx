@@ -82,14 +82,12 @@ const certifications = [
 // Brand logos rendered in full color via Clearbit Logo API.
 // To add a brand, append { name, domain } to the relevant industry group.
 type Brand = { name: string; domain: string };
-type IndustryGroup = { id: string; name: string; tint: string; accent: string; brands: Brand[] };
+type IndustryGroup = { id: string; name: string; brands: Brand[] };
 
 const INDUSTRIES: IndustryGroup[] = [
   {
     id: "finance",
     name: "Finance & Banking",
-    accent: "#1e5cb3",
-    tint: "#eaf2fc",
     brands: [
       { name: "Vietcombank", domain: "vietcombank.com.vn" },
       { name: "Techcombank", domain: "techcombank.com.vn" },
@@ -106,8 +104,6 @@ const INDUSTRIES: IndustryGroup[] = [
   {
     id: "ecommerce",
     name: "E-Commerce",
-    accent: "#ff6b35",
-    tint: "#fff1ea",
     brands: [
       { name: "Tiki", domain: "tiki.vn" },
       { name: "Shopee", domain: "shopee.vn" },
@@ -119,8 +115,6 @@ const INDUSTRIES: IndustryGroup[] = [
   {
     id: "retail",
     name: "Retail",
-    accent: "#d4377a",
-    tint: "#fceaf2",
     brands: [
       { name: "Saigon Co.op", domain: "saigonco-op.com.vn" },
       { name: "Thế Giới Di Động", domain: "thegioididong.com" },
@@ -132,8 +126,6 @@ const INDUSTRIES: IndustryGroup[] = [
   {
     id: "fmcg",
     name: "FMCG",
-    accent: "#f5b400",
-    tint: "#fff7df",
     brands: [
       { name: "Vinamilk", domain: "vinamilk.com.vn" },
       { name: "Masan", domain: "masangroup.com" },
@@ -145,8 +137,6 @@ const INDUSTRIES: IndustryGroup[] = [
   {
     id: "fashion",
     name: "Fashion & Beauty",
-    accent: "#a64dff",
-    tint: "#f4ebff",
     brands: [
       { name: "Routine", domain: "routine.vn" },
       { name: "Canifa", domain: "canifa.com" },
@@ -158,8 +148,6 @@ const INDUSTRIES: IndustryGroup[] = [
   {
     id: "pharma",
     name: "Medicine & Pharmacy",
-    accent: "#0ea5a5",
-    tint: "#e3f6f6",
     brands: [
       { name: "Pharmacity", domain: "pharmacity.vn" },
       { name: "Long Châu", domain: "nhathuoclongchau.com.vn" },
@@ -171,8 +159,6 @@ const INDUSTRIES: IndustryGroup[] = [
   {
     id: "hospitality",
     name: "Hospitality",
-    accent: "#0288d1",
-    tint: "#e4f3fb",
     brands: [
       { name: "Vietnam Airlines", domain: "vietnamairlines.com" },
       { name: "Vietjet", domain: "vietjetair.com" },
@@ -184,8 +170,6 @@ const INDUSTRIES: IndustryGroup[] = [
   {
     id: "education",
     name: "Education",
-    accent: "#39b44a",
-    tint: "#e7f6e9",
     brands: [
       { name: "FPT Education", domain: "fpt.edu.vn" },
       { name: "VUS", domain: "vus.edu.vn" },
@@ -348,36 +332,24 @@ const IndustryCard = ({
   onToggle: () => void;
 }) => {
   const preview = group.brands.slice(0, 2);
+  const remaining = group.brands.length - preview.length;
   return (
     <button
       type="button"
       onClick={onToggle}
       aria-expanded={isOpen}
-      style={{
-        background: group.tint,
-        borderColor: isOpen ? group.accent : `${group.accent}33`,
-        boxShadow: isOpen ? `0 12px 32px -14px ${group.accent}66` : undefined,
-      }}
-      className="group/card relative flex flex-col items-start gap-3 overflow-hidden rounded-[14px] border p-4 text-left transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-      onMouseEnter={(e) => {
-        e.currentTarget.style.borderColor = group.accent;
-        e.currentTarget.style.boxShadow = `0 12px 32px -14px ${group.accent}66`;
-      }}
-      onMouseLeave={(e) => {
-        if (!isOpen) {
-          e.currentTarget.style.borderColor = `${group.accent}33`;
-          e.currentTarget.style.boxShadow = "";
-        }
-      }}
+      className={`group/card relative flex flex-col items-start gap-3 rounded-[14px] border bg-card p-4 text-left transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-[0_12px_32px_-14px_rgba(20,80,30,0.25)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+        isOpen ? "border-primary/40 shadow-[0_12px_32px_-14px_rgba(20,80,30,0.25)]" : "border-border"
+      }`}
     >
-      <span
-        aria-hidden
-        className="absolute left-0 top-0 h-full w-[3px]"
-        style={{ background: group.accent }}
-      />
-      <h3 className="text-[13px] font-semibold leading-tight sm:text-sm" style={{ color: group.accent }}>
-        {group.name}
-      </h3>
+      <div className="flex w-full items-center justify-between gap-2">
+        <h3 className="text-[13px] font-semibold leading-tight text-foreground sm:text-sm">
+          {group.name}
+        </h3>
+        <span className="shrink-0 rounded-full bg-muted px-2 py-0.5 text-[10px] font-semibold text-muted-foreground">
+          {group.brands.length}
+        </span>
+      </div>
 
       {/* Preview state — hidden on hover (desktop) or when open */}
       <div
@@ -388,6 +360,11 @@ const IndustryCard = ({
         {preview.map((b) => (
           <BrandLogo key={b.name} brand={b} size="sm" />
         ))}
+        {remaining > 0 && (
+          <span className="text-[11px] font-medium text-muted-foreground">
+            +{remaining} more
+          </span>
+        )}
       </div>
 
       {/* Expanded state — shown on hover (desktop) or when open (mobile tap) */}
