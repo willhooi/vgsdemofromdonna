@@ -4,10 +4,9 @@ import accreteLogo from "@/assets/brand/accrete-logo.png";
 
 /**
  * AccreteFlightChip
- * A small "A member of [Accrete]" chip that lives next to the Hero CTA.
- * When the user scrolls past the Hero, it detaches and "flies" down into
- * the TrustBand heading (FLIP-style), then disappears after triggering a
- * one-shot shimmer on the heading.
+ * Anchored "A member of [Accrete]" chip beside the Hero. When the TrustBand
+ * heading enters the viewport, a clone flies down and morphs into the
+ * heading's Accrete logo (FLIP-style, GPU-only transforms).
  */
 
 type Phase = "idle" | "flying" | "landed";
@@ -16,93 +15,117 @@ const SESSION_KEY = "vg.accrete.flight.played";
 
 export const AccreteFlightChip = () => {
   const [phase, setPhase] = useState<Phase>("idle");
-  const [transform, setTransform] = useState<string>("");
   const placeholderRef = useRef<HTMLDivElement>(null);
-  const chipRef = useRef<HTMLDivElement>(null);
+  const cloneRef = useRef<HTMLDivElement>(null);
   const startRectRef = useRef<DOMRect | null>(null);
+  const flightVarsRef = useRef<{
+    dx: number;
+    dy: number;
+    scale: number;
+    duration: number;
+  } | null>(null);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+    if (sessionStorage.getItem(SESSION_KEY) === "1") {
+      setPhase("landed");
+      return;
+    }
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-
-
-
-
     let triggered = false;
 
-    const fly = () => {
+    const computeAndFly = () => {
       if (triggered) return;
+      const target = document.querySelector<HTMLElement>("[data-accrete-target]");
+      const targetLogo =
+        document.querySelector<HTMLImageElement>("[data-accrete-logo]") ?? target;
+      const placeholder = placeholderRef.current;
+      if (!target || !targetLogo || !placeholder) return;
+
       triggered = true;
 
-      const target = document.querySelector<HTMLElement>("[data-accrete-target]");
-      const placeholder = placeholderRef.current;
-      const chip = chipRef.current;
-
-      if (!target || !placeholder || !chip) {
+      if (reduced) {
         setPhase("landed");
+        sessionStorage.setItem(SESSION_KEY, "1");
+        window.dispatchEvent(new CustomEvent("accrete:landed"));
         return;
       }
 
       const startRect = placeholder.getBoundingClientRect();
       startRectRef.current = startRect;
 
-      if (reduced) {
-        setPhase("landed");
-        window.dispatchEvent(new CustomEvent("accrete:landed"));
-        return;
-      }
-
-      const targetRect = target.getBoundingClientRect();
+      const targetRect = targetLogo.getBoundingClientRect();
       const startCenterX = startRect.left + startRect.width / 2;
       const startCenterY = startRect.top + startRect.height / 2;
       const targetCenterX = targetRect.left + targetRect.width / 2;
       const targetCenterY = targetRect.top + targetRect.height / 2;
       const dx = targetCenterX - startCenterX;
       const dy = targetCenterY - startCenterY;
-      const scale = Math.min(
-        3.2,
-        Math.max(1.6, targetRect.height / Math.max(startRect.height, 1))
-      );
 
-      // Switch to flying with initial transform = 0, then next frame apply final
+      // Scale chip so its inline logo lands at the heading-logo size.
+      const chipLogo = placeholder.querySelector<HTMLImageElement>("img");
+      const chipLogoH = chipLogo?.getBoundingClientRect().height || 14;
+      const targetLogoH = targetRect.height || 40;
+      const scale = Math.min(4.5, Math.max(1.6, targetLogoH / chipLogoH));
+
+      // Mobile-aware duration
+      const isMobile = window.matchMedia("(max-width: 640px)").matches;
+      const duration = isMobile ? 880 : 1140;
+
+      flightVarsRef.current = { dx, dy, scale, duration };
       setPhase("flying");
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          setTransform(`translate3d(${dx}px, ${dy}px, 0) scale(${scale})`);
-        });
-      });
-
-      window.setTimeout(() => {
-        setPhase("landed");
-        window.dispatchEvent(new CustomEvent("accrete:landed"));
-      }, 1100);
     };
 
-    // Trigger when the TrustBand heading is about to enter the viewport,
-    // so the user actually sees the chip flying into it.
     const target = document.querySelector<HTMLElement>("[data-accrete-target]");
     if (!target) {
-      const onScroll = () => { if (window.scrollY > 80) fly(); };
+      const onScroll = () => {
+        if (window.scrollY > 80) computeAndFly();
+      };
       window.addEventListener("scroll", onScroll, { passive: true });
       return () => window.removeEventListener("scroll", onScroll);
     }
+
     const io = new IntersectionObserver(
-      (entries) => { if (entries.some((e) => e.isIntersecting)) fly(); },
-      { rootMargin: "0px 0px -20% 0px", threshold: 0 }
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) computeAndFly();
+      },
+      { rootMargin: "-15% 0px -55% 0px", threshold: 0 }
     );
     io.observe(target);
     return () => io.disconnect();
   }, []);
 
+  // Apply CSS vars + listen for animation end
+  useEffect(() => {
+    if (phase !== "flying") return;
+    const node = cloneRef.current;
+    const vars = flightVarsRef.current;
+    const startRect = startRectRef.current;
+    if (!node || !vars || !startRect) return;
+
+    node.style.setProperty("--fx-dx", `${vars.dx}px`);
+    node.style.setProperty("--fx-dy", `${vars.dy}px`);
+    node.style.setProperty("--fx-scale", `${vars.scale}`);
+    node.style.setProperty("--fx-duration", `${vars.duration}ms`);
+
+    const onEnd = () => {
+      sessionStorage.setItem(SESSION_KEY, "1");
+      setPhase("landed");
+      window.dispatchEvent(new CustomEvent("accrete:landed"));
+    };
+    node.addEventListener("animationend", onEnd, { once: true });
+    // Safety fallback
+    const fallback = window.setTimeout(onEnd, vars.duration + 200);
+    return () => window.clearTimeout(fallback);
+  }, [phase]);
 
   const flying = phase === "flying";
   const startRect = startRectRef.current;
 
   return (
     <>
-      {/* Inline anchor — chip stays here at all times; only hidden during the flight */}
+      {/* Inline anchor — chip stays here at all times; hidden only during flight */}
       <div
         ref={placeholderRef}
         className="accrete-chip-slot mt-5 md:mt-6 flex justify-center lg:justify-start"
@@ -114,23 +137,18 @@ export const AccreteFlightChip = () => {
       {/* Fixed flying clone — only mounted during flight */}
       {flying && startRect && (
         <div
-          ref={chipRef}
+          ref={cloneRef}
           aria-hidden="true"
-          className="pointer-events-none fixed z-50"
+          className="accrete-flying pointer-events-none fixed z-50"
           style={{
             top: startRect.top,
             left: startRect.left,
             width: startRect.width,
             height: startRect.height,
-            transform: transform || "translate3d(0,0,0) scale(1)",
-            transition:
-              "transform 1050ms cubic-bezier(0.22, 1, 0.36, 1), opacity 260ms ease-out 850ms",
-            opacity: transform ? 0 : 1,
-            willChange: "transform, opacity",
           }}
         >
           <div className="flex h-full w-full items-center justify-center">
-            <ChipContent />
+            <ChipContent flying />
           </div>
         </div>
       )}
@@ -138,9 +156,19 @@ export const AccreteFlightChip = () => {
   );
 };
 
-const ChipContent = ({ showArrow = false }: { showArrow?: boolean }) => (
+const ChipContent = ({
+  showArrow = false,
+  flying = false,
+}: {
+  showArrow?: boolean;
+  flying?: boolean;
+}) => (
   <span className="accrete-chip accrete-chip-metallic inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-semibold tracking-wide text-[hsl(128_55%_20%)]">
-    <span className="relative z-[2]">A member of</span>
+    <span
+      className={`relative z-[2] transition-opacity ${flying ? "accrete-chip-text-fade" : ""}`}
+    >
+      A member of
+    </span>
     <img
       src={accreteLogo}
       alt=""
