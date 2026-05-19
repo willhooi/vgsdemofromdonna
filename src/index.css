@@ -288,20 +288,13 @@
 }
 .legacy-badge { animation: legacy-glow 2.6s ease-in-out infinite; }
 
-/* Hero section — responsive height constraints.
-   Goal: section below hero stays partially visible on first load. */
+/* Hero section — responsive min-heights only.
+   Avoid max-height so short landscape viewports don't squish content. */
 .hero-section {
-  min-height: 420px;
-  max-height: 60svh;
-}
-@media (min-width: 768px) {
-  .hero-section { min-height: 480px; max-height: 55vh; }
+  min-height: clamp(520px, 88svh, 760px);
 }
 @media (min-width: 1024px) {
-  .hero-section { min-height: 520px; max-height: 60vh; }
-}
-@media (min-width: 1280px) {
-  .hero-section { min-height: 560px; max-height: 65vh; }
+  .hero-section { min-height: clamp(560px, 82vh, 820px); }
 }
 
 /* Hero chat animation */

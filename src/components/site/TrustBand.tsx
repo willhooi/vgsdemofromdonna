@@ -113,7 +113,7 @@ export const TrustBand = () => {
     <section className="relative">
       {/* Combined Accrete + Certifications band */}
       <div
-        className="relative overflow-hidden py-12 md:py-16"
+        className="relative overflow-hidden py-10 sm:py-12 md:py-16"
         style={{
           background:
             "linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(128 45% 97%) 35%, hsl(128 50% 93%) 100%)",
@@ -131,17 +131,17 @@ export const TrustBand = () => {
           }}
         />
         <div className="container-tight relative">
-          <div className="flex flex-col items-center gap-2 text-center mb-6">
+          <div className="flex flex-col items-center gap-2 text-center mb-5 md:mb-6">
             <span className="shimmer-chip inline-flex items-center gap-2 rounded-full border border-[hsl(128_45%_30%)]/30 bg-gradient-to-r from-white via-[hsl(128_40%_96%)] to-white px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-[hsl(128_55%_22%)] shadow-[0_2px_10px_-4px_rgba(20,80,30,0.25)]">
               <ShieldCheck className="h-3.5 w-3.5" />
               Corporate Strength & Certifications
             </span>
           </div>
 
-          <div className="mx-auto max-w-6xl rounded-[20px] bg-white p-4 sm:p-6 md:p-8 shadow-[0_10px_40px_-15px_rgba(20,80,30,0.2)]">
+          <div className="mx-auto max-w-6xl rounded-2xl sm:rounded-[20px] bg-white p-4 sm:p-6 md:p-8 shadow-[0_10px_40px_-15px_rgba(20,80,30,0.2)]">
             {/* Heading block — full width, centered */}
-            <div className="mx-auto max-w-3xl text-center mb-6 md:mb-10">
-              <h2 className="heading-display flex flex-wrap items-baseline justify-center gap-x-3 sm:gap-x-4 gap-y-2 text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+            <div className="mx-auto max-w-3xl text-center mb-5 sm:mb-6 md:mb-10">
+              <h2 className="heading-display flex flex-wrap items-baseline justify-center gap-x-2.5 sm:gap-x-3 md:gap-x-4 gap-y-2 text-[22px] sm:text-3xl md:text-4xl lg:text-5xl">
                 <span>A member of</span>
                 <a
                   href="https://www.accrete-inc.com/"
@@ -220,13 +220,13 @@ export const TrustBand = () => {
       </div>
 
       {/* Brand marquee */}
-      <div className="border-b border-border bg-background py-10 md:py-12">
+      <div className="border-b border-border bg-background py-8 md:py-10">
         <div className="container-tight">
           <p className="text-center text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
             Trusted by Vietnam's enterprise leaders
           </p>
         </div>
-        <div className="mt-6 space-y-4">
+        <div className="mt-5 md:mt-6 space-y-3 md:space-y-4">
           <BrandRow brands={BRANDS_ROW_1} direction="left" />
           <BrandRow brands={BRANDS_ROW_2} direction="right" />
         </div>

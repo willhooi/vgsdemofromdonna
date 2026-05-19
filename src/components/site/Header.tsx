@@ -41,29 +41,29 @@ export const Header = () => {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-all duration-500",
+        "fixed inset-x-0 top-0 z-50 transition-all duration-300",
         scrolled
-          ? "border-b border-border/70 bg-background/90 backdrop-blur-xl"
-          : "bg-transparent",
+          ? "border-b border-border/70 bg-background/90 backdrop-blur-xl shadow-[0_4px_20px_-12px_rgba(0,0,0,0.08)]"
+          : "bg-background/60 backdrop-blur-md",
       )}
     >
       {/* Mobile announcement bar */}
       <Link
         to="/demo"
-        className="flex md:hidden items-center justify-center gap-1.5 bg-green-600 py-1.5 text-center text-xs font-medium text-white"
+        className="flex md:hidden items-center justify-center gap-1.5 bg-[#39b44a] py-1.5 text-center text-[11px] font-medium text-white"
       >
         {t("nav.demoBar")}
         <ArrowRight className="h-3 w-3" />
       </Link>
 
-      <div className="container-tight flex h-16 items-center justify-between gap-2 md:h-20">
+      <div className="container-tight flex h-14 items-center justify-between gap-3 md:h-[68px] lg:h-20">
         {/* Left: Logo */}
         <Link to="/" aria-label="VietGuys home" className="shrink-0">
-          <Logo />
+          <Logo className="h-8 w-auto sm:h-9 md:h-10 lg:h-11 object-contain" />
         </Link>
 
         {/* Centre: nav */}
-        <nav className="hidden flex-1 items-center justify-center gap-1 md:flex">
+        <nav className="hidden flex-1 items-center justify-center gap-0.5 md:flex lg:gap-1">
           {nav.map((n) => (
             <NavLink key={n.href} to={n.href} className={linkClass} end>
               {n.label}
@@ -72,10 +72,10 @@ export const Header = () => {
         </nav>
 
         {/* Right */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 md:gap-2">
           <button
             onClick={toggle}
-            className="hidden items-center gap-1.5 rounded-full px-3 py-2 text-xs font-semibold text-muted-foreground hover:text-foreground md:inline-flex"
+            className="hidden items-center gap-1.5 rounded-full px-2.5 py-2 text-xs font-semibold text-muted-foreground hover:text-foreground md:inline-flex"
             aria-label="Toggle language"
           >
             <Globe className="h-3.5 w-3.5" />
@@ -86,15 +86,15 @@ export const Header = () => {
 
           <Button
             variant="cta"
-            size="default"
+            size="sm"
             asChild
-            className="bg-[#39b44a] text-white shadow-[0_8px_24px_-8px_rgba(57,180,74,0.6)] hover:bg-[#2fa040] hover:brightness-100"
+            className="bg-[#39b44a] text-white shadow-[0_8px_24px_-8px_rgba(57,180,74,0.6)] hover:bg-[#2fa040] hover:brightness-100 md:h-10 md:px-5 md:text-sm"
           >
             <Link to="/contact">{t("nav.contact")}</Link>
           </Button>
 
           <button
-            className="grid h-10 w-10 place-items-center rounded-full border border-border md:hidden"
+            className="grid h-9 w-9 place-items-center rounded-full border border-border md:hidden"
             onClick={() => setOpen((o) => !o)}
             aria-label="Toggle menu"
             aria-expanded={open}
