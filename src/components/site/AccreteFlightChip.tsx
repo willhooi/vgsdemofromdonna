@@ -241,7 +241,7 @@ export const AccreteFlightChip = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="A member of Accrete Inc. — from Japan"
-              className="accrete-morph-inner relative inline-flex items-center gap-2 whitespace-nowrap rounded-full px-3.5 py-1.5 text-[11px] font-bold tracking-wide"
+              className="accrete-morph-inner relative inline-flex items-center gap-2 whitespace-nowrap rounded-full px-4 py-2 text-[12px] font-bold tracking-wide"
               style={{ color: "rgb(58,32,8)" }}
             >
               {/* Surface = border ring + champagne gradient, dissolves on scroll */}
@@ -267,7 +267,7 @@ export const AccreteFlightChip = () => {
                 alt=""
                 aria-hidden="true"
                 data-morph-logo
-                className="relative z-[2] h-[16px] w-auto"
+                className="relative z-[2] h-[20px] w-auto"
               />
             </a>
           </div>,
