@@ -455,20 +455,22 @@ body.accrete-morph-active [data-accrete-target] > * {
   /* opacity + CSS vars driven inline */
   transition: none;
   overflow: hidden;
-  /* Layered: champagne gradient fill + crisp border ring, each fading independently */
+  /* High-contrast metallic: deeper bronze mids, brighter highlights */
   --surface-bg: 1;
   --surface-border: 1;
   background:
     linear-gradient(135deg,
-      hsl(40 50% 99% / var(--surface-bg)) 0%,
-      hsl(38 55% 93% / var(--surface-bg)) 45%,
-      hsl(38 45% 88% / var(--surface-bg)) 65%,
-      hsl(40 55% 96% / var(--surface-bg)) 100%);
+      hsl(48 95% 96% / var(--surface-bg)) 0%,
+      hsl(42 80% 82% / var(--surface-bg)) 28%,
+      hsl(32 55% 55% / var(--surface-bg)) 55%,
+      hsl(40 85% 78% / var(--surface-bg)) 78%,
+      hsl(48 95% 95% / var(--surface-bg)) 100%);
   box-shadow:
-    inset 0 0 0 1px hsl(38 45% 72% / calc(var(--surface-border) * 0.85)),
-    inset 0 1px 0 rgba(255, 255, 255, calc(0.95 * var(--surface-bg))),
-    inset 0 -1px 0 hsl(35 50% 70% / calc(var(--surface-bg) * 0.35)),
-    0 6px 18px -8px hsl(35 70% 30% / calc(var(--surface-bg) * 0.35));
+    inset 0 0 0 1px hsl(34 70% 48% / calc(var(--surface-border) * 0.9)),
+    inset 0 1.5px 0 rgba(255, 255, 255, calc(1 * var(--surface-bg))),
+    inset 0 -1.5px 0 hsl(28 60% 38% / calc(var(--surface-bg) * 0.55)),
+    0 8px 22px -6px hsl(30 80% 28% / calc(var(--surface-bg) * 0.55)),
+    0 2px 4px hsl(30 60% 20% / calc(var(--surface-bg) * 0.18));
 }
 
 /* Halo breathing — only while chip is idle (progress < 0.04) */
