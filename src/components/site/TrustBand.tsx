@@ -151,7 +151,7 @@ export const TrustBand = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Accrete Inc. — from Japan (opens in new tab)"
-                  className="inline-flex items-center gap-2 sm:gap-2.5 md:gap-3 transition-opacity hover:opacity-80"
+                  className="inline-flex items-center gap-2 sm:gap-2.5 md:gap-3"
                 >
                   <img
                     src={accreteLogo}
