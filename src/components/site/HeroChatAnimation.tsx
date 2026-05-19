@@ -385,9 +385,9 @@ export const HeroChatAnimation = () => {
             className="pointer-events-none absolute inset-0 h-full w-full object-contain"
           />
           {/* Screen safe area inside the frame (tuned to the uploaded mockup). */}
-          <div className="absolute inset-[3.2%_4.5%_11%_4.5%] overflow-hidden rounded-[8%]">
+          <div className="absolute inset-[3%_5%_12%_5%] flex flex-col overflow-hidden rounded-[6%]">
             {/* Header */}
-            <div className="flex items-center gap-1.5 border-b border-border/70 bg-white/95 px-2 py-1.5 backdrop-blur">
+            <div className="flex shrink-0 items-center gap-1.5 border-b border-border/70 bg-white/95 px-2 py-1.5 backdrop-blur">
               <div className="flex h-6 w-6 items-center justify-center overflow-hidden rounded-full bg-white ring-1 ring-border">
                 <img src={vlAvatar} alt="" className="h-full w-full object-contain p-[2px]" />
               </div>
@@ -400,8 +400,8 @@ export const HeroChatAnimation = () => {
               </div>
             </div>
 
-            {/* Chat list */}
-            <div className="flex flex-col gap-1 px-1.5 py-1.5">
+            {/* Chat list — fills the full screen, side margins from phone edge */}
+            <div className="flex flex-1 flex-col justify-end gap-1.5 px-2.5 pb-2 pt-2">
               {BUBBLES.map((b, i) => {
                 const visible = i < visibleCount;
                 return (
