@@ -388,29 +388,29 @@ export const HeroChatAnimation = () => {
             className="pointer-events-none absolute inset-0 h-full w-full object-contain"
           />
           {/* Screen safe area inside the frame (tuned to the uploaded mockup). */}
-          <div className="absolute inset-[2.5%_3.5%_16%_3.5%] overflow-hidden rounded-[8%]">
-            {/* Header — sizes scale with phone width via container queries */}
+          <div className="absolute inset-[7.5%_4%_15%_4%] overflow-hidden rounded-[6%] bg-white">
+            {/* Header — anchored to top of screen, fully inside safe area */}
             <div
-              className="flex items-center border-b border-border/70 bg-white/95 backdrop-blur"
-              style={{ gap: "3cqw", padding: "3cqw 5cqw" }}
+              className="sticky top-0 z-10 flex items-center border-b border-border/70 bg-white/95 backdrop-blur"
+              style={{ gap: "3cqw", padding: "3.2cqw 4.5cqw" }}
             >
               <div
                 className="flex shrink-0 items-center justify-center overflow-hidden rounded-full bg-white ring-1 ring-border"
-                style={{ width: "11cqw", height: "11cqw" }}
+                style={{ width: "10cqw", height: "10cqw" }}
               >
                 <img src={vlAvatar} alt="" className="h-full w-full object-contain p-[4%]" />
               </div>
-              <div className="flex flex-col" style={{ gap: "1cqw" }}>
-                <span className="font-bold leading-none text-foreground" style={{ fontSize: "4.8cqw" }}>
+              <div className="flex min-w-0 flex-col" style={{ gap: "1cqw" }}>
+                <span className="truncate font-bold leading-none text-foreground" style={{ fontSize: "4.4cqw" }}>
                   VietGuys
                 </span>
                 <span
                   className="flex items-center text-muted-foreground"
-                  style={{ gap: "1.5cqw", fontSize: "3.6cqw" }}
+                  style={{ gap: "1.5cqw", fontSize: "3.3cqw" }}
                 >
                   <span
                     className="inline-block rounded-full bg-[#39b44a]"
-                    style={{ width: "1.8cqw", height: "1.8cqw" }}
+                    style={{ width: "1.6cqw", height: "1.6cqw" }}
                   />
                   Online
                 </span>
