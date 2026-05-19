@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Header } from "@/components/site/Header";
 import { Hero } from "@/components/site/Hero";
-import { MediaShowcase } from "@/components/site/MediaShowcase";
+// import { MediaShowcase } from "@/components/site/MediaShowcase"; // hidden per request
 
 import { TrustBand } from "@/components/site/TrustBand";
 import { Solutions } from "@/components/site/Solutions";
