@@ -307,8 +307,9 @@ export const AccreteFlightChip = () => {
                 alt=""
                 aria-hidden="true"
                 data-morph-logo
-                className="relative z-[2] h-[20px] w-auto"
+                className="relative z-[2] block h-[14px] w-auto self-center"
               />
+
             </a>
           </div>,
           document.body
