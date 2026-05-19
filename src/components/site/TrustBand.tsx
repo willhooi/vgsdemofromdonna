@@ -161,14 +161,9 @@ export const TrustBand = () => {
                     loading="lazy"
                     decoding="async"
                   />
-                  <svg viewBox="0 0 15 10" aria-hidden="true" className="h-5 sm:h-6 md:h-8 lg:h-10 w-auto shrink-0">
-                    <rect width="15" height="10" rx="1.2" fill="#ffffff" />
-                    <circle cx="7.5" cy="5" r="3" fill="#bc002d" />
-                    <rect x="0.25" y="0.25" width="14.5" height="9.5" rx="1.05" fill="none" stroke="rgba(0,0,0,0.12)" strokeWidth="0.5" />
-                  </svg>
                 </a>
               </h2>
-              <p className="mt-4 md:mt-5 text-[13px] sm:text-sm leading-relaxed text-muted-foreground md:text-sm">
+              <p className={`mt-4 md:mt-5 text-[13px] sm:text-sm leading-relaxed text-muted-foreground md:text-sm ${shimmer ? "accrete-text-shimmer" : ""}`}>
                 Backed by Japan’s leading SMS gateway group, recognized by <span className="font-semibold text-foreground">Forbes Asia</span> among Asia’s <span className="font-semibold text-foreground">Best Under A Billion</span> companies, empowering VietGuys with global expertise and scalable enterprise messaging capabilities
               </p>
             </div>
