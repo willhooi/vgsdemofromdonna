@@ -9,6 +9,7 @@ import rewardsIcon from "@/assets/hero-icons/rewards.png";
 import voiceIcon from "@/assets/hero-icons/voice.png";
 import customizedIcon from "@/assets/hero-icons/customized.png";
 import miniappIcon from "@/assets/hero-icons/miniapp.png";
+import vietguysAvatar from "@/assets/hero-icons/vietguys-avatar.png";
 
 /**
  * HeroChatAnimation
