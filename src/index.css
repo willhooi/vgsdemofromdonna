@@ -479,10 +479,9 @@ body.accrete-morph-active [data-accrete-target] > * {
 
 @media (prefers-reduced-motion: reduce) {
   .accrete-orbit-dot,
-  .accrete-orbit-trail,
   .vg-chevron,
   .accrete-heading-shimmer::after { animation: none !important; }
-  .vg-chevron { opacity: 0; }
+  .vg-chevron, .japan-flag { opacity: 0 !important; }
   body.accrete-morph-active [data-accrete-target] > * { visibility: visible; }
   .accrete-morph { display: none !important; }
 }
