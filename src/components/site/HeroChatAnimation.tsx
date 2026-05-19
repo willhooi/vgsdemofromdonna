@@ -388,10 +388,10 @@ export const HeroChatAnimation = () => {
             className="pointer-events-none absolute inset-0 h-full w-full object-contain"
           />
           {/* Screen safe area inside the frame (tuned to the uploaded mockup). */}
-          <div className="absolute inset-[7.5%_4%_15%_4%] overflow-hidden rounded-[6%] bg-white">
+          <div className="absolute inset-[7.5%_4%_15%_4%] flex flex-col overflow-hidden rounded-[6%] bg-white">
             {/* Header — anchored to top of screen, fully inside safe area */}
             <div
-              className="sticky top-0 z-10 flex items-center border-b border-border/70 bg-white/95 backdrop-blur"
+              className="flex shrink-0 items-center border-b border-border/70 bg-white/95 backdrop-blur"
               style={{ gap: "3cqw", padding: "3.2cqw 4.5cqw" }}
             >
               <div
@@ -417,8 +417,11 @@ export const HeroChatAnimation = () => {
               </div>
             </div>
 
-            {/* Chat list */}
-            <div className="flex flex-col" style={{ gap: "1.4cqw", padding: "2cqw 2cqw" }}>
+            {/* Chat list — fills remaining screen, scrolls only if needed */}
+            <div
+              className="flex min-h-0 flex-1 flex-col justify-end overflow-y-auto"
+              style={{ gap: "1.2cqw", padding: "2.5cqw 3cqw 3cqw" }}
+            >
               {BUBBLES.map((b, i) => {
                 const visible = i < visibleCount;
                 return (
@@ -432,12 +435,12 @@ export const HeroChatAnimation = () => {
                     }}
                   >
                     <div
-                      className={`max-w-[92%] rounded-2xl shadow-sm leading-snug ${
+                      className={`max-w-[82%] rounded-2xl shadow-sm leading-snug ${
                         b.side === "left"
                           ? "rounded-tl-md bg-[hsl(128_60%_94%)] text-[hsl(128_55%_18%)]"
                           : "rounded-tr-md bg-foreground/90 text-white"
                       }`}
-                      style={{ fontSize: "3.6cqw", padding: "2cqw 2.8cqw" }}
+                      style={{ fontSize: "3.2cqw", padding: "1.8cqw 2.6cqw" }}
                     >
                       {b.text}
                     </div>
