@@ -437,9 +437,11 @@ export const HeroChatAnimation = () => {
                           ? "rounded-tl-md bg-[hsl(128_60%_94%)] text-[hsl(128_55%_18%)]"
                           : "rounded-tr-md bg-foreground/90 text-white"
                       }`}
+                      style={{ fontSize: "3.6cqw", padding: "2cqw 2.8cqw" }}
                     >
                       {b.text}
                     </div>
+
                   </div>
                 );
               })}
