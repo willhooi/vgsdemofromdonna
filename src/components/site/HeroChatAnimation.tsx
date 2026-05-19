@@ -388,7 +388,7 @@ export const HeroChatAnimation = () => {
             className="pointer-events-none absolute inset-0 h-full w-full object-contain"
           />
           {/* Screen safe area inside the frame (tuned to the uploaded mockup). */}
-          <div className="absolute inset-[3.2%_4.5%_11%_4.5%] overflow-hidden rounded-[8%]">
+          <div className="absolute inset-[2.5%_3.5%_16%_3.5%] overflow-hidden rounded-[8%]">
             {/* Header — sizes scale with phone width via container queries */}
             <div
               className="flex items-center border-b border-border/70 bg-white/95 backdrop-blur"
@@ -418,7 +418,7 @@ export const HeroChatAnimation = () => {
             </div>
 
             {/* Chat list */}
-            <div className="flex flex-col" style={{ gap: "1.6cqw", padding: "2.5cqw 3cqw" }}>
+            <div className="flex flex-col" style={{ gap: "1.4cqw", padding: "2cqw 2cqw" }}>
               {BUBBLES.map((b, i) => {
                 const visible = i < visibleCount;
                 return (
@@ -432,7 +432,7 @@ export const HeroChatAnimation = () => {
                     }}
                   >
                     <div
-                      className={`max-w-[86%] rounded-2xl shadow-sm leading-snug ${
+                      className={`max-w-[92%] rounded-2xl shadow-sm leading-snug ${
                         b.side === "left"
                           ? "rounded-tl-md bg-[hsl(128_60%_94%)] text-[hsl(128_55%_18%)]"
                           : "rounded-tr-md bg-foreground/90 text-white"
