@@ -97,20 +97,18 @@ export const AccreteFlightChip = () => {
   }, []);
 
 
-  if (phase === "landed") return null;
-
   const flying = phase === "flying";
   const startRect = startRectRef.current;
 
   return (
     <>
-      {/* Inline placeholder — reserves the layout slot while chip is idle */}
+      {/* Inline anchor — chip stays here at all times; only hidden during the flight */}
       <div
         ref={placeholderRef}
         className="accrete-chip-slot mt-4 flex justify-center lg:justify-start"
         style={{ visibility: flying ? "hidden" : "visible" }}
       >
-        <ChipContent showArrow />
+        <ChipContent showArrow={phase === "idle"} />
       </div>
 
       {/* Fixed flying clone — only mounted during flight */}
