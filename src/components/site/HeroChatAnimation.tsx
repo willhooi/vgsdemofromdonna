@@ -418,7 +418,7 @@ export const HeroChatAnimation = () => {
             </div>
 
             {/* Chat list */}
-            <div className="flex flex-col" style={{ gap: "1.6cqw", padding: "2.5cqw 3cqw" }}>
+            <div className="flex flex-col" style={{ gap: "1.4cqw", padding: "2cqw 2cqw" }}>
               {BUBBLES.map((b, i) => {
                 const visible = i < visibleCount;
                 return (
