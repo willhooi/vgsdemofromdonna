@@ -209,9 +209,9 @@ export const AccreteFlightChip = () => {
         aria-hidden="true"
         className="accrete-chip-slot mt-5 md:mt-6 flex justify-center lg:justify-start"
       >
-        <span data-chip-anchor className="invisible inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-semibold">
-          <span>A member of</span>
-          <img src={accreteLogo} alt="" aria-hidden className="h-[14px] w-auto" />
+        <span data-chip-anchor className="invisible inline-flex items-baseline gap-1.5 rounded-full px-3.5 py-1.5 text-[11px] font-bold">
+          <span className="leading-none">A member of</span>
+          <img src={accreteLogo} alt="" aria-hidden className="h-[12px] w-auto" />
         </span>
       </div>
 
