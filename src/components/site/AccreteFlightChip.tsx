@@ -73,7 +73,7 @@ export const AccreteFlightChip = () => {
 
       const tgLogo = target.querySelector<HTMLImageElement>("[data-accrete-logo]");
       const tgLogoH = tgLogo?.getBoundingClientRect().height || 56;
-      const chipLogoH = 16;
+      const chipLogoH = 20;
       const maxScale = Math.max(2, tgLogoH / chipLogoH);
       const scale = lerp(1, maxScale, progress);
 
@@ -228,7 +228,7 @@ export const AccreteFlightChip = () => {
           className="invisible inline-flex items-center gap-2 rounded-full px-4 py-2 text-[12px] font-bold"
         >
           <span className="leading-none">A member of</span>
-          <img src={accreteLogo} alt="" aria-hidden className="block h-[16px] w-auto" />
+          <img src={accreteLogo} alt="" aria-hidden className="h-[20px] w-auto" />
         </span>
       </div>
 
@@ -307,9 +307,8 @@ export const AccreteFlightChip = () => {
                 alt=""
                 aria-hidden="true"
                 data-morph-logo
-                className="relative z-[2] block h-[16px] w-auto"
+                className="relative z-[2] h-[20px] w-auto"
               />
-
             </a>
           </div>,
           document.body
