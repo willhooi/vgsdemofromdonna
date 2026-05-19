@@ -88,7 +88,7 @@ const MediaCarousel = ({ items }: { items: MediaItem[] }) => {
           ))}
         </CarouselContent>
       </Carousel>
-      <div className="mt-5 flex justify-center gap-2">
+      <div className="mt-3 flex justify-center gap-2">
         {items.map((_, i) => (
           <button
             key={i}
