@@ -19,6 +19,7 @@ const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 const clamp01 = (v: number) => Math.max(0, Math.min(1, v));
 const easeInOutCubic = (t: number) =>
   t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+const easeOutQuart = (t: number) => 1 - Math.pow(1 - t, 4);
 
 // Accrete signature teal
 const TEAL = "hsl(168 60% 52%)";
