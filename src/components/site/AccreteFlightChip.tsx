@@ -185,11 +185,32 @@ export const AccreteFlightChip = () => {
     const t1 = window.setTimeout(update, 250);
     const t2 = window.setTimeout(update, 1200);
 
+    // Recompute when the Accrete logo image actually decodes (lazy/async)
+    // and whenever the target heading reflows (font load, viewport changes).
+    const tgLogoEl = document.querySelector<HTMLImageElement>("[data-accrete-logo]");
+    const tgEl = document.querySelector<HTMLElement>("[data-accrete-target]");
+    const onLogoLoad = () => onResize();
+    if (tgLogoEl) {
+      if (!tgLogoEl.complete) tgLogoEl.addEventListener("load", onLogoLoad);
+    }
+    let ro: ResizeObserver | undefined;
+    if (typeof ResizeObserver !== "undefined" && tgEl) {
+      ro = new ResizeObserver(() => onResize());
+      ro.observe(tgEl);
+      if (tgLogoEl) ro.observe(tgLogoEl);
+    }
+    // Re-run after web fonts finish loading (line-height shifts can move bbox)
+    if ((document as any).fonts?.ready) {
+      (document as any).fonts.ready.then(() => onResize()).catch(() => {});
+    }
+
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);
       window.clearTimeout(t1);
       window.clearTimeout(t2);
+      if (tgLogoEl) tgLogoEl.removeEventListener("load", onLogoLoad);
+      ro?.disconnect();
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
   }, [mounted]);
