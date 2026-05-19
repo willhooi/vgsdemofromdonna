@@ -313,21 +313,16 @@
   .hero-anim *[style*="chip-float"] { animation: none !important; }
 }
 
-/* Accrete flight chip */
-@keyframes chip-arrow-pulse {
-  0%, 100% { transform: translateY(0); opacity: 0.7; }
-  50%      { transform: translateY(2px); opacity: 1; }
-}
-.accrete-chip-arrow { animation: chip-arrow-pulse 2.4s ease-in-out infinite; }
+/* ============================================================
+   Accrete chip — minimalist "Accrete Loop" + scroll-linked morph
+   ============================================================ */
 
+/* Landing signals on TrustBand (subtle, fire once when chip lands) */
 @keyframes accrete-heading-shimmer {
   0%   { background-position: -150% 0; }
   100% { background-position: 250% 0; }
 }
-.accrete-heading-shimmer {
-  position: relative;
-  isolation: isolate;
-}
+.accrete-heading-shimmer { position: relative; isolation: isolate; }
 .accrete-heading-shimmer::after {
   content: "";
   position: absolute;
@@ -336,7 +331,7 @@
   background: linear-gradient(
     100deg,
     transparent 35%,
-    hsl(35 100% 54% / 0.18) 50%,
+    hsl(168 60% 52% / 0.18) 50%,
     transparent 65%
   );
   background-size: 200% 100%;
@@ -345,7 +340,6 @@
   animation: accrete-heading-shimmer 1100ms ease-out 1 forwards;
 }
 
-/* Metallic sweep across the Accrete description paragraph after landing */
 @keyframes accrete-text-shimmer-move {
   0%   { background-position: -150% 0; }
   100% { background-position: 250% 0; }
@@ -355,8 +349,8 @@
     100deg,
     hsl(var(--muted-foreground)) 0%,
     hsl(var(--muted-foreground)) 38%,
-    hsl(35 100% 50%) 48%,
-    hsl(45 100% 70%) 52%,
+    hsl(168 60% 52%) 48%,
+    hsl(168 70% 70%) 52%,
     hsl(var(--muted-foreground)) 62%,
     hsl(var(--muted-foreground)) 100%
   );
@@ -371,76 +365,9 @@
 }
 .accrete-text-shimmer .font-semibold { -webkit-text-fill-color: transparent; }
 
-
-
-@media (prefers-reduced-motion: reduce) {
-  .accrete-chip-arrow,
-  .accrete-heading-shimmer::after { animation: none !important; }
-}
-
-/* Luxury metallic chip — champagne/gold surface with slow specular sweep */
-.accrete-chip-metallic {
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
-  background:
-    linear-gradient(135deg,
-      hsl(38 60% 92%) 0%,
-      hsl(40 70% 98%) 35%,
-      hsl(42 80% 99%) 50%,
-      hsl(40 70% 97%) 65%,
-      hsl(38 60% 92%) 100%);
-  border: 1px solid hsl(38 45% 72% / 0.75);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.95),
-    inset 0 -1px 0 hsl(35 50% 70% / 0.35),
-    0 6px 18px -8px hsl(35 70% 30% / 0.35),
-    0 1px 2px rgba(0, 0, 0, 0.05);
-}
-.accrete-chip-metallic::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background:
-    radial-gradient(80% 120% at 50% 50%, rgba(255, 255, 255, 0.55) 0%, transparent 65%),
-    radial-gradient(120% 80% at 15% 0%, rgba(255, 255, 255, 0.55) 0%, transparent 55%),
-    radial-gradient(140% 100% at 85% 100%, hsl(40 85% 70% / 0.15) 0%, transparent 60%);
-}
-.accrete-chip-metallic::after {
-  content: "";
-  position: absolute;
-  top: -50%;
-  bottom: -50%;
-  left: 0;
-  width: 40%;
-  pointer-events: none;
-  z-index: 1;
-  background: linear-gradient(
-    100deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0) 30%,
-    rgba(255, 255, 255, 0.85) 50%,
-    rgba(255, 240, 200, 0.4) 60%,
-    rgba(255, 255, 255, 0) 70%,
-    transparent 100%
-  );
-  transform: translateX(-150%) skewX(-22deg);
-  animation: accrete-metallic-sweep 4.8s ease-in-out infinite;
-}
-@keyframes accrete-metallic-sweep {
-  0%   { transform: translateX(-150%) skewX(-22deg); }
-  55%  { transform: translateX(280%) skewX(-22deg); }
-  100% { transform: translateX(280%) skewX(-22deg); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .accrete-chip-metallic::after { animation: none !important; opacity: 0; }
-}
-
 /* Scroll-linked chip ↔ headline morph.
-   The real chip placeholder (Hero) and real heading content (TrustBand)
-   are kept in DOM for SEO/layout but visually hidden while morph is active. */
+   Real chip placeholder (Hero) and real heading content (TrustBand) stay in
+   DOM for SEO/layout but are visually hidden while morph is active. */
 body.accrete-morph-active [data-accrete-target] > * {
   visibility: hidden;
 }
@@ -449,42 +376,52 @@ body.accrete-morph-active [data-accrete-target] > * {
   contain: layout style;
 }
 .accrete-morph-inner {
-  /* font-weight, letter-spacing, color, text-shadow driven inline by scroll progress */
   font-family: inherit;
   transition: none;
 }
-.accrete-morph-surface {
-  /* opacity + CSS vars driven inline */
-  transition: none;
-  overflow: hidden;
-  /* High-contrast metallic: deeper bronze mids, brighter highlights */
-  --surface-bg: 1;
-  --surface-border: 1;
-  background:
-    linear-gradient(135deg,
-      hsl(48 95% 96% / var(--surface-bg)) 0%,
-      hsl(42 80% 82% / var(--surface-bg)) 28%,
-      hsl(32 55% 55% / var(--surface-bg)) 55%,
-      hsl(40 85% 78% / var(--surface-bg)) 78%,
-      hsl(48 95% 95% / var(--surface-bg)) 100%);
-  box-shadow:
-    inset 0 0 0 1px hsl(34 70% 48% / calc(var(--surface-border) * 0.9)),
-    inset 0 1.5px 0 rgba(255, 255, 255, calc(1 * var(--surface-bg))),
-    inset 0 -1.5px 0 hsl(28 60% 38% / calc(var(--surface-bg) * 0.55)),
-    0 8px 22px -6px hsl(30 80% 28% / calc(var(--surface-bg) * 0.55)),
-    0 2px 4px hsl(30 60% 20% / calc(var(--surface-bg) * 0.18));
+
+/* Concentric pulse rings — slow sonar ping behind the chip */
+.accrete-pulse-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  border: 1px solid hsl(168 60% 52% / 0.5);
+  transform-origin: 50% 50%;
+  animation: accrete-pulse 4.2s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
+  pointer-events: none;
+}
+.accrete-pulse-ring-1 { animation-delay: 0s; }
+.accrete-pulse-ring-2 { animation-delay: 1.6s; }
+@keyframes accrete-pulse {
+  0%   { transform: scale(1);    opacity: 0.55; }
+  70%  { transform: scale(1.55); opacity: 0; }
+  100% { transform: scale(1.55); opacity: 0; }
 }
 
-/* Halo breathing — only while chip is idle (progress < 0.04) */
-@keyframes accrete-halo-breath {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50%      { transform: scale(1.06); opacity: 0.82; }
+/* Orbiting dot — runs along the rounded-pill perimeter (Accrete signature) */
+.accrete-orbit-dot {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  top: 0;
+  left: 0;
+  offset-path: inset(0 round 9999px);
+  offset-distance: 0%;
+  offset-rotate: 0deg;
+  animation: accrete-orbit 5.5s linear infinite;
+  box-shadow: 0 0 6px hsl(168 60% 52% / 0.6);
 }
-.accrete-morph-idle .accrete-morph-halo {
-  animation: accrete-halo-breath 4.2s ease-in-out infinite;
+@keyframes accrete-orbit {
+  to { offset-distance: 100%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .accrete-pulse-ring,
+  .accrete-orbit-dot,
+  .accrete-heading-shimmer::after { animation: none !important; }
+  .accrete-pulse-ring { opacity: 0; }
   body.accrete-morph-active [data-accrete-target] > * { visibility: visible; }
   .accrete-morph { display: none !important; }
 }
+
