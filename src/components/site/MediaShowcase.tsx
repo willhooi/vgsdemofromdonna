@@ -43,7 +43,7 @@ export const MediaShowcase = () => {
   return (
     <section
       id="media"
-      className="relative overflow-hidden py-10 md:py-14"
+      className="relative overflow-hidden py-4 md:py-6"
       style={{ background: "hsl(var(--primary-soft) / 0.45)" }}
     >
       <div className="container-tight">
