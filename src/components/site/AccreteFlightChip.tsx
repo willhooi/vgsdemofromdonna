@@ -126,7 +126,7 @@ export const AccreteFlightChip = () => {
             height: startRect.height,
             transform: transform || "translate3d(0,0,0) scale(1)",
             transition:
-              "transform 700ms cubic-bezier(0.22, 1, 0.36, 1), opacity 220ms ease-out 520ms",
+              "transform 1050ms cubic-bezier(0.22, 1, 0.36, 1), opacity 260ms ease-out 850ms",
             opacity: transform ? 0 : 1,
             willChange: "transform, opacity",
           }}
