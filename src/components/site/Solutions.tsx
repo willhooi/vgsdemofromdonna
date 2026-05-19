@@ -14,6 +14,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import bytetechLogo from "@/assets/brand/bytetech.svg";
+import channelsGirl from "@/assets/channels-girl.png";
 import { useCountUp } from "@/hooks/use-count-up";
 
 /**
