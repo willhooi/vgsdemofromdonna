@@ -34,8 +34,8 @@ export const AccreteFlightChip = () => {
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    const hero = document.getElementById("top");
-    if (!hero) return;
+
+
 
 
     let triggered = false;
