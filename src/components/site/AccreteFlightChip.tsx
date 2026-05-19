@@ -174,15 +174,33 @@ export const AccreteFlightChip = () => {
             className="accrete-morph fixed left-0 top-0 z-40"
             style={{ transformOrigin: "50% 50%", willChange: "transform" }}
           >
-            {/* Concentric pulse rings (sonar) — only visible at idle */}
+            {/* VietGuys chevron pulses — bắn ngang trái (xanh) + phải (cam) */}
             <div
               data-pulse
               aria-hidden="true"
-              className="pointer-events-none absolute inset-0 -z-10"
+              className="pointer-events-none absolute inset-0"
               style={{ transition: "opacity 200ms linear" }}
             >
-              <span className="accrete-pulse-ring accrete-pulse-ring-1" />
-              <span className="accrete-pulse-ring accrete-pulse-ring-2" />
+              <span className="vg-chevron vg-chevron-left">
+                <svg viewBox="0 0 12 16">
+                  <path d="M10 2 L2 8 L10 14" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </span>
+              <span className="vg-chevron vg-chevron-left vg-chevron-delay">
+                <svg viewBox="0 0 12 16">
+                  <path d="M10 2 L2 8 L10 14" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </span>
+              <span className="vg-chevron vg-chevron-right">
+                <svg viewBox="0 0 12 16">
+                  <path d="M2 2 L10 8 L2 14" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </span>
+              <span className="vg-chevron vg-chevron-right vg-chevron-delay">
+                <svg viewBox="0 0 12 16">
+                  <path d="M2 2 L10 8 L2 14" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </span>
             </div>
 
             <a
@@ -193,7 +211,7 @@ export const AccreteFlightChip = () => {
               className="accrete-morph-inner relative inline-flex items-center gap-2 whitespace-nowrap rounded-full px-4 py-2 text-[12px] font-bold tracking-wide"
               style={{ color: "rgb(33,33,33)" }}
             >
-              {/* Thin teal ring (the "Accrete Loop") + orbiting dot */}
+              {/* Ring (Accrete Loop) + orbiting dot + comet trail */}
               <span
                 data-ring
                 aria-hidden="true"
@@ -207,16 +225,20 @@ export const AccreteFlightChip = () => {
                     boxShadow: `0 0 0 1px hsl(168 60% 52% / 0.08)`,
                   }}
                 />
-                {/* Orbiting dot — runs around the pill via CSS */}
+                {/* Comet trail (behind) */}
+                <span
+                  data-dot
+                  className="accrete-orbit-trail"
+                  style={{ transition: "opacity 200ms linear" }}
+                />
+                {/* Orbiting dot (front) */}
                 <span
                   data-dot
                   className="accrete-orbit-dot"
-                  style={{
-                    background: TEAL,
-                    transition: "opacity 200ms linear",
-                  }}
+                  style={{ transition: "opacity 200ms linear" }}
                 />
               </span>
+
 
               <span className="relative z-[2] leading-none">A member of</span>
               <img
