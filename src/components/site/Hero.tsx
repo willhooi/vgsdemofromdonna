@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { trackDemoRequest } from "@/lib/analytics";
 import { useT } from "@/lib/i18n";
 import { HeroChatAnimation } from "./HeroChatAnimation";
+import { AccreteFlightChip } from "./AccreteFlightChip";
 
 
 export const Hero = () => {
@@ -50,6 +51,8 @@ export const Hero = () => {
                 </Link>
               </Button>
             </div>
+
+            <AccreteFlightChip />
           </div>
 
           {/* Right — animation (compact on mobile, full on desktop) */}

@@ -109,6 +109,15 @@ const BRANDS_ROW_2: Brand[] = [
 ];
 
 export const TrustBand = () => {
+  const [shimmer, setShimmer] = useState(false);
+  useEffect(() => {
+    const onLanded = () => {
+      setShimmer(true);
+      window.setTimeout(() => setShimmer(false), 1200);
+    };
+    window.addEventListener("accrete:landed", onLanded);
+    return () => window.removeEventListener("accrete:landed", onLanded);
+  }, []);
   return (
     <section className="relative">
       {/* Combined Accrete + Certifications band */}
@@ -141,7 +150,7 @@ export const TrustBand = () => {
           <div className="mx-auto max-w-6xl rounded-2xl sm:rounded-[20px] bg-white p-4 sm:p-6 md:p-8 shadow-[0_10px_40px_-15px_rgba(20,80,30,0.2)]">
             {/* Heading block — full width, centered */}
             <div className="mx-auto max-w-3xl text-center mb-5 sm:mb-6 md:mb-10">
-              <h2 className="heading-display flex flex-wrap items-baseline justify-center gap-x-2.5 sm:gap-x-3 md:gap-x-4 gap-y-2 text-[22px] sm:text-3xl md:text-4xl lg:text-5xl">
+              <h2 id="accrete-heading" data-accrete-target className={`heading-display flex flex-wrap items-baseline justify-center gap-x-2.5 sm:gap-x-3 md:gap-x-4 gap-y-2 text-[22px] sm:text-3xl md:text-4xl lg:text-5xl ${shimmer ? "accrete-heading-shimmer" : ""}`}>
                 <span>A member of</span>
                 <a
                   href="https://www.accrete-inc.com/"
