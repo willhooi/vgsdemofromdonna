@@ -11,7 +11,10 @@ export const Hero = () => {
   const parts = headline.split("conversations");
 
   return (
-    <section id="top" className="relative overflow-hidden bg-background pt-28 md:pt-32">
+    <section
+      id="top"
+      className="hero-section relative overflow-hidden bg-background pt-28 md:pt-32 flex items-center"
+    >
       <div className="pointer-events-none absolute inset-0 -z-10" style={{ background: "var(--gradient-hero)" }} />
 
       <div className="container-tight pb-12 md:pb-16">
