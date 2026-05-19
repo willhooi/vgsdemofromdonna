@@ -133,6 +133,8 @@ export const AccreteFlightChip = () => {
           // Track scroll 1:1 so motion feels glued to the user's gesture.
           // Tiny ease only to soften start/end without lagging behind.
           const fp = clamp01(rawProgress / 0.85);
+          const fx = lerp(startXVp, endXVp, fp);
+          const fy = lerp(startYVp, endYVp, fp);
           // Shape morph — flag final size scales with logo height
           const flagH = Math.max(12, logoRect.height * 0.55);
           const flagW = flagH * 1.5;
