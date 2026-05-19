@@ -268,17 +268,11 @@ export const AccreteFlightChip = () => {
                     boxShadow: `0 0 0 1px hsl(168 60% 52% / 0.08)`,
                   }}
                 />
-                {/* Comet trail (behind) */}
-                <span
-                  data-dot
-                  className="accrete-orbit-trail"
-                  style={{ transition: "opacity 200ms linear" }}
-                />
-                {/* Orbiting dot (front) */}
+                {/* Single Japan-red orbiting dot */}
                 <span
                   data-dot
                   className="accrete-orbit-dot"
-                  style={{ transition: "opacity 200ms linear" }}
+                  style={{ transition: "opacity 160ms linear" }}
                 />
               </span>
 
