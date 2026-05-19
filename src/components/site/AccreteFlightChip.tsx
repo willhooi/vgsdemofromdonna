@@ -228,7 +228,7 @@ export const AccreteFlightChip = () => {
           className="invisible inline-flex items-center gap-2 rounded-full px-4 py-2 text-[12px] font-bold"
         >
           <span className="leading-none">A member of</span>
-          <img src={accreteLogo} alt="" aria-hidden className="h-[20px] w-auto" />
+          <img src={accreteLogo} alt="" aria-hidden className="block h-[16px] w-auto" />
         </span>
       </div>
 
