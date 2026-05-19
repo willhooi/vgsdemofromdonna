@@ -34,6 +34,12 @@ export const Hero = () => {
               ) : (
                 headline
               )}
+              <span
+                data-headline-end
+                aria-hidden="true"
+                className="inline-block align-baseline"
+                style={{ width: 0, height: "0.7em" }}
+              />
             </h1>
 
             <AccreteFlightChip />
