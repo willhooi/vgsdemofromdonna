@@ -251,7 +251,7 @@ export const AccreteFlightChip = () => {
                 data-morph-logo
                 className="relative z-[2] h-[14px] w-auto"
               />
-              <JapanFlag className="relative z-[2] h-[10px] w-[14px] shrink-0" />
+              
             </a>
           </div>,
           document.body
