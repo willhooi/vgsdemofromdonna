@@ -239,8 +239,8 @@ export const AccreteFlightChip = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="A member of Accrete Inc. — from Japan"
-              className="accrete-morph-inner relative inline-flex items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-1.5 text-[11px] font-semibold tracking-wide"
-              style={{ color: "rgb(40,95,55)" }}
+              className="accrete-morph-inner relative inline-flex items-baseline gap-1.5 whitespace-nowrap rounded-full px-3.5 py-1.5 text-[11px] font-bold tracking-wide"
+              style={{ color: "rgb(58,32,8)" }}
             >
               {/* Surface = border ring + champagne gradient, dissolves on scroll */}
               <span
@@ -251,22 +251,22 @@ export const AccreteFlightChip = () => {
                   className="accrete-morph-shimmer absolute top-0 bottom-0 left-0 pointer-events-none"
                   aria-hidden="true"
                   style={{
-                    width: "40%",
+                    width: "55%",
                     background:
-                      "linear-gradient(100deg, transparent 0%, rgba(255,255,255,0) 30%, rgba(255,255,255,0.9) 50%, rgba(255,240,200,0.5) 60%, rgba(255,255,255,0) 70%, transparent 100%)",
+                      "linear-gradient(100deg, transparent 0%, rgba(255,255,255,0) 20%, rgba(255,255,255,1) 45%, rgba(255,248,220,0.95) 55%, rgba(255,255,255,0) 75%, transparent 100%)",
                     transform: "translateX(-120%) skewX(-22deg)",
+                    mixBlendMode: "overlay",
                   }}
                 />
               </span>
-              <span className="relative z-[2]">A member of</span>
+              <span className="relative z-[2] leading-none">A member of</span>
               <img
                 src={accreteLogo}
                 alt=""
                 aria-hidden="true"
                 data-morph-logo
-                className="relative z-[2] h-[14px] w-auto"
+                className="relative z-[2] h-[12px] w-auto self-baseline translate-y-[1px]"
               />
-              
             </a>
           </div>,
           document.body
