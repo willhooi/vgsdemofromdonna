@@ -1,7 +1,3 @@
-import { ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { trackDemoRequest } from "@/lib/analytics";
 import { useT } from "@/lib/i18n";
 import { HeroChatAnimation } from "./HeroChatAnimation";
 import { AccreteFlightChip } from "./AccreteFlightChip";
@@ -21,7 +17,7 @@ export const Hero = () => {
 
       <div className="container-tight w-full">
         <div className="grid items-center gap-10 md:gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
-          {/* Left — headline + CTA */}
+          {/* Left — headline + chip */}
           <div className="mx-auto max-w-2xl text-center lg:mx-0 lg:text-left">
             <h1 className="heading-display text-[32px] leading-[1.08] sm:text-[40px] md:text-5xl lg:text-[56px] xl:text-6xl text-balance animate-fade-up">
               {parts.length === 2 ? (
@@ -41,18 +37,6 @@ export const Hero = () => {
             </h1>
 
             <AccreteFlightChip />
-
-            <div
-              className="mt-4 md:mt-5 flex justify-center lg:justify-start animate-fade-up"
-              style={{ animationDelay: "180ms" }}
-            >
-              <Button variant="cta" size="lg" asChild>
-                <Link to="/contact" onClick={() => trackDemoRequest("hero_contact_experts")}>
-                  {t("hero.cta")}
-                  <ArrowRight className="ml-1 h-4 w-4" />
-                </Link>
-              </Button>
-            </div>
           </div>
 
           {/* Right — animation (compact on mobile, full on desktop) */}

@@ -105,7 +105,7 @@ export const AccreteFlightChip = () => {
       {/* Inline anchor — chip stays here at all times; only hidden during the flight */}
       <div
         ref={placeholderRef}
-        className="accrete-chip-slot mt-4 flex justify-center lg:justify-start"
+        className="accrete-chip-slot mt-5 md:mt-6 flex justify-center lg:justify-start"
         style={{ visibility: flying ? "hidden" : "visible" }}
       >
         <ChipContent showArrow={phase === "idle"} />
@@ -139,18 +139,18 @@ export const AccreteFlightChip = () => {
 };
 
 const ChipContent = ({ showArrow = false }: { showArrow?: boolean }) => (
-  <span className="accrete-chip inline-flex items-center gap-1.5 rounded-full border border-[hsl(128_45%_30%)]/25 bg-white/90 px-2.5 py-1 text-[11px] font-medium text-[hsl(128_55%_22%)] shadow-[0_4px_14px_-6px_rgba(20,80,30,0.35)] backdrop-blur">
-    <span>A member of</span>
+  <span className="accrete-chip accrete-chip-metallic inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-semibold tracking-wide text-[hsl(128_55%_20%)]">
+    <span className="relative z-[2]">A member of</span>
     <img
       src={accreteLogo}
       alt=""
       aria-hidden="true"
-      className="h-[14px] w-auto"
+      className="relative z-[2] h-[14px] w-auto"
       loading="lazy"
       decoding="async"
     />
     {showArrow && (
-      <ChevronDown className="accrete-chip-arrow h-3 w-3 text-[#ff9b17]" />
+      <ChevronDown className="accrete-chip-arrow relative z-[2] h-3 w-3 text-[#ff9b17]" />
     )}
   </span>
 );
