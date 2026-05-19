@@ -432,7 +432,7 @@ export const HeroChatAnimation = () => {
                     }}
                   >
                     <div
-                      className={`max-w-[86%] rounded-2xl shadow-sm leading-snug ${
+                      className={`max-w-[92%] rounded-2xl shadow-sm leading-snug ${
                         b.side === "left"
                           ? "rounded-tl-md bg-[hsl(128_60%_94%)] text-[hsl(128_55%_18%)]"
                           : "rounded-tr-md bg-foreground/90 text-white"
