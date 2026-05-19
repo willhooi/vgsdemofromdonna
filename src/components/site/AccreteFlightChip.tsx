@@ -289,6 +289,18 @@ export const AccreteFlightChip = () => {
           </div>,
           document.body
         )}
+
+      {/* Japan flag — fixed portal element that morphs from chip dot → Hinomaru at headline end */}
+      {mounted &&
+        typeof document !== "undefined" &&
+        createPortal(
+          <span
+            ref={flagRef}
+            className="japan-flag"
+            aria-hidden="true"
+          />,
+          document.body
+        )}
     </>
   );
 };
