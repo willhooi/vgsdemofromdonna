@@ -117,17 +117,22 @@ export const AccreteFlightChip = () => {
       if (flag) {
         if (tgLogo && rawProgress > 0.001) {
           const logoRect = tgLogo.getBoundingClientRect();
+          const vw = window.innerWidth;
+          const isMobile = vw < 640;
           // Start: current chip center in viewport
           const startXVp = phRect.left + phRect.width / 2;
           const startYVp = phRect.top + phRect.height / 2;
-          // End: anchor strictly to the logo's bbox — gap scales with logo height,
-          // vertical center = bbox center (independent of font/line-height).
-          const gap = Math.max(8, logoRect.height * 0.22);
-          const endXVp = logoRect.right + gap;
+          // End: anchor to the logo's bbox. Mobile uses tighter gap and clamps within viewport.
+          const gap = isMobile
+            ? Math.max(4, logoRect.height * 0.12)
+            : Math.max(8, logoRect.height * 0.22);
+          const rawEndX = logoRect.right + gap;
+          // Mobile-only: keep the flag fully on-screen (≥10px from right edge)
+          const endXVp = isMobile ? Math.min(rawEndX, vw - 14) : rawEndX;
           const endYVp = logoRect.top + logoRect.height / 2;
-          // Flag travel uses its own eased progress (front-loaded so it lands before headline does)
-          // Slight lead vs headline + smooth deceleration → flag glides in just before logo settles.
-          const fp = easeOutQuart(clamp01(rawProgress / 0.82));
+          // Track scroll 1:1 so motion feels glued to the user's gesture.
+          // Tiny ease only to soften start/end without lagging behind.
+          const fp = clamp01(rawProgress / 0.85);
           const fx = lerp(startXVp, endXVp, fp);
           const fy = lerp(startYVp, endYVp, fp);
           // Shape morph — flag final size scales with logo height
