@@ -24,14 +24,6 @@ export const AccreteFlightChip = () => {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    // Already played this session → render nothing (return early via phase=landed)
-    try {
-      if (window.sessionStorage.getItem(SESSION_KEY) === "1") {
-        setPhase("landed");
-        return;
-      }
-    } catch { /* noop */ }
-
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 
