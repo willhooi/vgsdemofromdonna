@@ -207,7 +207,45 @@ const InputCard = ({
   );
 };
 
-const ChannelPill = ({
+const ChannelsShowcase = ({ visible }: { visible: boolean }) => (
+  <div
+    className="flex flex-col gap-4"
+    style={{
+      opacity: visible ? 1 : 0,
+      transform: visible ? "translateY(0)" : "translateY(8px)",
+      transition: "opacity 700ms ease-out 200ms, transform 700ms ease-out 200ms",
+    }}
+  >
+    {/* Hero illustration */}
+    <div className="relative overflow-hidden rounded-2xl border border-border bg-gradient-to-b from-white to-[hsl(145_50%_97%)] p-2 shadow-[0_10px_30px_-18px_hsl(128_52%_30%/0.35)]">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse at 60% 40%, hsl(35 100% 70% / 0.18), transparent 60%), radial-gradient(ellipse at 30% 70%, hsl(145 60% 70% / 0.22), transparent 60%)",
+        }}
+      />
+      <img
+        src={channelsGirl}
+        alt="Happy customer receiving messages across SMS, Zalo, Viber and Email"
+        width={896}
+        height={1024}
+        loading="lazy"
+        className="relative mx-auto aspect-square w-full max-w-[320px] object-contain"
+      />
+    </div>
+
+    {/* Circle service buttons */}
+    <div className="grid grid-cols-3 gap-2.5">
+      {CHANNELS.map((c, idx) => (
+        <ChannelCircle key={c.id} channel={c} index={idx} visible={visible} />
+      ))}
+    </div>
+  </div>
+);
+
+const ChannelCircle = ({
   channel,
   index,
   visible,
@@ -216,18 +254,24 @@ const ChannelPill = ({
   index: number;
   visible: boolean;
 }) => (
-  <div
-    className="flex items-center gap-2.5 rounded-xl border border-border bg-white px-3 py-2.5 shadow-[0_2px_8px_-4px_rgba(0,0,0,0.06)] transition-all hover:border-[hsl(var(--accent))]/50 hover:shadow-[0_6px_18px_-8px_hsl(35_100%_55%/0.4)]"
+  <a
+    href={`/solutions#${channel.id}`}
+    aria-label={channel.label}
+    className="group relative flex aspect-square flex-col items-center justify-center gap-1 rounded-full border border-border bg-white p-2 text-center shadow-[0_2px_8px_-4px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-[hsl(var(--primary))]/50 hover:shadow-[0_14px_30px_-12px_hsl(128_52%_40%/0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--primary))]/60 cursor-pointer"
     style={{
       opacity: visible ? 1 : 0,
-      transform: visible ? "translateY(0)" : "translateY(8px)",
-      transition: `opacity 500ms ease-out ${index * 60 + 200}ms, transform 500ms ease-out ${index * 60 + 200}ms`,
+      transform: visible ? "translateY(0) scale(1)" : "translateY(8px) scale(0.95)",
+      transition: `opacity 450ms ease-out ${index * 60 + 300}ms, transform 450ms ease-out ${index * 60 + 300}ms`,
     }}
   >
     <span
-      className="relative grid h-2.5 w-2.5 place-items-center"
       aria-hidden
-    >
+      className="absolute inset-0 rounded-full opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+      style={{
+        background: `radial-gradient(circle at 50% 30%, ${channel.dot}22, transparent 70%)`,
+      }}
+    />
+    <span className="relative grid h-2.5 w-2.5 place-items-center" aria-hidden>
       <span
         className="absolute inset-0 rounded-full opacity-60"
         style={{
@@ -240,8 +284,10 @@ const ChannelPill = ({
         style={{ background: channel.dot }}
       />
     </span>
-    <span className="text-[12.5px] font-medium text-foreground">{channel.label}</span>
-  </div>
+    <span className="relative text-[10.5px] font-semibold leading-tight text-foreground transition-colors group-hover:text-[hsl(var(--primary-deep))]">
+      {channel.label}
+    </span>
+  </a>
 );
 
 const CDPCore = ({ visible }: { visible: boolean }) => {
