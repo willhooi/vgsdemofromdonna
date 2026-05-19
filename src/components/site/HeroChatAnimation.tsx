@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from "react";
-import { Gift, Lock, RotateCcw, Move } from "lucide-react";
+import { Gift, Lock, RotateCcw, Move, Star } from "lucide-react";
 
 import smsIcon from "@/assets/hero-icons/sms.png";
 import zaloIcon from "@/assets/hero-icons/zalo.png";
@@ -27,36 +27,65 @@ type Bubble = {
 const BUBBLES: Bubble[] = [
   {
     side: "left",
-    text: (
-      <>
-        Xin chào <b>Nguyễn An</b>, cảm ơn bạn đã đăng ký 👋
-      </>
-    ),
+    text: <>Xin chào <b>Nguyễn An</b>, cảm ơn bạn đã đăng ký 👋</>,
     srText: "Xin chào Nguyễn An, cảm ơn bạn đã đăng ký",
   },
   {
     side: "left",
     text: (
       <>
-        Mã OTP xác thực: <b className="font-mono tracking-wider">482916</b>
+        Mã OTP xác thực:
+        <br />
+        <b className="font-mono tracking-[0.2em] text-[#39b44a] text-[11px]">482916</b>
       </>
     ),
     srText: "Mã OTP xác thực 482916",
   },
   {
     side: "right",
-    text: <>Đăng ký trải nghiệm sản phẩm mới!</>,
-    srText: "Đăng ký trải nghiệm sản phẩm mới",
+    text: <>Tôi cần hỗ trợ đổi mật khẩu</>,
+    srText: "Tôi cần hỗ trợ đổi mật khẩu",
+  },
+  {
+    side: "left",
+    text: <>Đã gửi link reset qua Email ✉️</>,
+    srText: "Đã gửi link reset qua Email",
+  },
+  {
+    side: "right",
+    text: <>Trải nghiệm sản phẩm mới!</>,
+    srText: "Trải nghiệm sản phẩm mới",
   },
   {
     side: "left",
     text: (
-      <span className="inline-flex items-center gap-1.5">
-        Tặng bạn Voucher <b>30%</b> cho đơn hàng tiếp theo
-        <Gift className="h-3.5 w-3.5 inline-block text-[#ff9b17]" />
-      </span>
+      <>
+        Cảm ơn Quý khách đã sử dụng dịch vụ của chúng tôi!
+        <br />
+        <span className="mt-1 inline-flex items-center gap-0.5">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <Star key={i} className="h-3 w-3 fill-[#ff9b17] text-[#ff9b17]" />
+          ))}
+        </span>
+      </>
     ),
-    srText: "Tặng bạn Voucher 30% cho đơn hàng tiếp theo",
+    srText: "Cảm ơn Quý khách đã sử dụng dịch vụ của chúng tôi",
+  },
+  {
+    side: "left",
+    text: (
+      <>
+        <span className="inline-flex items-center gap-1">
+          Tặng Quý khách Voucher <b>30%</b> cho lần mua sắm tiếp theo
+          <Gift className="h-3 w-3 inline-block text-[#ff9b17]" />
+        </span>
+        <br />
+        <span className="mt-1.5 inline-block rounded-full bg-[#39b44a] px-2 py-0.5 text-[9px] font-bold text-white shadow-sm">
+          Sử dụng ngay!
+        </span>
+      </>
+    ),
+    srText: "Tặng Quý khách Voucher 30% cho lần mua sắm tiếp theo. Sử dụng ngay",
   },
 ];
 
