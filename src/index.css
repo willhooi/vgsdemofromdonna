@@ -380,11 +380,10 @@ body.accrete-morph-active [data-accrete-target] > * {
   transition: none;
 }
 
-/* Shared brand color cycle: Japan red → VietGuys orange → teal → VietGuys green */
+/* Shared brand color cycle: Japan red → VietGuys orange → VietGuys green */
 @keyframes accrete-color-cycle {
-  0%   { --brand-cycle: #bc002d; }   /* Japan red */
-  33%  { --brand-cycle: #ff6b00; }   /* VietGuys orange */
-  66%  { --brand-cycle: hsl(168 60% 52%); } /* Accrete teal */
+  0%   { --brand-cycle: #bc002d; }   /* Japan red — gốc Nhật */
+  50%  { --brand-cycle: #ff6b00; }   /* VietGuys orange */
   100% { --brand-cycle: #39b44a; }   /* VietGuys green */
 }
 @property --brand-cycle {
@@ -393,54 +392,92 @@ body.accrete-morph-active [data-accrete-target] > * {
   initial-value: #bc002d;
 }
 
-/* Concentric pulse rings — sonar ping, color blends with dot */
-.accrete-pulse-ring {
-  position: absolute;
-  inset: 0;
-  border-radius: 9999px;
-  border: 1px solid var(--brand-cycle, hsl(168 60% 52%));
-  opacity: 0.55;
-  transform-origin: 50% 50%;
-  animation:
-    accrete-pulse 4.2s cubic-bezier(0.22, 0.61, 0.36, 1) infinite,
-    accrete-color-cycle 8s linear infinite;
-  pointer-events: none;
-}
-.accrete-pulse-ring-1 { animation-delay: 0s, 0s; }
-.accrete-pulse-ring-2 { animation-delay: 1.6s, 0s; }
-@keyframes accrete-pulse {
-  0%   { transform: scale(1);    opacity: 0.55; }
-  70%  { transform: scale(1.55); opacity: 0; }
-  100% { transform: scale(1.55); opacity: 0; }
-}
-
-/* Orbiting dot — runs along rounded-pill perimeter, color cycles with rings */
+/* Orbiting dot — runs along rounded-pill perimeter, color cycles 1 lap = 1 story */
 .accrete-orbit-dot {
   position: absolute;
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   top: 0;
   left: 0;
   offset-path: inset(0 round 9999px);
   offset-distance: 0%;
   offset-rotate: 0deg;
-  background: var(--brand-cycle, hsl(168 60% 52%)) !important;
-  box-shadow: 0 0 6px var(--brand-cycle, hsl(168 60% 52% / 0.6));
+  background: var(--brand-cycle, #bc002d) !important;
+  box-shadow: 0 0 10px var(--brand-cycle, #bc002d), 0 0 3px var(--brand-cycle, #bc002d);
   animation:
-    accrete-orbit 5.5s linear infinite,
-    accrete-color-cycle 8s linear infinite;
+    accrete-orbit 6s linear infinite,
+    accrete-color-cycle 6s linear infinite;
+}
+/* Comet trail — second dot offset behind, dimmer */
+.accrete-orbit-trail {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  top: 0;
+  left: 0;
+  offset-path: inset(0 round 9999px);
+  offset-distance: 0%;
+  offset-rotate: 0deg;
+  background: var(--brand-cycle, #bc002d);
+  opacity: 0.35;
+  filter: blur(2px);
+  animation:
+    accrete-orbit 6s linear infinite -0.18s,
+    accrete-color-cycle 6s linear infinite -0.18s;
 }
 @keyframes accrete-orbit {
   to { offset-distance: 100%; }
 }
 
+/* VietGuys chevron pulses — radiate horizontally from ring (replace concentric rings) */
+.vg-chevron {
+  position: absolute;
+  top: 50%;
+  width: 12px;
+  height: 16px;
+  margin-top: -8px;
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+.vg-chevron svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.vg-chevron-right { left: 100%; margin-left: 6px; color: #ff6b00; animation: vg-chevron-right 2.6s ease-out infinite; }
+.vg-chevron-left  { right: 100%; margin-right: 6px; color: #39b44a; animation: vg-chevron-left  2.6s ease-out infinite; }
+.vg-chevron-delay { animation-delay: 1.3s; }
+@keyframes vg-chevron-right {
+  0%   { transform: translateX(0)    scale(0.55); opacity: 0; }
+  18%  { opacity: 0.75; }
+  100% { transform: translateX(26px) scale(1.05); opacity: 0; }
+}
+@keyframes vg-chevron-left {
+  0%   { transform: translateX(0)     scale(0.55); opacity: 0; }
+  18%  { opacity: 0.75; }
+  100% { transform: translateX(-26px) scale(1.05); opacity: 0; }
+}
+
+@media (max-width: 640px) {
+  @keyframes vg-chevron-right {
+    0% { transform: translateX(0) scale(0.55); opacity: 0; }
+    18% { opacity: 0.75; }
+    100% { transform: translateX(18px) scale(1); opacity: 0; }
+  }
+  @keyframes vg-chevron-left {
+    0% { transform: translateX(0) scale(0.55); opacity: 0; }
+    18% { opacity: 0.75; }
+    100% { transform: translateX(-18px) scale(1); opacity: 0; }
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .accrete-pulse-ring,
   .accrete-orbit-dot,
+  .accrete-orbit-trail,
+  .vg-chevron,
   .accrete-heading-shimmer::after { animation: none !important; }
-  .accrete-pulse-ring { opacity: 0; }
+  .vg-chevron { opacity: 0; }
   body.accrete-morph-active [data-accrete-target] > * { visibility: visible; }
   .accrete-morph { display: none !important; }
 }
+
 
