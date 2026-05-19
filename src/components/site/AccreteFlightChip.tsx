@@ -97,16 +97,16 @@ export const AccreteFlightChip = () => {
         ring.style.opacity = String(clamp01(1 - rawProgress / 0.45));
       }
 
-      // Pulse rings fade out almost immediately on scroll
+      // Chevron pulses fade out first (strongest visual, would disrupt scale)
       const pulse = morph.querySelector<HTMLElement>("[data-pulse]");
       if (pulse) {
-        pulse.style.opacity = String(clamp01(1 - rawProgress / 0.25));
+        pulse.style.opacity = String(clamp01(1 - rawProgress / 0.20));
       }
 
-      // Orbiting dot fades in sync with ring
+      // Orbiting dot + trail fade next
       const dot = morph.querySelector<HTMLElement>("[data-dot]");
       if (dot) {
-        dot.style.opacity = String(clamp01(1 - rawProgress / 0.35));
+        dot.style.opacity = String(clamp01(1 - rawProgress / 0.30));
       }
 
       // Logo polish — saturate as it lands
