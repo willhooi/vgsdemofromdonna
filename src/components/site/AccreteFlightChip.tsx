@@ -108,15 +108,17 @@ export const AccreteFlightChip = () => {
       // Inner typography morph
       const inner = morph.querySelector<HTMLElement>(".accrete-morph-inner");
       if (inner) {
-        inner.style.fontWeight = String(Math.round(lerp(600, 800, progress)));
+        inner.style.fontWeight = String(Math.round(lerp(700, 800, progress)));
         inner.style.letterSpacing = `${lerp(0.02, -0.012, progress)}em`;
-        // Color: green chip → foreground at landing
-        const r = Math.round(lerp(40, 33, progress));
-        const g = Math.round(lerp(95, 33, progress));
-        const b = Math.round(lerp(55, 33, progress));
+        // Color: deep bronze on chip → foreground at landing
+        const r = Math.round(lerp(58, 33, progress));
+        const g = Math.round(lerp(32, 33, progress));
+        const b = Math.round(lerp(8, 33, progress));
         inner.style.color = `rgb(${r}, ${g}, ${b})`;
         inner.style.textShadow =
-          progress > 0.6
+          progress < 0.4
+            ? `0 1px 0 rgba(255,255,255,0.7), 0 0 1px rgba(120,70,20,0.35)`
+            : progress > 0.6
             ? `0 1px 0 rgba(255,255,255,${(progress - 0.6) * 1.2})`
             : "none";
       }
