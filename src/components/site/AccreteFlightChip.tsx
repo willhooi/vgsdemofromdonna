@@ -51,7 +51,6 @@ export const AccreteFlightChip = () => {
       if (reduced) {
         setPhase("landed");
         window.dispatchEvent(new CustomEvent("accrete:landed"));
-        try { window.sessionStorage.setItem(SESSION_KEY, "1"); } catch { /* noop */ }
         return;
       }
 
@@ -78,7 +77,6 @@ export const AccreteFlightChip = () => {
       window.setTimeout(() => {
         setPhase("landed");
         window.dispatchEvent(new CustomEvent("accrete:landed"));
-        try { window.sessionStorage.setItem(SESSION_KEY, "1"); } catch { /* noop */ }
       }, 720);
     };
 
