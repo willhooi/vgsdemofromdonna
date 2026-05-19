@@ -26,6 +26,7 @@ const TEAL = "hsl(168 60% 52%)";
 export const AccreteFlightChip = () => {
   const placeholderRef = useRef<HTMLDivElement>(null);
   const morphRef = useRef<HTMLDivElement>(null);
+  const flagRef = useRef<HTMLSpanElement>(null);
   const landedRef = useRef(false);
   const rafRef = useRef(0);
   const [mounted, setMounted] = useState(false);
@@ -103,10 +104,52 @@ export const AccreteFlightChip = () => {
         pulse.style.opacity = String(clamp01(1 - rawProgress / 0.20));
       }
 
-      // Orbiting dot + trail fade next
+      // Orbiting dot fades out quickly as morph begins (it "becomes" the flag)
       const dot = morph.querySelector<HTMLElement>("[data-dot]");
       if (dot) {
-        dot.style.opacity = String(clamp01(1 - rawProgress / 0.30));
+        dot.style.opacity = String(clamp01(1 - rawProgress / 0.08));
+      }
+
+      // Japan flag — slides from chip center to end of headline, morphs disc → flag
+      const flag = flagRef.current;
+      const headlineEnd = document.querySelector<HTMLElement>("[data-headline-end]");
+      if (flag) {
+        if (headlineEnd && rawProgress > 0.001 && rawProgress < 0.999) {
+          const heRect = headlineEnd.getBoundingClientRect();
+          // Use chip center as start; period sits near baseline → use bottom of anchor
+          const startX = phCxDoc - scrollY * 0 - 0; // doc coords don't matter; we use viewport
+          const startXVp = phRect.left + phRect.width / 2;
+          const startYVp = phRect.top + phRect.height / 2;
+          const endXVp = heRect.left + heRect.width / 2;
+          const endYVp = heRect.top + heRect.height * 0.78; // sit on baseline-ish
+          // Flag travel uses its own eased progress (front-loaded)
+          const fp = easeInOutCubic(clamp01(rawProgress / 0.45));
+          const fx = lerp(startXVp, endXVp, fp);
+          const fy = lerp(startYVp, endYVp, fp);
+          // Shape morph
+          const w = lerp(7, 18, fp);
+          const h = lerp(7, 12, fp);
+          const radius = lerp(50, 12, fp); // % then px-ish — used as %
+          const isFlag = fp > 0.65;
+          // White bg blends in after halfway
+          const bgMix = fp; // 0 = red, 1 = white
+          const r = Math.round(lerp(188, 255, bgMix));
+          const g = Math.round(lerp(0, 255, bgMix));
+          const b = Math.round(lerp(45, 255, bgMix));
+          flag.style.opacity = "1";
+          flag.style.transform = `translate3d(${fx - w / 2}px, ${fy - h / 2}px, 0)`;
+          flag.style.width = `${w}px`;
+          flag.style.height = `${h}px`;
+          flag.style.borderRadius = `${radius}%`;
+          flag.style.background = `rgb(${r},${g},${b})`;
+          flag.style.boxShadow = isFlag
+            ? "0 1px 3px rgba(0,0,0,0.18), 0 0 0 0.5px rgba(0,0,0,0.06)"
+            : "0 0 10px rgba(188,0,45,0.55)";
+          flag.dataset.flag = isFlag ? "1" : "0";
+        } else {
+          flag.style.opacity = "0";
+          flag.dataset.flag = "0";
+        }
       }
 
       // Logo polish — saturate as it lands
@@ -225,17 +268,11 @@ export const AccreteFlightChip = () => {
                     boxShadow: `0 0 0 1px hsl(168 60% 52% / 0.08)`,
                   }}
                 />
-                {/* Comet trail (behind) */}
-                <span
-                  data-dot
-                  className="accrete-orbit-trail"
-                  style={{ transition: "opacity 200ms linear" }}
-                />
-                {/* Orbiting dot (front) */}
+                {/* Single Japan-red orbiting dot */}
                 <span
                   data-dot
                   className="accrete-orbit-dot"
-                  style={{ transition: "opacity 200ms linear" }}
+                  style={{ transition: "opacity 160ms linear" }}
                 />
               </span>
 
@@ -250,6 +287,18 @@ export const AccreteFlightChip = () => {
               />
             </a>
           </div>,
+          document.body
+        )}
+
+      {/* Japan flag — fixed portal element that morphs from chip dot → Hinomaru at headline end */}
+      {mounted &&
+        typeof document !== "undefined" &&
+        createPortal(
+          <span
+            ref={flagRef}
+            className="japan-flag"
+            aria-hidden="true"
+          />,
           document.body
         )}
     </>
