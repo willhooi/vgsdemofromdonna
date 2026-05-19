@@ -77,14 +77,23 @@ export const AccreteFlightChip = () => {
       window.setTimeout(() => {
         setPhase("landed");
         window.dispatchEvent(new CustomEvent("accrete:landed"));
-      }, 720);
+      }, 1100);
     };
 
-    const onScroll = () => {
-      if (window.scrollY > 80) fly();
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    // Trigger when the TrustBand heading is about to enter the viewport,
+    // so the user actually sees the chip flying into it.
+    const target = document.querySelector<HTMLElement>("[data-accrete-target]");
+    if (!target) {
+      const onScroll = () => { if (window.scrollY > 80) fly(); };
+      window.addEventListener("scroll", onScroll, { passive: true });
+      return () => window.removeEventListener("scroll", onScroll);
+    }
+    const io = new IntersectionObserver(
+      (entries) => { if (entries.some((e) => e.isIntersecting)) fly(); },
+      { rootMargin: "0px 0px -20% 0px", threshold: 0 }
+    );
+    io.observe(target);
+    return () => io.disconnect();
   }, []);
 
 
