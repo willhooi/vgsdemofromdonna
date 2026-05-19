@@ -3,43 +3,25 @@ import { createPortal } from "react-dom";
 import accreteLogo from "@/assets/brand/accrete-logo.png";
 
 /**
- * AccreteFlightChip — premium scroll-linked shared-element morph.
+ * AccreteFlightChip — minimal "Accrete Loop" morph.
  *
- * progress 0 → metallic champagne chip with halo + Japan flag, sitting as
- *               eyebrow above the Hero headline.
- * progress 1 → lands on the TrustBand headline at full size, surface dissolved,
- *               weight + spacing + color matching enterprise typography.
+ * Idle: text "A member of" + Accrete logo, wrapped by a thin teal ring with
+ *       a small dot orbiting it (signature of accrete-inc.com). 2 concentric
+ *       rings pulse outward like a slow sonar (telecom story for VietGuys).
  *
- * Bidirectional (pure function of scrollY). GPU-only transforms.
+ * Scroll: ring + pulses + dot fade out; typography eases into the TrustBand
+ *         headline (scroll-linked, bidirectional, GPU-only transforms).
+ *
+ * Reduced motion: morph disabled, chip + headline render statically.
  */
 
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 const clamp01 = (v: number) => Math.max(0, Math.min(1, v));
-// Smooth premium easing (ease-in-out cubic)
 const easeInOutCubic = (t: number) =>
   t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
-const JapanFlag = ({ className = "" }: { className?: string }) => (
-  <svg
-    viewBox="0 0 15 10"
-    aria-hidden="true"
-    className={className}
-    style={{ display: "block" }}
-  >
-    <rect width="15" height="10" rx="1.2" fill="#ffffff" />
-    <circle cx="7.5" cy="5" r="3" fill="#bc002d" />
-    <rect
-      x="0.25"
-      y="0.25"
-      width="14.5"
-      height="9.5"
-      rx="1.05"
-      fill="none"
-      stroke="rgba(0,0,0,0.12)"
-      strokeWidth="0.5"
-    />
-  </svg>
-);
+// Accrete signature teal
+const TEAL = "hsl(168 60% 52%)";
 
 export const AccreteFlightChip = () => {
   const placeholderRef = useRef<HTMLDivElement>(null);
@@ -69,9 +51,6 @@ export const AccreteFlightChip = () => {
       const target = document.querySelector<HTMLElement>("[data-accrete-target]");
       if (!placeholder || !morph || !target) return;
 
-      // Measure the inner sized span (true chip box) instead of the full-width
-      // flex placeholder — so on desktop the chip aligns to the same left edge
-      // as the headline, while on mobile/tablet it follows the center justify.
       const phInner =
         placeholder.querySelector<HTMLElement>("[data-chip-anchor]") || placeholder;
       const phRect = phInner.getBoundingClientRect();
@@ -84,7 +63,6 @@ export const AccreteFlightChip = () => {
       const tgCxDoc = tgRect.left + tgRect.width / 2;
       const tgCyDoc = tgRect.top + scrollY + tgRect.height / 2;
 
-      // Longer travel for premium feel
       const endScroll = Math.max(tgCyDoc - vh * 0.55, 80);
       const rawProgress = clamp01(scrollY / endScroll);
       const progress = easeInOutCubic(rawProgress);
@@ -94,80 +72,49 @@ export const AccreteFlightChip = () => {
 
       const tgLogo = target.querySelector<HTMLImageElement>("[data-accrete-logo]");
       const tgLogoH = tgLogo?.getBoundingClientRect().height || 56;
-      const chipLogoH = 14;
+      const chipLogoH = 20;
       const maxScale = Math.max(2, tgLogoH / chipLogoH);
       const scale = lerp(1, maxScale, progress);
 
       const w = morph.offsetWidth;
       const h = morph.offsetHeight;
-      const tx = cxVp - w / 2;
-      const ty = cyVp - h / 2;
+      morph.style.transform = `translate3d(${cxVp - w / 2}px, ${cyVp - h / 2}px, 0) scale(${scale})`;
 
-      morph.style.transform = `translate3d(${tx}px, ${ty}px, 0) scale(${scale})`;
-
-      // Inner typography morph
+      // Typography morph — bronze→foreground, weight, letter-spacing
       const inner = morph.querySelector<HTMLElement>(".accrete-morph-inner");
       if (inner) {
         inner.style.fontWeight = String(Math.round(lerp(700, 800, progress)));
-        inner.style.letterSpacing = `${lerp(0.02, -0.012, progress)}em`;
-        // Color: deep bronze on chip → foreground at landing
-        const r = Math.round(lerp(58, 33, progress));
-        const g = Math.round(lerp(32, 33, progress));
-        const b = Math.round(lerp(8, 33, progress));
+        inner.style.letterSpacing = `${lerp(0.01, -0.012, progress)}em`;
+        const r = Math.round(lerp(33, 33, progress));
+        const g = Math.round(lerp(33, 33, progress));
+        const b = Math.round(lerp(33, 33, progress));
         inner.style.color = `rgb(${r}, ${g}, ${b})`;
-        inner.style.textShadow =
-          progress < 0.4
-            ? `0 1px 0 rgba(255,255,255,0.7), 0 0 1px rgba(120,70,20,0.35)`
-            : progress > 0.6
-            ? `0 1px 0 rgba(255,255,255,${(progress - 0.6) * 1.2})`
-            : "none";
       }
 
-      // Surface dissolve — border ring fades fast, gradient bg lingers
-      const surface = morph.querySelector<HTMLElement>(".accrete-morph-surface");
-      if (surface) {
-        const borderOpacity = clamp01(1 - rawProgress / 0.5);
-        const bgOpacity = clamp01(1 - Math.max(0, rawProgress - 0.3) / 0.5);
-        surface.style.setProperty("--surface-border", String(borderOpacity));
-        surface.style.setProperty("--surface-bg", String(bgOpacity));
-        surface.style.opacity = String(clamp01(1 - progress * 0.95));
+      // Ring fades out early (well before scale gets large)
+      const ring = morph.querySelector<HTMLElement>("[data-ring]");
+      if (ring) {
+        ring.style.opacity = String(clamp01(1 - rawProgress / 0.45));
       }
 
-      // Halo: bloom from chip → fade as we approach landing
-      const halo = morph.querySelector<HTMLElement>(".accrete-morph-halo");
-      if (halo) {
-        const haloScale = lerp(1, 1.35, Math.min(progress * 1.5, 1));
-        const haloOpacity = clamp01(1 - progress * 1.4);
-        halo.style.transform = `scale(${haloScale})`;
-        halo.style.opacity = String(haloOpacity);
+      // Pulse rings fade out almost immediately on scroll
+      const pulse = morph.querySelector<HTMLElement>("[data-pulse]");
+      if (pulse) {
+        pulse.style.opacity = String(clamp01(1 - rawProgress / 0.25));
       }
 
-      // Specular shimmer — sweep position driven by progress (scanner effect)
-      const shimmer = morph.querySelector<HTMLElement>(".accrete-morph-shimmer");
-      if (shimmer) {
-        const sweep = lerp(-120, 220, progress);
-        shimmer.style.transform = `translateX(${sweep}%) skewX(-22deg)`;
-        shimmer.style.opacity = String(clamp01(1 - rawProgress / 0.85));
+      // Orbiting dot fades in sync with ring
+      const dot = morph.querySelector<HTMLElement>("[data-dot]");
+      if (dot) {
+        dot.style.opacity = String(clamp01(1 - rawProgress / 0.35));
       }
 
-      // Logo polish — saturate + crispen as it lands
+      // Logo polish — saturate as it lands
       const logoImg = morph.querySelector<HTMLImageElement>("[data-morph-logo]");
       if (logoImg) {
-        logoImg.style.filter = `saturate(${lerp(0.85, 1, progress)}) drop-shadow(0 ${lerp(
-          1,
-          6,
-          progress
-        )}px ${lerp(2, 14, progress)}px rgba(15,27,61,${lerp(0.05, 0.18, progress)}))`;
+        logoImg.style.filter = `saturate(${lerp(0.9, 1, progress)})`;
       }
 
-      // Idle state class for breathing micro-motion
-      if (rawProgress < 0.04) {
-        morph.classList.add("accrete-morph-idle");
-      } else {
-        morph.classList.remove("accrete-morph-idle");
-      }
-
-      // Dispatch landed event once when crossing into landing zone
       const landed = rawProgress >= 0.98;
       if (landed && !landedRef.current) {
         landedRef.current = true;
@@ -209,9 +156,12 @@ export const AccreteFlightChip = () => {
         aria-hidden="true"
         className="accrete-chip-slot mt-5 md:mt-6 flex justify-center lg:justify-start"
       >
-        <span data-chip-anchor className="invisible inline-flex items-baseline gap-1.5 rounded-full px-3.5 py-1.5 text-[11px] font-bold">
+        <span
+          data-chip-anchor
+          className="invisible inline-flex items-center gap-2 rounded-full px-4 py-2 text-[12px] font-bold"
+        >
           <span className="leading-none">A member of</span>
-          <img src={accreteLogo} alt="" aria-hidden className="h-[12px] w-auto" />
+          <img src={accreteLogo} alt="" aria-hidden className="h-[20px] w-auto" />
         </span>
       </div>
 
@@ -224,17 +174,16 @@ export const AccreteFlightChip = () => {
             className="accrete-morph fixed left-0 top-0 z-40"
             style={{ transformOrigin: "50% 50%", willChange: "transform" }}
           >
-            {/* Halo — soft champagne glow behind chip */}
-            <span
-              className="accrete-morph-halo pointer-events-none absolute inset-0 -z-10 rounded-full"
+            {/* Concentric pulse rings (sonar) — only visible at idle */}
+            <div
+              data-pulse
               aria-hidden="true"
-              style={{
-                background:
-                  "radial-gradient(60% 80% at 50% 50%, hsl(38 70% 70% / 0.55) 0%, hsl(38 70% 70% / 0) 70%)",
-                filter: "blur(12px)",
-                transformOrigin: "50% 50%",
-              }}
-            />
+              className="pointer-events-none absolute inset-0 -z-10"
+              style={{ transition: "opacity 200ms linear" }}
+            >
+              <span className="accrete-pulse-ring accrete-pulse-ring-1" />
+              <span className="accrete-pulse-ring accrete-pulse-ring-2" />
+            </div>
 
             <a
               href="https://www.accrete-inc.com/"
@@ -242,25 +191,33 @@ export const AccreteFlightChip = () => {
               rel="noopener noreferrer"
               aria-label="A member of Accrete Inc. — from Japan"
               className="accrete-morph-inner relative inline-flex items-center gap-2 whitespace-nowrap rounded-full px-4 py-2 text-[12px] font-bold tracking-wide"
-              style={{ color: "rgb(58,32,8)" }}
+              style={{ color: "rgb(33,33,33)" }}
             >
-              {/* Surface = border ring + champagne gradient, dissolves on scroll */}
+              {/* Thin teal ring (the "Accrete Loop") + orbiting dot */}
               <span
-                className="accrete-morph-surface accrete-chip-surface absolute inset-0 rounded-full pointer-events-none"
+                data-ring
                 aria-hidden="true"
+                className="pointer-events-none absolute inset-0"
+                style={{ transition: "opacity 200ms linear" }}
               >
                 <span
-                  className="accrete-morph-shimmer absolute top-0 bottom-0 left-0 pointer-events-none"
-                  aria-hidden="true"
+                  className="absolute inset-0 rounded-full"
                   style={{
-                    width: "55%",
-                    background:
-                      "linear-gradient(100deg, transparent 0%, rgba(255,255,255,0) 20%, rgba(255,255,255,1) 45%, rgba(255,248,220,0.95) 55%, rgba(255,255,255,0) 75%, transparent 100%)",
-                    transform: "translateX(-120%) skewX(-22deg)",
-                    mixBlendMode: "overlay",
+                    border: `1.25px solid ${TEAL}`,
+                    boxShadow: `0 0 0 1px hsl(168 60% 52% / 0.08)`,
+                  }}
+                />
+                {/* Orbiting dot — runs around the pill via CSS */}
+                <span
+                  data-dot
+                  className="accrete-orbit-dot"
+                  style={{
+                    background: TEAL,
+                    transition: "opacity 200ms linear",
                   }}
                 />
               </span>
+
               <span className="relative z-[2] leading-none">A member of</span>
               <img
                 src={accreteLogo}
