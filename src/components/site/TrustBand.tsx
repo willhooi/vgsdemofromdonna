@@ -220,13 +220,13 @@ export const TrustBand = () => {
       </div>
 
       {/* Brand marquee */}
-      <div className="border-b border-border bg-background py-10 md:py-12">
+      <div className="border-b border-border bg-background py-8 md:py-10">
         <div className="container-tight">
           <p className="text-center text-[11px] font-semibold uppercase tracking-[0.22em] text-muted-foreground">
             Trusted by Vietnam's enterprise leaders
           </p>
         </div>
-        <div className="mt-6 space-y-4">
+        <div className="mt-5 md:mt-6 space-y-3 md:space-y-4">
           <BrandRow brands={BRANDS_ROW_1} direction="left" />
           <BrandRow brands={BRANDS_ROW_2} direction="right" />
         </div>
