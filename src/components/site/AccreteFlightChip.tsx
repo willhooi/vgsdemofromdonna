@@ -44,6 +44,7 @@ const JapanFlag = ({ className = "" }: { className?: string }) => (
 export const AccreteFlightChip = () => {
   const placeholderRef = useRef<HTMLDivElement>(null);
   const morphRef = useRef<HTMLDivElement>(null);
+  const landedRef = useRef(false);
   const rafRef = useRef(0);
   const [mounted, setMounted] = useState(false);
 
