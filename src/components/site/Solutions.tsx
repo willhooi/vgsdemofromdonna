@@ -123,11 +123,7 @@ export const Solutions = () => {
 
             {/* Column 3 — Channels */}
             <Column title="Channels" subtitle="Outputs" tone="muted" align="right">
-              <div className="grid grid-cols-2 lg:grid-cols-1 gap-2.5">
-                {CHANNELS.map((c, idx) => (
-                  <ChannelPill key={c.id} channel={c} index={idx} visible={visible} />
-                ))}
-              </div>
+              <ChannelsShowcase visible={visible} />
             </Column>
           </div>
 
