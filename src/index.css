@@ -419,13 +419,37 @@ body.accrete-morph-active [data-accrete-target] > * {
   contain: layout style;
 }
 .accrete-morph-inner {
-  /* font-weight and letter-spacing are driven inline by scroll progress */
+  /* font-weight, letter-spacing, color, text-shadow driven inline by scroll progress */
   font-family: inherit;
   transition: none;
 }
 .accrete-morph-surface {
-  /* opacity driven inline (1 → 0 as morph scales up) */
+  /* opacity + CSS vars driven inline */
   transition: none;
+  overflow: hidden;
+  /* Layered: champagne gradient fill + crisp border ring, each fading independently */
+  --surface-bg: 1;
+  --surface-border: 1;
+  background:
+    linear-gradient(135deg,
+      hsl(40 50% 99% / var(--surface-bg)) 0%,
+      hsl(38 55% 93% / var(--surface-bg)) 45%,
+      hsl(38 45% 88% / var(--surface-bg)) 65%,
+      hsl(40 55% 96% / var(--surface-bg)) 100%);
+  box-shadow:
+    inset 0 0 0 1px hsl(38 45% 72% / calc(var(--surface-border) * 0.85)),
+    inset 0 1px 0 rgba(255, 255, 255, calc(0.95 * var(--surface-bg))),
+    inset 0 -1px 0 hsl(35 50% 70% / calc(var(--surface-bg) * 0.35)),
+    0 6px 18px -8px hsl(35 70% 30% / calc(var(--surface-bg) * 0.35));
+}
+
+/* Halo breathing — only while chip is idle (progress < 0.04) */
+@keyframes accrete-halo-breath {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(1.06); opacity: 0.82; }
+}
+.accrete-morph-idle .accrete-morph-halo {
+  animation: accrete-halo-breath 4.2s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
