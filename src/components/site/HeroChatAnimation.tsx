@@ -392,7 +392,7 @@ export const HeroChatAnimation = () => {
             {/* Header — sizes scale with phone width via container queries */}
             <div
               className="flex items-center border-b border-border/70 bg-white/95 backdrop-blur"
-              style={{ gap: "3cqw", padding: "3cqw 4cqw" }}
+              style={{ gap: "2.5cqw", padding: "2.5cqw 2cqw" }}
             >
               <div
                 className="flex items-center justify-center overflow-hidden rounded-full bg-white ring-1 ring-border"
