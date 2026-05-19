@@ -29,7 +29,8 @@ const Index = () => {
     <main className="min-h-screen bg-background">
       <Header />
       <Hero />
-      <MediaShowcase />
+      {/* <MediaShowcase /> hidden per request */}
+
       
       <TrustBand />
       <Solutions />
