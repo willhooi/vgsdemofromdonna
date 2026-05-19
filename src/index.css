@@ -380,56 +380,63 @@ body.accrete-morph-active [data-accrete-target] > * {
   transition: none;
 }
 
-/* Shared brand color cycle: Japan red → VietGuys orange → VietGuys green */
-@keyframes accrete-color-cycle {
-  0%   { --brand-cycle: #bc002d; }   /* Japan red — gốc Nhật */
-  50%  { --brand-cycle: #ff6b00; }   /* VietGuys orange */
-  100% { --brand-cycle: #39b44a; }   /* VietGuys green */
-}
-@property --brand-cycle {
-  syntax: "<color>";
-  inherits: true;
-  initial-value: #bc002d;
-}
+/* Japan red — gốc Nhật (đơn sắc, không cycle) */
+:root { --japan-red: #bc002d; }
 
-/* Orbiting dot — runs along rounded-pill perimeter, color cycles 1 lap = 1 story */
+/* Orbiting dot — single Japan-red dot running on rounded-pill perimeter */
 .accrete-orbit-dot {
   position: absolute;
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   top: 0;
   left: 0;
   offset-path: inset(0 round 9999px);
   offset-distance: 0%;
   offset-rotate: 0deg;
-  background: var(--brand-cycle, #bc002d) !important;
-  box-shadow: 0 0 10px var(--brand-cycle, #bc002d), 0 0 3px var(--brand-cycle, #bc002d);
-  animation:
-    accrete-orbit 6s linear infinite,
-    accrete-color-cycle 6s linear infinite;
-}
-/* Comet trail — second dot offset behind, dimmer */
-.accrete-orbit-trail {
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  top: 0;
-  left: 0;
-  offset-path: inset(0 round 9999px);
-  offset-distance: 0%;
-  offset-rotate: 0deg;
-  background: var(--brand-cycle, #bc002d);
-  opacity: 0.35;
-  filter: blur(2px);
-  animation:
-    accrete-orbit 6s linear infinite -0.18s,
-    accrete-color-cycle 6s linear infinite -0.18s;
+  background: var(--japan-red);
+  box-shadow:
+    0 0 10px rgba(188, 0, 45, 0.55),
+    0 0 3px rgba(188, 0, 45, 0.9);
+  animation: accrete-orbit 6s linear infinite;
 }
 @keyframes accrete-orbit {
   to { offset-distance: 100%; }
 }
+
+/* Japan flag — morph target rendered as fixed portal element.
+   Idle: hidden. During scroll morph: travels from chip → end of headline,
+   shape morphs from red disc → white rectangle with red disc (Hinomaru). */
+.japan-flag {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--japan-red);
+  box-shadow: 0 0 10px rgba(188, 0, 45, 0.55);
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform, width, height, border-radius, background, box-shadow;
+  z-index: 41;
+}
+.japan-flag::before {
+  /* Hinomaru disc — only visible once background turns white */
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 55%;
+  height: 78%;
+  border-radius: 50%;
+  background: var(--japan-red);
+  opacity: 0;
+  transition: opacity 120ms linear;
+}
+.japan-flag[data-flag="1"]::before { opacity: 1; }
+
+
 
 /* VietGuys chevron pulses — radiate horizontally from ring (replace concentric rings) */
 .vg-chevron {
