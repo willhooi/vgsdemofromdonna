@@ -52,8 +52,8 @@ export const Hero = () => {
             </div>
           </div>
 
-          {/* Right — animation (hidden on mobile to protect hero height) */}
-          <div className="hidden md:block animate-fade-up" style={{ animationDelay: "320ms" }}>
+          {/* Right — animation (compact on mobile, full on desktop) */}
+          <div className="animate-fade-up mx-auto w-full max-w-[320px] sm:max-w-[380px] lg:max-w-none" style={{ animationDelay: "320ms" }}>
             <HeroChatAnimation />
           </div>
         </div>
