@@ -158,7 +158,7 @@ export const TrustBand = () => {
                     alt="Accrete Inc."
                     data-accrete-logo
                     className="inline-block h-8 sm:h-10 w-auto md:h-14 lg:h-16"
-                    loading="lazy"
+                    loading="eager"
                     decoding="async"
                   />
                 </a>
