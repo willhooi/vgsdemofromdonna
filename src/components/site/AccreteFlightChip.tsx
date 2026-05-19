@@ -44,6 +44,7 @@ const JapanFlag = ({ className = "" }: { className?: string }) => (
 export const AccreteFlightChip = () => {
   const placeholderRef = useRef<HTMLDivElement>(null);
   const morphRef = useRef<HTMLDivElement>(null);
+  const landedRef = useRef(false);
   const rafRef = useRef(0);
   const [mounted, setMounted] = useState(false);
 
@@ -158,6 +159,15 @@ export const AccreteFlightChip = () => {
       } else {
         morph.classList.remove("accrete-morph-idle");
       }
+
+      // Dispatch landed event once when crossing into landing zone
+      const landed = rawProgress >= 0.98;
+      if (landed && !landedRef.current) {
+        landedRef.current = true;
+        window.dispatchEvent(new CustomEvent("accrete:landed"));
+      } else if (!landed && landedRef.current && rawProgress < 0.9) {
+        landedRef.current = false;
+      }
     };
 
     const onScroll = () => {
@@ -190,12 +200,11 @@ export const AccreteFlightChip = () => {
       <div
         ref={placeholderRef}
         aria-hidden="true"
-        className="accrete-chip-slot mb-4 md:mb-5 flex justify-center lg:justify-start"
+        className="accrete-chip-slot mt-5 md:mt-6 flex justify-center lg:justify-start"
       >
         <span className="invisible inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-semibold">
           <span>A member of</span>
           <img src={accreteLogo} alt="" aria-hidden className="h-[14px] w-auto" />
-          <JapanFlag className="h-[10px] w-[14px]" />
         </span>
       </div>
 
@@ -252,7 +261,7 @@ export const AccreteFlightChip = () => {
                 data-morph-logo
                 className="relative z-[2] h-[14px] w-auto"
               />
-              <JapanFlag className="relative z-[2] h-[10px] w-[14px] shrink-0" />
+              
             </a>
           </div>,
           document.body
