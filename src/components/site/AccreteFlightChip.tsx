@@ -26,6 +26,7 @@ const TEAL = "hsl(168 60% 52%)";
 export const AccreteFlightChip = () => {
   const placeholderRef = useRef<HTMLDivElement>(null);
   const morphRef = useRef<HTMLDivElement>(null);
+  const flagRef = useRef<HTMLSpanElement>(null);
   const landedRef = useRef(false);
   const rafRef = useRef(0);
   const [mounted, setMounted] = useState(false);
