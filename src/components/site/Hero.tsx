@@ -40,8 +40,10 @@ export const Hero = () => {
               )}
             </h1>
 
+            <AccreteFlightChip />
+
             <div
-              className="mt-6 md:mt-8 flex justify-center lg:justify-start animate-fade-up"
+              className="mt-4 md:mt-5 flex justify-center lg:justify-start animate-fade-up"
               style={{ animationDelay: "180ms" }}
             >
               <Button variant="cta" size="lg" asChild>
@@ -51,8 +53,6 @@ export const Hero = () => {
                 </Link>
               </Button>
             </div>
-
-            <AccreteFlightChip />
           </div>
 
           {/* Right — animation (compact on mobile, full on desktop) */}
