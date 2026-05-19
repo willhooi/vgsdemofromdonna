@@ -392,13 +392,13 @@ export const HeroChatAnimation = () => {
             {/* Header — sizes scale with phone width via container queries */}
             <div
               className="flex items-center border-b border-border/70 bg-white/95 backdrop-blur"
-              style={{ gap: "2.5cqw", padding: "2.5cqw 2cqw" }}
+              style={{ gap: "3cqw", padding: "3cqw 5cqw" }}
             >
               <div
-                className="flex items-center justify-center overflow-hidden rounded-full bg-white ring-1 ring-border"
-                style={{ width: "13cqw", height: "13cqw" }}
+                className="flex shrink-0 items-center justify-center overflow-hidden rounded-full bg-white ring-1 ring-border"
+                style={{ width: "11cqw", height: "11cqw" }}
               >
-                <img src={vlAvatar} alt="" className="h-full w-full object-contain p-[6%]" />
+                <img src={vlAvatar} alt="" className="h-full w-full object-contain p-[4%]" />
               </div>
               <div className="flex flex-col" style={{ gap: "1cqw" }}>
                 <span className="font-bold leading-none text-foreground" style={{ fontSize: "4.8cqw" }}>
