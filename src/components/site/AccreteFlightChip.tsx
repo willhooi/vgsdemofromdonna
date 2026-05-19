@@ -24,14 +24,6 @@ export const AccreteFlightChip = () => {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    // Already played this session → render nothing (return early via phase=landed)
-    try {
-      if (window.sessionStorage.getItem(SESSION_KEY) === "1") {
-        setPhase("landed");
-        return;
-      }
-    } catch { /* noop */ }
-
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 
@@ -59,7 +51,6 @@ export const AccreteFlightChip = () => {
       if (reduced) {
         setPhase("landed");
         window.dispatchEvent(new CustomEvent("accrete:landed"));
-        try { window.sessionStorage.setItem(SESSION_KEY, "1"); } catch { /* noop */ }
         return;
       }
 
@@ -86,7 +77,6 @@ export const AccreteFlightChip = () => {
       window.setTimeout(() => {
         setPhase("landed");
         window.dispatchEvent(new CustomEvent("accrete:landed"));
-        try { window.sessionStorage.setItem(SESSION_KEY, "1"); } catch { /* noop */ }
       }, 720);
     };
 
