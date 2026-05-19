@@ -11,6 +11,10 @@ import {
   Mail,
   Phone,
   Smartphone,
+  Landmark,
+  ShoppingBag,
+  HeartPulse,
+  Plane,
 } from "lucide-react";
 import bytetechLogo from "@/assets/brand/bytetech.svg";
 import shopperImg from "@/assets/channels-girl.png";
