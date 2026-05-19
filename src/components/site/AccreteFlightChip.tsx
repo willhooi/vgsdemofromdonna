@@ -37,6 +37,7 @@ export const AccreteFlightChip = () => {
     const hero = document.getElementById("top");
     if (!hero) return;
 
+
     let triggered = false;
 
     const fly = () => {
