@@ -114,7 +114,7 @@ export const AccreteFlightChip = () => {
       // inside the TrustBand heading, morphs disc → Hinomaru flag.
       const flag = flagRef.current;
       if (flag) {
-        if (tgLogo && rawProgress > 0.001 && rawProgress < 0.999) {
+        if (tgLogo && rawProgress > 0.001) {
           const logoRect = tgLogo.getBoundingClientRect();
           // Start: current chip center in viewport
           const startXVp = phRect.left + phRect.width / 2;
