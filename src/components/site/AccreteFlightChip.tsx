@@ -110,32 +110,34 @@ export const AccreteFlightChip = () => {
         dot.style.opacity = String(clamp01(1 - rawProgress / 0.08));
       }
 
-      // Japan flag — slides from chip center to end of headline, morphs disc → flag
+      // Japan flag — slides from chip dot to the right edge of the Accrete logo
+      // inside the TrustBand heading, morphs disc → Hinomaru flag.
       const flag = flagRef.current;
-      const headlineEnd = document.querySelector<HTMLElement>("[data-headline-end]");
       if (flag) {
-        if (headlineEnd && rawProgress > 0.001 && rawProgress < 0.999) {
-          const heRect = headlineEnd.getBoundingClientRect();
-          // Use chip center as start; period sits near baseline → use bottom of anchor
-          const startX = phCxDoc - scrollY * 0 - 0; // doc coords don't matter; we use viewport
+        if (tgLogo && rawProgress > 0.001 && rawProgress < 0.999) {
+          const logoRect = tgLogo.getBoundingClientRect();
+          // Start: current chip center in viewport
           const startXVp = phRect.left + phRect.width / 2;
           const startYVp = phRect.top + phRect.height / 2;
-          const endXVp = heRect.left + heRect.width / 2;
-          const endYVp = heRect.top + heRect.height * 0.78; // sit on baseline-ish
-          // Flag travel uses its own eased progress (front-loaded)
-          const fp = easeInOutCubic(clamp01(rawProgress / 0.45));
+          // End: just to the right of the Accrete logo, vertically centered on its baseline
+          const gap = Math.max(8, logoRect.height * 0.22);
+          const endXVp = logoRect.right + gap;
+          const endYVp = logoRect.top + logoRect.height * 0.62;
+          // Flag travel uses its own eased progress (front-loaded so it lands before headline does)
+          const fp = easeInOutCubic(clamp01(rawProgress / 0.55));
           const fx = lerp(startXVp, endXVp, fp);
           const fy = lerp(startYVp, endYVp, fp);
-          // Shape morph
-          const w = lerp(7, 18, fp);
-          const h = lerp(7, 12, fp);
-          const radius = lerp(50, 12, fp); // % then px-ish — used as %
+          // Shape morph — flag final size scales with logo height
+          const flagH = Math.max(12, logoRect.height * 0.55);
+          const flagW = flagH * 1.5;
+          const w = lerp(7, flagW, fp);
+          const h = lerp(7, flagH, fp);
+          const radius = lerp(50, 10, fp); // % — disc → soft-cornered rect
           const isFlag = fp > 0.65;
           // White bg blends in after halfway
-          const bgMix = fp; // 0 = red, 1 = white
-          const r = Math.round(lerp(188, 255, bgMix));
-          const g = Math.round(lerp(0, 255, bgMix));
-          const b = Math.round(lerp(45, 255, bgMix));
+          const r = Math.round(lerp(188, 255, fp));
+          const g = Math.round(lerp(0, 255, fp));
+          const b = Math.round(lerp(45, 255, fp));
           flag.style.opacity = "1";
           flag.style.transform = `translate3d(${fx - w / 2}px, ${fy - h / 2}px, 0)`;
           flag.style.width = `${w}px`;
@@ -143,7 +145,7 @@ export const AccreteFlightChip = () => {
           flag.style.borderRadius = `${radius}%`;
           flag.style.background = `rgb(${r},${g},${b})`;
           flag.style.boxShadow = isFlag
-            ? "0 1px 3px rgba(0,0,0,0.18), 0 0 0 0.5px rgba(0,0,0,0.06)"
+            ? "0 1px 3px rgba(0,0,0,0.18), 0 0 0 0.5px rgba(0,0,0,0.08)"
             : "0 0 10px rgba(188,0,45,0.55)";
           flag.dataset.flag = isFlag ? "1" : "0";
         } else {
