@@ -76,9 +76,13 @@ const BUBBLES: Bubble[] = [
     side: "left",
     text: (
       <>
-        <span className="inline-flex items-center gap-1">
-          Tặng Quý khách Voucher <b>30%</b> cho lần mua sắm tiếp theo
-          <Gift className="h-3 w-3 inline-block text-[#ff9b17]" />
+        <span className="flex flex-col gap-0.5">
+          <span>Tặng Quý khách Voucher</span>
+          <span className="flex items-center gap-1">
+            <b className="text-sm">30%</b>
+            <Gift className="h-3 w-3 inline-block text-[#ff9b17]" />
+          </span>
+          <span>cho lần mua sắm tiếp theo</span>
         </span>
         <br />
         <span className="mt-1.5 inline-block rounded-full bg-[#39b44a] px-2 py-0.5 text-[9px] font-bold text-white shadow-sm">
