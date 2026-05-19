@@ -377,7 +377,10 @@ export const HeroChatAnimation = () => {
         })}
 
         {/* Phone — uses uploaded frame image */}
-        <div className="phone-float absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[62%] aspect-[392/720]">
+        <div
+          className="phone-float absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[62%] aspect-[392/720]"
+          style={{ containerType: "inline-size" }}
+        >
           <img
             src={phoneFrame}
             alt=""
@@ -386,22 +389,36 @@ export const HeroChatAnimation = () => {
           />
           {/* Screen safe area inside the frame (tuned to the uploaded mockup). */}
           <div className="absolute inset-[3.2%_4.5%_11%_4.5%] overflow-hidden rounded-[8%]">
-            {/* Header */}
-            <div className="flex items-center gap-1.5 border-b border-border/70 bg-white/95 px-2 py-1.5 backdrop-blur">
-              <div className="flex h-6 w-6 items-center justify-center overflow-hidden rounded-full bg-white ring-1 ring-border">
-                <img src={vlAvatar} alt="" className="h-full w-full object-contain p-[2px]" />
+            {/* Header — sizes scale with phone width via container queries */}
+            <div
+              className="flex items-center border-b border-border/70 bg-white/95 backdrop-blur"
+              style={{ gap: "3cqw", padding: "3cqw 4cqw" }}
+            >
+              <div
+                className="flex items-center justify-center overflow-hidden rounded-full bg-white ring-1 ring-border"
+                style={{ width: "13cqw", height: "13cqw" }}
+              >
+                <img src={vlAvatar} alt="" className="h-full w-full object-contain p-[6%]" />
               </div>
-              <div className="flex flex-col">
-                <span className="text-[9px] font-bold leading-none text-foreground">VietGuys</span>
-                <span className="flex items-center gap-1 text-[7px] text-muted-foreground">
-                  <span className="inline-block h-1 w-1 rounded-full bg-[#39b44a]" />
+              <div className="flex flex-col" style={{ gap: "1cqw" }}>
+                <span className="font-bold leading-none text-foreground" style={{ fontSize: "4.8cqw" }}>
+                  VietGuys
+                </span>
+                <span
+                  className="flex items-center text-muted-foreground"
+                  style={{ gap: "1.5cqw", fontSize: "3.6cqw" }}
+                >
+                  <span
+                    className="inline-block rounded-full bg-[#39b44a]"
+                    style={{ width: "1.8cqw", height: "1.8cqw" }}
+                  />
                   Online
                 </span>
               </div>
             </div>
 
             {/* Chat list */}
-            <div className="flex flex-col gap-1 px-1.5 py-1.5">
+            <div className="flex flex-col" style={{ gap: "1.6cqw", padding: "2.5cqw 3cqw" }}>
               {BUBBLES.map((b, i) => {
                 const visible = i < visibleCount;
                 return (
@@ -415,7 +432,7 @@ export const HeroChatAnimation = () => {
                     }}
                   >
                     <div
-                      className={`max-w-[84%] rounded-2xl px-2 py-1 text-[8.5px] leading-snug shadow-sm ${
+                      className={`max-w-[86%] rounded-2xl shadow-sm leading-snug ${
                         b.side === "left"
                           ? "rounded-tl-md bg-[hsl(128_60%_94%)] text-[hsl(128_55%_18%)]"
                           : "rounded-tr-md bg-foreground/90 text-white"
