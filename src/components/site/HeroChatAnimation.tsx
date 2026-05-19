@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from "react";
-import { Gift, Lock, RotateCcw, Move, Star } from "lucide-react";
+import { Gift, Lock, RotateCcw, Move } from "lucide-react";
 
 import smsIcon from "@/assets/hero-icons/sms.png";
 import zaloIcon from "@/assets/hero-icons/zalo.png";
@@ -10,15 +10,12 @@ import voiceIcon from "@/assets/hero-icons/voice.png";
 import customizedIcon from "@/assets/hero-icons/customized.png";
 import miniappIcon from "@/assets/hero-icons/miniapp.png";
 
-import vlAvatar from "@/assets/hero/vl-avatar.png";
-
 /**
  * HeroChatAnimation
  * - Phone mockup with sequential VietGuys chat bubbles.
  * - 8 channel icons orbit around the phone, pulsing in sequence.
- * - Editor mode (admin only) lets you drag + resize icons.
- *   Enable via ?edit=1 or localStorage["vg.admin"]="1".
- *   Positions + sizes persist to localStorage.
+ * - Editor mode (toggle via floating button or ?edit=1) lets you drag icons.
+ *   Positions persist to localStorage under HERO_ICON_POS_KEY.
  */
 
 type Bubble = {
@@ -30,64 +27,36 @@ type Bubble = {
 const BUBBLES: Bubble[] = [
   {
     side: "left",
-    text: <>Xin chào <b>Nguyễn An</b>, cảm ơn bạn đã đăng ký 👋</>,
+    text: (
+      <>
+        Xin chào <b>Nguyễn An</b>, cảm ơn bạn đã đăng ký 👋
+      </>
+    ),
     srText: "Xin chào Nguyễn An, cảm ơn bạn đã đăng ký",
   },
   {
     side: "left",
     text: (
       <>
-        Mã OTP xác thực:{" "}
-        <b className="font-mono tracking-wider rounded-md bg-[#ff9b17]/15 px-1.5 py-0.5 text-[#b8650a]">
-          482916
-        </b>
+        Mã OTP xác thực: <b className="font-mono tracking-wider">482916</b>
       </>
     ),
     srText: "Mã OTP xác thực 482916",
   },
   {
     side: "right",
-    text: <>Tôi cần hỗ trợ đổi mật khẩu</>,
-    srText: "Tôi cần hỗ trợ đổi mật khẩu",
-  },
-  {
-    side: "left",
-    text: <>Đã gửi link reset qua Email ✉️</>,
-    srText: "Đã gửi link reset qua Email",
-  },
-  {
-    side: "right",
-    text: <>Trải nghiệm sản phẩm mới!</>,
-    srText: "Trải nghiệm sản phẩm mới",
+    text: <>Đăng ký trải nghiệm sản phẩm mới!</>,
+    srText: "Đăng ký trải nghiệm sản phẩm mới",
   },
   {
     side: "left",
     text: (
-      <span className="inline-flex items-center gap-1">
-        Đơn hàng đã giao thành công!
-        <span className="inline-flex items-center gap-[1px] text-[#ff9b17]">
-          {Array.from({ length: 5 }).map((_, i) => (
-            <Star key={i} className="h-2.5 w-2.5 fill-current" />
-          ))}
-        </span>
+      <span className="inline-flex items-center gap-1.5">
+        Tặng bạn Voucher <b>30%</b> cho đơn hàng tiếp theo
+        <Gift className="h-3.5 w-3.5 inline-block text-[#ff9b17]" />
       </span>
     ),
-    srText: "Đơn hàng đã giao thành công - 5 sao",
-  },
-  {
-    side: "left",
-    text: (
-      <span className="flex flex-col gap-1">
-        <span className="inline-flex items-center gap-1">
-          Tặng bạn Voucher <b>30%</b> cho đơn hàng tiếp theo
-          <Gift className="h-3 w-3 inline-block text-[#ff9b17]" />
-        </span>
-        <span className="inline-flex w-fit rounded-full bg-[#39b44a] px-2 py-0.5 text-[8px] font-bold text-white shadow-sm">
-          Sử dụng ngay!
-        </span>
-      </span>
-    ),
-    srText: "Tặng bạn Voucher 30% cho đơn hàng tiếp theo. Sử dụng ngay",
+    srText: "Tặng bạn Voucher 30% cho đơn hàng tiếp theo",
   },
 ];
 
@@ -95,35 +64,29 @@ type Chip = {
   id: string;
   label: string;
   icon: string;
-  default: { x: number; y: number; size: number };
+  /** default position as % of container (top-left origin of chip) */
+  default: { x: number; y: number };
 };
 
-// Safe zones: x/y in % (chip top-left), size in % of container width.
-// Default size 11% ≈ matches previous 11/12 px chip.
 const CHIPS: Chip[] = [
-  { id: "sms", label: "SMS", icon: smsIcon, default: { x: 2, y: 4, size: 12 } },
-  { id: "voice", label: "Voice", icon: voiceIcon, default: { x: 44, y: -1, size: 12 } },
-  { id: "viber", label: "Viber", icon: viberIcon, default: { x: 86, y: 6, size: 12 } },
-  { id: "customized", label: "Customized", icon: customizedIcon, default: { x: -2, y: 42, size: 12 } },
-  { id: "zalo", label: "Zalo", icon: zaloIcon, default: { x: 88, y: 44, size: 12 } },
-  { id: "miniapp", label: "Mini App", icon: miniappIcon, default: { x: 0, y: 82, size: 12 } },
-  { id: "email", label: "Email", icon: emailIcon, default: { x: 44, y: 92, size: 12 } },
-  { id: "rewards", label: "Rewards", icon: rewardsIcon, default: { x: 86, y: 82, size: 12 } },
+  { id: "sms", label: "SMS", icon: smsIcon, default: { x: 4, y: 6 } },
+  { id: "voice", label: "Voice", icon: voiceIcon, default: { x: 44, y: 0 } },
+  { id: "viber", label: "Viber", icon: viberIcon, default: { x: 84, y: 10 } },
+  { id: "customized", label: "Customized", icon: customizedIcon, default: { x: 0, y: 42 } },
+  { id: "zalo", label: "Zalo", icon: zaloIcon, default: { x: 86, y: 44 } },
+  { id: "miniapp", label: "Mini App", icon: miniappIcon, default: { x: 2, y: 78 } },
+  { id: "email", label: "Email", icon: emailIcon, default: { x: 44, y: 90 } },
+  { id: "rewards", label: "Rewards", icon: rewardsIcon, default: { x: 84, y: 80 } },
 ];
 
-const POS_KEY = "vg.hero.icon.positions.v2";
-const ADMIN_KEY = "vg.admin";
+const STORAGE_KEY = "vg.hero.icon.positions.v1";
 
-// Safe-zone clamps (in %) — keeps icons inside the visible band on mobile too.
-const SAFE = { minX: -4, maxX: 96, minY: -4, maxY: 96, minSize: 7, maxSize: 18 };
-
-type PosEntry = { x: number; y: number; size: number };
-type PositionMap = Record<string, PosEntry>;
+type PositionMap = Record<string, { x: number; y: number }>;
 
 const loadPositions = (): PositionMap => {
   if (typeof window === "undefined") return {};
   try {
-    const raw = window.localStorage.getItem(POS_KEY);
+    const raw = window.localStorage.getItem(STORAGE_KEY);
     return raw ? (JSON.parse(raw) as PositionMap) : {};
   } catch {
     return {};
@@ -132,41 +95,25 @@ const loadPositions = (): PositionMap => {
 
 const savePositions = (p: PositionMap) => {
   try {
-    window.localStorage.setItem(POS_KEY, JSON.stringify(p));
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(p));
   } catch {
     /* noop */
-  }
-};
-
-const isAdmin = () => {
-  if (typeof window === "undefined") return false;
-  try {
-    const params = new URLSearchParams(window.location.search);
-    if (params.get("edit") === "1") {
-      window.localStorage.setItem(ADMIN_KEY, "1");
-      return true;
-    }
-    if (params.get("edit") === "0") {
-      window.localStorage.removeItem(ADMIN_KEY);
-      return false;
-    }
-    return window.localStorage.getItem(ADMIN_KEY) === "1";
-  } catch {
-    return false;
   }
 };
 
 export const HeroChatAnimation = () => {
   const [visibleCount, setVisibleCount] = useState(1);
   const [activeChip, setActiveChip] = useState(0);
-  const [admin, setAdmin] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [positions, setPositions] = useState<PositionMap>(() => loadPositions());
   const containerRef = useRef<HTMLDivElement>(null);
-  const dragRef = useRef<{ mode: "move" | "resize"; id: string; offX: number; offY: number; startSize: number; startX: number; startY: number } | null>(null);
+  const dragRef = useRef<{ id: string; offX: number; offY: number } | null>(null);
 
+  // Allow ?edit=1 to open editor on load
   useEffect(() => {
-    setAdmin(isAdmin());
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("edit") === "1") setEditMode(true);
   }, []);
 
   // Chat bubble sequence
@@ -176,10 +123,11 @@ export const HeroChatAnimation = () => {
     const id = setInterval(() => {
       step = step >= totalSteps ? 1 : step + 1;
       setVisibleCount(Math.min(step, BUBBLES.length));
-    }, 1500);
+    }, 1800);
     return () => clearInterval(id);
   }, []);
 
+  // Sequenced chip highlight (paused in edit mode for clarity)
   useEffect(() => {
     if (editMode) return;
     const id = setInterval(() => {
@@ -188,65 +136,42 @@ export const HeroChatAnimation = () => {
     return () => clearInterval(id);
   }, [editMode]);
 
-  const getPos = (chip: Chip): PosEntry => positions[chip.id] ?? chip.default;
+  const getPos = (chip: Chip) => positions[chip.id] ?? chip.default;
 
   const onPointerDown = useCallback(
-    (e: React.PointerEvent, id: string, mode: "move" | "resize") => {
+    (e: React.PointerEvent, id: string) => {
       if (!editMode) return;
       e.preventDefault();
       e.stopPropagation();
       const target = e.currentTarget as HTMLElement;
       target.setPointerCapture(e.pointerId);
       const rect = containerRef.current?.getBoundingClientRect();
+      const chipRect = target.getBoundingClientRect();
       if (!rect) return;
-      const chip = CHIPS.find((c) => c.id === id)!;
-      const current = positions[id] ?? chip.default;
-      const chipRect = (target.closest("[data-chip]") as HTMLElement)?.getBoundingClientRect() ?? target.getBoundingClientRect();
       dragRef.current = {
-        mode,
         id,
         offX: e.clientX - chipRect.left,
         offY: e.clientY - chipRect.top,
-        startSize: current.size,
-        startX: e.clientX,
-        startY: e.clientY,
       };
     },
-    [editMode, positions]
+    [editMode]
   );
 
   const onPointerMove = useCallback((e: React.PointerEvent) => {
     const drag = dragRef.current;
     const rect = containerRef.current?.getBoundingClientRect();
     if (!drag || !rect) return;
-    const chip = CHIPS.find((c) => c.id === drag.id)!;
-    const current = positions[drag.id] ?? chip.default;
-
-    if (drag.mode === "move") {
-      const x = ((e.clientX - drag.offX - rect.left) / rect.width) * 100;
-      const y = ((e.clientY - drag.offY - rect.top) / rect.height) * 100;
-      setPositions((prev) => ({
-        ...prev,
-        [drag.id]: {
-          ...current,
-          x: Math.max(SAFE.minX, Math.min(SAFE.maxX, x)),
-          y: Math.max(SAFE.minY, Math.min(SAFE.maxY, y)),
-        },
-      }));
-    } else {
-      // Resize: drag right/down increases size
-      const deltaPx = Math.max(e.clientX - drag.startX, e.clientY - drag.startY);
-      const deltaPct = (deltaPx / rect.width) * 100;
-      const next = Math.max(SAFE.minSize, Math.min(SAFE.maxSize, drag.startSize + deltaPct));
-      setPositions((prev) => ({
-        ...prev,
-        [drag.id]: { ...current, size: next },
-      }));
-    }
-  }, [positions]);
+    const x = ((e.clientX - drag.offX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - drag.offY - rect.top) / rect.height) * 100;
+    const clampedX = Math.max(-4, Math.min(96, x));
+    const clampedY = Math.max(-4, Math.min(96, y));
+    setPositions((prev) => ({ ...prev, [drag.id]: { x: clampedX, y: clampedY } }));
+  }, []);
 
   const onPointerUp = useCallback((e: React.PointerEvent) => {
-    if (dragRef.current) savePositions(positions);
+    if (dragRef.current) {
+      savePositions(positions);
+    }
     dragRef.current = null;
     try {
       (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
@@ -258,7 +183,7 @@ export const HeroChatAnimation = () => {
   const resetPositions = () => {
     setPositions({});
     try {
-      window.localStorage.removeItem(POS_KEY);
+      window.localStorage.removeItem(STORAGE_KEY);
     } catch {
       /* noop */
     }
@@ -266,34 +191,35 @@ export const HeroChatAnimation = () => {
 
   return (
     <div className="relative">
-      {admin && (
-        <div className="absolute -top-2 right-0 z-20 flex items-center gap-1.5">
+      {/* Edit-mode floating toolbar */}
+      <div className="absolute -top-2 right-0 z-20 flex items-center gap-1.5">
+        <button
+          type="button"
+          onClick={() => {
+            if (editMode) savePositions(positions);
+            setEditMode((v) => !v);
+          }}
+          className={`flex items-center gap-1 rounded-full border px-2.5 py-1 text-[11px] font-semibold shadow-sm transition-colors ${
+            editMode
+              ? "border-[#39b44a] bg-[#39b44a] text-white"
+              : "border-border bg-white/90 text-foreground hover:bg-white"
+          }`}
+          aria-label={editMode ? "Lock icons" : "Edit icon positions"}
+        >
+          {editMode ? <Lock className="h-3 w-3" /> : <Move className="h-3 w-3" />}
+          {editMode ? "Done" : "Edit"}
+        </button>
+        {editMode && (
           <button
             type="button"
-            onClick={() => {
-              if (editMode) savePositions(positions);
-              setEditMode((v) => !v);
-            }}
-            className={`flex items-center gap-1 rounded-full border px-2.5 py-1 text-[11px] font-semibold shadow-sm transition-colors ${
-              editMode
-                ? "border-[#39b44a] bg-[#39b44a] text-white"
-                : "border-border bg-white/90 text-foreground hover:bg-white"
-            }`}
+            onClick={resetPositions}
+            className="flex items-center gap-1 rounded-full border border-border bg-white/90 px-2.5 py-1 text-[11px] font-semibold text-foreground shadow-sm hover:bg-white"
+            aria-label="Reset positions"
           >
-            {editMode ? <Lock className="h-3 w-3" /> : <Move className="h-3 w-3" />}
-            {editMode ? "Done" : "Edit"}
+            <RotateCcw className="h-3 w-3" /> Reset
           </button>
-          {editMode && (
-            <button
-              type="button"
-              onClick={resetPositions}
-              className="flex items-center gap-1 rounded-full border border-border bg-white/90 px-2.5 py-1 text-[11px] font-semibold text-foreground shadow-sm hover:bg-white"
-            >
-              <RotateCcw className="h-3 w-3" /> Reset
-            </button>
-          )}
-        </div>
-      )}
+        )}
+      </div>
 
       <div
         ref={containerRef}
@@ -329,23 +255,20 @@ export const HeroChatAnimation = () => {
           return (
             <div
               key={chip.id}
-              data-chip
               className="absolute select-none"
               style={{
                 left: `${pos.x}%`,
                 top: `${pos.y}%`,
-                width: `${pos.size}%`,
-                aspectRatio: "1 / 1",
                 animation: editMode ? "none" : `chip-float 5.4s ease-in-out infinite`,
                 animationDelay: `${i * 0.28}s`,
                 cursor: editMode ? "grab" : "default",
                 touchAction: "none",
                 zIndex: editMode ? 15 : 5,
               }}
-              onPointerDown={(e) => onPointerDown(e, chip.id, "move")}
+              onPointerDown={(e) => onPointerDown(e, chip.id)}
             >
               <div
-                className="flex h-full w-full items-center justify-center rounded-2xl transition-transform duration-300"
+                className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-2xl bg-white/0 transition-transform duration-300"
                 style={{
                   transform: isActive ? "scale(1.14)" : "scale(1)",
                   filter: editMode
@@ -362,120 +285,55 @@ export const HeroChatAnimation = () => {
                   className="h-full w-full object-contain pointer-events-none"
                 />
               </div>
-
-              {editMode && (
-                <button
-                  type="button"
-                  onPointerDown={(e) => onPointerDown(e, chip.id, "resize")}
-                  className="absolute -bottom-1 -right-1 h-3.5 w-3.5 rounded-full border border-white bg-[#39b44a] shadow"
-                  style={{ cursor: "nwse-resize", touchAction: "none" }}
-                  aria-label={`Resize ${chip.label}`}
-                />
-              )}
             </div>
           );
         })}
 
-        {/* Phone — drawn with CSS (no external frame image) */}
-        <div
-          className="phone-float absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[58%] aspect-[392/780]"
-          style={{ containerType: "inline-size" }}
-        >
-          {/* Outer body */}
-          <div
-            className="absolute inset-0 rounded-[14%/7%] bg-gradient-to-b from-neutral-800 to-neutral-950 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.45),0_8px_20px_-8px_rgba(0,0,0,0.35)]"
-            style={{ padding: "2.2cqw" }}
-          >
-            {/* Inner bezel */}
-            <div className="relative h-full w-full rounded-[12%/6%] bg-black ring-1 ring-white/10">
-              {/* Side buttons */}
-              <span className="absolute -left-[1.2cqw] top-[18%] h-[6%] w-[1.2cqw] rounded-l-full bg-neutral-800" />
-              <span className="absolute -left-[1.2cqw] top-[28%] h-[10%] w-[1.2cqw] rounded-l-full bg-neutral-800" />
-              <span className="absolute -left-[1.2cqw] top-[42%] h-[10%] w-[1.2cqw] rounded-l-full bg-neutral-800" />
-              <span className="absolute -right-[1.2cqw] top-[26%] h-[14%] w-[1.2cqw] rounded-r-full bg-neutral-800" />
+        {/* Phone frame */}
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[58%] aspect-[9/16] rounded-[28px] bg-white shadow-[0_22px_60px_-20px_rgba(20,80,30,0.35),0_0_0_1px_hsl(var(--border))] overflow-hidden phone-float">
+          <div className="flex items-center gap-2 border-b border-border/70 px-3 py-2">
+            <div
+              className="flex h-7 w-7 items-center justify-center rounded-full"
+              style={{
+                background: "linear-gradient(135deg, #39b44a 0 50%, #ff9b17 50% 100%)",
+              }}
+            >
+              <span className="text-[10px] font-extrabold text-white">V</span>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-[10px] font-bold leading-none text-foreground">VietGuys</span>
+              <span className="flex items-center gap-1 text-[8px] text-muted-foreground">
+                <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#39b44a]" />
+                Online
+              </span>
+            </div>
+          </div>
 
-              {/* Dynamic island / notch */}
-              <div
-                className="absolute left-1/2 top-[1.8%] z-20 -translate-x-1/2 rounded-full bg-black"
-                style={{ width: "28%", height: "3.6%" }}
-              />
-
-              {/* Screen */}
-              <div className="absolute inset-[1.4%] flex flex-col overflow-hidden rounded-[11%/5.5%] bg-white">
-                {/* Status bar */}
+          <div className="flex flex-col gap-1.5 px-2.5 py-3">
+            {BUBBLES.map((b, i) => {
+              const visible = i < visibleCount;
+              return (
                 <div
-                  className="flex shrink-0 items-center justify-between text-foreground/80"
-                  style={{ padding: "1.8cqw 5cqw 0.8cqw", fontSize: "2.8cqw" }}
+                  key={i}
+                  className={`flex ${b.side === "right" ? "justify-end" : "justify-start"}`}
+                  style={{
+                    opacity: visible ? 1 : 0,
+                    transform: visible ? "translateY(0) scale(1)" : "translateY(6px) scale(0.94)",
+                    transition: "opacity 320ms ease-out, transform 320ms cubic-bezier(0.22,1,0.36,1)",
+                  }}
                 >
-                  <span className="font-semibold">9:41</span>
-                  <span className="flex items-center" style={{ gap: "1cqw" }}>
-                    <span className="inline-block rounded-sm bg-foreground/70" style={{ width: "3cqw", height: "1.6cqw" }} />
-                    <span className="inline-block rounded-full bg-foreground/70" style={{ width: "1.6cqw", height: "1.6cqw" }} />
-                    <span className="inline-block rounded-[0.4cqw] border border-foreground/70" style={{ width: "4cqw", height: "1.8cqw" }} />
-                  </span>
-                </div>
-            {/* Header — anchored to top of screen, fully inside safe area */}
-            <div
-              className="flex shrink-0 items-center border-b border-border/70 bg-white/95 backdrop-blur"
-              style={{ gap: "3cqw", padding: "3.2cqw 4.5cqw" }}
-            >
-              <div
-                className="flex shrink-0 items-center justify-center overflow-hidden rounded-full bg-white ring-1 ring-border"
-                style={{ width: "10cqw", height: "10cqw" }}
-              >
-                <img src={vlAvatar} alt="" className="h-full w-full object-contain p-[4%]" />
-              </div>
-              <div className="flex min-w-0 flex-col" style={{ gap: "1cqw" }}>
-                <span className="truncate font-bold leading-none text-foreground" style={{ fontSize: "4.4cqw" }}>
-                  VietGuys
-                </span>
-                <span
-                  className="flex items-center text-muted-foreground"
-                  style={{ gap: "1.5cqw", fontSize: "3.3cqw" }}
-                >
-                  <span
-                    className="inline-block rounded-full bg-[#39b44a]"
-                    style={{ width: "1.6cqw", height: "1.6cqw" }}
-                  />
-                  Online
-                </span>
-              </div>
-            </div>
-
-            {/* Chat list — fills remaining screen, scrolls only if needed */}
-            <div
-              className="flex min-h-0 flex-1 flex-col justify-end overflow-y-auto"
-              style={{ gap: "1.2cqw", padding: "2.5cqw 3cqw 3cqw" }}
-            >
-              {BUBBLES.map((b, i) => {
-                const visible = i < visibleCount;
-                return (
                   <div
-                    key={i}
-                    className={`flex ${b.side === "right" ? "justify-end" : "justify-start"}`}
-                    style={{
-                      opacity: visible ? 1 : 0,
-                      transform: visible ? "translateY(0) scale(1)" : "translateY(6px) scale(0.94)",
-                      transition: "opacity 320ms ease-out, transform 320ms cubic-bezier(0.22,1,0.36,1)",
-                    }}
+                    className={`max-w-[82%] rounded-2xl px-2.5 py-1.5 text-[10px] leading-snug shadow-sm ${
+                      b.side === "left"
+                        ? "rounded-tl-md bg-[hsl(128_60%_94%)] text-[hsl(128_55%_18%)]"
+                        : "rounded-tr-md bg-foreground/90 text-white"
+                    }`}
                   >
-                    <div
-                      className={`max-w-[82%] rounded-2xl shadow-sm leading-snug ${
-                        b.side === "left"
-                          ? "rounded-tl-md bg-[hsl(128_60%_94%)] text-[hsl(128_55%_18%)]"
-                          : "rounded-tr-md bg-foreground/90 text-white"
-                      }`}
-                      style={{ fontSize: "3.2cqw", padding: "1.8cqw 2.6cqw" }}
-                    >
-                      {b.text}
-                    </div>
-
+                    {b.text}
                   </div>
-                );
-              })}
-            </div>
-              </div>
-            </div>
+                </div>
+              );
+            })}
           </div>
         </div>
 
@@ -486,9 +344,9 @@ export const HeroChatAnimation = () => {
         </ul>
       </div>
 
-      {admin && editMode && (
+      {editMode && (
         <p className="mt-2 text-center text-[11px] text-muted-foreground">
-          Kéo icon để di chuyển, kéo chấm xanh góc dưới-phải để resize. Vùng an toàn được tự động giới hạn.
+          Kéo các icon để sắp xếp lại quanh điện thoại. Vị trí được lưu tự động trên thiết bị này.
         </p>
       )}
     </div>
