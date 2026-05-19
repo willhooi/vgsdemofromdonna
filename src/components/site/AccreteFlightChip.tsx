@@ -89,19 +89,11 @@ export const AccreteFlightChip = () => {
       }, 720);
     };
 
-    const io = new IntersectionObserver(
-      (entries) => {
-        const e = entries[0];
-        if (!e) return;
-        // Hero ≤ 80% visible → user has started scrolling away
-        if (e.intersectionRatio < 0.8) fly();
-      },
-      { threshold: [0, 0.5, 0.8, 1] }
-    );
-    io.observe(hero);
-
-    return () => io.disconnect();
-  }, []);
+    const onScroll = () => {
+      if (window.scrollY > 80) fly();
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
 
   if (phase === "landed") return null;
 
