@@ -94,7 +94,7 @@ export const Solutions = () => {
             to="/solutions"
             className="inline-flex items-center gap-1.5 rounded-full bg-[hsl(var(--primary))] px-6 py-3 text-sm font-semibold text-white shadow-[0_10px_30px_-10px_hsl(128_52%_40%/0.5)] transition-transform hover:-translate-y-0.5"
           >
-            Explore the full stack <ArrowRight className="h-4 w-4" />
+            Explore Our Solutions <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </div>
