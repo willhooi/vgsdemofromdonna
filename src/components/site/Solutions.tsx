@@ -80,21 +80,21 @@ export const Solutions = () => {
 
         {/* Stage + Outcome rail */}
         <div className="relative mx-auto mt-10 md:mt-14 max-w-6xl">
-          <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-10 items-center">
+          <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-10 items-start">
             <OutcomeStage visible={visible} />
-            <OutcomeRail visible={visible} />
+            <div className="flex flex-col gap-4">
+              <CDPSupportStrip visible={visible} />
+              <OutcomeRail visible={visible} />
+            </div>
           </div>
         </div>
-
-        {/* Support strip — PangoCDP × ByteTech */}
-        <CDPSupportStrip visible={visible} />
 
         <div className="mt-10 flex justify-center">
           <Link
             to="/solutions"
             className="inline-flex items-center gap-1.5 rounded-full bg-[hsl(var(--primary))] px-6 py-3 text-sm font-semibold text-white shadow-[0_10px_30px_-10px_hsl(128_52%_40%/0.5)] transition-transform hover:-translate-y-0.5"
           >
-            Explore the platform <ArrowRight className="h-4 w-4" />
+            Explore the full stack <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </div>
