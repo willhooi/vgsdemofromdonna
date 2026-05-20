@@ -171,7 +171,7 @@ const OutcomeStage = ({ visible }: { visible: boolean }) => (
         <span className="text-[11px] font-semibold text-foreground">5.0</span>
       </div>
       <p className="mt-1 text-[11px] text-muted-foreground">
-        "Giao hàng siêu nhanh!"
+        "Thanks for your feedback!"
       </p>
     </Popup>
 
