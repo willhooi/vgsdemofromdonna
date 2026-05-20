@@ -69,7 +69,7 @@ export const Solutions = () => {
         {/* Header */}
         <div className="mx-auto max-w-2xl text-center">
           <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-[hsl(var(--primary-deep))]">
-            <Sparkles className="h-3.5 w-3.5" /> The Outcome
+            <Sparkles className="h-3.5 w-3.5" /> WHAT WE DO
           </span>
           <h2 className="heading-display mt-3 text-balance text-[26px] sm:text-3xl md:text-4xl lg:text-[44px] text-foreground">
             Every conversation,{" "}
