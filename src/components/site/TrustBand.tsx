@@ -271,7 +271,7 @@ const BrandRow = ({
   return (
     <div className="group relative overflow-hidden">
       <div
-        className="flex w-max gap-4 will-change-transform"
+        className="flex w-max gap-2 sm:gap-3 will-change-transform"
         style={{
           animation: `${direction === "left" ? "marquee-left" : "marquee-right"} 38s linear infinite`,
         }}
@@ -289,7 +289,7 @@ const BrandLogo = ({ brand }: { brand: Brand }) => {
   return (
     <span
       title={brand.name}
-      className="inline-flex h-16 w-36 shrink-0 items-center justify-center rounded-xl border border-border bg-card px-2 py-1.5 sm:h-20 sm:w-44 sm:rounded-2xl sm:px-3 sm:py-2 md:h-24 md:w-52"
+      className="inline-flex h-14 w-24 shrink-0 items-center justify-center rounded-lg border border-border bg-card px-1.5 py-1 sm:h-16 sm:w-32 sm:rounded-xl sm:px-2 sm:py-1.5 md:h-20 md:w-36 md:px-3"
     >
       <img
         src={brand.logo}
