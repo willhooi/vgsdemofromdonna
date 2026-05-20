@@ -265,17 +265,21 @@ const BrandRow = ({
 };
 
 const BrandLogo = ({ brand }: { brand: Brand }) => {
+  // Uniform frame across breakpoints + inner safe-area so every logo
+  // (wide wordmark or square mark) reads at the same optical weight.
   return (
     <span
       title={brand.name}
-      className="inline-flex h-16 w-40 shrink-0 items-center justify-center rounded-2xl border border-border bg-card px-5 py-3 transition-all hover:-translate-y-0.5 hover:shadow-[0_10px_30px_-12px_rgba(0,0,0,0.18)]"
+      className="inline-flex h-14 w-32 shrink-0 items-center justify-center rounded-xl border border-border bg-card px-3 py-2 sm:h-16 sm:w-40 sm:rounded-2xl sm:px-4 sm:py-3 md:h-20 md:w-48 md:px-5"
     >
       <img
         src={brand.logo}
         alt={brand.name}
         loading="lazy"
         decoding="async"
-        className="max-h-10 w-auto max-w-full object-contain"
+        draggable={false}
+        className="h-full w-full object-contain"
+        style={{ maxHeight: "70%", maxWidth: "85%" }}
       />
     </span>
   );
