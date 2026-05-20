@@ -68,14 +68,11 @@ export const Solutions = () => {
       <div className="container-tight relative">
         {/* Header */}
         <div className="mx-auto max-w-2xl text-center">
-          <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em] text-[hsl(var(--primary-deep))]">
-            <Sparkles className="h-3.5 w-3.5" /> WHAT WE DO
-          </span>
-          <h2 className="heading-display mt-3 text-balance text-[26px] sm:text-3xl md:text-4xl lg:text-[44px] text-foreground">
+          <h2 className="heading-display text-balance text-[26px] sm:text-3xl md:text-4xl lg:text-[44px] text-foreground">
             Every conversation,{" "}
             <span className="text-[hsl(var(--primary))]">a moment of growth</span>.
           </h2>
-          <p className="mt-3 text-sm sm:text-base text-muted-foreground">
+          <p className="mt-4 text-sm sm:text-base text-muted-foreground">
             SMS, Zalo, Viber, Email, OTP — when they land right, customers buy,
             return, and recommend.
           </p>
