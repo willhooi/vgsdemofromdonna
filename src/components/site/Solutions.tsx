@@ -113,6 +113,11 @@ const CHANNEL_CHIPS = [
   { id: "viber", label: "Viber", dot: "#7360f2", Icon: MessageCircle },
   { id: "email", label: "Email", dot: "#ff9b17", Icon: Mail },
   { id: "otp", label: "OTP", dot: "#e11d48", Icon: Phone },
+  { id: "topup", label: "Top-up", dot: "#06b6d4", Icon: Wallet },
+  { id: "rewards", label: "Rewards", dot: "#f59e0b", Icon: Gift },
+  { id: "ewarranty", label: "E-Warranty", dot: "#10b981", Icon: ShieldCheck },
+  { id: "voice", label: "Voice", dot: "#8b5cf6", Icon: PhoneCall },
+  { id: "miniapp", label: "Mini App", dot: "#3b82f6", Icon: LayoutGrid },
 ] as const;
 
 const OutcomeStage = ({ visible }: { visible: boolean }) => (
