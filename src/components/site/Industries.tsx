@@ -1,29 +1,7 @@
-import { Landmark, Plane, ShoppingCart, Truck, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { VWatermark } from "@/components/brand/VWatermark";
 
-const sectors = [
-  {
-    icon: Landmark,
-    title: "Banking & Finance",
-    desc: "OTP, fraud alerts and customer notifications.",
-  },
-  {
-    icon: Plane,
-    title: "Airlines & Travel",
-    desc: "Flight updates, bookings and loyalty messaging.",
-  },
-  {
-    icon: ShoppingCart,
-    title: "Retail & E-commerce",
-    desc: "Promotions, order updates and cart recovery.",
-  },
-  {
-    icon: Truck,
-    title: "Logistics & Enterprise",
-    desc: "Delivery alerts and operational broadcasts.",
-  },
-];
 
 type CaseStudy = {
   slug: string;
