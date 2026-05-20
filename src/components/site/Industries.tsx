@@ -1,29 +1,7 @@
-import { Landmark, Plane, ShoppingCart, Truck, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { VWatermark } from "@/components/brand/VWatermark";
 
-const sectors = [
-  {
-    icon: Landmark,
-    title: "Banking & Finance",
-    desc: "OTP, fraud alerts and customer notifications.",
-  },
-  {
-    icon: Plane,
-    title: "Airlines & Travel",
-    desc: "Flight updates, bookings and loyalty messaging.",
-  },
-  {
-    icon: ShoppingCart,
-    title: "Retail & E-commerce",
-    desc: "Promotions, order updates and cart recovery.",
-  },
-  {
-    icon: Truck,
-    title: "Logistics & Enterprise",
-    desc: "Delivery alerts and operational broadcasts.",
-  },
-];
 
 type CaseStudy = {
   slug: string;
@@ -124,26 +102,8 @@ export const Industries = () => {
           </h2>
         </div>
 
-        {/* Sector tiles — concise, non-interactive */}
-        <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {sectors.map(({ icon: Icon, title, desc }) => (
-            <div
-              key={title}
-              className="flex items-start gap-3 rounded-2xl border border-border bg-background p-4"
-            >
-              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[hsl(var(--accent-soft))] text-[hsl(var(--accent-deep))]">
-                <Icon className="h-5 w-5" />
-              </span>
-              <div>
-                <h3 className="text-[14px] font-bold leading-tight text-foreground">{title}</h3>
-                <p className="mt-1 text-[12px] leading-snug text-muted-foreground">{desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-
         {/* Showcase wall */}
-        <div className="mt-14 text-center">
+        <div className="mt-10 text-center">
           <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[hsl(var(--accent-deep))]">
             Case studies
           </span>
