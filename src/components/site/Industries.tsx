@@ -96,24 +96,15 @@ export const Industries = () => {
         className="absolute -right-16 bottom-12 h-[360px] w-[360px] opacity-[0.05]"
       />
       <div className="container-tight relative">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="heading-section text-balance">
-            Built for Vietnam's leading sectors
+        <div className="mx-auto max-w-3xl text-center">
+          <h2 className="heading-display text-balance text-3xl md:text-5xl lg:text-6xl font-extrabold leading-[1.05] tracking-tight">
+            <span className="text-foreground">Built for industries.</span>{" "}
+            <span className="bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--accent))] bg-clip-text text-transparent">
+              Proven by results
+            </span>
           </h2>
         </div>
 
-        {/* Showcase wall */}
-        <div className="mt-10 text-center">
-          <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[hsl(var(--accent-deep))]">
-            Case studies
-          </span>
-          <h3 className="mt-2 text-2xl font-bold tracking-tight text-foreground md:text-3xl">
-            What brands achieve with VietGuys
-          </h3>
-          <p className="mt-3 text-sm text-muted-foreground">
-            Hover any brand to reveal the outcome.
-          </p>
-        </div>
 
         <div className="mt-8 grid gap-3 sm:grid-cols-2 md:gap-4 lg:grid-cols-3">
           {caseStudies.map((c) => (
