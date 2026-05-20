@@ -265,26 +265,18 @@ const BrandRow = ({
 };
 
 const BrandLogo = ({ brand }: { brand: Brand }) => {
-  const [failed, setFailed] = useState(false);
   return (
     <span
       title={brand.name}
       className="inline-flex h-16 w-40 shrink-0 items-center justify-center rounded-2xl border border-border bg-card px-5 py-3 transition-all hover:-translate-y-0.5 hover:shadow-[0_10px_30px_-12px_rgba(0,0,0,0.18)]"
     >
-      {failed ? (
-        <span className="font-display text-base font-bold tracking-tight text-muted-foreground">
-          {brand.name}
-        </span>
-      ) : (
-        <img
-          src={`https://logo.clearbit.com/${brand.domain}`}
-          alt={brand.name}
-          loading="lazy"
-          decoding="async"
-          className="max-h-10 w-auto max-w-full object-contain"
-          onError={() => setFailed(true)}
-        />
-      )}
+      <img
+        src={brand.logo}
+        alt={brand.name}
+        loading="lazy"
+        decoding="async"
+        className="max-h-10 w-auto max-w-full object-contain"
+      />
     </span>
   );
 };
