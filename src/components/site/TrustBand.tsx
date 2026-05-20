@@ -6,6 +6,16 @@ import vncertLogo from "@/assets/certs/vncert-new.jpg";
 import vntaLogo from "@/assets/certs/vnta-new.png";
 import zaloLogo from "@/assets/certs/zalo-trusted-v3.png";
 import accreteLogo from "@/assets/brand/accrete-logo.png";
+import sonyLogo from "@/assets/brands/sony.png";
+import tokyoDeliLogo from "@/assets/brands/tokyo-deli.png";
+import travelokaLogo from "@/assets/brands/traveloka.png";
+import uobLogo from "@/assets/brands/uob.png";
+import vascaraLogo from "@/assets/brands/vascara.png";
+import vietnamAirlinesLogo from "@/assets/brands/vietnam-airlines.png";
+import vinfastLogo from "@/assets/brands/vinfast.png";
+import vnvcLogo from "@/assets/brands/vnvc.png";
+import vpbankLogo from "@/assets/brands/vpbank.png";
+import yolaLogo from "@/assets/brands/yola.png";
 
 /**
  * TrustBand — Infobip-style "trust at a glance" strip.
@@ -79,33 +89,23 @@ const certifications = [
   },
 ];
 
-// Brand logos rendered in full color via Clearbit Logo API.
-// To add a brand, append { name, domain }. Domain should be the company's primary website.
-type Brand = { name: string; domain: string };
+// Brand logos rendered from locally bundled PNGs in src/assets/brands/.
+// To add a brand, drop the file into src/assets/brands/ and append { name, logo }.
+type Brand = { name: string; logo: string };
 
 const BRANDS_ROW_1: Brand[] = [
-  { name: "Vietcombank", domain: "vietcombank.com.vn" },
-  { name: "Techcombank", domain: "techcombank.com.vn" },
-  { name: "VPBank", domain: "vpbank.com.vn" },
-  { name: "BIDV", domain: "bidv.com.vn" },
-  { name: "ACB", domain: "acb.com.vn" },
-  { name: "Sacombank", domain: "sacombank.com.vn" },
-  { name: "MB Bank", domain: "mbbank.com.vn" },
-  { name: "TPBank", domain: "tpb.vn" },
-  { name: "HDBank", domain: "hdbank.com.vn" },
-  { name: "VIB", domain: "vib.com.vn" },
+  { name: "VPBank", logo: vpbankLogo },
+  { name: "UOB", logo: uobLogo },
+  { name: "VinFast", logo: vinfastLogo },
+  { name: "SONY", logo: sonyLogo },
+  { name: "YOLA", logo: yolaLogo },
 ];
 const BRANDS_ROW_2: Brand[] = [
-  { name: "Vietnam Airlines", domain: "vietnamairlines.com" },
-  { name: "Vietjet", domain: "vietjetair.com" },
-  { name: "Bamboo Airways", domain: "bambooairways.com" },
-  { name: "Saigon Co.op", domain: "saigonco-op.com.vn" },
-  { name: "Thế Giới Di Động", domain: "thegioididong.com" },
-  { name: "FPT", domain: "fpt.com" },
-  { name: "Viettel", domain: "viettel.com.vn" },
-  { name: "Lotte", domain: "lotte.vn" },
-  { name: "AEON", domain: "aeon.com.vn" },
-  { name: "Grab", domain: "grab.com" },
+  { name: "Vietnam Airlines", logo: vietnamAirlinesLogo },
+  { name: "Traveloka", logo: travelokaLogo },
+  { name: "Tokyo Deli", logo: tokyoDeliLogo },
+  { name: "Vascara", logo: vascaraLogo },
+  { name: "VNVC", logo: vnvcLogo },
 ];
 
 export const TrustBand = () => {
@@ -265,26 +265,18 @@ const BrandRow = ({
 };
 
 const BrandLogo = ({ brand }: { brand: Brand }) => {
-  const [failed, setFailed] = useState(false);
   return (
     <span
       title={brand.name}
       className="inline-flex h-16 w-40 shrink-0 items-center justify-center rounded-2xl border border-border bg-card px-5 py-3 transition-all hover:-translate-y-0.5 hover:shadow-[0_10px_30px_-12px_rgba(0,0,0,0.18)]"
     >
-      {failed ? (
-        <span className="font-display text-base font-bold tracking-tight text-muted-foreground">
-          {brand.name}
-        </span>
-      ) : (
-        <img
-          src={`https://logo.clearbit.com/${brand.domain}`}
-          alt={brand.name}
-          loading="lazy"
-          decoding="async"
-          className="max-h-10 w-auto max-w-full object-contain"
-          onError={() => setFailed(true)}
-        />
-      )}
+      <img
+        src={brand.logo}
+        alt={brand.name}
+        loading="lazy"
+        decoding="async"
+        className="max-h-10 w-auto max-w-full object-contain"
+      />
     </span>
   );
 };
