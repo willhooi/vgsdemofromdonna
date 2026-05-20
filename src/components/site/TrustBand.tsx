@@ -20,7 +20,7 @@ import acfcLogo from "@/assets/brands/acfc.png";
 import aeonCitimartLogo from "@/assets/brands/aeon-citimart.png";
 import agodaLogo from "@/assets/brands/agoda.png";
 import akzonobelLogo from "@/assets/brands/akzonobel.png";
-import baoMinhLogo from "@/assets/brands/bao-minh.png";
+import porscheLogo from "@/assets/brands/porsche.png";
 import bayerLogo from "@/assets/brands/bayer.png";
 import beLogo from "@/assets/brands/be.png";
 import bhdCineplexLogo from "@/assets/brands/bhd-cineplex.jpg";
@@ -144,7 +144,7 @@ const BRANDS_ROW_3: Brand[] = [
   { name: "Hoa Sen University", logo: hoaSenLogo },
   { name: "Cao Đẳng Sài Gòn", logo: caoDangSaigonLogo },
   { name: "VNVC", logo: vnvcLogo },
-  { name: "Bao Minh", logo: baoMinhLogo },
+  { name: "Porsche", logo: porscheLogo },
   { name: "PVI Insurance", logo: pviLogo },
 ];
 
