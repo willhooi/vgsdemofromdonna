@@ -26,6 +26,15 @@ import beLogo from "@/assets/brands/be.png";
 import bhdCineplexLogo from "@/assets/brands/bhd-cineplex.jpg";
 import bridgestoneLogo from "@/assets/brands/bridgestone.png";
 import californiaFitnessLogo from "@/assets/brands/california-fitness.png";
+import caoDangSaigonLogo from "@/assets/brands/cao-dang-saigon.png";
+import hoaSenLogo from "@/assets/brands/hoa-sen-university.png";
+import fwdLogo from "@/assets/brands/fwd.png";
+import grabLogo from "@/assets/brands/grab.png";
+import highlandsCoffeeLogo from "@/assets/brands/highlands-coffee.png";
+import hyundaiLogo from "@/assets/brands/hyundai.png";
+import lgLogo from "@/assets/brands/lg.png";
+import pharmacityLogo from "@/assets/brands/pharmacity.png";
+import pviLogo from "@/assets/brands/pvi.png";
 
 /**
  * TrustBand — Infobip-style "trust at a glance" strip.
