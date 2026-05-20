@@ -6,6 +6,16 @@ import vncertLogo from "@/assets/certs/vncert-new.jpg";
 import vntaLogo from "@/assets/certs/vnta-new.png";
 import zaloLogo from "@/assets/certs/zalo-trusted-v3.png";
 import accreteLogo from "@/assets/brand/accrete-logo.png";
+import sonyLogo from "@/assets/brands/sony.png";
+import tokyoDeliLogo from "@/assets/brands/tokyo-deli.png";
+import travelokaLogo from "@/assets/brands/traveloka.png";
+import uobLogo from "@/assets/brands/uob.png";
+import vascaraLogo from "@/assets/brands/vascara.png";
+import vietnamAirlinesLogo from "@/assets/brands/vietnam-airlines.png";
+import vinfastLogo from "@/assets/brands/vinfast.png";
+import vnvcLogo from "@/assets/brands/vnvc.png";
+import vpbankLogo from "@/assets/brands/vpbank.png";
+import yolaLogo from "@/assets/brands/yola.png";
 
 /**
  * TrustBand — Infobip-style "trust at a glance" strip.
