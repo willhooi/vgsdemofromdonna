@@ -198,10 +198,10 @@ const OutcomeStage = ({ visible }: { visible: boolean }) => (
       visible={visible}
       accent="accent"
     >
-      <div className="text-[10px] font-bold uppercase tracking-wider text-[hsl(35_100%_45%)]">
-        Mã xác thực
+      <div className="text-[10px] font-bold uppercase tracking-wider text-[hsl(35_100%_45%)] text-center">
+        your otp code
       </div>
-      <div className="mt-1 font-mono text-[15px] font-extrabold tracking-[0.18em] text-foreground">
+      <div className="mt-1 font-mono text-[15px] font-extrabold tracking-[0.18em] text-foreground text-center">
         371 235
       </div>
     </Popup>
