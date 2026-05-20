@@ -1,4 +1,4 @@
-import { Landmark, Plane, ShoppingCart, Truck, ArrowUpRight, ArrowRight, TrendingUp, Zap, Users, ShieldCheck } from "lucide-react";
+import { Landmark, Plane, ShoppingCart, Truck, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { VWatermark } from "@/components/brand/VWatermark";
 
@@ -29,9 +29,12 @@ type CaseStudy = {
   slug: string;
   industry: string;
   client: string;
-  title: string;
-  metric: { icon: typeof TrendingUp; value: string; label: string };
-  accent: "primary" | "accent";
+  monogram: string;
+  brandColor: string; // hex for monogram tint
+  metric: string;
+  metricLabel: string;
+  result: string;
+  channels: string[];
 };
 
 const caseStudies: CaseStudy[] = [
@@ -39,33 +42,67 @@ const caseStudies: CaseStudy[] = [
     slug: "banking-card-activation",
     industry: "Banking & Finance",
     client: "Top Vietnamese commercial bank",
-    title: "Credit card activation via SMS → Zalo → Viber fallback",
-    metric: { icon: TrendingUp, value: "+38%", label: "Activation rate" },
-    accent: "primary",
+    monogram: "VCB",
+    brandColor: "#0a4d8c",
+    metric: "+38%",
+    metricLabel: "Activation rate",
+    result: "Credit card activation lifted with multi-channel fallback messaging.",
+    channels: ["SMS", "Zalo", "Viber"],
   },
   {
     slug: "retail-pangocdp",
     industry: "Retail & E-commerce",
     client: "Top 3 electronics retail chain",
-    title: "Personalized CSKH powered by PangoCDP & Behavioural AI",
-    metric: { icon: Zap, value: "+27%", label: "Revenue per campaign" },
-    accent: "accent",
+    monogram: "DMX",
+    brandColor: "#e11d48",
+    metric: "+27%",
+    metricLabel: "Revenue / campaign",
+    result: "Personalized CSKH powered by PangoCDP and behavioural AI.",
+    channels: ["Zalo ZNS", "SMS", "Email"],
   },
   {
     slug: "fmcg-loyalty-zalo",
     industry: "FMCG & Hospitality",
     client: "Multinational F&B brand",
-    title: "Loyalty 360° on Zalo Mini App with OTP & Rewards",
-    metric: { icon: Users, value: "+52%", label: "Return rate" },
-    accent: "primary",
+    monogram: "F&B",
+    brandColor: "#16a34a",
+    metric: "+52%",
+    metricLabel: "Return rate",
+    result: "Loyalty 360° on Zalo Mini App with OTP and rewards built in.",
+    channels: ["Zalo Mini App", "OTP", "Rewards"],
   },
   {
     slug: "airlines-realtime-alerts",
     industry: "Airlines & Travel",
     client: "Regional full-service carrier",
-    title: "Real-time flight & booking alerts across SMS and Email",
-    metric: { icon: ShieldCheck, value: "1.5M+", label: "Passengers reached" },
-    accent: "accent",
+    monogram: "VNA",
+    brandColor: "#0c2340",
+    metric: "1.5M+",
+    metricLabel: "Passengers reached",
+    result: "Real-time flight and booking alerts across SMS and Email.",
+    channels: ["SMS Brandname", "Email"],
+  },
+  {
+    slug: "insurance-support-deflection",
+    industry: "Insurance",
+    client: "Leading life insurer",
+    monogram: "INS",
+    brandColor: "#7c3aed",
+    metric: "−41%",
+    metricLabel: "Support call volume",
+    result: "Proactive policy updates cut inbound calls without hurting CSAT.",
+    channels: ["Zalo ZNS", "Voice"],
+  },
+  {
+    slug: "logistics-otp-delivery",
+    industry: "Logistics",
+    client: "National courier network",
+    monogram: "LOG",
+    brandColor: "#f59e0b",
+    metric: "99.95%",
+    metricLabel: "OTP delivery < 2s",
+    result: "Authentication that lands first time, with built-in fallback.",
+    channels: ["OTP", "SMS", "Zalo"],
   },
 ];
 
@@ -109,75 +146,97 @@ export const Industries = () => {
           ))}
         </div>
 
-        {/* Featured case studies */}
-        <div className="mt-14 flex items-end justify-between gap-4">
-          <div>
-            <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[hsl(var(--accent-deep))]">
-              Case studies
-            </span>
-            <h3 className="mt-2 text-2xl font-bold tracking-tight text-foreground md:text-3xl">
-              Featured outcomes from enterprise leaders
-            </h3>
-          </div>
+        {/* Showcase wall */}
+        <div className="mt-14 text-center">
+          <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[hsl(var(--accent-deep))]">
+            Case studies
+          </span>
+          <h3 className="mt-2 text-2xl font-bold tracking-tight text-foreground md:text-3xl">
+            What brands achieve with VietGuys
+          </h3>
+          <p className="mt-3 text-sm text-muted-foreground">
+            Hover any brand to reveal the outcome.
+          </p>
         </div>
 
-        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {caseStudies.map((c) => {
-            const MetricIcon = c.metric.icon;
-            const accentColor =
-              c.accent === "accent" ? "text-[hsl(var(--accent-deep))]" : "text-primary";
-            const dotBg = c.accent === "accent" ? "bg-accent" : "bg-primary";
-            return (
-              <article
-                key={c.slug}
-                className="group flex flex-col rounded-2xl border border-border bg-background p-5 transition-all hover:-translate-y-1 hover:border-primary/30 hover:shadow-[var(--shadow-card)]"
-              >
-                <div className="flex items-center gap-2">
-                  <span className={`inline-block h-1.5 w-1.5 rounded-full ${dotBg}`} />
-                  <span className="text-[10.5px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-                    {c.industry}
-                  </span>
-                </div>
-                <h4 className="mt-3 text-[15px] font-bold leading-snug text-foreground">
-                  {c.title}
-                </h4>
-                <p className="mt-1 text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
-                  {c.client}
-                </p>
-
-                <div className="mt-5 flex items-center gap-2 border-t border-border pt-4">
-                  <MetricIcon className={`h-4 w-4 ${accentColor}`} />
-                  <div>
-                    <div className="text-lg font-extrabold leading-none tracking-tight text-foreground">
-                      {c.metric.value}
-                    </div>
-                    <div className="mt-1 text-[10.5px] leading-tight text-muted-foreground">
-                      {c.metric.label}
-                    </div>
-                  </div>
-                </div>
-
-                <Link
-                  to={`/case-studies/${c.slug}`}
-                  className={`mt-5 inline-flex items-center gap-1.5 self-start text-[12.5px] font-semibold ${accentColor} hover:underline`}
-                >
-                  Learn more
-                  <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                </Link>
-              </article>
-            );
-          })}
+        <div className="mt-8 grid gap-3 sm:grid-cols-2 md:gap-4 lg:grid-cols-3">
+          {caseStudies.map((c) => (
+            <CaseTile key={c.slug} c={c} />
+          ))}
         </div>
 
-        <div className="mt-10 text-center">
+        <div className="mt-12 flex justify-center">
           <Link
             to="/contact"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
+            className="group inline-flex items-center gap-2 rounded-full bg-[hsl(var(--accent))] px-6 py-3 text-sm font-semibold text-[hsl(var(--accent-foreground))] shadow-[0_12px_30px_-12px_hsl(35_100%_50%/0.55)] transition-transform hover:-translate-y-0.5"
           >
-            Don't see your sector? Talk to us <ArrowRight className="h-4 w-4" />
+            Muốn trải nghiệm giải pháp customize cho bạn? Talk to us
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
           </Link>
         </div>
       </div>
     </section>
   );
 };
+
+const CaseTile = ({ c }: { c: CaseStudy }) => (
+  <Link
+    to={`/case-studies/${c.slug}`}
+    className="group relative block aspect-[4/3] overflow-hidden rounded-2xl border border-border bg-white shadow-[0_4px_14px_-10px_rgba(0,0,0,0.1)] transition-all hover:-translate-y-0.5 hover:border-[hsl(var(--primary))]/30 hover:shadow-[0_22px_44px_-22px_hsl(128_52%_30%/0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--primary))]/40"
+  >
+    {/* Front face — monogram */}
+    <div className="absolute inset-0 flex flex-col items-center justify-center px-6 transition-opacity duration-300 group-hover:opacity-0 group-focus-within:opacity-0 motion-reduce:transition-none">
+      <span
+        className="font-display text-[44px] font-extrabold tracking-tight md:text-[52px]"
+        style={{ color: c.brandColor }}
+      >
+        {c.monogram}
+      </span>
+      <span className="mt-3 text-[10.5px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+        {c.industry}
+      </span>
+    </div>
+
+    {/* Back face — achievement */}
+    <div
+      className="absolute inset-0 flex flex-col justify-between p-5 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100 motion-reduce:transition-none"
+      style={{
+        background:
+          "linear-gradient(135deg, hsl(var(--primary-deep)) 0%, hsl(145 70% 18%) 100%)",
+      }}
+    >
+      <div>
+        <div className="text-[10.5px] font-semibold uppercase tracking-[0.18em] text-white/70">
+          {c.industry}
+        </div>
+        <div className="mt-1 text-[11px] font-medium text-white/85">{c.client}</div>
+      </div>
+
+      <div>
+        <div className="font-display text-[34px] font-extrabold leading-none tracking-tight md:text-[40px]">
+          {c.metric}
+        </div>
+        <div className="mt-1 text-[11.5px] font-semibold uppercase tracking-wider text-[hsl(35_100%_70%)]">
+          {c.metricLabel}
+        </div>
+        <p className="mt-2 text-[12.5px] leading-snug text-white/85">{c.result}</p>
+      </div>
+
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex flex-wrap gap-1.5">
+          {c.channels.map((ch) => (
+            <span
+              key={ch}
+              className="rounded-full bg-white/10 px-2 py-0.5 text-[10px] font-semibold text-white/90 ring-1 ring-white/15"
+            >
+              {ch}
+            </span>
+          ))}
+        </div>
+        <span className="inline-flex items-center gap-1 text-[11.5px] font-semibold text-white">
+          Read <ArrowRight className="h-3 w-3" />
+        </span>
+      </div>
+    </div>
+  </Link>
+);

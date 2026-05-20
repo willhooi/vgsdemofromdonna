@@ -1,52 +1,51 @@
-## Solutions section — expand channels + add wave animation
+## Goal
+Transform the "Featured case studies" area in `src/components/site/Industries.tsx` into a brand showcase wall (4–6 tiles) inspired by Insider One's *"What brands achieve with Insider One"* — clean logo grid by default, rich achievement reveal on hover.
 
-**File:** `src/components/site/Solutions.tsx`
+## Reference behavior (Insider One)
+- Grid of large brand cards, each showing the **client logo** prominently on a clean background.
+- On hover: card flips/fades to reveal the **headline outcome metric** (e.g. "+38% activation rate"), a short result sentence, the channels/products used, and a "Read story" link.
+- Mobile (no hover): tap-to-flip OR always-visible compact summary under each logo.
 
-### 1. Extend the channel list to 10 services
+## Layout proposal
+1. **Section header** (kept): eyebrow "Case studies" + heading "Featured outcomes from enterprise leaders" + 1-line subhead.
+2. **Sector strip** (kept above): the 4 concise sector tiles stay as-is.
+3. **Showcase wall** — new component `CaseStudyWall`:
+   - Responsive grid: `grid-cols-2 md:grid-cols-3 lg:grid-cols-3` (6 tiles) — falls back to `lg:grid-cols-2` if we ship 4 tiles.
+   - Each tile = square-ish card (aspect ~4/3), white background, 1px border, soft shadow on hover.
+   - **Front face**: centered client logo (grayscale, ~60% width) + small industry tag bottom-left.
+   - **Back face (hover/focus)**: dark green `hsl(var(--primary-deep))` background, white text:
+     - Big metric (e.g. `+38%`) in display font.
+     - Metric label (`Activation rate`).
+     - 1-sentence result.
+     - Channels chips (SMS · Zalo · Viber).
+     - "Read case study →" link.
+   - Transition: cross-fade + subtle scale (no 3D flip — keeps it elegant and accessible). Use `group-hover` + `group-focus-within` for keyboard.
+   - Mobile: back face content shown as a compact strip under the logo (no hover dependency).
+4. **Single CTA below the wall** replaces the current "Don't see your sector?" link:
+   - Copy: **"Muốn trải nghiệm giải pháp customize cho bạn? Talk to us"**
+   - Style: pill button, `bg-[hsl(var(--accent))]` (orange) with arrow icon, centered, generous top margin.
 
-Update `CHANNEL_CHIPS` to add 5 new services with brand-aligned colors and lucide icons:
+## Content (6 case studies)
+Reuse the 4 existing studies and add 2 more to fill the wall:
+1. Banking & Finance — Top Vietnamese commercial bank — `+38% Activation rate`
+2. Retail & E-commerce — Top 3 electronics retail chain — `+27% Revenue per campaign`
+3. FMCG & Hospitality — Multinational F&B brand — `+52% Return rate`
+4. Airlines & Travel — Regional full-service carrier — `1.5M+ Passengers reached`
+5. *(new placeholder)* Insurance — Leading life insurer — `-41% Support call volume`
+6. *(new placeholder)* Logistics — National courier — `<2s OTP delivery, 99.95%`
 
+Client logos: use placeholder monogram tiles (initials in brand font) until real logos are provided — keeps layout clean and avoids brand-permission issues.
 
-| Service    | Color               | Icon                             |
-| ---------- | ------------------- | -------------------------------- |
-| Top-up     | `#06b6d4` (cyan)    | `Wallet`                         |
-| Rewards    | `#f59e0b` (amber)   | `Gift` (already imported)        |
-| E-Warranty | `#10b981` (emerald) | `ShieldCheck` (already imported) |
-| Voice      | `#8b5cf6` (violet)  | `Phone` (reuse) or `PhoneCall`   |
-| Mini App   | blue                | `LayoutGrid`                     |
+## Files to change
+- `src/components/site/Industries.tsx` — replace the `caseStudies` card grid and bottom link with the new wall + CTA. Keep sector tiles and section header intact.
+- (Optional) extract `CaseStudyWall` into `src/components/site/CaseStudyWall.tsx` if it grows past ~80 lines.
 
+## Technical notes
+- Pure Tailwind + existing tokens (`--primary-deep`, `--accent`, `--border`). No new deps.
+- Hover reveal uses `group` + `opacity/translate` transitions; fully accessible via `focus-within`.
+- Respects `prefers-reduced-motion` (disable transform, keep opacity).
+- Routes preserved: each tile links to `/case-studies/{slug}`.
 
-Existing 5 stay as-is (SMS, Zalo, Viber, Email, OTP) → total **10 chips**.
-
-### 2. Reposition the 10 chips around `OutcomeStage`
-
-Expand the `positions` array in `OutcomeStage` from 5 → 10 entries, distributed evenly around the shopper image (top, right, bottom, left edges + corners). Stagger the entry transitions (`600 + i * 80ms`) so all 10 fade in smoothly without feeling crowded.
-
-On mobile / tablet (`<lg`), the chip orbit stays hidden as today — no UX change for small screens.
-
-### 3. Add animated wave + traveling dots inside `CDPSupportStrip`
-
-In the "CDP Solution" header block, add a thin SVG **wave band** (no text, no avatars, no popups — purely the sinusoidal lines like the reference image) sitting underneath / behind the "CDP Solution" eyebrow and "Strategic partnership with [ByteTech logo]" line.
-
-**Wave visual:**
-
-- 2–3 stacked sine curves drawn as SVG `<path>`, very thin strokes (`stroke-width: 1.2px`)
-- Soft brand-aligned gradient stroke (teal → soft green → warm orange), low opacity (~25%) so it doesn't fight the text
-- Width = full strip width, height ≈ 56–72px
-- Sits as an absolute-positioned layer inside the strip; text content sits above with `relative z-10`
-
-**Traveling dots:**
-
-- 10 colored dots, one per service, each colored with its `dot` from `CHANNEL_CHIPS`
-- Each dot follows the wave path via SVG `<animateMotion>` referencing the path with a `<mpath>`, with `dur` ≈ 8–10s, `repeatCount="indefinite"`, and staggered `begin` offsets so they ride along the bumps continuously
-- Dots are small (r=3) with a soft outer glow matching their color
-- No labels — just the moving colored dots
-
-**Layout impact:** the strip becomes slightly taller (≈ +56px). The 3-bullet list below ("Drive personalized…", "Maximize…", "Optimize…") stays unchanged.
-
-### Technical notes
-
-- Pure presentational additions, no new deps (use native SVG `animateMotion`).
-- Respect `prefers-reduced-motion`: when set, dots freeze at their starting offset; wave stroke stays static.
-- Reuse `CHANNEL_CHIPS` as the single source of truth for service colors so chip + wave dot colors always stay in sync.
-- All colors via inline style for the brand dot hexes (already the pattern in this file); structural colors keep semantic tokens.
+## Out of scope
+- No changes to the sector tiles or the section heading copy.
+- No new data fetching — content stays static.
