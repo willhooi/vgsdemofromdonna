@@ -89,33 +89,23 @@ const certifications = [
   },
 ];
 
-// Brand logos rendered in full color via Clearbit Logo API.
-// To add a brand, append { name, domain }. Domain should be the company's primary website.
-type Brand = { name: string; domain: string };
+// Brand logos rendered from locally bundled PNGs in src/assets/brands/.
+// To add a brand, drop the file into src/assets/brands/ and append { name, logo }.
+type Brand = { name: string; logo: string };
 
 const BRANDS_ROW_1: Brand[] = [
-  { name: "Vietcombank", domain: "vietcombank.com.vn" },
-  { name: "Techcombank", domain: "techcombank.com.vn" },
-  { name: "VPBank", domain: "vpbank.com.vn" },
-  { name: "BIDV", domain: "bidv.com.vn" },
-  { name: "ACB", domain: "acb.com.vn" },
-  { name: "Sacombank", domain: "sacombank.com.vn" },
-  { name: "MB Bank", domain: "mbbank.com.vn" },
-  { name: "TPBank", domain: "tpb.vn" },
-  { name: "HDBank", domain: "hdbank.com.vn" },
-  { name: "VIB", domain: "vib.com.vn" },
+  { name: "VPBank", logo: vpbankLogo },
+  { name: "UOB", logo: uobLogo },
+  { name: "VinFast", logo: vinfastLogo },
+  { name: "SONY", logo: sonyLogo },
+  { name: "YOLA", logo: yolaLogo },
 ];
 const BRANDS_ROW_2: Brand[] = [
-  { name: "Vietnam Airlines", domain: "vietnamairlines.com" },
-  { name: "Vietjet", domain: "vietjetair.com" },
-  { name: "Bamboo Airways", domain: "bambooairways.com" },
-  { name: "Saigon Co.op", domain: "saigonco-op.com.vn" },
-  { name: "Thế Giới Di Động", domain: "thegioididong.com" },
-  { name: "FPT", domain: "fpt.com" },
-  { name: "Viettel", domain: "viettel.com.vn" },
-  { name: "Lotte", domain: "lotte.vn" },
-  { name: "AEON", domain: "aeon.com.vn" },
-  { name: "Grab", domain: "grab.com" },
+  { name: "Vietnam Airlines", logo: vietnamAirlinesLogo },
+  { name: "Traveloka", logo: travelokaLogo },
+  { name: "Tokyo Deli", logo: tokyoDeliLogo },
+  { name: "Vascara", logo: vascaraLogo },
+  { name: "VNVC", logo: vnvcLogo },
 ];
 
 export const TrustBand = () => {
