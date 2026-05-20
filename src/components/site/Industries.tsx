@@ -119,17 +119,13 @@ export const Industries = () => {
       />
       <div className="container-tight relative">
         <div className="mx-auto max-w-2xl text-center">
-          <span className="eyebrow justify-center text-[hsl(var(--accent-deep))]">Industries</span>
-          <h2 className="heading-section mt-4 text-balance">
+          <h2 className="heading-section text-balance">
             Built for Vietnam's leading sectors
           </h2>
-          <p className="mt-4 text-base text-muted-foreground">
-            Industry-specific use cases, distilled from 19 years serving enterprise.
-          </p>
         </div>
 
         {/* Sector tiles — concise, non-interactive */}
-        <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {sectors.map(({ icon: Icon, title, desc }) => (
             <div
               key={title}
