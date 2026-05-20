@@ -109,6 +109,11 @@ const BRANDS_ROW_1: Brand[] = [
   { name: "VinFast", logo: vinfastLogo },
   { name: "SONY", logo: sonyLogo },
   { name: "YOLA", logo: yolaLogo },
+  { name: "Agoda", logo: agodaLogo },
+  { name: "AkzoNobel", logo: akzonobelLogo },
+  { name: "Bayer", logo: bayerLogo },
+  { name: "Bridgestone", logo: bridgestoneLogo },
+  { name: "be", logo: beLogo },
 ];
 const BRANDS_ROW_2: Brand[] = [
   { name: "Vietnam Airlines", logo: vietnamAirlinesLogo },
@@ -116,6 +121,11 @@ const BRANDS_ROW_2: Brand[] = [
   { name: "Tokyo Deli", logo: tokyoDeliLogo },
   { name: "Vascara", logo: vascaraLogo },
   { name: "VNVC", logo: vnvcLogo },
+  { name: "ACFC", logo: acfcLogo },
+  { name: "AEON Citimart", logo: aeonCitimartLogo },
+  { name: "Bao Minh", logo: baoMinhLogo },
+  { name: "BHD Cineplex", logo: bhdCineplexLogo },
+  { name: "California Fitness & Yoga", logo: californiaFitnessLogo },
 ];
 
 export const TrustBand = () => {
