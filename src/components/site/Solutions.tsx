@@ -89,9 +89,6 @@ export const Solutions = () => {
         {/* Support strip — PangoCDP × ByteTech */}
         <CDPSupportStrip visible={visible} />
 
-        {/* Footer metrics strip */}
-        <MetricsStrip visible={visible} />
-
         <div className="mt-10 flex justify-center">
           <Link
             to="/solutions"

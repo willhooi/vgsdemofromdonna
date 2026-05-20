@@ -1,37 +1,41 @@
-## Mục tiêu
+## 1. Solutions section — refine ByteTech partnership, remove metrics
 
-Thay 20 logo brand đang load qua Clearbit API (`https://logo.clearbit.com/...`) bằng 10 file PNG thực tế user vừa upload. Lưu logo vào `src/assets/brands/` để được Vite bundle/optimize đúng cách (đồng nhất với pattern đang dùng cho cert logos ở `src/assets/certs/`).
+**File:** `src/components/site/Solutions.tsx`
 
-## Files affected
+- Remove `MetricsStrip` rendering and its definitions (no more 5M messages / 76 clients / 99.95% uptime / 9 channels strip).
+- Upgrade `CDPSupportStrip` into a more intentional but still subtle **"CDP Solution — Strategic partnership with ByteTech"** card:
+  - Eyebrow: `CDP SOLUTION` (small, brand teal).
+  - Title line: `Strategic partnership with ByteTech` next to ByteTech logo.
+  - Replace generic feature pills with the 3 outcome-focused bullets requested:
+    - Drive personalized customer experiences
+    - Maximize conversion rates
+    - Optimize costs
+  - Keep tone tinh tế: soft brand-tinted card, light divider, subtle hover; no heavy gradients.
+- Keep the bottom CTA ("Explore the platform") and OutcomeStage/OutcomeRail unchanged.
 
-**Tạo mới** (10 file, copy từ user-uploads):
-- `src/assets/brands/sony.png`
-- `src/assets/brands/tokyo-deli.png`
-- `src/assets/brands/traveloka.png`
-- `src/assets/brands/uob.png`
-- `src/assets/brands/vascara.png`
-- `src/assets/brands/vietnam-airlines.png`
-- `src/assets/brands/vinfast.png`
-- `src/assets/brands/vnvc.png`
-- `src/assets/brands/vpbank.png`
-- `src/assets/brands/yola.png`
+## 2. Industries section — concise sector list + 4 case studies
 
-**Sửa**: `src/components/site/TrustBand.tsx`
-- Thêm 10 import ES6 cho logo PNG.
-- Đổi type `Brand` từ `{ name; domain }` sang `{ name; logo }` (import path).
-- Gộp lại `BRANDS_ROW_1` (5 logo) + `BRANDS_ROW_2` (5 logo) — chia đều theo nhóm hợp lý:
-  - Row 1 (Finance + Tech + Edu): VPBank · UOB · VinFast · SONY · YOLA
-  - Row 2 (Travel + Retail + Health): Vietnam Airlines · Traveloka · Tokyo Deli · Vascara · VNVC
-- Component `BrandLogo`: bỏ logic `failed`/`onError` (không cần fallback text vì asset đã có sẵn), thay `<img src={`https://logo.clearbit.com/...`} />` thành `<img src={brand.logo} />`.
-- Marquee logic (duplicate items, animation) giữ nguyên.
+**File:** `src/components/site/Industries.tsx` (refactor in place)
 
-## Out of scope
+- **Top block — Leading sectors (concise):**
+  - Keep heading + sub.
+  - Replace the 4 link cards with a compact, non-interactive list/grid of sectors (icon + name + 1-line desc). No "Learn more" link, no `Link` wrapper, no hover translate. Render as a 2×2 / 4-col responsive grid of small static tiles.
+  - Sectors stay: Banking & Finance, Airlines & Travel, Retail & E-commerce, Logistics & Enterprise (plus optionally add a couple more short ones like Insurance, F&B — confirm only if needed; default to current 4 to keep scope tight).
 
-- Không thay đổi cert cards, stats, hay heading Accrete.
-- Không đổi animation speed/direction của marquee.
-- Không xoá Clearbit fallback ở chỗ khác (nếu có) — chỉ refactor trong TrustBand.
+- **Bottom block — Featured case studies (new):**
+  - Sub-heading: `Featured case studies`.
+  - 4 cards in a responsive grid (1 / 2 / 4 cols). Each card: industry tag, client (anonymized), short title, 1 headline metric, and a **"Learn more"** button (`ArrowUpRight`) linking to `/case-studies/{slug}` (route may not exist yet — link is fine; clicking can 404 later, out of scope).
+  - Seed data inline in the component (4 entries), reusing case study material similar to `CaseStudies.tsx`:
+    1. Banking — Credit card activation via multi-layer OTT fallback (+38% activation)
+    2. Retail/E-commerce — Personalized CSKH with PangoCDP (+27% revenue/campaign)
+    3. FMCG/F&B — Loyalty 360° on Zalo Mini App (+52% return rate)
+    4. Airlines/Travel — Real-time flight & booking notifications (e.g. 1.5M passengers reached) — new short entry to round out 4.
 
-## Lưu ý
+- Keep existing watermark, container, "Don't see your sector? Talk to us" footer link.
 
-- Logo có aspect ratio khác nhau (Traveloka rất ngang, SONY/Tokyo Deli vuông). Giữ `max-h-10 w-auto object-contain` để tự co cho vừa khung 160×64px.
-- Một vài logo nền trắng full (UOB, Vinfast, VNVC) — vẫn fit OK vào card nền trắng hiện tại.
+## Technical notes
+
+- All changes are frontend/presentation only.
+- Use existing semantic tokens (`--primary`, `--accent`, `--accent-soft`, `--accent-deep`, etc.) — no raw colors.
+- No new dependencies. Icons from `lucide-react` already in use.
+- `Index.tsx` order stays the same; `CaseStudies.tsx` is not mounted on the homepage so no duplication.
