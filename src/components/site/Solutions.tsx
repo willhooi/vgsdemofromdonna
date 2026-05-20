@@ -231,7 +231,7 @@ const OutcomeStage = ({ visible }: { visible: boolean }) => (
               ...p,
               opacity: visible ? 1 : 0,
               transform: visible ? "scale(1)" : "scale(0.85)",
-              transition: `opacity 500ms ease-out ${600 + i * 100}ms, transform 500ms ease-out ${600 + i * 100}ms`,
+              transition: `opacity 500ms ease-out ${500 + i * 70}ms, transform 500ms ease-out ${500 + i * 70}ms`,
             }}
           >
             <div className="group flex items-center gap-1.5 rounded-full border border-border bg-white/95 px-2.5 py-1 shadow-[0_6px_18px_-8px_rgba(0,0,0,0.18)] backdrop-blur transition-transform hover:-translate-y-0.5">
