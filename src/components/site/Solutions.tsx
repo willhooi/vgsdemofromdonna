@@ -411,21 +411,19 @@ const CDPSupportStrip = ({ visible }: { visible: boolean }) => (
       transition: "opacity 600ms ease-out 200ms, transform 600ms ease-out 200ms",
     }}
   >
-    <div className="flex items-center gap-3">
-      <div className="flex-1">
-        <div className="text-[10px] font-bold uppercase tracking-[0.22em] text-[hsl(var(--primary-deep))]">
-          CDP Solution
-        </div>
-        <div className="mt-1 text-[14px] font-semibold leading-tight text-foreground">
-          Strategic partnership with
-        </div>
+    <div>
+      <div className="text-[10px] font-bold uppercase tracking-[0.22em] text-[hsl(var(--primary-deep))]">
+        CDP Solution
       </div>
-      <img
-        src={bytetechLogo}
-        alt="ByteTech"
-        className="h-9 w-auto shrink-0 md:h-10"
-        loading="lazy"
-      />
+      <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-[14px] font-semibold leading-tight text-foreground">
+        <span>Strategic partnership with</span>
+        <img
+          src={bytetechLogo}
+          alt="ByteTech"
+          className="inline-block h-6 w-auto shrink-0 align-middle md:h-7"
+          loading="lazy"
+        />
+      </div>
     </div>
 
     <ul className="mt-3 grid gap-2 border-t border-[hsl(var(--primary))]/10 pt-3 sm:grid-cols-3 sm:gap-3">
