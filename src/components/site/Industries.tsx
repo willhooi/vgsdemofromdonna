@@ -124,26 +124,8 @@ export const Industries = () => {
           </h2>
         </div>
 
-        {/* Sector tiles — concise, non-interactive */}
-        <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {sectors.map(({ icon: Icon, title, desc }) => (
-            <div
-              key={title}
-              className="flex items-start gap-3 rounded-2xl border border-border bg-background p-4"
-            >
-              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-[hsl(var(--accent-soft))] text-[hsl(var(--accent-deep))]">
-                <Icon className="h-5 w-5" />
-              </span>
-              <div>
-                <h3 className="text-[14px] font-bold leading-tight text-foreground">{title}</h3>
-                <p className="mt-1 text-[12px] leading-snug text-muted-foreground">{desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-
         {/* Showcase wall */}
-        <div className="mt-14 text-center">
+        <div className="mt-10 text-center">
           <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[hsl(var(--accent-deep))]">
             Case studies
           </span>
