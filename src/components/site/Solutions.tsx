@@ -11,6 +11,9 @@ import {
   Mail,
   Phone,
   Smartphone,
+  Wallet,
+  PhoneCall,
+  LayoutGrid,
 } from "lucide-react";
 import bytetechLogo from "@/assets/brand/bytetech.svg";
 import shopperImg from "@/assets/channels-girl.png";
@@ -110,6 +113,11 @@ const CHANNEL_CHIPS = [
   { id: "viber", label: "Viber", dot: "#7360f2", Icon: MessageCircle },
   { id: "email", label: "Email", dot: "#ff9b17", Icon: Mail },
   { id: "otp", label: "OTP", dot: "#e11d48", Icon: Phone },
+  { id: "topup", label: "Top-up", dot: "#06b6d4", Icon: Wallet },
+  { id: "rewards", label: "Rewards", dot: "#f59e0b", Icon: Gift },
+  { id: "ewarranty", label: "E-Warranty", dot: "#10b981", Icon: ShieldCheck },
+  { id: "voice", label: "Voice", dot: "#8b5cf6", Icon: PhoneCall },
+  { id: "miniapp", label: "Mini App", dot: "#3b82f6", Icon: LayoutGrid },
 ] as const;
 
 const OutcomeStage = ({ visible }: { visible: boolean }) => (
@@ -203,11 +211,16 @@ const OutcomeStage = ({ visible }: { visible: boolean }) => (
     <div className="pointer-events-none absolute inset-0 hidden lg:block">
       {CHANNEL_CHIPS.map((c, i) => {
         const positions = [
-          { left: "-2%", top: "48%" },
-          { left: "6%", bottom: "12%" },
-          { right: "10%", bottom: "4%" },
-          { left: "38%", top: "-3%" },
-          { right: "-2%", top: "44%" },
+          { left: "-4%", top: "20%" },
+          { left: "-2%", top: "52%" },
+          { left: "4%", bottom: "18%" },
+          { left: "26%", bottom: "-2%" },
+          { left: "54%", bottom: "4%" },
+          { right: "6%", bottom: "20%" },
+          { right: "-4%", top: "52%" },
+          { right: "-2%", top: "22%" },
+          { right: "18%", top: "-3%" },
+          { left: "34%", top: "-4%" },
         ];
         const p = positions[i];
         return (
@@ -218,7 +231,7 @@ const OutcomeStage = ({ visible }: { visible: boolean }) => (
               ...p,
               opacity: visible ? 1 : 0,
               transform: visible ? "scale(1)" : "scale(0.85)",
-              transition: `opacity 500ms ease-out ${600 + i * 100}ms, transform 500ms ease-out ${600 + i * 100}ms`,
+              transition: `opacity 500ms ease-out ${500 + i * 70}ms, transform 500ms ease-out ${500 + i * 70}ms`,
             }}
           >
             <div className="group flex items-center gap-1.5 rounded-full border border-border bg-white/95 px-2.5 py-1 shadow-[0_6px_18px_-8px_rgba(0,0,0,0.18)] backdrop-blur transition-transform hover:-translate-y-0.5">
@@ -404,14 +417,15 @@ const CDP_BULLETS = [
 
 const CDPSupportStrip = ({ visible }: { visible: boolean }) => (
   <div
-    className="overflow-hidden rounded-2xl border border-[hsl(var(--primary))]/15 bg-gradient-to-br from-[hsl(145_55%_98%)] to-white p-4 md:p-5"
+    className="relative overflow-hidden rounded-2xl border border-[hsl(var(--primary))]/15 bg-gradient-to-br from-[hsl(145_55%_98%)] to-white p-4 md:p-5"
     style={{
       opacity: visible ? 1 : 0,
       transform: visible ? "translateY(0)" : "translateY(10px)",
       transition: "opacity 600ms ease-out 200ms, transform 600ms ease-out 200ms",
     }}
   >
-    <div>
+    <CDPWave />
+    <div className="relative z-10">
       <div className="text-[10px] font-bold uppercase tracking-[0.22em] text-[hsl(var(--primary-deep))]">
         CDP Solution
       </div>
@@ -442,5 +456,67 @@ const CDPSupportStrip = ({ visible }: { visible: boolean }) => (
     </ul>
   </div>
 );
+
+/* ---------- Decorative wave behind CDP strip ---------- */
+
+const CDPWave = () => {
+  const paths = [
+    "M0,70 C75,20 150,120 225,70 C300,20 375,120 450,70 C525,20 600,120 600,70",
+    "M0,80 C90,40 180,110 270,80 C360,50 450,115 540,80 C570,72 600,78 600,80",
+    "M0,60 C100,100 200,30 300,60 C400,90 500,30 600,60",
+  ];
+  const dur = 9;
+  return (
+    <div
+      aria-hidden
+      className="pointer-events-none absolute inset-0 z-0 motion-reduce:opacity-50"
+    >
+      <svg
+        viewBox="0 0 600 140"
+        preserveAspectRatio="none"
+        className="h-full w-full"
+      >
+        <defs>
+          <linearGradient id="cdp-wave-grad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="#39b44a" stopOpacity="0.35" />
+            <stop offset="50%" stopColor="#06b6d4" stopOpacity="0.35" />
+            <stop offset="100%" stopColor="#ff9b17" stopOpacity="0.35" />
+          </linearGradient>
+          {paths.map((d, i) => (
+            <path key={`p-${i}`} id={`cdp-wave-path-${i}`} d={d} />
+          ))}
+        </defs>
+        {paths.map((_, i) => (
+          <use
+            key={`u-${i}`}
+            href={`#cdp-wave-path-${i}`}
+            fill="none"
+            stroke="url(#cdp-wave-grad)"
+            strokeWidth="1.2"
+            vectorEffect="non-scaling-stroke"
+          />
+        ))}
+        {CHANNEL_CHIPS.map((c, i) => {
+          const pathIdx = i % paths.length;
+          const begin = -((i * dur) / CHANNEL_CHIPS.length);
+          return (
+            <circle key={c.id} r="3.2" fill={c.dot}>
+              <animateMotion
+                dur={`${dur}s`}
+                repeatCount="indefinite"
+                rotate="0"
+                begin={`${begin}s`}
+                className="motion-reduce:hidden"
+              >
+                <mpath href={`#cdp-wave-path-${pathIdx}`} />
+              </animateMotion>
+            </circle>
+          );
+        })}
+      </svg>
+    </div>
+  );
+};
+
 
 

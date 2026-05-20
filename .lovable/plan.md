@@ -1,37 +1,52 @@
-## Solutions section — reorganize layout
+## Solutions section — expand channels + add wave animation
 
 **File:** `src/components/site/Solutions.tsx`
 
-### 1. Move `CDPSupportStrip` above the OutcomeRail cards
+### 1. Extend the channel list to 10 services
 
-- Render order inside the right column changes to:
-  1. `CDPSupportStrip` (currently sits below the whole grid)
-  2. 4 `OutcomeCard` grid (2×2)
-- Remove the old `CDPSupportStrip` call placed under the Stage+Rail grid.
-- Adjust spacing: tighten its `mt-10/md:mt-12` to fit naturally as a header above the cards (e.g. `mt-0`, with rail cards getting `mt-4`).
-- On mobile the strip stacks normally above the cards.
+Update `CHANNEL_CHIPS` to add 5 new services with brand-aligned colors and lucide icons:
 
-### 2. Replace text "ByteTech" with ByteTech logo inline
 
-- In `CDPSupportStrip`, the title line currently reads:
-  `Strategic partnership with ByteTech`
-- Change to: `Strategic partnership with [ByteTech logo inline]`.
-  - Remove the standalone 12×12 logo tile on the left so the logo is not duplicated.
-  - Keep the "CDP Solution" eyebrow.
-  - The inline ByteTech logo is rendered as an `<img>` (h-4 / md:h-5, w-auto) with `alt="ByteTech"`, aligned to the text baseline via `inline-block align-[-2px]`.
-- Re-balance left column: drop `min-w-[260px]` constraint, drop the white tile wrapper, drop the vertical divider (or keep a subtle divider — default: remove for cleaner inline look).
+| Service    | Color               | Icon                             |
+| ---------- | ------------------- | -------------------------------- |
+| Top-up     | `#06b6d4` (cyan)    | `Wallet`                         |
+| Rewards    | `#f59e0b` (amber)   | `Gift` (already imported)        |
+| E-Warranty | `#10b981` (emerald) | `ShieldCheck` (already imported) |
+| Voice      | `#8b5cf6` (violet)  | `Phone` (reuse) or `PhoneCall`   |
+| Mini App   | blue                | `LayoutGrid`                     |
 
-### 3. Merge the two CTAs into one
 
-- Remove the dashed `+ 5 more services — see the full stack` link inside `OutcomeRail`.
-- Remove the standalone `Explore the platform` button at the bottom.
-- Replace both with a single CTA centered under the rail:
-  - Label: **"Explore the full stack"**
-  - Route: `/solutions`
-  - Style: reuse the existing primary pill button (`bg-[hsl(var(--primary))]`, white text, ArrowRight icon).
+Existing 5 stay as-is (SMS, Zalo, Viber, Email, OTP) → total **10 chips**.
+
+### 2. Reposition the 10 chips around `OutcomeStage`
+
+Expand the `positions` array in `OutcomeStage` from 5 → 10 entries, distributed evenly around the shopper image (top, right, bottom, left edges + corners). Stagger the entry transitions (`600 + i * 80ms`) so all 10 fade in smoothly without feeling crowded.
+
+On mobile / tablet (`<lg`), the chip orbit stays hidden as today — no UX change for small screens.
+
+### 3. Add animated wave + traveling dots inside `CDPSupportStrip`
+
+In the "CDP Solution" header block, add a thin SVG **wave band** (no text, no avatars, no popups — purely the sinusoidal lines like the reference image) sitting underneath / behind the "CDP Solution" eyebrow and "Strategic partnership with [ByteTech logo]" line.
+
+**Wave visual:**
+
+- 2–3 stacked sine curves drawn as SVG `<path>`, very thin strokes (`stroke-width: 1.2px`)
+- Soft brand-aligned gradient stroke (teal → soft green → warm orange), low opacity (~25%) so it doesn't fight the text
+- Width = full strip width, height ≈ 56–72px
+- Sits as an absolute-positioned layer inside the strip; text content sits above with `relative z-10`
+
+**Traveling dots:**
+
+- 10 colored dots, one per service, each colored with its `dot` from `CHANNEL_CHIPS`
+- Each dot follows the wave path via SVG `<animateMotion>` referencing the path with a `<mpath>`, with `dur` ≈ 8–10s, `repeatCount="indefinite"`, and staggered `begin` offsets so they ride along the bumps continuously
+- Dots are small (r=3) with a soft outer glow matching their color
+- No labels — just the moving colored dots
+
+**Layout impact:** the strip becomes slightly taller (≈ +56px). The 3-bullet list below ("Drive personalized…", "Maximize…", "Optimize…") stays unchanged.
 
 ### Technical notes
 
-- Pure presentation changes; no new deps, no data changes.
-- Continue using existing semantic tokens.
-- `OutcomeRail` signature stays the same — just trims its trailing link.
+- Pure presentational additions, no new deps (use native SVG `animateMotion`).
+- Respect `prefers-reduced-motion`: when set, dots freeze at their starting offset; wave stroke stays static.
+- Reuse `CHANNEL_CHIPS` as the single source of truth for service colors so chip + wave dot colors always stay in sync.
+- All colors via inline style for the brand dot hexes (already the pattern in this file); structural colors keep semantic tokens.
