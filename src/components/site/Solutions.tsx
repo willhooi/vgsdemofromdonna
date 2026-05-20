@@ -210,12 +210,12 @@ const OutcomeStage = ({ visible }: { visible: boolean }) => (
     <div className="pointer-events-none absolute inset-0 hidden lg:block">
       {CHANNEL_CHIPS.map((c, i) => {
         const positions = [
-          { left: "-4%", top: "20%" },
-          { left: "-2%", top: "52%" },
+          { left: "-4%", top: "40%" },
+          { left: "-2%", top: "62%" },
           { left: "4%", bottom: "18%" },
           { left: "26%", bottom: "-2%" },
           { left: "54%", bottom: "4%" },
-          { right: "8%", bottom: "44%" },
+          { left: "8%", top: "4%" },
           { right: "-4%", top: "52%" },
           { right: "-2%", top: "22%" },
           { right: "18%", top: "-3%" },
