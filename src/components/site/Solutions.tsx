@@ -460,9 +460,12 @@ const CDPSupportStrip = ({ visible }: { visible: boolean }) => (
 
 const CDPWave = () => {
   const paths = [
-    "M0,30 C150,-10 300,90 450,30 C600,-10 750,90 900,30 C1050,-10 1200,90 1200,30",
-    "M0,70 C180,30 360,120 540,70 C720,30 900,120 1080,70 C1140,60 1200,72 1200,70",
-    "M0,110 C200,150 400,60 600,110 C800,160 1000,60 1200,110",
+    // Upper strand — crosses center at the "waists" (x=200, 600, 1000) and bulges down/up between
+    "M0,20 C100,20 150,70 200,70 C250,70 350,120 400,120 C450,120 550,70 600,70 C650,70 750,20 800,20 C850,20 950,70 1000,70 C1050,70 1150,120 1200,120",
+    // Lower strand — mirror of the upper strand, producing clear intersections at the waists
+    "M0,120 C100,120 150,70 200,70 C250,70 350,20 400,20 C450,20 550,70 600,70 C650,70 750,120 800,120 C850,120 950,70 1000,70 C1050,70 1150,20 1200,20",
+    // Spine — gentle ripple through the center
+    "M0,70 C150,55 250,85 400,70 C550,55 650,85 800,70 C950,55 1050,85 1200,70",
   ];
   const dur = 9;
   return (
