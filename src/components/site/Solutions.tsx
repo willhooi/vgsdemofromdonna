@@ -215,7 +215,7 @@ const OutcomeStage = ({ visible }: { visible: boolean }) => (
           { left: "4%", bottom: "18%" },
           { left: "26%", bottom: "-2%" },
           { left: "54%", bottom: "4%" },
-          { right: "6%", bottom: "20%" },
+          { right: "8%", bottom: "44%" },
           { right: "-4%", top: "52%" },
           { right: "-2%", top: "22%" },
           { right: "18%", top: "-3%" },
