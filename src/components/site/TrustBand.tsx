@@ -16,6 +16,16 @@ import vinfastLogo from "@/assets/brands/vinfast.png";
 import vnvcLogo from "@/assets/brands/vnvc.png";
 import vpbankLogo from "@/assets/brands/vpbank.png";
 import yolaLogo from "@/assets/brands/yola.png";
+import acfcLogo from "@/assets/brands/acfc.png";
+import aeonCitimartLogo from "@/assets/brands/aeon-citimart.png";
+import agodaLogo from "@/assets/brands/agoda.png";
+import akzonobelLogo from "@/assets/brands/akzonobel.png";
+import baoMinhLogo from "@/assets/brands/bao-minh.png";
+import bayerLogo from "@/assets/brands/bayer.png";
+import beLogo from "@/assets/brands/be.png";
+import bhdCineplexLogo from "@/assets/brands/bhd-cineplex.jpg";
+import bridgestoneLogo from "@/assets/brands/bridgestone.png";
+import californiaFitnessLogo from "@/assets/brands/california-fitness.png";
 
 /**
  * TrustBand — Infobip-style "trust at a glance" strip.
