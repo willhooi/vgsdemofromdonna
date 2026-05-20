@@ -403,98 +403,58 @@ const OutcomeCard = ({
   );
 };
 
-/* ---------- Support strip ---------- */
+/* ---------- Support strip — CDP × ByteTech ---------- */
+
+const CDP_BULLETS = [
+  "Drive personalized customer experiences",
+  "Maximize conversion rates",
+  "Optimize costs",
+];
 
 const CDPSupportStrip = ({ visible }: { visible: boolean }) => (
   <div
-    className="mt-10 rounded-2xl border border-[hsl(var(--primary))]/15 bg-[hsl(145_50%_97%)] p-4 md:mt-12 md:p-5"
+    className="mt-10 overflow-hidden rounded-2xl border border-[hsl(var(--primary))]/15 bg-gradient-to-br from-[hsl(145_55%_98%)] to-white p-5 md:mt-12 md:p-6"
     style={{
       opacity: visible ? 1 : 0,
       transform: visible ? "translateY(0)" : "translateY(10px)",
       transition: "opacity 600ms ease-out 400ms, transform 600ms ease-out 400ms",
     }}
   >
-    <div className="flex flex-col items-start gap-3 md:flex-row md:items-center md:justify-between md:gap-6">
-      <div className="flex items-center gap-3">
-        <img
-          src={bytetechLogo}
-          alt="ByteTech"
-          className="h-6 w-auto md:h-7"
-          loading="lazy"
-        />
+    <div className="flex flex-col gap-5 md:flex-row md:items-center md:gap-8">
+      {/* Left — identity */}
+      <div className="flex items-center gap-4 md:min-w-[260px]">
+        <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-white shadow-[0_4px_14px_-6px_hsl(128_52%_40%/0.25)] ring-1 ring-[hsl(var(--primary))]/15">
+          <img src={bytetechLogo} alt="ByteTech" className="h-7 w-auto" loading="lazy" />
+        </div>
         <div>
-          <div className="text-[10px] font-bold uppercase tracking-[0.18em] text-[hsl(var(--primary-deep))]">
-            Powered by PangoCDP
+          <div className="text-[10px] font-bold uppercase tracking-[0.22em] text-[hsl(var(--primary-deep))]">
+            CDP Solution
           </div>
-          <div className="text-[12.5px] font-semibold text-foreground">
-            Strategic CDP partnership with ByteTech
+          <div className="mt-0.5 text-[14px] font-semibold leading-tight text-foreground">
+            Strategic partnership with <span className="text-[hsl(var(--primary-deep))]">ByteTech</span>
           </div>
         </div>
       </div>
 
-      <ul className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[11.5px] text-muted-foreground">
-        {["Unified profiles", "Real-time segments", "AI next-best action"].map(
-          (t) => (
-            <li key={t} className="flex items-center gap-1.5">
-              <span className="h-1.5 w-1.5 rounded-full bg-[hsl(var(--primary))]" />
-              {t}
-            </li>
-          ),
-        )}
-      </ul>
+      {/* Divider */}
+      <div className="hidden h-12 w-px bg-[hsl(var(--primary))]/15 md:block" />
 
-      <a
-        href="https://bytetech.io/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center gap-1 text-[12px] font-semibold text-[hsl(var(--primary-deep))] hover:underline"
-      >
-        Read the partnership <ArrowRight className="h-3.5 w-3.5" />
-      </a>
+      {/* Right — outcome bullets */}
+      <ul className="grid flex-1 gap-2 sm:grid-cols-3 sm:gap-3">
+        {CDP_BULLETS.map((t) => (
+          <li
+            key={t}
+            className="flex items-start gap-2 text-[12.5px] leading-snug text-foreground/90"
+          >
+            <span
+              aria-hidden
+              className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-[hsl(var(--primary))]"
+            />
+            {t}
+          </li>
+        ))}
+      </ul>
     </div>
   </div>
 );
 
-/* ---------- Metrics strip ---------- */
-
-const MetricsStrip = ({ visible }: { visible: boolean }) => {
-  const items = [
-    { v: 5_000_000, suf: "+", lbl: "Messages / day", compact: true },
-    { v: 76, suf: "+", lbl: "Enterprise clients" },
-    { v: 99.95, suf: "%", lbl: "Network uptime", decimals: 2 },
-    { v: 9, suf: "", lbl: "Channels in one API" },
-  ];
-  return (
-    <div className="mt-6 grid grid-cols-2 gap-3 rounded-2xl border border-border bg-white p-4 md:grid-cols-4 md:p-5">
-      {items.map((it) => (
-        <MetricItem key={it.lbl} item={it} visible={visible} />
-      ))}
-    </div>
-  );
-};
-
-const MetricItem = ({
-  item,
-  visible,
-}: {
-  item: { v: number; suf: string; lbl: string; compact?: boolean; decimals?: number };
-  visible: boolean;
-}) => {
-  const n = useCountUp(visible ? Math.round(item.v) : 0, 1600);
-  const display = item.compact
-    ? `${(n / 1_000_000).toFixed(n >= 1_000_000 ? 1 : 0)}M`
-    : item.decimals
-      ? item.v.toFixed(item.decimals)
-      : n.toLocaleString();
-  return (
-    <div className="text-center">
-      <div className="font-display text-2xl font-extrabold tabular-nums text-foreground md:text-3xl">
-        {display}
-        {item.suf}
-      </div>
-      <div className="mt-0.5 text-[11px] uppercase tracking-wider text-muted-foreground">
-        {item.lbl}
-      </div>
-    </div>
-  );
-};
