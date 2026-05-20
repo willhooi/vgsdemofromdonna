@@ -26,6 +26,15 @@ import beLogo from "@/assets/brands/be.png";
 import bhdCineplexLogo from "@/assets/brands/bhd-cineplex.jpg";
 import bridgestoneLogo from "@/assets/brands/bridgestone.png";
 import californiaFitnessLogo from "@/assets/brands/california-fitness.png";
+import caoDangSaigonLogo from "@/assets/brands/cao-dang-saigon.png";
+import hoaSenLogo from "@/assets/brands/hoa-sen-university.png";
+import fwdLogo from "@/assets/brands/fwd.png";
+import grabLogo from "@/assets/brands/grab.png";
+import highlandsCoffeeLogo from "@/assets/brands/highlands-coffee.png";
+import hyundaiLogo from "@/assets/brands/hyundai.png";
+import lgLogo from "@/assets/brands/lg.png";
+import pharmacityLogo from "@/assets/brands/pharmacity.png";
+import pviLogo from "@/assets/brands/pvi.png";
 
 /**
  * TrustBand — Infobip-style "trust at a glance" strip.
@@ -108,24 +117,35 @@ const BRANDS_ROW_1: Brand[] = [
   { name: "UOB", logo: uobLogo },
   { name: "VinFast", logo: vinfastLogo },
   { name: "SONY", logo: sonyLogo },
-  { name: "YOLA", logo: yolaLogo },
-  { name: "Agoda", logo: agodaLogo },
-  { name: "AkzoNobel", logo: akzonobelLogo },
-  { name: "Bayer", logo: bayerLogo },
+  { name: "Hyundai", logo: hyundaiLogo },
+  { name: "LG", logo: lgLogo },
   { name: "Bridgestone", logo: bridgestoneLogo },
-  { name: "be", logo: beLogo },
+  { name: "Bayer", logo: bayerLogo },
+  { name: "AkzoNobel", logo: akzonobelLogo },
+  { name: "FWD Insurance", logo: fwdLogo },
 ];
 const BRANDS_ROW_2: Brand[] = [
   { name: "Vietnam Airlines", logo: vietnamAirlinesLogo },
   { name: "Traveloka", logo: travelokaLogo },
+  { name: "Agoda", logo: agodaLogo },
+  { name: "Grab", logo: grabLogo },
+  { name: "be", logo: beLogo },
+  { name: "Highlands Coffee", logo: highlandsCoffeeLogo },
   { name: "Tokyo Deli", logo: tokyoDeliLogo },
-  { name: "Vascara", logo: vascaraLogo },
-  { name: "VNVC", logo: vnvcLogo },
-  { name: "ACFC", logo: acfcLogo },
   { name: "AEON Citimart", logo: aeonCitimartLogo },
-  { name: "Bao Minh", logo: baoMinhLogo },
+  { name: "Pharmacity", logo: pharmacityLogo },
   { name: "BHD Cineplex", logo: bhdCineplexLogo },
+];
+const BRANDS_ROW_3: Brand[] = [
+  { name: "ACFC", logo: acfcLogo },
+  { name: "Vascara", logo: vascaraLogo },
   { name: "California Fitness & Yoga", logo: californiaFitnessLogo },
+  { name: "YOLA", logo: yolaLogo },
+  { name: "Hoa Sen University", logo: hoaSenLogo },
+  { name: "Cao Đẳng Sài Gòn", logo: caoDangSaigonLogo },
+  { name: "VNVC", logo: vnvcLogo },
+  { name: "Bao Minh", logo: baoMinhLogo },
+  { name: "PVI Insurance", logo: pviLogo },
 ];
 
 export const TrustBand = () => {
@@ -253,6 +273,7 @@ export const TrustBand = () => {
         <div className="mt-5 md:mt-6 space-y-3 md:space-y-4">
           <BrandRow brands={BRANDS_ROW_1} direction="left" />
           <BrandRow brands={BRANDS_ROW_2} direction="right" />
+          <BrandRow brands={BRANDS_ROW_3} direction="left" />
         </div>
       </div>
     </section>
