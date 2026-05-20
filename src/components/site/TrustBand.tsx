@@ -16,6 +16,16 @@ import vinfastLogo from "@/assets/brands/vinfast.png";
 import vnvcLogo from "@/assets/brands/vnvc.png";
 import vpbankLogo from "@/assets/brands/vpbank.png";
 import yolaLogo from "@/assets/brands/yola.png";
+import acfcLogo from "@/assets/brands/acfc.png";
+import aeonCitimartLogo from "@/assets/brands/aeon-citimart.png";
+import agodaLogo from "@/assets/brands/agoda.png";
+import akzonobelLogo from "@/assets/brands/akzonobel.png";
+import baoMinhLogo from "@/assets/brands/bao-minh.png";
+import bayerLogo from "@/assets/brands/bayer.png";
+import beLogo from "@/assets/brands/be.png";
+import bhdCineplexLogo from "@/assets/brands/bhd-cineplex.jpg";
+import bridgestoneLogo from "@/assets/brands/bridgestone.png";
+import californiaFitnessLogo from "@/assets/brands/california-fitness.png";
 
 /**
  * TrustBand — Infobip-style "trust at a glance" strip.
@@ -99,6 +109,11 @@ const BRANDS_ROW_1: Brand[] = [
   { name: "VinFast", logo: vinfastLogo },
   { name: "SONY", logo: sonyLogo },
   { name: "YOLA", logo: yolaLogo },
+  { name: "Agoda", logo: agodaLogo },
+  { name: "AkzoNobel", logo: akzonobelLogo },
+  { name: "Bayer", logo: bayerLogo },
+  { name: "Bridgestone", logo: bridgestoneLogo },
+  { name: "be", logo: beLogo },
 ];
 const BRANDS_ROW_2: Brand[] = [
   { name: "Vietnam Airlines", logo: vietnamAirlinesLogo },
@@ -106,6 +121,11 @@ const BRANDS_ROW_2: Brand[] = [
   { name: "Tokyo Deli", logo: tokyoDeliLogo },
   { name: "Vascara", logo: vascaraLogo },
   { name: "VNVC", logo: vnvcLogo },
+  { name: "ACFC", logo: acfcLogo },
+  { name: "AEON Citimart", logo: aeonCitimartLogo },
+  { name: "Bao Minh", logo: baoMinhLogo },
+  { name: "BHD Cineplex", logo: bhdCineplexLogo },
+  { name: "California Fitness & Yoga", logo: californiaFitnessLogo },
 ];
 
 export const TrustBand = () => {
@@ -251,7 +271,7 @@ const BrandRow = ({
   return (
     <div className="group relative overflow-hidden">
       <div
-        className="flex w-max gap-4 will-change-transform"
+        className="flex w-max gap-2 sm:gap-3 will-change-transform"
         style={{
           animation: `${direction === "left" ? "marquee-left" : "marquee-right"} 38s linear infinite`,
         }}
@@ -269,7 +289,7 @@ const BrandLogo = ({ brand }: { brand: Brand }) => {
   return (
     <span
       title={brand.name}
-      className="inline-flex h-16 w-36 shrink-0 items-center justify-center rounded-xl border border-border bg-card px-2 py-1.5 sm:h-20 sm:w-44 sm:rounded-2xl sm:px-3 sm:py-2 md:h-24 md:w-52"
+      className="inline-flex h-14 w-24 shrink-0 items-center justify-center rounded-lg border border-border bg-card px-1.5 py-1 sm:h-16 sm:w-32 sm:rounded-xl sm:px-2 sm:py-1.5 md:h-20 md:w-36 md:px-3"
     >
       <img
         src={brand.logo}
