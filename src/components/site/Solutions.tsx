@@ -337,19 +337,10 @@ const OUTCOMES: Outcome[] = [
 ];
 
 const OutcomeRail = ({ visible }: { visible: boolean }) => (
-  <div className="flex flex-col gap-3">
-    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-      {OUTCOMES.map((o, i) => (
-        <OutcomeCard key={o.id} o={o} index={i} visible={visible} />
-      ))}
-    </div>
-    <Link
-      to="/solutions"
-      className="group mt-1 inline-flex items-center justify-center gap-1.5 rounded-xl border border-dashed border-border bg-white/60 px-4 py-3 text-[12.5px] font-semibold text-[hsl(var(--primary-deep))] transition-colors hover:border-[hsl(var(--primary))]/50 hover:bg-white"
-    >
-      + 5 more services — see the full stack
-      <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-    </Link>
+  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+    {OUTCOMES.map((o, i) => (
+      <OutcomeCard key={o.id} o={o} index={i} visible={visible} />
+    ))}
   </div>
 );
 
