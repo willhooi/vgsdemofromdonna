@@ -125,7 +125,7 @@ export const Industries = () => {
         </div>
 
         {/* Sector tiles — concise, non-interactive */}
-        <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {sectors.map(({ icon: Icon, title, desc }) => (
             <div
               key={title}
