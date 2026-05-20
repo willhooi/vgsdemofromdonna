@@ -179,12 +179,12 @@ const OutcomeStage = ({ visible }: { visible: boolean }) => (
       accent="primary"
     >
       <div className="text-[10px] font-bold uppercase tracking-wider text-[hsl(var(--primary-deep))]">
-        Trạng thái đơn hàng
+        ORDER STATUS
       </div>
       <div className="mt-1 flex items-center gap-1.5">
         <PackageCheck className="h-3.5 w-3.5 text-[hsl(var(--primary))]" />
         <span className="text-[12px] font-semibold text-foreground">
-          Đã xác nhận
+          Confirmed
         </span>
       </div>
     </Popup>
