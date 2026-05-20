@@ -165,12 +165,15 @@ export const Industries = () => {
           ))}
         </div>
 
-        <div className="mt-12 flex justify-center">
+        <div className="mt-12 flex flex-col items-center gap-4 text-center">
+          <p className="text-base font-medium text-foreground">
+            Need a tailored solution?
+          </p>
           <Link
             to="/contact"
             className="group inline-flex items-center gap-2 rounded-full bg-[hsl(var(--accent))] px-6 py-3 text-sm font-semibold text-[hsl(var(--accent-foreground))] shadow-[0_12px_30px_-12px_hsl(35_100%_50%/0.55)] transition-transform hover:-translate-y-0.5"
           >
-            Muốn trải nghiệm giải pháp customize cho bạn? Talk to us
+            Talk to us
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
           </Link>
         </div>
