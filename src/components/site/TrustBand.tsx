@@ -273,6 +273,7 @@ export const TrustBand = () => {
         <div className="mt-5 md:mt-6 space-y-3 md:space-y-4">
           <BrandRow brands={BRANDS_ROW_1} direction="left" />
           <BrandRow brands={BRANDS_ROW_2} direction="right" />
+          <BrandRow brands={BRANDS_ROW_3} direction="left" />
         </div>
       </div>
     </section>
