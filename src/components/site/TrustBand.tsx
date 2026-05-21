@@ -145,7 +145,7 @@ const BRANDS_ROW_3: Brand[] = [
   { name: "Hoa Sen University", logo: hoaSenLogo, scale: 0.8 },
   { name: "UrBox", logo: urboxLogo, scale: 1.55 },
   { name: "VNVC", logo: vnvcLogo, scale: 1.5 },
-  { name: "Porsche", logo: porscheLogo, scale: 0.9 },
+  { name: "Porsche", logo: porscheLogo, scale: 1.6 },
   { name: "CGV Cinemas", logo: cgvLogo, scale: 1.0 },
 ];
 
