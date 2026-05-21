@@ -36,6 +36,7 @@ import lgLogo from "@/assets/brands/lg.png";
 import pharmacityLogo from "@/assets/brands/pharmacity.png";
 import cgvLogo from "@/assets/brands/cgv.png";
 import rmitLogo from "@/assets/brands/rmit.jpg";
+import shopeeLogo from "@/assets/brands/shopee.png";
 
 /**
  * TrustBand — Infobip-style "trust at a glance" strip.
