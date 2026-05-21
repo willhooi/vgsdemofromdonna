@@ -34,7 +34,7 @@ import highlandsCoffeeLogo from "@/assets/brands/highlands-coffee.png";
 import hyundaiLogo from "@/assets/brands/hyundai.png";
 import lgLogo from "@/assets/brands/lg.png";
 import pharmacityLogo from "@/assets/brands/pharmacity.png";
-import pviLogo from "@/assets/brands/pvi.png";
+import cgvLogo from "@/assets/brands/cgv.png";
 
 /**
  * TrustBand — Infobip-style "trust at a glance" strip.
@@ -145,7 +145,7 @@ const BRANDS_ROW_3: Brand[] = [
   { name: "UrBox", logo: urboxLogo },
   { name: "VNVC", logo: vnvcLogo },
   { name: "Porsche", logo: porscheLogo },
-  { name: "PVI Insurance", logo: pviLogo },
+  { name: "CGV Cinemas", logo: cgvLogo },
 ];
 
 export const TrustBand = () => {
