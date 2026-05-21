@@ -336,11 +336,11 @@ const OUTCOMES: Outcome[] = [
     id: "reward",
     Icon: Gift,
     tag: "Reward Unlocked",
-    service: "Rewards Delivery",
+    service: "Instant Reward Success",
     metric: 100,
     suffix: "%",
     prefix: "",
-    body: "Repeat-customer LTV from loyalty journeys customers actually open.",
+    body: "Instantly deliver mobile top-ups and voucher codes in any quantity.",
   },
 ];
 
