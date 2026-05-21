@@ -365,7 +365,7 @@ const StatCard = ({ eyebrow, target, suffix, label }: StatCardProps) => {
     return () => obs.disconnect();
   }, [inView]);
 
-  const value = useCountUp(target, 1800, inView);
+  const value = useCountUp(inView ? target : 0, 1800);
   const display = target >= 1000 ? value.toLocaleString() : value.toString();
 
   return (
