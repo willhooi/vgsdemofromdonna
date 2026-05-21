@@ -35,6 +35,7 @@ import hyundaiLogo from "@/assets/brands/hyundai.png";
 import lgLogo from "@/assets/brands/lg.png";
 import pharmacityLogo from "@/assets/brands/pharmacity.png";
 import cgvLogo from "@/assets/brands/cgv.png";
+import rmitLogo from "@/assets/brands/rmit.jpg";
 
 /**
  * TrustBand — Infobip-style "trust at a glance" strip.
@@ -143,6 +144,7 @@ const BRANDS_ROW_3: Brand[] = [
   { name: "California Fitness & Yoga", logo: californiaFitnessLogo, scale: 1.1 },
   { name: "YOLA", logo: yolaLogo, scale: 0.6 },
   { name: "Hoa Sen University", logo: hoaSenLogo, scale: 0.8 },
+  { name: "RMIT University", logo: rmitLogo, scale: 1.0 },
   { name: "UrBox", logo: urboxLogo, scale: 1.55 },
   { name: "VNVC", logo: vnvcLogo, scale: 1.5 },
   { name: "Porsche", logo: porscheLogo, scale: 1.6 },
