@@ -58,7 +58,7 @@ const stats = [
     eyebrow: "Daily volume",
     target: 8000000,
     suffix: "+",
-    label: "SMS, Zalo & email messages delivered every single day across Vietnam",
+    label: "Messages delivered every day across Vietnam’s most popular platforms.",
   },
 ];
 
