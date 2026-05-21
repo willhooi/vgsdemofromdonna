@@ -138,14 +138,14 @@ const BRANDS_ROW_2: Brand[] = [
   { name: "BHD Cineplex", logo: bhdCineplexLogo, scale: 1.1 },
 ];
 const BRANDS_ROW_3: Brand[] = [
-  { name: "ACFC", logo: acfcLogo, scale: 1.1 },
-  { name: "Vascara", logo: vascaraLogo, scale: 1.0 },
+  { name: "ACFC", logo: acfcLogo, scale: 0.75 },
+  { name: "Vascara", logo: vascaraLogo, scale: 1.3 },
   { name: "California Fitness & Yoga", logo: californiaFitnessLogo, scale: 1.1 },
-  { name: "YOLA", logo: yolaLogo, scale: 1.15 },
-  { name: "Hoa Sen University", logo: hoaSenLogo, scale: 1.15 },
-  { name: "UrBox", logo: urboxLogo, scale: 1.05 },
-  { name: "VNVC", logo: vnvcLogo, scale: 1.1 },
-  { name: "Porsche", logo: porscheLogo, scale: 1.25 },
+  { name: "YOLA", logo: yolaLogo, scale: 0.8 },
+  { name: "Hoa Sen University", logo: hoaSenLogo, scale: 0.8 },
+  { name: "UrBox", logo: urboxLogo, scale: 1.35 },
+  { name: "VNVC", logo: vnvcLogo, scale: 1.4 },
+  { name: "Porsche", logo: porscheLogo, scale: 0.9 },
   { name: "CGV Cinemas", logo: cgvLogo, scale: 1.0 },
 ];
 
