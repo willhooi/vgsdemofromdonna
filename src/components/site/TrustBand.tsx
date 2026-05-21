@@ -139,12 +139,12 @@ const BRANDS_ROW_2: Brand[] = [
 ];
 const BRANDS_ROW_3: Brand[] = [
   { name: "ACFC", logo: acfcLogo, scale: 0.75 },
-  { name: "Vascara", logo: vascaraLogo, scale: 1.3 },
+  { name: "Vascara", logo: vascaraLogo, scale: 1.5 },
   { name: "California Fitness & Yoga", logo: californiaFitnessLogo, scale: 1.1 },
-  { name: "YOLA", logo: yolaLogo, scale: 0.8 },
+  { name: "YOLA", logo: yolaLogo, scale: 0.6 },
   { name: "Hoa Sen University", logo: hoaSenLogo, scale: 0.8 },
-  { name: "UrBox", logo: urboxLogo, scale: 1.35 },
-  { name: "VNVC", logo: vnvcLogo, scale: 1.4 },
+  { name: "UrBox", logo: urboxLogo, scale: 1.55 },
+  { name: "VNVC", logo: vnvcLogo, scale: 1.5 },
   { name: "Porsche", logo: porscheLogo, scale: 0.9 },
   { name: "CGV Cinemas", logo: cgvLogo, scale: 1.0 },
 ];
