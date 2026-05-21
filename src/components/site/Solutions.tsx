@@ -336,7 +336,7 @@ const OUTCOMES: Outcome[] = [
     id: "reward",
     Icon: Gift,
     tag: "Reward Unlocked",
-    service: "Rewards + Smart Warranty",
+    service: "Rewards Delivery",
     metric: 100,
     suffix: "%",
     prefix: "",
