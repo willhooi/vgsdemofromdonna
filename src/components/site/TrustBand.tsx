@@ -109,44 +109,46 @@ const certifications = [
 ];
 
 // Brand logos rendered from locally bundled PNGs in src/assets/brands/.
-// To add a brand, drop the file into src/assets/brands/ and append { name, logo }.
-type Brand = { name: string; logo: string };
+// `scale` normalizes visual weight: stacked/shield logos with whitespace get boosted,
+// wide wordmarks stay at 1. Adjust per logo to keep optical sizing consistent.
+type Brand = { name: string; logo: string; scale?: number };
 
 const BRANDS_ROW_1: Brand[] = [
-  { name: "VPBank", logo: vpbankLogo },
-  { name: "UOB", logo: uobLogo },
-  { name: "Green SM", logo: greenSmLogo },
-  { name: "SONY", logo: sonyLogo },
-  { name: "Hyundai", logo: hyundaiLogo },
-  { name: "LG", logo: lgLogo },
-  { name: "Bridgestone", logo: bridgestoneLogo },
-  { name: "Bayer", logo: bayerLogo },
-  { name: "AkzoNobel", logo: akzonobelLogo },
-  { name: "FWD Insurance", logo: fwdLogo },
+  { name: "VPBank", logo: vpbankLogo, scale: 1.0 },
+  { name: "UOB", logo: uobLogo, scale: 1.15 },
+  { name: "Green SM", logo: greenSmLogo, scale: 1.1 },
+  { name: "SONY", logo: sonyLogo, scale: 0.95 },
+  { name: "Hyundai", logo: hyundaiLogo, scale: 1.0 },
+  { name: "LG", logo: lgLogo, scale: 1.2 },
+  { name: "Bridgestone", logo: bridgestoneLogo, scale: 1.0 },
+  { name: "Bayer", logo: bayerLogo, scale: 1.15 },
+  { name: "AkzoNobel", logo: akzonobelLogo, scale: 1.0 },
+  { name: "FWD Insurance", logo: fwdLogo, scale: 1.2 },
 ];
 const BRANDS_ROW_2: Brand[] = [
-  { name: "Vietnam Airlines", logo: vietnamAirlinesLogo },
-  { name: "Traveloka", logo: travelokaLogo },
-  { name: "Agoda", logo: agodaLogo },
-  { name: "Grab", logo: grabLogo },
-  { name: "be", logo: beLogo },
-  { name: "Highlands Coffee", logo: highlandsCoffeeLogo },
-  { name: "Tokyo Deli", logo: tokyoDeliLogo },
-  { name: "AEON Citimart", logo: aeonCitimartLogo },
-  { name: "Pharmacity", logo: pharmacityLogo },
-  { name: "BHD Cineplex", logo: bhdCineplexLogo },
+  { name: "Vietnam Airlines", logo: vietnamAirlinesLogo, scale: 1.0 },
+  { name: "Traveloka", logo: travelokaLogo, scale: 1.0 },
+  { name: "Agoda", logo: agodaLogo, scale: 1.05 },
+  { name: "Grab", logo: grabLogo, scale: 1.1 },
+  { name: "be", logo: beLogo, scale: 1.25 },
+  { name: "Highlands Coffee", logo: highlandsCoffeeLogo, scale: 1.0 },
+  { name: "Tokyo Deli", logo: tokyoDeliLogo, scale: 1.1 },
+  { name: "AEON Citimart", logo: aeonCitimartLogo, scale: 1.0 },
+  { name: "Pharmacity", logo: pharmacityLogo, scale: 1.05 },
+  { name: "BHD Cineplex", logo: bhdCineplexLogo, scale: 1.1 },
 ];
 const BRANDS_ROW_3: Brand[] = [
-  { name: "ACFC", logo: acfcLogo },
-  { name: "Vascara", logo: vascaraLogo },
-  { name: "California Fitness & Yoga", logo: californiaFitnessLogo },
-  { name: "YOLA", logo: yolaLogo },
-  { name: "Hoa Sen University", logo: hoaSenLogo },
-  { name: "UrBox", logo: urboxLogo },
-  { name: "VNVC", logo: vnvcLogo },
-  { name: "Porsche", logo: porscheLogo },
-  { name: "CGV Cinemas", logo: cgvLogo },
+  { name: "ACFC", logo: acfcLogo, scale: 1.1 },
+  { name: "Vascara", logo: vascaraLogo, scale: 1.0 },
+  { name: "California Fitness & Yoga", logo: californiaFitnessLogo, scale: 1.1 },
+  { name: "YOLA", logo: yolaLogo, scale: 1.15 },
+  { name: "Hoa Sen University", logo: hoaSenLogo, scale: 1.15 },
+  { name: "UrBox", logo: urboxLogo, scale: 1.05 },
+  { name: "VNVC", logo: vnvcLogo, scale: 1.1 },
+  { name: "Porsche", logo: porscheLogo, scale: 1.25 },
+  { name: "CGV Cinemas", logo: cgvLogo, scale: 1.0 },
 ];
+
 
 export const TrustBand = () => {
   const [shimmer, setShimmer] = useState(false);
