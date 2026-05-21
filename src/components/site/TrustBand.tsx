@@ -114,7 +114,7 @@ const certifications = [
 type Brand = { name: string; logo: string; scale?: number; offsetY?: string };
 
 const BRANDS_ROW_1: Brand[] = [
-  { name: "VPBank", logo: vpbankLogo, scale: 1.2 },
+  { name: "VPBank", logo: vpbankLogo, scale: 1.4 },
   { name: "UOB", logo: uobLogo, scale: 1.15 },
   { name: "Green SM", logo: greenSmLogo, scale: 0.9, offsetY: "-5px" },
   { name: "SONY", logo: sonyLogo, scale: 1.2 },
