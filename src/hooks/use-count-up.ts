@@ -23,6 +23,3 @@ export const useCountUp = (target: number, duration = 1800) => {
 
   return value;
 };
-
-  return value;
-};
