@@ -364,7 +364,6 @@ const OutcomeCard = ({
   const target = o.decimals ? Math.round(o.metric * 100) : o.metric;
   const n = useCountUp(visible ? target : 0, 1400);
   const display = o.decimals ? (n / 100).toFixed(o.decimals) : n.toLocaleString();
-  const { Icon } = o;
   return (
     <article
       className="group relative overflow-hidden rounded-2xl border border-border bg-white p-4 shadow-[0_4px_14px_-8px_rgba(0,0,0,0.08)] transition-all hover:-translate-y-0.5 hover:border-[hsl(var(--primary))]/40 hover:shadow-[0_18px_36px_-18px_hsl(128_52%_40%/0.35)]"
