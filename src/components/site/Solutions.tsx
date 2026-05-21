@@ -330,7 +330,7 @@ const OUTCOMES: Outcome[] = [
     metric: 99.95,
     suffix: "%",
     decimals: 2,
-    body: "Authentication that lands first time, every time — fallback built in.",
+    body: "Instant automatic messaging via SMS Short Code service.",
   },
   {
     id: "reward",
