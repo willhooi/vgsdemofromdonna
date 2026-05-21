@@ -48,7 +48,7 @@ import cgvLogo from "@/assets/brands/cgv.png";
 const stats = [
   {
     eyebrow: "Since 2007",
-    target: 5000,
+    target: 8000000,
     suffix: "+",
     label: "Enterprise brands trust VietGuys to power their customer conversations.",
   },
