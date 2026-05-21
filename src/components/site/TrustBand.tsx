@@ -126,15 +126,15 @@ const BRANDS_ROW_1: Brand[] = [
   { name: "FWD Insurance", logo: fwdLogo, scale: 0.75 },
 ];
 const BRANDS_ROW_2: Brand[] = [
-  { name: "Vietnam Airlines", logo: vietnamAirlinesLogo, scale: 1.0 },
+  { name: "Vietnam Airlines", logo: vietnamAirlinesLogo, scale: 1.1 },
   { name: "Traveloka", logo: travelokaLogo, scale: 1.0 },
   { name: "Agoda", logo: agodaLogo, scale: 1.05 },
-  { name: "Grab", logo: grabLogo, scale: 1.1 },
-  { name: "be", logo: beLogo, scale: 1.25 },
+  { name: "Grab", logo: grabLogo, scale: 1.2 },
+  { name: "be", logo: beLogo, scale: 1.15 },
   { name: "Highlands Coffee", logo: highlandsCoffeeLogo, scale: 1.0 },
-  { name: "Tokyo Deli", logo: tokyoDeliLogo, scale: 1.1 },
-  { name: "AEON Citimart", logo: aeonCitimartLogo, scale: 1.0 },
-  { name: "Pharmacity", logo: pharmacityLogo, scale: 1.05 },
+  { name: "Tokyo Deli", logo: tokyoDeliLogo, scale: 1.2 },
+  { name: "AEON Citimart", logo: aeonCitimartLogo, scale: 1.2 },
+  { name: "Pharmacity", logo: pharmacityLogo, scale: 0.95 },
   { name: "BHD Cineplex", logo: bhdCineplexLogo, scale: 1.1 },
 ];
 const BRANDS_ROW_3: Brand[] = [
