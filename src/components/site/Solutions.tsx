@@ -319,7 +319,7 @@ const OUTCOMES: Outcome[] = [
     service: "Cost Savings",
     metric: 40,
     suffix: "%",
-    prefix: "−",
+    prefix: "",
     body: "Maximize budget with strategic multi-channel routing over standalone messaging.",
   },
   {
