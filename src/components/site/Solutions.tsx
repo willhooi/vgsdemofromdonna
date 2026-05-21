@@ -364,7 +364,6 @@ const OutcomeCard = ({
   const target = o.decimals ? Math.round(o.metric * 100) : o.metric;
   const n = useCountUp(visible ? target : 0, 1400);
   const display = o.decimals ? (n / 100).toFixed(o.decimals) : n.toLocaleString();
-  const { Icon } = o;
   return (
     <article
       className="group relative overflow-hidden rounded-2xl border border-border bg-white p-4 shadow-[0_4px_14px_-8px_rgba(0,0,0,0.08)] transition-all hover:-translate-y-0.5 hover:border-[hsl(var(--primary))]/40 hover:shadow-[0_18px_36px_-18px_hsl(128_52%_40%/0.35)]"
@@ -379,14 +378,6 @@ const OutcomeCard = ({
         className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100"
         style={{ background: "hsl(128 52% 60% / 0.35)" }}
       />
-      <div className="relative flex items-center gap-2">
-        <span className="grid h-7 w-7 place-items-center rounded-lg bg-[hsl(145_60%_94%)] text-[hsl(var(--primary-deep))]">
-          <Icon className="h-3.5 w-3.5" />
-        </span>
-        <span className="text-[10.5px] font-bold uppercase tracking-[0.18em] text-muted-foreground">
-          {o.tag}
-        </span>
-      </div>
       <div className="relative mt-2 font-display text-[26px] font-extrabold tabular-nums leading-none text-foreground sm:text-[28px]">
         {o.prefix}
         {display}
