@@ -12,7 +12,7 @@ import travelokaLogo from "@/assets/brands/traveloka.png";
 import uobLogo from "@/assets/brands/uob.png";
 import vascaraLogo from "@/assets/brands/vascara.png";
 import vietnamAirlinesLogo from "@/assets/brands/vietnam-airlines.png";
-import vinfastLogo from "@/assets/brands/vinfast.png";
+import greenSmLogo from "@/assets/brands/green-sm.png";
 import vnvcLogo from "@/assets/brands/vnvc.png";
 import vpbankLogo from "@/assets/brands/vpbank.png";
 import yolaLogo from "@/assets/brands/yola.png";
@@ -115,7 +115,7 @@ type Brand = { name: string; logo: string };
 const BRANDS_ROW_1: Brand[] = [
   { name: "VPBank", logo: vpbankLogo },
   { name: "UOB", logo: uobLogo },
-  { name: "VinFast", logo: vinfastLogo },
+  { name: "Green SM", logo: greenSmLogo },
   { name: "SONY", logo: sonyLogo },
   { name: "Hyundai", logo: hyundaiLogo },
   { name: "LG", logo: lgLogo },
