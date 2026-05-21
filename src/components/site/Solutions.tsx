@@ -307,7 +307,7 @@ const OUTCOMES: Outcome[] = [
     id: "review",
     Icon: Star,
     tag: "Delivery Rate",
-    service: "SMS Brandname + Zalo",
+    service: "Delivery Rate",
     metric: 99,
     suffix: "%",
     body: "Built-in SMS failover ensures uninterrupted customer communications.",
