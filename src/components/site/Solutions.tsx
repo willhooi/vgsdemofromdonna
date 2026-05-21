@@ -379,14 +379,6 @@ const OutcomeCard = ({
         className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100"
         style={{ background: "hsl(128 52% 60% / 0.35)" }}
       />
-      <div className="relative flex items-center gap-2">
-        <span className="grid h-7 w-7 place-items-center rounded-lg bg-[hsl(145_60%_94%)] text-[hsl(var(--primary-deep))]">
-          <Icon className="h-3.5 w-3.5" />
-        </span>
-        <span className="text-[10.5px] font-bold uppercase tracking-[0.18em] text-muted-foreground">
-          {o.tag}
-        </span>
-      </div>
       <div className="relative mt-2 font-display text-[26px] font-extrabold tabular-nums leading-none text-foreground sm:text-[28px]">
         {o.prefix}
         {display}
