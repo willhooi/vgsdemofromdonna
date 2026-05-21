@@ -306,12 +306,11 @@ const OUTCOMES: Outcome[] = [
   {
     id: "review",
     Icon: Star,
-    tag: "5★ Review",
-    service: "Zalo ZNS · post-purchase",
-    metric: 18,
+    tag: "Delivery Rate",
+    service: "SMS Brandname + Zalo",
+    metric: 99,
     suffix: "%",
-    prefix: "+",
-    body: "Lifted NPS by turning every delivery into a branded touchpoint.",
+    body: "Built-in SMS failover ensures uninterrupted customer communications.",
   },
   {
     id: "order",
