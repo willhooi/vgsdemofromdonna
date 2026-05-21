@@ -116,14 +116,14 @@ type Brand = { name: string; logo: string; scale?: number };
 const BRANDS_ROW_1: Brand[] = [
   { name: "VPBank", logo: vpbankLogo, scale: 1.0 },
   { name: "UOB", logo: uobLogo, scale: 1.15 },
-  { name: "Green SM", logo: greenSmLogo, scale: 1.1 },
+  { name: "Green SM", logo: greenSmLogo, scale: 0.9 },
   { name: "SONY", logo: sonyLogo, scale: 0.95 },
-  { name: "Hyundai", logo: hyundaiLogo, scale: 1.0 },
-  { name: "LG", logo: lgLogo, scale: 1.2 },
+  { name: "Hyundai", logo: hyundaiLogo, scale: 0.85 },
+  { name: "LG", logo: lgLogo, scale: 1.0 },
   { name: "Bridgestone", logo: bridgestoneLogo, scale: 1.0 },
-  { name: "Bayer", logo: bayerLogo, scale: 1.15 },
+  { name: "Bayer", logo: bayerLogo, scale: 0.9 },
   { name: "AkzoNobel", logo: akzonobelLogo, scale: 1.0 },
-  { name: "FWD Insurance", logo: fwdLogo, scale: 1.2 },
+  { name: "FWD Insurance", logo: fwdLogo, scale: 1.0 },
 ];
 const BRANDS_ROW_2: Brand[] = [
   { name: "Vietnam Airlines", logo: vietnamAirlinesLogo, scale: 1.0 },
