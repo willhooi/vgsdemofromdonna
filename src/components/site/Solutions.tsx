@@ -326,7 +326,7 @@ const OUTCOMES: Outcome[] = [
     id: "otp",
     Icon: ShieldCheck,
     tag: "OTP < 2s",
-    service: "OTPBox · multi-channel",
+    service: "Response Rate",
     metric: 3,
     suffix: "s",
     prefix: "< ",
