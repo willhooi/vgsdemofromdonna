@@ -320,7 +320,7 @@ const OUTCOMES: Outcome[] = [
     metric: 40,
     suffix: "%",
     prefix: "−",
-    body: "Strategic multi-channel routing instead of sending messages separately.",
+    body: "Maximize budget with strategic multi-channel routing over standalone messaging.",
   },
   {
     id: "otp",
