@@ -50,7 +50,7 @@ import shopeeLogo from "@/assets/brands/shopee.png";
 const stats = [
   {
     eyebrow: "Since 2007",
-    target: 8000000,
+    target: 6000,
     suffix: "+",
     label: "Enterprise brands trust VietGuys to power their customer conversations.",
   },
