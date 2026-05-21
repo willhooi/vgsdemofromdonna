@@ -337,9 +337,9 @@ const OUTCOMES: Outcome[] = [
     Icon: Gift,
     tag: "Reward Unlocked",
     service: "Rewards + Smart Warranty",
-    metric: 27,
+    metric: 100,
     suffix: "%",
-    prefix: "+",
+    prefix: "",
     body: "Repeat-customer LTV from loyalty journeys customers actually open.",
   },
 ];
