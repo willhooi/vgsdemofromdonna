@@ -308,24 +308,30 @@ const BrandRow = ({
 };
 
 const BrandLogo = ({ brand }: { brand: Brand }) => {
-  // Uniform frame + larger inner safe-area so brand names read clearly.
+  // Uniform outer frame; per-brand `scale` normalizes optical weight so logos
+  // with small marks or extra whitespace render at a comparable size to wide wordmarks.
+  const scale = brand.scale ?? 1;
   return (
     <span
       title={brand.name}
-      className="inline-flex h-14 w-24 shrink-0 items-center justify-center rounded-lg border border-border bg-card px-1.5 py-1 sm:h-16 sm:w-32 sm:rounded-xl sm:px-2 sm:py-1.5 md:h-20 md:w-36 md:px-3"
+      className="inline-flex h-14 w-24 shrink-0 items-center justify-center rounded-lg border border-border bg-card p-2 sm:h-16 sm:w-32 sm:rounded-xl sm:p-2.5 md:h-20 md:w-36 md:p-3"
     >
-      <img
-        src={brand.logo}
-        alt={brand.name}
-        loading="lazy"
-        decoding="async"
-        draggable={false}
-        className="h-full w-full object-contain"
-        style={{ maxHeight: "92%", maxWidth: "96%" }}
-      />
+      {/* Inner safe-area: uniform padding box, logo centered both axes, scaled by visual weight */}
+      <span className="flex h-full w-full items-center justify-center overflow-hidden">
+        <img
+          src={brand.logo}
+          alt={brand.name}
+          loading="lazy"
+          decoding="async"
+          draggable={false}
+          className="max-h-full max-w-full object-contain"
+          style={{ transform: `scale(${scale})`, transformOrigin: "center" }}
+        />
+      </span>
     </span>
   );
 };
+
 
 type StatCardProps = {
   eyebrow: string;
