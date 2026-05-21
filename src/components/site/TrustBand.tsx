@@ -111,19 +111,19 @@ const certifications = [
 // Brand logos rendered from locally bundled PNGs in src/assets/brands/.
 // `scale` normalizes visual weight: stacked/shield logos with whitespace get boosted,
 // wide wordmarks stay at 1. Adjust per logo to keep optical sizing consistent.
-type Brand = { name: string; logo: string; scale?: number };
+type Brand = { name: string; logo: string; scale?: number; offsetY?: string };
 
 const BRANDS_ROW_1: Brand[] = [
-  { name: "VPBank", logo: vpbankLogo, scale: 1.1 },
+  { name: "VPBank", logo: vpbankLogo, scale: 1.2 },
   { name: "UOB", logo: uobLogo, scale: 1.15 },
-  { name: "Green SM", logo: greenSmLogo, scale: 0.9 },
-  { name: "SONY", logo: sonyLogo, scale: 1.05 },
+  { name: "Green SM", logo: greenSmLogo, scale: 0.9, offsetY: "-5px" },
+  { name: "SONY", logo: sonyLogo, scale: 1.2 },
   { name: "Hyundai", logo: hyundaiLogo, scale: 0.85 },
-  { name: "LG", logo: lgLogo, scale: 0.9 },
+  { name: "LG", logo: lgLogo, scale: 0.75 },
   { name: "Bridgestone", logo: bridgestoneLogo, scale: 1.0 },
   { name: "Bayer", logo: bayerLogo, scale: 0.9 },
   { name: "AkzoNobel", logo: akzonobelLogo, scale: 1.1 },
-  { name: "FWD Insurance", logo: fwdLogo, scale: 0.9 },
+  { name: "FWD Insurance", logo: fwdLogo, scale: 0.75 },
 ];
 const BRANDS_ROW_2: Brand[] = [
   { name: "Vietnam Airlines", logo: vietnamAirlinesLogo, scale: 1.0 },
@@ -325,7 +325,7 @@ const BrandLogo = ({ brand }: { brand: Brand }) => {
           decoding="async"
           draggable={false}
           className="max-h-full max-w-full object-contain"
-          style={{ transform: `scale(${scale})`, transformOrigin: "center" }}
+          style={{ transform: `scale(${scale}) translateY(${brand.offsetY ?? 0})`, transformOrigin: "center" }}
         />
       </span>
     </span>
