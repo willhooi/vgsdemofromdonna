@@ -36,6 +36,7 @@ import lgLogo from "@/assets/brands/lg.png";
 import pharmacityLogo from "@/assets/brands/pharmacity.png";
 import cgvLogo from "@/assets/brands/cgv.png";
 import rmitLogo from "@/assets/brands/rmit.jpg";
+import shopeeLogo from "@/assets/brands/shopee.png";
 
 /**
  * TrustBand — Infobip-style "trust at a glance" strip.
@@ -135,6 +136,7 @@ const BRANDS_ROW_2: Brand[] = [
   { name: "Highlands Coffee", logo: highlandsCoffeeLogo, scale: 1.0 },
   { name: "Tokyo Deli", logo: tokyoDeliLogo, scale: 1.35 },
   { name: "AEON Citimart", logo: aeonCitimartLogo, scale: 1.2 },
+  { name: "Shopee", logo: shopeeLogo, scale: 1.0 },
   { name: "Pharmacity", logo: pharmacityLogo, scale: 0.8 },
   { name: "BHD Cineplex", logo: bhdCineplexLogo, scale: 1.1 },
 ];
