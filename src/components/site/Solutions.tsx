@@ -2,18 +2,22 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
+  ArrowUpRight,
   Star,
   PackageCheck,
   ShieldCheck,
   Gift,
   Sparkles,
   MessageCircle,
+  MessageSquare,
   Mail,
   Phone,
   Smartphone,
   Wallet,
   PhoneCall,
   LayoutGrid,
+  Layers,
+  Zap,
 } from "lucide-react";
 import bytetechLogo from "@/assets/brand/bytetech.svg";
 import shopperImg from "@/assets/channels-girl.png";
@@ -24,8 +28,7 @@ import { useCountUp } from "@/hooks/use-count-up";
  *
  * Hero key message: "where customer conversations become business growth."
  * Stage: happy shopper + live conversation pop-ups.
- * Outcome rail: 4 service moments, each phrased as a business result.
- * Support strip: PangoCDP × ByteTech (supporting, not lead).
+ * Right column: ByteTech CDP strip → 99% Delivery Rate highlight → 8-service bento.
  */
 
 export const Solutions = () => {
@@ -73,18 +76,19 @@ export const Solutions = () => {
             <span className="text-[hsl(var(--primary))]">a moment of growth</span>.
           </h2>
           <p className="mt-4 text-sm sm:text-base text-muted-foreground">
-            SMS, Zalo, Viber, Email, OTP — when they land right, customers buy,
-            return, and recommend.
+            From SMS to Zalo, Voice to Email — VietGuys connects your brand to every
+            customer, across every touchpoint, with built-in reliability at scale.
           </p>
         </div>
 
-        {/* Stage + Outcome rail */}
+        {/* Stage + Right column */}
         <div className="relative mx-auto mt-10 md:mt-14 max-w-6xl">
           <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-10 items-start">
             <OutcomeStage visible={visible} />
             <div className="flex flex-col gap-4">
               <CDPSupportStrip visible={visible} />
-              <OutcomeRail visible={visible} />
+              <DeliveryRateCard visible={visible} />
+              <ServicesBento visible={visible} />
             </div>
           </div>
         </div>
@@ -101,6 +105,7 @@ export const Solutions = () => {
     </section>
   );
 };
+
 
 /* ---------- Stage (left) ---------- */
 
@@ -288,111 +293,184 @@ const Popup = ({
   );
 };
 
-/* ---------- Outcome rail (right) ---------- */
+/* ---------- 99% Delivery Rate highlight ---------- */
 
-type Outcome = {
-  id: string;
-  Icon: typeof Star;
-  tag: string;
-  service: string;
-  metric: number;
-  suffix: string;
-  prefix?: string;
-  body: string;
-  decimals?: number;
+const DeliveryRateCard = ({ visible }: { visible: boolean }) => {
+  const n = useCountUp(visible ? 99 : 0, 1400);
+  return (
+    <div
+      className="relative overflow-hidden rounded-2xl border border-[hsl(var(--primary))]/20 bg-gradient-to-br from-[hsl(var(--primary))] to-[hsl(var(--primary-deep))] p-4 md:p-5 text-white shadow-[0_18px_36px_-18px_hsl(128_52%_40%/0.45)]"
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(10px)",
+        transition: "opacity 600ms ease-out 280ms, transform 600ms ease-out 280ms",
+      }}
+    >
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-white/10 blur-2xl"
+      />
+      <div className="relative flex items-center gap-4">
+        <div className="shrink-0 grid h-12 w-12 place-items-center rounded-xl bg-white/15 backdrop-blur">
+          <Zap className="h-6 w-6" />
+        </div>
+        <div className="flex-1 min-w-0">
+          <div className="flex items-baseline gap-2">
+            <span className="font-display text-[32px] font-extrabold leading-none tabular-nums">
+              {n}%
+            </span>
+            <span className="text-[10.5px] font-bold uppercase tracking-[0.18em] text-white/85">
+              Delivery Rate
+            </span>
+          </div>
+          <p className="mt-1.5 text-[12px] leading-snug text-white/85">
+            Built-in messaging failover ensures uninterrupted customer communications.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
 };
 
-const OUTCOMES: Outcome[] = [
+/* ---------- Services bento ---------- */
+
+type Service = {
+  id: string;
+  name: string;
+  Icon: typeof Star;
+  body: string;
+  featured?: boolean;
+  cls: string; // grid placement classes
+};
+
+const SERVICES: Service[] = [
   {
-    id: "review",
-    Icon: Star,
-    tag: "Delivery Rate",
-    service: "Delivery Rate",
-    metric: 99,
-    suffix: "%",
-    body: "Built-in SMS failover ensures uninterrupted customer communications.",
+    id: "sms",
+    name: "SMS Brandname",
+    Icon: MessageSquare,
+    body: "Authenticated sender ID with nationwide carrier coverage.",
+    featured: true,
+    cls: "col-span-2 row-span-2",
   },
   {
-    id: "order",
-    Icon: PackageCheck,
-    tag: "Order Confirmed",
-    service: "Cost Savings",
-    metric: 40,
-    suffix: "%",
-    prefix: "",
-    body: "Maximize budget with strategic multi-channel routing over standalone messaging.",
+    id: "zalo",
+    name: "Zalo",
+    Icon: Smartphone,
+    body: "Official Account & ZNS template messages on Vietnam's #1 chat app.",
+    featured: true,
+    cls: "col-span-2 row-span-2",
   },
   {
-    id: "otp",
+    id: "topup",
+    name: "Mobile Top-up",
+    Icon: Wallet,
+    body: "Instantly deliver mobile top-ups in any quantity.",
+    featured: true,
+    cls: "col-span-2 row-span-2",
+  },
+  {
+    id: "ott",
+    name: "OTT Multi Service",
+    Icon: Layers,
+    body: "One API, every OTT channel — smart fallback built in.",
+    featured: true,
+    cls: "col-span-2 row-span-2",
+  },
+  {
+    id: "viber",
+    name: "Viber",
+    Icon: MessageCircle,
+    body: "Rich branded messaging with two-way conversations.",
+    cls: "col-span-1 row-span-1",
+  },
+  {
+    id: "voice",
+    name: "Voice",
+    Icon: PhoneCall,
+    body: "Automated voice calls and IVR at scale.",
+    cls: "col-span-1 row-span-1",
+  },
+  {
+    id: "email",
+    name: "Email",
+    Icon: Mail,
+    body: "Transactional and marketing email orchestration.",
+    cls: "col-span-1 row-span-1",
+  },
+  {
+    id: "warranty",
+    name: "Smart Warranty",
     Icon: ShieldCheck,
-    tag: "OTP < 2s",
-    service: "Response Rate",
-    metric: 3,
-    suffix: "s",
-    prefix: "< ",
-    decimals: 2,
-    body: "Instant automatic messaging via SMS Short Code service.",
-  },
-  {
-    id: "reward",
-    Icon: Gift,
-    tag: "Reward Unlocked",
-    service: "Instant Reward Success",
-    metric: 100,
-    suffix: "%",
-    prefix: "",
-    body: "Instantly deliver mobile top-ups and voucher codes in any quantity.",
+    body: "Digital warranty activation right inside customer chats.",
+    cls: "col-span-1 row-span-1",
   },
 ];
 
-const OutcomeRail = ({ visible }: { visible: boolean }) => (
-  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-    {OUTCOMES.map((o, i) => (
-      <OutcomeCard key={o.id} o={o} index={i} visible={visible} />
+const ServicesBento = ({ visible }: { visible: boolean }) => (
+  <div
+    className="grid grid-cols-4 auto-rows-[64px] sm:auto-rows-[72px] gap-2.5"
+    style={{
+      opacity: visible ? 1 : 0,
+      transform: visible ? "translateY(0)" : "translateY(10px)",
+      transition: "opacity 600ms ease-out 360ms, transform 600ms ease-out 360ms",
+    }}
+  >
+    {SERVICES.map((s, i) => (
+      <ServiceTile key={s.id} s={s} index={i} />
     ))}
   </div>
 );
 
-const OutcomeCard = ({
-  o,
-  index,
-  visible,
-}: {
-  o: Outcome;
-  index: number;
-  visible: boolean;
-}) => {
-  const target = o.decimals ? Math.round(o.metric * 100) : o.metric;
-  const n = useCountUp(visible ? target : 0, 1400);
-  const display = o.decimals ? (n / 100).toFixed(o.decimals) : n.toLocaleString();
+const ServiceTile = ({ s, index }: { s: Service; index: number }) => {
+  const Icon = s.Icon;
   return (
-    <article
-      className="group relative overflow-hidden rounded-2xl border border-border bg-white p-4 shadow-[0_4px_14px_-8px_rgba(0,0,0,0.08)] transition-all hover:-translate-y-0.5 hover:border-[hsl(var(--primary))]/40 hover:shadow-[0_18px_36px_-18px_hsl(128_52%_40%/0.35)]"
-      style={{
-        opacity: visible ? 1 : 0,
-        transform: visible ? "translateY(0)" : "translateY(10px)",
-        transition: `opacity 500ms ease-out ${200 + index * 90}ms, transform 500ms ease-out ${200 + index * 90}ms`,
-      }}
+    <Link
+      to="/solutions"
+      className={`group relative overflow-hidden rounded-2xl border border-border bg-white p-3 sm:p-4 shadow-[0_4px_14px_-8px_rgba(0,0,0,0.08)] transition-all hover:-translate-y-0.5 hover:border-[hsl(var(--primary))]/40 hover:shadow-[0_18px_36px_-18px_hsl(128_52%_40%/0.35)] ${s.cls}`}
+      style={{ transitionDelay: `${index * 40}ms` }}
     >
+      {/* Glow on hover */}
       <div
         aria-hidden
         className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100"
         style={{ background: "hsl(128 52% 60% / 0.35)" }}
       />
-      <div className="relative mt-2 font-display text-[26px] font-extrabold tabular-nums leading-none text-foreground sm:text-[28px]">
-        {o.prefix}
-        {display}
-        {o.suffix}
+
+      {/* Default state — icon + name */}
+      <div className="relative flex h-full flex-col justify-between transition-opacity duration-300 group-hover:opacity-0">
+        <span className="grid h-8 w-8 sm:h-9 sm:w-9 place-items-center rounded-lg bg-[hsl(var(--primary-soft))]/60 text-[hsl(var(--primary-deep))]">
+          <Icon className="h-4 w-4 sm:h-[18px] sm:w-[18px]" />
+        </span>
+        <div className="mt-2 flex items-end justify-between gap-2">
+          <span className={`font-semibold leading-tight text-foreground ${s.featured ? "text-[13px] sm:text-[15px]" : "text-[12px] sm:text-[13px]"}`}>
+            {s.name}
+          </span>
+          {s.featured && (
+            <span className="shrink-0 rounded-full bg-[hsl(35_100%_55%)]/15 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-[hsl(35_100%_40%)]">
+              Core
+            </span>
+          )}
+        </div>
       </div>
-      <div className="relative mt-1 text-[10.5px] font-semibold uppercase tracking-wider text-[hsl(var(--primary-deep))]">
-        {o.service}
+
+      {/* Hover state — description + CTA */}
+      <div className="pointer-events-none absolute inset-0 flex flex-col justify-between p-3 sm:p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-hover:pointer-events-auto">
+        <div>
+          <div className="text-[11px] sm:text-[12px] font-semibold text-foreground">
+            {s.name}
+          </div>
+          <p className="mt-1 text-[10.5px] sm:text-[11.5px] leading-snug text-muted-foreground line-clamp-3">
+            {s.body}
+          </p>
+        </div>
+        <span className="inline-flex items-center gap-1 text-[10.5px] font-semibold text-[hsl(var(--primary-deep))]">
+          Learn more <ArrowUpRight className="h-3 w-3" />
+        </span>
       </div>
-      <p className="relative mt-2 text-[12px] leading-snug text-muted-foreground">
-        {o.body}
-      </p>
-    </article>
+    </Link>
   );
 };
+
 
 /* ---------- Support strip — CDP × ByteTech ---------- */
 
