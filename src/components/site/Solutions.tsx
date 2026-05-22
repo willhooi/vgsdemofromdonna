@@ -416,32 +416,30 @@ const ServicesBento = ({ visible }: { visible: boolean }) => (
 const ServiceTile = ({ s, index }: { s: Service; index: number }) => {
   const Icon = s.Icon;
   const sizeCls = s.featured
-    ? "px-4 py-2.5 sm:px-5 sm:py-3 text-[13px] sm:text-[14px]"
-    : "px-3 py-2 sm:px-3.5 sm:py-2.5 text-[12px] sm:text-[12.5px]";
-  const iconCls = s.featured ? "h-[18px] w-[18px]" : "h-4 w-4";
+    ? "h-11 sm:h-12 pl-4 pr-4 sm:pl-5 sm:pr-5 text-[13px] sm:text-[14px]"
+    : "h-9 sm:h-10 pl-3 pr-3.5 sm:pl-3.5 sm:pr-4 text-[12px] sm:text-[12.5px]";
   return (
     <Link
       to="/solutions"
-      className={`group relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-border bg-white shadow-[0_4px_14px_-8px_rgba(0,0,0,0.08)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-[hsl(var(--primary))]/40 hover:bg-[hsl(var(--primary-soft))]/40 hover:shadow-[0_18px_36px_-18px_hsl(128_52%_40%/0.35)] ${sizeCls}`}
-      style={{ transitionDelay: `${index * 30}ms` }}
+      className={`group relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-border bg-white shadow-[0_4px_14px_-8px_rgba(0,0,0,0.08)] transition-[transform,box-shadow,background-color,border-color,max-width] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-[hsl(var(--primary))]/40 hover:bg-[hsl(var(--primary-soft))]/40 hover:shadow-[0_18px_36px_-18px_hsl(128_52%_40%/0.35)] ${sizeCls}`}
+      style={{ transitionDelay: `${index * 25}ms`, maxWidth: "100%" }}
       title={s.body}
     >
-      <span className={`grid place-items-center text-[hsl(var(--primary-deep))] ${s.featured ? "h-6 w-6" : "h-5 w-5"}`}>
-        <Icon className={iconCls} />
+      <span className={`grid shrink-0 place-items-center text-[hsl(var(--primary-deep))] ${s.featured ? "h-6 w-6" : "h-5 w-5"}`}>
+        <Icon className={s.featured ? "h-[18px] w-[18px]" : "h-4 w-4"} />
       </span>
-      <span className="font-semibold leading-none text-foreground whitespace-nowrap">
+      <span className="shrink-0 font-semibold leading-none text-foreground whitespace-nowrap">
         {s.name}
       </span>
 
-      {/* Expanded body on hover */}
-      <span className="grid grid-cols-[0fr] overflow-hidden transition-[grid-template-columns] duration-500 ease-out group-hover:grid-cols-[1fr]">
-        <span className="min-w-0 overflow-hidden">
-          <span className="ml-1 flex items-center gap-1.5 whitespace-nowrap pr-1 text-[11px] sm:text-[11.5px] font-normal text-muted-foreground">
-            <span className="h-3 w-px bg-border" />
-            {s.body}
-            <ArrowUpRight className="h-3 w-3 shrink-0 text-[hsl(var(--primary-deep))]" />
-          </span>
-        </span>
+      {/* Expanded body on hover — max-width transition for smoothness */}
+      <span
+        aria-hidden
+        className="pointer-events-none flex items-center gap-1.5 overflow-hidden whitespace-nowrap text-[11px] sm:text-[11.5px] font-normal text-muted-foreground opacity-0 transition-[max-width,opacity,margin] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] max-w-0 ml-0 group-hover:opacity-100 group-hover:max-w-[420px] group-hover:ml-1"
+      >
+        <span className="h-3 w-px shrink-0 bg-border" />
+        <span>{s.body}</span>
+        <ArrowUpRight className="h-3 w-3 shrink-0 text-[hsl(var(--primary-deep))]" />
       </span>
     </Link>
   );
