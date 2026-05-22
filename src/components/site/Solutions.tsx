@@ -2,18 +2,22 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
+  ArrowUpRight,
   Star,
   PackageCheck,
   ShieldCheck,
   Gift,
   Sparkles,
   MessageCircle,
+  MessageSquare,
   Mail,
   Phone,
   Smartphone,
   Wallet,
   PhoneCall,
   LayoutGrid,
+  Layers,
+  Zap,
 } from "lucide-react";
 import bytetechLogo from "@/assets/brand/bytetech.svg";
 import shopperImg from "@/assets/channels-girl.png";
@@ -24,8 +28,7 @@ import { useCountUp } from "@/hooks/use-count-up";
  *
  * Hero key message: "where customer conversations become business growth."
  * Stage: happy shopper + live conversation pop-ups.
- * Outcome rail: 4 service moments, each phrased as a business result.
- * Support strip: PangoCDP × ByteTech (supporting, not lead).
+ * Right column: ByteTech CDP strip → 99% Delivery Rate highlight → 8-service bento.
  */
 
 export const Solutions = () => {
@@ -73,18 +76,19 @@ export const Solutions = () => {
             <span className="text-[hsl(var(--primary))]">a moment of growth</span>.
           </h2>
           <p className="mt-4 text-sm sm:text-base text-muted-foreground">
-            SMS, Zalo, Viber, Email, OTP — when they land right, customers buy,
-            return, and recommend.
+            From SMS to Zalo, Voice to Email — VietGuys connects your brand to every
+            customer, across every touchpoint, with built-in reliability at scale.
           </p>
         </div>
 
-        {/* Stage + Outcome rail */}
+        {/* Stage + Right column */}
         <div className="relative mx-auto mt-10 md:mt-14 max-w-6xl">
           <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-10 items-start">
             <OutcomeStage visible={visible} />
             <div className="flex flex-col gap-4">
               <CDPSupportStrip visible={visible} />
-              <OutcomeRail visible={visible} />
+              <DeliveryRateCard visible={visible} />
+              <ServicesBento visible={visible} />
             </div>
           </div>
         </div>
@@ -101,6 +105,7 @@ export const Solutions = () => {
     </section>
   );
 };
+
 
 /* ---------- Stage (left) ---------- */
 
