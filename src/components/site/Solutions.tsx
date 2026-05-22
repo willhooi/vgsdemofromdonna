@@ -340,9 +340,9 @@ type Service = {
   Icon: typeof Star;
   body: string;
   featured?: boolean;
-  cls: string; // grid placement classes
 };
 
+// Intentionally jumbled order — core tiles mixed in with smaller ones
 const SERVICES: Service[] = [
   {
     id: "sms",
@@ -350,7 +350,12 @@ const SERVICES: Service[] = [
     Icon: MessageSquare,
     body: "Authenticated sender ID with nationwide carrier coverage.",
     featured: true,
-    cls: "col-span-2 row-span-2",
+  },
+  {
+    id: "viber",
+    name: "Viber",
+    Icon: MessageCircle,
+    body: "Rich branded messaging with two-way conversations.",
   },
   {
     id: "zalo",
@@ -358,15 +363,12 @@ const SERVICES: Service[] = [
     Icon: Smartphone,
     body: "Official Account & ZNS template messages on Vietnam's #1 chat app.",
     featured: true,
-    cls: "col-span-2 row-span-2",
   },
   {
-    id: "topup",
-    name: "Mobile Top-up",
-    Icon: Wallet,
-    body: "Instantly deliver mobile top-ups in any quantity.",
-    featured: true,
-    cls: "col-span-2 row-span-2",
+    id: "email",
+    name: "Email",
+    Icon: Mail,
+    body: "Transactional and marketing email orchestration.",
   },
   {
     id: "ott",
@@ -374,41 +376,31 @@ const SERVICES: Service[] = [
     Icon: Layers,
     body: "One API, every OTT channel — smart fallback built in.",
     featured: true,
-    cls: "col-span-2 row-span-2",
-  },
-  {
-    id: "viber",
-    name: "Viber",
-    Icon: MessageCircle,
-    body: "Rich branded messaging with two-way conversations.",
-    cls: "col-span-1 row-span-1",
   },
   {
     id: "voice",
     name: "Voice",
     Icon: PhoneCall,
     body: "Automated voice calls and IVR at scale.",
-    cls: "col-span-1 row-span-1",
   },
   {
-    id: "email",
-    name: "Email",
-    Icon: Mail,
-    body: "Transactional and marketing email orchestration.",
-    cls: "col-span-1 row-span-1",
+    id: "topup",
+    name: "Mobile Top-up",
+    Icon: Wallet,
+    body: "Instantly deliver mobile top-ups in any quantity.",
+    featured: true,
   },
   {
     id: "warranty",
     name: "Smart Warranty",
     Icon: ShieldCheck,
     body: "Digital warranty activation right inside customer chats.",
-    cls: "col-span-1 row-span-1",
   },
 ];
 
 const ServicesBento = ({ visible }: { visible: boolean }) => (
   <div
-    className="grid grid-cols-4 auto-rows-[64px] sm:auto-rows-[72px] gap-2.5"
+    className="flex flex-wrap gap-2 sm:gap-2.5"
     style={{
       opacity: visible ? 1 : 0,
       transform: visible ? "translateY(0)" : "translateY(10px)",
@@ -423,50 +415,34 @@ const ServicesBento = ({ visible }: { visible: boolean }) => (
 
 const ServiceTile = ({ s, index }: { s: Service; index: number }) => {
   const Icon = s.Icon;
+  const sizeCls = s.featured
+    ? "px-4 py-2.5 sm:px-5 sm:py-3 text-[13px] sm:text-[14px]"
+    : "px-3 py-2 sm:px-3.5 sm:py-2.5 text-[12px] sm:text-[12.5px]";
+  const iconCls = s.featured ? "h-[18px] w-[18px]" : "h-4 w-4";
   return (
     <Link
       to="/solutions"
-      className={`group relative overflow-hidden rounded-2xl border border-border bg-white p-3 sm:p-4 shadow-[0_4px_14px_-8px_rgba(0,0,0,0.08)] transition-all hover:-translate-y-0.5 hover:border-[hsl(var(--primary))]/40 hover:shadow-[0_18px_36px_-18px_hsl(128_52%_40%/0.35)] ${s.cls}`}
-      style={{ transitionDelay: `${index * 40}ms` }}
+      className={`group relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-border bg-white shadow-[0_4px_14px_-8px_rgba(0,0,0,0.08)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:border-[hsl(var(--primary))]/40 hover:bg-[hsl(var(--primary-soft))]/40 hover:shadow-[0_18px_36px_-18px_hsl(128_52%_40%/0.35)] ${sizeCls}`}
+      style={{ transitionDelay: `${index * 30}ms` }}
+      title={s.body}
     >
-      {/* Glow on hover */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100"
-        style={{ background: "hsl(128 52% 60% / 0.35)" }}
-      />
+      <span className={`grid place-items-center text-[hsl(var(--primary-deep))] ${s.featured ? "h-6 w-6" : "h-5 w-5"}`}>
+        <Icon className={iconCls} />
+      </span>
+      <span className="font-semibold leading-none text-foreground whitespace-nowrap">
+        {s.name}
+      </span>
 
-      {/* Default state — icon + name */}
-      <div className="relative flex h-full flex-col justify-between transition-opacity duration-300 group-hover:opacity-0">
-        <span className="grid h-8 w-8 sm:h-9 sm:w-9 place-items-center rounded-lg bg-[hsl(var(--primary-soft))]/60 text-[hsl(var(--primary-deep))]">
-          <Icon className="h-4 w-4 sm:h-[18px] sm:w-[18px]" />
-        </span>
-        <div className="mt-2 flex items-end justify-between gap-2">
-          <span className={`font-semibold leading-tight text-foreground ${s.featured ? "text-[13px] sm:text-[15px]" : "text-[12px] sm:text-[13px]"}`}>
-            {s.name}
-          </span>
-          {s.featured && (
-            <span className="shrink-0 rounded-full bg-[hsl(35_100%_55%)]/15 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-[hsl(35_100%_40%)]">
-              Core
-            </span>
-          )}
-        </div>
-      </div>
-
-      {/* Hover state — description + CTA */}
-      <div className="pointer-events-none absolute inset-0 flex flex-col justify-between p-3 sm:p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-hover:pointer-events-auto">
-        <div>
-          <div className="text-[11px] sm:text-[12px] font-semibold text-foreground">
-            {s.name}
-          </div>
-          <p className="mt-1 text-[10.5px] sm:text-[11.5px] leading-snug text-muted-foreground line-clamp-3">
+      {/* Expanded body on hover */}
+      <span className="grid grid-cols-[0fr] overflow-hidden transition-[grid-template-columns] duration-500 ease-out group-hover:grid-cols-[1fr]">
+        <span className="min-w-0 overflow-hidden">
+          <span className="ml-1 flex items-center gap-1.5 whitespace-nowrap pr-1 text-[11px] sm:text-[11.5px] font-normal text-muted-foreground">
+            <span className="h-3 w-px bg-border" />
             {s.body}
-          </p>
-        </div>
-        <span className="inline-flex items-center gap-1 text-[10.5px] font-semibold text-[hsl(var(--primary-deep))]">
-          Learn more <ArrowUpRight className="h-3 w-3" />
+            <ArrowUpRight className="h-3 w-3 shrink-0 text-[hsl(var(--primary-deep))]" />
+          </span>
         </span>
-      </div>
+      </span>
     </Link>
   );
 };
