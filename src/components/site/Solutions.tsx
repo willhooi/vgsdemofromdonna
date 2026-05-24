@@ -415,29 +415,54 @@ const ServicesBento = ({ visible }: { visible: boolean }) => (
 
 const ServiceTile = ({ s, index }: { s: Service; index: number }) => {
   const Icon = s.Icon;
-  const sizeCls = s.featured
-    ? "h-11 sm:h-12 pl-4 pr-4 sm:pl-5 sm:pr-5 text-[13px] sm:text-[14px]"
-    : "h-9 sm:h-10 pl-3 pr-3.5 sm:pl-3.5 sm:pr-4 text-[12px] sm:text-[12.5px]";
+
+  // Non-core (phụ) → giữ pill tròn nhẹ nhàng
+  if (!s.featured) {
+    return (
+      <Link
+        to="/solutions"
+        className="group relative inline-flex h-9 items-center gap-2 overflow-hidden rounded-full border border-border bg-white pl-3 pr-3.5 text-[12px] shadow-[0_4px_14px_-8px_rgba(0,0,0,0.08)] transition-[transform,box-shadow,background-color,border-color,max-width] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-[hsl(var(--primary))]/40 hover:bg-[hsl(var(--primary-soft))]/40 hover:shadow-[0_18px_36px_-18px_hsl(128_52%_40%/0.35)] sm:h-10 sm:pl-3.5 sm:pr-4 sm:text-[12.5px]"
+        style={{ transitionDelay: `${index * 25}ms` }}
+        title={s.body}
+      >
+        <span className="grid h-5 w-5 shrink-0 place-items-center text-[hsl(var(--primary-deep))]">
+          <Icon className="h-4 w-4" />
+        </span>
+        <span className="shrink-0 font-semibold leading-none text-foreground whitespace-nowrap">
+          {s.name}
+        </span>
+        <span
+          aria-hidden
+          className="pointer-events-none flex max-w-0 items-center gap-1.5 overflow-hidden whitespace-nowrap text-[11px] font-normal text-muted-foreground opacity-0 transition-[max-width,opacity,margin] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:ml-1 group-hover:max-w-[420px] group-hover:opacity-100 sm:text-[11.5px]"
+        >
+          <span className="h-3 w-px shrink-0 bg-border" />
+          <span>{s.body}</span>
+          <ArrowUpRight className="h-3 w-3 shrink-0 text-[hsl(var(--primary-deep))]" />
+        </span>
+      </Link>
+    );
+  }
+
+  // Core tile — signature VG shape: chamfered tag (rest) → V-notch right (hover).
+  // Clip-path uses identical point count in both states → smooth morph.
   return (
     <Link
       to="/solutions"
-      className={`group relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-border bg-white shadow-[0_4px_14px_-8px_rgba(0,0,0,0.08)] transition-[transform,box-shadow,background-color,border-color,max-width] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-[hsl(var(--primary))]/40 hover:bg-[hsl(var(--primary-soft))]/40 hover:shadow-[0_18px_36px_-18px_hsl(128_52%_40%/0.35)] ${sizeCls}`}
-      style={{ transitionDelay: `${index * 25}ms`, maxWidth: "100%" }}
+      className="vg-core-tile group relative inline-flex h-11 items-center gap-2 bg-white pl-5 pr-4 text-[13px] transition-[transform,padding,background-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-[hsl(var(--primary-soft))]/50 hover:pr-6 sm:h-12 sm:pl-6 sm:pr-5 sm:text-[14px] sm:hover:pr-7"
+      style={{ transitionDelay: `${index * 25}ms` }}
       title={s.body}
     >
-      <span className={`grid shrink-0 place-items-center text-[hsl(var(--primary-deep))] ${s.featured ? "h-6 w-6" : "h-5 w-5"}`}>
-        <Icon className={s.featured ? "h-[18px] w-[18px]" : "h-4 w-4"} />
+      <span className="grid h-6 w-6 shrink-0 place-items-center text-[hsl(var(--primary-deep))]">
+        <Icon className="h-[18px] w-[18px]" />
       </span>
       <span className="shrink-0 font-semibold leading-none text-foreground whitespace-nowrap">
         {s.name}
       </span>
-
-      {/* Expanded body on hover — max-width transition for smoothness */}
       <span
         aria-hidden
-        className="pointer-events-none flex items-center gap-1.5 overflow-hidden whitespace-nowrap text-[11px] sm:text-[11.5px] font-normal text-muted-foreground opacity-0 transition-[max-width,opacity,margin] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] max-w-0 ml-0 group-hover:opacity-100 group-hover:max-w-[420px] group-hover:ml-1"
+        className="pointer-events-none flex max-w-0 items-center gap-1.5 overflow-hidden whitespace-nowrap text-[11.5px] font-normal text-muted-foreground opacity-0 transition-[max-width,opacity,margin] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:ml-1 group-hover:max-w-[420px] group-hover:opacity-100 sm:text-[12px]"
       >
-        <span className="h-3 w-px shrink-0 bg-border" />
+        <span className="h-3 w-px shrink-0 bg-[hsl(var(--primary))]/40" />
         <span>{s.body}</span>
         <ArrowUpRight className="h-3 w-3 shrink-0 text-[hsl(var(--primary-deep))]" />
       </span>
