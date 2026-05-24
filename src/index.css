@@ -201,6 +201,46 @@
 }
 .animate-signal { animation: signal-pulse 2.4s ease-in-out infinite; transform-origin: center; }
 
+/* VG core service tile — signature shape inspired by the angular V/L logo.
+   Rest: chamfered tag (angled left edge, flat right).
+   Hover: V-notch bites into the right edge.
+   Same polygon point-count in both states → smooth clip-path morph. */
+.vg-core-tile {
+  --vg-chamfer: 18px;
+  --vg-notch: 0px;
+  clip-path: polygon(
+    var(--vg-chamfer) 0,
+    100% 0,
+    calc(100% - var(--vg-notch)) 50%,
+    100% 100%,
+    var(--vg-chamfer) 100%,
+    0 50%
+  );
+  transition:
+    transform 500ms cubic-bezier(0.22, 1, 0.36, 1),
+    padding 500ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 500ms cubic-bezier(0.22, 1, 0.36, 1),
+    clip-path 500ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 500ms cubic-bezier(0.22, 1, 0.36, 1);
+  filter:
+    drop-shadow(0 4px 14px rgba(0, 0, 0, 0.08))
+    drop-shadow(0 0 0.5px hsl(var(--primary) / 0.45));
+}
+.vg-core-tile:hover {
+  --vg-notch: 14px;
+  filter:
+    drop-shadow(0 14px 24px hsl(128 52% 40% / 0.22))
+    drop-shadow(0 0 0.5px hsl(var(--primary) / 0.7))
+    drop-shadow(0 0 0.5px hsl(var(--accent) / 0.4));
+}
+@media (prefers-reduced-motion: reduce) {
+  .vg-core-tile,
+  .vg-core-tile:hover {
+    transition: none;
+    --vg-notch: 0px;
+  }
+}
+
 /* Brand storytelling — Signature Artwork System */
 @keyframes signal-ring {
   0%   { transform: scale(0.4); opacity: 0; }
