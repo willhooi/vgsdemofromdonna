@@ -205,6 +205,11 @@
    Rest: chamfered tag (angled left edge, flat right).
    Hover: V-notch bites into the right edge.
    Same polygon point-count in both states → smooth clip-path morph. */
+@property --vg-notch {
+  syntax: "<length>";
+  inherits: false;
+  initial-value: 0px;
+}
 .vg-core-tile {
   --vg-chamfer: 18px;
   --vg-notch: 0px;
