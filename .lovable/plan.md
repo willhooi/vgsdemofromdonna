@@ -1,51 +1,38 @@
-## Goal
-Transform the "Featured case studies" area in `src/components/site/Industries.tsx` into a brand showcase wall (4–6 tiles) inspired by Insider One's *"What brands achieve with Insider One"* — clean logo grid by default, rich achievement reveal on hover.
+# Signature V-notch cho thẻ Core khi expand
 
-## Reference behavior (Insider One)
-- Grid of large brand cards, each showing the **client logo** prominently on a clean background.
-- On hover: card flips/fades to reveal the **headline outcome metric** (e.g. "+38% activation rate"), a short result sentence, the channels/products used, and a "Read story" link.
-- Mobile (no hover): tap-to-flip OR always-visible compact summary under each logo.
+## Ý tưởng
 
-## Layout proposal
-1. **Section header** (kept): eyebrow "Case studies" + heading "Featured outcomes from enterprise leaders" + 1-line subhead.
-2. **Sector strip** (kept above): the 4 concise sector tiles stay as-is.
-3. **Showcase wall** — new component `CaseStudyWall`:
-   - Responsive grid: `grid-cols-2 md:grid-cols-3 lg:grid-cols-3` (6 tiles) — falls back to `lg:grid-cols-2` if we ship 4 tiles.
-   - Each tile = square-ish card (aspect ~4/3), white background, 1px border, soft shadow on hover.
-   - **Front face**: centered client logo (grayscale, ~60% width) + small industry tag bottom-left.
-   - **Back face (hover/focus)**: dark green `hsl(var(--primary-deep))` background, white text:
-     - Big metric (e.g. `+38%`) in display font.
-     - Metric label (`Activation rate`).
-     - 1-sentence result.
-     - Channels chips (SMS · Zalo · Viber).
-     - "Read case study →" link.
-   - Transition: cross-fade + subtle scale (no 3D flip — keeps it elegant and accessible). Use `group-hover` + `group-focus-within` for keyboard.
-   - Mobile: back face content shown as a compact strip under the logo (no hover dependency).
-4. **Single CTA below the wall** replaces the current "Don't see your sector?" link:
-   - Copy: **"Muốn trải nghiệm giải pháp customize cho bạn? Talk to us"**
-   - Style: pill button, `bg-[hsl(var(--accent))]` (orange) with arrow icon, centered, generous top margin.
+Khi hover vào 4 thẻ Core (SMS Brandname, Zalo, OTT Multi Service, Mobile Top-up), pill bo tròn sẽ "morph" thành dáng có đuôi nhọn chữ V ở mép phải — vết cắt xéo mirror lại cạnh chéo của logo VG (V xanh + L cam). Hiệu ứng cho cảm giác như mũi tên/lưỡi dao đặc trưng, tách 4 dịch vụ chủ lực ra khỏi các pill phụ trơn tru.
 
-## Content (6 case studies)
-Reuse the 4 existing studies and add 2 more to fill the wall:
-1. Banking & Finance — Top Vietnamese commercial bank — `+38% Activation rate`
-2. Retail & E-commerce — Top 3 electronics retail chain — `+27% Revenue per campaign`
-3. FMCG & Hospitality — Multinational F&B brand — `+52% Return rate`
-4. Airlines & Travel — Regional full-service carrier — `1.5M+ Passengers reached`
-5. *(new placeholder)* Insurance — Leading life insurer — `-41% Support call volume`
-6. *(new placeholder)* Logistics — National courier — `<2s OTP delivery, 99.95%`
+```text
+Trạng thái nghỉ (pill core):        Trạng thái expand (V-notch):
+┌──────────────────┐                ┌─────────────────────────────────╲
+│ ◆  SMS Brandname │      hover →   │ ◆  SMS Brandname │ description    ╲
+└──────────────────┘                └─────────────────────────────────╱
+                                     (mép phải cắt chữ V vào trong)
+```
 
-Client logos: use placeholder monogram tiles (initials in brand font) until real logos are provided — keeps layout clean and avoids brand-permission issues.
+## Cơ chế kỹ thuật
 
-## Files to change
-- `src/components/site/Industries.tsx` — replace the `caseStudies` card grid and bottom link with the new wall + CTA. Keep sector tiles and section header intact.
-- (Optional) extract `CaseStudyWall` into `src/components/site/CaseStudyWall.tsx` if it grows past ~80 lines.
+- Dùng `clip-path: polygon(...)` trên thẻ core với 2 trạng thái:
+  - **Nghỉ**: polygon hình pill (8 điểm bo góc) — gần như tròn.
+  - **Hover**: polygon cùng cạnh trái pill bo, cạnh phải biến thành ∨-notch (3 điểm: trên-phải, giữa-thụt-vào, dưới-phải).
+- Transition `clip-path` 500ms cubic-bezier(0.22, 1, 0.36, 1) — cùng easing với max-width hiện có để 2 chuyển động đồng pha.
+- Padding-right được tăng thêm khi hover để text không bị notch ăn vào.
+- Thêm 1 viền sáng mảnh (`::after` hoặc inset shadow) chạy theo cạnh chéo của notch — màu primary, làm điểm nhấn signature.
+- Thẻ phụ (Viber, Voice, Email, Smart Warranty) giữ nguyên pill tròn hiện tại — không clip-path, không thay đổi.
 
-## Technical notes
-- Pure Tailwind + existing tokens (`--primary-deep`, `--accent`, `--border`). No new deps.
-- Hover reveal uses `group` + `opacity/translate` transitions; fully accessible via `focus-within`.
-- Respects `prefers-reduced-motion` (disable transform, keep opacity).
-- Routes preserved: each tile links to `/case-studies/{slug}`.
+## Phạm vi sửa
 
-## Out of scope
-- No changes to the sector tiles or the section heading copy.
-- No new data fetching — content stays static.
+Chỉ động vào `src/components/site/Solutions.tsx` — `ServiceTile`:
+1. Tách style theo `s.featured`: core dùng class mới có `clip-path` + padding-right động.
+2. Thêm CSS inline-style cho 2 polygon (nghỉ / hover) bằng custom property để Tailwind không cần keyframes.
+3. Tinh chỉnh `max-width` của description trong core (rộng hơn ~40px) để bù khoảng notch.
+
+## Fallback & QA
+
+- Trình duyệt cũ không hỗ trợ `clip-path` animation → nhận pill tĩnh không notch (graceful degrade).
+- Test 3 viewport: mobile (375), tablet (768), desktop (1280) — đảm bảo notch không lệch khi pill xuống dòng hoặc bị chèn.
+- Reduce-motion: tắt transition của clip-path, giữ nguyên dáng pill.
+
+Không đụng tới layout flex-wrap, không đụng tới DeliveryRateCard, CDPSupportStrip hay phần stage trái.
