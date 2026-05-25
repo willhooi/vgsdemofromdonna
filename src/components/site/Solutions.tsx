@@ -2,10 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
-  ArrowUpRight,
   Star,
   PackageCheck,
-  ShieldCheck,
   Gift,
   Sparkles,
   MessageCircle,
@@ -16,7 +14,6 @@ import {
   Wallet,
   PhoneCall,
   LayoutGrid,
-  Layers,
   Zap,
 } from "lucide-react";
 import bytetechLogo from "@/assets/brand/bytetech.svg";
@@ -89,14 +86,9 @@ export const Solutions = () => {
           </div>
         </div>
 
-        {/* Stage + Services */}
+        {/* Stage */}
         <div className="relative mx-auto mt-8 md:mt-12 max-w-6xl">
-          <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-10 items-start">
-            <OutcomeStage visible={visible} />
-            <div className="flex flex-col gap-4">
-              <ServicesBento visible={visible} />
-            </div>
-          </div>
+          <OutcomeStage visible={visible} />
         </div>
 
         <div className="mt-10 flex justify-center">
@@ -347,143 +339,6 @@ const DeliveryRateCard = ({ visible }: { visible: boolean }) => {
   );
 };
 
-/* ---------- Services bento ---------- */
-
-type Service = {
-  id: string;
-  name: string;
-  Icon: typeof Star;
-  body: string;
-  featured?: boolean;
-};
-
-// Intentionally jumbled order — core tiles mixed in with smaller ones
-const SERVICES: Service[] = [
-  {
-    id: "sms",
-    name: "SMS Brandname",
-    Icon: MessageSquare,
-    body: "Authenticated sender ID with nationwide carrier coverage.",
-    featured: true,
-  },
-  {
-    id: "viber",
-    name: "Viber",
-    Icon: MessageCircle,
-    body: "Rich branded messaging with two-way conversations.",
-  },
-  {
-    id: "zalo",
-    name: "Zalo",
-    Icon: Smartphone,
-    body: "Official Account & ZNS template messages on Vietnam's #1 chat app.",
-    featured: true,
-  },
-  {
-    id: "email",
-    name: "Email",
-    Icon: Mail,
-    body: "Transactional and marketing email orchestration.",
-  },
-  {
-    id: "ott",
-    name: "OTT Multi Service",
-    Icon: Layers,
-    body: "One API, every OTT channel — smart fallback built in.",
-    featured: true,
-  },
-  {
-    id: "voice",
-    name: "Voice",
-    Icon: PhoneCall,
-    body: "Automated voice calls and IVR at scale.",
-  },
-  {
-    id: "topup",
-    name: "Mobile Top-up",
-    Icon: Wallet,
-    body: "Instantly deliver mobile top-ups in any quantity.",
-    featured: true,
-  },
-  {
-    id: "warranty",
-    name: "Smart Warranty",
-    Icon: ShieldCheck,
-    body: "Digital warranty activation right inside customer chats.",
-  },
-];
-
-const ServicesBento = ({ visible }: { visible: boolean }) => (
-  <div
-    className="flex flex-wrap gap-2 sm:gap-2.5"
-    style={{
-      opacity: visible ? 1 : 0,
-      transform: visible ? "translateY(0)" : "translateY(10px)",
-      transition: "opacity 600ms ease-out 360ms, transform 600ms ease-out 360ms",
-    }}
-  >
-    {SERVICES.map((s, i) => (
-      <ServiceTile key={s.id} s={s} index={i} />
-    ))}
-  </div>
-);
-
-const ServiceTile = ({ s, index }: { s: Service; index: number }) => {
-  const Icon = s.Icon;
-
-  // Non-core (phụ) → giữ pill tròn nhẹ nhàng
-  if (!s.featured) {
-    return (
-      <Link
-        to="/solutions"
-        className="group relative inline-flex h-9 items-center gap-2 overflow-hidden rounded-full border border-border bg-white pl-3 pr-3.5 text-[12px] shadow-[0_4px_14px_-8px_rgba(0,0,0,0.08)] transition-[transform,box-shadow,background-color,border-color,max-width] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-[hsl(var(--primary))]/40 hover:bg-[hsl(var(--primary-soft))]/40 hover:shadow-[0_18px_36px_-18px_hsl(128_52%_40%/0.35)] sm:h-10 sm:pl-3.5 sm:pr-4 sm:text-[12.5px]"
-        style={{ transitionDelay: `${index * 25}ms` }}
-        title={s.body}
-      >
-        <span className="grid h-5 w-5 shrink-0 place-items-center text-[hsl(var(--primary-deep))]">
-          <Icon className="h-4 w-4" />
-        </span>
-        <span className="shrink-0 font-semibold leading-none text-foreground whitespace-nowrap">
-          {s.name}
-        </span>
-        <span
-          aria-hidden
-          className="pointer-events-none flex max-w-0 items-center gap-1.5 overflow-hidden whitespace-nowrap text-[11px] font-normal text-muted-foreground opacity-0 transition-[max-width,opacity,margin] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:ml-1 group-hover:max-w-[420px] group-hover:opacity-100 sm:text-[11.5px]"
-        >
-          <span className="h-3 w-px shrink-0 bg-border" />
-          <span>{s.body}</span>
-          <ArrowUpRight className="h-3 w-3 shrink-0 text-[hsl(var(--primary-deep))]" />
-        </span>
-      </Link>
-    );
-  }
-
-  // Core tile — signature VG shape: chamfered tag (rest) → V-notch right (hover).
-  // Clip-path uses identical point count in both states → smooth morph.
-  return (
-    <Link
-      to="/solutions"
-      className="vg-core-tile group relative inline-flex h-11 items-center gap-2 bg-white pl-5 pr-4 text-[13px] transition-[transform,padding,background-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-[hsl(var(--primary-soft))]/50 hover:pr-6 sm:h-12 sm:pl-6 sm:pr-5 sm:text-[14px] sm:hover:pr-7"
-      style={{ transitionDelay: `${index * 25}ms` }}
-      title={s.body}
-    >
-      <span className="grid h-6 w-6 shrink-0 place-items-center text-[hsl(var(--primary-deep))]">
-        <Icon className="h-[18px] w-[18px]" />
-      </span>
-      <span className="shrink-0 font-semibold leading-none text-foreground whitespace-nowrap">
-        {s.name}
-      </span>
-      <span
-        aria-hidden
-        className="pointer-events-none flex max-w-0 items-center gap-1.5 overflow-hidden whitespace-nowrap text-[11.5px] font-normal text-muted-foreground opacity-0 transition-[max-width,opacity,margin] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:ml-1 group-hover:max-w-[420px] group-hover:opacity-100 sm:text-[12px]"
-      >
-        <span className="h-3 w-px shrink-0 bg-[hsl(var(--primary))]/40" />
-        <span>{s.body}</span>
-        <ArrowUpRight className="h-3 w-3 shrink-0 text-[hsl(var(--primary-deep))]" />
-      </span>
-    </Link>
-  );
-};
 
 
 /* ---------- Support strip — CDP × ByteTech ---------- */
