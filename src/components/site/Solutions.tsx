@@ -2,8 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowRight,
+  ArrowUpRight,
   Star,
   PackageCheck,
+  ShieldCheck,
   Gift,
   Sparkles,
   MessageCircle,
@@ -14,6 +16,7 @@ import {
   Wallet,
   PhoneCall,
   LayoutGrid,
+  Layers,
   Zap,
 } from "lucide-react";
 import bytetechLogo from "@/assets/brand/bytetech.svg";
@@ -86,9 +89,14 @@ export const Solutions = () => {
           </div>
         </div>
 
-        {/* Stage — girl centered, popups on the left, channel chips arc on the right */}
+        {/* Stage + Services */}
         <div className="relative mx-auto mt-8 md:mt-12 max-w-6xl">
-          <OutcomeStage visible={visible} />
+          <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-10 items-start">
+            <OutcomeStage visible={visible} />
+            <div className="flex flex-col gap-4">
+              <ServicesBento visible={visible} />
+            </div>
+          </div>
         </div>
 
         <div className="mt-10 flex justify-center">
@@ -152,9 +160,9 @@ const OutcomeStage = ({ visible }: { visible: boolean }) => (
       className="relative mx-auto aspect-square w-full max-w-[460px] object-contain drop-shadow-[0_25px_40px_rgba(0,0,0,0.12)]"
     />
 
-    {/* Floating pop-ups around the shopper */}
+    {/* Floating pop-ups */}
     <Popup
-      className="absolute left-[2%] top-[14%]"
+      className="absolute left-[2%] top-[12%]"
       delay={300}
       visible={visible}
     >
@@ -175,7 +183,7 @@ const OutcomeStage = ({ visible }: { visible: boolean }) => (
     </Popup>
 
     <Popup
-      className="absolute left-[0%] top-[46%]"
+      className="absolute left-[0%] top-[44%]"
       delay={500}
       visible={visible}
       accent="primary"
@@ -192,7 +200,7 @@ const OutcomeStage = ({ visible }: { visible: boolean }) => (
     </Popup>
 
     <Popup
-      className="absolute left-[4%] bottom-[10%]"
+      className="absolute left-[2%] top-[74%]"
       delay={700}
       visible={visible}
       accent="accent"
@@ -205,19 +213,31 @@ const OutcomeStage = ({ visible }: { visible: boolean }) => (
       </div>
     </Popup>
 
-    {/* Channel chips — right-side arc (desktop only) */}
+    {/* Channel orbit chips — right-side arc, hidden on small screens */}
     <div className="pointer-events-none absolute inset-0 hidden lg:block">
       {CHANNEL_CHIPS.map((c, i) => {
         const n = CHANNEL_CHIPS.length;
-        // Arc from -78° (top) to +78° (bottom) on the right side
-        const startDeg = -78;
-        const endDeg = 78;
+        // Arc from -82° (top) to +82° (bottom) on the right side
+        const startDeg = -82;
+        const endDeg = 82;
         const deg = startDeg + (i * (endDeg - startDeg)) / (n - 1);
         const rad = (deg * Math.PI) / 180;
-        const radiusX = 50; // % horizontal — hugs right of girl, not too far
-        const radiusY = 44; // % vertical
-        const left = 50 + Math.cos(rad) * radiusX;
-        const top = 50 + Math.sin(rad) * radiusY;
+        const radiusX = 53; // % horizontal
+        const radiusY = 48; // % vertical
+        // Per-chip nudges (% units) to avoid overlapping the shopper
+        const nudges: Array<{ dx: number; dy: number }> = [
+          { dx: 2, dy: -6 },   // 0 SMS Brandname — lift above head
+          { dx: 3, dy: -2 },   // 1 Zalo ZBS
+          { dx: 4, dy: 0 },    // 2 Viber Message
+          { dx: 5, dy: 0 },    // 3 Email Marketing
+          { dx: 5, dy: 0 },    // 4 Mobile Topup
+          { dx: 4, dy: 1 },    // 5 SMS Short Code
+          { dx: 7, dy: 2 },    // 6 Voice Brandname — push right of shopper
+          { dx: 6, dy: 5 },    // 7 Customized Solution — down & right
+        ];
+        const n0 = nudges[i] ?? { dx: 0, dy: 0 };
+        const left = 50 + Math.cos(rad) * radiusX + n0.dx;
+        const top = 50 + Math.sin(rad) * radiusY + n0.dy;
         return (
           <div
             key={c.id}
@@ -230,27 +250,21 @@ const OutcomeStage = ({ visible }: { visible: boolean }) => (
               transition: `opacity 500ms ease-out ${500 + i * 70}ms, transform 500ms ease-out ${500 + i * 70}ms`,
             }}
           >
-            <div
-              className="vg-chip-chevron flex items-center gap-1.5 pl-3 py-1.5"
-              style={{
-                background:
-                  i % 2 === 0
-                    ? "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-deep)) 100%)"
-                    : "linear-gradient(135deg, hsl(35 100% 58%) 0%, hsl(20 95% 52%) 100%)",
-                boxShadow:
-                  i % 2 === 0
-                    ? "0 8px 20px -8px hsl(var(--primary) / 0.55), inset 0 1px 0 rgba(255,255,255,0.28)"
-                    : "0 8px 20px -8px hsl(25 95% 50% / 0.55), inset 0 1px 0 rgba(255,255,255,0.28)",
-              }}
-            >
+            <div className="group flex items-center gap-1.5 rounded-full border border-border bg-white/95 px-2.5 py-1 shadow-[0_6px_18px_-8px_rgba(0,0,0,0.18)] backdrop-blur transition-transform hover:-translate-y-0.5">
               <span className="relative grid h-2 w-2 place-items-center">
                 <span
-                  className="absolute inset-0 rounded-full bg-white/50"
-                  style={{ animation: "signal-pulse 2.4s ease-out infinite" }}
+                  className="absolute inset-0 rounded-full opacity-60"
+                  style={{
+                    background: c.dot,
+                    animation: "signal-pulse 2.4s ease-out infinite",
+                  }}
                 />
-                <span className="h-2 w-2 rounded-full bg-white" />
+                <span
+                  className="h-2 w-2 rounded-full"
+                  style={{ background: c.dot }}
+                />
               </span>
-              <span className="text-[10.5px] font-semibold text-white whitespace-nowrap drop-shadow-[0_1px_1px_rgba(0,0,0,0.18)]">
+              <span className="text-[10.5px] font-semibold text-foreground">
                 {c.label}
               </span>
             </div>
@@ -260,7 +274,6 @@ const OutcomeStage = ({ visible }: { visible: boolean }) => (
     </div>
   </div>
 );
-
 
 const Popup = ({
   children,
@@ -334,6 +347,143 @@ const DeliveryRateCard = ({ visible }: { visible: boolean }) => {
   );
 };
 
+/* ---------- Services bento ---------- */
+
+type Service = {
+  id: string;
+  name: string;
+  Icon: typeof Star;
+  body: string;
+  featured?: boolean;
+};
+
+// Intentionally jumbled order — core tiles mixed in with smaller ones
+const SERVICES: Service[] = [
+  {
+    id: "sms",
+    name: "SMS Brandname",
+    Icon: MessageSquare,
+    body: "Authenticated sender ID with nationwide carrier coverage.",
+    featured: true,
+  },
+  {
+    id: "viber",
+    name: "Viber",
+    Icon: MessageCircle,
+    body: "Rich branded messaging with two-way conversations.",
+  },
+  {
+    id: "zalo",
+    name: "Zalo",
+    Icon: Smartphone,
+    body: "Official Account & ZNS template messages on Vietnam's #1 chat app.",
+    featured: true,
+  },
+  {
+    id: "email",
+    name: "Email",
+    Icon: Mail,
+    body: "Transactional and marketing email orchestration.",
+  },
+  {
+    id: "ott",
+    name: "OTT Multi Service",
+    Icon: Layers,
+    body: "One API, every OTT channel — smart fallback built in.",
+    featured: true,
+  },
+  {
+    id: "voice",
+    name: "Voice",
+    Icon: PhoneCall,
+    body: "Automated voice calls and IVR at scale.",
+  },
+  {
+    id: "topup",
+    name: "Mobile Top-up",
+    Icon: Wallet,
+    body: "Instantly deliver mobile top-ups in any quantity.",
+    featured: true,
+  },
+  {
+    id: "warranty",
+    name: "Smart Warranty",
+    Icon: ShieldCheck,
+    body: "Digital warranty activation right inside customer chats.",
+  },
+];
+
+const ServicesBento = ({ visible }: { visible: boolean }) => (
+  <div
+    className="flex flex-wrap gap-2 sm:gap-2.5"
+    style={{
+      opacity: visible ? 1 : 0,
+      transform: visible ? "translateY(0)" : "translateY(10px)",
+      transition: "opacity 600ms ease-out 360ms, transform 600ms ease-out 360ms",
+    }}
+  >
+    {SERVICES.map((s, i) => (
+      <ServiceTile key={s.id} s={s} index={i} />
+    ))}
+  </div>
+);
+
+const ServiceTile = ({ s, index }: { s: Service; index: number }) => {
+  const Icon = s.Icon;
+
+  // Non-core (phụ) → giữ pill tròn nhẹ nhàng
+  if (!s.featured) {
+    return (
+      <Link
+        to="/solutions"
+        className="group relative inline-flex h-9 items-center gap-2 overflow-hidden rounded-full border border-border bg-white pl-3 pr-3.5 text-[12px] shadow-[0_4px_14px_-8px_rgba(0,0,0,0.08)] transition-[transform,box-shadow,background-color,border-color,max-width] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:border-[hsl(var(--primary))]/40 hover:bg-[hsl(var(--primary-soft))]/40 hover:shadow-[0_18px_36px_-18px_hsl(128_52%_40%/0.35)] sm:h-10 sm:pl-3.5 sm:pr-4 sm:text-[12.5px]"
+        style={{ transitionDelay: `${index * 25}ms` }}
+        title={s.body}
+      >
+        <span className="grid h-5 w-5 shrink-0 place-items-center text-[hsl(var(--primary-deep))]">
+          <Icon className="h-4 w-4" />
+        </span>
+        <span className="shrink-0 font-semibold leading-none text-foreground whitespace-nowrap">
+          {s.name}
+        </span>
+        <span
+          aria-hidden
+          className="pointer-events-none flex max-w-0 items-center gap-1.5 overflow-hidden whitespace-nowrap text-[11px] font-normal text-muted-foreground opacity-0 transition-[max-width,opacity,margin] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:ml-1 group-hover:max-w-[420px] group-hover:opacity-100 sm:text-[11.5px]"
+        >
+          <span className="h-3 w-px shrink-0 bg-border" />
+          <span>{s.body}</span>
+          <ArrowUpRight className="h-3 w-3 shrink-0 text-[hsl(var(--primary-deep))]" />
+        </span>
+      </Link>
+    );
+  }
+
+  // Core tile — signature VG shape: chamfered tag (rest) → V-notch right (hover).
+  // Clip-path uses identical point count in both states → smooth morph.
+  return (
+    <Link
+      to="/solutions"
+      className="vg-core-tile group relative inline-flex h-11 items-center gap-2 bg-white pl-5 pr-4 text-[13px] transition-[transform,padding,background-color] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-0.5 hover:bg-[hsl(var(--primary-soft))]/50 hover:pr-6 sm:h-12 sm:pl-6 sm:pr-5 sm:text-[14px] sm:hover:pr-7"
+      style={{ transitionDelay: `${index * 25}ms` }}
+      title={s.body}
+    >
+      <span className="grid h-6 w-6 shrink-0 place-items-center text-[hsl(var(--primary-deep))]">
+        <Icon className="h-[18px] w-[18px]" />
+      </span>
+      <span className="shrink-0 font-semibold leading-none text-foreground whitespace-nowrap">
+        {s.name}
+      </span>
+      <span
+        aria-hidden
+        className="pointer-events-none flex max-w-0 items-center gap-1.5 overflow-hidden whitespace-nowrap text-[11.5px] font-normal text-muted-foreground opacity-0 transition-[max-width,opacity,margin] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:ml-1 group-hover:max-w-[420px] group-hover:opacity-100 sm:text-[12px]"
+      >
+        <span className="h-3 w-px shrink-0 bg-[hsl(var(--primary))]/40" />
+        <span>{s.body}</span>
+        <ArrowUpRight className="h-3 w-3 shrink-0 text-[hsl(var(--primary-deep))]" />
+      </span>
+    </Link>
+  );
+};
 
 
 /* ---------- Support strip — CDP × ByteTech ---------- */
