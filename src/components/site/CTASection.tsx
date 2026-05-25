@@ -19,7 +19,7 @@ export const CTASection = () => (
             </p>
           </div>
           <div className="flex flex-col gap-3">
-            <Button variant="cta" size="xl" asChild>
+            <Button variant="cta" size="xl" className="vg-cta-slant" asChild>
               <a href="#book" onClick={() => trackDemoRequest("cta_strip")}>
                 Book a Demo <ArrowRight className="h-4 w-4" />
               </a>
