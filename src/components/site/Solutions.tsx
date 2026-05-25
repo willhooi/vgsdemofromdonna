@@ -157,7 +157,7 @@ const OutcomeStage = ({ visible }: { visible: boolean }) => (
 
     {/* Floating pop-ups */}
     <Popup
-      className="absolute left-[2%] top-[18%] sm:left-[4%]"
+      className="absolute left-[2%] top-[12%]"
       delay={300}
       visible={visible}
     >
@@ -178,7 +178,7 @@ const OutcomeStage = ({ visible }: { visible: boolean }) => (
     </Popup>
 
     <Popup
-      className="absolute right-[-2%] top-[6%] sm:right-[0%]"
+      className="absolute left-[0%] top-[44%]"
       delay={500}
       visible={visible}
       accent="primary"
@@ -195,7 +195,7 @@ const OutcomeStage = ({ visible }: { visible: boolean }) => (
     </Popup>
 
     <Popup
-      className="absolute right-[-2%] bottom-[14%] sm:right-[2%]"
+      className="absolute left-[2%] top-[74%]"
       delay={700}
       visible={visible}
       accent="accent"
