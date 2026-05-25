@@ -89,14 +89,9 @@ export const Solutions = () => {
           </div>
         </div>
 
-        {/* Stage + Services */}
+        {/* Stage */}
         <div className="relative mx-auto mt-8 md:mt-12 max-w-6xl">
-          <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-10 items-start">
-            <OutcomeStage visible={visible} />
-            <div className="flex flex-col gap-4">
-              <ServicesBento visible={visible} />
-            </div>
-          </div>
+          <OutcomeStage visible={visible} />
         </div>
 
         <div className="mt-10 flex justify-center">
