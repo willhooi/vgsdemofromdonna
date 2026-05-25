@@ -118,7 +118,7 @@ export const Industries = () => {
           </p>
           <Link
             to="/contact"
-            className="group inline-flex items-center gap-2 rounded-full bg-[hsl(var(--accent))] px-6 py-3 text-sm font-semibold text-[hsl(var(--accent-foreground))] shadow-[0_12px_30px_-12px_hsl(35_100%_50%/0.55)] transition-transform hover:-translate-y-0.5"
+            className="vg-cta-slant group inline-flex items-center gap-2 rounded-full bg-[hsl(var(--accent))] px-6 py-3 text-sm font-semibold text-[hsl(var(--accent-foreground))] transition-transform hover:-translate-y-0.5"
           >
             Talk to us
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
@@ -132,7 +132,7 @@ export const Industries = () => {
 const CaseTile = ({ c }: { c: CaseStudy }) => (
   <Link
     to={`/case-studies/${c.slug}`}
-    className="group relative block aspect-[4/3] overflow-hidden rounded-2xl border border-border bg-white shadow-[0_4px_14px_-10px_rgba(0,0,0,0.1)] transition-all hover:-translate-y-0.5 hover:border-[hsl(var(--primary))]/30 hover:shadow-[0_22px_44px_-22px_hsl(128_52%_30%/0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--primary))]/40"
+    className="vg-chamfer-card group relative block aspect-[4/3] overflow-hidden border border-border bg-white shadow-[0_4px_14px_-10px_rgba(0,0,0,0.1)] transition-all hover:-translate-y-0.5 hover:border-[hsl(var(--primary))]/30 hover:shadow-[0_22px_44px_-22px_hsl(128_52%_30%/0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--primary))]/40"
   >
     {/* Front face — monogram */}
     <div className="absolute inset-0 flex flex-col items-center justify-center px-6 transition-opacity duration-300 group-hover:opacity-0 group-focus-within:opacity-0 motion-reduce:transition-none">

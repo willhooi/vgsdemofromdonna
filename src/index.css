@@ -139,6 +139,65 @@
   }
   .text-balance { text-wrap: balance; }
 
+  /* VG Signature — Phase 2 shape utilities */
+  /* Chamfer card: top-right corner cut at 135° matching the V apex. */
+  .vg-chamfer-card {
+    --vg-chamfer: 18px;
+    clip-path: polygon(
+      0 0,
+      calc(100% - var(--vg-chamfer)) 0,
+      100% var(--vg-chamfer),
+      100% 100%,
+      0 100%
+    );
+  }
+  /* Subtle accent line tracing the chamfer cut */
+  .vg-chamfer-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: calc(var(--vg-chamfer, 18px) * 1.42);
+    height: 1px;
+    background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)));
+    transform-origin: top right;
+    transform: rotate(-45deg);
+    opacity: 0.55;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  /* CTA slant — right edge becomes a chevron pointing forward (V apex).
+     Pairs with rounded-l-full on the left; shadow handled via drop-shadow filter. */
+  .vg-cta-slant {
+    --vg-tip: 14px;
+    clip-path: polygon(
+      0 0,
+      calc(100% - var(--vg-tip)) 0,
+      100% 50%,
+      calc(100% - var(--vg-tip)) 100%,
+      0 100%
+    );
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    padding-right: calc(var(--vg-tip) + 1rem);
+    box-shadow: none !important;
+    filter: drop-shadow(0 10px 22px hsl(35 100% 50% / 0.35));
+    transition: filter 300ms var(--ease-smooth), transform 300ms var(--ease-smooth);
+  }
+  .vg-cta-slant:hover {
+    filter: drop-shadow(0 14px 28px hsl(35 100% 50% / 0.5));
+  }
+  .vg-cta-slant.vg-cta-slant--brand {
+    filter: drop-shadow(0 10px 22px hsl(128 52% 35% / 0.35));
+  }
+  .vg-cta-slant.vg-cta-slant--brand:hover {
+    filter: drop-shadow(0 14px 28px hsl(128 52% 35% / 0.5));
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .vg-cta-slant { transition: none; }
+  }
+
   .grid-bg {
     background-image:
       linear-gradient(hsl(var(--border) / 0.6) 1px, transparent 1px),
