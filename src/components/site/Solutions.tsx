@@ -86,9 +86,12 @@ export const Solutions = () => {
           </div>
         </div>
 
-        {/* Stage */}
+        {/* Stage — image + popups on the left; right side reserved for upcoming content */}
         <div className="relative mx-auto mt-8 md:mt-12 max-w-6xl">
-          <OutcomeStage visible={visible} />
+          <div className="grid gap-6 lg:grid-cols-2 items-center">
+            <OutcomeStage visible={visible} />
+            <div aria-hidden className="hidden lg:block" />
+          </div>
         </div>
 
         <div className="mt-10 flex justify-center">
