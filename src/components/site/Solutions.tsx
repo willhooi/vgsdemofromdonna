@@ -211,15 +211,27 @@ const OutcomeStage = ({ visible }: { visible: boolean }) => (
     <div className="pointer-events-none absolute inset-0 hidden lg:block">
       {CHANNEL_CHIPS.map((c, i) => {
         const n = CHANNEL_CHIPS.length;
-        // Arc from -75° (top) to +75° (bottom) on the right side
-        const startDeg = -75;
-        const endDeg = 75;
+        // Arc from -82° (top) to +82° (bottom) on the right side
+        const startDeg = -82;
+        const endDeg = 82;
         const deg = startDeg + (i * (endDeg - startDeg)) / (n - 1);
         const rad = (deg * Math.PI) / 180;
-        const radiusX = 50; // % horizontal
-        const radiusY = 46; // % vertical
-        const left = 50 + Math.cos(rad) * radiusX;
-        const top = 50 + Math.sin(rad) * radiusY;
+        const radiusX = 53; // % horizontal
+        const radiusY = 48; // % vertical
+        // Per-chip nudges (% units) to avoid overlapping the shopper
+        const nudges: Array<{ dx: number; dy: number }> = [
+          { dx: 2, dy: -6 },   // 0 SMS Brandname — lift above head
+          { dx: 3, dy: -2 },   // 1 Zalo ZBS
+          { dx: 4, dy: 0 },    // 2 Viber Message
+          { dx: 5, dy: 0 },    // 3 Email Marketing
+          { dx: 5, dy: 0 },    // 4 Mobile Topup
+          { dx: 4, dy: 1 },    // 5 SMS Short Code
+          { dx: 7, dy: 2 },    // 6 Voice Brandname — push right of shopper
+          { dx: 6, dy: 5 },    // 7 Customized Solution — down & right
+        ];
+        const n0 = nudges[i] ?? { dx: 0, dy: 0 };
+        const left = 50 + Math.cos(rad) * radiusX + n0.dx;
+        const top = 50 + Math.sin(rad) * radiusY + n0.dy;
         return (
           <div
             key={c.id}
