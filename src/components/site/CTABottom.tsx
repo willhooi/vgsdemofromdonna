@@ -12,7 +12,7 @@ export const CTABottom = () => (
         Talk to our enterprise team. No commitment required.
       </p>
       <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-        <Button variant="cta" size="xl" asChild>
+        <Button variant="cta" size="xl" className="vg-cta-slant" asChild>
           <a href="/demo" onClick={() => trackDemoRequest("bottom_cta")}>
             Request a Demo <ArrowRight className="h-4 w-4" />
           </a>
