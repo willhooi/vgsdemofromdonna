@@ -50,11 +50,17 @@
     --gradient-hero: radial-gradient(ellipse at top right, hsl(128 52% 46% / 0.08), transparent 60%),
                      radial-gradient(ellipse at bottom left, hsl(35 100% 54% / 0.06), transparent 55%);
 
+    /* VG signature tokens — derived from the V/L logo geometry */
+    --gradient-vg: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+    --vg-chamfer: 14px;
+    --vg-angle: 135deg;
+
     /* Shadows */
     --shadow-soft: 0 1px 2px hsl(0 0% 0% / 0.04), 0 8px 24px -12px hsl(128 52% 46% / 0.12);
     --shadow-card: 0 1px 2px hsl(0 0% 0% / 0.03), 0 12px 40px -16px hsl(0 0% 0% / 0.10);
     --shadow-cta: 0 8px 24px -8px hsl(35 100% 54% / 0.45);
     --shadow-glow: 0 0 0 1px hsl(128 52% 46% / 0.12), 0 16px 48px -16px hsl(128 52% 46% / 0.25);
+    --shadow-vg: 0 10px 30px -10px hsl(var(--primary) / 0.25), 0 10px 30px -10px hsl(var(--accent) / 0.20);
 
     /* Motion */
     --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
