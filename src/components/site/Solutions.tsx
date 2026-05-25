@@ -209,10 +209,7 @@ const OutcomeStage = ({ visible }: { visible: boolean }) => (
     </Popup>
   </div>
 );
-      })}
-    </div>
-  </div>
-);
+
 
 const Popup = ({
   children,
