@@ -133,7 +133,6 @@ const CaseTile = ({ c }: { c: CaseStudy }) => (
   <Link
     to={`/case-studies/${c.slug}`}
     className="vg-chamfer-card group relative block aspect-[4/3] overflow-hidden border border-border bg-white shadow-[0_4px_14px_-10px_rgba(0,0,0,0.1)] transition-all hover:-translate-y-0.5 hover:border-[hsl(var(--primary))]/30 hover:shadow-[0_22px_44px_-22px_hsl(128_52%_30%/0.35)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--primary))]/40"
-    style={{ borderRadius: "1rem" }}
   >
     {/* Front face — monogram */}
     <div className="absolute inset-0 flex flex-col items-center justify-center px-6 transition-opacity duration-300 group-hover:opacity-0 group-focus-within:opacity-0 motion-reduce:transition-none">
