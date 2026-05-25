@@ -208,30 +208,28 @@ const OutcomeStage = ({ visible }: { visible: boolean }) => (
       </div>
     </Popup>
 
-    {/* Channel orbit chips — hidden on small screens */}
+    {/* Channel orbit chips — right-side arc, hidden on small screens */}
     <div className="pointer-events-none absolute inset-0 hidden lg:block">
       {CHANNEL_CHIPS.map((c, i) => {
-        const positions = [
-          { left: "-4%", top: "40%" },
-          { left: "-2%", top: "62%" },
-          { left: "4%", bottom: "18%" },
-          { left: "26%", bottom: "-2%" },
-          { left: "54%", bottom: "4%" },
-          { left: "8%", top: "4%" },
-          { right: "-4%", top: "52%" },
-          { right: "-2%", top: "22%" },
-          { right: "18%", top: "-3%" },
-          { left: "34%", top: "-4%" },
-        ];
-        const p = positions[i];
+        const n = CHANNEL_CHIPS.length;
+        // Arc from -75° (top) to +75° (bottom) on the right side
+        const startDeg = -75;
+        const endDeg = 75;
+        const deg = startDeg + (i * (endDeg - startDeg)) / (n - 1);
+        const rad = (deg * Math.PI) / 180;
+        const radiusX = 50; // % horizontal
+        const radiusY = 46; // % vertical
+        const left = 50 + Math.cos(rad) * radiusX;
+        const top = 50 + Math.sin(rad) * radiusY;
         return (
           <div
             key={c.id}
-            className="absolute pointer-events-auto"
+            className="absolute pointer-events-auto -translate-x-1/2 -translate-y-1/2"
             style={{
-              ...p,
+              left: `${left}%`,
+              top: `${top}%`,
               opacity: visible ? 1 : 0,
-              transform: visible ? "scale(1)" : "scale(0.85)",
+              transform: `translate(-50%, -50%) scale(${visible ? 1 : 0.85})`,
               transition: `opacity 500ms ease-out ${500 + i * 70}ms, transform 500ms ease-out ${500 + i * 70}ms`,
             }}
           >
