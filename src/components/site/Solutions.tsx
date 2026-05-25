@@ -86,12 +86,9 @@ export const Solutions = () => {
           </div>
         </div>
 
-        {/* Stage — image + popups on the left; right side reserved for upcoming content */}
+        {/* Stage — girl centered, popups on the left, channel chips arc on the right */}
         <div className="relative mx-auto mt-8 md:mt-12 max-w-6xl">
-          <div className="grid gap-6 lg:grid-cols-2 items-center">
-            <OutcomeStage visible={visible} />
-            <div aria-hidden className="hidden lg:block" />
-          </div>
+          <OutcomeStage visible={visible} />
         </div>
 
         <div className="mt-10 flex justify-center">
@@ -178,7 +175,7 @@ const OutcomeStage = ({ visible }: { visible: boolean }) => (
     </Popup>
 
     <Popup
-      className="absolute right-[2%] top-[22%]"
+      className="absolute left-[0%] top-[46%]"
       delay={500}
       visible={visible}
       accent="primary"
@@ -207,6 +204,54 @@ const OutcomeStage = ({ visible }: { visible: boolean }) => (
         371 235
       </div>
     </Popup>
+
+    {/* Channel chips — right-side arc (desktop only) */}
+    <div className="pointer-events-none absolute inset-0 hidden lg:block">
+      {CHANNEL_CHIPS.map((c, i) => {
+        const n = CHANNEL_CHIPS.length;
+        // Arc from -78° (top) to +78° (bottom) on the right side
+        const startDeg = -78;
+        const endDeg = 78;
+        const deg = startDeg + (i * (endDeg - startDeg)) / (n - 1);
+        const rad = (deg * Math.PI) / 180;
+        const radiusX = 50; // % horizontal — hugs right of girl, not too far
+        const radiusY = 44; // % vertical
+        const left = 50 + Math.cos(rad) * radiusX;
+        const top = 50 + Math.sin(rad) * radiusY;
+        return (
+          <div
+            key={c.id}
+            className="absolute pointer-events-auto -translate-x-1/2 -translate-y-1/2"
+            style={{
+              left: `${left}%`,
+              top: `${top}%`,
+              opacity: visible ? 1 : 0,
+              transform: `translate(-50%, -50%) scale(${visible ? 1 : 0.85})`,
+              transition: `opacity 500ms ease-out ${500 + i * 70}ms, transform 500ms ease-out ${500 + i * 70}ms`,
+            }}
+          >
+            <div className="flex items-center gap-1.5 rounded-full border border-border bg-white/95 px-2.5 py-1 shadow-[0_6px_18px_-8px_rgba(0,0,0,0.18)] backdrop-blur transition-transform hover:-translate-y-0.5">
+              <span className="relative grid h-2 w-2 place-items-center">
+                <span
+                  className="absolute inset-0 rounded-full opacity-60"
+                  style={{
+                    background: c.dot,
+                    animation: "signal-pulse 2.4s ease-out infinite",
+                  }}
+                />
+                <span
+                  className="h-2 w-2 rounded-full"
+                  style={{ background: c.dot }}
+                />
+              </span>
+              <span className="text-[10.5px] font-semibold text-foreground whitespace-nowrap">
+                {c.label}
+              </span>
+            </div>
+          </div>
+        );
+      })}
+    </div>
   </div>
 );
 
