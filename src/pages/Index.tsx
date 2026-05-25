@@ -10,6 +10,7 @@ import { FAQ } from "@/components/site/FAQ";
 import { CTASection } from "@/components/site/CTASection";
 import { Footer } from "@/components/site/Footer";
 import { ChatBubble } from "@/components/site/ChatBubble";
+import { VDivider } from "@/components/brand/VWatermark";
 
 const Index = () => {
   useEffect(() => {
@@ -29,12 +30,13 @@ const Index = () => {
     <main className="min-h-screen bg-background">
       <Header />
       <Hero />
-      {/* <MediaShowcase /> hidden per request */}
-
-      
+      <div className="container-tight"><VDivider /></div>
       <TrustBand />
+      <div className="container-tight"><VDivider /></div>
       <Solutions />
+      <div className="container-tight"><VDivider /></div>
       <Industries />
+      <div className="container-tight"><VDivider /></div>
       <div className="bg-muted">
         <FAQ />
       </div>

@@ -50,11 +50,17 @@
     --gradient-hero: radial-gradient(ellipse at top right, hsl(128 52% 46% / 0.08), transparent 60%),
                      radial-gradient(ellipse at bottom left, hsl(35 100% 54% / 0.06), transparent 55%);
 
+    /* VG signature tokens — derived from the V/L logo geometry */
+    --gradient-vg: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+    --vg-chamfer: 14px;
+    --vg-angle: 135deg;
+
     /* Shadows */
     --shadow-soft: 0 1px 2px hsl(0 0% 0% / 0.04), 0 8px 24px -12px hsl(128 52% 46% / 0.12);
     --shadow-card: 0 1px 2px hsl(0 0% 0% / 0.03), 0 12px 40px -16px hsl(0 0% 0% / 0.10);
     --shadow-cta: 0 8px 24px -8px hsl(35 100% 54% / 0.45);
     --shadow-glow: 0 0 0 1px hsl(128 52% 46% / 0.12), 0 16px 48px -16px hsl(128 52% 46% / 0.25);
+    --shadow-vg: 0 10px 30px -10px hsl(var(--primary) / 0.25), 0 10px 30px -10px hsl(var(--accent) / 0.20);
 
     /* Motion */
     --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
@@ -531,4 +537,88 @@ body.accrete-morph-active [data-accrete-target] > * {
   .accrete-morph { display: none !important; }
 }
 
+/* ============================================================
+   VG Signature System — reusable design language from the V/L mark
+   Phase 1: foundation utilities (shape, color, motion primitives).
+   ============================================================ */
+
+/* Brand gradient text — use on headline accents, big stat numbers. */
+.vg-text-gradient {
+  background-image: var(--gradient-vg);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Chamfered card — top-right corner cut (echoes the V tip). */
+.vg-chamfer-card {
+  clip-path: polygon(
+    0 0,
+    calc(100% - var(--vg-chamfer)) 0,
+    100% var(--vg-chamfer),
+    100% 100%,
+    0 100%
+  );
+}
+
+/* Button with a soft right-edge slant (echoes the L leg). */
+.vg-cta-slant {
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    calc(100% - 10px) 50%,
+    100% 100%,
+    0 100%
+  );
+  padding-right: 1.75rem;
+}
+
+/* Brand dual-tone focus ring. */
+.vg-focus-ring:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px hsl(var(--background)),
+    -2px -2px 0 2px hsl(var(--primary)),
+     2px  2px 0 2px hsl(var(--accent));
+}
+
+/* Mini V bullet — replaces "•" in opinionated lists. */
+.vg-list { list-style: none; padding-left: 0; }
+.vg-list > li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+.vg-list > li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 0.75rem;
+  height: 0.65rem;
+  background: var(--gradient-vg);
+  clip-path: polygon(0 0, 45% 0, 50% 60%, 55% 0, 100% 0, 55% 100%, 45% 100%);
+}
+
+/* V-divider line for between sections (works alongside <VDivider>). */
+.vg-divider-rule {
+  position: relative;
+  height: 1px;
+  background: hsl(var(--border));
+}
+.vg-divider-rule::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -5px;
+  width: 24px;
+  height: 10px;
+  transform: translateX(-50%);
+  background: var(--gradient-vg);
+  clip-path: polygon(0 0, 50% 100%, 100% 0, 92% 0, 50% 80%, 8% 0);
+}
+
+/* Subtle V-glow halo for hero CTAs / featured tiles. */
+.vg-halo { box-shadow: var(--shadow-vg); }
 
