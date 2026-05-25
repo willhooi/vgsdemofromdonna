@@ -220,6 +220,15 @@
   .animate-pulse-ring {
     animation: pulse-ring 2.4s ease-out infinite;
   }
+  .vg-chip-chevron {
+    clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 50%, calc(100% - 14px) 100%, 0 100%);
+    padding-right: 1.25rem;
+    transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1), filter 280ms ease-out;
+  }
+  .vg-chip-chevron:hover {
+    transform: translateX(3px);
+    filter: brightness(1.08) saturate(1.05);
+  }
 }
 
 @keyframes fade-up {

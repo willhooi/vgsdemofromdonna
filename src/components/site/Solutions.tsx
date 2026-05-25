@@ -230,21 +230,27 @@ const OutcomeStage = ({ visible }: { visible: boolean }) => (
               transition: `opacity 500ms ease-out ${500 + i * 70}ms, transform 500ms ease-out ${500 + i * 70}ms`,
             }}
           >
-            <div className="flex items-center gap-1.5 rounded-full border border-border bg-white/95 px-2.5 py-1 shadow-[0_6px_18px_-8px_rgba(0,0,0,0.18)] backdrop-blur transition-transform hover:-translate-y-0.5">
+            <div
+              className="vg-chip-chevron flex items-center gap-1.5 pl-3 py-1.5"
+              style={{
+                background:
+                  i % 2 === 0
+                    ? "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-deep)) 100%)"
+                    : "linear-gradient(135deg, hsl(35 100% 58%) 0%, hsl(20 95% 52%) 100%)",
+                boxShadow:
+                  i % 2 === 0
+                    ? "0 8px 20px -8px hsl(var(--primary) / 0.55), inset 0 1px 0 rgba(255,255,255,0.28)"
+                    : "0 8px 20px -8px hsl(25 95% 50% / 0.55), inset 0 1px 0 rgba(255,255,255,0.28)",
+              }}
+            >
               <span className="relative grid h-2 w-2 place-items-center">
                 <span
-                  className="absolute inset-0 rounded-full opacity-60"
-                  style={{
-                    background: c.dot,
-                    animation: "signal-pulse 2.4s ease-out infinite",
-                  }}
+                  className="absolute inset-0 rounded-full bg-white/50"
+                  style={{ animation: "signal-pulse 2.4s ease-out infinite" }}
                 />
-                <span
-                  className="h-2 w-2 rounded-full"
-                  style={{ background: c.dot }}
-                />
+                <span className="h-2 w-2 rounded-full bg-white" />
               </span>
-              <span className="text-[10.5px] font-semibold text-foreground whitespace-nowrap">
+              <span className="text-[10.5px] font-semibold text-white whitespace-nowrap drop-shadow-[0_1px_1px_rgba(0,0,0,0.18)]">
                 {c.label}
               </span>
             </div>
