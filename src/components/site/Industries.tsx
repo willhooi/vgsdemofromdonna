@@ -118,7 +118,7 @@ export const Industries = () => {
           </p>
           <Link
             to="/contact"
-            className="group inline-flex items-center gap-2 rounded-full bg-[hsl(var(--accent))] px-6 py-3 text-sm font-semibold text-[hsl(var(--accent-foreground))] shadow-[0_12px_30px_-12px_hsl(35_100%_50%/0.55)] transition-transform hover:-translate-y-0.5"
+            className="vg-cta-slant group inline-flex items-center gap-2 rounded-full bg-[hsl(var(--accent))] px-6 py-3 text-sm font-semibold text-[hsl(var(--accent-foreground))] transition-transform hover:-translate-y-0.5"
           >
             Talk to us
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
