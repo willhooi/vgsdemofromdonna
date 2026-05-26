@@ -208,7 +208,7 @@ function DesktopCard({
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
       onClick={onToggle}
-      className="group relative flex h-full cursor-pointer flex-col rounded-[14px] p-5 transition-all duration-300 hover:-translate-y-0.5"
+      className="group relative flex cursor-pointer flex-col self-start rounded-[14px] p-5 transition-all duration-300 hover:-translate-y-0.5"
       style={{
         background: open ? GREEN_BG : "hsl(var(--background))",
         border: open ? BORDER_ACTIVE : BORDER,
@@ -543,16 +543,25 @@ export function ServicesGrid() {
         {isMobile ? (
           <MobileSwiper />
         ) : (
-          <div className="hidden md:grid md:grid-cols-3 md:auto-rows-fr md:gap-[14px] md:items-stretch">
-            {SERVICES.map((s, i) => (
-              <DesktopCard
-                key={s.name}
-                svc={s}
-                open={isOpen(i)}
-                onEnter={() => openAt(i)}
-                onLeave={() => {}}
-                onToggle={() => toggleAt(i)}
-              />
+          <div className="hidden md:flex md:gap-[14px]">
+            {[0, 1, 2].map((col) => (
+              <div key={col} className="flex flex-1 flex-col gap-[14px]">
+                {[0, 1, 2].map((row) => {
+                  const i = row * 3 + col;
+                  const s = SERVICES[i];
+                  if (!s) return null;
+                  return (
+                    <DesktopCard
+                      key={s.name}
+                      svc={s}
+                      open={isOpen(i)}
+                      onEnter={() => openAt(i)}
+                      onLeave={() => {}}
+                      onToggle={() => toggleAt(i)}
+                    />
+                  );
+                })}
+              </div>
             ))}
           </div>
         )}
