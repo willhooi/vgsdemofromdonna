@@ -195,16 +195,22 @@ function ComingSoonForm({ compact = false }: { compact?: boolean }) {
 
 function DesktopCard({
   svc,
+  index,
+  total,
   active,
   onActivate,
   onClose,
 }: {
   svc: Service;
+  index: number;
+  total: number;
   active: boolean;
   onActivate: () => void;
   onClose: () => void;
 }) {
   const Icon = svc.icon;
+  const isLastRow =
+    Math.floor(index / 3) === Math.floor((total - 1) / 3);
   return (
     <article
       onMouseEnter={!active ? onActivate : undefined}
@@ -213,7 +219,7 @@ function DesktopCard({
       }`}
       style={{
         gridColumn: active ? "span 2" : undefined,
-        gridRow: active ? "span 2" : undefined,
+        gridRow: active && !isLastRow ? "span 2" : undefined,
         background: active ? GREEN_BG : "hsl(var(--background))",
         border: active ? BORDER_ACTIVE : BORDER,
         minHeight: 130,
@@ -515,11 +521,14 @@ export function ServicesGrid() {
 
   // Each card occupies cells in a 3-col grid. When expanded, it spans 2x2.
   // Clamp col to 1 max so the 2-wide span fits within 3 columns.
+  const total = SERVICES.length;
+  const lastRow = Math.floor((total - 1) / 3);
   const cellsFor = (i: number, expanded: boolean): string[] => {
     const r = Math.floor(i / 3);
     const c = i % 3;
     if (!expanded) return [`${r},${c}`];
     const cc = Math.min(c, 1);
+    if (r === lastRow) return [`${r},${cc}`, `${r},${cc + 1}`];
     return [`${r},${cc}`, `${r},${cc + 1}`, `${r + 1},${cc}`, `${r + 1},${cc + 1}`];
   };
 
@@ -597,6 +606,8 @@ export function ServicesGrid() {
               <DesktopCard
                 key={s.name}
                 svc={s}
+                index={i}
+                total={total}
                 active={activeSet.has(i)}
                 onActivate={() => activate(i)}
                 onClose={() => close(i)}
