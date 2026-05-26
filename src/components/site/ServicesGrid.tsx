@@ -196,18 +196,18 @@ function ComingSoonForm({ compact = false }: { compact?: boolean }) {
 function DesktopCard({
   svc,
   active,
-  onClick,
+  onActivate,
   onClose,
 }: {
   svc: Service;
   active: boolean;
-  onClick: () => void;
+  onActivate: () => void;
   onClose: () => void;
 }) {
   const Icon = svc.icon;
   return (
     <article
-      onClick={!active ? onClick : undefined}
+      onMouseEnter={!active ? onActivate : undefined}
       className={`group relative flex flex-col rounded-[14px] p-5 transition-all duration-300 ${
         active ? "" : "cursor-pointer bg-background hover:-translate-y-0.5"
       }`}
