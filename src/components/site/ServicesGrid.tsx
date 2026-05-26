@@ -164,10 +164,7 @@ function ComingSoonForm() {
       >
         Coming Soon
       </span>
-      <h4 className="mt-3 text-[15px] font-black" style={{ color: GREEN_DEEP }}>
-        Đang phát triển
-      </h4>
-      <p className="mt-1 text-[12px] leading-[1.7] text-muted-foreground">
+      <p className="mt-3 text-[12px] leading-[1.7] text-muted-foreground">
         Đăng ký để nhận thông tin sớm nhất khi giải pháp AI ra mắt.
       </p>
       <form onSubmit={(e) => e.preventDefault()} className="mt-3 flex gap-2">
