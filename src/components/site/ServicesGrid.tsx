@@ -557,9 +557,9 @@ export function ServicesGrid() {
                 key={s.name}
                 svc={s}
                 open={isOpen(i)}
-                onEnter={() => {}}
+                onEnter={() => openAt(i)}
                 onLeave={() => {}}
-                onToggle={() => handleClick(i)}
+                onToggle={() => toggleAt(i)}
               />
             ))}
           </div>
