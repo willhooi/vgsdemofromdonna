@@ -195,16 +195,22 @@ function ComingSoonForm({ compact = false }: { compact?: boolean }) {
 
 function DesktopCard({
   svc,
+  index,
+  total,
   active,
   onActivate,
   onClose,
 }: {
   svc: Service;
+  index: number;
+  total: number;
   active: boolean;
   onActivate: () => void;
   onClose: () => void;
 }) {
   const Icon = svc.icon;
+  const isLastRow =
+    Math.floor(index / 3) === Math.floor((total - 1) / 3);
   return (
     <article
       onMouseEnter={!active ? onActivate : undefined}
@@ -213,7 +219,7 @@ function DesktopCard({
       }`}
       style={{
         gridColumn: active ? "span 2" : undefined,
-        gridRow: active ? "span 2" : undefined,
+        gridRow: active && !isLastRow ? "span 2" : undefined,
         background: active ? GREEN_BG : "hsl(var(--background))",
         border: active ? BORDER_ACTIVE : BORDER,
         minHeight: 130,
