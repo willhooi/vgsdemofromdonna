@@ -81,11 +81,11 @@ export const Solutions = () => {
           </p>
         </div>
 
-        {/* Stage + Right column (99% + CDP) */}
+        {/* Stage + Right column (99% + CDP as squares) */}
         <div className="relative mx-auto mt-8 md:mt-12 max-w-6xl">
           <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-10 items-center">
             <OutcomeStage visible={visible} />
-            <div className="flex flex-col gap-4 md:gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
               <DeliveryRateCard visible={visible} />
               <CDPSupportStrip visible={visible} />
             </div>
