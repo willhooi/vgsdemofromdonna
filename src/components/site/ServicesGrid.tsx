@@ -606,6 +606,8 @@ export function ServicesGrid() {
               <DesktopCard
                 key={s.name}
                 svc={s}
+                index={i}
+                total={total}
                 active={activeSet.has(i)}
                 onActivate={() => activate(i)}
                 onClose={() => close(i)}
