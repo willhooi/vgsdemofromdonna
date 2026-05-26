@@ -81,20 +81,13 @@ export const Solutions = () => {
           </p>
         </div>
 
-        {/* Top highlight row — 99% (left) + CDP partnership (right) */}
-        <div className="relative mx-auto mt-8 md:mt-10 max-w-6xl">
-          <div className="grid gap-4 md:gap-5 md:grid-cols-[0.95fr_1.05fr] items-stretch">
-            <DeliveryRateCard visible={visible} />
-            <CDPSupportStrip visible={visible} />
-          </div>
-        </div>
-
-        {/* Stage + Services */}
+        {/* Stage + Right column (99% + CDP) */}
         <div className="relative mx-auto mt-8 md:mt-12 max-w-6xl">
-          <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-10 items-start">
+          <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-10 items-center">
             <OutcomeStage visible={visible} />
-            <div className="flex flex-col gap-4">
-              <ServicesBento visible={visible} />
+            <div className="flex flex-col gap-4 md:gap-5">
+              <DeliveryRateCard visible={visible} />
+              <CDPSupportStrip visible={visible} />
             </div>
           </div>
         </div>
