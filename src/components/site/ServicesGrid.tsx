@@ -519,7 +519,7 @@ export function ServicesGrid() {
       style={{ fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" }}
     >
       <div className="container-tight">
-        <header className="mx-auto mb-10 max-w-2xl text-center">
+        <header className="mx-auto mb-10 max-w-4xl text-center">
           <div
             className="text-[11px] font-bold uppercase"
             style={{ color: GREEN, letterSpacing: "2px" }}
@@ -527,11 +527,12 @@ export function ServicesGrid() {
             Giải pháp toàn diện
           </div>
           <h2
-            className="mt-3 text-[26px] font-black leading-tight md:text-[36px]"
+            className="mt-3 whitespace-nowrap text-[26px] font-black leading-tight md:text-[36px]"
             style={{ fontWeight: 900 }}
           >
             Tiếp cận khách hàng{" "}
-            <span style={{ color: GREEN }}>đúng kênh,</span> đúng thời điểm
+            <span style={{ color: GREEN }}>đúng kênh,</span>{" "}
+            <span style={{ color: ORANGE }}>đúng thời điểm</span>
           </h2>
           <p className="mx-auto mt-3 max-w-[500px] text-[14px] text-muted-foreground">
             Từ SMS đến AI, VietGuys cung cấp đa dạng kênh tiếp cận — kết nối
