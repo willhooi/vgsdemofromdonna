@@ -129,7 +129,7 @@ const SERVICES: Service[] = [
     name: "Dịch vụ AI",
     icon: Brain,
     tag: "Trí tuệ nhân tạo",
-    short: "Chatbot, phân tích hành vi, cá nhân hóa siêu thực bằng AI.",
+    short: "",
     desc: "Giải pháp AI sắp ra mắt — chatbot thông minh, phân tích dự đoán hành vi, cá nhân hóa siêu thực theo từng customer profile. Tích hợp vào toàn bộ hành trình khách hàng.",
     stats: [],
     cta: "",
