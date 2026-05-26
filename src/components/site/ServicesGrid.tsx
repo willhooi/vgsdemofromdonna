@@ -496,7 +496,15 @@ export function ServicesGrid() {
     return openByCol[col] === row;
   };
 
-  const handleClick = (i: number) => {
+  const openAt = (i: number) => {
+    const col = i % 3;
+    const row = Math.floor(i / 3);
+    setOpenByCol((prev) =>
+      prev[col] === row ? prev : { ...prev, [col]: row }
+    );
+  };
+
+  const toggleAt = (i: number) => {
     const col = i % 3;
     const row = Math.floor(i / 3);
     setOpenByCol((prev) => ({
@@ -549,9 +557,9 @@ export function ServicesGrid() {
                 key={s.name}
                 svc={s}
                 open={isOpen(i)}
-                onEnter={() => {}}
+                onEnter={() => openAt(i)}
                 onLeave={() => {}}
-                onToggle={() => handleClick(i)}
+                onToggle={() => toggleAt(i)}
               />
             ))}
           </div>
