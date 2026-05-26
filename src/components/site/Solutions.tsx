@@ -307,7 +307,7 @@ const DeliveryRateCard = ({ visible }: { visible: boolean }) => {
   const n = useCountUp(visible ? 99 : 0, 1400);
   return (
     <div
-      className="relative aspect-square overflow-hidden rounded-2xl border border-[hsl(var(--primary))]/20 bg-gradient-to-br from-[hsl(var(--primary))] to-[hsl(var(--primary-deep))] p-5 text-white shadow-[0_18px_36px_-18px_hsl(128_52%_40%/0.45)]"
+      className="relative h-full overflow-hidden rounded-2xl border border-[hsl(var(--primary))]/20 bg-gradient-to-br from-[hsl(var(--primary))] to-[hsl(var(--primary-deep))] p-5 text-white shadow-[0_18px_36px_-18px_hsl(128_52%_40%/0.45)]"
       style={{
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(10px)",
