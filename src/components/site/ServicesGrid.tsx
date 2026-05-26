@@ -254,12 +254,11 @@ function DesktopCard({
         >
           {svc.name}
         </h3>
-        <p
-          className="mt-1.5 line-clamp-2 text-[11px] leading-snug text-muted-foreground"
-          style={{ minHeight: "2.6em" }}
-        >
-          {svc.short}
-        </p>
+        {svc.short && (
+          <p className="mt-1.5 line-clamp-2 text-[11px] leading-snug text-muted-foreground">
+            {svc.short}
+          </p>
+        )}
       </div>
 
       {/* Smooth accordion drop using grid-template-rows trick */}
