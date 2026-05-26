@@ -307,7 +307,7 @@ const DeliveryRateCard = ({ visible }: { visible: boolean }) => {
   const n = useCountUp(visible ? 99 : 0, 1400);
   return (
     <div
-      className="relative w-full overflow-hidden rounded-2xl border border-[hsl(var(--primary))]/20 bg-gradient-to-br from-[hsl(var(--primary))] to-[hsl(var(--primary-deep))] p-4 text-white shadow-[0_18px_36px_-18px_hsl(128_52%_40%/0.45)] h-48"
+      className="relative w-full overflow-hidden rounded-2xl border border-[hsl(var(--primary))]/20 bg-gradient-to-br from-[hsl(var(--primary))] to-[hsl(var(--primary-deep))] p-4 text-white shadow-[0_18px_36px_-18px_hsl(128_52%_40%/0.45)] h-48 mx-[88px]"
       style={{
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(10px)",
@@ -489,7 +489,7 @@ const CDP_BULLETS = [
 
 const CDPSupportStrip = ({ visible }: { visible: boolean }) => (
   <div
-    className="relative aspect-square w-full overflow-hidden rounded-2xl border border-[hsl(var(--primary))]/15 bg-gradient-to-br from-[hsl(145_55%_98%)] to-white p-4 mx-[99px]"
+    className="relative aspect-square w-full overflow-hidden rounded-2xl border-[hsl(var(--primary))]/15 bg-gradient-to-br from-[hsl(145_55%_98%)] to-white p-4 border-2 mx-[88px]"
     style={{
       opacity: visible ? 1 : 0,
       transform: visible ? "translateY(0)" : "translateY(10px)",
