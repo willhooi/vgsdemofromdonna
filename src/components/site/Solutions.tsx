@@ -85,7 +85,7 @@ export const Solutions = () => {
         <div className="relative mx-auto mt-8 md:mt-12 max-w-6xl">
           <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-10 items-center">
             <OutcomeStage visible={visible} />
-            <div className="flex flex-col gap-4 md:gap-5 items-end ml-auto w-full max-w-[260px]">
+            <div className="flex flex-col gap-4 md:gap-5 items-end ml-auto w-full max-w-[320px]">
               <DeliveryRateCard visible={visible} />
               <CDPSupportStrip visible={visible} />
             </div>
@@ -307,7 +307,7 @@ const DeliveryRateCard = ({ visible }: { visible: boolean }) => {
   const n = useCountUp(visible ? 99 : 0, 1400);
   return (
     <div
-      className="relative aspect-square w-full overflow-hidden rounded-2xl border border-[hsl(var(--primary))]/20 bg-gradient-to-br from-[hsl(var(--primary))] to-[hsl(var(--primary-deep))] p-4 text-white shadow-[0_18px_36px_-18px_hsl(128_52%_40%/0.45)] px-[16px] mx-[99px]"
+      className="relative w-full overflow-hidden rounded-2xl border border-[hsl(var(--primary))]/20 bg-gradient-to-br from-[hsl(var(--primary))] to-[hsl(var(--primary-deep))] p-4 text-white shadow-[0_18px_36px_-18px_hsl(128_52%_40%/0.45)] h-48"
       style={{
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(10px)",
