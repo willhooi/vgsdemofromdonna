@@ -307,7 +307,7 @@ const DeliveryRateCard = ({ visible }: { visible: boolean }) => {
   const n = useCountUp(visible ? 99 : 0, 1400);
   return (
     <div
-      className="relative overflow-hidden rounded-2xl border border-[hsl(var(--primary))]/20 bg-gradient-to-br from-[hsl(var(--primary))] to-[hsl(var(--primary-deep))] p-4 md:p-5 text-white shadow-[0_18px_36px_-18px_hsl(128_52%_40%/0.45)]"
+      className="relative aspect-square w-full overflow-hidden rounded-2xl border border-[hsl(var(--primary))]/20 bg-gradient-to-br from-[hsl(var(--primary))] to-[hsl(var(--primary-deep))] p-4 text-white shadow-[0_18px_36px_-18px_hsl(128_52%_40%/0.45)]"
       style={{
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(10px)",
@@ -318,20 +318,20 @@ const DeliveryRateCard = ({ visible }: { visible: boolean }) => {
         aria-hidden
         className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-white/10 blur-2xl"
       />
-      <div className="relative flex items-center gap-4">
-        <div className="shrink-0 grid h-12 w-12 place-items-center rounded-xl bg-white/15 backdrop-blur">
-          <Zap className="h-6 w-6" />
+      <div className="relative flex h-full flex-col justify-between">
+        <div className="grid h-11 w-11 place-items-center rounded-xl bg-white/15 backdrop-blur">
+          <Zap className="h-5 w-5" />
         </div>
-        <div className="flex-1 min-w-0">
-          <div className="flex items-baseline gap-2">
-            <span className="font-display text-[32px] font-extrabold leading-none tabular-nums">
+        <div>
+          <div className="flex items-baseline gap-1.5">
+            <span className="font-display text-[36px] font-extrabold leading-none tabular-nums">
               {n}%
             </span>
-            <span className="text-[10.5px] font-bold uppercase tracking-[0.18em] text-white/85">
-              Delivery Rate
-            </span>
           </div>
-          <p className="mt-1.5 text-[12px] leading-snug text-white/85">
+          <div className="mt-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white/85">
+            Delivery Rate
+          </div>
+          <p className="mt-1.5 text-[11px] leading-snug text-white/85">
             Built-in messaging failover ensures uninterrupted customer communications.
           </p>
         </div>
