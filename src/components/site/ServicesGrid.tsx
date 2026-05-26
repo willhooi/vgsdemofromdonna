@@ -483,18 +483,26 @@ function MobileSwiper() {
 
 export function ServicesGrid() {
   const isMobile = useIsMobile();
-  const [hovered, setHovered] = useState<number | null>(null);
-  const [pinned, setPinned] = useState<Set<number>>(new Set());
+  // One open card per column by default (top row of each column).
+  const [openByCol, setOpenByCol] = useState<Record<number, number | null>>({
+    0: 0,
+    1: 0,
+    2: 0,
+  });
 
-  const isOpen = (i: number) => hovered === i || pinned.has(i);
+  const isOpen = (i: number) => {
+    const col = i % 3;
+    const row = Math.floor(i / 3);
+    return openByCol[col] === row;
+  };
 
-  const togglePin = (i: number) => {
-    setPinned((prev) => {
-      const next = new Set(prev);
-      if (next.has(i)) next.delete(i);
-      else next.add(i);
-      return next;
-    });
+  const handleClick = (i: number) => {
+    const col = i % 3;
+    const row = Math.floor(i / 3);
+    setOpenByCol((prev) => ({
+      ...prev,
+      [col]: prev[col] === row ? null : row,
+    }));
   };
 
   return (
@@ -541,9 +549,9 @@ export function ServicesGrid() {
                 key={s.name}
                 svc={s}
                 open={isOpen(i)}
-                onEnter={() => setHovered(i)}
-                onLeave={() => setHovered((h) => (h === i ? null : h))}
-                onToggle={() => togglePin(i)}
+                onEnter={() => {}}
+                onLeave={() => {}}
+                onToggle={() => handleClick(i)}
               />
             ))}
           </div>
