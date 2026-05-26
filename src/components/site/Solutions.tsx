@@ -85,7 +85,7 @@ export const Solutions = () => {
         <div className="relative mx-auto mt-8 md:mt-12 max-w-6xl">
           <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-10 items-center">
             <OutcomeStage visible={visible} />
-            <div className="grid grid-cols-2 gap-4 md:gap-5 justify-items-end ml-auto w-full max-w-[460px]">
+            <div className="flex flex-col gap-4 md:gap-5 items-end ml-auto w-full max-w-[260px]">
               <DeliveryRateCard visible={visible} />
               <CDPSupportStrip visible={visible} />
             </div>
