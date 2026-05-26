@@ -521,11 +521,14 @@ export function ServicesGrid() {
 
   // Each card occupies cells in a 3-col grid. When expanded, it spans 2x2.
   // Clamp col to 1 max so the 2-wide span fits within 3 columns.
+  const total = SERVICES.length;
+  const lastRow = Math.floor((total - 1) / 3);
   const cellsFor = (i: number, expanded: boolean): string[] => {
     const r = Math.floor(i / 3);
     const c = i % 3;
     if (!expanded) return [`${r},${c}`];
     const cc = Math.min(c, 1);
+    if (r === lastRow) return [`${r},${cc}`, `${r},${cc + 1}`];
     return [`${r},${cc}`, `${r},${cc + 1}`, `${r + 1},${cc}`, `${r + 1},${cc + 1}`];
   };
 
