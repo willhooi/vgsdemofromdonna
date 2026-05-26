@@ -511,7 +511,41 @@ function MobileSwiper() {
 
 export function ServicesGrid() {
   const isMobile = useIsMobile();
-  const [active, setActive] = useState<number | null>(null);
+  const [activeSet, setActiveSet] = useState<Set<number>>(new Set());
+
+  // Each card occupies cells in a 3-col grid. When expanded, it spans 2x2.
+  // Clamp col to 1 max so the 2-wide span fits within 3 columns.
+  const cellsFor = (i: number, expanded: boolean): string[] => {
+    const r = Math.floor(i / 3);
+    const c = i % 3;
+    if (!expanded) return [`${r},${c}`];
+    const cc = Math.min(c, 1);
+    return [`${r},${cc}`, `${r},${cc + 1}`, `${r + 1},${cc}`, `${r + 1},${cc + 1}`];
+  };
+
+  const activate = (i: number) => {
+    setActiveSet((prev) => {
+      if (prev.has(i)) return prev;
+      const incoming = new Set(cellsFor(i, true));
+      const next = new Set(prev);
+      // Evict any currently expanded card whose footprint overlaps the new one
+      for (const j of prev) {
+        const occ = cellsFor(j, true);
+        if (occ.some((k) => incoming.has(k))) next.delete(j);
+      }
+      next.add(i);
+      return next;
+    });
+  };
+
+  const close = (i: number) => {
+    setActiveSet((prev) => {
+      if (!prev.has(i)) return prev;
+      const next = new Set(prev);
+      next.delete(i);
+      return next;
+    });
+  };
 
   return (
     <section
@@ -563,9 +597,9 @@ export function ServicesGrid() {
               <DesktopCard
                 key={s.name}
                 svc={s}
-                active={active === i}
-                onClick={() => setActive(i)}
-                onClose={() => setActive(null)}
+                active={activeSet.has(i)}
+                onActivate={() => activate(i)}
+                onClose={() => close(i)}
               />
             ))}
           </div>
