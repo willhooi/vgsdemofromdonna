@@ -543,24 +543,25 @@ export function ServicesGrid() {
         {isMobile ? (
           <MobileSwiper />
         ) : (
-          <div
-            className="hidden md:grid"
-            style={{
-              gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
-              gridAutoRows: "min-content",
-              alignItems: "start",
-              gap: "14px",
-            }}
-          >
-            {SERVICES.map((s, i) => (
-              <DesktopCard
-                key={s.name}
-                svc={s}
-                open={isOpen(i)}
-                onEnter={() => openAt(i)}
-                onLeave={() => {}}
-                onToggle={() => toggleAt(i)}
-              />
+          <div className="hidden md:flex md:gap-[14px]">
+            {[0, 1, 2].map((col) => (
+              <div key={col} className="flex flex-1 flex-col gap-[14px]">
+                {[0, 1, 2].map((row) => {
+                  const i = row * 3 + col;
+                  const s = SERVICES[i];
+                  if (!s) return null;
+                  return (
+                    <DesktopCard
+                      key={s.name}
+                      svc={s}
+                      open={isOpen(i)}
+                      onEnter={() => openAt(i)}
+                      onLeave={() => {}}
+                      onToggle={() => toggleAt(i)}
+                    />
+                  );
+                })}
+              </div>
             ))}
           </div>
         )}
