@@ -13,7 +13,6 @@ import {
   ChevronLeft,
   ChevronRight,
   Hand,
-  X,
   type LucideIcon,
 } from "lucide-react";
 
@@ -156,9 +155,9 @@ function useIsMobile() {
   return m;
 }
 
-function ComingSoonForm({ compact = false }: { compact?: boolean }) {
+function ComingSoonForm() {
   return (
-    <div className={compact ? "mt-3" : "mt-4"}>
+    <div className="mt-4">
       <span
         className="inline-block rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white"
         style={{ background: ORANGE }}
@@ -171,10 +170,7 @@ function ComingSoonForm({ compact = false }: { compact?: boolean }) {
       <p className="mt-1 text-[12px] leading-[1.7] text-muted-foreground">
         Đăng ký để nhận thông tin sớm nhất khi giải pháp AI ra mắt.
       </p>
-      <form
-        onSubmit={(e) => e.preventDefault()}
-        className="mt-3 flex gap-2"
-      >
+      <form onSubmit={(e) => e.preventDefault()} className="mt-3 flex gap-2">
         <input
           type="email"
           required
@@ -195,49 +191,43 @@ function ComingSoonForm({ compact = false }: { compact?: boolean }) {
 
 function DesktopCard({
   svc,
-  index,
-  total,
-  active,
-  onActivate,
-  onClose,
+  open,
+  onEnter,
+  onLeave,
+  onToggle,
 }: {
   svc: Service;
-  index: number;
-  total: number;
-  active: boolean;
-  onActivate: () => void;
-  onClose: () => void;
+  open: boolean;
+  onEnter: () => void;
+  onLeave: () => void;
+  onToggle: () => void;
 }) {
   const Icon = svc.icon;
-  const isLastRow =
-    Math.floor(index / 3) === Math.floor((total - 1) / 3);
   return (
     <article
-      onMouseEnter={!active ? onActivate : undefined}
-      className={`group relative flex flex-col rounded-[14px] p-5 transition-all duration-300 ${
-        active ? "" : "cursor-pointer bg-background hover:-translate-y-0.5"
-      }`}
+      onMouseEnter={onEnter}
+      onMouseLeave={onLeave}
+      onClick={onToggle}
+      className="group relative flex cursor-pointer flex-col self-start rounded-[14px] p-5 transition-all duration-300 hover:-translate-y-0.5"
       style={{
-        gridColumn: active ? "span 2" : undefined,
-        gridRow: active && !isLastRow ? "span 2" : undefined,
-        background: active ? GREEN_BG : "hsl(var(--background))",
-        border: active ? BORDER_ACTIVE : BORDER,
-        minHeight: 130,
+        background: open ? GREEN_BG : "hsl(var(--background))",
+        border: open ? BORDER_ACTIVE : BORDER,
+        boxShadow: open ? "0 10px 30px -12px rgba(57,180,74,0.25)" : "none",
       }}
     >
       <header className="flex items-start justify-between gap-3">
         <div
           className="flex items-center justify-center rounded-[8px] transition-all"
           style={{
-            width: active ? 42 : 36,
-            height: active ? 42 : 36,
-            background: active ? GREEN : "rgba(57,180,74,0.10)",
-            borderRadius: active ? 10 : 8,
+            width: open ? 42 : 36,
+            height: open ? 42 : 36,
+            background: open ? GREEN : "rgba(57,180,74,0.10)",
+            borderRadius: open ? 10 : 8,
           }}
         >
-          <Icon size={active ? 22 : 18} color={active ? "#fff" : GREEN} />
+          <Icon size={open ? 22 : 18} color={open ? "#fff" : GREEN} />
         </div>
-        {svc.comingSoon && !active && (
+        {svc.comingSoon && !open && (
           <span
             className="rounded-full px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-white"
             style={{ background: ORANGE }}
@@ -245,7 +235,7 @@ function DesktopCard({
             Soon
           </span>
         )}
-        {!active && (
+        {!open && (
           <ArrowUpRight
             size={16}
             className="opacity-0 transition-opacity group-hover:opacity-60"
@@ -257,86 +247,65 @@ function DesktopCard({
         <h3
           className="font-bold transition-all"
           style={{
-            fontSize: active ? 16 : 13,
-            color: active ? GREEN_DEEP : "hsl(var(--foreground))",
-            fontWeight: active ? 900 : 700,
+            fontSize: open ? 16 : 13,
+            color: open ? GREEN_DEEP : "hsl(var(--foreground))",
+            fontWeight: open ? 900 : 700,
           }}
         >
           {svc.name}
         </h3>
-        {!active && (
-          <p className="mt-1.5 text-[11px] leading-snug text-muted-foreground">
-            {svc.short}
-          </p>
-        )}
+        <p className="mt-1.5 text-[11px] leading-snug text-muted-foreground">
+          {svc.short}
+        </p>
       </div>
 
-      {active && (
-        <div
-          className="mt-3 flex flex-1 flex-col"
-          style={{ animation: "svcFade 0.3s ease both" }}
-        >
-          <p className="text-[12px] leading-[1.7] text-muted-foreground">
-            {svc.desc}
-          </p>
+      {/* Smooth accordion drop using grid-template-rows trick */}
+      <div
+        className="grid transition-[grid-template-rows,opacity] duration-400 ease-out"
+        style={{
+          gridTemplateRows: open ? "1fr" : "0fr",
+          opacity: open ? 1 : 0,
+          transitionDuration: "400ms",
+        }}
+      >
+        <div className="overflow-hidden">
+          <div className="pt-3">
+            <p className="text-[12px] leading-[1.7] text-muted-foreground">
+              {svc.desc}
+            </p>
 
-          {svc.comingSoon ? (
-            <ComingSoonForm />
-          ) : (
-            <>
-              <div className="mt-4 grid grid-cols-2 gap-2">
-                {svc.stats.map((s) => (
-                  <div
-                    key={s.label}
-                    className="rounded-[10px] bg-secondary p-3"
-                  >
-                    <div
-                      className="text-[20px] font-black leading-none"
-                      style={{ color: GREEN }}
-                    >
-                      {s.value}
+            {svc.comingSoon ? (
+              <ComingSoonForm />
+            ) : (
+              <>
+                <div className="mt-4 grid grid-cols-2 gap-2">
+                  {svc.stats.map((s) => (
+                    <div key={s.label} className="rounded-[10px] bg-secondary p-3">
+                      <div
+                        className="text-[20px] font-black leading-none"
+                        style={{ color: GREEN }}
+                      >
+                        {s.value}
+                      </div>
+                      <div className="mt-1 text-[11px] text-muted-foreground">
+                        {s.label}
+                      </div>
                     </div>
-                    <div className="mt-1 text-[11px] text-muted-foreground">
-                      {s.label}
-                    </div>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
 
-              <div className="mt-auto flex flex-wrap gap-2 pt-4">
                 <button
-                  className="rounded-[9px] px-4 py-2 text-[12px] font-bold text-white transition-opacity hover:opacity-90"
+                  onClick={(e) => e.stopPropagation()}
+                  className="mt-4 rounded-[9px] px-4 py-2 text-[12px] font-bold text-white transition-opacity hover:opacity-90"
                   style={{ background: GREEN }}
                 >
                   {svc.cta}
                 </button>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onClose();
-                  }}
-                  className="rounded-[9px] border border-border px-4 py-2 text-[12px] font-bold text-foreground transition-colors hover:bg-secondary"
-                >
-                  Đóng
-                </button>
-              </div>
-            </>
-          )}
+              </>
+            )}
+          </div>
         </div>
-      )}
-
-      {active && (
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            onClose();
-          }}
-          aria-label="Đóng"
-          className="absolute right-3 top-3 rounded-full p-1 text-muted-foreground hover:bg-secondary"
-        >
-          <X size={14} />
-        </button>
-      )}
+      </div>
     </article>
   );
 }
@@ -359,10 +328,7 @@ function MobileCard({ svc }: { svc: Service }) {
           <h3 className="text-[17px] font-black leading-tight text-foreground">
             {svc.name}
           </h3>
-          <div
-            className="mt-1 text-[11px] font-bold"
-            style={{ color: GREEN }}
-          >
+          <div className="mt-1 text-[11px] font-bold" style={{ color: GREEN }}>
             {svc.tag}
           </div>
         </div>
@@ -517,41 +483,16 @@ function MobileSwiper() {
 
 export function ServicesGrid() {
   const isMobile = useIsMobile();
-  const [activeSet, setActiveSet] = useState<Set<number>>(new Set());
+  const [hovered, setHovered] = useState<number | null>(null);
+  const [pinned, setPinned] = useState<Set<number>>(new Set());
 
-  // Each card occupies cells in a 3-col grid. When expanded, it spans 2x2.
-  // Clamp col to 1 max so the 2-wide span fits within 3 columns.
-  const total = SERVICES.length;
-  const lastRow = Math.floor((total - 1) / 3);
-  const cellsFor = (i: number, expanded: boolean): string[] => {
-    const r = Math.floor(i / 3);
-    const c = i % 3;
-    if (!expanded) return [`${r},${c}`];
-    const cc = Math.min(c, 1);
-    if (r === lastRow) return [`${r},${cc}`, `${r},${cc + 1}`];
-    return [`${r},${cc}`, `${r},${cc + 1}`, `${r + 1},${cc}`, `${r + 1},${cc + 1}`];
-  };
+  const isOpen = (i: number) => hovered === i || pinned.has(i);
 
-  const activate = (i: number) => {
-    setActiveSet((prev) => {
-      if (prev.has(i)) return prev;
-      const incoming = new Set(cellsFor(i, true));
+  const togglePin = (i: number) => {
+    setPinned((prev) => {
       const next = new Set(prev);
-      // Evict any currently expanded card whose footprint overlaps the new one
-      for (const j of prev) {
-        const occ = cellsFor(j, true);
-        if (occ.some((k) => incoming.has(k))) next.delete(j);
-      }
-      next.add(i);
-      return next;
-    });
-  };
-
-  const close = (i: number) => {
-    setActiveSet((prev) => {
-      if (!prev.has(i)) return prev;
-      const next = new Set(prev);
-      next.delete(i);
+      if (next.has(i)) next.delete(i);
+      else next.add(i);
       return next;
     });
   };
@@ -562,13 +503,6 @@ export function ServicesGrid() {
       className="bg-background py-20"
       style={{ fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" }}
     >
-      <style>{`
-        @keyframes svcFade {
-          from { opacity: 0; transform: translateY(8px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-      `}</style>
-
       <div className="container-tight">
         <header className="mx-auto mb-10 max-w-2xl text-center">
           <div
@@ -597,20 +531,19 @@ export function ServicesGrid() {
             className="hidden md:grid"
             style={{
               gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
-              gridAutoRows: "minmax(150px, auto)",
+              gridAutoRows: "min-content",
+              alignItems: "start",
               gap: "14px",
-              transition: "all 0.35s cubic-bezier(0.4,0,0.2,1)",
             }}
           >
             {SERVICES.map((s, i) => (
               <DesktopCard
                 key={s.name}
                 svc={s}
-                index={i}
-                total={total}
-                active={activeSet.has(i)}
-                onActivate={() => activate(i)}
-                onClose={() => close(i)}
+                open={isOpen(i)}
+                onEnter={() => setHovered(i)}
+                onLeave={() => setHovered((h) => (h === i ? null : h))}
+                onToggle={() => togglePin(i)}
               />
             ))}
           </div>
