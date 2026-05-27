@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
-  ArrowRight,
   ArrowUpRight,
   Star,
   PackageCheck,
@@ -49,7 +48,7 @@ export const Solutions = () => {
     <section
       ref={ref}
       id="solutions"
-      className="relative overflow-hidden py-16 md:py-24"
+      className="relative overflow-hidden pt-16 md:pt-24 pb-8 md:pb-12"
       style={{
         background:
           "radial-gradient(ellipse at 50% 0%, hsl(145 60% 96%) 0%, hsl(0 0% 100%) 60%)",
@@ -92,14 +91,6 @@ export const Solutions = () => {
           </div>
         </div>
 
-        <div className="mt-10 flex justify-center">
-          <Link
-            to="/solutions"
-            className="vg-cta-slant vg-cta-slant--brand inline-flex items-center gap-1.5 rounded-full bg-[hsl(var(--primary))] px-6 py-3 text-sm font-semibold text-white transition-transform hover:-translate-y-0.5"
-          >
-            Explore Our Solutions <ArrowRight className="h-4 w-4" />
-          </Link>
-        </div>
       </div>
     </section>
   );
