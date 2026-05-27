@@ -447,52 +447,50 @@ const CDPSupportStrip = ({ visible }: { visible: boolean }) => {
           </div>
         </div>
 
-        {/* Bullets */}
-        <ul className="mt-auto flex flex-col gap-1.5 border-t border-[hsl(var(--primary))]/10 pt-3 pr-[17rem]">
-          {CDP_BULLETS.map((t) => (
-            <li
-              key={t}
-              className="inline-flex items-center gap-2 text-[12px] leading-snug text-muted-foreground"
-            >
-              <span
-                aria-hidden
-                className="h-1.5 w-1.5 shrink-0 rounded-full bg-[hsl(var(--primary))]"
-              />
-              {t}
-            </li>
-          ))}
-        </ul>
-      </div>
+        {/* Bullets + Badge row */}
+        <div className="mt-auto flex items-center gap-4 border-t border-[hsl(var(--primary))]/10 pt-3">
+          <ul className="flex flex-1 flex-col gap-1.5">
+            {CDP_BULLETS.map((t) => (
+              <li
+                key={t}
+                className="inline-flex items-center gap-2 text-[12px] leading-snug text-muted-foreground"
+              >
+                <span
+                  aria-hidden
+                  className="h-1.5 w-1.5 shrink-0 rounded-full bg-[hsl(var(--primary))]"
+                />
+                {t}
+              </li>
+            ))}
+          </ul>
 
-      {/* 99% Delivery Rate — floating badge, bottom-right */}
-      <div
-        className="absolute bottom-4 right-4 z-20 w-[260px] translate-y-[75px] overflow-hidden rounded-2xl border-[hsl(145_45%_75%)]/40 bg-gradient-to-br from-[hsl(145_55%_62%)] to-[hsl(145_48%_50%)] text-white shadow-[0_16px_32px_-14px_hsl(128_45%_35%/0.4)] px-0 py-0 border-4"
-        style={{
-          opacity: visible ? 1 : 0,
-          transform: visible ? "translateY(0)" : "translateY(10px)",
-          transition: "opacity 600ms ease-out 280ms, transform 600ms ease-out 280ms",
-        }}
-      >
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full bg-white/12 blur-2xl"
-        />
-        <div className="relative items-start py-0 flex flex-row gap-0">
-          <div className="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-white/15 backdrop-blur">
-            <Zap className="h-3.5 w-3.5" />
-          </div>
-          <div className="min-w-0 flex-1">
-            <div className="flex items-baseline gap-2">
-              <span className="font-display font-extrabold leading-none tabular-nums text-slate-50 text-4xl">
-                {n}%
-              </span>
-              <span className="font-bold uppercase tracking-[0.12em] text-white/90 text-xs">
-                Delivery Rate
-              </span>
+          {/* 99% Delivery Rate — refined light badge */}
+          <div
+            className="relative z-20 w-[240px] shrink-0 overflow-hidden rounded-2xl border border-[hsl(145_45%_70%)]/50 bg-[hsl(145_55%_94%)] px-3.5 py-3 shadow-[0_8px_20px_-12px_hsl(145_45%_35%/0.25)]"
+            style={{
+              opacity: visible ? 1 : 0,
+              transform: visible ? "translateY(0)" : "translateY(10px)",
+              transition: "opacity 600ms ease-out 280ms, transform 600ms ease-out 280ms",
+            }}
+          >
+            <div className="relative flex items-start gap-2.5">
+              <div className="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-[hsl(145_55%_85%)]">
+                <Zap className="h-3.5 w-3.5 text-[hsl(145_60%_28%)]" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <div className="flex items-baseline gap-2">
+                  <span className="font-display text-[26px] font-extrabold leading-none tabular-nums text-[hsl(145_60%_25%)]">
+                    {n}%
+                  </span>
+                  <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-[hsl(145_55%_30%)]">
+                    Delivery Rate
+                  </span>
+                </div>
+                <p className="mt-1.5 text-[11px] leading-[1.5] text-slate-600">
+                  Built-in messaging failover ensures uninterrupted customer communications.
+                </p>
+              </div>
             </div>
-            <p className="mt-1.5 leading-[1.55] text-slate-50 text-[11px]">
-              Built-in messaging failover ensures uninterrupted customer communications.
-            </p>
           </div>
         </div>
       </div>
