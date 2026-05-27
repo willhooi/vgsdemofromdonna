@@ -83,9 +83,9 @@ export const Solutions = () => {
 
         {/* Stage + Right column (99% + CDP) */}
         <div className="relative mx-auto mt-8 md:mt-12 max-w-6xl">
-          <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-10 items-center">
+          <div className="grid gap-8 lg:grid-cols-2 lg:gap-10 items-center">
             <OutcomeStage visible={visible} />
-            <div className="flex flex-col gap-4 md:gap-5 items-end ml-auto w-full max-w-[320px]">
+            <div className="flex flex-col gap-4 w-full">
               <DeliveryRateCard visible={visible} />
               <CDPSupportStrip visible={visible} />
             </div>
@@ -121,7 +121,7 @@ const CHANNEL_CHIPS = [
 
 const OutcomeStage = ({ visible }: { visible: boolean }) => (
   <div
-    className="relative mx-auto w-full max-w-[480px] lg:max-w-none"
+    className="relative mx-auto w-full max-w-[380px] lg:mx-0"
     style={{
       opacity: visible ? 1 : 0,
       transform: visible ? "translateY(0)" : "translateY(12px)",
@@ -150,7 +150,7 @@ const OutcomeStage = ({ visible }: { visible: boolean }) => (
       width={896}
       height={1024}
       loading="lazy"
-      className="relative mx-auto aspect-square w-full max-w-[460px] object-contain drop-shadow-[0_25px_40px_rgba(0,0,0,0.12)]"
+      className="relative mx-auto aspect-square w-full max-w-[360px] object-contain drop-shadow-[0_25px_40px_rgba(0,0,0,0.12)]"
     />
 
     {/* Floating pop-ups */}
@@ -307,7 +307,7 @@ const DeliveryRateCard = ({ visible }: { visible: boolean }) => {
   const n = useCountUp(visible ? 99 : 0, 1400);
   return (
     <div
-      className="relative w-full overflow-hidden rounded-2xl border border-[hsl(var(--primary))]/20 bg-gradient-to-br from-[hsl(var(--primary))] to-[hsl(var(--primary-deep))] p-4 text-white shadow-[0_18px_36px_-18px_hsl(128_52%_40%/0.45)] h-48 mx-[88px]"
+      className="relative w-full overflow-hidden rounded-2xl border border-[hsl(var(--primary))]/20 bg-[hsl(var(--primary))] bg-gradient-to-br from-[hsl(var(--primary))] to-[hsl(var(--primary-deep))] px-4 py-3 text-white shadow-[0_18px_36px_-18px_hsl(128_52%_40%/0.45)]"
       style={{
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(10px)",
@@ -318,20 +318,20 @@ const DeliveryRateCard = ({ visible }: { visible: boolean }) => {
         aria-hidden
         className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-white/10 blur-2xl"
       />
-      <div className="relative flex h-full flex-col justify-between">
-        <div className="grid h-11 w-11 place-items-center rounded-xl bg-white/15 backdrop-blur">
+      <div className="relative flex items-center gap-4">
+        <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white/15 backdrop-blur">
           <Zap className="h-5 w-5" />
         </div>
-        <div>
-          <div className="flex items-baseline gap-1.5">
-            <span className="font-display text-[36px] font-extrabold leading-none tabular-nums">
+        <div className="flex-1 min-w-0">
+          <div className="flex items-baseline gap-2">
+            <span className="font-display text-[32px] font-extrabold leading-none tabular-nums">
               {n}%
             </span>
+            <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-white/90">
+              Delivery Rate
+            </span>
           </div>
-          <div className="mt-1 text-[10px] font-bold uppercase tracking-[0.18em] text-white/85">
-            Delivery Rate
-          </div>
-          <p className="mt-1.5 text-[11px] leading-snug text-white/85">
+          <p className="mt-1 text-[12px] leading-[1.5] text-white/70">
             Built-in messaging failover ensures uninterrupted customer communications.
           </p>
         </div>
@@ -489,7 +489,7 @@ const CDP_BULLETS = [
 
 const CDPSupportStrip = ({ visible }: { visible: boolean }) => (
   <div
-    className="relative aspect-square w-full overflow-hidden rounded-2xl border-[hsl(var(--primary))]/15 bg-gradient-to-br from-[hsl(145_55%_98%)] to-white p-4 border-2 mx-[88px]"
+    className="relative w-full overflow-hidden rounded-2xl border border-[hsl(var(--primary))]/15 bg-gradient-to-br from-[hsl(145_55%_98%)] to-white px-4 py-3"
     style={{
       opacity: visible ? 1 : 0,
       transform: visible ? "translateY(0)" : "translateY(10px)",
@@ -497,28 +497,32 @@ const CDPSupportStrip = ({ visible }: { visible: boolean }) => (
     }}
   >
     <CDPWave />
-    <div className="relative z-10 flex h-full flex-col">
-      <div className="text-[10px] font-bold uppercase tracking-[0.22em] text-[hsl(var(--primary-deep))]">
-        CDP Solution
+    <div className="relative z-10 flex flex-col gap-2">
+      <div className="flex items-center justify-between gap-3">
+        <div className="min-w-0 flex-1">
+          <div className="text-[10px] font-bold uppercase tracking-[0.22em] text-[hsl(var(--primary-deep))]">
+            CDP Solution
+          </div>
+          <div className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] font-semibold leading-tight text-foreground">
+            <span className="text-muted-foreground font-normal">Strategic partnership with</span>
+            <img
+              src={bytetechLogo}
+              alt="ByteTech"
+              className="inline-block h-5 w-auto shrink-0 align-middle"
+              loading="lazy"
+            />
+          </div>
+        </div>
       </div>
-      <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-[12px] font-semibold leading-tight text-foreground">
-        <span>Strategic partnership with</span>
-        <img
-          src={bytetechLogo}
-          alt="ByteTech"
-          className="inline-block h-5 w-auto shrink-0 align-middle"
-          loading="lazy"
-        />
-      </div>
-      <ul className="mt-auto grid gap-1.5 border-t border-[hsl(var(--primary))]/10 pt-2">
+      <ul className="flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-[hsl(var(--primary))]/10 pt-2">
         {CDP_BULLETS.map((t) => (
           <li
             key={t}
-            className="flex items-start gap-2 text-[11px] leading-snug text-foreground/90"
+            className="inline-flex items-center gap-1.5 text-[11px] leading-snug text-muted-foreground"
           >
             <span
               aria-hidden
-              className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-[hsl(var(--primary))]"
+              className="h-1.5 w-1.5 shrink-0 rounded-full bg-[hsl(var(--primary))]"
             />
             {t}
           </li>
