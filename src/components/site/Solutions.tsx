@@ -498,66 +498,197 @@ const CDPSupportStrip = ({ visible }: { visible: boolean }) => {
   );
 };
 
-/* ---------- Decorative wave behind CDP strip ---------- */
+/* ---------- Animated CDP illustration behind strip ---------- */
 
 const CDPWave = () => {
-  const paths = [
-    // Upper strand — crosses center at the "waists" (x=200, 600, 1000) and bulges down/up between
-    "M0,20 C100,20 150,70 200,70 C250,70 350,120 400,120 C450,120 550,70 600,70 C650,70 750,20 800,20 C850,20 950,70 1000,70 C1050,70 1150,120 1200,120",
-    // Lower strand — mirror of the upper strand, producing clear intersections at the waists
-    "M0,120 C100,120 150,70 200,70 C250,70 350,20 400,20 C450,20 550,70 600,70 C650,70 750,120 800,120 C850,120 950,70 1000,70 C1050,70 1150,20 1200,20",
-    // Spine — gentle ripple through the center
-    "M0,70 C150,55 250,85 400,70 C550,55 650,85 800,70 C950,55 1050,85 1200,70",
+  const sourceIcons = [
+    // store
+    <path key="s" d="M3 9l1-5h16l1 5M4 9v11h16V9M4 9h16M9 13h6" stroke="white" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round" />,
+    // server
+    <g key="sv" stroke="white" strokeWidth="1.8" fill="none" strokeLinecap="round">
+      <rect x="4" y="4" width="16" height="6" rx="1.2" />
+      <rect x="4" y="14" width="16" height="6" rx="1.2" />
+      <circle cx="8" cy="7" r="0.6" fill="white" />
+      <circle cx="8" cy="17" r="0.6" fill="white" />
+    </g>,
+    // globe
+    <g key="g" stroke="white" strokeWidth="1.8" fill="none">
+      <circle cx="12" cy="12" r="8" />
+      <path d="M4 12h16M12 4c3 3 3 13 0 16M12 4c-3 3-3 13 0 16" strokeLinecap="round" />
+    </g>,
+    // search/click
+    <g key="c" stroke="white" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="10" cy="10" r="5" />
+      <path d="M14 14l5 5" />
+    </g>,
   ];
-  const dur = 9;
+
   return (
     <div
       aria-hidden
-      className="pointer-events-none absolute inset-0 z-0 opacity-50 motion-reduce:opacity-30"
+      className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-2xl"
+      style={{ background: "linear-gradient(135deg, #0d3b2e 0%, #0a2e23 100%)" }}
     >
+      <style>{`
+        @keyframes cdp-bob-0 { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+        @keyframes cdp-bob-1 { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        @keyframes cdp-bob-2 { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+        @keyframes cdp-bob-3 { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+        @keyframes cdp-blob-morph {
+          0%,100% { border-radius: 42% 58% 55% 45% / 50% 45% 55% 50%; transform: translate(-50%,-50%) rotate(0deg); }
+          33% { border-radius: 55% 45% 40% 60% / 45% 55% 45% 55%; transform: translate(-50%,-50%) rotate(120deg); }
+          66% { border-radius: 48% 52% 60% 40% / 55% 48% 52% 45%; transform: translate(-50%,-50%) rotate(240deg); }
+        }
+        @keyframes cdp-ripple {
+          0% { transform: translate(-50%,-50%) scale(0.6); opacity: 0.55; }
+          100% { transform: translate(-50%,-50%) scale(1.8); opacity: 0; }
+        }
+        @keyframes cdp-arrow-flow {
+          0% { offset-distance: 0%; opacity: 0; }
+          15% { opacity: 1; }
+          85% { opacity: 1; }
+          100% { offset-distance: 100%; opacity: 0; }
+        }
+        @keyframes cdp-dash {
+          to { stroke-dashoffset: -24; }
+        }
+      `}</style>
+
+      {/* LEFT panel */}
+      <div
+        className="absolute"
+        style={{
+          left: "4%",
+          top: "12%",
+          width: "26%",
+          height: "76%",
+          background: "linear-gradient(160deg, rgba(57,180,74,0.18), rgba(13,59,46,0.4))",
+          border: "1px solid rgba(110,220,150,0.35)",
+          borderRadius: "14px",
+          boxShadow: "0 0 24px rgba(57,180,74,0.15), inset 0 0 18px rgba(57,180,74,0.08)",
+          backdropFilter: "blur(2px)",
+        }}
+      >
+        <div className="relative h-full w-full p-2">
+          {sourceIcons.map((icon, i) => {
+            const positions = [
+              { left: "18%", top: "12%" },
+              { left: "12%", top: "44%" },
+              { left: "48%", top: "30%" },
+              { left: "22%", top: "70%" },
+            ];
+            const sizes = [28, 26, 34, 26];
+            return (
+              <div
+                key={i}
+                className="absolute grid place-items-center rounded-full"
+                style={{
+                  ...positions[i],
+                  width: sizes[i],
+                  height: sizes[i],
+                  background: "linear-gradient(140deg, #ee6a4f, #d44a32)",
+                  boxShadow: "0 4px 10px rgba(216,74,50,0.45), inset 0 1px 0 rgba(255,255,255,0.2)",
+                  animation: `cdp-bob-${i} ${2.4 + i * 0.3}s ease-in-out ${i * 0.25}s infinite`,
+                }}
+              >
+                <svg viewBox="0 0 24 24" width={sizes[i] * 0.55} height={sizes[i] * 0.55}>
+                  {icon}
+                </svg>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* CENTER — arc + flowing chevrons */}
       <svg
-        viewBox="0 0 1200 140"
+        className="absolute inset-0 h-full w-full"
+        viewBox="0 0 400 200"
         preserveAspectRatio="none"
-        className="h-full w-full"
       >
         <defs>
-          <linearGradient id="cdp-wave-grad" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#39b44a" stopOpacity="0.22" />
-            <stop offset="50%" stopColor="#06b6d4" stopOpacity="0.22" />
-            <stop offset="100%" stopColor="#ff9b17" stopOpacity="0.22" />
-          </linearGradient>
-          {paths.map((d, i) => (
-            <path key={`p-${i}`} id={`cdp-wave-path-${i}`} d={d} />
-          ))}
+          <path id="cdp-flow-arc" d="M132,100 C180,60 220,140 268,100" fill="none" />
         </defs>
-        {paths.map((_, i) => (
-          <use
-            key={`u-${i}`}
-            href={`#cdp-wave-path-${i}`}
-            fill="none"
-            stroke="url(#cdp-wave-grad)"
-            strokeWidth="1"
-            vectorEffect="non-scaling-stroke"
+        <use
+          href="#cdp-flow-arc"
+          stroke="rgba(110,220,150,0.5)"
+          strokeWidth="1.2"
+          strokeDasharray="3 4"
+          fill="none"
+          style={{ animation: "cdp-dash 1.6s linear infinite" }}
+          vectorEffect="non-scaling-stroke"
+        />
+      </svg>
+
+      {/* Flowing chevron arrows */}
+      {[0, 1, 2].map((i) => (
+        <div
+          key={i}
+          className="absolute"
+          style={{
+            left: 0,
+            top: 0,
+            width: "100%",
+            height: "100%",
+            offsetPath: "path('M132,100 C180,60 220,140 268,100')",
+            // @ts-ignore
+            offsetRotate: "auto",
+            animation: `cdp-arrow-flow 2.2s linear ${i * 0.73}s infinite`,
+          }}
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" style={{ transform: "translate(-50%, -50%)" }}>
+            <path d="M5 4l10 8-10 8" fill="none" stroke="#9ef5b8" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </div>
+      ))}
+
+      {/* RIGHT — CDP blob with ripples */}
+      <div
+        className="absolute"
+        style={{ left: "78%", top: "50%", width: 0, height: 0 }}
+      >
+        {/* ripples */}
+        {[0, 1, 2, 3].map((i) => (
+          <div
+            key={i}
+            className="absolute"
+            style={{
+              left: 0,
+              top: 0,
+              width: "120px",
+              height: "120px",
+              borderRadius: "50%",
+              border: "1.5px solid rgba(110,220,150,0.55)",
+              animation: `cdp-ripple 3.2s ease-out ${i * 0.8}s infinite`,
+            }}
           />
         ))}
-        {CHANNEL_CHIPS.map((c, i) => {
-          const pathIdx = i % paths.length;
-          const begin = -((i * dur) / CHANNEL_CHIPS.length);
-          return (
-            <circle key={c.id} r="2.8" fill={c.dot} opacity="0.7">
-              <animateMotion
-                dur={`${dur}s`}
-                repeatCount="indefinite"
-                rotate="0"
-                begin={`${begin}s`}
-                className="motion-reduce:hidden"
-              >
-                <mpath href={`#cdp-wave-path-${pathIdx}`} />
-              </animateMotion>
-            </circle>
-          );
-        })}
-      </svg>
+        {/* blob */}
+        <div
+          className="absolute grid place-items-center"
+          style={{
+            left: 0,
+            top: 0,
+            width: "100px",
+            height: "100px",
+            background: "radial-gradient(circle at 35% 30%, #7df5b0, #3ddc84 60%, #2bb96b)",
+            boxShadow: "0 0 30px rgba(61,220,132,0.55), inset 0 -8px 18px rgba(0,0,0,0.12)",
+            animation: "cdp-blob-morph 9s ease-in-out infinite",
+          }}
+        >
+          <span
+            style={{
+              fontWeight: 900,
+              fontSize: "26px",
+              letterSpacing: "0.04em",
+              color: "#0d3b2e",
+              textShadow: "0 1px 0 rgba(255,255,255,0.25)",
+            }}
+          >
+            CDP
+          </span>
+        </div>
+      </div>
     </div>
   );
 };
