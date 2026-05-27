@@ -615,7 +615,7 @@ const CDPWave = () => {
         </defs>
         <use
           href="#cdp-flow-arc"
-          stroke="rgba(110,220,150,0.5)"
+          stroke="rgba(30,140,80,0.55)"
           strokeWidth="1.2"
           strokeDasharray="3 4"
           fill="none"
