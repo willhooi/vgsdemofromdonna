@@ -530,8 +530,8 @@ const CDPWave = () => {
   return (
     <div
       aria-hidden
-      className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-2xl"
-      style={{ background: "linear-gradient(135deg, #0d3b2e 0%, #0a2e23 100%)" }}
+      className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-xl"
+      style={{ background: "transparent" }}
     >
       <style>{`
         @keyframes cdp-bob-0 { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
