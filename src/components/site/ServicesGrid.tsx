@@ -132,11 +132,10 @@ const SERVICES: Service[] = [
     short: "Deliver OTP via SMS, Zalo, Viber & Voice — all on one API.",
     desc: "Route OTP across prioritized channels with automatic failover if delivery fails. End-users choose their preferred channel — maximizing verification success while minimizing cost.",
     stats: [
-      { value: "1 API", label: "All OTP channels" },
-      { value: "Auto Failover", label: "Channel switching" },
+      { value: "Automatic failover", label: "Failover mechanism" },
+      { value: "99%", label: "Delivery Rate" },
     ],
-    cta: "",
-    comingSoon: true,
+    cta: "Learn about OTP Multichannel",
   },
 ];
 
