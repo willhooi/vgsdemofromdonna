@@ -271,8 +271,8 @@ function DesktopCard({
         }}
       >
         <div className="overflow-hidden">
-          <div className="pt-3">
-            <p className="text-[12px] leading-[1.7] text-muted-foreground">
+          <div className="pt-2">
+            <p className="text-[12px] leading-[1.6] text-muted-foreground">
               {svc.desc}
             </p>
 
@@ -280,16 +280,16 @@ function DesktopCard({
               <ComingSoonForm />
             ) : (
               <>
-                <div className="mt-4 grid grid-cols-2 gap-2">
+                <div className="mt-3 grid grid-cols-2 gap-1.5">
                   {svc.stats.map((s) => (
-                    <div key={s.label} className="rounded-[10px] bg-secondary p-3">
+                    <div key={s.label} className="rounded-[10px] bg-secondary py-2 px-2.5">
                       <div
                         className="font-black leading-none"
                         style={{ color: GREEN, whiteSpace: "nowrap", fontSize: "clamp(11px, 1.6vw, 15px)" }}
                       >
                         {s.value}
                       </div>
-                      <div className="mt-1 text-[11px] text-muted-foreground">
+                      <div className="mt-0.5 text-[11px] text-muted-foreground">
                         {s.label}
                       </div>
                     </div>
@@ -298,7 +298,7 @@ function DesktopCard({
 
                 <button
                   onClick={(e) => e.stopPropagation()}
-                  className="mt-4 rounded-[9px] px-4 py-2 text-[12px] font-bold text-white transition-opacity hover:opacity-90"
+                  className="mt-3 rounded-[9px] px-4 py-2 text-[12px] font-bold text-white transition-opacity hover:opacity-90"
                   style={{ background: GREEN }}
                 >
                   {svc.cta}
