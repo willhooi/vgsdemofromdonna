@@ -208,11 +208,12 @@ function DesktopCard({
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
       onClick={onToggle}
-      className="group relative flex cursor-pointer flex-col self-start rounded-[14px] p-5 transition-all duration-300 hover:-translate-y-0.5"
+      className="group relative flex cursor-pointer flex-col self-start overflow-hidden rounded-[14px] p-5 transition-all duration-300 hover:-translate-y-0.5"
       style={{
         background: open ? GREEN_BG : "hsl(var(--background))",
         border: open ? BORDER_ACTIVE : BORDER,
         boxShadow: open ? "0 10px 30px -12px rgba(57,180,74,0.25)" : "none",
+        height: open ? 360 : 140,
       }}
     >
       <header className="flex items-start justify-between gap-3">
@@ -284,8 +285,8 @@ function DesktopCard({
                   {svc.stats.map((s) => (
                     <div key={s.label} className="rounded-[10px] bg-secondary p-3">
                       <div
-                        className="text-[20px] font-black leading-none"
-                        style={{ color: GREEN }}
+                        className="font-black leading-none"
+                        style={{ color: GREEN, whiteSpace: "nowrap", fontSize: "clamp(11px, 1.6vw, 15px)" }}
                       >
                         {s.value}
                       </div>
