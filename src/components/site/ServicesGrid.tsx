@@ -207,7 +207,7 @@ function DesktopCard({
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
       onClick={onToggle}
-      className="group relative flex h-full cursor-pointer flex-col overflow-hidden rounded-[14px] p-5 transition-all duration-300 hover:-translate-y-0.5"
+      className="group relative flex h-full w-full cursor-pointer flex-col overflow-hidden rounded-[14px] p-5 transition-all duration-300 hover:-translate-y-0.5"
       style={{
         background: open ? GREEN_BG : "hsl(var(--background))",
         border: open ? BORDER_ACTIVE : BORDER,
