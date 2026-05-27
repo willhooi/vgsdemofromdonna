@@ -449,11 +449,11 @@ const CDPSupportStrip = ({ visible }: { visible: boolean }) => {
 
         {/* Bullets + Badge row */}
         <div className="mt-auto flex items-center gap-4 border-t border-[hsl(var(--primary))]/10 pt-3">
-          <ul className="flex flex-1 flex-col gap-1.5">
+          <ul className="flex flex-1 flex-col gap-1.5 text-base">
             {CDP_BULLETS.map((t) => (
               <li
                 key={t}
-                className="inline-flex items-center gap-2 text-[12px] leading-snug text-muted-foreground"
+                className="inline-flex items-center gap-2 leading-snug text-muted-foreground text-xs"
               >
                 <span
                   aria-hidden
