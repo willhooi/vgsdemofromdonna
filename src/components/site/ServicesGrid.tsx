@@ -284,8 +284,14 @@ function DesktopCard({
                   {svc.stats.map((s) => (
                     <div key={s.label} className="rounded-[10px] bg-secondary p-3">
                       <div
-                        className="text-[20px] font-black leading-none"
-                        style={{ color: GREEN }}
+                        className="font-black leading-none"
+                        style={{
+                          color: GREEN,
+                          fontSize: "clamp(11px, 1.8vw, 20px)",
+                          whiteSpace: "nowrap",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                        }}
                       >
                         {s.value}
                       </div>
