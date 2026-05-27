@@ -207,13 +207,12 @@ function DesktopCard({
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
       onClick={onToggle}
-      className="group relative flex h-full w-full cursor-pointer flex-col overflow-hidden rounded-[14px] p-5 transition-all duration-300 hover:-translate-y-0.5"
+      className="group relative flex cursor-pointer flex-col self-start overflow-hidden rounded-[14px] p-5 transition-all duration-300 hover:-translate-y-0.5"
       style={{
         background: open ? GREEN_BG : "hsl(var(--background))",
         border: open ? BORDER_ACTIVE : BORDER,
         boxShadow: open ? "0 10px 30px -12px rgba(57,180,74,0.25)" : "none",
-        minHeight: 150,
-        transitionProperty: "background, border, box-shadow, transform",
+        height: open ? 360 : 140,
       }}
     >
       <header className="flex items-start justify-between gap-3">
@@ -283,10 +282,10 @@ function DesktopCard({
               <>
                 <div className="mt-4 grid grid-cols-2 gap-2">
                   {svc.stats.map((s) => (
-                    <div key={s.label} className="overflow-hidden rounded-[10px] bg-secondary p-3">
+                    <div key={s.label} className="rounded-[10px] bg-secondary p-3">
                       <div
-                        className="overflow-hidden font-black leading-none"
-                        style={{ color: GREEN, whiteSpace: "nowrap", textOverflow: "ellipsis", fontSize: "clamp(11px, 1.5vw, 15px)" }}
+                        className="font-black leading-none"
+                        style={{ color: GREEN, whiteSpace: "nowrap", fontSize: "clamp(11px, 1.6vw, 15px)" }}
                       >
                         {s.value}
                       </div>
@@ -547,23 +546,22 @@ export function ServicesGrid() {
         {isMobile ? (
           <MobileSwiper />
         ) : (
-          <div className="hidden md:flex md:flex-col md:gap-[14px]">
-            {[0, 1, 2].map((row) => (
-              <div key={row} className="flex items-stretch gap-[14px]">
-                {[0, 1, 2].map((col) => {
+          <div className="hidden md:flex md:gap-[14px]">
+            {[0, 1, 2].map((col) => (
+              <div key={col} className="flex flex-1 flex-col gap-[14px]">
+                {[0, 1, 2].map((row) => {
                   const i = row * 3 + col;
                   const s = SERVICES[i];
                   if (!s) return null;
                   return (
-                    <div key={s.name} className="flex flex-1">
-                      <DesktopCard
-                        svc={s}
-                        open={isOpen(i)}
-                        onEnter={() => openAt(i)}
-                        onLeave={() => {}}
-                        onToggle={() => toggleAt(i)}
-                      />
-                    </div>
+                    <DesktopCard
+                      key={s.name}
+                      svc={s}
+                      open={isOpen(i)}
+                      onEnter={() => openAt(i)}
+                      onLeave={() => {}}
+                      onToggle={() => toggleAt(i)}
+                    />
                   );
                 })}
               </div>
