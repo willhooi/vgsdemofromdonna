@@ -8,7 +8,7 @@ import {
   Hash,
   PhoneCall,
   Settings2,
-  Brain,
+  Key,
   ArrowUpRight,
   ChevronLeft,
   ChevronRight,
