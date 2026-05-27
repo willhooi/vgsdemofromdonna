@@ -489,7 +489,7 @@ const CDP_BULLETS = [
 
 const CDPSupportStrip = ({ visible }: { visible: boolean }) => (
   <div
-    className="relative aspect-square w-full overflow-hidden rounded-2xl border-[hsl(var(--primary))]/15 bg-gradient-to-br from-[hsl(145_55%_98%)] to-white p-4 border-2 mx-[88px]"
+    className="relative w-full overflow-hidden rounded-2xl border border-[hsl(var(--primary))]/15 bg-gradient-to-br from-[hsl(145_55%_98%)] to-white px-4 py-3"
     style={{
       opacity: visible ? 1 : 0,
       transform: visible ? "translateY(0)" : "translateY(10px)",
@@ -497,28 +497,32 @@ const CDPSupportStrip = ({ visible }: { visible: boolean }) => (
     }}
   >
     <CDPWave />
-    <div className="relative z-10 flex h-full flex-col">
-      <div className="text-[10px] font-bold uppercase tracking-[0.22em] text-[hsl(var(--primary-deep))]">
-        CDP Solution
+    <div className="relative z-10 flex flex-col gap-2">
+      <div className="flex items-center justify-between gap-3">
+        <div className="min-w-0 flex-1">
+          <div className="text-[10px] font-bold uppercase tracking-[0.22em] text-[hsl(var(--primary-deep))]">
+            CDP Solution
+          </div>
+          <div className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] font-semibold leading-tight text-foreground">
+            <span className="text-muted-foreground font-normal">Strategic partnership with</span>
+            <img
+              src={bytetechLogo}
+              alt="ByteTech"
+              className="inline-block h-5 w-auto shrink-0 align-middle"
+              loading="lazy"
+            />
+          </div>
+        </div>
       </div>
-      <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-[12px] font-semibold leading-tight text-foreground">
-        <span>Strategic partnership with</span>
-        <img
-          src={bytetechLogo}
-          alt="ByteTech"
-          className="inline-block h-5 w-auto shrink-0 align-middle"
-          loading="lazy"
-        />
-      </div>
-      <ul className="mt-auto grid gap-1.5 border-t border-[hsl(var(--primary))]/10 pt-2">
+      <ul className="flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-[hsl(var(--primary))]/10 pt-2">
         {CDP_BULLETS.map((t) => (
           <li
             key={t}
-            className="flex items-start gap-2 text-[11px] leading-snug text-foreground/90"
+            className="inline-flex items-center gap-1.5 text-[11px] leading-snug text-muted-foreground"
           >
             <span
               aria-hidden
-              className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-[hsl(var(--primary))]"
+              className="h-1.5 w-1.5 shrink-0 rounded-full bg-[hsl(var(--primary))]"
             />
             {t}
           </li>
