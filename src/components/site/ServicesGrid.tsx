@@ -212,7 +212,7 @@ function DesktopCard({
         background: open ? GREEN_BG : "hsl(var(--background))",
         border: open ? BORDER_ACTIVE : BORDER,
         boxShadow: open ? "0 10px 30px -12px rgba(57,180,74,0.25)" : "none",
-        height: open ? 360 : 140,
+        height: open ? 420 : 150,
       }}
     >
       <header className="flex items-start justify-between gap-3">
@@ -282,10 +282,10 @@ function DesktopCard({
               <>
                 <div className="mt-4 grid grid-cols-2 gap-2">
                   {svc.stats.map((s) => (
-                    <div key={s.label} className="rounded-[10px] bg-secondary p-3">
+                    <div key={s.label} className="overflow-hidden rounded-[10px] bg-secondary p-3">
                       <div
-                        className="font-black leading-none"
-                        style={{ color: GREEN, whiteSpace: "nowrap", fontSize: "clamp(11px, 1.6vw, 15px)" }}
+                        className="overflow-hidden font-black leading-none"
+                        style={{ color: GREEN, whiteSpace: "nowrap", textOverflow: "ellipsis", fontSize: "clamp(11px, 1.5vw, 15px)" }}
                       >
                         {s.value}
                       </div>
