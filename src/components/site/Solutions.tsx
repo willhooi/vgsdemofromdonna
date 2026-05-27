@@ -641,7 +641,7 @@ const CDPWave = () => {
           }}
         >
           <svg width="14" height="14" viewBox="0 0 24 24" style={{ transform: "translate(-50%, -50%)" }}>
-            <path d="M5 4l10 8-10 8" fill="none" stroke="#9ef5b8" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M5 4l10 8-10 8" fill="none" stroke="#1e8c50" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </div>
       ))}
