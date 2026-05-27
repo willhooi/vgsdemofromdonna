@@ -466,7 +466,7 @@ const CDPSupportStrip = ({ visible }: { visible: boolean }) => {
 
       {/* 99% Delivery Rate — floating badge, bottom-right */}
       <div
-        className="absolute bottom-4 right-4 z-20 w-[260px] translate-y-[55px] overflow-hidden rounded-2xl border-[hsl(145_45%_75%)]/40 bg-gradient-to-br from-[hsl(145_55%_62%)] to-[hsl(145_48%_50%)] text-white shadow-[0_16px_32px_-14px_hsl(128_45%_35%/0.4)] px-0 py-0 border-4"
+        className="absolute bottom-4 right-4 z-20 w-[260px] translate-y-[75px] overflow-hidden rounded-2xl border-[hsl(145_45%_75%)]/40 bg-gradient-to-br from-[hsl(145_55%_62%)] to-[hsl(145_48%_50%)] text-white shadow-[0_16px_32px_-14px_hsl(128_45%_35%/0.4)] px-0 py-0 border-4"
         style={{
           opacity: visible ? 1 : 0,
           transform: visible ? "translateY(0)" : "translateY(10px)",
