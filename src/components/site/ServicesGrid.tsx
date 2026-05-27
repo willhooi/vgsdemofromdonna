@@ -212,7 +212,9 @@ function DesktopCard({
         background: open ? GREEN_BG : "hsl(var(--background))",
         border: open ? BORDER_ACTIVE : BORDER,
         boxShadow: open ? "0 10px 30px -12px rgba(57,180,74,0.25)" : "none",
-        height: open ? 420 : 150,
+        height: open ? "auto" : 150,
+        maxHeight: open ? 600 : 150,
+        transitionProperty: "max-height, background, border, box-shadow, transform",
       }}
     >
       <header className="flex items-start justify-between gap-3">
