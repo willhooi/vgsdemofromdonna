@@ -477,9 +477,9 @@ const CDPSupportStrip = ({ visible }: { visible: boolean }) => {
           aria-hidden
           className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full bg-white/12 blur-2xl"
         />
-        <div className="relative flex items-start gap-3">
-          <div className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-white/15 backdrop-blur">
-            <Zap className="h-4 w-4" />
+        <div className="relative flex items-start gap-2">
+          <div className="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-white/15 backdrop-blur">
+            <Zap className="h-3.5 w-3.5" />
           </div>
           <div className="min-w-0 flex-1">
             <div className="flex items-baseline gap-2">
@@ -490,7 +490,7 @@ const CDPSupportStrip = ({ visible }: { visible: boolean }) => {
                 Delivery Rate
               </span>
             </div>
-            <p className="mt-1.5 leading-[1.55] text-slate-50 text-xs">
+            <p className="mt-1.5 leading-[1.55] text-slate-50 text-[11px]">
               Built-in messaging failover ensures uninterrupted customer communications.
             </p>
           </div>
