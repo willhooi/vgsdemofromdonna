@@ -422,7 +422,7 @@ const CDPSupportStrip = ({ visible }: { visible: boolean }) => {
   const n = useCountUp(visible ? 99 : 0, 1400);
   return (
     <div
-      className="relative w-full h-full overflow-hidden rounded-2xl border border-[hsl(var(--primary))]/15 bg-gradient-to-br from-[hsl(145_55%_98%)] to-white px-5 py-5 flex flex-col"
+      className="relative w-full h-full overflow-hidden rounded-2xl border border-[hsl(var(--primary))]/15 bg-gradient-to-br from-[hsl(145_55%_98%)] to-white px-5 py-3.5 flex flex-col"
       style={{
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(10px)",
@@ -466,27 +466,27 @@ const CDPSupportStrip = ({ visible }: { visible: boolean }) => {
 
           {/* 99% Delivery Rate — refined light badge */}
           <div
-            className="relative z-20 w-[240px] shrink-0 overflow-hidden rounded-2xl border border-[hsl(145_45%_70%)]/50 bg-[hsl(145_55%_94%)] px-3.5 py-3 shadow-[0_8px_20px_-12px_hsl(145_45%_35%/0.25)]"
+            className="relative z-20 w-[295px] shrink-0 overflow-hidden rounded-2xl border border-[hsl(145_45%_70%)]/50 bg-[hsl(145_55%_94%)] px-[18px] py-[14px] shadow-[0_8px_20px_-12px_hsl(145_45%_35%/0.25)]"
             style={{
               opacity: visible ? 1 : 0,
               transform: visible ? "translateY(0)" : "translateY(10px)",
               transition: "opacity 600ms ease-out 280ms, transform 600ms ease-out 280ms",
             }}
           >
-            <div className="relative flex items-start gap-2.5">
-              <div className="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-[hsl(145_55%_85%)]">
-                <Zap className="h-3.5 w-3.5 text-[hsl(145_60%_28%)]" />
+            <div className="relative flex items-center gap-2.5">
+              <div className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-[hsl(145_55%_85%)]">
+                <Zap className="h-4 w-4 text-[hsl(145_60%_28%)]" />
               </div>
               <div className="min-w-0 flex-1">
                 <div className="flex items-baseline gap-2">
-                  <span className="font-display text-[26px] font-extrabold leading-none tabular-nums text-[hsl(145_60%_25%)]">
+                  <span className="font-display text-[28px] font-black leading-none tabular-nums text-[hsl(145_60%_25%)]">
                     {n}%
                   </span>
                   <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-[hsl(145_55%_30%)]">
                     Delivery Rate
                   </span>
                 </div>
-                <p className="mt-1.5 text-[11px] leading-[1.5] text-slate-600">
+                <p className="mt-1 text-[12px] leading-[1.5] text-slate-600">
                   Built-in messaging failover ensures uninterrupted customer communications.
                 </p>
               </div>
