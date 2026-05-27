@@ -121,7 +121,7 @@ const CHANNEL_CHIPS = [
 
 const OutcomeStage = ({ visible }: { visible: boolean }) => (
   <div
-    className="relative mx-auto w-full max-w-[480px] lg:max-w-none"
+    className="relative mx-auto w-full max-w-[380px] lg:mx-0"
     style={{
       opacity: visible ? 1 : 0,
       transform: visible ? "translateY(0)" : "translateY(12px)",
@@ -150,7 +150,7 @@ const OutcomeStage = ({ visible }: { visible: boolean }) => (
       width={896}
       height={1024}
       loading="lazy"
-      className="relative mx-auto aspect-square w-full max-w-[460px] object-contain drop-shadow-[0_25px_40px_rgba(0,0,0,0.12)]"
+      className="relative mx-auto aspect-square w-full max-w-[360px] object-contain drop-shadow-[0_25px_40px_rgba(0,0,0,0.12)]"
     />
 
     {/* Floating pop-ups */}
