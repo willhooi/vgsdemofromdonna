@@ -208,7 +208,7 @@ function DesktopCard({
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
       onClick={onToggle}
-      className="group relative flex cursor-pointer flex-col self-start rounded-[14px] p-5 transition-all duration-300 hover:-translate-y-0.5"
+      className="group relative flex h-full cursor-pointer flex-col rounded-[14px] p-5 transition-all duration-300 hover:-translate-y-0.5"
       style={{
         background: open ? GREEN_BG : "hsl(var(--background))",
         border: open ? BORDER_ACTIVE : BORDER,
@@ -284,8 +284,14 @@ function DesktopCard({
                   {svc.stats.map((s) => (
                     <div key={s.label} className="rounded-[10px] bg-secondary p-3">
                       <div
-                        className="text-[20px] font-black leading-none"
-                        style={{ color: GREEN }}
+                        className="font-black leading-none"
+                        style={{
+                          color: GREEN,
+                          fontSize: "clamp(11px, 1.8vw, 20px)",
+                          whiteSpace: "nowrap",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                        }}
                       >
                         {s.value}
                       </div>
@@ -347,8 +353,14 @@ function MobileCard({ svc }: { svc: Service }) {
             {svc.stats.map((s) => (
               <div key={s.label} className="rounded-[10px] bg-secondary p-3">
                 <div
-                  className="text-[20px] font-black leading-none"
-                  style={{ color: GREEN }}
+                  className="font-black leading-none"
+                  style={{
+                    color: GREEN,
+                    fontSize: "clamp(11px, 4.5vw, 20px)",
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                  }}
                 >
                   {s.value}
                 </div>
@@ -546,25 +558,16 @@ export function ServicesGrid() {
         {isMobile ? (
           <MobileSwiper />
         ) : (
-          <div className="hidden md:flex md:gap-[14px]">
-            {[0, 1, 2].map((col) => (
-              <div key={col} className="flex flex-1 flex-col gap-[14px]">
-                {[0, 1, 2].map((row) => {
-                  const i = row * 3 + col;
-                  const s = SERVICES[i];
-                  if (!s) return null;
-                  return (
-                    <DesktopCard
-                      key={s.name}
-                      svc={s}
-                      open={isOpen(i)}
-                      onEnter={() => openAt(i)}
-                      onLeave={() => {}}
-                      onToggle={() => toggleAt(i)}
-                    />
-                  );
-                })}
-              </div>
+          <div className="hidden md:grid md:grid-cols-3 md:gap-[14px] md:[grid-auto-rows:1fr]">
+            {SERVICES.map((s, i) => (
+              <DesktopCard
+                key={s.name}
+                svc={s}
+                open={isOpen(i)}
+                onEnter={() => openAt(i)}
+                onLeave={() => {}}
+                onToggle={() => toggleAt(i)}
+              />
             ))}
           </div>
         )}
