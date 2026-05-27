@@ -466,7 +466,7 @@ const CDPSupportStrip = ({ visible }: { visible: boolean }) => {
 
           {/* 99% Delivery Rate — refined light badge */}
           <div
-            className="relative z-20 w-[295px] shrink-0 overflow-hidden rounded-2xl border border-[hsl(145_45%_70%)]/50 bg-[hsl(145_55%_94%)] px-[18px] py-[14px] shadow-[0_8px_20px_-12px_hsl(145_45%_35%/0.25)]"
+            className="relative z-20 w-[370px] shrink-0 overflow-hidden rounded-2xl border border-[hsl(145_45%_70%)]/50 bg-[hsl(145_55%_94%)] px-[18px] py-[8px] shadow-[0_8px_20px_-12px_hsl(145_45%_35%/0.25)]"
             style={{
               opacity: visible ? 1 : 0,
               transform: visible ? "translateY(0)" : "translateY(10px)",
