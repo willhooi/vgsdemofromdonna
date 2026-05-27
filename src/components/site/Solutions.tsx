@@ -448,7 +448,7 @@ const CDPSupportStrip = ({ visible }: { visible: boolean }) => {
         </div>
 
         {/* Bullets */}
-        <ul className="mt-auto flex flex-col gap-1.5 border-t border-[hsl(var(--primary))]/10 pt-3 pr-36">
+        <ul className="mt-auto flex flex-col gap-1.5 border-t border-[hsl(var(--primary))]/10 pt-3 pr-[17rem]">
           {CDP_BULLETS.map((t) => (
             <li
               key={t}
