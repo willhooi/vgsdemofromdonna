@@ -168,13 +168,13 @@ function ComingSoonForm() {
         Coming Soon
       </span>
       <p className="mt-3 text-[12px] leading-[1.7] text-muted-foreground">
-        Đăng ký để nhận thông tin sớm nhất khi giải pháp AI ra mắt.
+        Register to get notified as soon as OTP Multichannel goes live.
       </p>
       <form onSubmit={(e) => e.preventDefault()} className="mt-3 flex gap-2">
         <input
           type="email"
           required
-          placeholder="email@cong-ty.vn"
+          placeholder="email@company.com"
           className="min-w-0 flex-1 rounded-[9px] border border-border bg-background px-3 py-2 text-[12px] outline-none focus:border-foreground"
         />
         <button
@@ -182,7 +182,7 @@ function ComingSoonForm() {
           className="rounded-[9px] px-4 text-[12px] font-bold text-white transition-opacity hover:opacity-90"
           style={{ background: ORANGE }}
         >
-          Đăng ký
+          Notify me
         </button>
       </form>
     </div>
