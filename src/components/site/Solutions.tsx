@@ -422,7 +422,7 @@ const CDPSupportStrip = ({ visible }: { visible: boolean }) => {
   const n = useCountUp(visible ? 99 : 0, 1400);
   return (
     <div
-      className="relative w-full h-full overflow-hidden rounded-2xl border border-[hsl(var(--primary))]/15 bg-gradient-to-br from-[hsl(145_55%_98%)] to-white px-5 py-5 flex flex-col"
+      className="relative w-full h-full overflow-hidden rounded-2xl border border-[hsl(var(--primary))]/15 bg-gradient-to-br from-[hsl(145_55%_98%)] to-white px-5 py-3.5 flex flex-col"
       style={{
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(10px)",
