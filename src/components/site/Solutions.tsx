@@ -82,12 +82,11 @@ export const Solutions = () => {
 
         {/* Stage + Right column (99% + CDP) */}
         <div className="relative mx-auto mt-8 md:mt-12 max-w-6xl">
-          <div className="grid gap-8 lg:grid-cols-2 lg:gap-10 items-center">
-            <OutcomeStage visible={visible} />
-            <div className="flex flex-col gap-4 w-full">
-              <DeliveryRateCard visible={visible} />
-              <CDPSupportStrip visible={visible} />
+          <div className="grid gap-8 lg:grid-cols-2 lg:gap-10 items-stretch">
+            <div className="flex justify-center lg:justify-end lg:pl-8">
+              <OutcomeStage visible={visible} />
             </div>
+            <CDPSupportStrip visible={visible} />
           </div>
         </div>
 
