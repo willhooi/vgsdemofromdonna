@@ -155,53 +155,53 @@ const OutcomeStage = ({ visible }: { visible: boolean }) => (
 
     {/* Floating pop-ups */}
     <Popup
-      className="absolute left-[2%] top-[12%]"
+      className="absolute left-[-8%] top-[10%] scale-[0.85]"
       delay={300}
       visible={visible}
     >
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-1.5">
         <div className="flex">
           {Array.from({ length: 5 }).map((_, i) => (
             <Star
               key={i}
-              className="h-3.5 w-3.5 fill-[#ff9b17] text-[#ff9b17]"
+              className="h-3 w-3 fill-[#ff9b17] text-[#ff9b17]"
             />
           ))}
         </div>
-        <span className="text-[11px] font-semibold text-foreground">5.0</span>
+        <span className="text-[10px] font-semibold text-foreground">5.0</span>
       </div>
-      <p className="mt-1 text-[11px] text-muted-foreground">
+      <p className="mt-0.5 text-[10px] text-muted-foreground">
         "Thanks for your feedback!"
       </p>
     </Popup>
 
     <Popup
-      className="absolute left-[0%] top-[44%]"
+      className="absolute left-[-10%] top-[44%] scale-[0.85]"
       delay={500}
       visible={visible}
       accent="primary"
     >
-      <div className="text-[10px] font-bold uppercase tracking-wider text-[hsl(var(--primary-deep))]">
+      <div className="text-[9px] font-bold uppercase tracking-wider text-[hsl(var(--primary-deep))]">
         ORDER STATUS
       </div>
-      <div className="mt-1 flex items-center gap-1.5">
-        <PackageCheck className="h-3.5 w-3.5 text-[hsl(var(--primary))]" />
-        <span className="text-[12px] font-semibold text-foreground">
+      <div className="mt-0.5 flex items-center gap-1.5">
+        <PackageCheck className="h-3 w-3 text-[hsl(var(--primary))]" />
+        <span className="text-[11px] font-semibold text-foreground">
           Confirmed
         </span>
       </div>
     </Popup>
 
     <Popup
-      className="absolute left-[2%] top-[74%]"
+      className="absolute left-[-8%] top-[74%] scale-[0.85]"
       delay={700}
       visible={visible}
       accent="accent"
     >
-      <div className="text-[10px] font-bold uppercase tracking-wider text-[hsl(35_100%_45%)] text-center">
+      <div className="text-[9px] font-bold uppercase tracking-wider text-[hsl(35_100%_45%)] text-center">
         your otp code
       </div>
-      <div className="mt-1 font-mono text-[15px] font-extrabold tracking-[0.18em] text-foreground text-center">
+      <div className="mt-0.5 font-mono text-[13px] font-extrabold tracking-[0.18em] text-foreground text-center">
         371 235
       </div>
     </Popup>
