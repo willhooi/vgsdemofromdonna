@@ -547,22 +547,23 @@ export function ServicesGrid() {
         {isMobile ? (
           <MobileSwiper />
         ) : (
-          <div className="hidden md:flex md:gap-[14px]">
-            {[0, 1, 2].map((col) => (
-              <div key={col} className="flex flex-1 flex-col gap-[14px]">
-                {[0, 1, 2].map((row) => {
+          <div className="hidden md:flex md:flex-col md:gap-[14px]">
+            {[0, 1, 2].map((row) => (
+              <div key={row} className="flex items-stretch gap-[14px]">
+                {[0, 1, 2].map((col) => {
                   const i = row * 3 + col;
                   const s = SERVICES[i];
                   if (!s) return null;
                   return (
-                    <DesktopCard
-                      key={s.name}
-                      svc={s}
-                      open={isOpen(i)}
-                      onEnter={() => openAt(i)}
-                      onLeave={() => {}}
-                      onToggle={() => toggleAt(i)}
-                    />
+                    <div key={s.name} className="flex flex-1">
+                      <DesktopCard
+                        svc={s}
+                        open={isOpen(i)}
+                        onEnter={() => openAt(i)}
+                        onLeave={() => {}}
+                        onToggle={() => toggleAt(i)}
+                      />
+                    </div>
                   );
                 })}
               </div>
