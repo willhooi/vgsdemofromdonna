@@ -108,16 +108,6 @@ export const Solutions = () => {
 
 /* ---------- Stage (left) ---------- */
 
-const CHANNEL_CHIPS = [
-  { id: "sms-brandname", label: "SMS Brandname", dot: "#39b44a", Icon: MessageSquare },
-  { id: "zalo-zbs", label: "Zalo ZBS", dot: "#0068ff", Icon: Smartphone },
-  { id: "viber", label: "Viber Message", dot: "#7360f2", Icon: MessageCircle },
-  { id: "email", label: "Email Marketing", dot: "#ff9b17", Icon: Mail },
-  { id: "topup", label: "Mobile Topup", dot: "#06b6d4", Icon: Wallet },
-  { id: "sms-shortcode", label: "SMS Short Code", dot: "#e11d48", Icon: Phone },
-  { id: "voice", label: "Voice Brandname", dot: "#8b5cf6", Icon: PhoneCall },
-  { id: "custom", label: "Customized Solution", dot: "#f59e0b", Icon: LayoutGrid },
-] as const;
 
 const OutcomeStage = ({ visible }: { visible: boolean }) => (
   <div
