@@ -206,65 +206,6 @@ const OutcomeStage = ({ visible }: { visible: boolean }) => (
       </div>
     </Popup>
 
-    {/* Channel orbit chips — right-side arc, hidden on small screens */}
-    <div className="pointer-events-none absolute inset-0 hidden lg:block">
-      {CHANNEL_CHIPS.map((c, i) => {
-        const n = CHANNEL_CHIPS.length;
-        // Arc from -82° (top) to +82° (bottom) on the right side
-        const startDeg = -82;
-        const endDeg = 82;
-        const deg = startDeg + (i * (endDeg - startDeg)) / (n - 1);
-        const rad = (deg * Math.PI) / 180;
-        const radiusX = 53; // % horizontal
-        const radiusY = 48; // % vertical
-        // Per-chip nudges (% units) to avoid overlapping the shopper
-        const nudges: Array<{ dx: number; dy: number }> = [
-          { dx: 2, dy: -6 },   // 0 SMS Brandname — lift above head
-          { dx: 3, dy: -2 },   // 1 Zalo ZBS
-          { dx: 4, dy: 0 },    // 2 Viber Message
-          { dx: 5, dy: 0 },    // 3 Email Marketing
-          { dx: 5, dy: 0 },    // 4 Mobile Topup
-          { dx: 4, dy: 1 },    // 5 SMS Short Code
-          { dx: 7, dy: 2 },    // 6 Voice Brandname — push right of shopper
-          { dx: 6, dy: 5 },    // 7 Customized Solution — down & right
-        ];
-        const n0 = nudges[i] ?? { dx: 0, dy: 0 };
-        const left = 50 + Math.cos(rad) * radiusX + n0.dx;
-        const top = 50 + Math.sin(rad) * radiusY + n0.dy;
-        return (
-          <div
-            key={c.id}
-            className="absolute pointer-events-auto -translate-x-1/2 -translate-y-1/2"
-            style={{
-              left: `${left}%`,
-              top: `${top}%`,
-              opacity: visible ? 1 : 0,
-              transform: `translate(-50%, -50%) scale(${visible ? 1 : 0.85})`,
-              transition: `opacity 500ms ease-out ${500 + i * 70}ms, transform 500ms ease-out ${500 + i * 70}ms`,
-            }}
-          >
-            <div className="group flex items-center gap-1.5 rounded-full border border-border bg-white/95 px-2.5 py-1 shadow-[0_6px_18px_-8px_rgba(0,0,0,0.18)] backdrop-blur transition-transform hover:-translate-y-0.5">
-              <span className="relative grid h-2 w-2 place-items-center">
-                <span
-                  className="absolute inset-0 rounded-full opacity-60"
-                  style={{
-                    background: c.dot,
-                    animation: "signal-pulse 2.4s ease-out infinite",
-                  }}
-                />
-                <span
-                  className="h-2 w-2 rounded-full"
-                  style={{ background: c.dot }}
-                />
-              </span>
-              <span className="text-[10.5px] font-semibold text-foreground">
-                {c.label}
-              </span>
-            </div>
-          </div>
-        );
-      })}
-    </div>
   </div>
 );
 
