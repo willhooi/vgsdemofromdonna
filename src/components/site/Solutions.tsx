@@ -422,43 +422,46 @@ const CDPSupportStrip = ({ visible }: { visible: boolean }) => {
   const n = useCountUp(visible ? 99 : 0, 1400);
   return (
     <div
-      className="relative w-full h-full overflow-hidden rounded-2xl border border-[hsl(145_50%_25%)]/60 px-5 py-3.5 flex flex-col"
+      className="relative w-full h-full overflow-hidden rounded-2xl border border-[hsl(var(--primary))]/15 bg-white px-5 py-3.5 flex flex-col"
       style={{
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(10px)",
         transition: "opacity 600ms ease-out 200ms, transform 600ms ease-out 200ms",
-        background: "#0d3b2e",
       }}
     >
-      <CDPWave />
-      <div className="relative z-10 flex h-full flex-col gap-4">
+      <div className="relative z-10 flex h-full flex-col gap-3">
         {/* Header */}
         <div className="min-w-0">
-          <div className="text-[20px] font-bold uppercase tracking-[0.18em] text-[hsl(145_70%_75%)]">
+          <div className="text-[20px] font-bold uppercase tracking-[0.18em] text-[hsl(var(--primary-deep))]">
             CDP Solution
           </div>
-          <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] font-semibold leading-tight text-white">
-            <span className="text-white/70 font-normal">Strategic partnership with</span>
+          <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] font-semibold leading-tight text-foreground">
+            <span className="text-muted-foreground font-normal">Strategic partnership with</span>
             <img
               src={bytetechLogo}
               alt="ByteTech"
-              className="inline-block h-5 w-auto shrink-0 align-middle brightness-0 invert"
+              className="inline-block h-5 w-auto shrink-0 align-middle"
               loading="lazy"
             />
           </div>
         </div>
 
+        {/* Animated illustration — sits above the divider line */}
+        <div className="relative w-full flex-1 min-h-[130px]">
+          <CDPWave />
+        </div>
+
         {/* Bullets + Badge row */}
-        <div className="mt-auto flex items-center gap-4 border-t border-white/15 pt-3">
+        <div className="flex items-center gap-4 border-t border-[hsl(var(--primary))]/10 pt-3">
           <ul className="flex flex-1 flex-col gap-1.5 text-base">
             {CDP_BULLETS.map((t) => (
               <li
                 key={t}
-                className="inline-flex items-center gap-2 leading-snug text-white/85 text-xs"
+                className="inline-flex items-center gap-2 leading-snug text-muted-foreground text-xs"
               >
                 <span
                   aria-hidden
-                  className="h-1.5 w-1.5 shrink-0 rounded-full bg-[hsl(145_70%_60%)]"
+                  className="h-1.5 w-1.5 shrink-0 rounded-full bg-[hsl(var(--primary))]"
                 />
                 {t}
               </li>
@@ -527,8 +530,8 @@ const CDPWave = () => {
   return (
     <div
       aria-hidden
-      className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-2xl"
-      style={{ background: "linear-gradient(135deg, #0d3b2e 0%, #0a2e23 100%)" }}
+      className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-xl"
+      style={{ background: "transparent" }}
     >
       <style>{`
         @keyframes cdp-bob-0 { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
@@ -612,7 +615,7 @@ const CDPWave = () => {
         </defs>
         <use
           href="#cdp-flow-arc"
-          stroke="rgba(110,220,150,0.5)"
+          stroke="rgba(30,140,80,0.55)"
           strokeWidth="1.2"
           strokeDasharray="3 4"
           fill="none"
@@ -638,7 +641,7 @@ const CDPWave = () => {
           }}
         >
           <svg width="14" height="14" viewBox="0 0 24 24" style={{ transform: "translate(-50%, -50%)" }}>
-            <path d="M5 4l10 8-10 8" fill="none" stroke="#9ef5b8" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M5 4l10 8-10 8" fill="none" stroke="#1e8c50" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </div>
       ))}
