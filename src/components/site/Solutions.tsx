@@ -466,7 +466,7 @@ const CDPSupportStrip = ({ visible }: { visible: boolean }) => {
 
       {/* 99% Delivery Rate — floating badge, bottom-right */}
       <div
-        className="absolute bottom-4 right-4 z-20 w-[260px] overflow-hidden rounded-2xl border border-[hsl(145_45%_75%)]/40 bg-gradient-to-br from-[hsl(145_55%_62%)] to-[hsl(145_48%_50%)] px-4 py-3.5 text-white shadow-[0_16px_32px_-14px_hsl(128_45%_35%/0.4)]"
+        className="absolute bottom-4 right-4 z-20 w-[260px] overflow-hidden rounded-2xl border-[hsl(145_45%_75%)]/40 bg-gradient-to-br from-[hsl(145_55%_62%)] to-[hsl(145_48%_50%)] text-white shadow-[0_16px_32px_-14px_hsl(128_45%_35%/0.4)] px-0 py-0 border-4"
         style={{
           opacity: visible ? 1 : 0,
           transform: visible ? "translateY(0)" : "translateY(10px)",
@@ -483,14 +483,14 @@ const CDPSupportStrip = ({ visible }: { visible: boolean }) => {
           </div>
           <div className="min-w-0 flex-1">
             <div className="flex items-baseline gap-2">
-              <span className="font-display text-[26px] font-extrabold leading-none tabular-nums">
+              <span className="font-display font-extrabold leading-none tabular-nums text-slate-50 text-4xl">
                 {n}%
               </span>
-              <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-white/90">
+              <span className="font-bold uppercase tracking-[0.12em] text-white/90 text-xs">
                 Delivery Rate
               </span>
             </div>
-            <p className="mt-1.5 text-[11px] leading-[1.55] text-white/80">
+            <p className="mt-1.5 leading-[1.55] text-slate-50 text-xs">
               Built-in messaging failover ensures uninterrupted customer communications.
             </p>
           </div>
