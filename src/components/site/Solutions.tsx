@@ -477,7 +477,7 @@ const CDPSupportStrip = ({ visible }: { visible: boolean }) => {
           aria-hidden
           className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full bg-white/12 blur-2xl"
         />
-        <div className="relative flex items-start gap-2">
+        <div className="relative items-start py-0 flex flex-row gap-0">
           <div className="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-white/15 backdrop-blur">
             <Zap className="h-3.5 w-3.5" />
           </div>
