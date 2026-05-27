@@ -82,12 +82,11 @@ export const Solutions = () => {
 
         {/* Stage + Right column (99% + CDP) */}
         <div className="relative mx-auto mt-8 md:mt-12 max-w-6xl">
-          <div className="grid gap-8 lg:grid-cols-2 lg:gap-10 items-center">
-            <OutcomeStage visible={visible} />
-            <div className="flex flex-col gap-4 w-full">
-              <DeliveryRateCard visible={visible} />
-              <CDPSupportStrip visible={visible} />
+          <div className="grid gap-8 lg:grid-cols-2 lg:gap-10 items-stretch">
+            <div className="flex justify-center lg:justify-end lg:pl-8">
+              <OutcomeStage visible={visible} />
             </div>
+            <CDPSupportStrip visible={visible} />
           </div>
         </div>
 
@@ -419,23 +418,25 @@ const CDP_BULLETS = [
   "Optimize costs",
 ];
 
-const CDPSupportStrip = ({ visible }: { visible: boolean }) => (
-  <div
-    className="relative w-full overflow-hidden rounded-2xl border border-[hsl(var(--primary))]/15 bg-gradient-to-br from-[hsl(145_55%_98%)] to-white px-4 py-3"
-    style={{
-      opacity: visible ? 1 : 0,
-      transform: visible ? "translateY(0)" : "translateY(10px)",
-      transition: "opacity 600ms ease-out 200ms, transform 600ms ease-out 200ms",
-    }}
-  >
-    <CDPWave />
-    <div className="relative z-10 flex flex-col gap-2">
-      <div className="flex items-center justify-between gap-3">
-        <div className="min-w-0 flex-1">
+const CDPSupportStrip = ({ visible }: { visible: boolean }) => {
+  const n = useCountUp(visible ? 99 : 0, 1400);
+  return (
+    <div
+      className="relative w-full h-full overflow-hidden rounded-2xl border border-[hsl(var(--primary))]/15 bg-gradient-to-br from-[hsl(145_55%_98%)] to-white px-5 py-5 flex flex-col"
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(10px)",
+        transition: "opacity 600ms ease-out 200ms, transform 600ms ease-out 200ms",
+      }}
+    >
+      <CDPWave />
+      <div className="relative z-10 flex h-full flex-col gap-4">
+        {/* Header */}
+        <div className="min-w-0">
           <div className="text-[10px] font-bold uppercase tracking-[0.22em] text-[hsl(var(--primary-deep))]">
             CDP Solution
           </div>
-          <div className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] font-semibold leading-tight text-foreground">
+          <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] font-semibold leading-tight text-foreground">
             <span className="text-muted-foreground font-normal">Strategic partnership with</span>
             <img
               src={bytetechLogo}
@@ -445,24 +446,52 @@ const CDPSupportStrip = ({ visible }: { visible: boolean }) => (
             />
           </div>
         </div>
+
+        {/* 99% Delivery Rate — nested element */}
+        <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-[hsl(var(--primary))] to-[hsl(var(--primary-deep))] px-4 py-3 text-white shadow-[0_14px_28px_-16px_hsl(128_52%_40%/0.45)]">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full bg-white/10 blur-2xl"
+          />
+          <div className="relative flex items-center gap-3">
+            <div className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-white/15 backdrop-blur">
+              <Zap className="h-4 w-4" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-baseline gap-2">
+                <span className="font-display text-[28px] font-extrabold leading-none tabular-nums">
+                  {n}%
+                </span>
+                <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-white/90">
+                  Delivery Rate
+                </span>
+              </div>
+              <p className="mt-1 text-[11px] leading-[1.45] text-white/75">
+                Built-in messaging failover ensures uninterrupted customer communications.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Bullets — push to bottom */}
+        <ul className="mt-auto flex flex-col gap-1.5 border-t border-[hsl(var(--primary))]/10 pt-3">
+          {CDP_BULLETS.map((t) => (
+            <li
+              key={t}
+              className="inline-flex items-center gap-2 text-[12px] leading-snug text-muted-foreground"
+            >
+              <span
+                aria-hidden
+                className="h-1.5 w-1.5 shrink-0 rounded-full bg-[hsl(var(--primary))]"
+              />
+              {t}
+            </li>
+          ))}
+        </ul>
       </div>
-      <ul className="flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-[hsl(var(--primary))]/10 pt-2">
-        {CDP_BULLETS.map((t) => (
-          <li
-            key={t}
-            className="inline-flex items-center gap-1.5 text-[11px] leading-snug text-muted-foreground"
-          >
-            <span
-              aria-hidden
-              className="h-1.5 w-1.5 shrink-0 rounded-full bg-[hsl(var(--primary))]"
-            />
-            {t}
-          </li>
-        ))}
-      </ul>
     </div>
-  </div>
-);
+  );
+};
 
 /* ---------- Decorative wave behind CDP strip ---------- */
 
