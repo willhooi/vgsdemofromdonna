@@ -232,7 +232,7 @@ function DesktopCard({
             className="rounded-full px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-white"
             style={{ background: ORANGE }}
           >
-            Soon
+            SOON
           </span>
         )}
         {!open && (
