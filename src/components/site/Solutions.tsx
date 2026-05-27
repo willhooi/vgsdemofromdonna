@@ -447,34 +447,8 @@ const CDPSupportStrip = ({ visible }: { visible: boolean }) => {
           </div>
         </div>
 
-        {/* 99% Delivery Rate — nested element */}
-        <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-[hsl(var(--primary))] to-[hsl(var(--primary-deep))] px-4 py-3 text-white shadow-[0_14px_28px_-16px_hsl(128_52%_40%/0.45)]">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full bg-white/10 blur-2xl"
-          />
-          <div className="relative flex items-center gap-3">
-            <div className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-white/15 backdrop-blur">
-              <Zap className="h-4 w-4" />
-            </div>
-            <div className="flex-1 min-w-0">
-              <div className="flex items-baseline gap-2">
-                <span className="font-display text-[28px] font-extrabold leading-none tabular-nums">
-                  {n}%
-                </span>
-                <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-white/90">
-                  Delivery Rate
-                </span>
-              </div>
-              <p className="mt-1 text-[11px] leading-[1.45] text-white/75">
-                Built-in messaging failover ensures uninterrupted customer communications.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* Bullets — push to bottom */}
-        <ul className="mt-auto flex flex-col gap-1.5 border-t border-[hsl(var(--primary))]/10 pt-3">
+        {/* Bullets */}
+        <ul className="mt-auto flex flex-col gap-1.5 border-t border-[hsl(var(--primary))]/10 pt-3 pr-36">
           {CDP_BULLETS.map((t) => (
             <li
               key={t}
@@ -488,6 +462,27 @@ const CDPSupportStrip = ({ visible }: { visible: boolean }) => {
             </li>
           ))}
         </ul>
+      </div>
+
+      {/* 99% Delivery Rate — small floating badge, bottom-right */}
+      <div className="absolute bottom-4 right-4 z-20 overflow-hidden rounded-xl bg-gradient-to-br from-[hsl(var(--primary))] to-[hsl(var(--primary-deep))] px-3 py-2 text-white shadow-[0_14px_28px_-16px_hsl(128_52%_40%/0.55)]">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -right-6 -top-6 h-16 w-16 rounded-full bg-white/10 blur-xl"
+        />
+        <div className="relative flex items-center gap-2">
+          <div className="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-white/15 backdrop-blur">
+            <Zap className="h-3.5 w-3.5" />
+          </div>
+          <div className="flex flex-col leading-none">
+            <span className="font-display text-[20px] font-extrabold tabular-nums">
+              {n}%
+            </span>
+            <span className="mt-0.5 text-[9px] font-bold uppercase tracking-[0.14em] text-white/90">
+              Delivery Rate
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   );
