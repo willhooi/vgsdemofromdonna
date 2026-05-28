@@ -751,7 +751,7 @@ function PlexusBackground() {
                   r={6.5}
                   fill="none"
                   stroke="#39B44A"
-                  strokeOpacity={0.55}
+                  strokeOpacity={0.8}
                   strokeWidth={1}
                   style={{
                     transformOrigin: `${n.x}px ${n.y}px`,
