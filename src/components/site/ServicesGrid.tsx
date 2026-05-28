@@ -762,9 +762,9 @@ function PlexusBackground() {
             );
           }
           if (n.kind === 0) {
-            return <circle key={i} cx={n.x} cy={n.y} r={2} fill="#39B44A" opacity={0.85} />;
+            return <circle key={i} cx={n.x} cy={n.y} r={2.4} fill="#39B44A" opacity={1} />;
           }
-          return <circle key={i} cx={n.x} cy={n.y} r={2} fill="#39B44A" opacity={0.35} />;
+          return <circle key={i} cx={n.x} cy={n.y} r={2} fill="#39B44A" opacity={0.6} />;
         })}
       </g>
     </svg>
