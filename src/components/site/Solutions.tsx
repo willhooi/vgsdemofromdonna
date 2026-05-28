@@ -528,11 +528,12 @@ const CDPWave = () => {
   ];
 
   const iconPositions = [
-    { left: "14%", top: "16%" },
-    { left: "52%", top: "22%" },
-    { left: "20%", top: "54%" },
-    { left: "54%", top: "58%" },
+    { left: "38%", top: "18%" },
+    { left: "62%", top: "12%" },
+    { left: "22%", top: "48%" },
+    { left: "55%", top: "52%" },
   ];
+
 
   return (
     <div
