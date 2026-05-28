@@ -1,44 +1,30 @@
 ## Mục tiêu
 
-thay thế lớp plexus thành signal waves
+Thay hiệu ứng `SignalWaves` trong `ServicesGrid` bằng hình dãy núi tuyết (từ ảnh đính kèm), tách nền — chỉ giữ silhouette núi, đặt mờ nhẹ hoà vào background gradient hiện tại.
 
-Thứ tự lớp (z-index từ dưới lên):
+## Các bước
 
-1. Base gradient xanh hiện có
-2. **Aurora / blob gradient mềm** (mới)
-3. **Signal waves** (mới)
-4. Lớp gradient trắng fade trên/dưới + viền trái/phải
-5. Nội dung card
+1. **Chuẩn bị ảnh núi (tách nền)**
+   - Copy `user-uploads://image-21.png` → `src/assets/services-mountains.png`.
+   - Dùng `imagegen--edit_image` với `transparent_background: true` và prompt giữ nguyên dãy núi tuyết, loại bỏ phần trời/nền → xuất `src/assets/services-mountains.png` (PNG trong suốt).
 
-## 1. Aurora / blob gradient mềm
+2. **Cập nhật `src/components/site/ServicesGrid.tsx`**
+   - Xoá component `SignalWaves` và keyframes `signal-ping`, `signal-core`.
+   - Thêm component nội bộ `MountainBackdrop`:
+     - `import mountains from "@/assets/services-mountains.png"`.
+     - `<img>` `absolute inset-x-0 bottom-0 w-full h-auto object-cover object-bottom pointer-events-none select-none`.
+     - Style: `opacity: 0.18`, `filter: blur(2px) saturate(0.6)`, `mix-blend-mode: luminosity` để chìm vào gradient xanh.
+     - Thêm mask gradient `mask-image: linear-gradient(to top, black 40%, transparent 100%)` để mép trên fade mượt.
+   - Thứ tự DOM trong block `aria-hidden`: base gradient → `AuroraBlobs` → `MountainBackdrop` → các dải fade trắng → nội dung.
 
-- 3–4 khối tròn lớn (`absolute`, `rounded-full`, kích thước 480–720px) blur mạnh (`filter: blur(90–120px)`), opacity ~0.35–0.5.
-- Màu: xanh lá brand `rgba(57,180,74,...)`, xanh mint nhạt `rgba(140,220,170,...)`, trắng-xanh `rgba(220,245,225,...)`.
-- Vị trí so le: top-left, top-right hơi lệch, bottom-center, mid-right.
-- Animation: drift chậm bằng keyframe `translate` + `scale` 18–26s, ease-in-out, `alternate infinite`. Thêm keyframes mới vào `tailwind.config.ts` (vd: `aurora-drift-1/2/3`) hoặc dùng inline `<style>` trong component.
-- `pointer-events-none`, `mix-blend-mode: screen` để hoà với plexus.
+3. **Giữ nguyên**
+   - Base gradient, `AuroraBlobs`, 2 dải fade trắng trên/dưới, viền 2 bên.
+   - Card dịch vụ (transparent default / hover trắng nhẹ).
+   - Layout grid, spacing, typography.
 
-## 2. Signal waves
+## Chi tiết kỹ thuật
 
-- 3 cụm "đài phát" đặt rải rác (vd: 15% / 85% chiều ngang, độ cao khác nhau).
-- Mỗi cụm: 3 vòng tròn SVG `circle` chỉ stroke (không fill), bán kính tăng dần (40 → 120 → 200), stroke màu xanh brand opacity giảm dần theo bán kính.
-- Animation: keyframe `signal-ping` (scale 0.6 → 1.4, opacity 0.55 → 0), 4–6s, `infinite`, mỗi vòng `animation-delay` lệch nhau 1.2s để tạo hiệu ứng sóng phát liên tục.
-- Render bằng SVG riêng `absolute inset-0`, opacity tổng 0.35 để không lấn plexus.
-- `pointer-events-none`.
-
-## Triển khai
-
-File chính: `src/components/site/ServicesGrid.tsx`
-
-- Trong block `aria-hidden` background (sau base gradient, trước `<PlexusBackground />`):
-  - Thêm `<AuroraBlobs />` component nội bộ.
-  - Thêm `<SignalWaves />` component nội bộ.
-- Thêm keyframes:
-  - Cách gọn: chèn `<style>{`@keyframes aurora-drift-a {...} @keyframes signal-ping {...}`}</style>` ngay trong component để không động `tailwind.config.ts`.
-- Đảm bảo `z-index`: các lớp mới đặt cùng `absolute inset-0` trong cùng wrapper `aria-hidden` đã có; thứ tự DOM quyết định stack.
-
-## Không thay đổi
-
-- Gradient nền xanh gốc + 2 dải fade trắng trên/dưới + viền 2 bên.
-- Card dịch vụ (transparent default / hover trắng nhẹ).
-- Layout grid, spacing, typography.
+- File chỉnh: `src/components/site/ServicesGrid.tsx`
+- File mới: `src/assets/services-mountains.png` (PNG nền trong suốt)
+- Không động `tailwind.config.ts` / `index.css`.
+- Nếu việc tách nền AI không sạch, fallback: dùng ảnh gốc với `mix-blend-mode: multiply` + opacity thấp + mask để loại bỏ phần trời sáng.
