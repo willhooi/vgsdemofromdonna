@@ -1,33 +1,61 @@
-## Goal
-Tidy the `OutcomeStage` (Solutions section) so the visual cluster around the shopper image reads cleanly: 3 conversation popups on the left, all channel chips on the right in an evenly-spaced arc.
+# Đề xuất hướng triển khai trang About Us
 
-## Changes (`src/components/site/Solutions.tsx`)
+## 1. Concept định hướng
 
-### 1. Move 3 popups to the LEFT side (stacked, even vertical spacing)
-- **Feedback (5-star)** — `left: 2%`, `top: 12%`
-- **Order Status — Confirmed** — `left: 0%`, `top: 42%`
-- **Your OTP Code** — `left: 2%`, `top: 72%`
+Trang chủ đang dùng narrative theo "Acts" (Act 01 — The Signal, Act 02 — Our Journey…). About Us nên là một **chương dài hơn của cùng câu chuyện** — không lặp lại trang chủ mà đào sâu phần "con người, hành trình, giá trị" mà trang chủ chỉ chạm lướt qua.
 
-All three keep current styling (white card + accent ring). Stagger delays 300 / 500 / 700ms.
+Tone đồng bộ:
 
-### 2. Move all channel chips to the RIGHT side, in a semi-circular arc
-Replace the current scattered `positions` array (10 mixed positions) with an arc-math layout for the 9 chips in `CHANNEL_CHIPS`:
+- Eyebrow dạng "Chapter 01 — ...", "Chapter 02 — ..." (phân biệt với "Act" trang chủ để không trùng lặp)
+- Cùng hệ design token (primary green, gradient-hero, container-tight, heading-display/heading-section, animate-fade-up)
+- Cùng motif "tín hiệu / sóng / kết nối" đã có ở Hero, Solutions, TrustMap
+- Cùng nhịp: hero lớn → câu chuyện cá nhân → dữ kiện → con người → CTA
+
+## 2. Cấu trúc trang đề xuất (8 sections)
 
 ```text
-For i in 0..n-1:
-  angle = -70° + (i * 140°/(n-1))   // arc from top-right to bottom-right
-  x = 50% + cos(angle) * radius
-  y = 50% + sin(angle) * radius
-  radius ≈ 46% (just outside the image)
+Header
+ ├─ Chapter 01 — The Origin        (Hero: "Short steps on a long journey")
+ ├─ Chapter 02 — The Why           (Story: 25m² → backbone, 3 ảnh minh hoạ web cũ)
+ ├─ Chapter 03 — Vision & Mission  (2-card đối xứng, giữ nguyên nội dung)
+ ├─ Chapter 04 — Milestones        (Timeline dọc kế thừa, gắn icon theo loại sự kiện)
+ ├─ Chapter 05 — Core Values       (6 giá trị, layout grid 3×2 có ảnh nền nhẹ)
+ ├─ Chapter 06 — The Bridge        (Accrete partnership — tái sử dụng JapanBridge/AccreteBacking)
+ ├─ Chapter 07 — The Team          (giữ <Team />, thêm dải "Life at VietGuys" 3 ảnh)
+ ├─ Chapter 08 — Valued Clients    (logo marquee theo ngành: E-commerce, Finance, Retail, Logistics)
+ └─ CTA cuối + Footer + ChatBubble
 ```
 
-This produces evenly-spaced chips hugging the right edge of the shopper image — from upper-right down to lower-right. Implemented inline with `Math.cos/sin` so spacing recomputes if chip count changes.
+### Khác biệt so với About.tsx hiện tại
 
-### 3. Chip list cleanup
-Keep the 9 existing channel chips (SMS, Zalo, Viber, Email, OTP, Rewards, E-Warranty, Voice, Top-up) — no chip removals. Arc anchors them to the right half only; left half stays clean for the popups.
+- **Thêm Chapter 02 mở rộng**: 3 trụ "Solidarity team / Service quality / Community trust" lấy từ web cũ — hiện trang đang thiếu hoàn toàn phần human-story này.
+- **Thêm Chapter 06 — The Bridge**: hiện chỉ nhắc Accrete một câu ở hero; web cũ nhấn mạnh nhiều, nên tách thành section riêng với visual VN×JP (đã có sẵn `JapanBridge` / `AccreteFlightChip`).
+- **Thêm Chapter 08 — Valued Clients**: web cũ có danh sách khách hàng theo ngành (Shopee, Lazada, HSBC, FWD…). Tái dùng `LogoMarquee` chia theo tab/ngành.
+- **Milestones**: nâng cấp từ list dọc đơn sắc → timeline có icon riêng cho từng cột mốc (founding, partnership, award, product launch, office expansion) để match cảm giác "tín hiệu mạnh dần" của Timeline trang chủ.
+- **Hero**: thêm hình ảnh/illustration mang motif sóng tín hiệu (như Hero trang chủ) thay vì chỉ gradient phẳng.
 
-### Visual integrity
-- Desktop (`lg+`): arc visible as designed.
-- Mobile/tablet: chip cluster stays `hidden lg:block` (unchanged). Popups remain visible at all breakpoints with left-side coords that still fit the smaller stage.
+## 3. Nội dung cập nhật / bổ sung
 
-No other files touched.
+- **Headline hero**: giữ "Short steps on a long journey" + sub trích nguyên văn web cũ.
+- **Milestones**: bổ sung 06/2018 (1st office expansion) và 05/2020 (2nd office expansion) — hiện đang thiếu so với web cũ, để đủ 12 mốc.
+- **Human story block**: 3 ảnh + caption (team solidarity, service quality, community contribution).
+- **Clients**: nhóm theo 4 industry như web cũ (E-commerce, Finance & Banking, Retail/F&B, Logistics).
+
+## 4. Chi tiết kỹ thuật
+
+- File chính: `src/pages/About.tsx` — refactor toàn bộ, vẫn dùng các component có sẵn:
+  - `Header`, `Footer`, `ChatBubble`, `Team`, `LogoMarquee`, `JapanBridge` (hoặc `AccreteBacking`), `VDivider`
+- Tạo 2 component nhỏ mới trong `src/components/site/`:
+  - `AboutStoryPillars.tsx` — 3 ảnh + caption (Chapter 02 mở rộng)
+  - `AboutMilestones.tsx` — timeline với icon theo type
+- Locales: thêm `about.*` keys vào `src/locales/en.ts` và `vi.ts` để song ngữ (trang hiện đang hard-code tiếng Anh).
+- SEO: cập nhật title/meta description, thêm 1 H1 duy nhất, alt text cho mọi ảnh, JSON-LD `Organization` với foundingDate 2007, parentOrganization Accrete Inc.
+- Animation: dùng `animate-fade-up` + delay theo index như pattern hiện tại; không thêm thư viện mới.
+- Design tokens: dùng `--gradient-hero`, `--shadow-soft`, `--shadow-card`, `primary`/`accent` — không hardcode màu.
+
+## 5. Câu hỏi cần xác nhận trước khi build
+
+1. Có muốn **song ngữ EN/VI** ngay lần này không, hay chỉ EN như trang hiện tại? --> Answer: làm EN trước
+2. Có muốn **giữ tên "Chapter" cho About** (để phân biệt với "Act" trang chủ), hay dùng tiếp "Act 06, 07…" để liền mạch? --> Answer: xét về cấu trúc thì tôi không có ý kiến, chỉ cần không hiển thị text "Chapter" ra nhé.
+3. Phần **Valued Clients**: dùng logo thật từ web cũ (cần copy assets) hay logo placeholder/marquee text như `LogoMarquee` hiện có? --> Answer: Không cần thể hiện "Valued Clients" nữa
+4. Phần **ảnh human-story** ở Chapter 02: dùng lại 3 ảnh từ web cũ (link trực tiếp), hay generate ảnh mới bằng imagegen cho đồng bộ visual style? --> Answer: generate ảnh mới cho đồng bộ visual style
