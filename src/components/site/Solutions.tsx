@@ -666,110 +666,153 @@ const CDPWave = () => {
         </div>
       </div>
 
-      {/* CENTER — funnel curves + chevrons */}
+      {/* CENTER — connector with arrowheads, anchor dots, traveling dots */}
       <svg
         className="absolute"
         style={{ left: "33%", top: "50%", transform: "translateY(-50%)", width: "44%", height: "60%", overflow: "visible" }}
-        viewBox="0 0 120 100"
+        viewBox="0 0 150 140"
         preserveAspectRatio="none"
       >
-        {/* two curved paths funneling into center */}
+        <defs>
+          <marker id="arrGreen" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="8" markerHeight="8" orient="auto">
+            <path d="M2 2L10 6L2 10" fill="none" stroke="#39B44A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </marker>
+          <marker id="arrOrange" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="8" markerHeight="8" orient="auto">
+            <path d="M2 2L10 6L2 10" fill="none" stroke="#FF9B17" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </marker>
+        </defs>
+
+        {/* anchor dots on slab edge */}
+        <circle cx="8" cy="44" r="3.5" fill="#39B44A" opacity="0.9" />
+        <circle cx="8" cy="96" r="3.5" fill="#FF9B17" opacity="0.9" />
+
+        {/* top path — green */}
         <path
-          d="M 4 30 C 28 30, 38 50, 56 50"
+          id="cdp-path-top"
+          d="M 8 44 C 50 44, 90 60, 138 68"
           fill="none"
-          stroke="#9CA3AF"
+          stroke="#39B44A"
           strokeWidth="2"
           strokeLinecap="round"
-          strokeDasharray="4 3"
+          strokeDasharray="5 4"
+          markerEnd="url(#arrGreen)"
           style={{ animation: "cdp-dash 1.6s linear infinite" }}
         />
+        {/* bottom path — orange */}
         <path
-          d="M 4 70 C 28 70, 38 50, 56 50"
+          id="cdp-path-bot"
+          d="M 8 96 C 50 96, 90 80, 138 72"
           fill="none"
-          stroke="#9CA3AF"
+          stroke="#FF9B17"
           strokeWidth="2"
           strokeLinecap="round"
-          strokeDasharray="4 3"
+          strokeDasharray="5 4"
+          markerEnd="url(#arrOrange)"
           style={{ animation: "cdp-dash 1.6s linear infinite" }}
         />
-        {/* 3 chevrons, progressively smaller & fading */}
-        {[
-          { x: 62, scale: 1, opacity: 1, delay: 0 },
-          { x: 78, scale: 0.85, opacity: 0.75, delay: 0.25 },
-          { x: 92, scale: 0.7, opacity: 0.5, delay: 0.5 },
-        ].map((c, i) => (
-          <polygon
-            key={i}
-            points={`${c.x},${50 - 6 * c.scale} ${c.x + 8 * c.scale},50 ${c.x},${50 + 6 * c.scale}`}
-            fill="#9CA3AF"
-            style={{
-              // @ts-ignore
-              "--o": c.opacity,
-              animation: `cdp-chev-fade 1.6s ease-in-out ${c.delay}s infinite`,
-            } as React.CSSProperties}
-          />
+
+        {/* traveling dots on top path */}
+        {[0, 0.9].map((b, i) => (
+          <circle key={`t${i}`} r="2.6" fill="#39B44A">
+            <animateMotion dur="1.8s" repeatCount="indefinite" begin={`${b}s`}>
+              <mpath href="#cdp-path-top" />
+            </animateMotion>
+          </circle>
         ))}
+        {/* traveling dots on bottom path */}
+        {[0, 0.9].map((b, i) => (
+          <circle key={`b${i}`} r="2.6" fill="#FF9B17">
+            <animateMotion dur="1.8s" repeatCount="indefinite" begin={`${b}s`}>
+              <mpath href="#cdp-path-bot" />
+            </animateMotion>
+          </circle>
+        ))}
+
+        {/* merge point pulse */}
+        <circle cx="142" cy="70" r="5" fill="#39B44A" opacity="0.15">
+          <animate attributeName="r" values="4;8;4" dur="1.8s" repeatCount="indefinite" />
+          <animate attributeName="opacity" values="0.18;0.04;0.18" dur="1.8s" repeatCount="indefinite" />
+        </circle>
       </svg>
 
-      {/* RIGHT — CDP organic orb */}
+      {/* RIGHT — CDP 3D sphere */}
       <div
         className="absolute"
         style={{ left: "82%", top: "50%", width: 0, height: 0 }}
       >
-        {/* outer glow 2 */}
+        {/* ripple rings */}
+        {[
+          { size: 100, delay: 0 },
+          { size: 124, delay: 0.85 },
+          { size: 148, delay: 1.7 },
+        ].map((r, i) => (
+          <div
+            key={i}
+            className="absolute rounded-full"
+            style={{
+              left: 0,
+              top: 0,
+              width: r.size,
+              height: r.size,
+              border: "1px solid rgba(57,180,74,0.28)",
+              transform: "translate(-50%,-50%)",
+              animation: `cdp-ripple 2.6s ease-out ${r.delay}s infinite`,
+            }}
+          />
+        ))}
+
+        {/* sphere */}
         <div
-          className="absolute"
+          className="cdp-orb absolute grid place-items-center"
           style={{
-            left: "-90px",
-            top: "-90px",
-            width: "180px",
-            height: "180px",
-            background: "#39B44A",
-            borderRadius: "60% 40% 55% 45% / 45% 55% 40% 60%",
-            // @ts-ignore
-            "--o": 0.07,
-            opacity: 0.07,
-            animation: "cdp-glow-pulse 3.6s ease-in-out infinite",
-          } as React.CSSProperties}
-        />
-        {/* outer glow 1 */}
-        <div
-          className="absolute"
-          style={{
-            left: "-73px",
-            top: "-73px",
-            width: "146px",
-            height: "146px",
-            background: "#39B44A",
-            borderRadius: "60% 40% 55% 45% / 45% 55% 40% 60%",
-            // @ts-ignore
-            "--o": 0.15,
-            opacity: 0.15,
-            animation: "cdp-glow-pulse 3s ease-in-out infinite",
-          } as React.CSSProperties}
-        />
-        {/* inner orb */}
-        <div
-          className="absolute grid place-items-center"
-          style={{
-            left: "-56px",
-            top: "-56px",
-            width: "112px",
-            height: "112px",
-            background: "radial-gradient(circle at 32% 30%, #6EE090 0%, #39B44A 55%, #1F7A33 100%)",
-            borderRadius: "60% 40% 55% 45% / 45% 55% 40% 60%",
+            left: -42,
+            top: -42,
+            width: 84,
+            height: 84,
+            borderRadius: "50%",
+            overflow: "hidden",
+            background:
+              "radial-gradient(circle at 32% 28%, #7FE08F 0%, #39B44A 40%, #1a6b2a 75%, #0d3d18 100%)",
             boxShadow:
-              "0 12px 28px rgba(57,180,74,0.35), inset 0 3px 8px rgba(255,255,255,0.35), inset 0 -6px 12px rgba(0,0,0,0.18)",
-            animation: "cdp-blob-morph 7s ease-in-out infinite",
+              "0 0 0 2px rgba(57,180,74,0.25), 0 8px 28px rgba(57,180,74,0.40), inset 0 -6px 14px rgba(0,0,0,0.28), inset 2px 4px 10px rgba(255,255,255,0.18)",
+            animation: "cdp-orb-breathe 8s ease-in-out infinite",
           }}
         >
+          {/* rotating bands overlay */}
+          <div
+            className="absolute"
+            style={{ left: 0, top: 0, width: 84, height: 84, borderRadius: "50%", overflow: "hidden", zIndex: 1 }}
+          >
+            {[
+              { top: "28%", delay: "0s" },
+              { top: "50%", delay: "-2.7s" },
+              { top: "68%", delay: "-5.3s" },
+            ].map((b, i) => (
+              <div
+                key={i}
+                style={{
+                  position: "absolute",
+                  top: b.top,
+                  left: 0,
+                  width: "200%",
+                  height: 6,
+                  background: "rgba(255,255,255,0.065)",
+                  borderRadius: 3,
+                  animation: `cdp-band-spin 8s linear ${b.delay} infinite`,
+                }}
+              />
+            ))}
+          </div>
+
           <span
             style={{
+              position: "relative",
+              zIndex: 4,
               fontWeight: 900,
-              fontSize: "26px",
-              letterSpacing: "0.06em",
-              color: "white",
-              textShadow: "0 2px 4px rgba(0,0,0,0.2)",
+              fontSize: 17,
+              letterSpacing: "1px",
+              color: "#fff",
+              textShadow: "0 1px 4px rgba(0,0,0,0.4)",
             }}
           >
             CDP
