@@ -744,7 +744,7 @@ function PlexusBackground() {
           if (n.kind === 1) {
             return (
               <g key={i}>
-                <circle cx={n.x} cy={n.y} r={3.5} fill="#39B44A" opacity={0.9} />
+                <circle cx={n.x} cy={n.y} r={4} fill="#39B44A" opacity={1} />
                 <circle
                   cx={n.x}
                   cy={n.y}
