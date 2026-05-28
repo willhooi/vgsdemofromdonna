@@ -568,6 +568,7 @@ const CDPWave = () => {
           50%     { box-shadow: 0 0 0 2px rgba(57,180,74,0.30), 0 10px 34px rgba(57,180,74,0.55), inset 0 -6px 14px rgba(0,0,0,0.28), inset 2px 4px 10px rgba(255,255,255,0.18); }
         }
         @keyframes cdp-band-spin { 0% { transform: translateX(-50%); } 100% { transform: translateX(0%); } }
+        @keyframes cdp-orb-spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         @keyframes cdp-ripple {
           0% { transform: translate(-50%,-50%) scale(0.85); opacity: 0.55; }
           100% { transform: translate(-50%,-50%) scale(1); opacity: 0; }
@@ -594,7 +595,7 @@ const CDPWave = () => {
           top: "50%",
           width: "26%",
           height: "70%",
-          transform: "translateY(-50%) perspective(600px) rotateY(-20deg) rotateX(5deg)",
+          transform: "translateY(-50%) perspective(600px) rotateY(20deg) rotateX(5deg)",
           transformStyle: "preserve-3d",
         }}
       >
@@ -781,7 +782,7 @@ const CDPWave = () => {
           {/* rotating bands overlay */}
           <div
             className="absolute"
-            style={{ left: 0, top: 0, width: 84, height: 84, borderRadius: "50%", overflow: "hidden", zIndex: 1 }}
+            style={{ left: 0, top: 0, width: 84, height: 84, borderRadius: "50%", overflow: "hidden", zIndex: 1, animation: "cdp-orb-spin 8s linear infinite" }}
           >
             {[
               { top: "28%", delay: "0s" },
