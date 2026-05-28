@@ -687,38 +687,43 @@ const CDPWave = () => {
       className="pointer-events-none absolute inset-0 z-0 flex items-center gap-3 overflow-hidden rounded-xl px-[5%]"
       style={{
         background:
-          "radial-gradient(ellipse at center, #E8F8EE 0%, rgba(232,248,238,0) 70%)",
-        perspective: "900px",
+          "radial-gradient(ellipse at center, #ffffff 0%, #f4faf6 55%, #ffffff 100%)",
+        perspective: "1100px",
       }}
     >
       <style>{`
         @keyframes cdp-badge-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
-        @keyframes cdp-dot-twinkle { 0%,100% { opacity: 0.2; } 50% { opacity: 0.65; } }
+        @keyframes cdp-dot-twinkle { 0%,100% { opacity: 0.35; } 50% { opacity: 0.9; } }
         @keyframes cdp-sheen { 0% { transform: translateX(-120%) skewX(-20deg); } 100% { transform: translateX(220%) skewX(-20deg); } }
         @keyframes cdp-dash { to { stroke-dashoffset: -24; } }
+        @keyframes cdp-ring-spin { from { transform: translate(-50%,-50%) rotate(0deg); } to { transform: translate(-50%,-50%) rotate(360deg); } }
+        @keyframes cdp-ring-spin-rev { from { transform: translate(-50%,-50%) rotate(0deg); } to { transform: translate(-50%,-50%) rotate(-360deg); } }
+        @keyframes cdp-orb-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
         @keyframes orbPulse {
           0%,100% {
             box-shadow:
-              0 0 0 8px rgba(57,180,74,0.12),
-              0 0 0 16px rgba(57,180,74,0.06),
-              0 8px 24px rgba(57,180,74,0.35),
-              inset 0 -4px 10px rgba(0,0,0,0.20),
-              inset 2px 3px 8px rgba(255,255,255,0.15);
+              0 0 0 6px rgba(57,180,74,0.10),
+              0 0 0 14px rgba(57,180,74,0.05),
+              0 14px 28px -6px rgba(20,80,40,0.40),
+              0 4px 10px rgba(57,180,74,0.28),
+              inset 0 -6px 12px rgba(0,0,0,0.26),
+              inset 3px 4px 10px rgba(255,255,255,0.30);
           }
           50% {
             box-shadow:
-              0 0 0 8px rgba(57,180,74,0.18),
-              0 0 0 16px rgba(57,180,74,0.09),
-              0 10px 28px rgba(57,180,74,0.45),
-              inset 0 -4px 10px rgba(0,0,0,0.20),
-              inset 2px 3px 8px rgba(255,255,255,0.15);
+              0 0 0 6px rgba(57,180,74,0.16),
+              0 0 0 14px rgba(57,180,74,0.08),
+              0 18px 34px -6px rgba(20,80,40,0.50),
+              0 6px 14px rgba(57,180,74,0.38),
+              inset 0 -6px 12px rgba(0,0,0,0.26),
+              inset 3px 4px 10px rgba(255,255,255,0.30);
           }
         }
         .cdp-orb-new::before {
-          content: ""; position: absolute; width: 22px; height: 14px;
-          background: radial-gradient(ellipse, rgba(255,255,255,0.5), transparent 70%);
-          border-radius: 50%; top: 13px; left: 15px; transform: rotate(-20deg);
-          pointer-events: none; z-index: 0;
+          content: ""; position: absolute; width: 26px; height: 16px;
+          background: radial-gradient(ellipse, rgba(255,255,255,0.75), transparent 70%);
+          border-radius: 50%; top: 12px; left: 16px; transform: rotate(-22deg);
+          pointer-events: none; z-index: 1;
         }
       `}</style>
 
