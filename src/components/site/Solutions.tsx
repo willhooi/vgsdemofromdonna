@@ -439,14 +439,14 @@ const CDPSupportStrip = ({ visible }: { visible: boolean }) => {
       const rect = canvas.getBoundingClientRect();
       W = canvas.width = rect.width;
       H = canvas.height = rect.height;
-      particles = Array.from({ length: 26 }, () => ({
+      particles = Array.from({ length: 42 }, () => ({
         cx: Math.random() * W,
         cy: Math.random() * H,
         r: 14 + Math.random() * 38,
         a: Math.random() * Math.PI * 2,
         spd: (0.12 + Math.random() * 0.18) * (Math.random() > 0.5 ? 1 : -1),
-        size: 0.8 + Math.random() * 1.6,
-        baseOp: 0.08 + Math.random() * 0.18,
+        size: 1.0 + Math.random() * 1.8,
+        baseOp: 0.18 + Math.random() * 0.28,
         opFreq: 0.01 + Math.random() * 0.012,
         opPhase: Math.random() * Math.PI * 2,
         t: Math.random() * 300,
