@@ -728,7 +728,7 @@ function PlexusBackground() {
       viewBox="0 0 1440 900"
       preserveAspectRatio="xMidYMid slice"
     >
-      <g stroke="#39B44A" strokeWidth={0.9} strokeOpacity={0.6} fill="none">
+      <g stroke="#39B44A" strokeWidth={0.6} strokeOpacity={0.35} fill="none">
         {edges.map(([i, j], k) => (
           <line
             key={k}
