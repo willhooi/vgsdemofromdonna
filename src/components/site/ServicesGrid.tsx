@@ -699,24 +699,35 @@ function buildCluster(
 function PlexusBackground() {
   const { nodes, edges } = useMemo(() => {
     const rnd = mulberry32(20260528);
-    const a = buildCluster(rnd, 48, -60, 540, -20, 900);
-    const b = buildCluster(rnd, 48, 900, 1500, -20, 900);
-    const all = [...a, ...b];
-    const threshold = 150;
+    // Phân bố đều trên toàn bộ background bằng jittered grid
+    const cols = 12;
+    const rows = 7;
+    const xMin = -40, xMax = 1480;
+    const yMin = -20, yMax = 920;
+    const cellW = (xMax - xMin) / cols;
+    const cellH = (yMax - yMin) / rows;
+    const all: PNode[] = [];
+    for (let cy = 0; cy < rows; cy++) {
+      for (let cx = 0; cx < cols; cx++) {
+        const r = rnd();
+        const kind: 0 | 1 | 2 = r < 0.18 ? 1 : r < 0.55 ? 0 : 2;
+        all.push({
+          x: xMin + cx * cellW + rnd() * cellW,
+          y: yMin + cy * cellH + rnd() * cellH,
+          kind,
+        });
+      }
+    }
+    const threshold = 180;
     const links: [number, number][] = [];
-    const groups = [a, b];
-    let offset = 0;
-    for (const g of groups) {
-      for (let i = 0; i < g.length; i++) {
-        for (let j = i + 1; j < g.length; j++) {
-          const dx = g[i].x - g[j].x;
-          const dy = g[i].y - g[j].y;
-          if (Math.hypot(dx, dy) < threshold) {
-            links.push([offset + i, offset + j]);
-          }
+    for (let i = 0; i < all.length; i++) {
+      for (let j = i + 1; j < all.length; j++) {
+        const dx = all[i].x - all[j].x;
+        const dy = all[i].y - all[j].y;
+        if (Math.hypot(dx, dy) < threshold) {
+          links.push([i, j]);
         }
       }
-      offset += g.length;
     }
     return { nodes: all, edges: links };
   }, []);
