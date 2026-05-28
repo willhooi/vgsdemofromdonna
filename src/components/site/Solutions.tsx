@@ -753,8 +753,9 @@ const CDPWave = () => {
         <svg
           className="absolute inset-0"
           style={{ width: "100%", height: "100%", overflow: "visible" }}
-          viewBox="0 0 200 136"
+          viewBox="0 0 200 140"
           preserveAspectRatio="none"
+          fill="none"
         >
           <defs>
             <marker id="arrG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
@@ -766,77 +767,98 @@ const CDPWave = () => {
           </defs>
 
           <path
-            id="cdp-path-top"
-            d="M4,44 C80,44 120,62 196,64"
+            id="pT"
+            d="M4,38 C70,38 130,70 196,70"
             fill="none"
             stroke="#39B44A"
             strokeWidth="1.8"
             strokeDasharray="6 4"
             markerEnd="url(#arrG)"
+            opacity="0.9"
             style={{ animation: "cdp-dash 1.6s linear infinite" }}
           />
           <path
-            id="cdp-path-bot"
-            d="M4,92 C80,92 120,74 196,72"
+            id="pB"
+            d="M4,102 C70,102 130,70 196,70"
             fill="none"
             stroke="#FF9B17"
             strokeWidth="1.8"
             strokeDasharray="6 4"
             markerEnd="url(#arrO)"
+            opacity="0.9"
             style={{ animation: "cdp-dash 1.6s linear infinite" }}
           />
 
-          <circle cx="4" cy="44" r="4.5" fill="#39B44A" />
-          <circle cx="4" cy="92" r="4.5" fill="#FF9B17" />
+          <circle cx="115" cy="70" r="4" fill="none" stroke="#39B44A" strokeWidth="1" opacity="0.4">
+            <animate attributeName="r" values="3;6;3" dur="1.8s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.4;0.1;0.4" dur="1.8s" repeatCount="indefinite" />
+          </circle>
 
-          <circle cx="196" cy="68" r="7" fill="none" stroke="#39B44A" strokeWidth="1" opacity="0.3">
-            <animate attributeName="r" values="6;12;6" dur="2.2s" repeatCount="indefinite" />
-            <animate attributeName="opacity" values="0.3;0;0.3" dur="2.2s" repeatCount="indefinite" />
+          <circle cx="4" cy="38" r="4.5" fill="#39B44A" opacity="0.95" />
+          <circle cx="4" cy="102" r="4.5" fill="#FF9B17" opacity="0.95" />
+
+          <circle cx="196" cy="70" r="6" fill="#39B44A" opacity="0.2">
+            <animate attributeName="r" values="5;11;5" dur="2.2s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.2;0.04;0.2" dur="2.2s" repeatCount="indefinite" />
           </circle>
 
           {[
             { r: 3.8, op: 1, begin: "0s" },
-            { r: 2.8, op: 0.6, begin: "0.63s" },
-            { r: 2.0, op: 0.35, begin: "1.26s" },
+            { r: 2.6, op: 0.6, begin: "0.63s" },
+            { r: 1.8, op: 0.35, begin: "1.26s" },
           ].map((d, i) => (
             <circle key={`tt${i}`} r={d.r} fill="#39B44A" opacity={d.op}>
               <animateMotion dur="1.9s" repeatCount="indefinite" begin={d.begin}>
-                <mpath href="#cdp-path-top" />
+                <mpath href="#pT" />
               </animateMotion>
             </circle>
           ))}
           {[
             { r: 3.8, op: 1, begin: "0.4s" },
-            { r: 2.8, op: 0.6, begin: "1.1s" },
-            { r: 2.0, op: 0.35, begin: "1.8s" },
+            { r: 2.6, op: 0.6, begin: "1.1s" },
+            { r: 1.8, op: 0.35, begin: "1.8s" },
           ].map((d, i) => (
             <circle key={`bb${i}`} r={d.r} fill="#FF9B17" opacity={d.op}>
               <animateMotion dur="2.1s" repeatCount="indefinite" begin={d.begin}>
-                <mpath href="#cdp-path-bot" />
+                <mpath href="#pB" />
               </animateMotion>
             </circle>
           ))}
         </svg>
       </div>
 
-      {/* RIGHT — CDP circle */}
+      {/* RIGHT — CDP circle with orbiting particles */}
       <div
-        className="cdp-orb-new relative grid shrink-0 place-items-center"
-        style={{
-          width: 88,
-          height: 88,
-          borderRadius: "50%",
-          background:
-            "radial-gradient(circle at 38% 32%, #5dd06e, #39B44A 50%, #1d6b2a)",
-          boxShadow:
-            "0 0 0 8px rgba(57,180,74,0.12), 0 0 0 16px rgba(57,180,74,0.06), 0 8px 24px rgba(57,180,74,0.35), inset 0 -4px 10px rgba(0,0,0,0.20), inset 2px 3px 8px rgba(255,255,255,0.15)",
-          animation: "orbPulse 3s ease-in-out infinite",
-        }}
+        className="relative flex shrink-0 items-center justify-center"
+        style={{ width: 88, height: 88 }}
       >
+        <canvas
+          ref={orbitCanvasRef}
+          style={{
+            position: "absolute",
+            inset: -28,
+            width: 144,
+            height: 144,
+            zIndex: 3,
+            pointerEvents: "none",
+          }}
+        />
+        <div
+          className="cdp-orb-new absolute grid place-items-center"
+          style={{
+            inset: 0,
+            borderRadius: "50%",
+            background:
+              "radial-gradient(circle at 38% 32%, #5dd06e, #39B44A 50%, #1d6b2a)",
+            boxShadow:
+              "0 0 0 8px rgba(57,180,74,0.12), 0 0 0 16px rgba(57,180,74,0.06), 0 8px 24px rgba(57,180,74,0.35), inset 0 -4px 10px rgba(0,0,0,0.20), inset 2px 3px 8px rgba(255,255,255,0.15)",
+            animation: "orbPulse 3s ease-in-out infinite",
+          }}
+        />
         <span
           style={{
             position: "relative",
-            zIndex: 1,
+            zIndex: 5,
             fontSize: 17,
             fontWeight: 900,
             color: "#fff",
@@ -847,6 +869,7 @@ const CDPWave = () => {
           CDP
         </span>
       </div>
+
     </div>
   );
 };
