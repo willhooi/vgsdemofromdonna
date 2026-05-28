@@ -723,7 +723,6 @@ const CDPWave = () => {
           border: 2px solid rgba(255,255,255,0.6);
           display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
           overflow: hidden;
-          animation: cdp-ring-cw 4s linear infinite;
         }
         .cdp-gloss {
           position: absolute; top: 22%; left: 22%;
@@ -733,8 +732,8 @@ const CDPWave = () => {
           transform: rotate(-30deg);
           pointer-events: none;
         }
-        .cdp-core-label { font-size: 14px; font-weight: 700; color: #fff; letter-spacing: 0.06em; z-index: 2; animation: cdp-ring-ccw 4s linear infinite; }
-        .cdp-core-sub   { font-size: 8px; color: rgba(255,255,255,0.72); letter-spacing: 0.12em; z-index: 2; animation: cdp-ring-ccw 4s linear infinite; }
+        .cdp-core-label { font-size: 14px; font-weight: 700; color: #fff; letter-spacing: 0.06em; z-index: 2; }
+        .cdp-core-sub   { font-size: 8px; color: rgba(255,255,255,0.72); letter-spacing: 0.12em; z-index: 2; }
 
         /* Tablet */
         @media (max-width: 1023px) {
