@@ -725,6 +725,7 @@ const CDPWave = () => {
           border: 2px solid rgba(255,255,255,0.6);
           display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
           overflow: hidden;
+          animation: cdp-ring-cw 10s linear infinite;
         }
         .cdp-gloss {
           position: absolute; top: 22%; left: 22%;
