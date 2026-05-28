@@ -1,44 +1,57 @@
-# Kế hoạch: Nền "Soft Aurora Curves" cho mục 9 dịch vụ
+# Bổ sung Plexus + gradient fade mượt cho nền Services
 
-## 1. Nền section (`ServicesGrid.tsx` – `<section id="services">`)
+## 1. Lớp Plexus (SVG)
+Thêm component nội bộ `PlexusBackground` trong `ServicesGrid.tsx` — SVG absolute full-section, `pointer-events:none`, `z-index:0`.
 
-Đổi `bg-background` thành nền tổng hợp nhiều lớp, đặt `position: relative` + `overflow: hidden`:
+- Sinh ~55 node ngẫu nhiên (seed cố định để render ổn định, không nhấp nháy) chia thành 2 cụm:
+  - Cụm trái-trên: ~28 node trong vùng (0–40% width, 0–70% height)
+  - Cụm phải-dưới: ~27 node trong vùng (55–100% width, 25–95% height)
+  - Giữa để trống (giống ảnh mẫu).
+- Nối cạnh giữa các node cùng cụm khi khoảng cách < ngưỡng (~140px), `stroke="#39B44A"`, `stroke-width:0.7`, `stroke-opacity:0.35`.
+- Node: 3 loại
+  - dot nhỏ r=2, fill `#39B44A`, opacity 0.85
+  - dot vừa r=3.5 + vòng tròn rỗng r=6 stroke 1px (giống "node có quầng" trong ảnh)
+  - dot mờ r=2, opacity 0.35
+- Animation rất nhẹ: vài node lớn pulse opacity 3–4s (CSS keyframe `signal-pulse` đã có). Không animate toàn bộ để tránh nặng.
+- Mobile: giảm còn ~30 node, ẩn vòng quầng.
 
-- **Lớp base**: gradient dọc `linear-gradient(180deg, #FFFFFF 0%, #F4FBF5 55%, #E8F7EA 100%)`
-- **Lớp arc trên** (SVG absolute, top, full-width, height ~55%): đường cong lõm xuống, fill radial từ `rgba(57,180,74,0.18)` → trong suốt, blur 40px.
-- **Lớp arc dưới** (SVG absolute, bottom): đường cong lồi lên, fill `rgba(57,180,74,0.28)` → trong suốt, blur 30px – giống "chân trời" trong ảnh.
-- **2 blob phụ** (div absolute, blur 120px, opacity 0.35): 1 ở top-right màu mint sáng, 1 ở bottom-left màu xanh đậm hơn – tạo chiều sâu.
-- **Vignette mép**: lớp gradient trắng mờ ở 2 cạnh trái/phải để chữ dễ đọc trên màn rộng.
+## 2. Gradient fade mượt trên/dưới
+Thay base gradient hiện tại để 2 mép trắng hoàn toàn, ở giữa mới chuyển sang mint:
 
-Tất cả lớp nền đặt `pointer-events: none` và `z-index: 0`. Grid thẻ đặt `position: relative; z-index: 1`.
+```
+background: linear-gradient(180deg,
+  #FFFFFF 0%,
+  #FFFFFF 8%,
+  #F4FBF5 25%,
+  #E8F7EA 50%,
+  #F4FBF5 75%,
+  #FFFFFF 92%,
+  #FFFFFF 100%);
+```
 
-## 2. Thẻ dịch vụ trong suốt (`DesktopCard` + `MobileCard`)
+Thêm 2 overlay div phụ để "loang" mượt hơn, phủ trên cả lớp plexus:
+- Top fade: absolute top:0, height ~180px, `linear-gradient(180deg, #FFFFFF 0%, rgba(255,255,255,0.85) 40%, rgba(255,255,255,0) 100%)`.
+- Bottom fade: absolute bottom:0, height ~200px, `linear-gradient(0deg, #FFFFFF 0%, rgba(255,255,255,0.85) 40%, rgba(255,255,255,0) 100%)`.
 
-Cập nhật style nền thẻ để hoà vào background mà vẫn nổi:
+Hai overlay này đặt `z-index:1`, plexus `z-index:0`, cards giữ `z-index:2`. Nhờ vậy node plexus sát mép sẽ fade dần vào trắng (giống ảnh).
 
-- **Thẻ đóng (default)**:
-  - `background: rgba(255,255,255,0.55)`
-  - `backdrop-filter: blur(14px) saturate(140%)`
-  - `border: 1px solid rgba(255,255,255,0.7)`
-  - `box-shadow: 0 4px 20px -8px rgba(57,180,74,0.12)`
-- **Thẻ mở (active/hover)**:
-  - `background: rgba(240,251,241,0.85)` (giữ tông GREEN_BG nhưng có alpha)
-  - `border: 1.5px solid rgba(57,180,74,0.9)`
-  - `box-shadow: 0 18px 40px -14px rgba(57,180,74,0.35)`
-- Các ô stats bên trong: `background: rgba(255,255,255,0.6)` thay vì `bg-secondary` đặc.
-
-## 3. Responsive & accessibility
-
-- Mobile: giảm blur xuống 8px để tiết kiệm GPU; arc dưới rút gọn chiều cao.
-- Kiểm tra contrast text (`text-muted-foreground`) trên nền mint – nếu cần tăng độ đậm.
-- Thêm `@media (prefers-reduced-motion)` không ảnh hưởng (nền tĩnh).
+## 3. Thứ tự layer trong section
+```
+z-0: base gradient + arc SVG mint + 2 blob (giữ nguyên)
+z-0: PlexusBackground (mới)
+z-1: top fade + bottom fade (mới)  ← che cả arc lẫn plexus ở 2 mép
+z-1: vignette trái/phải (giữ)
+z-2: container grid + 9 thẻ
+```
 
 ## 4. Chi tiết kỹ thuật
 
-- Dùng 2 SVG `<path>` cho 2 arc, viewBox `0 0 1440 600`, preserveAspectRatio `none` để stretch full width.
-- Blob: `<div class="absolute rounded-full" style="filter:blur(120px); background: radial-gradient(...)">`.
-- Không tạo file mới – sửa trong `src/components/site/ServicesGrid.tsx`.
+- Node positions sinh bằng hàm pseudo-random dùng seed cố định trong `useMemo`, không phụ thuộc render → không nhảy khi re-render.
+- SVG dùng `viewBox="0 0 1440 900"` và `preserveAspectRatio="xMidYMid slice"` để stretch theo section.
+- Tất cả màu plexus dùng `#39B44A` (brand green) với các mức opacity 0.35 / 0.5 / 0.85.
+- Không tạo file mới — toàn bộ thêm vào `src/components/site/ServicesGrid.tsx`.
+- Không đổi nội dung 9 thẻ, không đổi logic.
 
-## Kết quả mong đợi
+## Kết quả
 
-Nền mềm mại như ảnh đính kèm (trắng → mint với 2 vòng cung), 9 thẻ kính trong suốt nổi nhẹ trên nền, thẻ active sáng rõ với viền xanh thương hiệu.
+Nền section giống ảnh đính kèm: 2 cụm mạng lưới plexus xanh ở góc trên-trái và dưới-phải, vùng giữa thoáng, mép trên & dưới fade trắng mượt nối liền các section khác, 9 thẻ kính vẫn nổi rõ ở lớp trên cùng.
