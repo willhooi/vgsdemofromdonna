@@ -687,58 +687,78 @@ const CDPWave = () => {
       className="pointer-events-none absolute inset-0 z-0 flex items-center gap-3 overflow-hidden rounded-xl px-[5%]"
       style={{
         background:
-          "radial-gradient(ellipse at center, #E8F8EE 0%, rgba(232,248,238,0) 70%)",
-        perspective: "900px",
+          "radial-gradient(ellipse at center, #ffffff 0%, #f4faf6 55%, #ffffff 100%)",
+        perspective: "1100px",
       }}
     >
       <style>{`
         @keyframes cdp-badge-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
-        @keyframes cdp-dot-twinkle { 0%,100% { opacity: 0.2; } 50% { opacity: 0.65; } }
+        @keyframes cdp-dot-twinkle { 0%,100% { opacity: 0.35; } 50% { opacity: 0.9; } }
         @keyframes cdp-sheen { 0% { transform: translateX(-120%) skewX(-20deg); } 100% { transform: translateX(220%) skewX(-20deg); } }
         @keyframes cdp-dash { to { stroke-dashoffset: -24; } }
+        @keyframes cdp-ring-spin { from { transform: translate(-50%,-50%) rotate(0deg); } to { transform: translate(-50%,-50%) rotate(360deg); } }
+        @keyframes cdp-ring-spin-rev { from { transform: translate(-50%,-50%) rotate(0deg); } to { transform: translate(-50%,-50%) rotate(-360deg); } }
+        @keyframes cdp-orb-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
         @keyframes orbPulse {
           0%,100% {
             box-shadow:
-              0 0 0 8px rgba(57,180,74,0.12),
-              0 0 0 16px rgba(57,180,74,0.06),
-              0 8px 24px rgba(57,180,74,0.35),
-              inset 0 -4px 10px rgba(0,0,0,0.20),
-              inset 2px 3px 8px rgba(255,255,255,0.15);
+              0 0 0 6px rgba(57,180,74,0.10),
+              0 0 0 14px rgba(57,180,74,0.05),
+              0 14px 28px -6px rgba(20,80,40,0.40),
+              0 4px 10px rgba(57,180,74,0.28),
+              inset 0 -6px 12px rgba(0,0,0,0.26),
+              inset 3px 4px 10px rgba(255,255,255,0.30);
           }
           50% {
             box-shadow:
-              0 0 0 8px rgba(57,180,74,0.18),
-              0 0 0 16px rgba(57,180,74,0.09),
-              0 10px 28px rgba(57,180,74,0.45),
-              inset 0 -4px 10px rgba(0,0,0,0.20),
-              inset 2px 3px 8px rgba(255,255,255,0.15);
+              0 0 0 6px rgba(57,180,74,0.16),
+              0 0 0 14px rgba(57,180,74,0.08),
+              0 18px 34px -6px rgba(20,80,40,0.50),
+              0 6px 14px rgba(57,180,74,0.38),
+              inset 0 -6px 12px rgba(0,0,0,0.26),
+              inset 3px 4px 10px rgba(255,255,255,0.30);
           }
         }
         .cdp-orb-new::before {
-          content: ""; position: absolute; width: 22px; height: 14px;
-          background: radial-gradient(ellipse, rgba(255,255,255,0.5), transparent 70%);
-          border-radius: 50%; top: 13px; left: 15px; transform: rotate(-20deg);
-          pointer-events: none; z-index: 0;
+          content: ""; position: absolute; width: 26px; height: 16px;
+          background: radial-gradient(ellipse, rgba(255,255,255,0.75), transparent 70%);
+          border-radius: 50%; top: 12px; left: 16px; transform: rotate(-22deg);
+          pointer-events: none; z-index: 1;
         }
       `}</style>
 
-      {/* LEFT — 3D dark-green slab */}
+      {/* LEFT — 3D glass slab on white */}
       <div
         className="relative shrink-0"
         style={{
           width: "26%",
           height: 136,
-          transform: "perspective(600px) rotateY(14deg) rotateX(-3deg)",
+          transform: "perspective(700px) rotateY(16deg) rotateX(-4deg)",
           transformStyle: "preserve-3d",
         }}
       >
+        {/* Soft ground shadow under the slab */}
+        <div
+          className="absolute"
+          style={{
+            left: "8%",
+            right: "4%",
+            bottom: -10,
+            height: 14,
+            background:
+              "radial-gradient(ellipse at center, rgba(20,80,40,0.35), transparent 70%)",
+            filter: "blur(6px)",
+            borderRadius: "50%",
+            zIndex: -1,
+          }}
+        />
         <div
           className="absolute inset-0 overflow-hidden"
           style={{
             background: "linear-gradient(135deg, #2D6A4F 0%, #1B4332 100%)",
-            borderRadius: "18px",
+            borderRadius: "20px",
             boxShadow:
-              "-8px 12px 32px rgba(0,0,0,0.18), 4px -4px 12px rgba(255,255,255,0.06), inset -6px -8px 0 rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.08)",
+              "-10px 16px 36px -8px rgba(20,60,40,0.35), 4px -4px 12px rgba(255,255,255,0.5), inset -6px -8px 0 rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.14), inset 0 0 0 1px rgba(255,255,255,0.06)",
           }}
         >
           <div
@@ -749,7 +769,7 @@ const CDPWave = () => {
               width: "40%",
               height: "100%",
               background:
-                "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0) 100%)",
+                "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.14) 50%, rgba(255,255,255,0) 100%)",
               animation: "cdp-sheen 5s ease-in-out infinite",
             }}
           />
@@ -764,9 +784,10 @@ const CDPWave = () => {
                 height: b.size,
                 marginLeft: -b.size / 2,
                 marginTop: -b.size / 2,
-                background: "#E8503A",
+                background:
+                  "radial-gradient(circle at 32% 28%, #ff8a72 0%, #E8503A 55%, #b8341f 100%)",
                 boxShadow:
-                  "0 4px 12px rgba(232,80,58,0.4), inset 0 1px 2px rgba(255,255,255,0.25), inset 0 -2px 3px rgba(0,0,0,0.18)",
+                  "0 6px 14px rgba(232,80,58,0.45), inset 0 2px 3px rgba(255,255,255,0.35), inset 0 -3px 4px rgba(0,0,0,0.22)",
                 animation: `cdp-badge-float 3s ease-in-out ${i * 0.4}s infinite`,
               }}
             >
@@ -794,6 +815,7 @@ const CDPWave = () => {
           ))}
         </div>
       </div>
+
 
       {/* CENTER — SVG connector */}
       <div className="relative" style={{ flex: 1, height: "100%" }}>
@@ -848,11 +870,88 @@ const CDPWave = () => {
         </svg>
       </div>
 
-      {/* RIGHT — CDP circle with orbiting particles */}
+      {/* RIGHT — CDP orb with orbital rings + particles */}
       <div
         className="relative flex shrink-0 items-center justify-center"
-        style={{ width: 88, height: 88 }}
+        style={{ width: 88, height: 88, animation: "cdp-orb-bob 4s ease-in-out infinite" }}
       >
+        {/* Ground shadow under orb */}
+        <div
+          aria-hidden
+          className="absolute"
+          style={{
+            left: "10%",
+            right: "10%",
+            bottom: -12,
+            height: 12,
+            background:
+              "radial-gradient(ellipse at center, rgba(20,80,40,0.40), transparent 70%)",
+            filter: "blur(4px)",
+            borderRadius: "50%",
+            zIndex: 0,
+          }}
+        />
+        {/* Tilted orbital ring (outer) */}
+        <div
+          aria-hidden
+          className="absolute"
+          style={{
+            top: "50%",
+            left: "50%",
+            width: 132,
+            height: 132,
+            transform: "translate(-50%,-50%) rotate(0deg)",
+            animation: "cdp-ring-spin 14s linear infinite",
+            borderRadius: "50%",
+            border: "1px dashed rgba(57,180,74,0.45)",
+            transformOrigin: "center",
+            zIndex: 1,
+          }}
+        >
+          <span
+            style={{
+              position: "absolute",
+              top: -3,
+              left: "50%",
+              width: 6,
+              height: 6,
+              marginLeft: -3,
+              borderRadius: "50%",
+              background: "#39B44A",
+              boxShadow: "0 0 8px rgba(57,180,74,0.7)",
+            }}
+          />
+        </div>
+        {/* Inner ring counter-rotating */}
+        <div
+          aria-hidden
+          className="absolute"
+          style={{
+            top: "50%",
+            left: "50%",
+            width: 108,
+            height: 108,
+            transform: "translate(-50%,-50%) rotate(0deg)",
+            animation: "cdp-ring-spin-rev 9s linear infinite",
+            borderRadius: "50%",
+            border: "1px solid rgba(57,180,74,0.22)",
+            zIndex: 1,
+          }}
+        >
+          <span
+            style={{
+              position: "absolute",
+              bottom: -2.5,
+              left: "50%",
+              width: 5,
+              height: 5,
+              marginLeft: -2.5,
+              borderRadius: "50%",
+              background: "#FF9B17",
+              boxShadow: "0 0 6px rgba(255,155,23,0.7)",
+            }}
+          />
+        </div>
         <canvas
           ref={orbitCanvasRef}
           style={{
@@ -870,10 +969,11 @@ const CDPWave = () => {
             inset: 0,
             borderRadius: "50%",
             background:
-              "radial-gradient(circle at 38% 32%, #5dd06e, #39B44A 50%, #1d6b2a)",
+              "radial-gradient(circle at 36% 30%, #7de08a 0%, #39B44A 48%, #1d6b2a 100%)",
             boxShadow:
-              "0 0 0 8px rgba(57,180,74,0.12), 0 0 0 16px rgba(57,180,74,0.06), 0 8px 24px rgba(57,180,74,0.35), inset 0 -4px 10px rgba(0,0,0,0.20), inset 2px 3px 8px rgba(255,255,255,0.15)",
+              "0 0 0 6px rgba(57,180,74,0.10), 0 0 0 14px rgba(57,180,74,0.05), 0 14px 28px -6px rgba(20,80,40,0.40), 0 4px 10px rgba(57,180,74,0.28), inset 0 -6px 12px rgba(0,0,0,0.26), inset 3px 4px 10px rgba(255,255,255,0.30)",
             animation: "orbPulse 3s ease-in-out infinite",
+            zIndex: 3,
           }}
         />
         <span
@@ -890,6 +990,7 @@ const CDPWave = () => {
           CDP
         </span>
       </div>
+
 
     </div>
   );
