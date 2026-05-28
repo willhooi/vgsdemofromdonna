@@ -849,28 +849,6 @@ const CDPWave = () => {
             <animate attributeName="opacity" values="0.2;0.04;0.2" dur="2.2s" repeatCount="indefinite" />
           </circle>
 
-          {[
-            { r: 3.8, op: 1, begin: "0s" },
-            { r: 2.6, op: 0.6, begin: "0.63s" },
-            { r: 1.8, op: 0.35, begin: "1.26s" },
-          ].map((d, i) => (
-            <circle key={`tt${i}`} r={d.r} fill="#39B44A" opacity={d.op}>
-              <animateMotion dur="1.9s" repeatCount="indefinite" begin={d.begin}>
-                <mpath href="#pT" />
-              </animateMotion>
-            </circle>
-          ))}
-          {[
-            { r: 3.8, op: 1, begin: "0.4s" },
-            { r: 2.6, op: 0.6, begin: "1.1s" },
-            { r: 1.8, op: 0.35, begin: "1.8s" },
-          ].map((d, i) => (
-            <circle key={`bb${i}`} r={d.r} fill="#FF9B17" opacity={d.op}>
-              <animateMotion dur="2.1s" repeatCount="indefinite" begin={d.begin}>
-                <mpath href="#pB" />
-              </animateMotion>
-            </circle>
-          ))}
         </svg>
       </div>
 
