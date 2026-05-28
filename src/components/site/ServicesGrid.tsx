@@ -736,15 +736,15 @@ function MountainBackdrop() {
       src={mountainsImg}
       alt=""
       aria-hidden
-      className="pointer-events-none absolute inset-x-0 bottom-[-70%] h-[62%] w-full select-none object-cover object-bottom"
+      className="pointer-events-none absolute inset-x-0 bottom-[29%] h-[62%] w-full select-none object-cover object-bottom"
       style={{
         opacity: 0.35,
         filter: "blur(2px) saturate(0.55)",
         mixBlendMode: "luminosity",
         WebkitMaskImage:
-          "linear-gradient(to top, black 30%, transparent 100%)",
+          "linear-gradient(to top, black 55%, transparent 100%)",
         maskImage:
-          "linear-gradient(to top, black 30%, transparent 100%)",
+          "linear-gradient(to top, black 55%, transparent 100%)",
       }}
     />
   );
