@@ -589,6 +589,9 @@ export function ServicesGrid() {
           }}
         />
 
+        {/* Plexus network */}
+        <PlexusBackground />
+
         {/* Side vignette for readability on wide screens */}
         <div
           className="absolute inset-y-0 left-0 w-24"
@@ -604,7 +607,24 @@ export function ServicesGrid() {
               "linear-gradient(270deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 100%)",
           }}
         />
+
+        {/* Top & bottom white fade for smooth blending with adjacent sections */}
+        <div
+          className="absolute inset-x-0 top-0 h-[180px]"
+          style={{
+            background:
+              "linear-gradient(180deg, #FFFFFF 0%, rgba(255,255,255,0.85) 40%, rgba(255,255,255,0) 100%)",
+          }}
+        />
+        <div
+          className="absolute inset-x-0 bottom-0 h-[200px]"
+          style={{
+            background:
+              "linear-gradient(0deg, #FFFFFF 0%, rgba(255,255,255,0.85) 40%, rgba(255,255,255,0) 100%)",
+          }}
+        />
       </div>
+
 
       <div className="container-tight relative z-10">
 
