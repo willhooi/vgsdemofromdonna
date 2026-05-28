@@ -526,7 +526,7 @@ export function ServicesGrid() {
       style={{
         fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
         background:
-          "linear-gradient(180deg, #FFFFFF 0%, #F4FBF5 55%, #E8F7EA 100%)",
+          "linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 8%, #F4FBF5 25%, #E8F7EA 50%, #F4FBF5 75%, #FFFFFF 92%, #FFFFFF 100%)",
       }}
     >
       {/* Aurora background layers */}
