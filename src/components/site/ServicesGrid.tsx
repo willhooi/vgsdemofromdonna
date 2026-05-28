@@ -699,10 +699,10 @@ function buildCluster(
 function PlexusBackground() {
   const { nodes, edges } = useMemo(() => {
     const rnd = mulberry32(20260528);
-    const a = buildCluster(rnd, 58, -60, 540, -20, 900);
-    const b = buildCluster(rnd, 58, 900, 1500, -20, 900);
+    const a = buildCluster(rnd, 48, -60, 540, -20, 900);
+    const b = buildCluster(rnd, 48, 900, 1500, -20, 900);
     const all = [...a, ...b];
-    const threshold = 170;
+    const threshold = 150;
     const links: [number, number][] = [];
     const groups = [a, b];
     let offset = 0;
