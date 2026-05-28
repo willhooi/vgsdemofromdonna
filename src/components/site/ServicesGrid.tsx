@@ -660,3 +660,114 @@ export function ServicesGrid() {
 }
 
 export default ServicesGrid;
+
+/* ============================ PlexusBackground ============================ */
+type PNode = { x: number; y: number; kind: 0 | 1 | 2 };
+
+function mulberry32(seed: number) {
+  let a = seed;
+  return () => {
+    a |= 0;
+    a = (a + 0x6d2b79f5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function buildCluster(
+  rnd: () => number,
+  count: number,
+  xMin: number,
+  xMax: number,
+  yMin: number,
+  yMax: number,
+): PNode[] {
+  const out: PNode[] = [];
+  for (let i = 0; i < count; i++) {
+    const r = rnd();
+    const kind: 0 | 1 | 2 = r < 0.18 ? 1 : r < 0.55 ? 0 : 2;
+    out.push({
+      x: xMin + rnd() * (xMax - xMin),
+      y: yMin + rnd() * (yMax - yMin),
+      kind,
+    });
+  }
+  return out;
+}
+
+function PlexusBackground() {
+  const { nodes, edges } = useMemo(() => {
+    const rnd = mulberry32(20260528);
+    const a = buildCluster(rnd, 30, 20, 600, 20, 620);
+    const b = buildCluster(rnd, 28, 860, 1420, 240, 880);
+    const all = [...a, ...b];
+    const threshold = 150;
+    const links: [number, number][] = [];
+    const groups = [a, b];
+    let offset = 0;
+    for (const g of groups) {
+      for (let i = 0; i < g.length; i++) {
+        for (let j = i + 1; j < g.length; j++) {
+          const dx = g[i].x - g[j].x;
+          const dy = g[i].y - g[j].y;
+          if (Math.hypot(dx, dy) < threshold) {
+            links.push([offset + i, offset + j]);
+          }
+        }
+      }
+      offset += g.length;
+    }
+    return { nodes: all, edges: links };
+  }, []);
+
+  return (
+    <svg
+      aria-hidden
+      className="absolute inset-0 h-full w-full"
+      viewBox="0 0 1440 900"
+      preserveAspectRatio="xMidYMid slice"
+    >
+      <g stroke="#39B44A" strokeWidth={0.7} strokeOpacity={0.35} fill="none">
+        {edges.map(([i, j], k) => (
+          <line
+            key={k}
+            x1={nodes[i].x}
+            y1={nodes[i].y}
+            x2={nodes[j].x}
+            y2={nodes[j].y}
+          />
+        ))}
+      </g>
+      <g>
+        {nodes.map((n, i) => {
+          if (n.kind === 1) {
+            return (
+              <g key={i}>
+                <circle cx={n.x} cy={n.y} r={3.5} fill="#39B44A" opacity={0.9} />
+                <circle
+                  cx={n.x}
+                  cy={n.y}
+                  r={6.5}
+                  fill="none"
+                  stroke="#39B44A"
+                  strokeOpacity={0.55}
+                  strokeWidth={1}
+                  style={{
+                    transformOrigin: `${n.x}px ${n.y}px`,
+                    animation: `signal-pulse ${3 + (i % 3)}s ease-in-out ${(i % 5) * 0.4}s infinite`,
+                  }}
+                />
+              </g>
+            );
+          }
+          if (n.kind === 0) {
+            return <circle key={i} cx={n.x} cy={n.y} r={2} fill="#39B44A" opacity={0.85} />;
+          }
+          return <circle key={i} cx={n.x} cy={n.y} r={2} fill="#39B44A" opacity={0.35} />;
+        })}
+      </g>
+    </svg>
+  );
+}
+
