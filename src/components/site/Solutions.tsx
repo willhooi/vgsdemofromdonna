@@ -497,7 +497,7 @@ const CDPSupportStrip = ({ visible }: { visible: boolean }) => {
       <div className="relative z-10 flex h-full flex-col gap-3">
         {/* Header */}
         <div className="min-w-0">
-          <div className="text-[20px] font-bold uppercase tracking-[0.18em] text-[hsl(var(--primary-deep))]">
+          <div className="uppercase tracking-[0.18em] text-[hsl(var(--primary-deep))] text-3xl font-extrabold px-0 mx-0">
             CDP Solution
           </div>
           <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] font-semibold leading-tight text-foreground">
