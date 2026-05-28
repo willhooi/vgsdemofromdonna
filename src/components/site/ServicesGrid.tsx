@@ -209,13 +209,13 @@ function DesktopCard({
       onClick={onToggle}
       className="group relative flex cursor-pointer flex-col self-start overflow-hidden rounded-[14px] p-5 transition-all duration-300 hover:-translate-y-0.5"
       style={{
-        background: open ? "rgba(240,251,241,0.85)" : "rgba(255,255,255,0.55)",
-        backdropFilter: "blur(14px) saturate(140%)",
-        WebkitBackdropFilter: "blur(14px) saturate(140%)",
-        border: open ? "1.5px solid rgba(57,180,74,0.9)" : "1px solid rgba(255,255,255,0.7)",
+        background: open ? "rgba(255,255,255,0.75)" : "rgba(255,255,255,0.06)",
+        backdropFilter: open ? "blur(14px) saturate(140%)" : "blur(6px) saturate(120%)",
+        WebkitBackdropFilter: open ? "blur(14px) saturate(140%)" : "blur(6px) saturate(120%)",
+        border: open ? "1.5px solid rgba(57,180,74,0.9)" : "1px solid rgba(255,255,255,0.22)",
         boxShadow: open
           ? "0 18px 40px -14px rgba(57,180,74,0.35)"
-          : "0 4px 20px -8px rgba(57,180,74,0.12)",
+          : "0 2px 10px -6px rgba(0,0,0,0.12)",
         height: open ? 360 : 140,
       }}
     >
