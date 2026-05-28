@@ -725,6 +725,7 @@ const CDPWave = () => {
           border: 2px solid rgba(255,255,255,0.6);
           display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
           overflow: hidden;
+          animation: cdp-ring-cw 10s linear infinite;
         }
         .cdp-gloss {
           position: absolute; top: 22%; left: 22%;
@@ -734,8 +735,8 @@ const CDPWave = () => {
           transform: rotate(-30deg);
           pointer-events: none;
         }
-        .cdp-core-label { font-size: 14px; font-weight: 700; color: #fff; letter-spacing: 0.06em; z-index: 2; }
-        .cdp-core-sub   { font-size: 8px; color: rgba(255,255,255,0.72); letter-spacing: 0.12em; z-index: 2; }
+        .cdp-core-label { font-size: 14px; font-weight: 700; color: #fff; letter-spacing: 0.06em; z-index: 2; animation: cdp-ring-ccw 10s linear infinite; }
+        .cdp-core-sub   { font-size: 8px; color: rgba(255,255,255,0.72); letter-spacing: 0.12em; z-index: 2; animation: cdp-ring-ccw 10s linear infinite; }
 
         /* Tablet */
         @media (max-width: 1023px) {
@@ -758,7 +759,8 @@ const CDPWave = () => {
         @media (prefers-reduced-motion: reduce) {
           .cdp-src, .cdp-orb-wrap2, .cdp-orb-pulse,
           .cdp-ring-1, .cdp-ring-2, .cdp-ring-3,
-          .cdp-badge, .cdp-node, .cdp-particle, .cdp-particle-extra {
+          .cdp-badge, .cdp-node, .cdp-particle, .cdp-particle-extra,
+          .cdp-core, .cdp-core-label, .cdp-core-sub {
             animation: none !important;
           }
           .cdp-src { transform: perspective(700px) rotateY(10deg); }
