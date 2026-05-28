@@ -1,73 +1,44 @@
+# Kế hoạch: Nền "Soft Aurora Curves" cho mục 9 dịch vụ
 
-# Plan — CDP "Holographic Data Stream" (Bright Theme)
+## 1. Nền section (`ServicesGrid.tsx` – `<section id="services">`)
 
-## Phạm vi
-Chỉ sửa **`src/components/site/Solutions.tsx`** — khối artwork CDP (component `CDPWave` hiện tại). Không đụng file khác, không thêm dependency.
+Đổi `bg-background` thành nền tổng hợp nhiều lớp, đặt `position: relative` + `overflow: hidden`:
 
-## Cấu trúc component sẽ build
+- **Lớp base**: gradient dọc `linear-gradient(180deg, #FFFFFF 0%, #F4FBF5 55%, #E8F7EA 100%)`
+- **Lớp arc trên** (SVG absolute, top, full-width, height ~55%): đường cong lõm xuống, fill radial từ `rgba(57,180,74,0.18)` → trong suốt, blur 40px.
+- **Lớp arc dưới** (SVG absolute, bottom): đường cong lồi lên, fill `rgba(57,180,74,0.28)` → trong suốt, blur 30px – giống "chân trời" trong ảnh.
+- **2 blob phụ** (div absolute, blur 120px, opacity 0.35): 1 ở top-right màu mint sáng, 1 ở bottom-left màu xanh đậm hơn – tạo chiều sâu.
+- **Vignette mép**: lớp gradient trắng mờ ở 2 cạnh trái/phải để chữ dễ đọc trên màn rộng.
 
-```text
-<section role="img" aria-label="CDP data flow diagram">
-  <div class="cdp-stage">              ← flex row, gap 32, justify-center, align-center
-    ├── <SourcePanel/>                 ← 200px, rotateY(10deg), float
-    │     ├── header label "● DATA SOURCES"
-    │     ├── holo grid ::before (18×18 lines)
-    │     └── grid 2×2 badges (E-commerce, POS, Web, Search)
-    │
-    ├── <ParticleConnector/>           ← 88×64 SVG + chevron row
-    │     ├── 2 path cong (xanh + cam, opacity 0.12)
-    │     ├── 5 dots animateMotion (3 xanh + 2 cam)
-    │     └── 3 chevron ▶▶▶ stagger pulse
-    │
-    └── <CDPOrb/>                      ← clamp(100,15vw,150), aspect 1/1, bob
-          ├── ring3 (dashed, -18 inset, 28s)
-          ├── ring2 (solid, -6 inset, -18s)
-          ├── ring1 (dashed, +4 inset, 12s)
-          ├── 2 data-node dots orbit (xanh 6s, cam 4s)
-          ├── pulse glow border (3s)
-          └── core circle (#39B44A) + gloss + "CDP / PLATFORM"
-  </div>
+Tất cả lớp nền đặt `pointer-events: none` và `z-index: 0`. Grid thẻ đặt `position: relative; z-index: 1`.
 
-  <style>{/* keyframes + responsive */}</style>
-</section>
-```
+## 2. Thẻ dịch vụ trong suốt (`DesktopCard` + `MobileCard`)
 
-## Keyframes cần định nghĩa
-`srcFloat` · `dotBlink` · `badgeFloat` · `chevPulse` · `dash` (cho stroke path nếu cần) · `ringSpin` / `ringSpinRev` · `nodeOrbit` · `orbGlow` · `orbBob`
+Cập nhật style nền thẻ để hoà vào background mà vẫn nổi:
 
-## Token màu
-Dùng **hex cứng theo spec** (#39B44A, #ff8a72, #f0faf2, …) cho artwork — đồng bộ với brand tokens `brand.green` / `brand.orange` đã có sẵn trong `tailwind.config.ts`. Không refactor sang `hsl(var(--…))` để giữ đúng spec màu chính xác và tránh drift visual.
+- **Thẻ đóng (default)**:
+  - `background: rgba(255,255,255,0.55)`
+  - `backdrop-filter: blur(14px) saturate(140%)`
+  - `border: 1px solid rgba(255,255,255,0.7)`
+  - `box-shadow: 0 4px 20px -8px rgba(57,180,74,0.12)`
+- **Thẻ mở (active/hover)**:
+  - `background: rgba(240,251,241,0.85)` (giữ tông GREEN_BG nhưng có alpha)
+  - `border: 1.5px solid rgba(57,180,74,0.9)`
+  - `box-shadow: 0 18px 40px -14px rgba(57,180,74,0.35)`
+- Các ô stats bên trong: `background: rgba(255,255,255,0.6)` thay vì `bg-secondary` đặc.
 
-## Responsive
-- **≥1024px**: layout đầy đủ như spec.
-- **768–1023px**: source panel 165px, ẩn ring3, giảm còn 3 particle dots.
-- **<768px**: `flex-direction: column`, source panel full-width max 300px, bỏ rotateY, xoay connector SVG 90°, ẩn data-node dots + particle, giữ chevron + ring1 + orb pulse.
+## 3. Responsive & accessibility
 
-## Accessibility
-- `role="img"` + `aria-label` ở section gốc.
-- `@media (prefers-reduced-motion: reduce)`: tắt `srcFloat`, `orbBob`, `orbGlow`, ring rotations, badge float; chevron giảm biên độ 0.4→0.7; particle `dur ×2`.
-- 4 icon là **SVG inline outline** (shopping-bag, monitor, globe, search) — không raster.
+- Mobile: giảm blur xuống 8px để tiết kiệm GPU; arc dưới rút gọn chiều cao.
+- Kiểm tra contrast text (`text-muted-foreground`) trên nền mint – nếu cần tăng độ đậm.
+- Thêm `@media (prefers-reduced-motion)` không ảnh hưởng (nền tĩnh).
 
-## Chi tiết kỹ thuật
+## 4. Chi tiết kỹ thuật
 
-- 4 icon SVG outline tự vẽ inline (viewBox 24×24, stroke #39B44A 1.8px, stroke-linecap round):
-  - `shopping-bag`: thân túi + 2 quai cong
-  - `monitor`: rect + chân đế ngang
-  - `globe`: circle + ellipse ngang + đường cong dọc
-  - `search`: circle + tay cầm chéo
-- Particle dots dùng `<circle><animateMotion><mpath href="#..."/></animateMotion></circle>` (SMIL) với `repeatCount="indefinite"`.
-- Orb `aspect-ratio: 1/1` + `width: clamp(100px,15vw,150px)`, container `position: relative` cho rings absolute.
-- Bob/glow/orbit dùng pure CSS keyframes, không JS.
-- Holo grid trên source panel: lớp absolute `inset:0`, 2 linear-gradient 18×18, `overflow:hidden` ở panel cha.
+- Dùng 2 SVG `<path>` cho 2 arc, viewBox `0 0 1440 600`, preserveAspectRatio `none` để stretch full width.
+- Blob: `<div class="absolute rounded-full" style="filter:blur(120px); background: radial-gradient(...)">`.
+- Không tạo file mới – sửa trong `src/components/site/ServicesGrid.tsx`.
 
-## Out of scope
-- Không đổi heading / copy section CDP.
-- Không đổi background section ngoài (vẫn radial trắng → #f4faf6 đã có).
-- Không đụng `index.css`, `tailwind.config.ts`, hay component khác.
-- Bỏ canvas particle hiện tại (orbitCanvasRef) — thay bằng SVG SMIL theo spec.
+## Kết quả mong đợi
 
-## Verify sau khi build
-1. Build pass.
-2. Mở preview ở 1298px (desktop hiện tại) — kiểm orb bob, rings quay ngược chiều, particle chảy mượt, chevron nhấp nháy stagger.
-3. Resize 800px và 400px — kiểm fallback (ẩn ring3, stack dọc, xoay connector).
-4. Toggle `prefers-reduced-motion` (DevTools Rendering) — kiểm animation tắt đúng.
+Nền mềm mại như ảnh đính kèm (trắng → mint với 2 vòng cung), 9 thẻ kính trong suốt nổi nhẹ trên nền, thẻ active sáng rõ với viền xanh thương hiệu.
