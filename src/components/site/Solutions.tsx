@@ -568,6 +568,7 @@ const CDPWave = () => {
           50%     { box-shadow: 0 0 0 2px rgba(57,180,74,0.30), 0 10px 34px rgba(57,180,74,0.55), inset 0 -6px 14px rgba(0,0,0,0.28), inset 2px 4px 10px rgba(255,255,255,0.18); }
         }
         @keyframes cdp-band-spin { 0% { transform: translateX(-50%); } 100% { transform: translateX(0%); } }
+        @keyframes cdp-orb-spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         @keyframes cdp-ripple {
           0% { transform: translate(-50%,-50%) scale(0.85); opacity: 0.55; }
           100% { transform: translate(-50%,-50%) scale(1); opacity: 0; }
