@@ -687,10 +687,10 @@ const CDPWave = () => {
         <circle cx="8" cy="44" r="3.5" fill="#39B44A" opacity="0.9" />
         <circle cx="8" cy="96" r="3.5" fill="#FF9B17" opacity="0.9" />
 
-        {/* top path — green */}
+        {/* top path — green, wavy */}
         <path
           id="cdp-path-top"
-          d="M 8 44 C 50 44, 90 60, 138 68"
+          d="M 8 44 Q 30 20, 55 40 T 100 50 T 138 64"
           fill="none"
           stroke="#39B44A"
           strokeWidth="2"
@@ -699,10 +699,10 @@ const CDPWave = () => {
           markerEnd="url(#arrGreen)"
           style={{ animation: "cdp-dash 1.6s linear infinite" }}
         />
-        {/* bottom path — orange */}
+        {/* bottom path — orange, wavy */}
         <path
           id="cdp-path-bot"
-          d="M 8 96 C 50 96, 90 80, 138 72"
+          d="M 8 96 Q 30 120, 55 100 T 100 90 T 138 76"
           fill="none"
           stroke="#FF9B17"
           strokeWidth="2"
