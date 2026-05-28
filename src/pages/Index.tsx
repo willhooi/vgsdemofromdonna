@@ -6,7 +6,7 @@ import { Hero } from "@/components/site/Hero";
 import { TrustBand } from "@/components/site/TrustBand";
 import { Solutions } from "@/components/site/Solutions";
 import { ServicesGrid } from "@/components/site/ServicesGrid";
-import { Industries } from "@/components/site/Industries";
+
 import { VietGuysCaseStudies } from "@/components/site/VietGuysCaseStudies";
 import { FAQ } from "@/components/site/FAQ";
 import { CTASection } from "@/components/site/CTASection";
@@ -38,9 +38,6 @@ const Index = () => {
       <Solutions />
       <div className="container-tight"><VDivider /></div>
       <ServicesGrid />
-      <div className="container-tight"><VDivider /></div>
-      <Industries />
-      <div className="container-tight"><VDivider /></div>
       <VietGuysCaseStudies />
       <div className="container-tight"><VDivider /></div>
       <div className="bg-muted">
