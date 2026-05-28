@@ -727,23 +727,38 @@ const CDPWave = () => {
         }
       `}</style>
 
-      {/* LEFT — 3D dark-green slab */}
+      {/* LEFT — 3D glass slab on white */}
       <div
         className="relative shrink-0"
         style={{
           width: "26%",
           height: 136,
-          transform: "perspective(600px) rotateY(14deg) rotateX(-3deg)",
+          transform: "perspective(700px) rotateY(16deg) rotateX(-4deg)",
           transformStyle: "preserve-3d",
         }}
       >
+        {/* Soft ground shadow under the slab */}
+        <div
+          className="absolute"
+          style={{
+            left: "8%",
+            right: "4%",
+            bottom: -10,
+            height: 14,
+            background:
+              "radial-gradient(ellipse at center, rgba(20,80,40,0.35), transparent 70%)",
+            filter: "blur(6px)",
+            borderRadius: "50%",
+            zIndex: -1,
+          }}
+        />
         <div
           className="absolute inset-0 overflow-hidden"
           style={{
             background: "linear-gradient(135deg, #2D6A4F 0%, #1B4332 100%)",
-            borderRadius: "18px",
+            borderRadius: "20px",
             boxShadow:
-              "-8px 12px 32px rgba(0,0,0,0.18), 4px -4px 12px rgba(255,255,255,0.06), inset -6px -8px 0 rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.08)",
+              "-10px 16px 36px -8px rgba(20,60,40,0.35), 4px -4px 12px rgba(255,255,255,0.5), inset -6px -8px 0 rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.14), inset 0 0 0 1px rgba(255,255,255,0.06)",
           }}
         >
           <div
@@ -754,7 +769,7 @@ const CDPWave = () => {
               width: "40%",
               height: "100%",
               background:
-                "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.12) 50%, rgba(255,255,255,0) 100%)",
+                "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.14) 50%, rgba(255,255,255,0) 100%)",
               animation: "cdp-sheen 5s ease-in-out infinite",
             }}
           />
@@ -769,9 +784,10 @@ const CDPWave = () => {
                 height: b.size,
                 marginLeft: -b.size / 2,
                 marginTop: -b.size / 2,
-                background: "#E8503A",
+                background:
+                  "radial-gradient(circle at 32% 28%, #ff8a72 0%, #E8503A 55%, #b8341f 100%)",
                 boxShadow:
-                  "0 4px 12px rgba(232,80,58,0.4), inset 0 1px 2px rgba(255,255,255,0.25), inset 0 -2px 3px rgba(0,0,0,0.18)",
+                  "0 6px 14px rgba(232,80,58,0.45), inset 0 2px 3px rgba(255,255,255,0.35), inset 0 -3px 4px rgba(0,0,0,0.22)",
                 animation: `cdp-badge-float 3s ease-in-out ${i * 0.4}s infinite`,
               }}
             >
@@ -799,6 +815,7 @@ const CDPWave = () => {
           ))}
         </div>
       </div>
+
 
       {/* CENTER — SVG connector */}
       <div className="relative" style={{ flex: 1, height: "100%" }}>
