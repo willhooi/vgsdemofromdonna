@@ -522,10 +522,92 @@ export function ServicesGrid() {
   return (
     <section
       id="services"
-      className="bg-background py-20"
-      style={{ fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif" }}
+      className="relative overflow-hidden py-20"
+      style={{
+        fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
+        background:
+          "linear-gradient(180deg, #FFFFFF 0%, #F4FBF5 55%, #E8F7EA 100%)",
+      }}
     >
-      <div className="container-tight">
+      {/* Aurora background layers */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
+        {/* Top arc */}
+        <svg
+          className="absolute left-0 top-0 h-[55%] w-full"
+          viewBox="0 0 1440 600"
+          preserveAspectRatio="none"
+          fill="none"
+        >
+          <defs>
+            <radialGradient id="auroraTop" cx="50%" cy="0%" r="75%">
+              <stop offset="0%" stopColor="rgba(57,180,74,0.22)" />
+              <stop offset="60%" stopColor="rgba(57,180,74,0.06)" />
+              <stop offset="100%" stopColor="rgba(57,180,74,0)" />
+            </radialGradient>
+          </defs>
+          <path
+            d="M0,0 L1440,0 L1440,420 C1080,560 360,560 0,420 Z"
+            fill="url(#auroraTop)"
+          />
+        </svg>
+
+        {/* Bottom arc (horizon) */}
+        <svg
+          className="absolute bottom-0 left-0 h-[45%] w-full"
+          viewBox="0 0 1440 500"
+          preserveAspectRatio="none"
+          fill="none"
+        >
+          <defs>
+            <radialGradient id="auroraBottom" cx="50%" cy="100%" r="80%">
+              <stop offset="0%" stopColor="rgba(57,180,74,0.32)" />
+              <stop offset="55%" stopColor="rgba(57,180,74,0.10)" />
+              <stop offset="100%" stopColor="rgba(57,180,74,0)" />
+            </radialGradient>
+          </defs>
+          <path
+            d="M0,500 L1440,500 L1440,140 C1080,0 360,0 0,140 Z"
+            fill="url(#auroraBottom)"
+          />
+        </svg>
+
+        {/* Soft blobs */}
+        <div
+          className="absolute -right-24 -top-24 h-[420px] w-[420px] rounded-full"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(115,220,140,0.45) 0%, rgba(115,220,140,0) 70%)",
+            filter: "blur(80px)",
+          }}
+        />
+        <div
+          className="absolute -bottom-32 -left-24 h-[480px] w-[480px] rounded-full"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(57,180,74,0.35) 0%, rgba(57,180,74,0) 70%)",
+            filter: "blur(100px)",
+          }}
+        />
+
+        {/* Side vignette for readability on wide screens */}
+        <div
+          className="absolute inset-y-0 left-0 w-24"
+          style={{
+            background:
+              "linear-gradient(90deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 100%)",
+          }}
+        />
+        <div
+          className="absolute inset-y-0 right-0 w-24"
+          style={{
+            background:
+              "linear-gradient(270deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 100%)",
+          }}
+        />
+      </div>
+
+      <div className="container-tight relative z-10">
+
 
         {isMobile ? (
           <MobileSwiper />
