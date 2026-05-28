@@ -528,11 +528,12 @@ const CDPWave = () => {
   ];
 
   const iconPositions = [
-    { left: "14%", top: "16%" },
-    { left: "52%", top: "22%" },
-    { left: "20%", top: "54%" },
-    { left: "54%", top: "58%" },
+    { left: "38%", top: "18%" },
+    { left: "62%", top: "12%" },
+    { left: "22%", top: "48%" },
+    { left: "55%", top: "52%" },
   ];
+
 
   return (
     <div
@@ -547,13 +548,16 @@ const CDPWave = () => {
           100% { background-position: 24px 24px; }
         }
         @keyframes cdp-blob-morph {
-          0%,100% { border-radius: 60% 40% 55% 45% / 45% 55% 40% 60%; }
-          50% { border-radius: 45% 55% 40% 60% / 55% 45% 60% 40%; }
+          0%,100% { border-radius: 62% 38% 46% 54% / 60% 44% 56% 40%; }
+          33% { border-radius: 48% 52% 62% 38% / 44% 60% 40% 56%; }
+          66% { border-radius: 56% 44% 38% 62% / 52% 48% 60% 40%; }
         }
         @keyframes cdp-ripple {
-          0% { transform: translate(-50%,-50%) scale(1); opacity: 0.5; }
-          100% { transform: translate(-50%,-50%) scale(1.8); opacity: 0; }
+          0% { transform: scale(1); opacity: 0.45; }
+          100% { transform: scale(1.7); opacity: 0; }
         }
+
+
         @keyframes cdp-particle {
           0% { transform: translateX(0); opacity: 0; }
           15% { opacity: 1; }
@@ -591,8 +595,9 @@ const CDPWave = () => {
             className="absolute grid place-items-center rounded-full"
             style={{
               ...iconPositions[i],
-              width: 50,
-              height: 50,
+              width: 52,
+              height: 52,
+
               background: "#E8553E",
               boxShadow: "0 4px 10px rgba(216,74,50,0.35)",
               animation: `cdp-pulse 2.4s ease-in-out ${i * 0.3}s infinite`,
@@ -660,7 +665,7 @@ const CDPWave = () => {
         className="absolute"
         style={{ left: "82%", top: "50%", width: 0, height: 0 }}
       >
-        {[0, 1, 2, 3].map((i) => (
+        {[0, 1, 2].map((i) => (
           <div
             key={i}
             className="absolute"
@@ -671,9 +676,10 @@ const CDPWave = () => {
               height: "110px",
               marginLeft: "-55px",
               marginTop: "-55px",
-              borderRadius: "50%",
-              border: "1.5px solid rgba(61,220,132,0.5)",
-              animation: `cdp-ripple 3.2s ease-out ${i * 0.6}s infinite`,
+              borderRadius: "62% 38% 46% 54% / 60% 44% 56% 40%",
+              background: "rgba(61,220,132,0.35)",
+              zIndex: 0,
+              animation: `cdp-ripple 2.4s ease-out ${i * 0.8}s infinite`,
             }}
           />
         ))}
@@ -685,10 +691,13 @@ const CDPWave = () => {
             width: "110px",
             height: "110px",
             background: "#3DDC84",
+            borderRadius: "62% 38% 46% 54% / 60% 44% 56% 40%",
             boxShadow: "0 6px 20px rgba(61,220,132,0.35)",
-            animation: "cdp-blob-morph 8s ease-in-out infinite",
+            zIndex: 1,
+            animation: "cdp-blob-morph 6s ease-in-out infinite",
           }}
         >
+
           <span
             style={{
               fontWeight: 900,
