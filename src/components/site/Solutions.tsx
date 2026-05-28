@@ -594,8 +594,9 @@ const CDPWave = () => {
             className="absolute grid place-items-center rounded-full"
             style={{
               ...iconPositions[i],
-              width: 50,
-              height: 50,
+              width: 52,
+              height: 52,
+
               background: "#E8553E",
               boxShadow: "0 4px 10px rgba(216,74,50,0.35)",
               animation: `cdp-pulse 2.4s ease-in-out ${i * 0.3}s infinite`,
