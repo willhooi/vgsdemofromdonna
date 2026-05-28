@@ -739,13 +739,13 @@ const CDPWave = () => {
       {/* RIGHT — CDP 3D sphere */}
       <div
         className="absolute"
-        style={{ left: "82%", top: "50%", width: 0, height: 0 }}
+        style={{ left: "74%", top: "50%", width: 0, height: 0 }}
       >
         {/* ripple rings */}
         {[
-          { size: 100, delay: 0 },
-          { size: 124, delay: 0.85 },
-          { size: 148, delay: 1.7 },
+          { size: 124, delay: 0 },
+          { size: 152, delay: 0.85 },
+          { size: 180, delay: 1.7 },
         ].map((r, i) => (
           <div
             key={i}
@@ -766,23 +766,23 @@ const CDPWave = () => {
         <div
           className="cdp-orb absolute grid place-items-center"
           style={{
-            left: -42,
-            top: -42,
-            width: 84,
-            height: 84,
+            left: -54,
+            top: -54,
+            width: 108,
+            height: 108,
             borderRadius: "50%",
             overflow: "hidden",
             background:
               "radial-gradient(circle at 32% 28%, #7FE08F 0%, #39B44A 40%, #1a6b2a 75%, #0d3d18 100%)",
             boxShadow:
-              "0 0 0 2px rgba(57,180,74,0.25), 0 8px 28px rgba(57,180,74,0.40), inset 0 -6px 14px rgba(0,0,0,0.28), inset 2px 4px 10px rgba(255,255,255,0.18)",
+              "0 0 0 2px rgba(57,180,74,0.25), 0 10px 34px rgba(57,180,74,0.45), inset 0 -8px 18px rgba(0,0,0,0.30), inset 2px 5px 12px rgba(255,255,255,0.20)",
             animation: "cdp-orb-breathe 8s ease-in-out infinite",
           }}
         >
           {/* rotating bands overlay */}
           <div
             className="absolute"
-            style={{ left: 0, top: 0, width: 84, height: 84, borderRadius: "50%", overflow: "hidden", zIndex: 1, animation: "cdp-orb-spin 8s linear infinite" }}
+            style={{ left: 0, top: 0, width: 108, height: 108, borderRadius: "50%", overflow: "hidden", zIndex: 1, animation: "cdp-orb-spin 8s linear infinite" }}
           >
             {[
               { top: "28%", delay: "0s" },
@@ -796,7 +796,7 @@ const CDPWave = () => {
                   top: b.top,
                   left: 0,
                   width: "200%",
-                  height: 6,
+                  height: 7,
                   background: "rgba(255,255,255,0.065)",
                   borderRadius: 3,
                   animation: `cdp-band-spin 8s linear ${b.delay} infinite`,
@@ -810,7 +810,7 @@ const CDPWave = () => {
               position: "relative",
               zIndex: 4,
               fontWeight: 900,
-              fontSize: 17,
+              fontSize: 22,
               letterSpacing: "1px",
               color: "#fff",
               textShadow: "0 1px 4px rgba(0,0,0,0.4)",
