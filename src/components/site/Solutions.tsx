@@ -814,6 +814,7 @@ const CDPWave = () => {
               letterSpacing: "1px",
               color: "#fff",
               textShadow: "0 1px 4px rgba(0,0,0,0.4)",
+              animation: "cdp-orb-spin 8s linear infinite",
             }}
           >
             CDP
