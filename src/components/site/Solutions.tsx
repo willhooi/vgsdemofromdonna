@@ -512,79 +512,61 @@ const CDPWave = () => {
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
-    const dpr = window.devicePixelRatio || 1;
-    const SIZE = 144;
-    canvas.width = SIZE * dpr;
-    canvas.height = SIZE * dpr;
-    ctx.scale(dpr, dpr);
+    const SIZE = 160;
+    canvas.width = SIZE;
+    canvas.height = SIZE;
+    const CX = 80, CY = 80;
+    const TAU = Math.PI * 2;
+    const DEG = Math.PI / 180;
 
-    const tracks = [
-      {
-        radius: 52,
-        speed: 0.9,
-        color: "#39B44A",
-        particles: [
-          { angle: 0, size: 3.2, opacity: 1 },
-          { angle: 120, size: 2.0, opacity: 0.55 },
-          { angle: 240, size: 2.5, opacity: 0.75 },
-        ],
-      },
-      {
-        radius: 64,
-        speed: -0.6,
-        color: "#FF9B17",
-        particles: [
-          { angle: 60, size: 2.8, opacity: 1 },
-          { angle: 200, size: 1.8, opacity: 0.5 },
-        ],
-      },
-      {
-        radius: 42,
-        speed: 1.4,
-        color: "#5dd06e",
-        particles: [
-          { angle: 90, size: 1.8, opacity: 0.7 },
-          { angle: 270, size: 2.2, opacity: 0.9 },
-        ],
-      },
-    ];
+    const particles = Array.from({ length: 28 }, () => ({
+      r: 52 + Math.random() * 26,
+      a: Math.random() * TAU,
+      spd: (0.18 + Math.random() * 0.22) * (Math.random() > 0.5 ? 1 : -1),
+      rAmp: 3 + Math.random() * 6,
+      rFreq: 0.008 + Math.random() * 0.006,
+      rPhase: Math.random() * TAU,
+      size: 1.2 + Math.random() * 1.8,
+      baseOpacity: 0.18 + Math.random() * 0.45,
+      opFreq: 0.012 + Math.random() * 0.01,
+      opPhase: Math.random() * TAU,
+      t: Math.random() * 300,
+    }));
 
     let raf = 0;
     const draw = () => {
       ctx.clearRect(0, 0, SIZE, SIZE);
-      const cx = 72, cy = 72;
-      for (const tr of tracks) {
-        ctx.beginPath();
-        ctx.arc(cx, cy, tr.radius, 0, Math.PI * 2);
-        ctx.strokeStyle = "rgba(57,180,74,0.10)";
-        ctx.lineWidth = 0.8;
-        ctx.stroke();
+      for (const p of particles) {
+        p.t += 1;
+        const rOffset = Math.sin(p.t * p.rFreq + p.rPhase) * p.rAmp;
+        const radius = p.r + rOffset;
+        p.a += p.spd * DEG;
+        const px = CX + radius * Math.cos(p.a);
+        const py = CY + radius * Math.sin(p.a);
+        const op = p.baseOpacity * (0.5 + 0.5 * Math.sin(p.t * p.opFreq + p.opPhase));
 
-        for (const p of tr.particles) {
-          p.angle += tr.speed;
-          for (let t = 5; t >= 1; t--) {
-            const ta = ((p.angle - tr.speed * t) * Math.PI) / 180;
-            const tx = cx + tr.radius * Math.cos(ta);
-            const ty = cy + tr.radius * Math.sin(ta);
-            const tr2 = p.size * (1 - t / 5) * 0.7;
-            const to = p.opacity * (1 - t / 5) * 0.4;
-            ctx.globalAlpha = to;
-            ctx.fillStyle = tr.color;
-            ctx.beginPath();
-            ctx.arc(tx, ty, Math.max(0.1, tr2), 0, Math.PI * 2);
-            ctx.fill();
-          }
-          const a = (p.angle * Math.PI) / 180;
-          const px = cx + tr.radius * Math.cos(a);
-          const py = cy + tr.radius * Math.sin(a);
-          ctx.globalAlpha = p.opacity;
-          ctx.fillStyle = tr.color;
+        ctx.save();
+        ctx.translate(px, py);
+        ctx.rotate(p.a + (p.spd > 0 ? Math.PI / 2 : -Math.PI / 2));
+        ctx.beginPath();
+        ctx.ellipse(0, 0, p.size * 0.55, p.size, 0, 0, TAU);
+        ctx.fillStyle = `rgba(57, 180, 74, ${op})`;
+        ctx.fill();
+        ctx.restore();
+
+        for (let ts = 1; ts <= 4; ts++) {
+          const tailAngle = p.a - p.spd * ts * 1.4 * DEG;
+          const tailR = p.r + rOffset * 0.6;
+          const tx = CX + tailR * Math.cos(tailAngle);
+          const ty = CY + tailR * Math.sin(tailAngle);
+          const tr = p.size * (1 - ts * 0.2) * 0.5;
+          const to = op * (1 - ts * 0.22);
           ctx.beginPath();
-          ctx.arc(px, py, p.size, 0, Math.PI * 2);
+          ctx.arc(tx, ty, Math.max(0.1, tr), 0, TAU);
+          ctx.fillStyle = `rgba(57, 180, 74, ${Math.max(0, to)})`;
           ctx.fill();
         }
       }
-      ctx.globalAlpha = 1;
       raf = requestAnimationFrame(draw);
     };
     raf = requestAnimationFrame(draw);
@@ -836,10 +818,10 @@ const CDPWave = () => {
           ref={orbitCanvasRef}
           style={{
             position: "absolute",
-            inset: -28,
-            width: 144,
-            height: 144,
-            zIndex: 3,
+            inset: -36,
+            width: 160,
+            height: 160,
+            zIndex: 2,
             pointerEvents: "none",
           }}
         />
