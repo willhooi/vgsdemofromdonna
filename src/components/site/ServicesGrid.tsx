@@ -286,7 +286,7 @@ function DesktopCard({
               <>
                 <div className="mt-3 grid grid-cols-2 gap-1.5">
                   {svc.stats.map((s) => (
-                    <div key={s.label} className="rounded-[10px] bg-secondary py-2 px-2.5">
+                    <div key={s.label} className="rounded-[10px] py-2 px-2.5" style={{ background: "rgba(255,255,255,0.6)" }}>
                       <div
                         className="font-black leading-none"
                         style={{ color: GREEN, whiteSpace: "nowrap", fontSize: "clamp(11px, 1.6vw, 15px)" }}
