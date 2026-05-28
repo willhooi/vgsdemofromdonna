@@ -1,79 +1,73 @@
-# Đề xuất artwork & animation cho khối CDP
 
-Dựa trên ảnh ref (source panel với 4 icon tròn → CDP blob hữu cơ → orbital rings) và concept chung của web (motif "tín hiệu / sóng / kết nối", primary green #39B44A, accent orange, gradient-hero, nhịp animation nhẹ — fade-up, pulse, dash).
+# Plan — CDP "Holographic Data Stream" (Bright Theme)
 
-## 1. Artwork — 3 hướng đề xuất
+## Phạm vi
+Chỉ sửa **`src/components/site/Solutions.tsx`** — khối artwork CDP (component `CDPWave` hiện tại). Không đụng file khác, không thêm dependency.
 
-### Hướng A — "Signal Constellation" (khuyến nghị)
-
-Giữ tinh thần ref nhưng tinh chỉnh để khớp web:
-
-- **Source panel (trái)**: glass slab nghiêng nhẹ (rotateY 14°), nền trắng gradient mềm, 4 icon tròn (E-commerce, POS, Web, Search) màu cam gradient (#ff8a72 → #b8341f) — đồng bộ accent của web. Icon arranged theo cụm 2-2 thay vì grid cứng.
-- **Connector (giữa)**: 2 đường cong SVG hội tụ (xanh + cam) + 3 chevron "▶▶▶" đang chạy (cdp-dash) thể hiện luồng dữ liệu — gợi lại motif SignalArt của Hero.
-- **CDP orb (phải)**: blob hữu cơ (border-radius bất đối xứng kiểu morphing) thay cho hình tròn cứng, gradient xanh #39B44A → #2a8038, có highlight gloss + 2 orbital rings (dashed ngoài + solid trong) quay ngược chiều.
-- **Background section**: trắng → #f4faf6 radial (như hiện tại), thêm noise grain rất nhẹ để có chiều sâu.
-
-### Hướng B — "Holographic Data Stream"
-
-- Source panel thành "holo card" với grid lines mờ phía sau, icon nổi 3D hơn (drop-shadow đa lớp).
-- Connector là dải particle stream (nhiều dot nhỏ chạy theo đường cong) thay vì line đơn.
-- CDP orb dạng "core" với 3 vòng quỹ đạo + vài data-node nhỏ orbit quanh.
-- Cảm giác sci-fi hơn, hợp với phần AI Core của web.
-
-### Hướng C — "Editorial Minimal"
-
-- Bỏ orbital rings, đơn giản hoá: source panel phẳng white card, connector mỏng tinh tế, CDP là circle solid với typography "CDP" lớn.
-- Tập trung vào typography và whitespace — hợp nếu muốn tone editorial nhẹ.
-- Ít animation nhất, performance tốt nhất.
-
-## 2. Hướng Animation
-
-Tất cả dùng CSS keyframes + SVG SMIL, không thêm thư viện:
-
-
-| Element                 | Animation                     | Duration       |
-| ----------------------- | ----------------------------- | -------------- |
-| Source panel            | float nhẹ ±3px                | 6s ease-in-out |
-| Icon badges             | float so le + sheen quét chéo | 4s / 3s        |
-| Connector paths         | stroke-dashoffset chạy        | 2s linear      |
-| Chevron ▶▶▶             | opacity twinkle so le         | 1.5s           |
-| Particle dots (hướng B) | animateMotion theo path       | 3-4s stagger   |
-| CDP orb                 | bob ±3px + pulse glow         | 4s / 3s        |
-| Orbital rings           | rotate ngược chiều            | 18s / 24s      |
-| Orb gloss highlight     | static (giả 3D)               | —              |
-
-
-**Nguyên tắc giảm chuyển động**: bọc trong `@media (prefers-reduced-motion: reduce)` để tắt bob/rings/sheen.
-
-## 3. Responsive — tối ưu mọi thiết bị
+## Cấu trúc component sẽ build
 
 ```text
-Desktop (≥1024px)   : layout 2 cột, panel 280px × orb 160px, đầy đủ rings + particles
-Tablet  (768-1023)  : 2 cột thu nhỏ, panel 220px × orb 130px, giảm 1 ring
-Mobile  (<768px)    : stack dọc, panel full-width max 320px, orb 110px,
-                      connector xoay 90° (cong dọc), ẩn particle stream,
-                      giữ orb pulse + chevron, tắt orbital ring ngoài
+<section role="img" aria-label="CDP data flow diagram">
+  <div class="cdp-stage">              ← flex row, gap 32, justify-center, align-center
+    ├── <SourcePanel/>                 ← 200px, rotateY(10deg), float
+    │     ├── header label "● DATA SOURCES"
+    │     ├── holo grid ::before (18×18 lines)
+    │     └── grid 2×2 badges (E-commerce, POS, Web, Search)
+    │
+    ├── <ParticleConnector/>           ← 88×64 SVG + chevron row
+    │     ├── 2 path cong (xanh + cam, opacity 0.12)
+    │     ├── 5 dots animateMotion (3 xanh + 2 cam)
+    │     └── 3 chevron ▶▶▶ stagger pulse
+    │
+    └── <CDPOrb/>                      ← clamp(100,15vw,150), aspect 1/1, bob
+          ├── ring3 (dashed, -18 inset, 28s)
+          ├── ring2 (solid, -6 inset, -18s)
+          ├── ring1 (dashed, +4 inset, 12s)
+          ├── 2 data-node dots orbit (xanh 6s, cam 4s)
+          ├── pulse glow border (3s)
+          └── core circle (#39B44A) + gloss + "CDP / PLATFORM"
+  </div>
+
+  <style>{/* keyframes + responsive */}</style>
+</section>
 ```
 
-Kỹ thuật:
+## Keyframes cần định nghĩa
+`srcFloat` · `dotBlink` · `badgeFloat` · `chevPulse` · `dash` (cho stroke path nếu cần) · `ringSpin` / `ringSpinRev` · `nodeOrbit` · `orbGlow` · `orbBob`
 
-- SVG connector dùng `viewBox` + `preserveAspectRatio="xMidYMid meet"` để scale mượt.
-- Canvas particle (nếu giữ ở hướng B) dùng `devicePixelRatio` + resize observer; tắt hẳn ở `<768px` để tiết kiệm pin.
-- Icon dùng SVG inline (không raster) — sắc nét mọi DPR.
-- Orb dùng `clamp(90px, 14vw, 160px)` thay vì fixed size.
-- Container dùng `aspect-ratio` thay vì height cứng để tránh vỡ layout.
+## Token màu
+Dùng **hex cứng theo spec** (#39B44A, #ff8a72, #f0faf2, …) cho artwork — đồng bộ với brand tokens `brand.green` / `brand.orange` đã có sẵn trong `tailwind.config.ts`. Không refactor sang `hsl(var(--…))` để giữ đúng spec màu chính xác và tránh drift visual.
 
-## 4. Chi tiết kỹ thuật (chỉ sửa Solutions.tsx)
+## Responsive
+- **≥1024px**: layout đầy đủ như spec.
+- **768–1023px**: source panel 165px, ẩn ring3, giảm còn 3 particle dots.
+- **<768px**: `flex-direction: column`, source panel full-width max 300px, bỏ rotateY, xoay connector SVG 90°, ẩn data-node dots + particle, giữ chevron + ring1 + orb pulse.
 
-- File: `src/components/site/Solutions.tsx` (khối CDP hiện tại, ~line 460-880)
-- Token màu: dùng `hsl(var(--primary))`, `hsl(var(--accent))` từ index.css — không hardcode hex trong component (hiện đang hardcode #39B44A, sẽ refactor sang token).
-- Thêm `@media (prefers-reduced-motion)` trong style block hiện có.
-- Thêm breakpoint mobile cho SVG connector (xoay path).
-- Không thêm dependency mới, không đụng file khác.
+## Accessibility
+- `role="img"` + `aria-label` ở section gốc.
+- `@media (prefers-reduced-motion: reduce)`: tắt `srcFloat`, `orbBob`, `orbGlow`, ring rotations, badge float; chevron giảm biên độ 0.4→0.7; particle `dur ×2`.
+- 4 icon là **SVG inline outline** (shopping-bag, monitor, globe, search) — không raster.
 
-## 5. Câu hỏi xác nhận
+## Chi tiết kỹ thuật
 
-1. **Chọn hướng nào**: A (Signal Constellation — gần ref nhất, khuyến nghị), B (Holographic — sci-fi hơn), hay C (Editorial Minimal — gọn nhất)? --> Ans: B nhưng light sci-fi tone (clean & clear)
-2. **Particle stream ở connector**: có muốn thêm không, hay giữ chevron ▶▶▶ như hiện tại cho nhẹ? 
-3. **Orb shape**: blob hữu cơ (như ref) hay tròn đều (như hiện tại)? --> Ans: tròn đều 
-4. **Refactor màu sang design token** (hsl var) hay giữ hex cứng? --> Ans: tuỳ bạn chọn để phù hợp tone & mood Enterprise của thương hiệu 
+- 4 icon SVG outline tự vẽ inline (viewBox 24×24, stroke #39B44A 1.8px, stroke-linecap round):
+  - `shopping-bag`: thân túi + 2 quai cong
+  - `monitor`: rect + chân đế ngang
+  - `globe`: circle + ellipse ngang + đường cong dọc
+  - `search`: circle + tay cầm chéo
+- Particle dots dùng `<circle><animateMotion><mpath href="#..."/></animateMotion></circle>` (SMIL) với `repeatCount="indefinite"`.
+- Orb `aspect-ratio: 1/1` + `width: clamp(100px,15vw,150px)`, container `position: relative` cho rings absolute.
+- Bob/glow/orbit dùng pure CSS keyframes, không JS.
+- Holo grid trên source panel: lớp absolute `inset:0`, 2 linear-gradient 18×18, `overflow:hidden` ở panel cha.
+
+## Out of scope
+- Không đổi heading / copy section CDP.
+- Không đổi background section ngoài (vẫn radial trắng → #f4faf6 đã có).
+- Không đụng `index.css`, `tailwind.config.ts`, hay component khác.
+- Bỏ canvas particle hiện tại (orbitCanvasRef) — thay bằng SVG SMIL theo spec.
+
+## Verify sau khi build
+1. Build pass.
+2. Mở preview ở 1298px (desktop hiện tại) — kiểm orb bob, rings quay ngược chiều, particle chảy mượt, chevron nhấp nháy stagger.
+3. Resize 800px và 400px — kiểm fallback (ẩn ring3, stack dọc, xoay connector).
+4. Toggle `prefers-reduced-motion` (DevTools Rendering) — kiểm animation tắt đúng.
