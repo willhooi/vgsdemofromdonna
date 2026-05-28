@@ -70,11 +70,14 @@ export const Solutions = () => {
       <div className="container-tight relative">
         {/* Header */}
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="heading-display text-balance text-[26px] sm:text-3xl md:text-4xl lg:text-[44px] text-foreground">
+          <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-[hsl(var(--primary))] mb-3">
+            Comprehensive Solution
+          </p>
+          <h2 className="heading-display text-balance text-[24px] sm:text-[28px] md:text-[38px] lg:text-[46px] text-foreground leading-tight">
             Every conversation,{" "}
             <span className="text-[hsl(var(--primary))]">a moment of growth</span>.
           </h2>
-          <p className="mt-4 text-sm sm:text-base text-muted-foreground">
+          <p className="mt-4 text-sm sm:text-base text-muted-foreground max-w-xl mx-auto">
             From SMS to Zalo, Voice to Email — VietGuys connects your brand to every
             customer, across every touchpoint, with built-in reliability at scale.
           </p>
