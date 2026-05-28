@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   MessageSquare,
   MessageCircle,
@@ -589,8 +589,9 @@ export function ServicesGrid() {
           }}
         />
 
-        {/* Plexus network */}
-        <PlexusBackground />
+        {/* Animated aurora drift + signal waves */}
+        <AuroraBlobs />
+        <SignalWaves />
 
         {/* Side vignette (kept very subtle so plexus stays visible) */}
         <div
@@ -661,124 +662,131 @@ export function ServicesGrid() {
 
 export default ServicesGrid;
 
-/* ============================ PlexusBackground ============================ */
-type PNode = { x: number; y: number; kind: 0 | 1 | 2 };
+/* ============================ Aurora + Signal Waves ============================ */
 
-function mulberry32(seed: number) {
-  let a = seed;
-  return () => {
-    a |= 0;
-    a = (a + 0x6d2b79f5) | 0;
-    let t = Math.imul(a ^ (a >>> 15), 1 | a);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
+const BG_KEYFRAMES = `
+@keyframes aurora-drift-a {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  100% { transform: translate3d(60px, -40px, 0) scale(1.12); }
+}
+@keyframes aurora-drift-b {
+  0%   { transform: translate3d(0, 0, 0) scale(1.05); }
+  100% { transform: translate3d(-50px, 30px, 0) scale(0.95); }
+}
+@keyframes aurora-drift-c {
+  0%   { transform: translate3d(0, 0, 0) scale(0.95); }
+  100% { transform: translate3d(40px, 50px, 0) scale(1.08); }
+}
+@keyframes signal-ping {
+  0%   { transform: scale(0.45); opacity: 0.55; }
+  80%  { opacity: 0.05; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+@keyframes signal-core {
+  0%, 100% { opacity: 0.85; }
+  50%      { opacity: 0.4; }
+}
+`;
+
+function AuroraBlobs() {
+  return (
+    <>
+      <style>{BG_KEYFRAMES}</style>
+      <div
+        className="absolute inset-0"
+        style={{ mixBlendMode: "screen" }}
+        aria-hidden
+      >
+        <div
+          className="absolute left-[6%] top-[8%] h-[520px] w-[520px] rounded-full"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(57,180,74,0.45) 0%, rgba(57,180,74,0) 70%)",
+            filter: "blur(110px)",
+            animation: "aurora-drift-a 22s ease-in-out infinite alternate",
+          }}
+        />
+        <div
+          className="absolute right-[4%] top-[28%] h-[600px] w-[600px] rounded-full"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(140,220,170,0.5) 0%, rgba(140,220,170,0) 70%)",
+            filter: "blur(120px)",
+            animation: "aurora-drift-b 26s ease-in-out infinite alternate",
+          }}
+        />
+        <div
+          className="absolute left-[35%] bottom-[6%] h-[560px] w-[560px] rounded-full"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(220,245,225,0.55) 0%, rgba(220,245,225,0) 70%)",
+            filter: "blur(100px)",
+            animation: "aurora-drift-c 24s ease-in-out infinite alternate",
+          }}
+        />
+        <div
+          className="absolute right-[22%] bottom-[14%] h-[420px] w-[420px] rounded-full"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(57,180,74,0.32) 0%, rgba(57,180,74,0) 70%)",
+            filter: "blur(95px)",
+            animation: "aurora-drift-a 28s ease-in-out infinite alternate-reverse",
+          }}
+        />
+      </div>
+    </>
+  );
 }
 
-function buildCluster(
-  rnd: () => number,
-  count: number,
-  xMin: number,
-  xMax: number,
-  yMin: number,
-  yMax: number,
-): PNode[] {
-  const out: PNode[] = [];
-  for (let i = 0; i < count; i++) {
-    const r = rnd();
-    const kind: 0 | 1 | 2 = r < 0.18 ? 1 : r < 0.55 ? 0 : 2;
-    out.push({
-      x: xMin + rnd() * (xMax - xMin),
-      y: yMin + rnd() * (yMax - yMin),
-      kind,
-    });
-  }
-  return out;
-}
+const SIGNAL_SOURCES = [
+  { cx: 220, cy: 200 },
+  { cx: 1200, cy: 280 },
+  { cx: 480, cy: 700 },
+  { cx: 1080, cy: 720 },
+  { cx: 740, cy: 420 },
+];
 
-function PlexusBackground() {
-  const { nodes, edges } = useMemo(() => {
-    const rnd = mulberry32(20260528);
-    // Phân bố đều trên toàn bộ background bằng jittered grid
-    const cols = 12;
-    const rows = 7;
-    const xMin = -40, xMax = 1480;
-    const yMin = -20, yMax = 920;
-    const cellW = (xMax - xMin) / cols;
-    const cellH = (yMax - yMin) / rows;
-    const all: PNode[] = [];
-    for (let cy = 0; cy < rows; cy++) {
-      for (let cx = 0; cx < cols; cx++) {
-        const r = rnd();
-        const kind: 0 | 1 | 2 = r < 0.18 ? 1 : r < 0.55 ? 0 : 2;
-        all.push({
-          x: xMin + cx * cellW + rnd() * cellW,
-          y: yMin + cy * cellH + rnd() * cellH,
-          kind,
-        });
-      }
-    }
-    const threshold = 180;
-    const links: [number, number][] = [];
-    for (let i = 0; i < all.length; i++) {
-      for (let j = i + 1; j < all.length; j++) {
-        const dx = all[i].x - all[j].x;
-        const dy = all[i].y - all[j].y;
-        if (Math.hypot(dx, dy) < threshold) {
-          links.push([i, j]);
-        }
-      }
-    }
-    return { nodes: all, edges: links };
-  }, []);
-
+function SignalWaves() {
   return (
     <svg
       aria-hidden
       className="absolute inset-0 h-full w-full"
       viewBox="0 0 1440 900"
       preserveAspectRatio="xMidYMid slice"
+      style={{ opacity: 0.55 }}
     >
-      <g stroke="#39B44A" strokeWidth={0.6} strokeOpacity={0.35} fill="none">
-        {edges.map(([i, j], k) => (
-          <line
-            key={k}
-            x1={nodes[i].x}
-            y1={nodes[i].y}
-            x2={nodes[j].x}
-            y2={nodes[j].y}
+      {SIGNAL_SOURCES.map((src, i) => (
+        <g key={i} style={{ transformOrigin: `${src.cx}px ${src.cy}px` }}>
+          {/* Core dot */}
+          <circle
+            cx={src.cx}
+            cy={src.cy}
+            r={5}
+            fill="#39B44A"
+            style={{
+              animation: `signal-core ${3 + (i % 3)}s ease-in-out infinite`,
+            }}
           />
-        ))}
-      </g>
-      <g>
-        {nodes.map((n, i) => {
-          if (n.kind === 1) {
-            return (
-              <g key={i}>
-                <circle cx={n.x} cy={n.y} r={4} fill="#39B44A" opacity={0.55} />
-                <circle
-                  cx={n.x}
-                  cy={n.y}
-                  r={6.5}
-                  fill="none"
-                  stroke="#39B44A"
-                  strokeOpacity={0.4}
-                  strokeWidth={0.8}
-                  style={{
-                    transformOrigin: `${n.x}px ${n.y}px`,
-                    animation: `signal-pulse ${3 + (i % 3)}s ease-in-out ${(i % 5) * 0.4}s infinite`,
-                  }}
-                />
-              </g>
-            );
-          }
-          if (n.kind === 0) {
-            return <circle key={i} cx={n.x} cy={n.y} r={2.4} fill="#39B44A" opacity={0.55} />;
-          }
-          return <circle key={i} cx={n.x} cy={n.y} r={2} fill="#39B44A" opacity={0.3} />;
-        })}
-      </g>
+          {/* Outward rings */}
+          {[0, 1, 2].map((k) => (
+            <circle
+              key={k}
+              cx={src.cx}
+              cy={src.cy}
+              r={70}
+              fill="none"
+              stroke="#39B44A"
+              strokeWidth={1.2}
+              style={{
+                transformOrigin: `${src.cx}px ${src.cy}px`,
+                animation: `signal-ping ${5 + (i % 2)}s ease-out ${k * 1.4 + i * 0.6}s infinite`,
+              }}
+            />
+          ))}
+        </g>
+      ))}
     </svg>
   );
 }
+
 
