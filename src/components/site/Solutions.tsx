@@ -548,13 +548,15 @@ const CDPWave = () => {
           100% { background-position: 24px 24px; }
         }
         @keyframes cdp-blob-morph {
-          0%,100% { border-radius: 60% 40% 55% 45% / 45% 55% 40% 60%; }
-          50% { border-radius: 45% 55% 40% 60% / 55% 45% 60% 40%; }
+          0%,100% { border-radius: 62% 38% 46% 54% / 60% 44% 56% 40%; }
+          33% { border-radius: 48% 52% 62% 38% / 44% 60% 40% 56%; }
+          66% { border-radius: 56% 44% 38% 62% / 52% 48% 60% 40%; }
         }
         @keyframes cdp-ripple {
-          0% { transform: translate(-50%,-50%) scale(1); opacity: 0.5; }
-          100% { transform: translate(-50%,-50%) scale(1.8); opacity: 0; }
+          0% { transform: translate(-50%,-50%) scale(1); opacity: 0.45; }
+          100% { transform: translate(-50%,-50%) scale(1.7); opacity: 0; }
         }
+
         @keyframes cdp-particle {
           0% { transform: translateX(0); opacity: 0; }
           15% { opacity: 1; }
