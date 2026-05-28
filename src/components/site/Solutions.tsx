@@ -502,29 +502,36 @@ const CDPSupportStrip = ({ visible }: { visible: boolean }) => {
   );
 };
 
-/* ---------- Animated CDP illustration behind strip ---------- */
+/* ---------- Animated CDP illustration ---------- */
 
 const CDPWave = () => {
-  const sourceIcons = [
-    // store
+  const iconPaths = [
+    // Store
     <path key="s" d="M3 9l1-5h16l1 5M4 9v11h16V9M4 9h16M9 13h6" stroke="white" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round" />,
-    // server
+    // Server
     <g key="sv" stroke="white" strokeWidth="1.8" fill="none" strokeLinecap="round">
       <rect x="4" y="4" width="16" height="6" rx="1.2" />
       <rect x="4" y="14" width="16" height="6" rx="1.2" />
       <circle cx="8" cy="7" r="0.6" fill="white" />
       <circle cx="8" cy="17" r="0.6" fill="white" />
     </g>,
-    // globe
+    // Globe
     <g key="g" stroke="white" strokeWidth="1.8" fill="none">
       <circle cx="12" cy="12" r="8" />
       <path d="M4 12h16M12 4c3 3 3 13 0 16M12 4c-3 3-3 13 0 16" strokeLinecap="round" />
     </g>,
-    // search/click
+    // Search
     <g key="c" stroke="white" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round">
       <circle cx="10" cy="10" r="5" />
       <path d="M14 14l5 5" />
     </g>,
+  ];
+
+  const iconPositions = [
+    { left: "14%", top: "16%" },
+    { left: "52%", top: "22%" },
+    { left: "20%", top: "54%" },
+    { left: "54%", top: "58%" },
   ];
 
   return (
@@ -534,124 +541,125 @@ const CDPWave = () => {
       style={{ background: "transparent" }}
     >
       <style>{`
-        @keyframes cdp-bob-0 { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
-        @keyframes cdp-bob-1 { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
-        @keyframes cdp-bob-2 { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
-        @keyframes cdp-bob-3 { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+        @keyframes cdp-pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.12); } }
+        @keyframes cdp-grid-drift {
+          0% { background-position: 0 0; }
+          100% { background-position: 24px 24px; }
+        }
         @keyframes cdp-blob-morph {
-          0%,100% { border-radius: 42% 58% 55% 45% / 50% 45% 55% 50%; transform: translate(-50%,-50%) rotate(0deg); }
-          33% { border-radius: 55% 45% 40% 60% / 45% 55% 45% 55%; transform: translate(-50%,-50%) rotate(120deg); }
-          66% { border-radius: 48% 52% 60% 40% / 55% 48% 52% 45%; transform: translate(-50%,-50%) rotate(240deg); }
+          0%,100% { border-radius: 60% 40% 55% 45% / 45% 55% 40% 60%; }
+          50% { border-radius: 45% 55% 40% 60% / 55% 45% 60% 40%; }
         }
         @keyframes cdp-ripple {
-          0% { transform: translate(-50%,-50%) scale(0.6); opacity: 0.55; }
+          0% { transform: translate(-50%,-50%) scale(1); opacity: 0.5; }
           100% { transform: translate(-50%,-50%) scale(1.8); opacity: 0; }
         }
-        @keyframes cdp-arrow-flow {
-          0% { offset-distance: 0%; opacity: 0; }
+        @keyframes cdp-particle {
+          0% { transform: translateX(0); opacity: 0; }
           15% { opacity: 1; }
           85% { opacity: 1; }
-          100% { offset-distance: 100%; opacity: 0; }
-        }
-        @keyframes cdp-dash {
-          to { stroke-dashoffset: -24; }
+          100% { transform: translateX(var(--cdp-dx, 120px)); opacity: 0; }
         }
       `}</style>
 
-      {/* LEFT panel */}
+      {/* LEFT — Source panel */}
       <div
-        className="absolute"
+        className="absolute overflow-hidden"
         style={{
           left: "4%",
           top: "12%",
-          width: "26%",
+          width: "30%",
           height: "76%",
-          background: "linear-gradient(160deg, rgba(57,180,74,0.18), rgba(13,59,46,0.4))",
-          border: "1px solid rgba(110,220,150,0.35)",
-          borderRadius: "14px",
-          boxShadow: "0 0 24px rgba(57,180,74,0.15), inset 0 0 18px rgba(57,180,74,0.08)",
-          backdropFilter: "blur(2px)",
+          background: "#C8EAD8",
+          borderRadius: "16px",
         }}
       >
-        <div className="relative h-full w-full p-2">
-          {sourceIcons.map((icon, i) => {
-            const positions = [
-              { left: "18%", top: "12%" },
-              { left: "12%", top: "44%" },
-              { left: "48%", top: "30%" },
-              { left: "22%", top: "70%" },
-            ];
-            const sizes = [28, 26, 34, 26];
-            return (
-              <div
-                key={i}
-                className="absolute grid place-items-center rounded-full"
-                style={{
-                  ...positions[i],
-                  width: sizes[i],
-                  height: sizes[i],
-                  background: "linear-gradient(140deg, #ee6a4f, #d44a32)",
-                  boxShadow: "0 4px 10px rgba(216,74,50,0.45), inset 0 1px 0 rgba(255,255,255,0.2)",
-                  animation: `cdp-bob-${i} ${2.4 + i * 0.3}s ease-in-out ${i * 0.25}s infinite`,
-                }}
-              >
-                <svg viewBox="0 0 24 24" width={sizes[i] * 0.55} height={sizes[i] * 0.55}>
-                  {icon}
-                </svg>
-              </div>
-            );
-          })}
-        </div>
+        {/* drifting grid texture */}
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage:
+              "linear-gradient(45deg, rgba(29,158,117,0.18) 1px, transparent 1px), linear-gradient(-45deg, rgba(29,158,117,0.18) 1px, transparent 1px)",
+            backgroundSize: "24px 24px",
+            animation: "cdp-grid-drift 6s linear infinite",
+          }}
+        />
+        {/* icons */}
+        {iconPaths.map((icon, i) => (
+          <div
+            key={i}
+            className="absolute grid place-items-center rounded-full"
+            style={{
+              ...iconPositions[i],
+              width: 50,
+              height: 50,
+              background: "#E8553E",
+              boxShadow: "0 4px 10px rgba(216,74,50,0.35)",
+              animation: `cdp-pulse 2.4s ease-in-out ${i * 0.3}s infinite`,
+            }}
+          >
+            <svg viewBox="0 0 24 24" width={26} height={26}>
+              {icon}
+            </svg>
+          </div>
+        ))}
       </div>
 
-      {/* CENTER — arc + flowing chevrons */}
-      <svg
-        className="absolute inset-0 h-full w-full"
-        viewBox="0 0 400 200"
-        preserveAspectRatio="none"
+      {/* CENTER — connector lines + particles */}
+      <div
+        className="absolute"
+        style={{ left: "34%", top: "42%", width: "38%", height: "16%" }}
       >
-        <defs>
-          <path id="cdp-flow-arc" d="M132,100 C180,60 220,140 268,100" fill="none" />
-        </defs>
-        <use
-          href="#cdp-flow-arc"
-          stroke="rgba(30,140,80,0.55)"
-          strokeWidth="1.2"
-          strokeDasharray="3 4"
-          fill="none"
-          style={{ animation: "cdp-dash 1.6s linear infinite" }}
-          vectorEffect="non-scaling-stroke"
-        />
-      </svg>
-
-      {/* Flowing chevron arrows */}
-      {[0, 1, 2].map((i) => (
+        {/* two dashed lines */}
         <div
-          key={i}
-          className="absolute"
+          className="absolute left-0 right-0"
           style={{
-            left: 0,
-            top: 0,
-            width: "100%",
-            height: "100%",
-            offsetPath: "path('M132,100 C180,60 220,140 268,100')",
-            // @ts-ignore
-            offsetRotate: "auto",
-            animation: `cdp-arrow-flow 2.2s linear ${i * 0.73}s infinite`,
+            top: "30%",
+            height: 0,
+            borderTop: "1.5px dashed rgba(29,158,117,0.5)",
           }}
-        >
-          <svg width="14" height="14" viewBox="0 0 24 24" style={{ transform: "translate(-50%, -50%)" }}>
-            <path d="M5 4l10 8-10 8" fill="none" stroke="#1e8c50" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </div>
-      ))}
+        />
+        <div
+          className="absolute left-0 right-0"
+          style={{
+            top: "70%",
+            height: 0,
+            borderTop: "1.5px dashed rgba(29,158,117,0.5)",
+          }}
+        />
+        {/* particles */}
+        {[
+          { top: "30%", delay: 0 },
+          { top: "30%", delay: 0.9 },
+          { top: "30%", delay: 1.8 },
+          { top: "70%", delay: 0.4 },
+          { top: "70%", delay: 1.3 },
+          { top: "70%", delay: 2.2 },
+        ].map((p, i) => (
+          <div
+            key={i}
+            className="absolute rounded-full"
+            style={{
+              left: 0,
+              top: p.top,
+              width: 7,
+              height: 7,
+              marginTop: -3.5,
+              background: "#1D9E75",
+              boxShadow: "0 0 6px rgba(29,158,117,0.6)",
+              // @ts-ignore
+              "--cdp-dx": "100%",
+              animation: `cdp-particle 2.6s linear ${p.delay}s infinite`,
+            } as React.CSSProperties}
+          />
+        ))}
+      </div>
 
       {/* RIGHT — CDP blob with ripples */}
       <div
         className="absolute"
-        style={{ left: "78%", top: "50%", width: 0, height: 0 }}
+        style={{ left: "82%", top: "50%", width: 0, height: 0 }}
       >
-        {/* ripples */}
         {[0, 1, 2, 3].map((i) => (
           <div
             key={i}
@@ -659,34 +667,34 @@ const CDPWave = () => {
             style={{
               left: 0,
               top: 0,
-              width: "120px",
-              height: "120px",
+              width: "110px",
+              height: "110px",
+              marginLeft: "-55px",
+              marginTop: "-55px",
               borderRadius: "50%",
-              border: "1.5px solid rgba(110,220,150,0.55)",
-              animation: `cdp-ripple 3.2s ease-out ${i * 0.8}s infinite`,
+              border: "1.5px solid rgba(61,220,132,0.5)",
+              animation: `cdp-ripple 3.2s ease-out ${i * 0.6}s infinite`,
             }}
           />
         ))}
-        {/* blob */}
         <div
           className="absolute grid place-items-center"
           style={{
-            left: 0,
-            top: 0,
-            width: "100px",
-            height: "100px",
-            background: "radial-gradient(circle at 35% 30%, #7df5b0, #3ddc84 60%, #2bb96b)",
-            boxShadow: "0 0 30px rgba(61,220,132,0.55), inset 0 -8px 18px rgba(0,0,0,0.12)",
-            animation: "cdp-blob-morph 9s ease-in-out infinite",
+            left: "-55px",
+            top: "-55px",
+            width: "110px",
+            height: "110px",
+            background: "#3DDC84",
+            boxShadow: "0 6px 20px rgba(61,220,132,0.35)",
+            animation: "cdp-blob-morph 8s ease-in-out infinite",
           }}
         >
           <span
             style={{
               fontWeight: 900,
-              fontSize: "26px",
+              fontSize: "28px",
               letterSpacing: "0.04em",
-              color: "#0d3b2e",
-              textShadow: "0 1px 0 rgba(255,255,255,0.25)",
+              color: "#0D5C3A",
             }}
           >
             CDP
