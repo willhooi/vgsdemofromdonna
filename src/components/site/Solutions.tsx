@@ -836,10 +836,6 @@ const CDPWave = () => {
             style={{ animation: "cdp-dash 1.6s linear infinite" }}
           />
 
-          <circle cx="115" cy="70" r="4" fill="none" stroke="#39B44A" strokeWidth="1" opacity="0.4">
-            <animate attributeName="r" values="3;6;3" dur="1.8s" repeatCount="indefinite" />
-            <animate attributeName="opacity" values="0.4;0.1;0.4" dur="1.8s" repeatCount="indefinite" />
-          </circle>
 
           <circle cx="4" cy="38" r="4.5" fill="#39B44A" opacity="0.95" />
           <circle cx="4" cy="102" r="4.5" fill="#FF9B17" opacity="0.95" />
