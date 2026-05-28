@@ -567,518 +567,276 @@ const CDPSupportStrip = ({ visible }: { visible: boolean }) => {
   );
 };
 
-/* ---------- Animated CDP illustration ---------- */
+/* ---------- Animated CDP illustration — Holographic Data Stream (bright) ---------- */
 
 const CDPWave = () => {
-  const orbitCanvasRef = useRef<HTMLCanvasElement | null>(null);
+  // 4 outline icons (stroke #39B44A) — E-commerce, POS, Web, Search
+  const Icon = ({ name }: { name: "bag" | "pos" | "globe" | "search" }) => (
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="#39B44A"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      {name === "bag" && (
+        <>
+          <path d="M5 8h14l-1 12H6L5 8z" />
+          <path d="M9 8a3 3 0 1 1 6 0" />
+        </>
+      )}
+      {name === "pos" && (
+        <>
+          <rect x="3" y="4" width="18" height="12" rx="1.5" />
+          <path d="M8 20h8M12 16v4" />
+        </>
+      )}
+      {name === "globe" && (
+        <>
+          <circle cx="12" cy="12" r="9" />
+          <ellipse cx="12" cy="12" rx="9" ry="4" />
+          <path d="M12 3c2.5 2.5 2.5 15 0 18M12 3c-2.5 2.5-2.5 15 0 18" />
+        </>
+      )}
+      {name === "search" && (
+        <>
+          <circle cx="11" cy="11" r="6" />
+          <path d="M20 20l-4.5-4.5" />
+        </>
+      )}
+    </svg>
+  );
 
-  // Read brand HSL tokens at runtime so canvas particles stay on-brand
-  // (falls back to known values if CSS vars aren't ready yet).
-  const brand = useMemo(() => {
-    if (typeof window === "undefined")
-      return { primary: "128 52% 46%", accent: "35 100% 54%" };
-    const cs = getComputedStyle(document.documentElement);
-    return {
-      primary: cs.getPropertyValue("--primary").trim() || "128 52% 46%",
-      accent: cs.getPropertyValue("--accent").trim() || "35 100% 54%",
-    };
-  }, []);
-
-  useEffect(() => {
-    const canvas = orbitCanvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    // Respect reduced motion: skip the orbiting particle field entirely.
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) return;
-
-    const DPR = Math.min(window.devicePixelRatio || 1, 2);
-    const SIZE = 180;
-    canvas.width = SIZE * DPR;
-    canvas.height = SIZE * DPR;
-    canvas.style.width = SIZE + "px";
-    canvas.style.height = SIZE + "px";
-    ctx.scale(DPR, DPR);
-
-    const CX = SIZE / 2, CY = SIZE / 2;
-    const TAU = Math.PI * 2;
-    const DEG = Math.PI / 180;
-
-    const particles = Array.from({ length: 22 }, () => ({
-      r: 56 + Math.random() * 28,
-      a: Math.random() * TAU,
-      spd: (0.16 + Math.random() * 0.20) * (Math.random() > 0.5 ? 1 : -1),
-      rAmp: 2 + Math.random() * 5,
-      rFreq: 0.008 + Math.random() * 0.006,
-      rPhase: Math.random() * TAU,
-      size: 1.1 + Math.random() * 1.6,
-      baseOpacity: 0.20 + Math.random() * 0.45,
-      opFreq: 0.012 + Math.random() * 0.01,
-      opPhase: Math.random() * TAU,
-      t: Math.random() * 300,
-    }));
-
-    let raf = 0;
-    const draw = () => {
-      ctx.clearRect(0, 0, SIZE, SIZE);
-      for (const p of particles) {
-        p.t += 1;
-        const rOffset = Math.sin(p.t * p.rFreq + p.rPhase) * p.rAmp;
-        const radius = p.r + rOffset;
-        p.a += p.spd * DEG;
-        const px = CX + radius * Math.cos(p.a);
-        const py = CY + radius * Math.sin(p.a);
-        const op = p.baseOpacity * (0.5 + 0.5 * Math.sin(p.t * p.opFreq + p.opPhase));
-
-        // Head dot
-        ctx.beginPath();
-        ctx.arc(px, py, p.size, 0, TAU);
-        ctx.fillStyle = `hsla(${brand.primary} / ${op})`;
-        ctx.fill();
-
-        // Comet tail
-        for (let ts = 1; ts <= 3; ts++) {
-          const tailAngle = p.a - p.spd * ts * 1.4 * DEG;
-          const tx = CX + radius * Math.cos(tailAngle);
-          const ty = CY + radius * Math.sin(tailAngle);
-          const tr = Math.max(0.1, p.size * (1 - ts * 0.25) * 0.55);
-          const to = Math.max(0, op * (1 - ts * 0.28));
-          ctx.beginPath();
-          ctx.arc(tx, ty, tr, 0, TAU);
-          ctx.fillStyle = `hsla(${brand.primary} / ${to})`;
-          ctx.fill();
-        }
-      }
-      raf = requestAnimationFrame(draw);
-    };
-    raf = requestAnimationFrame(draw);
-    return () => cancelAnimationFrame(raf);
-  }, [brand.primary]);
-
-  // 4 white Lucide-style icons: Store, CreditCard, Globe, Search
-  const iconPaths = [
-    <g key="s" stroke="white" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M3 9l1.5-5h15L21 9" />
-      <path d="M4 9v11h16V9" />
-      <path d="M9 20v-6h6v6" />
-    </g>,
-    <g key="cc" stroke="white" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="2.5" y="5" width="19" height="14" rx="2" />
-      <path d="M2.5 10h19" />
-      <path d="M6 15h3" />
-    </g>,
-    <g key="g" stroke="white" strokeWidth="1.8" fill="none" strokeLinecap="round">
-      <circle cx="12" cy="12" r="8" />
-      <path d="M4 12h16M12 4c3 3 3 13 0 16M12 4c-3 3-3 13 0 16" />
-    </g>,
-    <g key="se" stroke="white" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="10.5" cy="10.5" r="5.5" />
-      <path d="M14.5 14.5l5 5" />
-    </g>,
-  ];
-
-  // Loosely scattered (not grid) — varying sizes for depth
-  const badges = [
-    { left: "28%", top: "20%", size: 44 },
-    { left: "68%", top: "30%", size: 36 },
-    { left: "26%", top: "62%", size: 40 },
-    { left: "66%", top: "76%", size: 32 },
-  ];
-
-  // Decorative dots
-  const dots = [
-    { left: "55%", top: "12%" },
-    { left: "18%", top: "44%" },
-    { left: "82%", top: "55%" },
-    { left: "48%", top: "90%" },
+  const badges: { key: "bag" | "pos" | "globe" | "search"; label: string }[] = [
+    { key: "bag", label: "E-commerce" },
+    { key: "pos", label: "POS" },
+    { key: "globe", label: "Web" },
+    { key: "search", label: "Search" },
   ];
 
   return (
     <div
-      aria-hidden
-      className="cdp-wave pointer-events-none absolute inset-0 z-0 flex items-center gap-3 overflow-hidden rounded-xl px-[5%]"
+      role="img"
+      aria-label="CDP data flow diagram"
+      className="cdp-stage absolute inset-0 flex items-center justify-center gap-6 overflow-hidden rounded-xl px-3"
       style={{
         background:
-          "radial-gradient(ellipse at center, hsl(0 0% 100%) 0%, hsl(var(--primary) / 0.04) 55%, hsl(0 0% 100%) 100%)",
-        perspective: "1100px",
+          "radial-gradient(ellipse at 85% 50%, rgba(57,180,74,0.04), transparent 60%), #ffffff",
       }}
     >
       <style>{`
-        @keyframes cdp-badge-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
-        @keyframes cdp-dot-twinkle { 0%,100% { opacity: 0.35; } 50% { opacity: 0.9; } }
-        @keyframes cdp-sheen { 0% { transform: translateX(-120%) skewX(-20deg); } 100% { transform: translateX(220%) skewX(-20deg); } }
-        @keyframes cdp-dash { to { stroke-dashoffset: -24; } }
-        @keyframes cdp-ring-spin { from { transform: translate(-50%,-50%) rotate(0deg); } to { transform: translate(-50%,-50%) rotate(360deg); } }
-        @keyframes cdp-ring-spin-rev { from { transform: translate(-50%,-50%) rotate(0deg); } to { transform: translate(-50%,-50%) rotate(-360deg); } }
-        @keyframes cdp-orb-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
-        @keyframes cdp-scan { 0% { transform: translateY(-100%); } 100% { transform: translateY(220%); } }
-        @keyframes orbPulse {
-          0%,100% {
-            box-shadow:
-              0 0 0 6px hsl(var(--primary) / 0.10),
-              0 0 0 14px hsl(var(--primary) / 0.05),
-              0 14px 28px -6px hsl(var(--primary-deep) / 0.40),
-              0 4px 10px hsl(var(--primary) / 0.28),
-              inset 0 -6px 12px rgba(0,0,0,0.26),
-              inset 3px 4px 10px rgba(255,255,255,0.30);
-          }
-          50% {
-            box-shadow:
-              0 0 0 6px hsl(var(--primary) / 0.16),
-              0 0 0 14px hsl(var(--primary) / 0.08),
-              0 18px 34px -6px hsl(var(--primary-deep) / 0.50),
-              0 6px 14px hsl(var(--primary) / 0.38),
-              inset 0 -6px 12px rgba(0,0,0,0.26),
-              inset 3px 4px 10px rgba(255,255,255,0.30);
-          }
+        @keyframes cdp-src-float { 0%,100% { transform: perspective(700px) rotateY(10deg) translateY(0); } 50% { transform: perspective(700px) rotateY(10deg) translateY(-4px); } }
+        @keyframes cdp-dot-blink { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+        @keyframes cdp-badge-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
+        @keyframes cdp-chev { 0%,100% { opacity: 0.25; } 50% { opacity: 1; } }
+        @keyframes cdp-ring-cw { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes cdp-ring-ccw { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+        @keyframes cdp-node-orbit { from { transform: rotate(0deg) translateX(48px) rotate(0deg); } to { transform: rotate(360deg) translateX(48px) rotate(-360deg); } }
+        @keyframes cdp-orb-glow { 0%,100% { transform: scale(1); opacity: 0.3; } 50% { transform: scale(1.06); opacity: 1; } }
+        @keyframes cdp-orb-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+
+        /* Source panel */
+        .cdp-src {
+          position: relative;
+          width: 200px;
+          flex-shrink: 0;
+          padding: 10px;
+          border-radius: 14px;
+          background: #ffffff;
+          border: 1px solid rgba(57,180,74,0.20);
+          box-shadow: 0 2px 16px rgba(57,180,74,0.10);
+          transform: perspective(700px) rotateY(10deg);
+          transform-origin: right center;
+          animation: cdp-src-float 6s ease-in-out infinite;
+          overflow: hidden;
         }
-        .cdp-orb-new::before {
-          content: ""; position: absolute; width: 26px; height: 16px;
-          background: radial-gradient(ellipse, rgba(255,255,255,0.75), transparent 70%);
-          border-radius: 50%; top: 12px; left: 16px; transform: rotate(-22deg);
-          pointer-events: none; z-index: 1;
-        }
-        /* Holo grid overlay on the source panel */
-        .cdp-holo-grid {
+        .cdp-src::before {
+          content: ""; position: absolute; inset: 0;
           background-image:
-            linear-gradient(to right, rgba(255,255,255,0.08) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(255,255,255,0.08) 1px, transparent 1px);
-          background-size: 14px 14px;
-          mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%);
+            linear-gradient(rgba(57,180,74,0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(57,180,74,0.05) 1px, transparent 1px);
+          background-size: 18px 18px;
+          pointer-events: none;
+          border-radius: inherit;
         }
-        /* Responsive: tighten artwork on small screens */
-        @media (max-width: 640px) {
-          .cdp-wave { gap: 6px !important; padding-left: 2% !important; padding-right: 2% !important; }
-          .cdp-slab { width: 32% !important; height: 110px !important; transform: perspective(700px) rotateY(10deg) rotateX(-3deg) !important; }
-          .cdp-orb-wrap { width: 76px !important; height: 76px !important; }
-          .cdp-ring-outer { width: 116px !important; height: 116px !important; }
-          .cdp-ring-mid { width: 96px !important; height: 96px !important; }
-          .cdp-ring-inner { display: none !important; }
-          .cdp-orbit-canvas { display: none !important; }
+        .cdp-src-head {
+          display: flex; align-items: center; gap: 5px;
+          font-size: 9px; font-weight: 600;
+          letter-spacing: 0.1em; color: #39B44A;
+          margin-bottom: 8px; position: relative; z-index: 1;
         }
+        .cdp-src-head .dot {
+          width: 5px; height: 5px; border-radius: 50%; background: #39B44A;
+          animation: cdp-dot-blink 2s ease-in-out infinite;
+        }
+        .cdp-src-grid {
+          position: relative; z-index: 1;
+          display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+        }
+        .cdp-badge {
+          display: flex; align-items: center; gap: 5px;
+          padding: 9px 7px; border-radius: 10px;
+          background: #f0faf2;
+          border: 1px solid rgba(57,180,74,0.25);
+          animation: cdp-badge-float 4s ease-in-out infinite;
+        }
+        .cdp-badge-label {
+          font-size: 9px; color: #2a8038; font-weight: 500;
+          white-space: nowrap;
+        }
+
+        /* Connector */
+        .cdp-connector { display: flex; flex-direction: column; align-items: center; gap: 4px; flex-shrink: 0; }
+        .cdp-chev-row { display: flex; gap: 3px; font-size: 11px; line-height: 1; color: #39B44A; }
+        .cdp-chev { animation: cdp-chev 1.5s ease-in-out infinite; }
+
+        /* Orb */
+        .cdp-orb-wrap2 {
+          position: relative; flex-shrink: 0;
+          width: clamp(100px, 15vw, 150px);
+          aspect-ratio: 1 / 1;
+          animation: cdp-orb-bob 4s ease-in-out infinite;
+        }
+        .cdp-ring { position: absolute; border-radius: 50%; pointer-events: none; }
+        .cdp-ring-3 { inset: -18px; border: 1px dashed rgba(57,180,74,0.15); animation: cdp-ring-cw 28s linear infinite; }
+        .cdp-ring-2 { inset: -6px;  border: 1px solid rgba(57,180,74,0.22); animation: cdp-ring-ccw 18s linear infinite; }
+        .cdp-ring-1 { inset: 4px;   border: 1.5px dashed rgba(57,180,74,0.35); animation: cdp-ring-cw 12s linear infinite; }
+        .cdp-node {
+          position: absolute; top: 50%; left: 50%;
+          width: 8px; height: 8px; margin: -4px 0 0 -4px;
+          border-radius: 50%;
+          transform-origin: 4px 4px;
+        }
+        .cdp-node-g { background: #39B44A; animation: cdp-node-orbit 6s linear infinite; }
+        .cdp-node-o { background: #ff8a72; animation: cdp-node-orbit 4s linear infinite; animation-delay: -2s; }
+        .cdp-orb-pulse {
+          position: absolute; inset: -2px; border-radius: 50%;
+          border: 2px solid rgba(57,180,74,0.18);
+          animation: cdp-orb-glow 3s ease-in-out infinite;
+          pointer-events: none;
+        }
+        .cdp-core {
+          position: absolute; inset: 16px; border-radius: 50%;
+          background: #39B44A;
+          border: 2px solid rgba(255,255,255,0.6);
+          display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+          overflow: hidden;
+        }
+        .cdp-gloss {
+          position: absolute; top: 22%; left: 22%;
+          width: 32%; height: 22%;
+          background: rgba(255,255,255,0.30);
+          border-radius: 50%;
+          transform: rotate(-30deg);
+          pointer-events: none;
+        }
+        .cdp-core-label { font-size: 14px; font-weight: 700; color: #fff; letter-spacing: 0.06em; z-index: 2; }
+        .cdp-core-sub   { font-size: 8px; color: rgba(255,255,255,0.72); letter-spacing: 0.12em; z-index: 2; }
+
+        /* Tablet */
+        @media (max-width: 1023px) {
+          .cdp-src { width: 165px; padding: 8px; }
+          .cdp-src-head { font-size: 8px; }
+          .cdp-badge-label { font-size: 8px; }
+          .cdp-ring-3 { display: none; }
+          .cdp-particle-extra { display: none; }
+        }
+        /* Mobile */
+        @media (max-width: 767px) {
+          .cdp-stage { flex-direction: column; gap: 12px; padding: 8px; }
+          .cdp-src { width: 100%; max-width: 300px; transform: none; animation: none; transform-origin: center; }
+          .cdp-connector svg { transform: rotate(90deg); }
+          .cdp-particle, .cdp-particle-extra { display: none; }
+          .cdp-ring-3, .cdp-ring-2 { display: none; }
+          .cdp-node { display: none; }
+        }
+
         @media (prefers-reduced-motion: reduce) {
-          .cdp-wave *, .cdp-wave *::before, .cdp-wave *::after {
+          .cdp-src, .cdp-orb-wrap2, .cdp-orb-pulse,
+          .cdp-ring-1, .cdp-ring-2, .cdp-ring-3,
+          .cdp-badge, .cdp-node, .cdp-particle, .cdp-particle-extra {
             animation: none !important;
           }
+          .cdp-src { transform: perspective(700px) rotateY(10deg); }
+          .cdp-chev { animation-duration: 3s; }
         }
       `}</style>
 
-      {/* LEFT — 3D glass slab (holo card) */}
-      <div
-        className="cdp-slab relative shrink-0"
-        style={{
-          width: "26%",
-          height: 136,
-          transform: "perspective(700px) rotateY(16deg) rotateX(-4deg)",
-          transformStyle: "preserve-3d",
-        }}
-      >
-        {/* Soft ground shadow under the slab */}
-        <div
-          className="absolute"
-          style={{
-            left: "8%",
-            right: "4%",
-            bottom: -10,
-            height: 14,
-            background:
-              "radial-gradient(ellipse at center, hsl(var(--primary-deep) / 0.35), transparent 70%)",
-            filter: "blur(6px)",
-            borderRadius: "50%",
-            zIndex: -1,
-          }}
-        />
-        <div
-          className="absolute inset-0 overflow-hidden"
-          style={{
-            background:
-              "linear-gradient(135deg, hsl(var(--primary-deep)) 0%, hsl(145 60% 18%) 100%)",
-            borderRadius: "20px",
-            boxShadow:
-              "-10px 16px 36px -8px hsl(var(--primary-deep) / 0.35), 4px -4px 12px rgba(255,255,255,0.5), inset -6px -8px 0 rgba(0,0,0,0.22), inset 0 1px 0 rgba(255,255,255,0.14), inset 0 0 0 1px rgba(255,255,255,0.06)",
-          }}
-        >
-          {/* Holographic grid */}
-          <div className="cdp-holo-grid absolute inset-0" aria-hidden />
-          {/* Sheen sweep */}
-          <div
-            className="absolute"
-            style={{
-              top: 0,
-              left: 0,
-              width: "40%",
-              height: "100%",
-              background:
-                "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.14) 50%, rgba(255,255,255,0) 100%)",
-              animation: "cdp-sheen 5s ease-in-out infinite",
-            }}
-          />
+      {/* ============ SOURCE PANEL ============ */}
+      <div className="cdp-src">
+        <div className="cdp-src-head">
+          <span className="dot" />
+          DATA SOURCES
+        </div>
+        <div className="cdp-src-grid">
           {badges.map((b, i) => (
-            <div
-              key={i}
-              className="absolute grid place-items-center rounded-full"
-              style={{
-                left: b.left,
-                top: b.top,
-                width: b.size,
-                height: b.size,
-                marginLeft: -b.size / 2,
-                marginTop: -b.size / 2,
-                background:
-                  "radial-gradient(circle at 32% 28%, hsl(var(--accent) / 0.95) 0%, hsl(var(--accent)) 55%, hsl(var(--accent-deep)) 100%)",
-                boxShadow:
-                  "0 6px 14px hsl(var(--accent-deep) / 0.45), inset 0 2px 3px rgba(255,255,255,0.35), inset 0 -3px 4px rgba(0,0,0,0.22)",
-                animation: `cdp-badge-float 3s ease-in-out ${i * 0.4}s infinite`,
-              }}
-            >
-              <svg viewBox="0 0 24 24" width={b.size * 0.5} height={b.size * 0.5}>
-                {iconPaths[i]}
-              </svg>
+            <div key={b.key} className="cdp-badge" style={{ animationDelay: `${i * 0.8}s` }}>
+              <Icon name={b.key} />
+              <span className="cdp-badge-label">{b.label}</span>
             </div>
           ))}
-          {dots.map((d, i) => (
-            <div
-              key={i}
-              className="absolute rounded-full"
-              style={{
-                left: d.left,
-                top: d.top,
-                width: 4,
-                height: 4,
-                marginLeft: -2,
-                marginTop: -2,
-                background: "white",
-                opacity: 0.4,
-                animation: `cdp-dot-twinkle 2.4s ease-in-out ${i * 0.5}s infinite`,
-              }}
-            />
-          ))}
         </div>
       </div>
 
-      {/* CENTER — SVG connector with particle stream */}
-      <div className="relative" style={{ flex: 1, height: "100%" }}>
-        <svg
-          className="absolute inset-0"
-          style={{ width: "100%", height: "100%", overflow: "visible" }}
-          viewBox="0 0 200 140"
-          preserveAspectRatio="none"
-          fill="none"
-        >
+      {/* ============ CONNECTOR — particle stream ============ */}
+      <div className="cdp-connector">
+        <svg width="88" height="64" viewBox="0 0 88 64" style={{ overflow: "visible" }} fill="none" aria-hidden>
           <defs>
-            <marker id="arrG" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-              <path d="M1 1.5L8.5 5L1 8.5" fill="none" stroke="hsl(var(--primary))" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </marker>
-            <marker id="arrO" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
-              <path d="M1 1.5L8.5 5L1 8.5" fill="none" stroke="hsl(var(--accent))" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </marker>
-            <path id="pTop" d="M4,38 C70,38 130,70 196,70" />
-            <path id="pBot" d="M4,102 C70,102 130,70 196,70" />
+            <path id="cdpTop" d="M 0,20 C 30,20 60,32 88,32" />
+            <path id="cdpBot" d="M 0,44 C 30,44 60,32 88,32" />
           </defs>
 
-          {/* Visible dashed paths */}
-          <use
-            href="#pTop"
-            stroke="hsl(var(--primary))"
-            strokeWidth="1.8"
-            strokeDasharray="6 4"
-            markerEnd="url(#arrG)"
-            opacity="0.9"
-            style={{ animation: "cdp-dash 1.6s linear infinite" }}
-          />
-          <use
-            href="#pBot"
-            stroke="hsl(var(--accent))"
-            strokeWidth="1.8"
-            strokeDasharray="6 4"
-            markerEnd="url(#arrO)"
-            opacity="0.9"
-            style={{ animation: "cdp-dash 1.6s linear infinite" }}
-          />
+          {/* Visible base curves */}
+          <use href="#cdpTop" stroke="#39B44A" strokeWidth="1" opacity="0.12" />
+          <use href="#cdpBot" stroke="#ff8a72" strokeWidth="1" opacity="0.12" />
 
-          {/* Source nodes */}
-          <circle cx="4" cy="38" r="4.5" fill="hsl(var(--primary))" opacity="0.95" />
-          <circle cx="4" cy="102" r="4.5" fill="hsl(var(--accent))" opacity="0.95" />
+          {/* Green particles on top path */}
+          <circle className="cdp-particle" r="3" fill="#39B44A">
+            <animateMotion dur="2.2s" begin="0s" repeatCount="indefinite"><mpath href="#cdpTop" /></animateMotion>
+          </circle>
+          <circle className="cdp-particle" r="2.2" fill="#39B44A">
+            <animateMotion dur="2.2s" begin="0.7s" repeatCount="indefinite"><mpath href="#cdpTop" /></animateMotion>
+          </circle>
+          <circle className="cdp-particle-extra" r="1.6" fill="#39B44A">
+            <animateMotion dur="2.2s" begin="1.4s" repeatCount="indefinite"><mpath href="#cdpTop" /></animateMotion>
+          </circle>
 
-          {/* Light-sci-fi particle stream — small glowing dots traveling along each path */}
-          {[0, 0.6, 1.2].map((delay, i) => (
-            <circle key={`tp-${i}`} r="1.7" fill="hsl(var(--primary))" opacity="0.85">
-              <animateMotion dur="2.2s" begin={`${delay}s`} repeatCount="indefinite">
-                <mpath href="#pTop" />
-              </animateMotion>
-              <animate attributeName="opacity" values="0;0.9;0" dur="2.2s" begin={`${delay}s`} repeatCount="indefinite" />
-            </circle>
-          ))}
-          {[0.3, 0.9, 1.5].map((delay, i) => (
-            <circle key={`bp-${i}`} r="1.7" fill="hsl(var(--accent))" opacity="0.85">
-              <animateMotion dur="2.2s" begin={`${delay}s`} repeatCount="indefinite">
-                <mpath href="#pBot" />
-              </animateMotion>
-              <animate attributeName="opacity" values="0;0.9;0" dur="2.2s" begin={`${delay}s`} repeatCount="indefinite" />
-            </circle>
-          ))}
-
-          {/* Soft halo where streams converge into the orb */}
-          <circle cx="196" cy="70" r="6" fill="hsl(var(--primary))" opacity="0.2">
-            <animate attributeName="r" values="5;11;5" dur="2.2s" repeatCount="indefinite" />
-            <animate attributeName="opacity" values="0.2;0.04;0.2" dur="2.2s" repeatCount="indefinite" />
+          {/* Orange particles on bottom path */}
+          <circle className="cdp-particle" r="2.8" fill="#ff8a72">
+            <animateMotion dur="2.8s" begin="0.35s" repeatCount="indefinite"><mpath href="#cdpBot" /></animateMotion>
+          </circle>
+          <circle className="cdp-particle-extra" r="2" fill="#ff8a72">
+            <animateMotion dur="2.8s" begin="1.2s" repeatCount="indefinite"><mpath href="#cdpBot" /></animateMotion>
           </circle>
         </svg>
+
+        <div className="cdp-chev-row">
+          <span className="cdp-chev" style={{ animationDelay: "0s" }}>▶</span>
+          <span className="cdp-chev" style={{ animationDelay: "0.3s" }}>▶</span>
+          <span className="cdp-chev" style={{ animationDelay: "0.6s" }}>▶</span>
+        </div>
       </div>
 
-      {/* RIGHT — CDP orb with 3 orbital rings + orbit particles */}
-      <div
-        className="cdp-orb-wrap relative flex shrink-0 items-center justify-center"
-        style={{ width: 88, height: 88, animation: "cdp-orb-bob 4s ease-in-out infinite" }}
-      >
-        {/* Ground shadow under orb */}
-        <div
-          aria-hidden
-          className="absolute"
-          style={{
-            left: "10%",
-            right: "10%",
-            bottom: -12,
-            height: 12,
-            background:
-              "radial-gradient(ellipse at center, hsl(var(--primary-deep) / 0.40), transparent 70%)",
-            filter: "blur(4px)",
-            borderRadius: "50%",
-            zIndex: 0,
-          }}
-        />
-        {/* Outer dashed ring */}
-        <div
-          aria-hidden
-          className="cdp-ring-outer absolute"
-          style={{
-            top: "50%",
-            left: "50%",
-            width: 138,
-            height: 138,
-            transform: "translate(-50%,-50%) rotate(0deg)",
-            animation: "cdp-ring-spin 18s linear infinite",
-            borderRadius: "50%",
-            border: "1px dashed hsl(var(--primary) / 0.45)",
-            transformOrigin: "center",
-            zIndex: 1,
-          }}
-        >
-          <span
-            style={{
-              position: "absolute",
-              top: -3,
-              left: "50%",
-              width: 6,
-              height: 6,
-              marginLeft: -3,
-              borderRadius: "50%",
-              background: "hsl(var(--primary))",
-              boxShadow: "0 0 8px hsl(var(--primary) / 0.7)",
-            }}
-          />
+      {/* ============ CDP CORE ORB ============ */}
+      <div className="cdp-orb-wrap2">
+        <div className="cdp-ring cdp-ring-3" aria-hidden />
+        <div className="cdp-ring cdp-ring-2" aria-hidden />
+        <div className="cdp-ring cdp-ring-1" aria-hidden />
+
+        <div className="cdp-node cdp-node-g" aria-hidden />
+        <div className="cdp-node cdp-node-o" aria-hidden />
+
+        <div className="cdp-orb-pulse" aria-hidden />
+
+        <div className="cdp-core">
+          <div className="cdp-gloss" aria-hidden />
+          <span className="cdp-core-label">CDP</span>
+          <span className="cdp-core-sub">PLATFORM</span>
         </div>
-        {/* Mid ring (counter-rotating) */}
-        <div
-          aria-hidden
-          className="cdp-ring-mid absolute"
-          style={{
-            top: "50%",
-            left: "50%",
-            width: 114,
-            height: 114,
-            transform: "translate(-50%,-50%) rotate(0deg)",
-            animation: "cdp-ring-spin-rev 11s linear infinite",
-            borderRadius: "50%",
-            border: "1px solid hsl(var(--primary) / 0.22)",
-            zIndex: 1,
-          }}
-        >
-          <span
-            style={{
-              position: "absolute",
-              bottom: -2.5,
-              left: "50%",
-              width: 5,
-              height: 5,
-              marginLeft: -2.5,
-              borderRadius: "50%",
-              background: "hsl(var(--accent))",
-              boxShadow: "0 0 6px hsl(var(--accent) / 0.7)",
-            }}
-          />
-        </div>
-        {/* Inner thin ring */}
-        <div
-          aria-hidden
-          className="cdp-ring-inner absolute"
-          style={{
-            top: "50%",
-            left: "50%",
-            width: 96,
-            height: 96,
-            transform: "translate(-50%,-50%)",
-            animation: "cdp-ring-spin 26s linear infinite",
-            borderRadius: "50%",
-            border: "1px dotted hsl(var(--primary) / 0.30)",
-            zIndex: 1,
-          }}
-        />
-        {/* Orbit particle canvas */}
-        <canvas
-          ref={orbitCanvasRef}
-          className="cdp-orbit-canvas"
-          style={{
-            position: "absolute",
-            inset: -46,
-            width: 180,
-            height: 180,
-            zIndex: 2,
-            pointerEvents: "none",
-          }}
-        />
-        {/* The orb */}
-        <div
-          className="cdp-orb-new absolute grid place-items-center overflow-hidden"
-          style={{
-            inset: 0,
-            borderRadius: "50%",
-            background:
-              "radial-gradient(circle at 36% 30%, hsl(128 60% 68%) 0%, hsl(var(--primary)) 48%, hsl(var(--primary-deep)) 100%)",
-            boxShadow:
-              "0 0 0 6px hsl(var(--primary) / 0.10), 0 0 0 14px hsl(var(--primary) / 0.05), 0 14px 28px -6px hsl(var(--primary-deep) / 0.40), 0 4px 10px hsl(var(--primary) / 0.28), inset 0 -6px 12px rgba(0,0,0,0.26), inset 3px 4px 10px rgba(255,255,255,0.30)",
-            animation: "orbPulse 3s ease-in-out infinite",
-            zIndex: 3,
-          }}
-        >
-          {/* Subtle scan line — light sci-fi accent */}
-          <div
-            aria-hidden
-            className="absolute left-0 right-0"
-            style={{
-              height: 2,
-              background:
-                "linear-gradient(90deg, transparent, rgba(255,255,255,0.55), transparent)",
-              animation: "cdp-scan 4s linear infinite",
-              opacity: 0.6,
-            }}
-          />
-        </div>
-        <span
-          style={{
-            position: "relative",
-            zIndex: 5,
-            fontSize: 17,
-            fontWeight: 900,
-            color: "#fff",
-            letterSpacing: "1px",
-            textShadow: "0 1px 5px rgba(0,0,0,0.4)",
-          }}
-        >
-          CDP
-        </span>
       </div>
     </div>
   );
