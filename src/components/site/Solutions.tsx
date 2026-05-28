@@ -594,7 +594,7 @@ const CDPWave = () => {
           top: "50%",
           width: "26%",
           height: "70%",
-          transform: "translateY(-50%) perspective(600px) rotateY(-20deg) rotateX(5deg)",
+          transform: "translateY(-50%) perspective(600px) rotateY(20deg) rotateX(5deg)",
           transformStyle: "preserve-3d",
         }}
       >
