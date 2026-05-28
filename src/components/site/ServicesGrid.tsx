@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import mountainsImg from "@/assets/services-mountains.png";
 import {
   MessageSquare,
   MessageCircle,
@@ -589,9 +590,9 @@ export function ServicesGrid() {
           }}
         />
 
-        {/* Animated aurora drift + signal waves */}
+        {/* Animated aurora drift + mountain silhouette backdrop */}
         <AuroraBlobs />
-        <SignalWaves />
+        <MountainBackdrop />
 
         {/* Side vignette (kept very subtle so plexus stays visible) */}
         <div
@@ -677,15 +678,6 @@ const BG_KEYFRAMES = `
   0%   { transform: translate3d(0, 0, 0) scale(0.95); }
   100% { transform: translate3d(40px, 50px, 0) scale(1.08); }
 }
-@keyframes signal-ping {
-  0%   { transform: scale(0.45); opacity: 0.55; }
-  80%  { opacity: 0.05; }
-  100% { transform: scale(1.5); opacity: 0; }
-}
-@keyframes signal-core {
-  0%, 100% { opacity: 0.85; }
-  50%      { opacity: 0.4; }
-}
 `;
 
 function AuroraBlobs() {
@@ -738,55 +730,25 @@ function AuroraBlobs() {
   );
 }
 
-const SIGNAL_SOURCES = [
-  { cx: 220, cy: 200 },
-  { cx: 1200, cy: 280 },
-  { cx: 480, cy: 700 },
-  { cx: 1080, cy: 720 },
-  { cx: 740, cy: 420 },
-];
-
-function SignalWaves() {
+function MountainBackdrop() {
   return (
-    <svg
+    <img
+      src={mountainsImg}
+      alt=""
       aria-hidden
-      className="absolute inset-0 h-full w-full"
-      viewBox="0 0 1440 900"
-      preserveAspectRatio="xMidYMid slice"
-      style={{ opacity: 0.55 }}
-    >
-      {SIGNAL_SOURCES.map((src, i) => (
-        <g key={i} style={{ transformOrigin: `${src.cx}px ${src.cy}px` }}>
-          {/* Core dot */}
-          <circle
-            cx={src.cx}
-            cy={src.cy}
-            r={5}
-            fill="#39B44A"
-            style={{
-              animation: `signal-core ${3 + (i % 3)}s ease-in-out infinite`,
-            }}
-          />
-          {/* Outward rings */}
-          {[0, 1, 2].map((k) => (
-            <circle
-              key={k}
-              cx={src.cx}
-              cy={src.cy}
-              r={70}
-              fill="none"
-              stroke="#39B44A"
-              strokeWidth={1.2}
-              style={{
-                transformOrigin: `${src.cx}px ${src.cy}px`,
-                animation: `signal-ping ${5 + (i % 2)}s ease-out ${k * 1.4 + i * 0.6}s infinite`,
-              }}
-            />
-          ))}
-        </g>
-      ))}
-    </svg>
+      className="pointer-events-none absolute inset-x-0 bottom-0 w-full select-none"
+      style={{
+        opacity: 0.22,
+        filter: "blur(2px) saturate(0.55)",
+        mixBlendMode: "luminosity",
+        WebkitMaskImage:
+          "linear-gradient(to top, black 45%, transparent 100%)",
+        maskImage:
+          "linear-gradient(to top, black 45%, transparent 100%)",
+      }}
+    />
   );
 }
+
 
 
