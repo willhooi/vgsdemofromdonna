@@ -16,7 +16,7 @@ type CaseItem = {
 
 const cases: CaseItem[] = [
   {
-    id: 0, brand: "Sea Group", abbr: "S", color: "#ee4d2d",
+    id: 0, brand: "Sea Group", abbr: "S", color: "#005a24",
     metric: "↓ Cost", metricLabel: "OTP & SMS Optimized",
     title: "Cost Optimization for SMS & OTP Services",
     description:
@@ -25,7 +25,7 @@ const cases: CaseItem[] = [
     image: "/images/sea-group.jpg",
   },
   {
-    id: 1, brand: "LG Electronics", abbr: "LG", color: "#a50034",
+    id: 1, brand: "LG Electronics", abbr: "LG", color: "#008134",
     metric: "Smart", metricLabel: "Warranty System",
     title: "Smart Warranty System Optimization",
     description:
@@ -34,7 +34,7 @@ const cases: CaseItem[] = [
     image: "/images/lge.jpg",
   },
   {
-    id: 2, brand: "CGV Cinemas", abbr: "▶", color: "#cc0000",
+    id: 2, brand: "CGV Cinemas", abbr: "▶", color: "#39b44a",
     metric: "80%", metricLabel: "Email Open Rate",
     title: "Boosting Box Office via Email Marketing",
     description:
@@ -43,7 +43,7 @@ const cases: CaseItem[] = [
     image: "/images/cgv.jpg",
   },
   {
-    id: 3, brand: "Pharmacity", abbr: "Rx", color: "#007c4e",
+    id: 3, brand: "Pharmacity", abbr: "Rx", color: "#ff9b17",
     metric: "↑ UX", metricLabel: "OTP Reliability",
     title: "Enhancing Customer Verification Monitoring",
     description:
@@ -52,7 +52,7 @@ const cases: CaseItem[] = [
     image: "/images/pharmacity.jpg",
   },
   {
-    id: 4, brand: "San Miguel Vietnam", abbr: "SM", color: "#1a3a6b",
+    id: 4, brand: "San Miguel Vietnam", abbr: "SM", color: "#d76e00",
     metric: "Zalo", metricLabel: "Chatbot Integrated",
     title: "Topup Reward Campaign with Zalo Chatbot",
     description:
