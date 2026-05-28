@@ -592,19 +592,19 @@ export function ServicesGrid() {
         {/* Plexus network */}
         <PlexusBackground />
 
-        {/* Side vignette for readability on wide screens */}
+        {/* Side vignette (kept very subtle so plexus stays visible) */}
         <div
-          className="absolute inset-y-0 left-0 w-24"
+          className="absolute inset-y-0 left-0 w-12"
           style={{
             background:
-              "linear-gradient(90deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 100%)",
+              "linear-gradient(90deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 100%)",
           }}
         />
         <div
-          className="absolute inset-y-0 right-0 w-24"
+          className="absolute inset-y-0 right-0 w-12"
           style={{
             background:
-              "linear-gradient(270deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 100%)",
+              "linear-gradient(270deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 100%)",
           }}
         />
 
@@ -699,8 +699,8 @@ function buildCluster(
 function PlexusBackground() {
   const { nodes, edges } = useMemo(() => {
     const rnd = mulberry32(20260528);
-    const a = buildCluster(rnd, 30, 20, 600, 20, 620);
-    const b = buildCluster(rnd, 28, 860, 1420, 240, 880);
+    const a = buildCluster(rnd, 42, -40, 560, 0, 780);
+    const b = buildCluster(rnd, 42, 880, 1480, 120, 900);
     const all = [...a, ...b];
     const threshold = 150;
     const links: [number, number][] = [];
@@ -728,7 +728,7 @@ function PlexusBackground() {
       viewBox="0 0 1440 900"
       preserveAspectRatio="xMidYMid slice"
     >
-      <g stroke="#39B44A" strokeWidth={0.7} strokeOpacity={0.35} fill="none">
+      <g stroke="#39B44A" strokeWidth={0.9} strokeOpacity={0.6} fill="none">
         {edges.map(([i, j], k) => (
           <line
             key={k}
@@ -744,14 +744,14 @@ function PlexusBackground() {
           if (n.kind === 1) {
             return (
               <g key={i}>
-                <circle cx={n.x} cy={n.y} r={3.5} fill="#39B44A" opacity={0.9} />
+                <circle cx={n.x} cy={n.y} r={4} fill="#39B44A" opacity={1} />
                 <circle
                   cx={n.x}
                   cy={n.y}
                   r={6.5}
                   fill="none"
                   stroke="#39B44A"
-                  strokeOpacity={0.55}
+                  strokeOpacity={0.8}
                   strokeWidth={1}
                   style={{
                     transformOrigin: `${n.x}px ${n.y}px`,
@@ -762,9 +762,9 @@ function PlexusBackground() {
             );
           }
           if (n.kind === 0) {
-            return <circle key={i} cx={n.x} cy={n.y} r={2} fill="#39B44A" opacity={0.85} />;
+            return <circle key={i} cx={n.x} cy={n.y} r={2.4} fill="#39B44A" opacity={1} />;
           }
-          return <circle key={i} cx={n.x} cy={n.y} r={2} fill="#39B44A" opacity={0.35} />;
+          return <circle key={i} cx={n.x} cy={n.y} r={2} fill="#39B44A" opacity={0.6} />;
         })}
       </g>
     </svg>
