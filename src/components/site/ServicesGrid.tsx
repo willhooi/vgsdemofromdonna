@@ -589,8 +589,9 @@ export function ServicesGrid() {
           }}
         />
 
-        {/* Plexus network */}
-        <PlexusBackground />
+        {/* Animated aurora drift + signal waves */}
+        <AuroraBlobs />
+        <SignalWaves />
 
         {/* Side vignette (kept very subtle so plexus stays visible) */}
         <div
