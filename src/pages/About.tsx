@@ -17,7 +17,7 @@ import { AboutStoryPillars } from "@/components/site/AboutStoryPillars";
 import { AboutMilestones } from "@/components/site/AboutMilestones";
 import { AccreteBacking } from "@/components/site/AccreteBacking";
 import { VDivider } from "@/components/brand/VWatermark";
-import { SignalArt } from "@/components/brand/SignalArt";
+import { SignalWave } from "@/components/brand/SignalArt";
 import { Button } from "@/components/ui/button";
 
 const values = [
@@ -52,8 +52,8 @@ const About = () => {
         className="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28"
         style={{ background: "var(--gradient-hero)" }}
       >
-        <div className="pointer-events-none absolute inset-0 -z-0 opacity-60">
-          <SignalArt />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-0 opacity-50">
+          <SignalWave className="h-32 w-full md:h-48" />
         </div>
         <div className="container-tight relative">
           <Link
