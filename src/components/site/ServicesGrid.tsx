@@ -592,19 +592,19 @@ export function ServicesGrid() {
         {/* Plexus network */}
         <PlexusBackground />
 
-        {/* Side vignette for readability on wide screens */}
+        {/* Side vignette (kept very subtle so plexus stays visible) */}
         <div
-          className="absolute inset-y-0 left-0 w-24"
+          className="absolute inset-y-0 left-0 w-12"
           style={{
             background:
-              "linear-gradient(90deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 100%)",
+              "linear-gradient(90deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 100%)",
           }}
         />
         <div
-          className="absolute inset-y-0 right-0 w-24"
+          className="absolute inset-y-0 right-0 w-12"
           style={{
             background:
-              "linear-gradient(270deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 100%)",
+              "linear-gradient(270deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 100%)",
           }}
         />
 
