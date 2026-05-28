@@ -818,10 +818,10 @@ const CDPWave = () => {
           ref={orbitCanvasRef}
           style={{
             position: "absolute",
-            inset: -28,
-            width: 144,
-            height: 144,
-            zIndex: 3,
+            inset: -36,
+            width: 160,
+            height: 160,
+            zIndex: 2,
             pointerEvents: "none",
           }}
         />
