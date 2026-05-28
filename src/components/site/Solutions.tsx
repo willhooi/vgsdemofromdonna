@@ -527,22 +527,22 @@ const CDPWave = () => {
     </g>,
   ];
 
+  // Evenly distributed 2x2 grid positions (cell centers)
   const iconPositions = [
-    { left: "38%", top: "18%" },
-    { left: "62%", top: "12%" },
-    { left: "22%", top: "48%" },
-    { left: "55%", top: "52%" },
+    { left: "28%", top: "28%" },
+    { left: "72%", top: "28%" },
+    { left: "28%", top: "72%" },
+    { left: "72%", top: "72%" },
   ];
-
 
   return (
     <div
       aria-hidden
       className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-xl"
-      style={{ background: "transparent" }}
+      style={{ background: "transparent", perspective: "900px" }}
     >
       <style>{`
-        @keyframes cdp-pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.12); } }
+        @keyframes cdp-pulse { 0%,100% { transform: translateZ(14px) scale(1); } 50% { transform: translateZ(22px) scale(1.08); } }
         @keyframes cdp-grid-drift {
           0% { background-position: 0 0; }
           100% { background-position: 24px 24px; }
@@ -556,17 +556,12 @@ const CDPWave = () => {
           0% { transform: scale(1); opacity: 0.45; }
           100% { transform: scale(1.7); opacity: 0; }
         }
-
-
-        @keyframes cdp-particle {
-          0% { transform: translateX(0); opacity: 0; }
-          15% { opacity: 1; }
-          85% { opacity: 1; }
-          100% { transform: translateX(var(--cdp-dx, 120px)); opacity: 0; }
+        @keyframes cdp-dash {
+          to { stroke-dashoffset: -28; }
         }
       `}</style>
 
-      {/* LEFT — Source panel */}
+      {/* LEFT — Source panel with 3D tilt */}
       <div
         className="absolute overflow-hidden"
         style={{
@@ -574,8 +569,13 @@ const CDPWave = () => {
           top: "12%",
           width: "30%",
           height: "76%",
-          background: "#C8EAD8",
-          borderRadius: "16px",
+          background: "linear-gradient(135deg, #D6F0E0 0%, #B8E2CE 60%, #9FD4BC 100%)",
+          borderRadius: "18px",
+          transform: "rotateY(-14deg) rotateX(4deg)",
+          transformStyle: "preserve-3d",
+          boxShadow:
+            "12px 14px 28px rgba(13,92,58,0.18), inset 0 1px 0 rgba(255,255,255,0.6), inset -6px -8px 18px rgba(13,92,58,0.08)",
+          border: "1px solid rgba(255,255,255,0.7)",
         }}
       >
         {/* drifting grid texture */}
@@ -588,18 +588,23 @@ const CDPWave = () => {
             animation: "cdp-grid-drift 6s linear infinite",
           }}
         />
-        {/* icons */}
+        {/* icons — 2x2 evenly distributed, 3D */}
         {iconPaths.map((icon, i) => (
           <div
             key={i}
             className="absolute grid place-items-center rounded-full"
             style={{
               ...iconPositions[i],
-              width: 52,
-              height: 52,
-
-              background: "#E8553E",
-              boxShadow: "0 4px 10px rgba(216,74,50,0.35)",
+              width: 54,
+              height: 54,
+              marginLeft: -27,
+              marginTop: -27,
+              background:
+                "radial-gradient(circle at 30% 28%, #FF8A6E 0%, #E8553E 55%, #B8341F 100%)",
+              boxShadow:
+                "0 8px 14px rgba(184,52,31,0.4), inset 0 2px 4px rgba(255,255,255,0.45), inset 0 -3px 6px rgba(0,0,0,0.18)",
+              transformStyle: "preserve-3d",
+              transform: "translateZ(14px)",
               animation: `cdp-pulse 2.4s ease-in-out ${i * 0.3}s infinite`,
             }}
           >
@@ -610,55 +615,56 @@ const CDPWave = () => {
         ))}
       </div>
 
-      {/* CENTER — connector lines + particles */}
-      <div
-        className="absolute"
-        style={{ left: "34%", top: "42%", width: "38%", height: "16%" }}
+      {/* CENTER — 2 rounded connector lines + arrow toward CDP */}
+      <svg
+        className="absolute inset-0 w-full h-full"
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
+        style={{ overflow: "visible" }}
       >
-        {/* two dashed lines */}
-        <div
-          className="absolute left-0 right-0"
-          style={{
-            top: "30%",
-            height: 0,
-            borderTop: "1.5px dashed rgba(29,158,117,0.5)",
-          }}
+        <defs>
+          <marker
+            id="cdp-arrow"
+            viewBox="0 0 10 10"
+            refX="8"
+            refY="5"
+            markerWidth="6"
+            markerHeight="6"
+            orient="auto-start-reverse"
+          >
+            <path d="M0,0 L10,5 L0,10 z" fill="#1D9E75" />
+          </marker>
+        </defs>
+        {/* top line: from panel top-right area, curves and merges */}
+        <path
+          d="M 34 32 H 55 Q 62 32 62 42 V 48"
+          fill="none"
+          stroke="#1D9E75"
+          strokeWidth="0.5"
+          strokeDasharray="3 2"
+          strokeLinecap="round"
+          style={{ animation: "cdp-dash 1.6s linear infinite" }}
         />
-        <div
-          className="absolute left-0 right-0"
-          style={{
-            top: "70%",
-            height: 0,
-            borderTop: "1.5px dashed rgba(29,158,117,0.5)",
-          }}
+        {/* bottom line: mirrors */}
+        <path
+          d="M 34 68 H 55 Q 62 68 62 58 V 52"
+          fill="none"
+          stroke="#1D9E75"
+          strokeWidth="0.5"
+          strokeDasharray="3 2"
+          strokeLinecap="round"
+          style={{ animation: "cdp-dash 1.6s linear infinite" }}
         />
-        {/* particles */}
-        {[
-          { top: "30%", delay: 0 },
-          { top: "30%", delay: 0.9 },
-          { top: "30%", delay: 1.8 },
-          { top: "70%", delay: 0.4 },
-          { top: "70%", delay: 1.3 },
-          { top: "70%", delay: 2.2 },
-        ].map((p, i) => (
-          <div
-            key={i}
-            className="absolute rounded-full"
-            style={{
-              left: 0,
-              top: p.top,
-              width: 7,
-              height: 7,
-              marginTop: -3.5,
-              background: "#1D9E75",
-              boxShadow: "0 0 6px rgba(29,158,117,0.6)",
-              // @ts-ignore
-              "--cdp-dx": "100%",
-              animation: `cdp-particle 2.6s linear ${p.delay}s infinite`,
-            } as React.CSSProperties}
-          />
-        ))}
-      </div>
+        {/* arrow merging into CDP */}
+        <path
+          d="M 62 50 H 78"
+          fill="none"
+          stroke="#1D9E75"
+          strokeWidth="0.8"
+          strokeLinecap="round"
+          markerEnd="url(#cdp-arrow)"
+        />
+      </svg>
 
       {/* RIGHT — CDP blob with ripples */}
       <div
@@ -697,7 +703,6 @@ const CDPWave = () => {
             animation: "cdp-blob-morph 6s ease-in-out infinite",
           }}
         >
-
           <span
             style={{
               fontWeight: 900,
