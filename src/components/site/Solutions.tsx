@@ -420,6 +420,65 @@ const CDP_BULLETS = [
 
 const CDPSupportStrip = ({ visible }: { visible: boolean }) => {
   const n = useCountUp(visible ? 99 : 0, 1400);
+  const ambientCanvasRef = useRef<HTMLCanvasElement | null>(null);
+
+  useEffect(() => {
+    const canvas = ambientCanvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let W = 0, H = 0, raf = 0;
+    type P = {
+      cx: number; cy: number; r: number; a: number; spd: number;
+      size: number; baseOp: number; opFreq: number; opPhase: number; t: number;
+    };
+    let particles: P[] = [];
+
+    const resize = () => {
+      const rect = canvas.getBoundingClientRect();
+      W = canvas.width = rect.width;
+      H = canvas.height = rect.height;
+      particles = Array.from({ length: 26 }, () => ({
+        cx: Math.random() * W,
+        cy: Math.random() * H,
+        r: 14 + Math.random() * 38,
+        a: Math.random() * Math.PI * 2,
+        spd: (0.12 + Math.random() * 0.18) * (Math.random() > 0.5 ? 1 : -1),
+        size: 0.8 + Math.random() * 1.6,
+        baseOp: 0.08 + Math.random() * 0.18,
+        opFreq: 0.01 + Math.random() * 0.012,
+        opPhase: Math.random() * Math.PI * 2,
+        t: Math.random() * 300,
+      }));
+    };
+    resize();
+    const ro = new ResizeObserver(resize);
+    ro.observe(canvas);
+
+    const DEG = Math.PI / 180;
+    const draw = () => {
+      ctx.clearRect(0, 0, W, H);
+      for (const p of particles) {
+        p.t += 1;
+        p.a += p.spd * DEG;
+        const px = p.cx + p.r * Math.cos(p.a);
+        const py = p.cy + p.r * Math.sin(p.a);
+        const op = p.baseOp * (0.5 + 0.5 * Math.sin(p.t * p.opFreq + p.opPhase));
+        ctx.beginPath();
+        ctx.arc(px, py, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(57, 180, 74, ${op})`;
+        ctx.fill();
+      }
+      raf = requestAnimationFrame(draw);
+    };
+    raf = requestAnimationFrame(draw);
+    return () => {
+      cancelAnimationFrame(raf);
+      ro.disconnect();
+    };
+  }, []);
+
   return (
     <div
       className="relative w-full h-full overflow-hidden rounded-2xl border border-[hsl(var(--primary))]/15 bg-white px-5 py-3.5 flex flex-col"
@@ -429,6 +488,12 @@ const CDPSupportStrip = ({ visible }: { visible: boolean }) => {
         transition: "opacity 600ms ease-out 200ms, transform 600ms ease-out 200ms",
       }}
     >
+      <canvas
+        ref={ambientCanvasRef}
+        aria-hidden
+        className="pointer-events-none absolute inset-0 h-full w-full"
+        style={{ zIndex: 1 }}
+      />
       <div className="relative z-10 flex h-full flex-col gap-3">
         {/* Header */}
         <div className="min-w-0">
