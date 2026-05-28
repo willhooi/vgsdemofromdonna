@@ -20,7 +20,7 @@ const cases: CaseItem[] = [
     metric: "↓ Cost", metricLabel: "OTP & SMS Optimized",
     title: "Cost Optimization for SMS & OTP Services",
     description:
-      "Triển khai kết hợp SMS OTP, Voice OTP và failover cho hệ sinh thái Shopee, Garena, AirPay — tối ưu chi phí xác thực quy mô lớn.",
+      "Deployed a combined SMS OTP, Voice OTP and failover solution across the Shopee, Garena and AirPay ecosystem — optimizing authentication costs at scale.",
     tags: ["SMS OTP", "Voice OTP", "Failover"],
     image: "/images/sea-group.jpg",
   },
@@ -29,7 +29,7 @@ const cases: CaseItem[] = [
     metric: "Smart", metricLabel: "Warranty System",
     title: "Smart Warranty System Optimization",
     description:
-      "Xây dựng hệ thống bảo hành thông minh: web platform, app Android/iOS và quản lý dữ liệu tập trung cho LGE.",
+      "Built a smart warranty system for LGE: web platform, Android/iOS apps and centralized data management.",
     tags: ["Web Platform", "Android", "iOS"],
     image: "/images/lge.jpg",
   },
@@ -38,7 +38,7 @@ const cases: CaseItem[] = [
     metric: "80%", metricLabel: "Email Open Rate",
     title: "Boosting Box Office via Email Marketing",
     description:
-      "Triển khai Email Marketing và transactional email tự động hóa booking, target open rate 80% và click rate 50%.",
+      "Rolled out Email Marketing and transactional emails to automate booking, targeting 80% open rate and 50% click rate.",
     tags: ["Email Marketing", "Automation"],
     image: "/images/cgv.jpg",
   },
@@ -47,7 +47,7 @@ const cases: CaseItem[] = [
     metric: "↑ UX", metricLabel: "OTP Reliability",
     title: "Enhancing Customer Verification Monitoring",
     description:
-      "Áp dụng SMS Brandname và Voice OTP — nâng cao xác thực khách hàng, giảm tỷ lệ OTP thất bại.",
+      "Applied SMS Brandname and Voice OTP — strengthening customer verification and reducing OTP failure rates.",
     tags: ["SMS Brandname", "Voice OTP"],
     image: "/images/pharmacity.jpg",
   },
@@ -56,7 +56,7 @@ const cases: CaseItem[] = [
     metric: "Zalo", metricLabel: "Chatbot Integrated",
     title: "Topup Reward Campaign with Zalo Chatbot",
     description:
-      "Hệ thống đổi thưởng tự động tích hợp Zalo Chatbot cho San Miguel — hiện đại hóa trải nghiệm đổi quà.",
+      "An automated reward redemption system integrated with Zalo Chatbot for San Miguel — modernizing the gifting experience.",
     tags: ["Zalo Chatbot", "Reward Automation"],
     image: "/images/sanmiguel.jpg",
   },
@@ -74,13 +74,13 @@ export const VietGuysCaseStudies = () => {
         <div className="mx-auto max-w-3xl text-center">
           <span className="chapter-eyebrow">Case studies</span>
           <h2 className="heading-section mt-3">
-            <span className="text-foreground">Khách hàng của </span>
+            <span className="text-foreground">Customers of </span>
             <span className="bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--accent))] bg-clip-text text-transparent">
               VietGuys
             </span>
           </h2>
           <p className="mt-4 text-base text-muted-foreground">
-            Những thương hiệu hàng đầu tin chọn VietGuys cho hạ tầng tin nhắn doanh nghiệp.
+            Leading brands trust VietGuys for enterprise messaging infrastructure.
           </p>
         </div>
 
