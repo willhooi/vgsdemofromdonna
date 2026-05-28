@@ -632,7 +632,7 @@ const CDPWave = () => {
         @keyframes cdp-src-float { 0%,100% { transform: perspective(700px) rotateY(10deg) translateY(0); } 50% { transform: perspective(700px) rotateY(10deg) translateY(-4px); } }
         @keyframes cdp-dot-blink { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
         @keyframes cdp-badge-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
-        @keyframes cdp-chev { 0%,100% { opacity: 0.25; } 50% { opacity: 1; } }
+        
         @keyframes cdp-ring-cw { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes cdp-ring-ccw { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
         @keyframes cdp-node-orbit { from { transform: rotate(0deg) translateX(48px) rotate(0deg); } to { transform: rotate(360deg) translateX(48px) rotate(-360deg); } }
@@ -691,8 +691,6 @@ const CDPWave = () => {
 
         /* Connector */
         .cdp-connector { display: flex; flex-direction: column; align-items: center; gap: 4px; flex-shrink: 0; }
-        .cdp-chev-row { display: flex; gap: 3px; font-size: 11px; line-height: 1; color: #39B44A; }
-        .cdp-chev { animation: cdp-chev 1.5s ease-in-out infinite; }
 
         /* Orb */
         .cdp-orb-wrap2 {
@@ -764,7 +762,7 @@ const CDPWave = () => {
             animation: none !important;
           }
           .cdp-src { transform: perspective(700px) rotateY(10deg); }
-          .cdp-chev { animation-duration: 3s; }
+          
         }
       `}</style>
 
@@ -816,11 +814,6 @@ const CDPWave = () => {
           </circle>
         </svg>
 
-        <div className="cdp-chev-row">
-          <span className="cdp-chev" style={{ animationDelay: "0s" }}>▶</span>
-          <span className="cdp-chev" style={{ animationDelay: "0.3s" }}>▶</span>
-          <span className="cdp-chev" style={{ animationDelay: "0.6s" }}>▶</span>
-        </div>
       </div>
 
       {/* ============ CDP CORE ORB ============ */}
