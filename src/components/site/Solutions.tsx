@@ -553,9 +553,10 @@ const CDPWave = () => {
           66% { border-radius: 56% 44% 38% 62% / 52% 48% 60% 40%; }
         }
         @keyframes cdp-ripple {
-          0% { transform: translate(-50%,-50%) scale(1); opacity: 0.45; }
-          100% { transform: translate(-50%,-50%) scale(1.7); opacity: 0; }
+          0% { transform: scale(1); opacity: 0.45; }
+          100% { transform: scale(1.7); opacity: 0; }
         }
+
 
         @keyframes cdp-particle {
           0% { transform: translateX(0); opacity: 0; }
