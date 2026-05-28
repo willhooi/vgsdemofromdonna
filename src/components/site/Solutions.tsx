@@ -782,7 +782,7 @@ const CDPWave = () => {
           {/* rotating bands overlay */}
           <div
             className="absolute"
-            style={{ left: 0, top: 0, width: 84, height: 84, borderRadius: "50%", overflow: "hidden", zIndex: 1 }}
+            style={{ left: 0, top: 0, width: 84, height: 84, borderRadius: "50%", overflow: "hidden", zIndex: 1, animation: "cdp-orb-spin 8s linear infinite" }}
           >
             {[
               { top: "28%", delay: "0s" },
