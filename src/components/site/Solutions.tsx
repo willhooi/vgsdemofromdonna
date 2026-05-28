@@ -733,8 +733,8 @@ const CDPWave = () => {
           transform: rotate(-30deg);
           pointer-events: none;
         }
-        .cdp-core-label { font-size: 14px; font-weight: 700; color: #fff; letter-spacing: 0.06em; z-index: 2; animation: cdp-ring-ccw 10s linear infinite; }
-        .cdp-core-sub   { font-size: 8px; color: rgba(255,255,255,0.72); letter-spacing: 0.12em; z-index: 2; animation: cdp-ring-ccw 10s linear infinite; }
+        .cdp-core-label { font-size: 14px; font-weight: 700; color: #fff; letter-spacing: 0.06em; z-index: 2; animation: cdp-ring-ccw 4s linear infinite; }
+        .cdp-core-sub   { font-size: 8px; color: rgba(255,255,255,0.72); letter-spacing: 0.12em; z-index: 2; animation: cdp-ring-ccw 4s linear infinite; }
 
         /* Tablet */
         @media (max-width: 1023px) {
