@@ -7,6 +7,7 @@ import { TrustBand } from "@/components/site/TrustBand";
 import { Solutions } from "@/components/site/Solutions";
 import { ServicesGrid } from "@/components/site/ServicesGrid";
 import { Industries } from "@/components/site/Industries";
+import { VietGuysCaseStudies } from "@/components/site/VietGuysCaseStudies";
 import { FAQ } from "@/components/site/FAQ";
 import { CTASection } from "@/components/site/CTASection";
 import { Footer } from "@/components/site/Footer";
