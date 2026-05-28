@@ -72,7 +72,7 @@ export const VietGuysCaseStudies = () => {
     >
       <div className="container-tight">
         <div className="mx-auto max-w-3xl text-center">
-          <span className="chapter-eyebrow">07 — Case studies</span>
+          <span className="chapter-eyebrow">Case studies</span>
           <h2 className="heading-section mt-3">
             <span className="text-foreground">Khách hàng của </span>
             <span className="bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--accent))] bg-clip-text text-transparent">
