@@ -505,8 +505,95 @@ const CDPSupportStrip = ({ visible }: { visible: boolean }) => {
 /* ---------- Animated CDP illustration ---------- */
 
 const CDPWave = () => {
+  const orbitCanvasRef = useRef<HTMLCanvasElement | null>(null);
+
+  useEffect(() => {
+    const canvas = orbitCanvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+    const dpr = window.devicePixelRatio || 1;
+    const SIZE = 144;
+    canvas.width = SIZE * dpr;
+    canvas.height = SIZE * dpr;
+    ctx.scale(dpr, dpr);
+
+    const tracks = [
+      {
+        radius: 52,
+        speed: 0.9,
+        color: "#39B44A",
+        particles: [
+          { angle: 0, size: 3.2, opacity: 1 },
+          { angle: 120, size: 2.0, opacity: 0.55 },
+          { angle: 240, size: 2.5, opacity: 0.75 },
+        ],
+      },
+      {
+        radius: 64,
+        speed: -0.6,
+        color: "#FF9B17",
+        particles: [
+          { angle: 60, size: 2.8, opacity: 1 },
+          { angle: 200, size: 1.8, opacity: 0.5 },
+        ],
+      },
+      {
+        radius: 42,
+        speed: 1.4,
+        color: "#5dd06e",
+        particles: [
+          { angle: 90, size: 1.8, opacity: 0.7 },
+          { angle: 270, size: 2.2, opacity: 0.9 },
+        ],
+      },
+    ];
+
+    let raf = 0;
+    const draw = () => {
+      ctx.clearRect(0, 0, SIZE, SIZE);
+      const cx = 72, cy = 72;
+      for (const tr of tracks) {
+        ctx.beginPath();
+        ctx.arc(cx, cy, tr.radius, 0, Math.PI * 2);
+        ctx.strokeStyle = "rgba(57,180,74,0.10)";
+        ctx.lineWidth = 0.8;
+        ctx.stroke();
+
+        for (const p of tr.particles) {
+          p.angle += tr.speed;
+          for (let t = 5; t >= 1; t--) {
+            const ta = ((p.angle - tr.speed * t) * Math.PI) / 180;
+            const tx = cx + tr.radius * Math.cos(ta);
+            const ty = cy + tr.radius * Math.sin(ta);
+            const tr2 = p.size * (1 - t / 5) * 0.7;
+            const to = p.opacity * (1 - t / 5) * 0.4;
+            ctx.globalAlpha = to;
+            ctx.fillStyle = tr.color;
+            ctx.beginPath();
+            ctx.arc(tx, ty, Math.max(0.1, tr2), 0, Math.PI * 2);
+            ctx.fill();
+          }
+          const a = (p.angle * Math.PI) / 180;
+          const px = cx + tr.radius * Math.cos(a);
+          const py = cy + tr.radius * Math.sin(a);
+          ctx.globalAlpha = p.opacity;
+          ctx.fillStyle = tr.color;
+          ctx.beginPath();
+          ctx.arc(px, py, p.size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+      ctx.globalAlpha = 1;
+      raf = requestAnimationFrame(draw);
+    };
+    raf = requestAnimationFrame(draw);
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
   // 4 white Lucide-style icons: Store, CreditCard, Globe, Search
   const iconPaths = [
+
     // Store
     <g key="s" stroke="white" strokeWidth="1.8" fill="none" strokeLinecap="round" strokeLinejoin="round">
       <path d="M3 9l1.5-5h15L21 9" />
