@@ -870,11 +870,88 @@ const CDPWave = () => {
         </svg>
       </div>
 
-      {/* RIGHT — CDP circle with orbiting particles */}
+      {/* RIGHT — CDP orb with orbital rings + particles */}
       <div
         className="relative flex shrink-0 items-center justify-center"
-        style={{ width: 88, height: 88 }}
+        style={{ width: 88, height: 88, animation: "cdp-orb-bob 4s ease-in-out infinite" }}
       >
+        {/* Ground shadow under orb */}
+        <div
+          aria-hidden
+          className="absolute"
+          style={{
+            left: "10%",
+            right: "10%",
+            bottom: -12,
+            height: 12,
+            background:
+              "radial-gradient(ellipse at center, rgba(20,80,40,0.40), transparent 70%)",
+            filter: "blur(4px)",
+            borderRadius: "50%",
+            zIndex: 0,
+          }}
+        />
+        {/* Tilted orbital ring (outer) */}
+        <div
+          aria-hidden
+          className="absolute"
+          style={{
+            top: "50%",
+            left: "50%",
+            width: 132,
+            height: 132,
+            transform: "translate(-50%,-50%) rotate(0deg)",
+            animation: "cdp-ring-spin 14s linear infinite",
+            borderRadius: "50%",
+            border: "1px dashed rgba(57,180,74,0.45)",
+            transformOrigin: "center",
+            zIndex: 1,
+          }}
+        >
+          <span
+            style={{
+              position: "absolute",
+              top: -3,
+              left: "50%",
+              width: 6,
+              height: 6,
+              marginLeft: -3,
+              borderRadius: "50%",
+              background: "#39B44A",
+              boxShadow: "0 0 8px rgba(57,180,74,0.7)",
+            }}
+          />
+        </div>
+        {/* Inner ring counter-rotating */}
+        <div
+          aria-hidden
+          className="absolute"
+          style={{
+            top: "50%",
+            left: "50%",
+            width: 108,
+            height: 108,
+            transform: "translate(-50%,-50%) rotate(0deg)",
+            animation: "cdp-ring-spin-rev 9s linear infinite",
+            borderRadius: "50%",
+            border: "1px solid rgba(57,180,74,0.22)",
+            zIndex: 1,
+          }}
+        >
+          <span
+            style={{
+              position: "absolute",
+              bottom: -2.5,
+              left: "50%",
+              width: 5,
+              height: 5,
+              marginLeft: -2.5,
+              borderRadius: "50%",
+              background: "#FF9B17",
+              boxShadow: "0 0 6px rgba(255,155,23,0.7)",
+            }}
+          />
+        </div>
         <canvas
           ref={orbitCanvasRef}
           style={{
@@ -892,10 +969,11 @@ const CDPWave = () => {
             inset: 0,
             borderRadius: "50%",
             background:
-              "radial-gradient(circle at 38% 32%, #5dd06e, #39B44A 50%, #1d6b2a)",
+              "radial-gradient(circle at 36% 30%, #7de08a 0%, #39B44A 48%, #1d6b2a 100%)",
             boxShadow:
-              "0 0 0 8px rgba(57,180,74,0.12), 0 0 0 16px rgba(57,180,74,0.06), 0 8px 24px rgba(57,180,74,0.35), inset 0 -4px 10px rgba(0,0,0,0.20), inset 2px 3px 8px rgba(255,255,255,0.15)",
+              "0 0 0 6px rgba(57,180,74,0.10), 0 0 0 14px rgba(57,180,74,0.05), 0 14px 28px -6px rgba(20,80,40,0.40), 0 4px 10px rgba(57,180,74,0.28), inset 0 -6px 12px rgba(0,0,0,0.26), inset 3px 4px 10px rgba(255,255,255,0.30)",
             animation: "orbPulse 3s ease-in-out infinite",
+            zIndex: 3,
           }}
         />
         <span
@@ -912,6 +990,7 @@ const CDPWave = () => {
           CDP
         </span>
       </div>
+
 
     </div>
   );
