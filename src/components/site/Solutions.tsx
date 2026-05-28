@@ -560,15 +560,30 @@ const CDPWave = () => {
       <style>{`
         @keyframes cdp-badge-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
         @keyframes cdp-dot-twinkle { 0%,100% { opacity: 0.2; } 50% { opacity: 0.65; } }
-        @keyframes cdp-blob-morph {
-          0%,100% { border-radius: 60% 40% 55% 45% / 45% 55% 40% 60%; }
-          33% { border-radius: 48% 52% 62% 38% / 56% 44% 60% 40%; }
-          66% { border-radius: 55% 45% 40% 60% / 50% 50% 55% 45%; }
-        }
         @keyframes cdp-glow-pulse { 0%,100% { transform: scale(1); opacity: var(--o,0.15); } 50% { transform: scale(1.08); opacity: calc(var(--o,0.15) * 1.6); } }
         @keyframes cdp-dash { to { stroke-dashoffset: -24; } }
-        @keyframes cdp-chev-fade { 0%,100% { opacity: var(--o,1); } 50% { opacity: calc(var(--o,1) * 0.4); } }
         @keyframes cdp-sheen { 0% { transform: translateX(-120%) skewX(-20deg); } 100% { transform: translateX(220%) skewX(-20deg); } }
+        @keyframes cdp-orb-breathe {
+          0%,100% { box-shadow: 0 0 0 2px rgba(57,180,74,0.25), 0 8px 28px rgba(57,180,74,0.40), inset 0 -6px 14px rgba(0,0,0,0.28), inset 2px 4px 10px rgba(255,255,255,0.18); }
+          50%     { box-shadow: 0 0 0 2px rgba(57,180,74,0.30), 0 10px 34px rgba(57,180,74,0.55), inset 0 -6px 14px rgba(0,0,0,0.28), inset 2px 4px 10px rgba(255,255,255,0.18); }
+        }
+        @keyframes cdp-band-spin { 0% { transform: translateX(-50%); } 100% { transform: translateX(0%); } }
+        @keyframes cdp-ripple {
+          0% { transform: translate(-50%,-50%) scale(0.85); opacity: 0.55; }
+          100% { transform: translate(-50%,-50%) scale(1); opacity: 0; }
+        }
+        .cdp-orb::after {
+          content: ""; position: absolute; width: 26px; height: 16px;
+          background: radial-gradient(ellipse, rgba(255,255,255,0.55), transparent 70%);
+          border-radius: 50%; top: 16px; left: 18px; transform: rotate(-25deg);
+          pointer-events: none; z-index: 3;
+        }
+        .cdp-orb::before {
+          content: ""; position: absolute; width: 120%; height: 18px;
+          background: rgba(255,255,255,0.055); border-radius: 50%;
+          top: 50%; left: -10%; transform: translateY(-50%) rotate(-15deg);
+          pointer-events: none; z-index: 2;
+        }
       `}</style>
 
       {/* LEFT — 3D dark-green slab */}
