@@ -759,7 +759,8 @@ const CDPWave = () => {
         @media (prefers-reduced-motion: reduce) {
           .cdp-src, .cdp-orb-wrap2, .cdp-orb-pulse,
           .cdp-ring-1, .cdp-ring-2, .cdp-ring-3,
-          .cdp-badge, .cdp-node, .cdp-particle, .cdp-particle-extra {
+          .cdp-badge, .cdp-node, .cdp-particle, .cdp-particle-extra,
+          .cdp-core, .cdp-core-label, .cdp-core-sub {
             animation: none !important;
           }
           .cdp-src { transform: perspective(700px) rotateY(10deg); }
