@@ -744,15 +744,15 @@ function PlexusBackground() {
           if (n.kind === 1) {
             return (
               <g key={i}>
-                <circle cx={n.x} cy={n.y} r={4} fill="#39B44A" opacity={1} />
+                <circle cx={n.x} cy={n.y} r={4} fill="#39B44A" opacity={0.55} />
                 <circle
                   cx={n.x}
                   cy={n.y}
                   r={6.5}
                   fill="none"
                   stroke="#39B44A"
-                  strokeOpacity={0.8}
-                  strokeWidth={1}
+                  strokeOpacity={0.4}
+                  strokeWidth={0.8}
                   style={{
                     transformOrigin: `${n.x}px ${n.y}px`,
                     animation: `signal-pulse ${3 + (i % 3)}s ease-in-out ${(i % 5) * 0.4}s infinite`,
@@ -762,9 +762,9 @@ function PlexusBackground() {
             );
           }
           if (n.kind === 0) {
-            return <circle key={i} cx={n.x} cy={n.y} r={2.4} fill="#39B44A" opacity={1} />;
+            return <circle key={i} cx={n.x} cy={n.y} r={2.4} fill="#39B44A" opacity={0.55} />;
           }
-          return <circle key={i} cx={n.x} cy={n.y} r={2} fill="#39B44A" opacity={0.6} />;
+          return <circle key={i} cx={n.x} cy={n.y} r={2} fill="#39B44A" opacity={0.3} />;
         })}
       </g>
     </svg>
