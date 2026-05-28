@@ -1,61 +1,79 @@
-# Đề xuất hướng triển khai trang About Us
+# Đề xuất artwork & animation cho khối CDP
 
-## 1. Concept định hướng
+Dựa trên ảnh ref (source panel với 4 icon tròn → CDP blob hữu cơ → orbital rings) và concept chung của web (motif "tín hiệu / sóng / kết nối", primary green #39B44A, accent orange, gradient-hero, nhịp animation nhẹ — fade-up, pulse, dash).
 
-Trang chủ đang dùng narrative theo "Acts" (Act 01 — The Signal, Act 02 — Our Journey…). About Us nên là một **chương dài hơn của cùng câu chuyện** — không lặp lại trang chủ mà đào sâu phần "con người, hành trình, giá trị" mà trang chủ chỉ chạm lướt qua.
+## 1. Artwork — 3 hướng đề xuất
 
-Tone đồng bộ:
+### Hướng A — "Signal Constellation" (khuyến nghị)
 
-- Eyebrow dạng "Chapter 01 — ...", "Chapter 02 — ..." (phân biệt với "Act" trang chủ để không trùng lặp)
-- Cùng hệ design token (primary green, gradient-hero, container-tight, heading-display/heading-section, animate-fade-up)
-- Cùng motif "tín hiệu / sóng / kết nối" đã có ở Hero, Solutions, TrustMap
-- Cùng nhịp: hero lớn → câu chuyện cá nhân → dữ kiện → con người → CTA
+Giữ tinh thần ref nhưng tinh chỉnh để khớp web:
 
-## 2. Cấu trúc trang đề xuất (8 sections)
+- **Source panel (trái)**: glass slab nghiêng nhẹ (rotateY 14°), nền trắng gradient mềm, 4 icon tròn (E-commerce, POS, Web, Search) màu cam gradient (#ff8a72 → #b8341f) — đồng bộ accent của web. Icon arranged theo cụm 2-2 thay vì grid cứng.
+- **Connector (giữa)**: 2 đường cong SVG hội tụ (xanh + cam) + 3 chevron "▶▶▶" đang chạy (cdp-dash) thể hiện luồng dữ liệu — gợi lại motif SignalArt của Hero.
+- **CDP orb (phải)**: blob hữu cơ (border-radius bất đối xứng kiểu morphing) thay cho hình tròn cứng, gradient xanh #39B44A → #2a8038, có highlight gloss + 2 orbital rings (dashed ngoài + solid trong) quay ngược chiều.
+- **Background section**: trắng → #f4faf6 radial (như hiện tại), thêm noise grain rất nhẹ để có chiều sâu.
+
+### Hướng B — "Holographic Data Stream"
+
+- Source panel thành "holo card" với grid lines mờ phía sau, icon nổi 3D hơn (drop-shadow đa lớp).
+- Connector là dải particle stream (nhiều dot nhỏ chạy theo đường cong) thay vì line đơn.
+- CDP orb dạng "core" với 3 vòng quỹ đạo + vài data-node nhỏ orbit quanh.
+- Cảm giác sci-fi hơn, hợp với phần AI Core của web.
+
+### Hướng C — "Editorial Minimal"
+
+- Bỏ orbital rings, đơn giản hoá: source panel phẳng white card, connector mỏng tinh tế, CDP là circle solid với typography "CDP" lớn.
+- Tập trung vào typography và whitespace — hợp nếu muốn tone editorial nhẹ.
+- Ít animation nhất, performance tốt nhất.
+
+## 2. Hướng Animation
+
+Tất cả dùng CSS keyframes + SVG SMIL, không thêm thư viện:
+
+
+| Element                 | Animation                     | Duration       |
+| ----------------------- | ----------------------------- | -------------- |
+| Source panel            | float nhẹ ±3px                | 6s ease-in-out |
+| Icon badges             | float so le + sheen quét chéo | 4s / 3s        |
+| Connector paths         | stroke-dashoffset chạy        | 2s linear      |
+| Chevron ▶▶▶             | opacity twinkle so le         | 1.5s           |
+| Particle dots (hướng B) | animateMotion theo path       | 3-4s stagger   |
+| CDP orb                 | bob ±3px + pulse glow         | 4s / 3s        |
+| Orbital rings           | rotate ngược chiều            | 18s / 24s      |
+| Orb gloss highlight     | static (giả 3D)               | —              |
+
+
+**Nguyên tắc giảm chuyển động**: bọc trong `@media (prefers-reduced-motion: reduce)` để tắt bob/rings/sheen.
+
+## 3. Responsive — tối ưu mọi thiết bị
 
 ```text
-Header
- ├─ Chapter 01 — The Origin        (Hero: "Short steps on a long journey")
- ├─ Chapter 02 — The Why           (Story: 25m² → backbone, 3 ảnh minh hoạ web cũ)
- ├─ Chapter 03 — Vision & Mission  (2-card đối xứng, giữ nguyên nội dung)
- ├─ Chapter 04 — Milestones        (Timeline dọc kế thừa, gắn icon theo loại sự kiện)
- ├─ Chapter 05 — Core Values       (6 giá trị, layout grid 3×2 có ảnh nền nhẹ)
- ├─ Chapter 06 — The Bridge        (Accrete partnership — tái sử dụng JapanBridge/AccreteBacking)
- ├─ Chapter 07 — The Team          (giữ <Team />, thêm dải "Life at VietGuys" 3 ảnh)
- ├─ Chapter 08 — Valued Clients    (logo marquee theo ngành: E-commerce, Finance, Retail, Logistics)
- └─ CTA cuối + Footer + ChatBubble
+Desktop (≥1024px)   : layout 2 cột, panel 280px × orb 160px, đầy đủ rings + particles
+Tablet  (768-1023)  : 2 cột thu nhỏ, panel 220px × orb 130px, giảm 1 ring
+Mobile  (<768px)    : stack dọc, panel full-width max 320px, orb 110px,
+                      connector xoay 90° (cong dọc), ẩn particle stream,
+                      giữ orb pulse + chevron, tắt orbital ring ngoài
 ```
 
-### Khác biệt so với About.tsx hiện tại
+Kỹ thuật:
 
-- **Thêm Chapter 02 mở rộng**: 3 trụ "Solidarity team / Service quality / Community trust" lấy từ web cũ — hiện trang đang thiếu hoàn toàn phần human-story này.
-- **Thêm Chapter 06 — The Bridge**: hiện chỉ nhắc Accrete một câu ở hero; web cũ nhấn mạnh nhiều, nên tách thành section riêng với visual VN×JP (đã có sẵn `JapanBridge` / `AccreteFlightChip`).
-- **Thêm Chapter 08 — Valued Clients**: web cũ có danh sách khách hàng theo ngành (Shopee, Lazada, HSBC, FWD…). Tái dùng `LogoMarquee` chia theo tab/ngành.
-- **Milestones**: nâng cấp từ list dọc đơn sắc → timeline có icon riêng cho từng cột mốc (founding, partnership, award, product launch, office expansion) để match cảm giác "tín hiệu mạnh dần" của Timeline trang chủ.
-- **Hero**: thêm hình ảnh/illustration mang motif sóng tín hiệu (như Hero trang chủ) thay vì chỉ gradient phẳng.
+- SVG connector dùng `viewBox` + `preserveAspectRatio="xMidYMid meet"` để scale mượt.
+- Canvas particle (nếu giữ ở hướng B) dùng `devicePixelRatio` + resize observer; tắt hẳn ở `<768px` để tiết kiệm pin.
+- Icon dùng SVG inline (không raster) — sắc nét mọi DPR.
+- Orb dùng `clamp(90px, 14vw, 160px)` thay vì fixed size.
+- Container dùng `aspect-ratio` thay vì height cứng để tránh vỡ layout.
 
-## 3. Nội dung cập nhật / bổ sung
+## 4. Chi tiết kỹ thuật (chỉ sửa Solutions.tsx)
 
-- **Headline hero**: giữ "Short steps on a long journey" + sub trích nguyên văn web cũ.
-- **Milestones**: bổ sung 06/2018 (1st office expansion) và 05/2020 (2nd office expansion) — hiện đang thiếu so với web cũ, để đủ 12 mốc.
-- **Human story block**: 3 ảnh + caption (team solidarity, service quality, community contribution).
-- **Clients**: nhóm theo 4 industry như web cũ (E-commerce, Finance & Banking, Retail/F&B, Logistics).
+- File: `src/components/site/Solutions.tsx` (khối CDP hiện tại, ~line 460-880)
+- Token màu: dùng `hsl(var(--primary))`, `hsl(var(--accent))` từ index.css — không hardcode hex trong component (hiện đang hardcode #39B44A, sẽ refactor sang token).
+- Thêm `@media (prefers-reduced-motion)` trong style block hiện có.
+- Thêm breakpoint mobile cho SVG connector (xoay path).
+- Không thêm dependency mới, không đụng file khác.
 
-## 4. Chi tiết kỹ thuật
+## 5. Câu hỏi xác nhận
 
-- File chính: `src/pages/About.tsx` — refactor toàn bộ, vẫn dùng các component có sẵn:
-  - `Header`, `Footer`, `ChatBubble`, `Team`, `LogoMarquee`, `JapanBridge` (hoặc `AccreteBacking`), `VDivider`
-- Tạo 2 component nhỏ mới trong `src/components/site/`:
-  - `AboutStoryPillars.tsx` — 3 ảnh + caption (Chapter 02 mở rộng)
-  - `AboutMilestones.tsx` — timeline với icon theo type
-- Locales: thêm `about.*` keys vào `src/locales/en.ts` và `vi.ts` để song ngữ (trang hiện đang hard-code tiếng Anh).
-- SEO: cập nhật title/meta description, thêm 1 H1 duy nhất, alt text cho mọi ảnh, JSON-LD `Organization` với foundingDate 2007, parentOrganization Accrete Inc.
-- Animation: dùng `animate-fade-up` + delay theo index như pattern hiện tại; không thêm thư viện mới.
-- Design tokens: dùng `--gradient-hero`, `--shadow-soft`, `--shadow-card`, `primary`/`accent` — không hardcode màu.
-
-## 5. Câu hỏi cần xác nhận trước khi build
-
-1. Có muốn **song ngữ EN/VI** ngay lần này không, hay chỉ EN như trang hiện tại? --> Answer: làm EN trước
-2. Có muốn **giữ tên "Chapter" cho About** (để phân biệt với "Act" trang chủ), hay dùng tiếp "Act 06, 07…" để liền mạch? --> Answer: xét về cấu trúc thì tôi không có ý kiến, chỉ cần không hiển thị text "Chapter" ra nhé.
-3. Phần **Valued Clients**: dùng logo thật từ web cũ (cần copy assets) hay logo placeholder/marquee text như `LogoMarquee` hiện có? --> Answer: Không cần thể hiện "Valued Clients" nữa
-4. Phần **ảnh human-story** ở Chapter 02: dùng lại 3 ảnh từ web cũ (link trực tiếp), hay generate ảnh mới bằng imagegen cho đồng bộ visual style? --> Answer: generate ảnh mới cho đồng bộ visual style
+1. **Chọn hướng nào**: A (Signal Constellation — gần ref nhất, khuyến nghị), B (Holographic — sci-fi hơn), hay C (Editorial Minimal — gọn nhất)? --> Ans: B nhưng light sci-fi tone (clean & clear)
+2. **Particle stream ở connector**: có muốn thêm không, hay giữ chevron ▶▶▶ như hiện tại cho nhẹ? 
+3. **Orb shape**: blob hữu cơ (như ref) hay tròn đều (như hiện tại)? --> Ans: tròn đều 
+4. **Refactor màu sang design token** (hsl var) hay giữ hex cứng? --> Ans: tuỳ bạn chọn để phù hợp tone & mood Enterprise của thương hiệu 
