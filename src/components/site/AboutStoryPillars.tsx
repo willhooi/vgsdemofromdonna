@@ -17,9 +17,9 @@ export const AboutStoryPillars = () => (
   <section className="py-20 md:py-28">
     <div className="container-tight">
       <Reveal variant="fade-up" className="max-w-2xl">
-        <span className="chapter-eyebrow">Values</span>
+        <span className="chapter-eyebrow">Core values</span>
         <h2 className="heading-section mt-4 text-balance">
-          Our Core Values — six convictions that outlasted every trend.
+          Six values that have outlasted every trend.
         </h2>
         <p className="mt-5 text-muted-foreground">
           Tools change. Channels change. The reasons we built VietGuys haven&apos;t.

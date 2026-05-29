@@ -29,13 +29,13 @@ export const Team = () => (
   <section id="team" className="py-24 md:py-32">
     <div className="container-tight">
       <div className="max-w-2xl">
-        <span className="chapter-eyebrow">Our Experts</span>
+        <span className="eyebrow">The people behind VietGuys</span>
         <h2 className="heading-section mt-4 text-balance">
-          Meet the people behind every message.
+          Real humans, on call for your brand.
         </h2>
         <p className="mt-5 text-muted-foreground">
-          Behind every delivered SMS, Zalo ZNS or voice OTP is a team that&apos;s been doing this since 2007 —
-          engineers, product leads and customer partners who care as much about your campaigns as you do.
+          Behind every message delivered is a team that&apos;s been doing this since 2007 — engineers,
+          product leads and customer partners who care as much about your campaigns as you do.
         </p>
       </div>
 

@@ -1,122 +1,81 @@
-# Adapt Aquafix template → trang About VietGuys
+# About Page — Content Enrichment + Cinematic Motion Pass
 
-Mục tiêu: mượn **composition signature** của Aquafix (hero stats nổi, timeline zigzag, values 6-card, mission/vision split với bullets, team grid, CTA chốt) — **không** mượn palette navy/lime hay font Clash Grotesk. Giữ trọn brand VietGuys (gradient brand hiện tại, typo `heading-display`, nội dung 19 năm + Accrete, motion system `Reveal` đã có).
+## 1. Remove sticky section nav
+- Delete `<AboutSectionNav />` usage from `src/pages/About.tsx` and remove the import.
+- Keep `src/components/site/AboutSectionNav.tsx` file deleted (no longer needed).
+- Keep section `id`s on wrappers (`#story`, `#vision`, `#milestones`, `#values`, `#team`, `#certificates`) — harmless and useful for deep-links from Footer/CTAs.
 
-## Sections mới / refactor
+## 2. Apply content from vietguys.biz/en/about-us/vietguys
 
-### 1. `AboutHero` — refactor theo signature Aquafix
+Extracted from the old site, mapped into existing sections (no new sections, just richer content):
 
-Bố cục mới:
+**AboutHero**
+- Keep tagline "Short steps · on a long journey".
+- Add a one-line positioning under H1: "Vietnam's pioneer in Mobile Marketing Solutions since 2007 — now part of Accrete Inc., Tokyo Stock Exchange listed."
 
-- Hàng trên: 2 cột — trái là H1 to (`heading-display`, giữ "Nineteen years. One signal."), phải là paragraph mô tả (Vietnam pioneer since 2007 + Accrete) căn justify như Aquafix.
-- Hàng dưới: 1 ảnh hero lớn full-width (kitchen-replace bằng ảnh team/office VietGuys từ Unsplash) với **stat strip nổi đè đáy ảnh** — card trắng bo lớn, shadow mềm, 4 stat animated counters:
-  - `19+` Years in Market
-  - `5,000+` Brands Trusted
-  - `5M+` Messages / Day
-  - `15+` Solutions Delivered
-- Dùng hook `use-count-up.ts` đã có để animate khi vào viewport.
-- Giữ tagline italic "Short steps · on a long journey" và link Back to home.
+**AboutVisionMission** — replace placeholder copy with the old-site canonical text:
+- Vision: "To become the leading Mobile Marketing Solutions provider in Vietnam and the region, accompanying enterprises on their digital transformation journey."
+- Mission: "Deliver constantly-improved Mobile Marketing Solutions for Vietnamese enterprises — creating holistic value for businesses and the wider community, not just sales or profit."
+- Add a small footer line: "Licensed Telecommunications Service Provider (no network infrastructure) — Ministry of Information & Communications, Vietnam."
 
-### 2. `AboutStoryTimeline` — component mới, thay phần Chapter 01/02/03 dài
+**AboutStoryPillars (Core Values)** — sync to the 6 official values from old site:
+1. People First  2. Quality  3. Integrity & Honesty  4. Accountability  5. Creativity  6. Innovation
+(Keep current visual treatment; only labels/short descriptions updated to match old-site wording.)
 
-Thay 3 `AboutChapter` block bằng **zigzag timeline** như Aquafix: mỗi mốc là 1 row image + year + heading + body, alternating trái/phải. 4 mốc lớn:
+**AboutMilestones** — extend timeline with old-site milestones if missing:
+- 2007 Founded · 2008 Samsung E-warranty · 2017 LG · 2018 #1 SMS in e-commerce · 2019 Viber · 2020 OTPBox · 2021 5,000+ brands / 15 solutions · 2022 Accrete merger · 2024 5M msgs/day.
 
-- **2007** — Company Establishment (25m² Saigon room)
-- **2008** — First Global Trust (Samsung E-warranty)
-- **2018** — #1 SMS in VN e-commerce
-- **2022** — Joined Accrete, listed TSE
+**AboutCertificates** — keep 4 cards; add subline "Audited & re-certified annually."
 
-Mỗi row: ảnh bo tròn lớn bên 1 phía, bên kia có badge năm to (số gradient), H3 ngắn, body 2-3 câu. Stagger reveal `fade-up` + ảnh `ken-burns`.
+**New micro-block inside Chapter 03 body** (no new section): mention Accrete ticker / TSE listing and "Vietnam–Japan bridge" framing already present — just tighten wording to match old-site tone.
 
-(Giữ 3 `AboutChapter` cũ dưới dạng tùy chọn? → **Bỏ**, vì timeline thay thế đầy đủ và gọn hơn. `AboutMilestones` ngang đã có sẽ trở thành "compact timeline" phụ phía dưới cho các mốc khác.)
+## 3. Hybrid cinematic motion system
 
-### 3. `AboutVisionMission` — refactor theo split của Aquafix
+Goal: smooth, brand-consistent (the "V" signal sweep), respects `prefers-reduced-motion`, GPU-friendly, no layout thrash. Hybrid = CSS keyframes for ambient loops + IntersectionObserver-driven reveal classes for scroll choreography. No new heavy dependency; framer-motion only where stagger is needed (already in deps if present, otherwise pure CSS/IO).
 
-Layout mới:
+**Shared primitives (new file: `src/components/motion/Reveal.tsx`)**
+- `<Reveal variant="fade-up" | "fade" | "clip-right" | "scale-soft" delay={0..600}>` — wraps children, uses IntersectionObserver (once), toggles a data-attribute that triggers a CSS transition defined in `index.css`.
+- Single source of truth for easing: `cubic-bezier(0.22, 1, 0.36, 1)` (cinematic ease-out-expo-ish), durations 600–900ms.
+- Honors `@media (prefers-reduced-motion: reduce)` → instant opacity 1, no transform.
 
-- 2 row alternating (Mission row: ảnh trái + text phải; Vision row: text trái + ảnh phải).
-- Mỗi row có H3 + paragraph + **3 bullet points có icon check**, theo đúng pattern Aquafix.
-- Thay ảnh placeholder bằng ảnh brand-tinted (VWatermark overlay).
-- Nội dung giữ nguyên Vision/Mission canonical từ vietguys.biz.
+**index.css additions**
+- Keyframes: `signal-sweep` (existing if any), `v-trace` (SVG stroke draw), `ken-burns` (slow image zoom 1→1.06 over 12s), `quote-rise` (translateY + clip-path reveal), `dot-pulse`.
+- Utility classes: `.reveal`, `.reveal[data-in="true"]` variants, `.ken-burns`, `.v-trace path { stroke-dasharray:1; stroke-dashoffset:1; animation: v-trace 1.6s ease forwards; }`.
 
-### 4. `AboutStoryPillars` (6 Core Values) — refactor visual theo Aquafix
+**Per-section choreography**
+- **AboutHero**: headline word-by-word fade-up (CSS stagger via `--i`), SignalArt `v-trace` plays once, background image gets `ken-burns`. Tagline fades in last.
+- **AboutChapter**: chapter number "01/02/03" does a vertical clip reveal + underline draw; H2 fade-up; body paragraphs fade-up staggered 80ms; image uses `clip-right` (clip-path inset 0 100% 0 0 → 0) + subtle ken-burns on hover; pull-quote slides up with left brand-gradient bar growing from 0 → full height.
+- **AboutVisionMission**: two cards do scale-soft (0.96→1) + fade, VWatermark fades in 200ms later; on hover, gradient border shimmer (CSS only).
+- **AboutMilestones**: timeline line draws left-to-right on enter (`scaleX 0→1`, origin-left, 1200ms); each dot pulses once when its row enters; year numbers count-up via existing `use-count-up`.
+- **AboutStoryPillars**: 6 cards stagger fade-up 60ms each; icon micro-bounce on enter.
+- **AboutCertificates**: cards fade-up + 3D tilt on hover (CSS `transform: perspective(800px) rotateY(...)`), logo gets subtle grayscale→color transition.
+- **CTASection**: gradient text shimmer loop (slow, 8s).
 
-Giữ 6 values hiện tại (People First, Quality, Integrity, Accountability, Creativity, Innovation), nhưng đổi sang **3×2 grid card** với:
+**Performance & a11y**
+- All animations on `transform`/`opacity` only.
+- IntersectionObserver with `rootMargin: "0px 0px -10% 0px"`, `once: true`.
+- Global `@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }` scoped to motion utility classes (not to UI components that need transitions for state).
 
-- Icon Lucide trong vòng tròn tint gradient brand
-- Tiêu đề bold, body 2 câu
-- Card có border mỏng + hover lift (translateY-2 + shadow), không tilt-3D phức tạp
-- Eyebrow "Values" trên + H2 "Our Core Values" như Aquafix
+## 4. Files touched
 
-### 5. `Team` — đã có, chỉ tinh chỉnh
+- edit `src/pages/About.tsx` — remove SectionNav, wrap content blocks in `<Reveal>`.
+- delete `src/components/site/AboutSectionNav.tsx`.
+- create `src/components/motion/Reveal.tsx`.
+- edit `src/index.css` — add keyframes + reveal utilities + reduced-motion guard.
+- edit `src/components/site/AboutHero.tsx` — word stagger, v-trace, ken-burns, positioning line.
+- edit `src/components/site/AboutChapter.tsx` — chapter number reveal, image clip-reveal, pull-quote bar grow.
+- edit `src/components/site/AboutVisionMission.tsx` — canonical vision/mission copy + license line + motion.
+- edit `src/components/site/AboutStoryPillars.tsx` — 6 official values + stagger.
+- edit `src/components/site/AboutMilestones.tsx` — line draw, dot pulse, full milestone set.
+- edit `src/components/site/AboutCertificates.tsx` — subline + tilt-on-hover.
 
-Thêm eyebrow "Our Experts" + H2 "Meet the people behind every message" theo style Aquafix. Giữ grid hiện tại.
+## 5. Out of scope
+- No new routes, no backend changes, no copy in other pages.
+- No framer-motion install if not already present (pure CSS + IO is enough for this scope).
 
-### 6. `AboutCTAFinal` — section CTA mới ở cuối (thay `CTASection` chung trên trang About)
-
-Pattern Aquafix:
-
-- Background gradient brand đậm full-width
-- H2 to "Let's discuss the details"
-- Sub copy 1 dòng
-- 2 button: "Get a Quote" (primary lime → brand) + "Talk to us"
-- Avatar tròn + 1 dòng quote nhỏ ("This is [Name], [Title] at VietGuys. I'm here to answer your questions.")
-
-### 7. Page assembly `src/pages/About.tsx`
-
-Order mới:
-
+```text
+Hero ──► Chapter 01 ──► Chapter 02 ──► Chapter 03
+            │              │              │
+            └─► Vision/Mission ─► Milestones ─► Values ─► Team ─► Certificates ─► CTA
+(no sticky nav; deep-link ids preserved)
 ```
-Header
-AboutHero (with floating stats)
-AboutStoryTimeline (zigzag 4 mốc)
-AboutVisionMission (split + bullets)
-AboutStoryPillars (6 values 3×2)
-AboutMilestones (compact horizontal — giữ làm phụ)
-Team
-AboutCertificates (giữ nguyên)
-AboutCTAFinal (gradient)
-Footer
-ChatBubble
-```
-
-Bỏ các `VDivider` thừa giữa các section vì Aquafix dùng whitespace lớn thay vì divider.
-
-## Motion
-
-Tái dùng `Reveal` + keyframes hiện có trong `index.css`:
-
-- Stat counters: trigger qua `use-count-up` khi card vào view
-- Timeline rows: `fade-up` stagger 120ms
-- Mission/Vision: `clip-right` cho ảnh, `fade-up` cho text+bullets
-- Values cards: `scale-soft` stagger
-- CTA: shimmer loop trên button primary
-
-Tất cả respect `prefers-reduced-motion` (đã có).
-
-## Files
-
-**Create**
-
-- `src/components/site/AboutStoryTimeline.tsx`
-- `src/components/site/AboutCTAFinal.tsx`
-
-**Edit**
-
-- `src/components/site/AboutHero.tsx` — thêm hero image + floating stat strip
-- `src/components/site/AboutVisionMission.tsx` — đổi sang split + bullets
-- `src/components/site/AboutStoryPillars.tsx` — đổi sang 3×2 card grid với icon tròn
-- `src/components/site/Team.tsx` — đổi eyebrow + H2
-- `src/pages/About.tsx` — reassemble theo order mới, bỏ 3 `AboutChapter`, bỏ `CTASection` chung
-
-**Không đổi**
-
-- `src/index.css` (motion keyframes đã đủ)
-- `src/components/motion/Reveal.tsx`
-- `src/components/site/AboutMilestones.tsx`, `AboutCertificates.tsx`
-- Brand palette, font, gradient — giữ nguyên 100%
-
-## Điều cần xác nhận
-
-- OK bỏ 3 `AboutChapter` (01/02/03) và gom nội dung vào `AboutStoryTimeline` zigzag? Cách này gọn và đúng pattern Aquafix nhất --> OK
-- OK dùng ảnh stock Unsplash cho hero + timeline rows, hay bạn muốn tôi để placeholder để bạn upload ảnh thật sau? --> dùng ảnh stock 
