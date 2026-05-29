@@ -10,25 +10,32 @@ import zaloLogo from "@/assets/certs/zalo-trusted-v3.png";
 const aiServices = [
   { t: "AI Campaign Services", h: "/solutions/ai-campaigns" },
   { t: "PangoCDP", h: "/solutions/pangodcp" },
-  { t: "OTPBox — Multi-Channel OTP", h: "/solutions/otpbox" },
-  { t: "Customized AI Solutions", h: "/solutions/customized" },
+  { t: "Customized AI Solutions", h: "/solutions/customized-ai" },
 ];
 
 const messaging = [
   { t: "SMS Brandname", h: "/solutions/sms-brandname" },
-  { t: "SMS Fixed", h: "/solutions/sms-fixed" },
-  { t: "SMS Short Code", h: "/solutions/sms-short-code" },
   { t: "Voice Brandname", h: "/solutions/voice-brandname" },
-  { t: "Voice OTP", h: "/solutions/voice-otp" },
+  { t: "Viber Message", h: "/solutions/viber" },
+  { t: "Zalo ZBS Template", h: "/solutions/zalo-zbs" },
+  { t: "Email Marketing", h: "/solutions/email-marketing" },
 ];
 
-const engagement = [
-  { t: "Zalo ZBS Template", h: "/solutions/zalo-zbs" },
-  { t: "Viber Message", h: "/solutions/viber" },
-  { t: "Email Marketing", h: "/solutions/email-marketing" },
+const otpVerification = [
+  { t: "OTPBox", h: "/solutions/otpbox" },
+  { t: "Voice OTP", h: "/solutions/voice-otp" },
   { t: "Email OTP", h: "/solutions/email-otp" },
+];
+
+const topup = [
   { t: "Mobile Topup", h: "/solutions/mobile-topup" },
+  { t: "Customized Reward Solutions", h: "/solutions/rewards" },
+];
+
+const customize = [
+  { t: "Zalo Engagement — MiniApp", h: "/solutions/zalo-miniapp" },
   { t: "Smart Warranty", h: "/solutions/smart-warranty" },
+  { t: "Automation System", h: "/solutions/automation" },
 ];
 
 const company = [
