@@ -1,4 +1,4 @@
-import { Mail, Phone, Smartphone, MapPin, ArrowRight, Facebook, Linkedin, MessageCircle, ExternalLink, AppWindow } from "lucide-react";
+import { Mail, Phone, Smartphone, MapPin, ArrowRight, Facebook, Linkedin, MessageCircle, ExternalLink } from "lucide-react";
 import { Logo } from "./Logo";
 import { Button } from "@/components/ui/button";
 import accreteLogo from "@/assets/brand/accrete-logo.png";
@@ -16,8 +16,8 @@ const messaging = [
 ];
 
 const aiDigital = [
-  { t: "AI Services", h: "/solutions/ai-campaigns", badge: "AI" as const },
-  { t: "Zalo Engagement Solution", h: "/solutions/zalo-miniapp", badgeIcon: AppWindow },
+  { t: "AI Services", h: "/solutions/ai-campaigns" },
+  { t: "Zalo Engagement Solution", h: "/solutions/zalo-miniapp" },
   { t: "Smart Warranty", h: "/solutions/smart-warranty" },
   { t: "Automation System", h: "/solutions/automation" },
 ];
