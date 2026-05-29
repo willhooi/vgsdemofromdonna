@@ -101,8 +101,8 @@ export const Footer = () => (
         {/* Brand & contact */}
         <div className="space-y-7 lg:col-span-4">
           <Logo />
-          <p className="text-sm leading-relaxed text-muted-foreground">
-            Enterprise messaging & AI engagement solutions — trusted by 5,000+ brands across Vietnam.
+          <p className="text-sm font-semibold leading-relaxed text-foreground">
+            Backed by Accrete Inc. Japan (TOKYO STOCK EXCHANGE Listed)
           </p>
           <ul className="space-y-3.5 text-sm">
             <li className="flex items-start gap-3">
