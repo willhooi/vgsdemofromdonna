@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ArrowRight } from "lucide-react";
+import seaGroupImg from "@/assets/case-sea-group.jpg";
 
 type CaseItem = {
   id: number;
