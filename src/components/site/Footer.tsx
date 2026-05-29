@@ -77,9 +77,18 @@ export const Footer = () => (
         {/* Brand & contact */}
         <div className="space-y-7 lg:col-span-4">
           <Logo />
-          <p className="text-sm font-semibold leading-relaxed text-foreground">
-            Backed by Accrete Inc. Japan (TOKYO STOCK EXCHANGE Listed)
-          </p>
+          <div className="inline-flex items-start gap-3 rounded-xl border border-primary/20 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent p-4 shadow-sm">
+            <span className="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/15 text-base">
+              🇯🇵
+            </span>
+            <p className="text-sm leading-relaxed text-foreground">
+              Backed by{" "}
+              <span className="font-bold text-primary">Accrete Inc. Japan</span>
+              <span className="mt-1 block text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                Tokyo Stock Exchange Listed
+              </span>
+            </p>
+          </div>
           <ul className="space-y-3.5 text-sm">
             <li className="flex items-start gap-3">
               <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
