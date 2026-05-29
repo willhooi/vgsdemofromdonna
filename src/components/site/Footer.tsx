@@ -101,14 +101,12 @@ export const Footer = () => (
                 <Mail className="h-5 w-5 text-primary" /> info@vietguys.biz
               </a>
             </li>
-            <li>
+            <li className="flex flex-wrap items-center gap-x-6 gap-y-2">
               <a href="tel:+842873008027" className="inline-flex items-center gap-3 font-medium text-foreground hover:text-primary">
                 <Phone className="h-5 w-5 text-primary" /> (+84) 28 7300 8027
               </a>
-            </li>
-            <li>
               <a href="tel:0933331840" className="inline-flex items-center gap-3 font-medium text-foreground hover:text-primary">
-                <Phone className="h-5 w-5 text-primary" /> 0933 331 840
+                <Smartphone className="h-5 w-5 text-primary" /> 0933 331 840
               </a>
             </li>
           </ul>
