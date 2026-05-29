@@ -1,6 +1,5 @@
-import { Mail, Phone, Smartphone, MapPin, ArrowRight, Facebook, Linkedin, MessageCircle, ExternalLink } from "lucide-react";
+import { Mail, Phone, Smartphone, MapPin, Facebook, Linkedin, MessageCircle, ExternalLink } from "lucide-react";
 import { Logo } from "./Logo";
-import { Button } from "@/components/ui/button";
 import accreteLogo from "@/assets/brand/accrete-logo.png";
 import isoLogo from "@/assets/certs/iso-27001-v2.png";
 import vncertLogo from "@/assets/certs/vncert-new.jpg";
@@ -108,11 +107,6 @@ export const Footer = () => (
               </a>
             </li>
           </ul>
-          <Button variant="cta" size="default" asChild>
-            <a href="/demo">
-              Request a Demo <ArrowRight className="h-4 w-4" />
-            </a>
-          </Button>
         </div>
 
         {/* Links Area */}
@@ -160,7 +154,7 @@ export const Footer = () => (
       </div>
 
       {/* Cert + social row */}
-      <div className="mt-16 border-t border-border pt-10">
+      <div className="mt-8 border-t border-border pt-8">
         <div className="flex flex-col items-center justify-between gap-8 lg:flex-row">
           <ul className="flex flex-wrap items-center justify-center gap-x-10 gap-y-5">
             {certs.map((c) => (
