@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import seaGroupImg from "@/assets/case-sea-group.jpg";
+import lgImg from "@/assets/case-lg.png";
+import cgvImg from "@/assets/case-cgv.jpg";
+import pharmacityImg from "@/assets/case-pharmacity.jpg";
+import sanMiguelImg from "@/assets/case-sanmiguel.png";
+
 
 type CaseItem = {
   id: number;
@@ -13,7 +18,12 @@ type CaseItem = {
   description: string;
   tags: string[];
   image: string;
+  /** object-position when card is collapsed (narrow) — keeps the logo visible */
+  collapsedPosition: string;
+  /** object-position when expanded */
+  expandedPosition?: string;
 };
+
 
 const cases: CaseItem[] = [
   {
