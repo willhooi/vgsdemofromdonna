@@ -1,96 +1,81 @@
-# About Us — Refresh từ web cũ vietguys.biz
+# About Page — Content Enrichment + Cinematic Motion Pass
 
-Mục tiêu: giữ kiến trúc "Editorial Story" hiện tại (3 chương + milestones + team), nhưng vay mượn **content có chiều sâu**, **section navigation**, **partner ecosystem** và **brand-signature motion** từ web cũ — đồng thời giữ chuẩn UX/UI hiện đại cho mọi thiết bị.
+## 1. Remove sticky section nav
+- Delete `<AboutSectionNav />` usage from `src/pages/About.tsx` and remove the import.
+- Keep `src/components/site/AboutSectionNav.tsx` file deleted (no longer needed).
+- Keep section `id`s on wrappers (`#story`, `#vision`, `#milestones`, `#values`, `#team`, `#certificates`) — harmless and useful for deep-links from Footer/CTAs.
 
-## Những thứ đáng vay từ web cũ
+## 2. Apply content from vietguys.biz/en/about-us/vietguys
 
-**Content**
+Extracted from the old site, mapped into existing sections (no new sections, just richer content):
 
-- Tagline gốc: *"Short steps on a long journey"* — dùng làm eyebrow phụ ở Hero để có dây liên kết thương hiệu.
-- Đoạn về **giấy phép "License for Provision of Telecommunications Services without Network Infrastructure"** — tài sản tin cậy hiếm có, hiện tại trang chưa nhắc.
-- **5 Core Values gốc**: People First, Quality, Integrity, Honesty, Accountability, Creativity & Innovation — hiện `AboutStoryPillars` chỉ có pillar chung chung, có thể đồng bộ lại đúng 6 giá trị cũ.
-- **Partner ecosystem theo ngành** (Fashion, Tech, Pharma, Delivery, Education, Finance...) — web mới mới có `LogoMarquee` chung; bản theo nhóm ngành kể được chuyện "ai cũng dùng VietGuys".
-- **3 trục trách nhiệm**: team đoàn kết · chất lượng dịch vụ · trách nhiệm cộng đồng — dùng làm 3 thẻ ảnh editorial giữa Chapter 02 và 03.
+**AboutHero**
+- Keep tagline "Short steps · on a long journey".
+- Add a one-line positioning under H1: "Vietnam's pioneer in Mobile Marketing Solutions since 2007 — now part of Accrete Inc., Tokyo Stock Exchange listed."
 
-**UX**
+**AboutVisionMission** — replace placeholder copy with the old-site canonical text:
+- Vision: "To become the leading Mobile Marketing Solutions provider in Vietnam and the region, accompanying enterprises on their digital transformation journey."
+- Mission: "Deliver constantly-improved Mobile Marketing Solutions for Vietnamese enterprises — creating holistic value for businesses and the wider community, not just sales or profit."
+- Add a small footer line: "Licensed Telecommunications Service Provider (no network infrastructure) — Ministry of Information & Communications, Vietnam."
 
-- Thanh **section nav dính** ở đầu trang (Stories · Milestones · Core Values · Clients · Certificates) — neo nhanh, rất hữu ích trên trang dài.
-- Mục **Vision & Mission** tách biệt — hiện chưa có.
-- Mục **Certificates** rõ ràng cuối trang — hiện mới rải rác ở Footer/Trust.
+**AboutStoryPillars (Core Values)** — sync to the 6 official values from old site:
+1. People First  2. Quality  3. Integrity & Honesty  4. Accountability  5. Creativity  6. Innovation
+(Keep current visual treatment; only labels/short descriptions updated to match old-site wording.)
 
-**Cái nên BỎ không bê qua**
+**AboutMilestones** — extend timeline with old-site milestones if missing:
+- 2007 Founded · 2008 Samsung E-warranty · 2017 LG · 2018 #1 SMS in e-commerce · 2019 Viber · 2020 OTPBox · 2021 5,000+ brands / 15 solutions · 2022 Accrete merger · 2024 5M msgs/day.
 
-- Layout bảng 2 cột cho milestones (cũ kỹ) — giữ timeline mới.
-- Ảnh stock tổng quát kiểu corporate — giữ phong cách editorial hiện tại.
-- Lặp lại text 2-3 lần như bản gốc.
+**AboutCertificates** — keep 4 cards; add subline "Audited & re-certified annually."
 
-## Cấu trúc trang mới (sau refresh)
+**New micro-block inside Chapter 03 body** (no new section): mention Accrete ticker / TSE listing and "Vietnam–Japan bridge" framing already present — just tighten wording to match old-site tone.
+
+## 3. Hybrid cinematic motion system
+
+Goal: smooth, brand-consistent (the "V" signal sweep), respects `prefers-reduced-motion`, GPU-friendly, no layout thrash. Hybrid = CSS keyframes for ambient loops + IntersectionObserver-driven reveal classes for scroll choreography. No new heavy dependency; framer-motion only where stagger is needed (already in deps if present, otherwise pure CSS/IO).
+
+**Shared primitives (new file: `src/components/motion/Reveal.tsx`)**
+- `<Reveal variant="fade-up" | "fade" | "clip-right" | "scale-soft" delay={0..600}>` — wraps children, uses IntersectionObserver (once), toggles a data-attribute that triggers a CSS transition defined in `index.css`.
+- Single source of truth for easing: `cubic-bezier(0.22, 1, 0.36, 1)` (cinematic ease-out-expo-ish), durations 600–900ms.
+- Honors `@media (prefers-reduced-motion: reduce)` → instant opacity 1, no transform.
+
+**index.css additions**
+- Keyframes: `signal-sweep` (existing if any), `v-trace` (SVG stroke draw), `ken-burns` (slow image zoom 1→1.06 over 12s), `quote-rise` (translateY + clip-path reveal), `dot-pulse`.
+- Utility classes: `.reveal`, `.reveal[data-in="true"]` variants, `.ken-burns`, `.v-trace path { stroke-dasharray:1; stroke-dashoffset:1; animation: v-trace 1.6s ease forwards; }`.
+
+**Per-section choreography**
+- **AboutHero**: headline word-by-word fade-up (CSS stagger via `--i`), SignalArt `v-trace` plays once, background image gets `ken-burns`. Tagline fades in last.
+- **AboutChapter**: chapter number "01/02/03" does a vertical clip reveal + underline draw; H2 fade-up; body paragraphs fade-up staggered 80ms; image uses `clip-right` (clip-path inset 0 100% 0 0 → 0) + subtle ken-burns on hover; pull-quote slides up with left brand-gradient bar growing from 0 → full height.
+- **AboutVisionMission**: two cards do scale-soft (0.96→1) + fade, VWatermark fades in 200ms later; on hover, gradient border shimmer (CSS only).
+- **AboutMilestones**: timeline line draws left-to-right on enter (`scaleX 0→1`, origin-left, 1200ms); each dot pulses once when its row enters; year numbers count-up via existing `use-count-up`.
+- **AboutStoryPillars**: 6 cards stagger fade-up 60ms each; icon micro-bounce on enter.
+- **AboutCertificates**: cards fade-up + 3D tilt on hover (CSS `transform: perspective(800px) rotateY(...)`), logo gets subtle grayscale→color transition.
+- **CTASection**: gradient text shimmer loop (slow, 8s).
+
+**Performance & a11y**
+- All animations on `transform`/`opacity` only.
+- IntersectionObserver with `rootMargin: "0px 0px -10% 0px"`, `once: true`.
+- Global `@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }` scoped to motion utility classes (not to UI components that need transitions for state).
+
+## 4. Files touched
+
+- edit `src/pages/About.tsx` — remove SectionNav, wrap content blocks in `<Reveal>`.
+- delete `src/components/site/AboutSectionNav.tsx`.
+- create `src/components/motion/Reveal.tsx`.
+- edit `src/index.css` — add keyframes + reveal utilities + reduced-motion guard.
+- edit `src/components/site/AboutHero.tsx` — word stagger, v-trace, ken-burns, positioning line.
+- edit `src/components/site/AboutChapter.tsx` — chapter number reveal, image clip-reveal, pull-quote bar grow.
+- edit `src/components/site/AboutVisionMission.tsx` — canonical vision/mission copy + license line + motion.
+- edit `src/components/site/AboutStoryPillars.tsx` — 6 official values + stagger.
+- edit `src/components/site/AboutMilestones.tsx` — line draw, dot pulse, full milestone set.
+- edit `src/components/site/AboutCertificates.tsx` — subline + tilt-on-hover.
+
+## 5. Out of scope
+- No new routes, no backend changes, no copy in other pages.
+- No framer-motion install if not already present (pure CSS + IO is enough for this scope).
 
 ```text
-Header
-├─ AboutHero                    (giữ — thêm sub-eyebrow "Short steps on a long journey")
-├─ AboutSectionNav   [MỚI]      (sticky dưới header: Story · Milestones · Values · Clients · Certificates)
-├─ Chapter 01 — Beginning       (giữ)
-├─ Chapter 02 — Growing         (giữ)
-├─ AboutResponsibility [MỚI]    (3 thẻ editorial: Team · Service · Community)
-├─ Chapter 03 — Japan Bridge    (giữ)
-├─ AboutVisionMission [MỚI]     (2 cột: Vision | Mission, dùng VWatermark + signal-art)
-├─ AboutMilestones              (giữ — id="milestones")
-├─ AboutStoryPillars            (RESTYLE → đúng 6 Core Values gốc, id="values")
-├─ Team                         (giữ)
-├─ AboutClientsByIndustry [MỚI] (id="clients" — tab/grid theo 6 ngành, dùng logos đã có + bổ sung)
-├─ AboutCertificates  [MỚI]     (id="certificates" — VNCERT, ISO 27001:2022, VNTA, Zalo Trusted với mô tả)
-├─ CTASection
-Footer + ChatBubble
+Hero ──► Chapter 01 ──► Chapter 02 ──► Chapter 03
+            │              │              │
+            └─► Vision/Mission ─► Milestones ─► Values ─► Team ─► Certificates ─► CTA
+(no sticky nav; deep-link ids preserved)
 ```
-
-## Brand-signature motion (mọi thiết bị)
-
-Dùng nhất quán **chữ V** (đã có `VWatermark`, `SignalArt`) làm "signature stroke" xuyên các section, không phải hiệu ứng rời rạc.
-
-1. **Hero — Signal sweep**: 1 lần khi load, một tia gradient brand quét chéo qua chữ "One signal." theo đường stroke của V (~1.2s, ease-out). Reduced-motion: fade-in tĩnh.
-2. **Section nav sticky**: indicator pill trượt mượt giữa các mục bằng `layoutId`-style (CSS transform, không cần framer-motion phụ thuộc nặng), highlight section đang xem bằng IntersectionObserver.
-3. **Chapter number reveal**: số "01/02/03" cỡ lớn fade + slide từ -8px lên 0 khi vào viewport, kèm `chapter-eyebrow` chạy width 0→100% (signature underline).
-4. **Pull-quote**: border-left 2px animate height 0→100% rồi text fade — cảm giác "khắc lên giấy".
-5. **Milestones**: dot trên trục dọc pulse nhẹ khi scroll tới (đã có timeline → chỉ thêm in-view animation).
-6. **Vision/Mission**: 2 watermark V đối xứng, một xoay rất chậm (10s linear infinite, opacity 0.06) — nền sống mà không gây nhiễu.
-7. **Client grid**: logos fade-up theo stagger 40ms khi vào viewport, hover lift nhẹ (-2px) + grayscale→color.
-8. **Certificates**: card flip nhẹ 6° trên hover desktop; trên mobile chỉ scale 1.02.
-
-Tất cả motion **respect `prefers-reduced-motion**`: chỉ fade, không transform.
-
-## Responsive
-
-- **≥1024px**: layout 12-col, sticky chapter marker bên trái, section nav sticky top.
-- **640–1023px**: chapter marker thành inline trên cùng content, số chương nhỏ hơn (text-7xl → text-6xl), section nav vẫn sticky nhưng scroll ngang được.
-- **<640px**: bỏ sticky chapter marker, section nav scroll-snap-x ngang, pull-quote font giảm còn text-xl, ảnh aspect 4/5, padding `py-16`. Touch target ≥44px cho mọi link nav/cert.
-
-## File sẽ tạo/sửa (khi vào build mode)
-
-Tạo mới:
-
-- `src/components/site/AboutSectionNav.tsx`
-- `src/components/site/AboutResponsibility.tsx`
-- `src/components/site/AboutVisionMission.tsx`
-- `src/components/site/AboutClientsByIndustry.tsx`
-- `src/components/site/AboutCertificates.tsx`
-
-Sửa:
-
-- `src/pages/About.tsx` — lắp ráp lại theo cấu trúc mới, thêm anchor id.
-- `src/components/site/AboutHero.tsx` — thêm eyebrow phụ "Short steps · Long journey" + signal-sweep animation.
-- `src/components/site/AboutStoryPillars.tsx` — chuẩn lại theo 6 Core Values gốc.
-- `src/index.css` — thêm keyframes: `signal-sweep`, `underline-grow`, `chapter-rise`; class `motion-safe` wrapper.
-- `src/components/site/AboutMilestones.tsx` — bổ sung mốc 2010 (Digitel), 2019 (Viber Top 3), 2020 (OTPBox + 2nd office), 2022 (PangoCDP) nếu thiếu.
-
-## Technical notes
-
-- Section nav dùng `IntersectionObserver` (rootMargin `-40% 0px -55% 0px`) để chọn section active — không phụ thuộc thêm package.
-- Animation tự viết bằng Tailwind keyframes + `animation-delay` inline; chỉ dùng `framer-motion` nếu đã có sẵn (kiểm tra `package.json` lúc build).
-- Toàn bộ màu/shadow/gradient đi qua design tokens HSL trong `index.css`, không hardcode.
-- Logo partner: ưu tiên dùng asset đã có trong `src/assets/`; nếu thiếu, dùng placeholder SVG xám có label thay vì hotlink từ vietguys.biz cũ.
-
-## Câu hỏi cần user xác nhận trước khi build
-
-1. Có muốn **giữ cả 3 chương cũ + thêm tất cả section mới** không, hay chỉ pick 2-3 phần ưu tiên (ví dụ chỉ thêm Section Nav + Vision/Mission + Certificates)? --> pick 2-3 phần ưu tiên
-2. Hotlink logo partners từ vietguys.biz cũ có chấp nhận được không, hay cần thay bằng placeholder? --> bỏ phần Our valued clients nhé
