@@ -58,9 +58,12 @@ export const AboutChapter = ({
           <Reveal variant="fade-up">
             <h2 className="heading-section text-balance">{title}</h2>
           </Reveal>
-          <div className="mt-6 space-y-5 text-base leading-relaxed text-muted-foreground md:text-lg">
-            {Array.isArray((body as any)?.props?.children) ? body : <Reveal variant="fade-up" delay={120}>{body}</Reveal>}
-          </div>
+          <Reveal variant="fade-up" delay={120}>
+            <div className="mt-6 space-y-5 text-base leading-relaxed text-muted-foreground md:text-lg">
+              {body}
+            </div>
+          </Reveal>
+
 
           {pullQuote && (
             <Reveal variant="fade-up" delay={200}>
