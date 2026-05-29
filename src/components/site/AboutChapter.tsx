@@ -1,8 +1,9 @@
 import { cn } from "@/lib/utils";
 import type { ReactNode } from "react";
+import { Reveal } from "@/components/motion/Reveal";
 
 interface AboutChapterProps {
-  chapterNumber: string; // "01"
+  chapterNumber: string;
   eyebrow: string;
   title: string;
   body: ReactNode;
@@ -31,39 +32,56 @@ export const AboutChapter = ({
         {/* Left — chapter marker */}
         <div className="lg:col-span-4">
           <div className="sticky top-28">
-            <span className="chapter-eyebrow">{eyebrow}</span>
-            <div
-              className="mt-4 font-display text-[120px] leading-[0.85] tracking-tight text-foreground/[0.08] md:text-[180px]"
-              aria-hidden="true"
-            >
-              {chapterNumber}
-            </div>
+            <Reveal variant="fade-up">
+              <span className="chapter-eyebrow">{eyebrow}</span>
+            </Reveal>
+            <Reveal variant="fade-up" delay={120}>
+              <div
+                className="mt-4 font-display text-[120px] leading-[0.85] tracking-tight md:text-[180px]"
+                aria-hidden="true"
+                style={{
+                  backgroundImage: "var(--gradient-brand)",
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                  color: "transparent",
+                  opacity: 0.12,
+                }}
+              >
+                {chapterNumber}
+              </div>
+            </Reveal>
           </div>
         </div>
 
         {/* Right — content */}
         <div className="lg:col-span-8">
-          <h2 className="heading-section text-balance">{title}</h2>
+          <Reveal variant="fade-up">
+            <h2 className="heading-section text-balance">{title}</h2>
+          </Reveal>
           <div className="mt-6 space-y-5 text-base leading-relaxed text-muted-foreground md:text-lg">
-            {body}
+            {Array.isArray((body as any)?.props?.children) ? body : <Reveal variant="fade-up" delay={120}>{body}</Reveal>}
           </div>
 
           {pullQuote && (
-            <blockquote className="mt-10 border-l-2 border-[hsl(var(--primary))] pl-6 font-display text-2xl italic leading-snug text-foreground md:text-3xl">
-              &ldquo;{pullQuote}&rdquo;
-            </blockquote>
+            <Reveal variant="fade-up" delay={200}>
+              <blockquote className="quote-bar mt-10 font-display text-2xl italic leading-snug text-foreground md:text-3xl">
+                &ldquo;{pullQuote}&rdquo;
+              </blockquote>
+            </Reveal>
           )}
 
           {image && (
-            <div className="relative mt-10 aspect-[16/9] overflow-hidden rounded-3xl border border-border shadow-[var(--shadow-card)]">
-              <img
-                src={image.src}
-                alt={image.alt}
-                loading="lazy"
-                decoding="async"
-                className="h-full w-full object-cover"
-              />
-            </div>
+            <Reveal variant="clip-right" delay={150}>
+              <div className="relative mt-10 aspect-[16/9] overflow-hidden rounded-3xl border border-border shadow-[var(--shadow-card)]">
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-full w-full object-cover ken-burns"
+                />
+              </div>
+            </Reveal>
           )}
         </div>
       </div>
