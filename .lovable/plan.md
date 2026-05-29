@@ -1,30 +1,12 @@
-## Mục tiêu
+## Plan
 
-Thay hiệu ứng `SignalWaves` trong `ServicesGrid` bằng hình dãy núi tuyết (từ ảnh đính kèm), tách nền — chỉ giữ silhouette núi, đặt mờ nhẹ hoà vào background gradient hiện tại.
+1. Copy `user-uploads://sea-group-singapore-1068x712.jpg` → `src/assets/case-sea-group.jpg`.
+2. In `src/components/site/VietGuysCaseStudies.tsx`:
+   - Import the asset: `import seaGroupImg from "@/assets/case-sea-group.jpg"`.
+   - Replace `image: "/images/sea-group.jpg"` in the Sea Group case item with `seaGroupImg`.
+   - Update the `<img>` tag to keep `object-cover` but change `object-position` based on active state so the **sea logo** (right-center of image) stays visible when the card is collapsed:
+     - When collapsed (narrow): `object-position: 62% center` to keep the logo in frame.
+     - When expanded: `object-position: center`.
+   - Slightly increase image opacity from `0.7` → `0.85` so the photo reads clearly, while the existing dark gradient overlay keeps text legible.
 
-## Các bước
-
-1. **Chuẩn bị ảnh núi (tách nền)**
-   - Copy `user-uploads://image-21.png` → `src/assets/services-mountains.png`.
-   - Dùng `imagegen--edit_image` với `transparent_background: true` và prompt giữ nguyên dãy núi tuyết, loại bỏ phần trời/nền → xuất `src/assets/services-mountains.png` (PNG trong suốt).
-
-2. **Cập nhật `src/components/site/ServicesGrid.tsx`**
-   - Xoá component `SignalWaves` và keyframes `signal-ping`, `signal-core`.
-   - Thêm component nội bộ `MountainBackdrop`:
-     - `import mountains from "@/assets/services-mountains.png"`.
-     - `<img>` `absolute inset-x-0 bottom-0 w-full h-auto object-cover object-bottom pointer-events-none select-none`.
-     - Style: `opacity: 0.18`, `filter: blur(2px) saturate(0.6)`, `mix-blend-mode: luminosity` để chìm vào gradient xanh.
-     - Thêm mask gradient `mask-image: linear-gradient(to top, black 40%, transparent 100%)` để mép trên fade mượt.
-   - Thứ tự DOM trong block `aria-hidden`: base gradient → `AuroraBlobs` → `MountainBackdrop` → các dải fade trắng → nội dung.
-
-3. **Giữ nguyên**
-   - Base gradient, `AuroraBlobs`, 2 dải fade trắng trên/dưới, viền 2 bên.
-   - Card dịch vụ (transparent default / hover trắng nhẹ).
-   - Layout grid, spacing, typography.
-
-## Chi tiết kỹ thuật
-
-- File chỉnh: `src/components/site/ServicesGrid.tsx`
-- File mới: `src/assets/services-mountains.png` (PNG nền trong suốt)
-- Không động `tailwind.config.ts` / `index.css`.
-- Nếu việc tách nền AI không sạch, fallback: dùng ảnh gốc với `mix-blend-mode: multiply` + opacity thấp + mask để loại bỏ phần trời sáng.
+No other cards or layout changes.
