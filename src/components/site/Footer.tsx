@@ -1,6 +1,5 @@
-import { Mail, Phone, Smartphone, MapPin, ArrowRight, Facebook, Linkedin, MessageCircle, ExternalLink } from "lucide-react";
+import { Mail, Phone, Smartphone, MapPin, Facebook, Linkedin, MessageCircle, ExternalLink } from "lucide-react";
 import { Logo } from "./Logo";
-import { Button } from "@/components/ui/button";
 import accreteLogo from "@/assets/brand/accrete-logo.png";
 import isoLogo from "@/assets/certs/iso-27001-v2.png";
 import vncertLogo from "@/assets/certs/vncert-new.jpg";
