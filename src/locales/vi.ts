@@ -51,7 +51,7 @@ export const vi = {
     coverage: "Được tin dùng bởi 76 doanh nghiệp trong ngân hàng, hàng không, bán lẻ và logistics.",
     certs: [
       { name: "ISO/IEC 27001", body: "Quản trị an toàn thông tin — chứng nhận toàn trình." },
-      { name: "VNCERT",        body: "Đăng ký với cơ quan ứng cứu khẩn cấp không gian mạng quốc gia." },
+      { name: "VNCERT CERTIFICATtion",        body: "Đăng ký với cơ quan ứng cứu khẩn cấp không gian mạng quốc gia." },
       { name: "Giấy phép Viễn thông MIC", body: "Đơn vị messaging được Bộ Thông tin & Truyền thông cấp phép." },
     ],
   },

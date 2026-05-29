@@ -6,7 +6,7 @@ import zaloTrusted from "@/assets/certs/zalo-trusted.svg";
 const certs = [
   { src: vnta, alt: "Viet Nam Telecommunications Authority (VNTA)" },
   { src: bsiIso, alt: "BSI ISO/IEC 27001 Information Security Management Certified" },
-  { src: vncert, alt: "VNCERT" },
+  { src: vncert, alt: "VNCERT CERTIFICATtion" },
   { src: zaloTrusted, alt: "Zalo Trusted Partner" },
 ];
 
