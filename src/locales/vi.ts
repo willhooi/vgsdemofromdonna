@@ -60,7 +60,7 @@ export const vi = {
     title: "Sức mạnh toàn cầu, hiểu biết địa phương.",
     p1: "Năm 2024, VietGuys gia nhập tập đoàn Accrete Inc. — công ty công nghệ niêm yết tại Nhật Bản. Quan hệ này mang đến quản trị kỷ luật, nguồn vốn khu vực và một bộ chiến lược APAC đứng sau mỗi chiến dịch chúng tôi triển khai.",
     p2: "Điều không đổi: đội ngũ tại TP.HCM, mối quan hệ nhà mạng đã xây 19 năm, và ngôn ngữ khách hàng của bạn thực sự nói. Hai con sóng, một tín hiệu.",
-    cta: "Đọc câu chuyện hợp tác",
+    cta: "Đọc câu chuyện Đối tác chiến lược",
     vn: "Việt Nam",
     jp: "Nhật Bản",
   },
