@@ -12,7 +12,7 @@ const faqs = [
   },
   {
     q: "Hệ thống của VietGuys có đảm bảo bảo mật và tốc độ không?",
-    a: "Có. VietGuys là một trong số ít công ty quảng cáo sở hữu chứng chỉ ISO 27001:2013 về An ninh thông tin, được cấp chứng chỉ VNCERT CERTIFICATtion bởi Bộ TT&TT, vận hành nhiều server back-up đảm bảo dịch vụ luôn ổn định và tốc độ gửi tin tính bằng giây.",
+    a: "Có. VietGuys là một trong số ít công ty quảng cáo sở hữu chứng chỉ ISO 27001:2022 về An ninh thông tin, được cấp chứng chỉ VNCERT CERTIFICATtion bởi Bộ TT&TT, vận hành nhiều server back-up đảm bảo dịch vụ luôn ổn định và tốc độ gửi tin tính bằng giây.",
   },
   {
     q: "Quy mô vận hành của VietGuys ra sao?",

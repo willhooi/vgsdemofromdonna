@@ -18,7 +18,7 @@ export const Trust = () => (
 
         <div className="mt-8 grid gap-3 sm:grid-cols-3">
           {[
-            { i: ShieldCheck, t: "ISO 27001:2013", d: "Information security certified" },
+            { i: ShieldCheck, t: "ISO 27001:2022", d: "Information security certified" },
             { i: Building2, t: "Accrete Inc.", d: "Tokyo Stock Exchange-listed" },
             { i: Languages, t: "VN · EN · JP", d: "Bilingual enterprise ready" },
           ].map((b) => {

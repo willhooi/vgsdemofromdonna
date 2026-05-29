@@ -41,7 +41,7 @@ const company = [
 ];
 
 const certs = [
-  { logo: isoLogo, name: "ISO/IEC 27001:2013" },
+  { logo: isoLogo, name: "ISO/IEC 27001:2022" },
   { logo: vncertLogo, name: "VNCERT CERTIFICATtion" },
   { logo: vntaLogo, name: "VNTA Licensed" },
   { logo: zaloLogo, name: "Zalo Trusted Partner" },
