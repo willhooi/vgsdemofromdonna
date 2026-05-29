@@ -106,6 +106,11 @@ export const Footer = () => (
                 <Phone className="h-5 w-5 text-primary" /> (+84) 28 7300 8027
               </a>
             </li>
+            <li>
+              <a href="tel:0933331840" className="inline-flex items-center gap-3 font-medium text-foreground hover:text-primary">
+                <Phone className="h-5 w-5 text-primary" /> 0933 331 840
+              </a>
+            </li>
           </ul>
           <Button variant="cta" size="default" asChild>
             <a href="/demo">
