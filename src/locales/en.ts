@@ -60,7 +60,7 @@ export const en = {
     title: "Global strength, local fluency.",
     p1: "In 2024, VietGuys joined the Accrete Inc. group — a publicly listed Japanese technology holding. The partnership brings disciplined governance, regional capital, and an APAC playbook that now sits behind every campaign we ship.",
     p2: "What didn't change: the team in Ho Chi Minh City, the carrier relationships built over 19 years, and the language your customers actually speak. Two waves, one signal.",
-    cta: "Read the partnership story",
+    cta: "Read the strategic partners story",
     vn: "Vietnam",
     jp: "Japan",
   },
