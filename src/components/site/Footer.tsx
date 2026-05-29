@@ -213,7 +213,7 @@ export const Footer = () => (
           <a href="/privacy" className="hover:text-primary">Privacy Policy</a>
           <a href="/terms" className="hover:text-primary">Terms of Use</a>
           <a href="/sitemap" className="hover:text-primary">Sitemap</a>
-          <span className="text-primary">PDPL 2023</span>
+          
         </div>
       </div>
     </div>
