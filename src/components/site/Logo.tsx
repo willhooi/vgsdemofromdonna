@@ -1,4 +1,4 @@
-import logoImg from "@/assets/brand/vietguys-accrete-horizontal-v3.png";
+import logoImg from "@/assets/brand/vietguys-accrete-horizontal-v2.png";
 
 type Props = { className?: string };
 
