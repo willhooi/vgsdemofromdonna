@@ -154,7 +154,7 @@ export const Footer = () => (
       </div>
 
       {/* Cert + social row */}
-      <div className="mt-16 border-t border-border pt-10">
+      <div className="mt-8 border-t border-border pt-8">
         <div className="flex flex-col items-center justify-between gap-8 lg:flex-row">
           <ul className="flex flex-wrap items-center justify-center gap-x-10 gap-y-5">
             {certs.map((c) => (
