@@ -17,8 +17,6 @@ const messaging = [
 
 const aiDigital = [
   { t: "AI Campaign Services", h: "/solutions/ai-campaigns", badge: "AI" as const },
-  { t: "PangoCDP", h: "/solutions/pangodcp", badge: "NEW" as const },
-  { t: "Customized AI Solutions", h: "/solutions/customized-ai" },
   { t: "Zalo Engagement — MiniApp", h: "/solutions/zalo-miniapp" },
   { t: "Smart Warranty", h: "/solutions/smart-warranty" },
   { t: "Automation System", h: "/solutions/automation" },
