@@ -9,6 +9,7 @@ import {
   Rocket,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { Reveal } from "@/components/motion/Reveal";
 
 type Milestone = {
   date: string;
@@ -28,7 +29,7 @@ const milestones: Milestone[] = [
   { date: "11/2020", title: "OTPBox launched", body: "Multi-channel verification code platform goes live.", icon: ShieldCheck },
   { date: "05/2020", title: "2nd office expansion", body: "Doubled office footprint to support growing enterprise demand.", icon: Building2 },
   { date: "01/2021", title: "5,000+ brands", body: "Trusted by 5,000+ domestic and international brands across 15 solutions.", icon: Award },
-  { date: "03/2022", title: "Joins Accrete Inc.", body: "Merged with Accrete Inc. — Japan's leading international SMS gateway provider.", icon: Handshake },
+  { date: "03/2022", title: "Joins Accrete Inc.", body: "Merged with Accrete Inc. — Japan's leading international SMS gateway provider, TSE-listed.", icon: Handshake },
   { date: "05/2022", title: "PangoCDP", body: "Partnered with ByteTech to bring PangoCDP to enterprises.", icon: Database },
   { date: "Today", title: "5M messages a day", body: "76 enterprise clients, every province in Vietnam, one steady signal.", icon: Rocket },
 ];
@@ -36,7 +37,7 @@ const milestones: Milestone[] = [
 export const AboutMilestones = () => (
   <section className="py-20 md:py-28">
     <div className="container-tight">
-      <div className="max-w-2xl">
+      <Reveal variant="fade-up" className="max-w-2xl">
         <span className="chapter-eyebrow">The long arc</span>
         <h2 className="heading-section mt-4 text-balance">
           Nineteen years, one signal — getting stronger.
@@ -44,19 +45,26 @@ export const AboutMilestones = () => (
         <p className="mt-5 text-muted-foreground">
           Every milestone below is a moment we earned the right to send the next message.
         </p>
-      </div>
+      </Reveal>
 
       <div className="relative mt-14">
-        <div className="absolute left-5 top-0 h-full w-px bg-gradient-to-b from-transparent via-border to-transparent md:left-1/2" />
+        <Reveal variant="fade" className="absolute left-5 top-0 h-full w-px md:left-1/2">
+          <div
+            className="timeline-line h-full w-px"
+            style={{ background: "linear-gradient(to bottom, transparent, hsl(var(--primary)/0.35), hsl(var(--accent)/0.35), transparent)" }}
+          />
+        </Reveal>
         <ol className="space-y-10">
           {milestones.map((m, i) => {
             const Icon = m.icon;
             const isRight = i % 2 === 1;
             return (
-              <li
+              <Reveal
+                as="li"
                 key={`${m.date}-${m.title}`}
-                className="relative grid gap-3 md:grid-cols-2 md:gap-12 animate-fade-up"
-                style={{ animationDelay: `${i * 50}ms` }}
+                variant="fade-up"
+                delay={i * 40}
+                className="relative grid gap-3 md:grid-cols-2 md:gap-12"
               >
                 <div className={isRight ? "md:order-2 md:pl-12" : "md:pr-12 md:text-right"}>
                   <div className="pl-14 md:pl-0">
@@ -69,10 +77,10 @@ export const AboutMilestones = () => (
                 <div className={isRight ? "md:order-1 md:pr-12 md:text-right" : "md:pl-12"}>
                   <p className="pl-14 text-sm text-muted-foreground md:pl-0">{m.body}</p>
                 </div>
-                <span className="absolute left-5 top-1 -translate-x-1/2 md:left-1/2 inline-flex h-10 w-10 items-center justify-center rounded-full bg-background ring-4 ring-background border border-[hsl(var(--primary))]/30 text-primary shadow-[var(--shadow-soft)]">
+                <span className="dot-pop absolute left-5 top-1 -translate-x-1/2 md:left-1/2 inline-flex h-10 w-10 items-center justify-center rounded-full bg-background ring-4 ring-background border border-[hsl(var(--primary))]/30 text-primary shadow-[var(--shadow-soft)]">
                   <Icon className="h-4 w-4" />
                 </span>
-              </li>
+              </Reveal>
             );
           })}
         </ol>

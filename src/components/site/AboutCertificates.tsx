@@ -2,6 +2,7 @@ import isoLogo from "@/assets/certs/iso-27001.svg";
 import vncertLogo from "@/assets/certs/vncert.svg";
 import vntaLogo from "@/assets/certs/vnta.svg";
 import zaloLogo from "@/assets/certs/zalo-trusted.svg";
+import { Reveal } from "@/components/motion/Reveal";
 
 const certs = [
   {
@@ -33,44 +34,43 @@ const certs = [
 export const AboutCertificates = () => (
   <section id="certificates" className="py-24 md:py-32">
     <div className="container-tight">
-      <div className="max-w-2xl">
+      <Reveal variant="fade-up" className="max-w-2xl">
         <span className="chapter-eyebrow">Certificates &amp; licenses</span>
         <h2 className="heading-section mt-4 text-balance">
           Trust, on paper. Audited, renewed, displayed.
         </h2>
         <p className="mt-5 text-muted-foreground">
-          The credentials behind every message we deliver — issued by Vietnamese
-          authorities, international standards bodies, and the platforms we
-          partner with.
+          The credentials behind every message we deliver — audited and re-certified annually by Vietnamese
+          authorities, international standards bodies, and the platforms we partner with.
         </p>
-      </div>
+      </Reveal>
 
       <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {certs.map((c, i) => (
-          <article
-            key={c.name}
-            className="group relative flex h-full flex-col rounded-3xl border border-border bg-background p-6 shadow-[var(--shadow-soft)] transition-all hover:-translate-y-1 hover:shadow-[var(--shadow-card)] motion-reduce:hover:translate-y-0 animate-fade-up"
-            style={{ animationDelay: `${i * 80}ms` }}
-          >
-            <div className="flex h-16 items-center">
-              <img
-                src={c.logo}
-                alt={`${c.name} certification`}
-                loading="lazy"
-                decoding="async"
-                className="h-12 w-auto max-w-[140px] object-contain"
-              />
-            </div>
-            <h3 className="mt-5 text-base font-bold text-foreground">
-              {c.name}
-            </h3>
-            <p className="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-primary">
-              {c.issuer}
-            </p>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              {c.body}
-            </p>
-          </article>
+          <Reveal key={c.name} variant="fade-up" delay={i * 90}>
+            <article
+              className="tilt-card group relative flex h-full flex-col rounded-3xl border border-border bg-background p-6 shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-card)]"
+            >
+              <div className="flex h-16 items-center">
+                <img
+                  src={c.logo}
+                  alt={`${c.name} certification`}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-12 w-auto max-w-[140px] object-contain grayscale transition-all duration-500 group-hover:grayscale-0"
+                />
+              </div>
+              <h3 className="mt-5 text-base font-bold text-foreground">
+                {c.name}
+              </h3>
+              <p className="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-primary">
+                {c.issuer}
+              </p>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                {c.body}
+              </p>
+            </article>
+          </Reveal>
         ))}
       </div>
     </div>

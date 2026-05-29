@@ -7,7 +7,6 @@ import { AboutStoryPillars } from "@/components/site/AboutStoryPillars";
 import { AboutMilestones } from "@/components/site/AboutMilestones";
 import { AboutHero } from "@/components/site/AboutHero";
 import { AboutChapter } from "@/components/site/AboutChapter";
-import { AboutSectionNav } from "@/components/site/AboutSectionNav";
 import { AboutVisionMission } from "@/components/site/AboutVisionMission";
 import { AboutCertificates } from "@/components/site/AboutCertificates";
 import { CTASection } from "@/components/site/CTASection";
@@ -32,8 +31,6 @@ const About = () => {
       <Header />
 
       <AboutHero />
-
-      <AboutSectionNav />
 
       <div id="story">
         <AboutChapter
