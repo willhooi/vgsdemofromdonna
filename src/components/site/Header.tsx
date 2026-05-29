@@ -14,9 +14,9 @@ export const Header = () => {
 
   const nav = [
     { label: t("nav.solutions"), href: "/solutions" },
-    { label: t("nav.industries"), href: "/industries" },
+    { label: t("nav.caseStudy"), href: "/case-studies" },
+    { label: t("nav.marketInsight"), href: "/market-insights" },
     { label: t("nav.about"), href: "/about" },
-    { label: t("nav.resources"), href: "/resources" },
   ];
 
   useEffect(() => {

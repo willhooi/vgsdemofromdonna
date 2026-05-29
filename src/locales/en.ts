@@ -1,9 +1,9 @@
 export const en = {
   nav: {
     solutions: "Solutions",
-    industries: "Industries",
-    about: "About",
-    resources: "Resources",
+    caseStudy: "Case Study",
+    marketInsight: "Market Insight",
+    about: "About Us",
     contact: "Contact Us",
     demoBar: "Talk to our enterprise team — Request a Demo",
   },
