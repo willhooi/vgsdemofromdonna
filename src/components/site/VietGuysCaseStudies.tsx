@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import seaGroupImg from "@/assets/case-sea-group.jpg";
+import lgImg from "@/assets/case-lg.png";
+import cgvImg from "@/assets/case-cgv.jpg";
+import pharmacityImg from "@/assets/case-pharmacity.jpg";
+import sanMiguelImg from "@/assets/case-sanmiguel.png";
+
 
 type CaseItem = {
   id: number;
@@ -13,7 +18,12 @@ type CaseItem = {
   description: string;
   tags: string[];
   image: string;
+  /** object-position when card is collapsed (narrow) — keeps the logo visible */
+  collapsedPosition: string;
+  /** object-position when expanded */
+  expandedPosition?: string;
 };
+
 
 const cases: CaseItem[] = [
   {
@@ -24,6 +34,8 @@ const cases: CaseItem[] = [
       "Deployed a combined SMS OTP, Voice OTP and failover solution across the Shopee, Garena and AirPay ecosystem — optimizing authentication costs at scale.",
     tags: ["SMS OTP", "Voice OTP", "Failover"],
     image: seaGroupImg,
+    collapsedPosition: "62% center",
+    expandedPosition: "center",
   },
   {
     id: 1, brand: "LG Electronics", abbr: "LG", color: "#008134",
@@ -32,7 +44,10 @@ const cases: CaseItem[] = [
     description:
       "Built a smart warranty system for LGE: web platform, Android/iOS apps and centralized data management.",
     tags: ["Web Platform", "Android", "iOS"],
-    image: "/images/lge.jpg",
+    image: lgImg,
+    // LG logo sits at lower-center of the photo
+    collapsedPosition: "60% 78%",
+    expandedPosition: "center 70%",
   },
   {
     id: 2, brand: "CGV Cinemas", abbr: "▶", color: "#39b44a",
@@ -41,7 +56,10 @@ const cases: CaseItem[] = [
     description:
       "Rolled out Email Marketing and transactional emails to automate booking, targeting 80% open rate and 50% click rate.",
     tags: ["Email Marketing", "Automation"],
-    image: "/images/cgv.jpg",
+    image: cgvImg,
+    // CGV logo is in upper-left third
+    collapsedPosition: "28% 38%",
+    expandedPosition: "center",
   },
   {
     id: 3, brand: "Pharmacity", abbr: "Rx", color: "#ff9b17",
@@ -50,7 +68,10 @@ const cases: CaseItem[] = [
     description:
       "Applied SMS Brandname and Voice OTP — strengthening customer verification and reducing OTP failure rates.",
     tags: ["SMS Brandname", "Voice OTP"],
-    image: "/images/pharmacity.jpg",
+    image: pharmacityImg,
+    // Pharmacity logo is top-center on the blue band
+    collapsedPosition: "50% 22%",
+    expandedPosition: "center 35%",
   },
   {
     id: 4, brand: "San Miguel Vietnam", abbr: "SM", color: "#d76e00",
@@ -59,9 +80,13 @@ const cases: CaseItem[] = [
     description:
       "An automated reward redemption system integrated with Zalo Chatbot for San Miguel — modernizing the gifting experience.",
     tags: ["Zalo Chatbot", "Reward Automation"],
-    image: "/images/sanmiguel.jpg",
+    image: sanMiguelImg,
+    // San Miguel logo overlays roughly center of frame
+    collapsedPosition: "center center",
+    expandedPosition: "center",
   },
 ];
+
 
 export const VietGuysCaseStudies = () => {
   const [active, setActive] = useState(0);
@@ -110,7 +135,7 @@ export const VietGuysCaseStudies = () => {
                   alt={c.brand}
                   loading="lazy"
                   className="absolute inset-0 h-full w-full object-cover opacity-85 transition-all duration-700 group-hover:scale-105"
-                  style={{ objectPosition: isActive ? "center" : "62% center" }}
+                  style={{ objectPosition: isActive ? (c.expandedPosition ?? "center") : c.collapsedPosition }}
                   onError={(e) => {
                     (e.currentTarget as HTMLImageElement).style.display = "none";
                   }}
