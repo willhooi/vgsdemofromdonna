@@ -129,33 +129,7 @@ export const Footer = () => (
           <div className="space-y-5">
             <ColHeading>AI &amp; Digital</ColHeading>
             <ul className="space-y-3">
-              {aiDigital.map((i) =>
-                i.badge || i.badgeIcon ? (
-                  <li key={i.t} className="flex items-center gap-2">
-                    <a href={i.h} className="text-sm font-semibold text-foreground hover:text-primary transition-colors">
-                      {i.t}
-                    </a>
-                    {i.badge && (
-                      <span
-                        className={
-                          i.badge === "AI"
-                            ? "rounded bg-primary/10 px-1.5 py-0.5 text-[10px] font-bold text-primary"
-                            : "rounded bg-[hsl(var(--cta))]/15 px-1.5 py-0.5 text-[10px] font-bold text-[hsl(var(--cta))]"
-                        }
-                      >
-                        {i.badge}
-                      </span>
-                    )}
-                    {i.badgeIcon && (
-                      <span className="inline-flex items-center justify-center rounded bg-[hsl(var(--cta))]/15 p-0.5 text-[hsl(var(--cta))]">
-                        <i.badgeIcon className="h-3 w-3" />
-                      </span>
-                    )}
-                  </li>
-                ) : (
-                  <LinkItem key={i.t} t={i.t} h={i.h} />
-                )
-              )}
+              {aiDigital.map((i) => <LinkItem key={i.t} {...i} />)}
             </ul>
           </div>
 
