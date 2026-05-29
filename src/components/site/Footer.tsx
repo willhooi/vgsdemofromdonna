@@ -107,68 +107,92 @@ export const Footer = () => (
     </div>
 
     {/* BAND 2 — Link grid */}
-    <div className="container-tight grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1fr]">
-      {/* Col 1 — Brand & contact */}
-      <div>
-        <Logo />
-        <p className="mt-4 text-sm text-muted-foreground">
-          Enterprise messaging & AI engagement — trusted by 5,000+ brands across Vietnam.
-        </p>
-        <ul className="mt-5 space-y-2.5 text-sm text-muted-foreground">
-          <li>
-            <a href="mailto:sales@vietguys.biz" className="inline-flex items-center gap-2 hover:text-primary">
-              <Mail className="h-4 w-4" /> sales@vietguys.biz
+    <div className="container-tight space-y-10 py-14">
+      {/* Row A — Brand + AI Services highlight */}
+      <div className="grid gap-8 lg:grid-cols-[1.4fr_2fr]">
+        {/* Brand & contact */}
+        <div>
+          <Logo />
+          <p className="mt-4 text-sm text-muted-foreground">
+            Enterprise messaging & AI engagement — trusted by 5,000+ brands across Vietnam.
+          </p>
+          <ul className="mt-5 space-y-2.5 text-sm text-muted-foreground">
+            <li>
+              <a href="mailto:sales@vietguys.biz" className="inline-flex items-center gap-2 hover:text-primary">
+                <Mail className="h-4 w-4" /> sales@vietguys.biz
+              </a>
+            </li>
+            <li>
+              <a href="tel:+842873008027" className="inline-flex items-center gap-2 hover:text-primary">
+                <Phone className="h-4 w-4" /> 028 7300 8027
+              </a>
+            </li>
+            <li className="flex items-start gap-2">
+              <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+              <span>1st Floor & T Floor, HBT Building, 456–458 Hai Ba Trung St., Tan Dinh Ward, HCMC.</span>
+            </li>
+          </ul>
+          <Button variant="cta" size="default" asChild className="mt-5">
+            <a href="/demo">
+              Request a Demo <ArrowRight className="h-4 w-4" />
             </a>
-          </li>
-          <li>
-            <a href="tel:+842873008027" className="inline-flex items-center gap-2 hover:text-primary">
-              <Phone className="h-4 w-4" /> 028 7300 8027
-            </a>
-          </li>
-          <li className="flex items-start gap-2">
-            <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-            <span>1st Floor & T Floor, HBT Building, 456–458 Hai Ba Trung St., Tan Dinh Ward, HCMC.</span>
-          </li>
-        </ul>
-        <Button variant="cta" size="default" asChild className="mt-5">
-          <a href="/demo">
-            Request a Demo <ArrowRight className="h-4 w-4" />
-          </a>
-        </Button>
-      </div>
-
-      {/* Col 2 — AI Services (highlighted) */}
-      <div className="relative rounded-2xl border border-primary/30 bg-primary/5 p-5 ring-1 ring-primary/10">
-        <div className="flex items-center gap-2">
-          <Sparkles className="h-4 w-4 text-primary" />
-          <ColHeading>
-            <span className="text-primary">AI Services</span>
-          </ColHeading>
-          <span className="ml-auto rounded-full bg-primary px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary-foreground">
-            New
-          </span>
+          </Button>
         </div>
-        <LinkList items={aiServices} />
+
+        {/* AI Services (highlighted banner) */}
+        <div className="relative overflow-hidden rounded-2xl border border-primary/30 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent p-6 ring-1 ring-primary/10">
+          <div className="flex items-center gap-2">
+            <Sparkles className="h-4 w-4 text-primary" />
+            <ColHeading>
+              <span className="text-primary">AI Services</span>
+            </ColHeading>
+            <span className="ml-auto rounded-full bg-primary px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-primary-foreground">
+              New
+            </span>
+          </div>
+          <p className="mt-3 text-sm text-muted-foreground">
+            Next-gen automation, data activation & intelligent campaigns powered by AI.
+          </p>
+          <ul className="mt-4 grid gap-2.5 sm:grid-cols-2">
+            {aiServices.map((i) => (
+              <li key={i.t}>
+                <a
+                  href={i.h}
+                  className="inline-flex items-center gap-2 text-sm font-medium text-foreground transition-colors hover:text-primary"
+                >
+                  <ArrowRight className="h-3.5 w-3.5 text-primary" /> {i.t}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
 
-      {/* Col 3 — Messaging */}
-      <div>
-        <ColHeading>Messaging</ColHeading>
-        <LinkList items={messaging} />
-      </div>
-
-      {/* Col 4 — Engagement & OTT */}
-      <div>
-        <ColHeading>Engagement & OTT</ColHeading>
-        <LinkList items={engagement} />
-      </div>
-
-      {/* Col 5 — Company */}
-      <div>
-        <ColHeading>Company</ColHeading>
-        <LinkList items={company} />
+      {/* Row B — Service groups + Company */}
+      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
+        <div>
+          <ColHeading>Messaging Solution</ColHeading>
+          <LinkList items={messaging} />
+        </div>
+        <div>
+          <ColHeading>OTP Verification</ColHeading>
+          <LinkList items={otpVerification} />
+        </div>
+        <div>
+          <ColHeading>Topup</ColHeading>
+          <LinkList items={topup} />
+        </div>
+        <div>
+          <ColHeading>Customize Solutions</ColHeading>
+          <LinkList items={customize} />
+        </div>
+        <div>
+          <ColHeading>Company</ColHeading>
+          <LinkList items={company} />
+        </div>
       </div>
     </div>
+
 
     {/* BAND 3 — Certifications */}
     <div className="border-t border-border">
