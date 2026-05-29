@@ -1,4 +1,4 @@
-import { Mail, Phone, Smartphone, MapPin, ArrowRight, Facebook, Linkedin, MessageCircle, ExternalLink, AppWindow } from "lucide-react";
+import { Mail, Phone, Smartphone, MapPin, ArrowRight, Facebook, Linkedin, MessageCircle, ExternalLink } from "lucide-react";
 import { Logo } from "./Logo";
 import { Button } from "@/components/ui/button";
 import accreteLogo from "@/assets/brand/accrete-logo.png";
@@ -16,8 +16,8 @@ const messaging = [
 ];
 
 const aiDigital = [
-  { t: "AI Services", h: "/solutions/ai-campaigns", badge: "AI" as const },
-  { t: "Zalo Engagement Solution", h: "/solutions/zalo-miniapp", badgeIcon: AppWindow },
+  { t: "AI Services", h: "/solutions/ai-campaigns" },
+  { t: "Zalo Engagement Solution", h: "/solutions/zalo-miniapp" },
   { t: "Smart Warranty", h: "/solutions/smart-warranty" },
   { t: "Automation System", h: "/solutions/automation" },
 ];
@@ -129,33 +129,7 @@ export const Footer = () => (
           <div className="space-y-5">
             <ColHeading>AI &amp; Digital</ColHeading>
             <ul className="space-y-3">
-              {aiDigital.map((i) =>
-                i.badge || i.badgeIcon ? (
-                  <li key={i.t} className="flex items-center gap-2">
-                    <a href={i.h} className="text-sm font-semibold text-foreground hover:text-primary transition-colors">
-                      {i.t}
-                    </a>
-                    {i.badge && (
-                      <span
-                        className={
-                          i.badge === "AI"
-                            ? "rounded bg-primary/10 px-1.5 py-0.5 text-[10px] font-bold text-primary"
-                            : "rounded bg-[hsl(var(--cta))]/15 px-1.5 py-0.5 text-[10px] font-bold text-[hsl(var(--cta))]"
-                        }
-                      >
-                        {i.badge}
-                      </span>
-                    )}
-                    {i.badgeIcon && (
-                      <span className="inline-flex items-center justify-center rounded bg-[hsl(var(--cta))]/15 p-0.5 text-[hsl(var(--cta))]">
-                        <i.badgeIcon className="h-3 w-3" />
-                      </span>
-                    )}
-                  </li>
-                ) : (
-                  <LinkItem key={i.t} t={i.t} h={i.h} />
-                )
-              )}
+              {aiDigital.map((i) => <LinkItem key={i.t} {...i} />)}
             </ul>
           </div>
 
