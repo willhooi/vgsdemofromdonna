@@ -112,8 +112,8 @@ export const Footer = () => (
               </span>
             </li>
             <li>
-              <a href="mailto:sales@vietguys.biz" className="inline-flex items-center gap-3 font-medium text-foreground hover:text-primary">
-                <Mail className="h-5 w-5 text-primary" /> sales@vietguys.biz
+              <a href="mailto:info@vietguys.biz" className="inline-flex items-center gap-3 font-medium text-foreground hover:text-primary">
+                <Mail className="h-5 w-5 text-primary" /> info@vietguys.biz
               </a>
             </li>
             <li>
