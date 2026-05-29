@@ -107,11 +107,6 @@ export const Footer = () => (
               </a>
             </li>
           </ul>
-          <Button variant="cta" size="default" asChild>
-            <a href="/demo">
-              Request a Demo <ArrowRight className="h-4 w-4" />
-            </a>
-          </Button>
         </div>
 
         {/* Links Area */}
