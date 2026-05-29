@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { ArrowRight } from "lucide-react";
+import seaGroupImg from "@/assets/case-sea-group.jpg";
 
 type CaseItem = {
   id: number;
@@ -22,7 +23,7 @@ const cases: CaseItem[] = [
     description:
       "Deployed a combined SMS OTP, Voice OTP and failover solution across the Shopee, Garena and AirPay ecosystem — optimizing authentication costs at scale.",
     tags: ["SMS OTP", "Voice OTP", "Failover"],
-    image: "/images/sea-group.jpg",
+    image: seaGroupImg,
   },
   {
     id: 1, brand: "LG Electronics", abbr: "LG", color: "#008134",
@@ -108,11 +109,13 @@ export const VietGuysCaseStudies = () => {
                   src={c.image}
                   alt={c.brand}
                   loading="lazy"
-                  className="absolute inset-0 h-full w-full object-cover opacity-70 transition-transform duration-700 group-hover:scale-105"
+                  className="absolute inset-0 h-full w-full object-cover opacity-85 transition-all duration-700 group-hover:scale-105"
+                  style={{ objectPosition: isActive ? "center" : "62% center" }}
                   onError={(e) => {
                     (e.currentTarget as HTMLImageElement).style.display = "none";
                   }}
                 />
+
 
                 {/* Dark gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/40 to-black/85" />
