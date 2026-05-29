@@ -109,11 +109,13 @@ export const VietGuysCaseStudies = () => {
                   src={c.image}
                   alt={c.brand}
                   loading="lazy"
-                  className="absolute inset-0 h-full w-full object-cover opacity-70 transition-transform duration-700 group-hover:scale-105"
+                  className="absolute inset-0 h-full w-full object-cover opacity-85 transition-all duration-700 group-hover:scale-105"
+                  style={{ objectPosition: isActive ? "center" : "62% center" }}
                   onError={(e) => {
                     (e.currentTarget as HTMLImageElement).style.display = "none";
                   }}
                 />
+
 
                 {/* Dark gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/40 to-black/85" />
