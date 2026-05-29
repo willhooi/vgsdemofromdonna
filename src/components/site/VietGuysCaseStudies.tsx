@@ -23,7 +23,7 @@ const cases: CaseItem[] = [
     description:
       "Deployed a combined SMS OTP, Voice OTP and failover solution across the Shopee, Garena and AirPay ecosystem — optimizing authentication costs at scale.",
     tags: ["SMS OTP", "Voice OTP", "Failover"],
-    image: "/images/sea-group.jpg",
+    image: seaGroupImg,
   },
   {
     id: 1, brand: "LG Electronics", abbr: "LG", color: "#008134",
