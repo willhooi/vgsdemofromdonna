@@ -88,7 +88,7 @@ const certifications = [
   },
   {
     logo: vncertLogo,
-    name: "VNCERT Certification",
+    name: "VNCERT CERTIFICATtion",
     description: "Exceptional security capabilities with rigorous information security compliance.",
     issuer: "Vietnam Cybersecurity Authority",
     tag: "Cyber security",

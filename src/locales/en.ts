@@ -51,7 +51,7 @@ export const en = {
     coverage: "Trusted by 76 enterprises across banking, airlines, retail and logistics.",
     certs: [
       { name: "ISO/IEC 27001", body: "Information security management — certified end-to-end." },
-      { name: "VNCERT",        body: "Registered with Vietnam's national cyber-emergency authority." },
+      { name: "VNCERT CERTIFICATtion",        body: "Registered with Vietnam's national cyber-emergency authority." },
       { name: "MIC Telecom License", body: "Licensed messaging operator under the Ministry of Information & Communications." },
     ],
   },
