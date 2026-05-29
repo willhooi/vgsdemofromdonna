@@ -6,6 +6,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import About from "./pages/About.tsx";
 import Solutions from "./pages/Solutions.tsx";
+import CaseStudies from "./pages/CaseStudies.tsx";
+import MarketInsights from "./pages/MarketInsights.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import { CookieBanner } from "./components/site/CookieBanner";
 
