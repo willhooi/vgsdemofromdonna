@@ -1,69 +1,86 @@
-# About Us — Human-First Direction
+# Footer Relayout Plan
 
-Tái cấu trúc `src/pages/About.tsx` theo hướng đặt con người làm trung tâm: nhân sự, văn hoá, và cộng đồng khách hàng là nhân vật chính; số liệu & công nghệ đóng vai trò hỗ trợ.
+Refactor `src/components/site/Footer.tsx` into a richer, multi-band footer that lifts VietGuys' credibility (Accrete + certs), restructures service navigation around the live `vietguys.biz/en/services` taxonomy, and adds proper social links.
 
-## Cấu trúc trang mới (theo thứ tự)
-
-1. **Hero — Panorama con người**
-   - Eyebrow: "About VietGuys"
-   - Headline lớn: "19 năm — vẫn là những con người gửi đi từng tin nhắn."
-   - Sub: 1-2 câu về việc công nghệ chỉ là phương tiện, con người mới là cam kết.
-   - Background: ảnh team panorama (dùng `founder.jpg`/`support-lead.jpg`/`engineer.jpg` ghép hoặc 1 ảnh rộng) + `VWatermark` mờ.
-   - Không có KPI số to ở hero — giữ cảm giác "ấm".
-
-2. **Manifesto — "Why we exist"**
-   - 1 đoạn văn lớn, typographic, italic accent.
-   - Nội dung: lý do VietGuys tồn tại — kết nối thương hiệu với con người thật, không phải "users".
-
-3. **3 Pillars — People · Quality · Community**
-   - Tái dùng `AboutStoryPillars` (đã có) hoặc viết lại 3 card:
-     - **People-first** — đội ngũ 24/7, không bot trả lời khách.
-     - **Quality obsessed** — 99.95% uptime, ISO 27001, từng tin nhắn được log.
-     - **Community-rooted** — 17+ năm cùng SMB Việt Nam, sponsor cộng đồng MarTech.
-
-4. **Voices from the team** (mới — tái dùng `HumanStory`)
-   - Giữ nguyên `HumanStory.tsx` — 3 nhân vật với quote cá nhân.
-
-5. **Leadership grid** (tái dùng `Team.tsx`)
-   - 4 thành viên ban lãnh đạo.
-
-6. **Life at VietGuys — Gallery**
-   - Mới: 6-8 ảnh dạng masonry/asymmetric (văn phòng, sự kiện, team building, khách hàng workshop).
-   - Dùng placeholder Unsplash nếu chưa có asset.
-
-7. **Our customers are our story** (tái dùng `VietGuysCaseStudies` hoặc rút gọn)
-   - 2-3 quote ngắn từ khách hàng dài hạn để khẳng định "human-first" được khách hàng cảm nhận.
-
-8. **Trust strip nhẹ** (tái dùng `LogoMarquee`)
-   - Cert + đối tác — đặt cuối, không phô trương.
-
-9. **Join us / CTA** (tái dùng `CTASection` hiện tại)
-   - Headline đổi: "Muốn cùng chúng tôi gửi đi những tin nhắn tiếp theo?"
-   - Form liên hệ giữ nguyên.
-
-## Components
-
-**Tái dùng**: `AboutStoryPillars`, `HumanStory`, `Team`, `VietGuysCaseStudies`, `LogoMarquee`, `CTASection`, `VWatermark`.
-
-**Tạo mới** (3 component nhỏ trong `src/components/site/about/`):
-- `AboutHumanHero.tsx` — hero panorama + headline + watermark.
-- `AboutManifesto.tsx` — section typographic 1 đoạn lớn.
-- `AboutLifeGallery.tsx` — masonry 6-8 ảnh + caption ngắn.
-
-## Files thay đổi
+## Layout (top → bottom)
 
 ```text
-src/pages/About.tsx                              (rewrite — compose sections)
-src/components/site/about/AboutHumanHero.tsx     (new)
-src/components/site/about/AboutManifesto.tsx     (new)
-src/components/site/about/AboutLifeGallery.tsx   (new)
+┌──────────────────────────────────────────────────────────────────────┐
+│ BAND 1 — Accrete trust strip (full width, gradient/dark bg)          │
+│  [Accrete logo] Backed by Accrete Inc. Japan                         │
+│                  TOKYO STOCK EXCHANGE Listed · Forbes Asia "Best     │
+│                  Under A Billion"                    [Learn more →]  │
+├──────────────────────────────────────────────────────────────────────┤
+│ BAND 2 — Link grid (5 columns on lg, collapses on mobile)            │
+│  Brand+Contact │ AI Services★ │ Messaging │ Engagement │ Company    │
+│  (1.4fr)       │ (1fr)        │ (1fr)     │ (1fr)      │ (1fr)      │
+├──────────────────────────────────────────────────────────────────────┤
+│ BAND 3 — Certifications strip                                        │
+│  ISO 27001 · VNCERT · VNTA · Zalo Trusted Partner (4 logo cards)    │
+├──────────────────────────────────────────────────────────────────────┤
+│ BAND 4 — Legal bar                                                   │
+│  © 2026 VietGuys JSC · Privacy · Terms · Sitemap · PDPL 2023        │
+│                                              [FB] [IN] [Zalo] EN|VI  │
+└──────────────────────────────────────────────────────────────────────┘
 ```
 
-## Design notes
+## Band-by-band content
 
-- Giữ design tokens hiện có (`--accent-deep`, `--primary-soft`, `--accent-soft`, `font-display`).
-- Tông ấm, nhiều ảnh người thật, ít số liệu to.
-- Typography: heading lớn dùng `font-display` italic cho accent words.
-- Spacing rộng (`py-24 md:py-32`) giữ nhịp giống `HumanStory` để đồng bộ.
+### Band 1 — Accrete backing (highlight #1)
+- Dark gradient background using `--gradient-brand` for contrast against the rest.
+- Left: Accrete logo (reuse `@/assets/brand/accrete-logo.png`).
+- Right: headline **"Backed by Accrete Inc. Japan"** + subline **"Tokyo Stock Exchange Listed · Forbes Asia 'Best Under A Billion'"**.
+- CTA link → `https://www.accrete-inc.com/` (new tab).
 
-Bấm Implement để mình bắt tay làm.
+### Band 2 — 5-column link grid
+
+**Col 1 — Brand & Contact**
+- Logo, short tagline.
+- Address: HBT Building, 456–458 Hai Ba Trung St., Tan Dinh Ward, HCMC.
+- Email `sales@vietguys.biz`, Phone `028 7300 8027`.
+- "Request a Demo" CTA button (kept).
+
+**Col 2 — AI Services ★ (highlighted)**
+- Visually distinct: subtle gradient border / "NEW" badge / primary accent on heading.
+- Items: AI Campaign Services · PangoCDP · OTPBox (Multi-Channel OTP) · Customized AI Solutions.
+
+**Col 3 — Messaging**
+- SMS Brandname · SMS Fixed · SMS Short Code · Voice Brandname · Voice OTP.
+
+**Col 4 — Engagement & OTT**
+- Zalo ZBS Template · Viber Message · Email Marketing · Email OTP · Mobile Topup · Smart Warranty.
+
+**Col 5 — Company**
+- About Us · Strategic Partnership · Careers · Case Studies · Market Insights.
+
+(Routes that don't exist yet point to `#` placeholders with a TODO comment — no new pages created in this task.)
+
+### Band 3 — Certifications (highlight #4)
+- Pull the same 4 logos already used in `TrustBand.tsx`:
+  - `iso-27001-v2.png` — ISO/IEC 27001:2013
+  - `vncert-new.jpg` — VNCERT/CC
+  - `vnta-new.png` — VNTA Licensed
+  - `zalo-trusted-v3.png` — Zalo Trusted Partner
+- Render as a horizontal row of 4 small bordered cards (logo + 1-line label), grayscale → color on hover.
+
+### Band 4 — Legal bar
+- Left: © {year} VietGuys Joint Stock Company · Privacy · Terms · Sitemap · PDPL 2023 Compliant.
+- Right: social icon row + EN/VI toggle.
+  - Facebook → `https://www.facebook.com/VIETGUYS`
+  - LinkedIn → `https://www.linkedin.com/company/vietguys/`
+  - Zalo → `https://zalo.me/4404293319006178133` (use `MessageCircle` lucide icon as Zalo stand-in, with `aria-label="Zalo"`).
+- All social links: `target="_blank"`, `rel="noopener noreferrer"`.
+
+## Technical notes
+- Single file change: rewrite `src/components/site/Footer.tsx`.
+- Reuse existing tokens (`bg-background`, `text-muted-foreground`, `--gradient-brand`, `border-border`, `container-tight`) — no new colors.
+- Cert logos imported from `@/assets/certs/*` (same paths as `TrustBand.tsx`).
+- Accrete logo imported from `@/assets/brand/accrete-logo.png`.
+- Responsive: grid collapses `lg:grid-cols-5` → `md:grid-cols-2` → mobile single column. Cert strip wraps to 2x2 on mobile. Legal bar stacks on mobile.
+- No i18n strings added in this pass (content is English-only, matching current footer); can be lifted into `locales/` later if needed.
+- No route additions; missing routes (`/about/strategic-partnership`, `/resources/case-studies`, etc.) stay as TODO links — flag for follow-up.
+
+## Out of scope
+- Creating new pages for the linked routes.
+- Wiring the EN/VI toggle to actual i18n state (kept as-is, visual only).
+- Changing `AccreteBacking.tsx` or `TrustBand.tsx` sections elsewhere on the site.
