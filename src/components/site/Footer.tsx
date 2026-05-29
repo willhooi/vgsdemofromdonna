@@ -17,7 +17,7 @@ const messaging = [
 
 const aiDigital = [
   { t: "AI Services", h: "/solutions/ai-campaigns", badge: "AI" as const },
-  { t: "Zalo Engagement Solution", h: "/solutions/zalo-miniapp" },
+  { t: "Zalo Engagement Solution", h: "/solutions/zalo-miniapp", badgeIcon: AppWindow as const },
   { t: "Smart Warranty", h: "/solutions/smart-warranty" },
   { t: "Automation System", h: "/solutions/automation" },
 ];
