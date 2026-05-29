@@ -70,30 +70,6 @@ const LinkItem = ({ t, h }: { t: string; h: string }) => (
 
 export const Footer = () => (
   <footer className="border-t border-border bg-background">
-    {/* BAND 1 — Accrete backing */}
-    <div className="border-b border-primary/10 bg-primary/5">
-      <div className="container-tight flex flex-col items-center gap-5 py-6 text-center md:flex-row md:justify-center md:gap-8 md:py-7 md:text-left">
-        <div className="flex items-center gap-3">
-          <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-muted-foreground">
-            A member of
-          </span>
-          <img src={accreteLogo} alt="Accrete Inc." className="h-7 w-auto" loading="lazy" decoding="async" />
-        </div>
-        <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
-          Backed by Japan&rsquo;s leading SMS gateway group, recognized by{" "}
-          <span className="font-semibold text-foreground">Forbes Asia</span> among Asia&rsquo;s{" "}
-          <span className="font-semibold text-foreground">Best Under A Billion</span> companies — Tokyo Stock Exchange Listed.
-        </p>
-        <a
-          href="https://www.accrete-inc.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex shrink-0 items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-primary hover:text-primary/80"
-        >
-          Learn more <ExternalLink className="h-3.5 w-3.5" />
-        </a>
-      </div>
-    </div>
 
     {/* BAND 2 — Main grid */}
     <div className="container-tight py-14 lg:py-16">
