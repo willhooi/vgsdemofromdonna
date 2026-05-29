@@ -1,9 +1,9 @@
 export const vi = {
   nav: {
     solutions: "Giải pháp",
-    industries: "Ngành",
+    caseStudy: "Case Study",
+    marketInsight: "Thông tin thị trường",
     about: "Về chúng tôi",
-    resources: "Tài nguyên",
     contact: "Liên hệ",
     demoBar: "Trao đổi với đội ngũ doanh nghiệp — Đăng ký Demo",
   },
