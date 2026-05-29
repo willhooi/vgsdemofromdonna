@@ -22,6 +22,9 @@ export const AboutHero = () => (
 
       <div className="mt-10 max-w-4xl">
         <span className="chapter-eyebrow">Chapter 00 — Since 2007</span>
+        <p className="mt-3 text-sm italic text-muted-foreground md:text-base">
+          Short steps · on a long journey.
+        </p>
         <h1 className="heading-display mt-6 text-[44px] leading-[1.02] sm:text-6xl md:text-7xl lg:text-[88px] text-balance">
           Nineteen years.
           <br />
