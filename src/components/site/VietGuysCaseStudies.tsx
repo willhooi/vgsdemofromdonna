@@ -135,7 +135,7 @@ export const VietGuysCaseStudies = () => {
                   alt={c.brand}
                   loading="lazy"
                   className="absolute inset-0 h-full w-full object-cover opacity-85 transition-all duration-700 group-hover:scale-105"
-                  style={{ objectPosition: isActive ? "center" : "62% center" }}
+                  style={{ objectPosition: isActive ? (c.expandedPosition ?? "center") : c.collapsedPosition }}
                   onError={(e) => {
                     (e.currentTarget as HTMLImageElement).style.display = "none";
                   }}
