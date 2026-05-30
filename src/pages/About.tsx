@@ -9,6 +9,7 @@ import { AboutHero } from "@/components/site/AboutHero";
 import { AboutChapter } from "@/components/site/AboutChapter";
 import { AboutVisionMission } from "@/components/site/AboutVisionMission";
 import { AboutCertificates } from "@/components/site/AboutCertificates";
+import { AboutCTABanner } from "@/components/site/AboutCTABanner";
 import { CTASection } from "@/components/site/CTASection";
 import { VDivider } from "@/components/brand/VWatermark";
 
@@ -152,7 +153,10 @@ const About = () => {
 
       <AboutCertificates />
 
+      <AboutCTABanner />
+
       <CTASection />
+
 
       <Footer />
       <ChatBubble />
