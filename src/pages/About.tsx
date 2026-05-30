@@ -153,7 +153,10 @@ const About = () => {
 
       <AboutCertificates />
 
+      <AboutCTABanner />
+
       <CTASection />
+
 
       <Footer />
       <ChatBubble />
