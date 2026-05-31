@@ -1,0 +1,207 @@
+import { useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
+import { ArrowLeft, ArrowUpRight, Clock } from "lucide-react";
+import { Header } from "@/components/site/Header";
+import { Footer } from "@/components/site/Footer";
+import { ChatBubble } from "@/components/site/ChatBubble";
+import { CATEGORIES } from "@/content/insights/categories";
+import {
+  ARTICLES,
+  featuredArticles,
+  formatDate,
+  latestArticles,
+} from "@/content/insights/articles";
+
+const Insights = () => {
+  const [active, setActive] = useState<string>("all");
+
+  useEffect(() => {
+    document.title = "Insights — VietGuys | Enterprise Messaging Vietnam";
+    let m = document.querySelector('meta[name="description"]');
+    if (!m) {
+      m = document.createElement("meta");
+      m.setAttribute("name", "description");
+      document.head.appendChild(m);
+    }
+    m.setAttribute(
+      "content",
+      "Channel intelligence, engagement strategy, AI & data and industry playbooks from VietGuys — Vietnam's enterprise messaging team.",
+    );
+
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement("link");
+      canonical.setAttribute("rel", "canonical");
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute("href", window.location.origin + "/insights");
+  }, []);
+
+  const featured = featuredArticles();
+  const hero = featured[0];
+
+  const filtered = useMemo(() => {
+    const all = latestArticles();
+    if (active === "all") return all;
+    return all.filter((a) => a.category === active);
+  }, [active]);
+
+  return (
+    <div className="min-h-screen bg-background">
+      <Header />
+
+      <section className="relative overflow-hidden pt-32 pb-16 md:pt-40 md:pb-20">
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(60%_50%_at_50%_0%,hsl(var(--primary)/0.10),transparent_70%)]" />
+        <div className="container-tight">
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground hover:text-foreground"
+          >
+            <ArrowLeft className="h-3.5 w-3.5" /> Back to home
+          </Link>
+          <div className="mt-8 grid gap-10 md:grid-cols-12 md:items-end">
+            <div className="md:col-span-8">
+              <span className="eyebrow">Insights</span>
+              <h1 className="heading-hero mt-4 text-balance">
+                Field notes from Vietnam's{" "}
+                <span className="text-primary">enterprise messaging</span> frontline.
+              </h1>
+            </div>
+            <p className="md:col-span-4 text-base leading-relaxed text-muted-foreground">
+              Benchmarks, playbooks and channel intelligence from the team
+              delivering 5 million messages a day across 5,000+ brands.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {hero && (
+        <section className="pb-16">
+          <div className="container-tight">
+            <Link
+              to={`/insights/${hero.slug}`}
+              className="group grid gap-8 overflow-hidden rounded-3xl border border-border bg-card shadow-[var(--shadow-soft)] transition-all hover:border-primary/40 hover:shadow-[var(--shadow-glow)] md:grid-cols-12"
+            >
+              <div className="relative md:col-span-7">
+                <div className="aspect-[16/10] w-full overflow-hidden md:h-full">
+                  <img
+                    src={hero.image}
+                    alt={hero.title}
+                    loading="eager"
+                    className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
+                  />
+                </div>
+                <span className="absolute left-5 top-5 rounded-full bg-background/90 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary backdrop-blur">
+                  Featured
+                </span>
+              </div>
+              <div className="flex flex-col justify-center gap-5 p-6 md:col-span-5 md:p-10">
+                <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                  {CATEGORIES.find((c) => c.slug === hero.category)?.title}
+                </span>
+                <h2 className="text-2xl font-bold tracking-tight text-foreground md:text-3xl">
+                  {hero.title}
+                </h2>
+                <p className="text-sm leading-relaxed text-muted-foreground md:text-base">
+                  {hero.excerpt}
+                </p>
+                <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                  <span>{formatDate(hero.date)}</span>
+                  <span aria-hidden>·</span>
+                  <span className="inline-flex items-center gap-1">
+                    <Clock className="h-3 w-3" /> {hero.readMinutes} min read
+                  </span>
+                </div>
+                <span className="inline-flex items-center gap-1 text-sm font-semibold text-primary">
+                  Read article <ArrowUpRight className="h-4 w-4" />
+                </span>
+              </div>
+            </Link>
+          </div>
+        </section>
+      )}
+
+      <section className="pb-28">
+        <div className="container-tight">
+          <div className="mb-8 flex flex-wrap items-center gap-2">
+            <button
+              onClick={() => setActive("all")}
+              className={`rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition-all ${
+                active === "all"
+                  ? "border-foreground bg-foreground text-background"
+                  : "border-border bg-background text-muted-foreground hover:border-foreground hover:text-foreground"
+              }`}
+            >
+              All ({ARTICLES.length})
+            </button>
+            {CATEGORIES.map((c) => {
+              const count = ARTICLES.filter((a) => a.category === c.slug).length;
+              const isActive = active === c.slug;
+              return (
+                <button
+                  key={c.slug}
+                  onClick={() => setActive(c.slug)}
+                  className={`rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] transition-all ${
+                    isActive
+                      ? "border-foreground bg-foreground text-background"
+                      : "border-border bg-background text-muted-foreground hover:border-foreground hover:text-foreground"
+                  }`}
+                >
+                  {c.title} ({count})
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {filtered.map((a) => (
+              <Link
+                to={`/insights/${a.slug}`}
+                key={a.slug}
+                className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-background shadow-[var(--shadow-soft)] transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-[var(--shadow-glow)]"
+              >
+                <div className="aspect-[16/10] overflow-hidden">
+                  <img
+                    src={a.image}
+                    alt={a.title}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105"
+                  />
+                </div>
+                <div className="flex flex-1 flex-col gap-3 p-6">
+                  <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
+                    {CATEGORIES.find((c) => c.slug === a.category)?.title}
+                  </span>
+                  <h3 className="text-lg font-bold tracking-tight text-foreground">
+                    {a.title}
+                  </h3>
+                  <p className="line-clamp-3 text-sm leading-relaxed text-muted-foreground">
+                    {a.excerpt}
+                  </p>
+                  <div className="mt-auto flex items-center gap-3 pt-2 text-xs text-muted-foreground">
+                    <span>{formatDate(a.date)}</span>
+                    <span aria-hidden>·</span>
+                    <span className="inline-flex items-center gap-1">
+                      <Clock className="h-3 w-3" /> {a.readMinutes} min
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          {filtered.length === 0 && (
+            <p className="py-20 text-center text-sm text-muted-foreground">
+              No articles in this category yet.
+            </p>
+          )}
+        </div>
+      </section>
+
+      <Footer />
+      <ChatBubble />
+    </div>
+  );
+};
+
+export default Insights;

@@ -8,6 +8,8 @@ import About from "./pages/About.tsx";
 import Solutions from "./pages/Solutions.tsx";
 import CaseStudies from "./pages/CaseStudies.tsx";
 import MarketInsights from "./pages/MarketInsights.tsx";
+import Insights from "./pages/Insights.tsx";
+import InsightArticle from "./pages/InsightArticle.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import { CookieBanner } from "./components/site/CookieBanner";
 
@@ -25,6 +27,8 @@ const App = () => (
           <Route path="/solutions" element={<Solutions />} />
           <Route path="/case-studies" element={<CaseStudies />} />
           <Route path="/market-insights" element={<MarketInsights />} />
+          <Route path="/insights" element={<Insights />} />
+          <Route path="/insights/:slug" element={<InsightArticle />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
