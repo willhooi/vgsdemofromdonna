@@ -1,27 +1,27 @@
 export const CATEGORIES = [
   {
-    slug: "channel-intelligence",
-    title: "Channel Intelligence",
+    slug: "messaging-channels",
+    title: "Messaging Channels",
     description:
-      "How SMS, Zalo ZNS, Viber and Email actually perform in Vietnam — benchmarks, costs, and routing decisions.",
+      "How SMS Brandname, Zalo ZNS, Viber, OTP and email actually perform in Vietnam — benchmarks, costs and routing decisions.",
   },
   {
-    slug: "engagement-strategy",
-    title: "Engagement Strategy",
+    slug: "customer-engagement",
+    title: "Customer Engagement & CX",
     description:
-      "Lifecycle programmes, chat-first CX, and the operating models behind owned-audience growth.",
+      "Chat-first CX, lifecycle programmes, retention and the operating models behind owned-audience growth.",
   },
   {
-    slug: "ai-and-data",
-    title: "AI & Data",
+    slug: "data-ai-martech",
+    title: "Data, AI & MarTech",
     description:
-      "CDP, first-party data and AI campaign optimisation for Vietnamese enterprises.",
+      "CDP, first-party data, AI campaign optimisation and the marketing stack for Vietnamese enterprises.",
   },
   {
     slug: "industry-playbooks",
     title: "Industry Playbooks",
     description:
-      "Sector-specific plays for retail, FMCG, finance and mobile-first businesses.",
+      "Sector-specific plays for banking, FMCG, retail, F&B, beauty, logistics and mobile-first businesses.",
   },
 ] as const;
 

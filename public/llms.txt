@@ -1,0 +1,38 @@
+# VietGuys
+
+> Vietnam's enterprise messaging and mobile marketing partner since 2007 — SMS Brandname, Zalo ZNS, OTP, AI campaigns and PangoCDP, delivering 5 million messages a day for 5,000+ brands.
+
+VietGuys is a licensed Vietnamese CPaaS and martech provider. The Market Insights hub publishes channel benchmarks, customer-engagement playbooks, AI & data analysis, and industry-specific guides for banking, FMCG, retail, F&B, beauty and logistics.
+
+## Pages
+
+- [Home](/): Company overview and core solutions.
+- [Solutions](/solutions): SMS Brandname, Zalo ZNS, OTP & alerts, AI campaigns, PangoCDP.
+- [Case Studies](/case-studies): Customer outcomes across banking, retail, FMCG and logistics.
+- [About](/about): 19-year company story, certifications and team.
+- [Market Insights](/market-insights): Editorial hub for channel intelligence, CX, data and industry playbooks.
+
+## Market Insights — Messaging Channels
+
+- [Zalo ZNS Template, explained](/market-insights/zalo-zns-template-explained): How Vietnamese enterprises send template-based messages at Zalo's 74M-user scale.
+- [OTP: the closest touchpoint to revenue](/market-insights/otp-the-revenue-bottleneck): Why enterprise OTP needs multi-channel fallback by default.
+- [Multi-channel messaging in 2026](/market-insights/multi-channel-messaging-2026): Decision matrix for picking SMS, Zalo, Viber or email by use case.
+
+## Market Insights — Customer Engagement & CX
+
+- [Chat-first Customer Experience](/market-insights/chat-first-customer-experience): Why persistent chat threads are the new CX interface.
+- [Ads dependency vs owned audience](/market-insights/ads-dependency-vs-owned-audience): The growth dilemma for Vietnam's beauty sector.
+- [The quiet moment after the first order](/market-insights/post-first-order-moment): FMCG second-order lifecycle programmes.
+
+## Market Insights — Data, AI & MarTech
+
+- [What a CDP actually does](/market-insights/cdp-for-vietnamese-enterprises): CRM vs CDP for Vietnamese enterprises.
+- [AI campaign optimisation](/market-insights/ai-campaigns-segmentation): Segmentation and send-time decided by models on first-party data.
+- [First-party data in 2026](/market-insights/first-party-data-2026): How Vietnamese enterprises are catching up.
+- [Mobile App Install data strategy](/market-insights/mobile-app-install-data): Connecting install attribution to retention and revenue.
+
+## Market Insights — Industry Playbooks
+
+- [CellphoneS Zalo ZNS case study](/market-insights/cellphones-zalo-zns-case-study): Retail post-purchase journey on ZNS.
+- [FMCG customer care as a revenue engine](/market-insights/fmcg-cx-2026-revenue-driver): 2026 trend for FMCG brands in Vietnam.
+- [5-touchpoint SMS strategy for restaurants & cafes](/market-insights/sms-five-touchpoints-restaurants-cafes): F&B retention via SMS Brandname.

@@ -1,54 +1,104 @@
 import { useEffect } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { ArrowLeft, ArrowUpRight, Clock } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ChatBubble } from "@/components/site/ChatBubble";
 import { Button } from "@/components/ui/button";
-import { CATEGORIES, getCategory } from "@/content/insights/categories";
+import { getCategory } from "@/content/insights/categories";
 import {
   ARTICLES,
   formatDate,
   getArticle,
 } from "@/content/insights/articles";
 
+const SITE = "https://vgsdemofromdonna.lovable.app";
+
 const InsightArticle = () => {
   const { slug = "" } = useParams();
   const article = getArticle(slug);
 
   useEffect(() => {
-    if (!article) return;
-    document.title = `${article.title} — VietGuys Insights`;
-    let m = document.querySelector('meta[name="description"]');
-    if (!m) {
-      m = document.createElement("meta");
-      m.setAttribute("name", "description");
-      document.head.appendChild(m);
-    }
-    m.setAttribute("content", article.excerpt);
-
-    let canonical = document.querySelector('link[rel="canonical"]');
-    if (!canonical) {
-      canonical = document.createElement("link");
-      canonical.setAttribute("rel", "canonical");
-      document.head.appendChild(canonical);
-    }
-    canonical.setAttribute(
-      "href",
-      window.location.origin + `/insights/${article.slug}`,
-    );
     window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
-  }, [article]);
+  }, [slug]);
 
-  if (!article) return <Navigate to="/insights" replace />;
+  if (!article) return <Navigate to="/market-insights" replace />;
 
   const category = getCategory(article.category);
   const related = ARTICLES.filter(
     (a) => a.category === article.category && a.slug !== article.slug,
   ).slice(0, 3);
 
+  const url = `${SITE}/market-insights/${article.slug}`;
+
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>{`${article.title} — VietGuys Market Insights`}</title>
+        <meta name="description" content={article.excerpt} />
+        <link rel="canonical" href={url} />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={article.title} />
+        <meta property="og:description" content={article.excerpt} />
+        <meta property="og:url" content={url} />
+        <meta property="og:image" content={article.image} />
+        <meta property="article:published_time" content={article.date} />
+        <meta property="article:author" content={article.author} />
+        <meta
+          property="article:section"
+          content={category?.title ?? "Insights"}
+        />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: article.title,
+            description: article.excerpt,
+            image: [article.image],
+            datePublished: article.date,
+            dateModified: article.date,
+            author: {
+              "@type": "Organization",
+              name: article.author,
+            },
+            publisher: {
+              "@type": "Organization",
+              name: "VietGuys Joint Stock Company",
+            },
+            mainEntityOfPage: { "@type": "WebPage", "@id": url },
+            articleSection: category?.title,
+            keywords: article.tags.join(", "),
+          })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Market Insights",
+                item: `${SITE}/market-insights`,
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: category?.title ?? "Article",
+                item: `${SITE}/market-insights`,
+              },
+              {
+                "@type": "ListItem",
+                position: 3,
+                name: article.title,
+                item: url,
+              },
+            ],
+          })}
+        </script>
+      </Helmet>
+
       <Header />
 
       <article>
@@ -56,7 +106,7 @@ const InsightArticle = () => {
           <div className="absolute inset-0 -z-10 bg-[radial-gradient(60%_50%_at_50%_0%,hsl(var(--primary)/0.08),transparent_70%)]" />
           <div className="container-tight max-w-4xl">
             <Link
-              to="/insights"
+              to="/market-insights"
               className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground hover:text-foreground"
             >
               <ArrowLeft className="h-3.5 w-3.5" /> All insights
@@ -64,7 +114,7 @@ const InsightArticle = () => {
             <div className="mt-8 flex flex-wrap items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.18em]">
               {category && (
                 <Link
-                  to="/insights"
+                  to="/market-insights"
                   className="rounded-full bg-primary/10 px-3 py-1 text-primary"
                 >
                   {category.title}
@@ -147,7 +197,7 @@ const InsightArticle = () => {
             <div className="grid gap-6 md:grid-cols-3">
               {related.map((a) => (
                 <Link
-                  to={`/insights/${a.slug}`}
+                  to={`/market-insights/${a.slug}`}
                   key={a.slug}
                   className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-background shadow-[var(--shadow-soft)] transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-[var(--shadow-glow)]"
                 >
@@ -189,9 +239,9 @@ const InsightArticle = () => {
               </div>
               <div className="md:col-span-4 md:text-right">
                 <Button variant="cta" size="lg" asChild>
-                  <a href="/#contact">
+                  <Link to="/contact">
                     Get in touch <ArrowUpRight className="ml-1 h-4 w-4" />
-                  </a>
+                  </Link>
                 </Button>
               </div>
             </div>
