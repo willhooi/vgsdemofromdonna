@@ -22,10 +22,10 @@ const img = (id: string) =>
   `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1600&q=80`;
 
 export const ARTICLES: InsightArticle[] = [
-  // ─────────────────────────────  CHANNEL INTELLIGENCE  ─────────────────────────────
+  // ─────────────────────────────  MESSAGING CHANNELS  ─────────────────────────────
   {
     slug: "zalo-zns-template-explained",
-    category: "channel-intelligence",
+    category: "messaging-channels",
     title: "Zalo ZNS Template, explained: how Vietnam's enterprises send 74M-reach messages",
     excerpt:
       "ZNS templates are the only way to reach Zalo's 74M+ Vietnamese users at scale with branded, verified content. Here is how the approval flow, pricing and use cases really work.",
@@ -47,7 +47,7 @@ export const ARTICLES: InsightArticle[] = [
   },
   {
     slug: "otp-the-revenue-bottleneck",
-    category: "channel-intelligence",
+    category: "messaging-channels",
     title: "OTP: the closest touchpoint to revenue — and the easiest to break",
     excerpt:
       "A delayed OTP looks like a 3-second technical glitch. On a checkout funnel it is an abandoned order. Why enterprise OTP needs multi-channel fallback by default.",
@@ -67,7 +67,7 @@ export const ARTICLES: InsightArticle[] = [
   },
   {
     slug: "multi-channel-messaging-2026",
-    category: "channel-intelligence",
+    category: "messaging-channels",
     title: "Multi-channel messaging in 2026: when to use SMS, Zalo, Viber or Email",
     excerpt:
       "A practical decision matrix for picking the right channel by use case, cost, reach and regulatory requirement in Vietnam.",
@@ -86,10 +86,10 @@ export const ARTICLES: InsightArticle[] = [
       "/vi/tin-tuc/messaging-da-kenh-la-gi-xu-huong-giup-doanh-nghiep-nang-cao-trai-nghiem-khach-hang-nam-2026",
   },
 
-  // ─────────────────────────────  ENGAGEMENT STRATEGY  ─────────────────────────────
+  // ─────────────────────────────  CUSTOMER ENGAGEMENT & CX  ─────────────────────────────
   {
     slug: "chat-first-customer-experience",
-    category: "engagement-strategy",
+    category: "customer-engagement",
     title: "Chat-first Customer Experience: why chat is becoming the new CX interface",
     excerpt:
       "Phone trees and email tickets are out. Persistent, asynchronous chat threads — across Zalo OA, Messenger and in-app — are now the centre of enterprise CX.",
@@ -110,7 +110,7 @@ export const ARTICLES: InsightArticle[] = [
   },
   {
     slug: "ads-dependency-vs-owned-audience",
-    category: "engagement-strategy",
+    category: "customer-engagement",
     title: "Ads dependency vs owned audience: the growth dilemma of Vietnam's beauty sector",
     excerpt:
       "Many beauty brands run on Facebook and Google Ads alone. The booked calendar hides a fragile economics story — and a clear path to owned-channel growth.",
@@ -130,7 +130,7 @@ export const ARTICLES: InsightArticle[] = [
   },
   {
     slug: "post-first-order-moment",
-    category: "engagement-strategy",
+    category: "customer-engagement",
     title: "The quiet moment after the first order that decides FMCG revenue",
     excerpt:
       "FMCG growth is won or lost in the 14 days after the first purchase. A look at the lifecycle programme that turns one-time buyers into a repeat base.",
@@ -149,10 +149,10 @@ export const ARTICLES: InsightArticle[] = [
       "/vi/tin-tuc/khoanh-khac-fmcg-am-tham-quyet-dinh-doanh-thu-sau-don-hang-dau-tien",
   },
 
-  // ─────────────────────────────  AI & DATA  ─────────────────────────────
+  // ─────────────────────────────  DATA, AI & MARTECH  ─────────────────────────────
   {
     slug: "cdp-for-vietnamese-enterprises",
-    category: "ai-and-data",
+    category: "data-ai-martech",
     title: "What a CDP actually does — for Vietnamese enterprises that already have a CRM",
     excerpt:
       "CRM tracks deals. CDP tracks people across every channel and stitches their identity. Why the two coexist, and what to build first.",
@@ -171,7 +171,7 @@ export const ARTICLES: InsightArticle[] = [
   },
   {
     slug: "ai-campaigns-segmentation",
-    category: "ai-and-data",
+    category: "data-ai-martech",
     title: "AI campaign optimisation: segmentation in plain language, send-time on autopilot",
     excerpt:
       "Modern AI marketing is not a chatbot bolted onto a campaign tool. It is segmentation, send-time and copy decided by models running on first-party data.",
@@ -189,7 +189,7 @@ export const ARTICLES: InsightArticle[] = [
   },
   {
     slug: "first-party-data-2026",
-    category: "ai-and-data",
+    category: "data-ai-martech",
     title: "First-party data in 2026: how Vietnamese enterprises are catching up",
     excerpt:
       "Third-party cookies are gone, regulation is tightening, and the brands with their own data are running away with the next cycle.",
@@ -204,6 +204,26 @@ export const ARTICLES: InsightArticle[] = [
     readMinutes: 6,
     tags: ["First-party data", "CDP", "Strategy"],
     image: img("photo-1518770660439-4636190af475"),
+  },
+  {
+    slug: "mobile-app-install-data",
+    category: "data-ai-martech",
+    title: "Using data to maximise Mobile App Install campaigns",
+    excerpt:
+      "App install is the easy part. Driving day-7 and day-30 retention is where most budgets quietly leak. A data-led approach to fix it.",
+    body: [
+      "Most Mobile App Install campaigns are measured at the install event. The real economics live further downstream — at activation, retention and revenue.",
+      "A data-led approach connects install attribution to in-app behaviour, then loops back into the CDP so the next campaign already knows which segments retain and which churn fast.",
+      "Layer messaging on top: ZNS welcomes on day 0, lifecycle nudges on day 3 and 7, win-back on day 30. The compounding effect on LTV is significant.",
+    ],
+    author: "VietGuys Team",
+    authorRole: "Growth",
+    date: "2022-10-07",
+    readMinutes: 5,
+    tags: ["Mobile", "Growth", "Attribution"],
+    image: img("photo-1512941937669-90a1b58e7e9c"),
+    legacyUrl:
+      "/vi/tin-tuc/su-dung-du-lieu-the-nao-de-toi-da-hieu-qua-chien-dich-mobile-app-install",
   },
 
   // ─────────────────────────────  INDUSTRY PLAYBOOKS  ─────────────────────────────
@@ -233,10 +253,10 @@ export const ARTICLES: InsightArticle[] = [
     category: "industry-playbooks",
     title: "2026 trend: turning FMCG customer care into a revenue engine",
     excerpt:
-      "FMCG brands historically saw CSKH as a cost line. The leading players in Vietnam are now measuring it as a revenue driver — and the data backs them up.",
+      "FMCG brands historically saw customer care as a cost line. The leading players in Vietnam are now measuring it as a revenue driver — and the data backs them up.",
     body: [
       "When customer care is wired into the CDP, every conversation becomes a behavioural signal that can feed back into segmentation, lifecycle and even product decisions.",
-      "The brands ahead in 2026 are running CSKH as a P&L: response time, resolution rate, NPS — but also incremental revenue per resolved conversation.",
+      "The brands ahead in 2026 are running care as a P&L: response time, resolution rate, NPS — but also incremental revenue per resolved conversation.",
       "Messaging plays a central role here. Chat threads on Zalo and Messenger create the persistent canvas. ZNS templates re-engage the customer with the next-best action.",
     ],
     author: "VietGuys Team",
@@ -249,24 +269,28 @@ export const ARTICLES: InsightArticle[] = [
       "/vi/tin-tuc/xu-huong-2026-chuyen-hoa-cskh-trong-fmcg-thanh-dong-luc-doanh-thu",
   },
   {
-    slug: "mobile-app-install-data",
+    slug: "sms-five-touchpoints-restaurants-cafes",
     category: "industry-playbooks",
-    title: "Using data to maximise Mobile App Install campaigns",
+    title: "The 5-touchpoint SMS strategy that lifts restaurant & cafe return rates",
     excerpt:
-      "App install is the easy part. Driving day-7 and day-30 retention is where most budgets quietly leak. A data-led approach to fix it.",
+      "Restaurants and cafes spend on first-visit acquisition and forget the return journey. Five well-placed SMS touchpoints can quietly compound traffic without touching the ad budget.",
     body: [
-      "Most Mobile App Install campaigns are measured at the install event. The real economics live further downstream — at activation, retention and revenue.",
-      "A data-led approach connects install attribution to in-app behaviour, then loops back into the CDP so the next campaign already knows which segments retain and which churn fast.",
-      "Layer messaging on top: ZNS welcomes on day 0, lifecycle nudges on day 3 and 7, win-back on day 30. The compounding effect on LTV is significant.",
+      "In F&B, the second visit is where the unit economics flip. The first visit pays for acquisition; every visit after that pays the bills. SMS Brandname remains the most reliable channel to nudge that second visit in Vietnam, because phone numbers are collected at checkout anyway.",
+      "Touchpoint 1 — the thank-you. Send within an hour of the visit, no offer attached. Goal: anchor the brand in memory while the experience is still fresh.",
+      "Touchpoint 2 — the segmented offer at day 3. Use POS data to recommend the next dish or drink the customer is most likely to try. A relevant nudge converts at multiples of a generic promo.",
+      "Touchpoint 3 — the weekend reminder. A simple SMS on Friday afternoon to the segment that visited mid-week reliably lifts weekend covers without discounting.",
+      "Touchpoint 4 — the win-back at day 30. Customers who skip a month are at risk. A small, time-boxed incentive recovers a meaningful share before the silence becomes permanent.",
+      "Touchpoint 5 — the loyalty milestone. Acknowledge the 5th and 10th visit publicly inside the message. Recognition outperforms discounts on long-term repeat rate.",
+      "What makes the programme work is not the copy — it is having the customer data unified so each SMS is targeted, not blasted. That is where SMS Brandname plus a CDP layer outperforms a standalone messaging tool.",
     ],
     author: "VietGuys Team",
-    authorRole: "Growth",
-    date: "2022-10-07",
-    readMinutes: 5,
-    tags: ["Mobile", "Growth", "Attribution"],
-    image: img("photo-1512941937669-90a1b58e7e9c"),
+    authorRole: "Industry",
+    date: "2026-06-02",
+    readMinutes: 7,
+    tags: ["F&B", "SMS", "Retention"],
+    image: img("photo-1554118811-1e0d58224f24"),
     legacyUrl:
-      "/vi/tin-tuc/su-dung-du-lieu-the-nao-de-toi-da-hieu-qua-chien-dich-mobile-app-install",
+      "/vi/tin-tuc/chien-luoc-5-diem-cham-giup-nha-hang-quan-ca-phe-tang-ty-le-khach-quay-lai-bang-sms-marketing",
   },
 ];
 
