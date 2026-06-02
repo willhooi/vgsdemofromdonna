@@ -1,81 +1,90 @@
-# About Page — Content Enrichment + Cinematic Motion Pass
 
-## 1. Remove sticky section nav
-- Delete `<AboutSectionNav />` usage from `src/pages/About.tsx` and remove the import.
-- Keep `src/components/site/AboutSectionNav.tsx` file deleted (no longer needed).
-- Keep section `id`s on wrappers (`#story`, `#vision`, `#milestones`, `#values`, `#team`, `#certificates`) — harmless and useful for deep-links from Footer/CTAs.
+## Goal
 
-## 2. Apply content from vietguys.biz/en/about-us/vietguys
+Rebuild `/market-insights` using the `insights-nest-11` template style and migrate the existing VietGuys VI blog into it as English articles, organised under 4 categories tuned for long-term SEO + AI-visibility.
 
-Extracted from the old site, mapped into existing sections (no new sections, just richer content):
+## 1. Categories (final)
 
-**AboutHero**
-- Keep tagline "Short steps · on a long journey".
-- Add a one-line positioning under H1: "Vietnam's pioneer in Mobile Marketing Solutions since 2007 — now part of Accrete Inc., Tokyo Stock Exchange listed."
+| Slug | Title | Pillar keywords |
+|---|---|---|
+| `messaging-channels` | Messaging Channels | SMS Brandname, Zalo ZNS, Viber, OTP, deliverability |
+| `customer-engagement` | Customer Engagement & CX | Chat-first CX, retention, lifecycle, loyalty |
+| `data-ai-martech` | Data, AI & MarTech | CDP, first-party data, AI campaigns, automation |
+| `industry-playbooks` | Industry Playbooks | Banking, FMCG, Retail, F&B, Beauty, Logistics |
 
-**AboutVisionMission** — replace placeholder copy with the old-site canonical text:
-- Vision: "To become the leading Mobile Marketing Solutions provider in Vietnam and the region, accompanying enterprises on their digital transformation journey."
-- Mission: "Deliver constantly-improved Mobile Marketing Solutions for Vietnamese enterprises — creating holistic value for businesses and the wider community, not just sales or profit."
-- Add a small footer line: "Licensed Telecommunications Service Provider (no network infrastructure) — Ministry of Information & Communications, Vietnam."
+Existing 12 EN articles will be re-tagged to fit these 4 slugs.
 
-**AboutStoryPillars (Core Values)** — sync to the 6 official values from old site:
-1. People First  2. Quality  3. Integrity & Honesty  4. Accountability  5. Creativity  6. Innovation
-(Keep current visual treatment; only labels/short descriptions updated to match old-site wording.)
+## 2. URL strategy
 
-**AboutMilestones** — extend timeline with old-site milestones if missing:
-- 2007 Founded · 2008 Samsung E-warranty · 2017 LG · 2018 #1 SMS in e-commerce · 2019 Viber · 2020 OTPBox · 2021 5,000+ brands / 15 solutions · 2022 Accrete merger · 2024 5M msgs/day.
+- Canonical hub: `/market-insights`
+- Detail: `/market-insights/:slug`
+- `/insights` and `/insights/:slug` → 301-style client redirect (Navigate replace) to the `/market-insights` equivalents (keeps any inbound link working without dual canonicals).
 
-**AboutCertificates** — keep 4 cards; add subline "Audited & re-certified annually."
+## 3. Content migration (blog cũ → EN articles)
 
-**New micro-block inside Chapter 03 body** (no new section): mention Accrete ticker / TSE listing and "Vietnam–Japan bridge" framing already present — just tighten wording to match old-site tone.
+Translate + rewrite EN excerpt (≈30 words) and body (4–6 short paragraphs, ~350–500 words) from each old VI title/meta only — no full-page fetch. Each article gets `legacyUrl` pointing to the original `vietguys.biz/vi/tin-tuc/...` so we can later set server redirects.
 
-## 3. Hybrid cinematic motion system
+Articles to add (8):
 
-Goal: smooth, brand-consistent (the "V" signal sweep), respects `prefers-reduced-motion`, GPU-friendly, no layout thrash. Hybrid = CSS keyframes for ambient loops + IntersectionObserver-driven reveal classes for scroll choreography. No new heavy dependency; framer-motion only where stagger is needed (already in deps if present, otherwise pure CSS/IO).
+| New slug | Category | Source legacyUrl |
+|---|---|---|
+| `cellphones-zalo-zns-template-case-study` | messaging-channels | cellphones-nang-cao-trai-nghiem-khach-hang-voi-zalo-zns-template |
+| `otp-the-revenue-bottleneck` | messaging-channels | otp-diem-gan-nhat-voi-doanh-thu-nhung-cung-la-diem-nghen-neu-den-tre |
+| `sms-five-touchpoints-restaurants-cafes` | industry-playbooks | chien-luoc-5-diem-cham-...-sms-marketing |
+| `fmcg-customer-care-2026-revenue-engine` | industry-playbooks | xu-huong-2026-chuyen-hoa-cskh-trong-fmcg-... |
+| `fmcg-silent-moment-after-first-order` | industry-playbooks | khoanh-khac-fmcg-am-tham-quyet-dinh-doanh-thu-... |
+| `beauty-industry-ads-vs-owned-assets` | industry-playbooks | phu-thuoc-ads-hay-xay-tai-san-... |
+| `chat-first-cx-new-interface` | customer-engagement | chat-first-customer-experience-la-gi-... |
+| `mobile-app-install-data-strategy` | data-ai-martech | su-dung-du-lieu-the-nao-de-toi-da-hieu-qua-... |
 
-**Shared primitives (new file: `src/components/motion/Reveal.tsx`)**
-- `<Reveal variant="fade-up" | "fade" | "clip-right" | "scale-soft" delay={0..600}>` — wraps children, uses IntersectionObserver (once), toggles a data-attribute that triggers a CSS transition defined in `index.css`.
-- Single source of truth for easing: `cubic-bezier(0.22, 1, 0.36, 1)` (cinematic ease-out-expo-ish), durations 600–900ms.
-- Honors `@media (prefers-reduced-motion: reduce)` → instant opacity 1, no transform.
+Press/company items (giấy phép viễn thông, Zalo Trusted Partner) are intentionally **not** ported — they belong in a future News section, not the topical authority hub.
 
-**index.css additions**
-- Keyframes: `signal-sweep` (existing if any), `v-trace` (SVG stroke draw), `ken-burns` (slow image zoom 1→1.06 over 12s), `quote-rise` (translateY + clip-path reveal), `dot-pulse`.
-- Utility classes: `.reveal`, `.reveal[data-in="true"]` variants, `.ken-burns`, `.v-trace path { stroke-dasharray:1; stroke-dashoffset:1; animation: v-trace 1.6s ease forwards; }`.
+Body generation: use Lovable AI Gateway (Gemini Flash) via the ai-gateway skill to draft EN body + excerpt from each VI title + 1-line meta, then commit the resulting `articles.ts`. Tone aligned with the existing 12 articles.
 
-**Per-section choreography**
-- **AboutHero**: headline word-by-word fade-up (CSS stagger via `--i`), SignalArt `v-trace` plays once, background image gets `ken-burns`. Tagline fades in last.
-- **AboutChapter**: chapter number "01/02/03" does a vertical clip reveal + underline draw; H2 fade-up; body paragraphs fade-up staggered 80ms; image uses `clip-right` (clip-path inset 0 100% 0 0 → 0) + subtle ken-burns on hover; pull-quote slides up with left brand-gradient bar growing from 0 → full height.
-- **AboutVisionMission**: two cards do scale-soft (0.96→1) + fade, VWatermark fades in 200ms later; on hover, gradient border shimmer (CSS only).
-- **AboutMilestones**: timeline line draws left-to-right on enter (`scaleX 0→1`, origin-left, 1200ms); each dot pulses once when its row enters; year numbers count-up via existing `use-count-up`.
-- **AboutStoryPillars**: 6 cards stagger fade-up 60ms each; icon micro-bounce on enter.
-- **AboutCertificates**: cards fade-up + 3D tilt on hover (CSS `transform: perspective(800px) rotateY(...)`), logo gets subtle grayscale→color transition.
-- **CTASection**: gradient text shimmer loop (slow, 8s).
+## 4. UI rebuild for `/market-insights`
 
-**Performance & a11y**
-- All animations on `transform`/`opacity` only.
-- IntersectionObserver with `rootMargin: "0px 0px -10% 0px"`, `once: true`.
-- Global `@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }` scoped to motion utility classes (not to UI components that need transitions for state).
+Mirror `insights-nest-11` layout:
+- **Hero**: 1 featured article (large image left, title + excerpt + author/date right).
+- **Category strip**: 4 chips, each `Title · N articles`, click filters grid.
+- **Grid**: responsive cards (3-col ≥lg, 2-col md, 1-col mobile) — image, category eyebrow, title, excerpt, author + date, read minutes.
+- **Newsletter band** at bottom (reuse current CTA card).
+- Animations: reuse `Reveal` (`fade-up`, `scale-soft`) for hero + card stagger; ken-burns on hero image.
+- Tokens only (no raw colors).
 
-## 4. Files touched
+## 5. Article detail page
 
-- edit `src/pages/About.tsx` — remove SectionNav, wrap content blocks in `<Reveal>`.
-- delete `src/components/site/AboutSectionNav.tsx`.
-- create `src/components/motion/Reveal.tsx`.
-- edit `src/index.css` — add keyframes + reveal utilities + reduced-motion guard.
-- edit `src/components/site/AboutHero.tsx` — word stagger, v-trace, ken-burns, positioning line.
-- edit `src/components/site/AboutChapter.tsx` — chapter number reveal, image clip-reveal, pull-quote bar grow.
-- edit `src/components/site/AboutVisionMission.tsx` — canonical vision/mission copy + license line + motion.
-- edit `src/components/site/AboutStoryPillars.tsx` — 6 official values + stagger.
-- edit `src/components/site/AboutMilestones.tsx` — line draw, dot pulse, full milestone set.
-- edit `src/components/site/AboutCertificates.tsx` — subline + tilt-on-hover.
+Keep `InsightArticle.tsx` logic but:
+- Route to `/market-insights/:slug`.
+- Add `react-helmet-async` (install + wrap `main.tsx` with `HelmetProvider`) for proper per-route `<title>`, meta description, canonical, og:*, and `Article` + `BreadcrumbList` JSON-LD.
+- "More in [category]" + bottom CTA stay.
 
-## 5. Out of scope
-- No new routes, no backend changes, no copy in other pages.
-- No framer-motion install if not already present (pure CSS + IO is enough for this scope).
+## 6. SEO + AI-visibility wiring
 
-```text
-Hero ──► Chapter 01 ──► Chapter 02 ──► Chapter 03
-            │              │              │
-            └─► Vision/Mission ─► Milestones ─► Values ─► Team ─► Certificates ─► CTA
-(no sticky nav; deep-link ids preserved)
+- `index.html`: remove static `<link rel="canonical">` (per head-meta rule) — Helmet now owns it.
+- `public/sitemap.xml`: add `/market-insights` and every `/market-insights/:slug`. Remove the stale `/resources/blog`, `/resources/case-studies` entries that don't exist as routes.
+- `public/llms.txt`: create with H1 + summary + `## Insights` section listing the 4 category landing filters and key articles, so ChatGPT/Perplexity/Claude can ingest the hub directly.
+- Each article carries `Article` JSON-LD (headline, datePublished, author, image, articleSection = category title) → strong AI Overviews + Google Discover signals.
+
+## 7. Technical section
+
+Files to touch:
+
 ```
+src/content/insights/categories.ts         rewrite to the 4 slugs above
+src/content/insights/articles.ts           re-tag 12 + add 8 new (with legacyUrl)
+src/pages/MarketInsights.tsx               rebuild from insights-nest-11 layout
+src/pages/InsightArticle.tsx               reuse, add Helmet, swap base path
+src/App.tsx                                routes: /market-insights, /market-insights/:slug; redirects from /insights*
+src/main.tsx                               wrap in <HelmetProvider>
+index.html                                 drop static canonical
+public/sitemap.xml                         regen entries
+public/llms.txt                            new
+package.json                               add react-helmet-async
+```
+
+EN body drafting flow (one-shot, inside build mode):
+1. Copy `knowledge://skill/ai-gateway/scripts/lovable_ai.py` to `/tmp/`.
+2. Run a batch prompt file (one line per article) asking for `{excerpt, body[]}` JSON for each of the 8 VI sources, system prompt = VietGuys voice + 350–500 words EN.
+3. Merge JSON output into `articles.ts`.
+
+No business-logic or backend changes. All work is content + presentation.
