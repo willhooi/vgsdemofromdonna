@@ -91,7 +91,7 @@ const About = () => {
           }
           pullQuote="5,000+ brands. 5 million messages a day. One promise, kept message by message."
           image={{
-            src: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=1600&q=80",
+            src: "/chat-first-cx.jpg",
             alt: "Enterprise team reviewing customer engagement dashboards",
           }}
         />
