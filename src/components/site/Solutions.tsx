@@ -111,9 +111,9 @@ const CHANNEL_CHIPS = [
   { id: "custom", label: "Customized Solution", dot: "#f59e0b", Icon: LayoutGrid },
 ] as const;
 
-const OutcomeStage = ({ visible }: { visible: boolean }) => (
+const OutcomeStage = ({ visible, className = "" }: { visible: boolean; className?: string }) => (
   <div
-    className="relative mx-auto w-full max-w-[380px] lg:mx-0"
+    className={`relative mx-auto w-full max-w-[340px] ${className}`}
     style={{
       opacity: visible ? 1 : 0,
       transform: visible ? "translateY(0)" : "translateY(12px)",
