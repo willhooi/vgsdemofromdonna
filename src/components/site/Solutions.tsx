@@ -737,27 +737,26 @@ const CDPWave = () => {
 
       {/* ============ HUB → OUTPUT CONNECTOR ============ */}
       <div className="cdp-connector">
-        <svg width="64" height="64" viewBox="0 0 64 64" style={{ overflow: "visible" }} fill="none" aria-hidden>
+        <svg viewBox="0 0 64 400" preserveAspectRatio="none" style={{ overflow: "visible" }} fill="none" aria-hidden>
           <defs>
-            <path id="cdpOutTop" d="M 0,32 C 20,32 42,20 64,20" />
-            <path id="cdpOutBot" d="M 0,32 C 20,32 42,44 64,44" />
+            <path id="cdpOut1" d="M 0,200 C 24,200 36,30  64,30" />
+            <path id="cdpOut2" d="M 0,200 C 24,200 36,100 64,100" />
+            <path id="cdpOut3" d="M 0,200 C 24,200 36,170 64,170" />
+            <path id="cdpOut4" d="M 0,200 C 24,200 36,230 64,230" />
+            <path id="cdpOut5" d="M 0,200 C 24,200 36,300 64,300" />
+            <path id="cdpOut6" d="M 0,200 C 24,200 36,370 64,370" />
           </defs>
-          <use href="#cdpOutTop" stroke="#39B44A" strokeWidth="1" opacity="0.18" />
-          <use href="#cdpOutBot" stroke="#39B44A" strokeWidth="1" opacity="0.18" />
-          <circle className="cdp-particle" r="3" fill="#39B44A">
-            <animateMotion dur="2.2s" begin="0s" repeatCount="indefinite"><mpath href="#cdpOutTop" /></animateMotion>
-          </circle>
-          <circle className="cdp-particle" r="2.2" fill="#39B44A">
-            <animateMotion dur="2.2s" begin="0.7s" repeatCount="indefinite"><mpath href="#cdpOutTop" /></animateMotion>
-          </circle>
-          <circle className="cdp-particle" r="2.8" fill="#39B44A">
-            <animateMotion dur="2.8s" begin="0.35s" repeatCount="indefinite"><mpath href="#cdpOutBot" /></animateMotion>
-          </circle>
-          <circle className="cdp-particle-extra" r="1.8" fill="#39B44A">
-            <animateMotion dur="2.8s" begin="1.2s" repeatCount="indefinite"><mpath href="#cdpOutBot" /></animateMotion>
-          </circle>
+          {["cdpOut1","cdpOut2","cdpOut3","cdpOut4","cdpOut5","cdpOut6"].map(id => (
+            <use key={id} href={`#${id}`} stroke="#39B44A" strokeWidth="1" strokeDasharray="3 4" opacity="0.4" />
+          ))}
+          {["cdpOut1","cdpOut2","cdpOut3","cdpOut4","cdpOut5","cdpOut6"].map((id, i) => (
+            <circle key={id} className="cdp-particle" r="2.4" fill="#39B44A">
+              <animateMotion dur="2.6s" begin={`${i * 0.35}s`} repeatCount="indefinite"><mpath href={`#${id}`} /></animateMotion>
+            </circle>
+          ))}
         </svg>
       </div>
+
 
       {/* ============ OUTPUT PANEL ============ */}
       <div className="cdp-out">
