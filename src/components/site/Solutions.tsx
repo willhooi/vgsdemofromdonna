@@ -462,7 +462,7 @@ const AIPlatformCard = ({ visible }: { visible: boolean }) => {
         </div>
 
         {/* Animated illustration */}
-        <div className="relative w-full flex-1 min-h-[260px]">
+        <div className="relative w-full flex-1 min-h-[420px]">
           <CDPWave />
         </div>
       </div>
@@ -521,7 +521,7 @@ const CDPWave = () => {
     <div
       role="img"
       aria-label="AI Customer Engagement Platform flow: input data sources to AI hub to output channels"
-      className="cdp-stage absolute inset-0 flex items-center justify-center gap-3 overflow-hidden rounded-xl px-2"
+      className="cdp-stage absolute inset-0 flex items-stretch justify-center gap-3 overflow-hidden rounded-xl px-2 py-3"
       style={{
         background:
           "radial-gradient(ellipse at 50% 50%, rgba(57,180,74,0.05), transparent 65%), #ffffff",
@@ -541,9 +541,12 @@ const CDPWave = () => {
 
         .cdp-src, .cdp-out {
           position: relative;
-          width: 170px;
+          width: 185px;
           flex-shrink: 0;
-          padding: 10px;
+          align-self: stretch;
+          display: flex;
+          flex-direction: column;
+          padding: 12px 10px;
           border-radius: 14px;
           background: #ffffff;
           overflow: hidden;
@@ -551,17 +554,19 @@ const CDPWave = () => {
         .cdp-src {
           border: 1px solid rgba(255,138,114,0.30);
           box-shadow: 0 2px 16px rgba(255,138,114,0.12);
-          transform: perspective(700px) rotateY(10deg);
+          transform: perspective(700px) rotateY(8deg);
           transform-origin: right center;
           animation: cdp-src-float 6s ease-in-out infinite;
         }
         .cdp-out {
           border: 1px solid rgba(57,180,74,0.25);
           box-shadow: 0 2px 16px rgba(57,180,74,0.12);
-          transform: perspective(700px) rotateY(-10deg);
+          transform: perspective(700px) rotateY(-8deg);
           transform-origin: left center;
           animation: cdp-out-float 6s ease-in-out infinite;
         }
+        @keyframes cdp-src-float { 0%,100% { transform: perspective(700px) rotateY(8deg) translateY(0); } 50% { transform: perspective(700px) rotateY(8deg) translateY(-4px); } }
+        @keyframes cdp-out-float { 0%,100% { transform: perspective(700px) rotateY(-8deg) translateY(0); } 50% { transform: perspective(700px) rotateY(-8deg) translateY(-4px); } }
         .cdp-src::before, .cdp-out::before {
           content: ""; position: absolute; inset: 0;
           background-image:
@@ -573,9 +578,9 @@ const CDPWave = () => {
         }
         .cdp-src-head, .cdp-out-head {
           display: flex; align-items: center; gap: 5px;
-          font-size: 9px; font-weight: 700;
-          letter-spacing: 0.14em;
-          margin-bottom: 8px; position: relative; z-index: 1;
+          font-size: 10px; font-weight: 700;
+          letter-spacing: 0.18em;
+          margin-bottom: 10px; position: relative; z-index: 1;
         }
         .cdp-src-head { color: #ff7a5e; justify-content: flex-start; }
         .cdp-out-head { color: #2a8038; justify-content: flex-end; }
@@ -587,26 +592,31 @@ const CDPWave = () => {
         .cdp-out-head .dot { background: #39B44A; }
         .cdp-src-grid, .cdp-out-grid {
           position: relative; z-index: 1;
-          display: grid; grid-template-columns: 1fr 1fr; gap: 6px;
+          display: flex; flex-direction: column; gap: 8px;
+          flex: 1;
+          justify-content: space-between;
         }
         .cdp-badge, .cdp-badge-out {
-          display: flex; align-items: center; gap: 5px;
-          padding: 7px 6px; border-radius: 10px;
+          display: flex; align-items: center; gap: 6px;
+          padding: 8px 10px; border-radius: 999px;
           animation: cdp-badge-float 4s ease-in-out infinite;
+          justify-content: center;
         }
         .cdp-badge { background: #fff3ef; border: 1px solid rgba(255,138,114,0.30); }
         .cdp-badge-out { background: #f0faf2; border: 1px solid rgba(57,180,74,0.25); }
         .cdp-badge-label {
-          font-size: 9px; font-weight: 500; white-space: nowrap;
+          font-size: 11px; font-weight: 600; white-space: nowrap;
         }
         .cdp-badge .cdp-badge-label { color: #b14b32; }
         .cdp-badge-out .cdp-badge-label { color: #2a8038; }
 
-        .cdp-connector { display: flex; flex-direction: column; align-items: center; gap: 4px; flex-shrink: 0; }
+        .cdp-connector { display: flex; align-items: stretch; flex-shrink: 0; align-self: stretch; }
+        .cdp-connector svg { height: 100%; width: 64px; }
 
         .cdp-orb-wrap2 {
           position: relative; flex-shrink: 0;
-          width: clamp(90px, 12vw, 130px);
+          align-self: center;
+          width: clamp(110px, 14vw, 160px);
           aspect-ratio: 1 / 1;
           animation: cdp-orb-bob 4s ease-in-out infinite;
         }
@@ -647,19 +657,23 @@ const CDPWave = () => {
         .cdp-core-sub   { font-size: 7px; color: rgba(255,255,255,0.78); letter-spacing: 0.14em; z-index: 2; }
 
         @media (max-width: 1199px) {
-          .cdp-src, .cdp-out { width: 145px; padding: 8px; }
-          .cdp-badge-label { font-size: 8px; }
+          .cdp-src, .cdp-out { width: 160px; padding: 10px 8px; }
+          .cdp-badge, .cdp-badge-out { padding: 6px 8px; }
+          .cdp-badge-label { font-size: 10px; }
+          .cdp-connector svg { width: 48px; }
           .cdp-ring-3 { display: none; }
           .cdp-particle-extra { display: none; }
         }
         @media (max-width: 767px) {
-          .cdp-stage { flex-direction: column; gap: 10px; padding: 8px; }
-          .cdp-src, .cdp-out { width: 100%; max-width: 280px; transform: none; animation: none; transform-origin: center; }
-          .cdp-connector svg { transform: rotate(90deg); }
+          .cdp-stage { flex-direction: column; gap: 10px; padding: 8px; align-items: center; }
+          .cdp-src, .cdp-out { width: 100%; max-width: 320px; transform: none; animation: none; transform-origin: center; align-self: center; }
+          .cdp-src-grid, .cdp-out-grid { display: grid; grid-template-columns: 1fr 1fr; }
+          .cdp-connector { display: none; }
           .cdp-particle, .cdp-particle-extra { display: none; }
           .cdp-ring-3, .cdp-ring-2 { display: none; }
           .cdp-node { display: none; }
         }
+
 
         @media (prefers-reduced-motion: reduce) {
           .cdp-src, .cdp-out, .cdp-orb-wrap2, .cdp-orb-pulse,
@@ -689,27 +703,26 @@ const CDPWave = () => {
 
       {/* ============ INPUT → HUB CONNECTOR ============ */}
       <div className="cdp-connector">
-        <svg width="64" height="64" viewBox="0 0 64 64" style={{ overflow: "visible" }} fill="none" aria-hidden>
+        <svg viewBox="0 0 64 400" preserveAspectRatio="none" style={{ overflow: "visible" }} fill="none" aria-hidden>
           <defs>
-            <path id="cdpTop" d="M 0,20 C 22,20 44,32 64,32" />
-            <path id="cdpBot" d="M 0,44 C 22,44 44,32 64,32" />
+            <path id="cdpIn1" d="M 0,30  C 28,30  40,200 64,200" />
+            <path id="cdpIn2" d="M 0,100 C 28,100 40,200 64,200" />
+            <path id="cdpIn3" d="M 0,170 C 28,170 40,200 64,200" />
+            <path id="cdpIn4" d="M 0,230 C 28,230 40,200 64,200" />
+            <path id="cdpIn5" d="M 0,300 C 28,300 40,200 64,200" />
+            <path id="cdpIn6" d="M 0,370 C 28,370 40,200 64,200" />
           </defs>
-          <use href="#cdpTop" stroke="#ff8a72" strokeWidth="1" opacity="0.15" />
-          <use href="#cdpBot" stroke="#ff8a72" strokeWidth="1" opacity="0.15" />
-          <circle className="cdp-particle" r="3" fill="#ff8a72">
-            <animateMotion dur="2.2s" begin="0s" repeatCount="indefinite"><mpath href="#cdpTop" /></animateMotion>
-          </circle>
-          <circle className="cdp-particle" r="2.2" fill="#ff8a72">
-            <animateMotion dur="2.2s" begin="0.7s" repeatCount="indefinite"><mpath href="#cdpTop" /></animateMotion>
-          </circle>
-          <circle className="cdp-particle" r="2.8" fill="#ff8a72">
-            <animateMotion dur="2.8s" begin="0.35s" repeatCount="indefinite"><mpath href="#cdpBot" /></animateMotion>
-          </circle>
-          <circle className="cdp-particle-extra" r="1.8" fill="#ff8a72">
-            <animateMotion dur="2.8s" begin="1.2s" repeatCount="indefinite"><mpath href="#cdpBot" /></animateMotion>
-          </circle>
+          {["cdpIn1","cdpIn2","cdpIn3","cdpIn4","cdpIn5","cdpIn6"].map(id => (
+            <use key={id} href={`#${id}`} stroke="#ff8a72" strokeWidth="1" strokeDasharray="3 4" opacity="0.35" />
+          ))}
+          {["cdpIn1","cdpIn2","cdpIn3","cdpIn4","cdpIn5","cdpIn6"].map((id, i) => (
+            <circle key={id} className="cdp-particle" r="2.4" fill="#ff8a72">
+              <animateMotion dur="2.6s" begin={`${i * 0.35}s`} repeatCount="indefinite"><mpath href={`#${id}`} /></animateMotion>
+            </circle>
+          ))}
         </svg>
       </div>
+
 
       {/* ============ AI HUB ORB ============ */}
       <div className="cdp-orb-wrap2">
@@ -728,27 +741,26 @@ const CDPWave = () => {
 
       {/* ============ HUB → OUTPUT CONNECTOR ============ */}
       <div className="cdp-connector">
-        <svg width="64" height="64" viewBox="0 0 64 64" style={{ overflow: "visible" }} fill="none" aria-hidden>
+        <svg viewBox="0 0 64 400" preserveAspectRatio="none" style={{ overflow: "visible" }} fill="none" aria-hidden>
           <defs>
-            <path id="cdpOutTop" d="M 0,32 C 20,32 42,20 64,20" />
-            <path id="cdpOutBot" d="M 0,32 C 20,32 42,44 64,44" />
+            <path id="cdpOut1" d="M 0,200 C 24,200 36,30  64,30" />
+            <path id="cdpOut2" d="M 0,200 C 24,200 36,100 64,100" />
+            <path id="cdpOut3" d="M 0,200 C 24,200 36,170 64,170" />
+            <path id="cdpOut4" d="M 0,200 C 24,200 36,230 64,230" />
+            <path id="cdpOut5" d="M 0,200 C 24,200 36,300 64,300" />
+            <path id="cdpOut6" d="M 0,200 C 24,200 36,370 64,370" />
           </defs>
-          <use href="#cdpOutTop" stroke="#39B44A" strokeWidth="1" opacity="0.18" />
-          <use href="#cdpOutBot" stroke="#39B44A" strokeWidth="1" opacity="0.18" />
-          <circle className="cdp-particle" r="3" fill="#39B44A">
-            <animateMotion dur="2.2s" begin="0s" repeatCount="indefinite"><mpath href="#cdpOutTop" /></animateMotion>
-          </circle>
-          <circle className="cdp-particle" r="2.2" fill="#39B44A">
-            <animateMotion dur="2.2s" begin="0.7s" repeatCount="indefinite"><mpath href="#cdpOutTop" /></animateMotion>
-          </circle>
-          <circle className="cdp-particle" r="2.8" fill="#39B44A">
-            <animateMotion dur="2.8s" begin="0.35s" repeatCount="indefinite"><mpath href="#cdpOutBot" /></animateMotion>
-          </circle>
-          <circle className="cdp-particle-extra" r="1.8" fill="#39B44A">
-            <animateMotion dur="2.8s" begin="1.2s" repeatCount="indefinite"><mpath href="#cdpOutBot" /></animateMotion>
-          </circle>
+          {["cdpOut1","cdpOut2","cdpOut3","cdpOut4","cdpOut5","cdpOut6"].map(id => (
+            <use key={id} href={`#${id}`} stroke="#39B44A" strokeWidth="1" strokeDasharray="3 4" opacity="0.4" />
+          ))}
+          {["cdpOut1","cdpOut2","cdpOut3","cdpOut4","cdpOut5","cdpOut6"].map((id, i) => (
+            <circle key={id} className="cdp-particle" r="2.4" fill="#39B44A">
+              <animateMotion dur="2.6s" begin={`${i * 0.35}s`} repeatCount="indefinite"><mpath href={`#${id}`} /></animateMotion>
+            </circle>
+          ))}
         </svg>
       </div>
+
 
       {/* ============ OUTPUT PANEL ============ */}
       <div className="cdp-out">
