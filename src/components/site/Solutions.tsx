@@ -475,7 +475,7 @@ const AIPlatformCard = ({ visible }: { visible: boolean }) => {
 
 const CDPWave = () => {
   type InKey = "erp" | "pos" | "web" | "loyalty" | "social" | "mkt";
-  type OutKey = "sms" | "zalo" | "email" | "voice" | "report" | "retarget";
+  type OutKey = "bizReport" | "campReport" | "retarget" | "zaloEng";
 
   const InIcon = ({ name }: { name: InKey }) => (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff8a72" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
@@ -490,12 +490,10 @@ const CDPWave = () => {
 
   const OutIcon = ({ name }: { name: OutKey }) => (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#39B44A" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      {name === "sms" && (<><path d="M4 5h16v11H8l-4 4z" /></>)}
-      {name === "zalo" && (<><path d="M4 5h16v11H8l-4 4z" /><path d="M9 10h6M9 13h4" /></>)}
-      {name === "email" && (<><rect x="3" y="5" width="18" height="14" rx="2" /><path d="M3 7l9 7 9-7" /></>)}
-      {name === "voice" && (<><path d="M5 4h4l2 5-3 2a12 12 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z" /></>)}
-      {name === "report" && (<><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M8 17V11M12 17V7M16 17v-4" /></>)}
+      {name === "bizReport" && (<><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M8 17V11M12 17V7M16 17v-4" /></>)}
+      {name === "campReport" && (<><path d="M3 12l4-7h10l4 7-9 9z" /><path d="M9 12h6" /></>)}
       {name === "retarget" && (<><circle cx="12" cy="12" r="8" /><circle cx="12" cy="12" r="4" /><circle cx="12" cy="12" r="1" /></>)}
+      {name === "zaloEng" && (<><path d="M4 5h16v11H8l-4 4z" /><path d="M9 10h6M9 13h4" /></>)}
     </svg>
   );
 
@@ -509,13 +507,12 @@ const CDPWave = () => {
   ];
 
   const outputs: { key: OutKey; label: string }[] = [
-    { key: "sms", label: "SMS" },
-    { key: "zalo", label: "Zalo" },
-    { key: "email", label: "Email" },
-    { key: "voice", label: "Voice" },
-    { key: "report", label: "Report" },
-    { key: "retarget", label: "Retarget" },
+    { key: "bizReport", label: "Business Report" },
+    { key: "campReport", label: "Campaign Report" },
+    { key: "retarget", label: "Retargeting" },
+    { key: "zaloEng", label: "Zalo Engagement" },
   ];
+
 
   return (
     <div
@@ -615,53 +612,61 @@ const CDPWave = () => {
 
         .cdp-orb-wrap2 {
           position: relative; flex-shrink: 0;
-          align-self: center;
-          width: clamp(110px, 14vw, 160px);
-          aspect-ratio: 1 / 1;
+          align-self: stretch;
+          width: clamp(150px, 18vw, 200px);
+          display: flex;
           animation: cdp-orb-bob 4s ease-in-out infinite;
         }
-        .cdp-ring { position: absolute; border-radius: 50%; pointer-events: none; }
-        .cdp-ring-3 { inset: -18px; border: 1px dashed rgba(57,180,74,0.15); animation: cdp-ring-cw 28s linear infinite; }
-        .cdp-ring-2 { inset: -6px;  border: 1px solid rgba(57,180,74,0.22); animation: cdp-ring-ccw 18s linear infinite; }
-        .cdp-ring-1 { inset: 4px;   border: 1.5px dashed rgba(57,180,74,0.35); animation: cdp-ring-cw 12s linear infinite; }
-        .cdp-node {
-          position: absolute; top: 50%; left: 50%;
-          width: 8px; height: 8px; margin: -4px 0 0 -4px;
-          border-radius: 50%;
-          transform-origin: 4px 4px;
-        }
-        .cdp-node-g { background: #39B44A; animation: cdp-node-orbit 6s linear infinite; }
-        .cdp-node-o { background: #ff8a72; animation: cdp-node-orbit 4s linear infinite; animation-delay: -2s; }
-        .cdp-orb-pulse {
-          position: absolute; inset: -2px; border-radius: 50%;
-          border: 2px solid rgba(57,180,74,0.18);
-          animation: cdp-orb-glow 3s ease-in-out infinite;
-          pointer-events: none;
-        }
-        .cdp-core {
-          position: absolute; inset: 14px; border-radius: 50%;
-          background: #39B44A;
-          border: 2px solid rgba(255,255,255,0.6);
-          display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+        .cdp-hub-card {
+          position: relative;
+          width: 100%;
+          border-radius: 22px;
+          background: linear-gradient(180deg, #6dc97a 0%, #4eb866 100%);
+          border: 1px solid rgba(57,180,74,0.45);
+          box-shadow: 0 10px 30px rgba(57,180,74,0.25), inset 0 1px 0 rgba(255,255,255,0.3);
+          padding: 14px 12px;
+          display: flex; flex-direction: column; align-items: stretch;
+          justify-content: space-between;
+          gap: 10px;
           overflow: hidden;
         }
-        .cdp-gloss {
-          position: absolute; top: 22%; left: 22%;
-          width: 32%; height: 22%;
-          background: rgba(255,255,255,0.30);
-          border-radius: 50%;
-          transform: rotate(-30deg);
-          pointer-events: none;
+        .cdp-hub-pill {
+          background: #ffffff;
+          border-radius: 999px;
+          padding: 7px 10px;
+          text-align: center;
+          font-size: 11px; font-weight: 700;
+          color: #1f5e2b;
+          box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+          white-space: nowrap;
         }
-        .cdp-core-label { font-size: 13px; font-weight: 800; color: #fff; letter-spacing: 0.06em; z-index: 2; }
-        .cdp-core-sub   { font-size: 7px; color: rgba(255,255,255,0.78); letter-spacing: 0.14em; z-index: 2; }
+        .cdp-hub-circle {
+          align-self: center;
+          width: 76%; aspect-ratio: 1/1;
+          background: #ffffff;
+          border-radius: 50%;
+          display: flex; align-items: center; justify-content: center;
+          text-align: center;
+          font-size: 11px; font-weight: 800;
+          color: #1f5e2b;
+          line-height: 1.2;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+          padding: 6px;
+        }
+        .cdp-hub-arrow {
+          align-self: center;
+          color: rgba(255,255,255,0.85);
+          font-size: 10px;
+          line-height: 1;
+        }
+
 
         @media (max-width: 1199px) {
           .cdp-src, .cdp-out { width: 160px; padding: 10px 8px; }
           .cdp-badge, .cdp-badge-out { padding: 6px 8px; }
           .cdp-badge-label { font-size: 10px; }
           .cdp-connector svg { width: 48px; }
-          .cdp-ring-3 { display: none; }
+          .cdp-orb-wrap2 { width: clamp(140px, 16vw, 170px); }
           .cdp-particle-extra { display: none; }
         }
         @media (max-width: 767px) {
@@ -670,19 +675,17 @@ const CDPWave = () => {
           .cdp-src-grid, .cdp-out-grid { display: grid; grid-template-columns: 1fr 1fr; }
           .cdp-connector { display: none; }
           .cdp-particle, .cdp-particle-extra { display: none; }
-          .cdp-ring-3, .cdp-ring-2 { display: none; }
-          .cdp-node { display: none; }
+          .cdp-orb-wrap2 { width: 100%; max-width: 320px; align-self: center; }
         }
 
 
         @media (prefers-reduced-motion: reduce) {
-          .cdp-src, .cdp-out, .cdp-orb-wrap2, .cdp-orb-pulse,
-          .cdp-ring-1, .cdp-ring-2, .cdp-ring-3,
-          .cdp-badge, .cdp-badge-out, .cdp-node, .cdp-particle, .cdp-particle-extra,
-          .cdp-core, .cdp-core-label, .cdp-core-sub {
+          .cdp-src, .cdp-out, .cdp-orb-wrap2,
+          .cdp-badge, .cdp-badge-out, .cdp-particle, .cdp-particle-extra {
             animation: none !important;
           }
         }
+
       `}</style>
 
       {/* ============ INPUT PANEL ============ */}
@@ -724,18 +727,15 @@ const CDPWave = () => {
       </div>
 
 
-      {/* ============ AI HUB ORB ============ */}
+      {/* ============ AI HUB CARD ============ */}
       <div className="cdp-orb-wrap2">
-        <div className="cdp-ring cdp-ring-3" aria-hidden />
-        <div className="cdp-ring cdp-ring-2" aria-hidden />
-        <div className="cdp-ring cdp-ring-1" aria-hidden />
-        <div className="cdp-node cdp-node-g" aria-hidden />
-        <div className="cdp-node cdp-node-o" aria-hidden />
-        <div className="cdp-orb-pulse" aria-hidden />
-        <div className="cdp-core">
-          <div className="cdp-gloss" aria-hidden />
-          <span className="cdp-core-label">AI HUB</span>
-          <span className="cdp-core-sub">ENGAGEMENT</span>
+        <div className="cdp-hub-card">
+          <div className="cdp-hub-pill">Data collected</div>
+          <div className="cdp-hub-arrow" aria-hidden>▼</div>
+          <div className="cdp-hub-circle">Customer<br/>Profile 360</div>
+          <div className="cdp-hub-arrow" aria-hidden>▼</div>
+          <div className="cdp-hub-pill">Segmentation</div>
+          <div className="cdp-hub-pill">Automation</div>
         </div>
       </div>
 
@@ -743,23 +743,22 @@ const CDPWave = () => {
       <div className="cdp-connector">
         <svg viewBox="0 0 64 400" preserveAspectRatio="none" style={{ overflow: "visible" }} fill="none" aria-hidden>
           <defs>
-            <path id="cdpOut1" d="M 0,200 C 24,200 36,30  64,30" />
-            <path id="cdpOut2" d="M 0,200 C 24,200 36,100 64,100" />
-            <path id="cdpOut3" d="M 0,200 C 24,200 36,170 64,170" />
-            <path id="cdpOut4" d="M 0,200 C 24,200 36,230 64,230" />
-            <path id="cdpOut5" d="M 0,200 C 24,200 36,300 64,300" />
-            <path id="cdpOut6" d="M 0,200 C 24,200 36,370 64,370" />
+            <path id="cdpOut1" d="M 0,200 C 24,200 36,50  64,50" />
+            <path id="cdpOut2" d="M 0,200 C 24,200 36,150 64,150" />
+            <path id="cdpOut3" d="M 0,200 C 24,200 36,250 64,250" />
+            <path id="cdpOut4" d="M 0,200 C 24,200 36,350 64,350" />
           </defs>
-          {["cdpOut1","cdpOut2","cdpOut3","cdpOut4","cdpOut5","cdpOut6"].map(id => (
+          {["cdpOut1","cdpOut2","cdpOut3","cdpOut4"].map(id => (
             <use key={id} href={`#${id}`} stroke="#39B44A" strokeWidth="1" strokeDasharray="3 4" opacity="0.4" />
           ))}
-          {["cdpOut1","cdpOut2","cdpOut3","cdpOut4","cdpOut5","cdpOut6"].map((id, i) => (
+          {["cdpOut1","cdpOut2","cdpOut3","cdpOut4"].map((id, i) => (
             <circle key={id} className="cdp-particle" r="2.4" fill="#39B44A">
-              <animateMotion dur="2.6s" begin={`${i * 0.35}s`} repeatCount="indefinite"><mpath href={`#${id}`} /></animateMotion>
+              <animateMotion dur="2.6s" begin={`${i * 0.4}s`} repeatCount="indefinite"><mpath href={`#${id}`} /></animateMotion>
             </circle>
           ))}
         </svg>
       </div>
+
 
 
       {/* ============ OUTPUT PANEL ============ */}
