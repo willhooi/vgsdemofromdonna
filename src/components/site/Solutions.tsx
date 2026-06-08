@@ -669,13 +669,17 @@ const CDPWave = () => {
 
 
         @media (max-width: 1199px) {
-          .cdp-src, .cdp-out { width: 160px; padding: 10px 8px; }
+          .cdp-src { width: 150px; padding: 10px 8px; }
+          .cdp-out { width: 170px; padding: 10px 8px; }
           .cdp-badge, .cdp-badge-out { padding: 6px 8px; }
           .cdp-badge-label { font-size: 10px; }
-          .cdp-connector svg { width: 48px; }
-          .cdp-orb-wrap2 { width: clamp(140px, 16vw, 170px); }
+          .cdp-connector svg { width: 40px; }
+          .cdp-orb-wrap2 { width: clamp(130px, 14vw, 155px); }
+          .cdp-hub-pill { font-size: 10px; padding: 6px 8px; }
+          .cdp-hub-circle { font-size: 10px; }
           .cdp-particle-extra { display: none; }
         }
+
         @media (max-width: 767px) {
           .cdp-stage { flex-direction: column; gap: 10px; padding: 8px; align-items: center; }
           .cdp-src, .cdp-out { width: 100%; max-width: 320px; transform: none; animation: none; transform-origin: center; align-self: center; }
