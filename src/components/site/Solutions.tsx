@@ -521,7 +521,7 @@ const CDPWave = () => {
     <div
       role="img"
       aria-label="AI Customer Engagement Platform flow: input data sources to AI hub to output channels"
-      className="cdp-stage absolute inset-0 flex items-center justify-center gap-3 overflow-hidden rounded-xl px-2"
+      className="cdp-stage absolute inset-0 flex items-stretch justify-center gap-3 overflow-hidden rounded-xl px-2 py-3"
       style={{
         background:
           "radial-gradient(ellipse at 50% 50%, rgba(57,180,74,0.05), transparent 65%), #ffffff",
