@@ -666,7 +666,7 @@ const CDPWave = () => {
           .cdp-badge, .cdp-badge-out { padding: 6px 8px; }
           .cdp-badge-label { font-size: 10px; }
           .cdp-connector svg { width: 48px; }
-          .cdp-ring-3 { display: none; }
+          .cdp-orb-wrap2 { width: clamp(140px, 16vw, 170px); }
           .cdp-particle-extra { display: none; }
         }
         @media (max-width: 767px) {
@@ -675,19 +675,17 @@ const CDPWave = () => {
           .cdp-src-grid, .cdp-out-grid { display: grid; grid-template-columns: 1fr 1fr; }
           .cdp-connector { display: none; }
           .cdp-particle, .cdp-particle-extra { display: none; }
-          .cdp-ring-3, .cdp-ring-2 { display: none; }
-          .cdp-node { display: none; }
+          .cdp-orb-wrap2 { width: 100%; max-width: 320px; align-self: center; }
         }
 
 
         @media (prefers-reduced-motion: reduce) {
-          .cdp-src, .cdp-out, .cdp-orb-wrap2, .cdp-orb-pulse,
-          .cdp-ring-1, .cdp-ring-2, .cdp-ring-3,
-          .cdp-badge, .cdp-badge-out, .cdp-node, .cdp-particle, .cdp-particle-extra,
-          .cdp-core, .cdp-core-label, .cdp-core-sub {
+          .cdp-src, .cdp-out, .cdp-orb-wrap2,
+          .cdp-badge, .cdp-badge-out, .cdp-particle, .cdp-particle-extra {
             animation: none !important;
           }
         }
+
       `}</style>
 
       {/* ============ INPUT PANEL ============ */}
