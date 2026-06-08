@@ -456,9 +456,14 @@ const AIPlatformCard = ({ visible }: { visible: boolean }) => {
           AI Customer Engagement Platform
         </div>
 
-        {/* Animated illustration */}
-        <div className="relative w-full flex-1 min-h-[420px]">
-          <CDPWave />
+        {/* Flow row: CDPWave (left) + OutcomeStage (right) */}
+        <div className="relative flex w-full flex-1 flex-col items-stretch gap-4 md:flex-row md:gap-3 lg:gap-4">
+          <div className="relative w-full flex-1 min-h-[380px] md:min-h-[420px]">
+            <CDPWave />
+          </div>
+          <div className="relative flex w-full items-center justify-center md:w-[36%] md:max-w-[340px] md:flex-shrink-0">
+            <OutcomeStage visible={visible} className="md:max-w-[320px]" />
+          </div>
         </div>
       </div>
     </div>
