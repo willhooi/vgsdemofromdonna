@@ -380,16 +380,9 @@ const ServiceTile = ({ s, index }: { s: Service; index: number }) => {
 };
 
 
-/* ---------- Support strip — CDP × ByteTech ---------- */
+/* ---------- AI Customer Engagement Platform card ---------- */
 
-const CDP_BULLETS = [
-  "Drive personalized customer experiences",
-  "Maximize conversion rates",
-  "Optimize costs",
-];
-
-const CDPSupportStrip = ({ visible }: { visible: boolean }) => {
-  const n = useCountUp(visible ? 99 : 0, 1400);
+const AIPlatformCard = ({ visible }: { visible: boolean }) => {
   const ambientCanvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
@@ -451,7 +444,7 @@ const CDPSupportStrip = ({ visible }: { visible: boolean }) => {
 
   return (
     <div
-      className="relative w-full h-full overflow-hidden rounded-2xl border border-[hsl(var(--primary))]/15 bg-white px-5 py-3.5 flex flex-col"
+      className="relative w-full h-full overflow-hidden rounded-2xl border border-[hsl(var(--primary))]/15 bg-white px-5 py-4 flex flex-col"
       style={{
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(10px)",
@@ -465,89 +458,20 @@ const CDPSupportStrip = ({ visible }: { visible: boolean }) => {
         style={{ zIndex: 1 }}
       />
       <div className="relative z-10 flex h-full flex-col gap-3">
-        {/* Header */}
-        <div className="min-w-0">
-          <div className="uppercase tracking-[0.18em] text-[hsl(var(--primary-deep))] text-3xl font-extrabold px-0 mx-0">
-            CDP Solution
-          </div>
-          <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-[13px] font-semibold leading-tight text-foreground">
-            <span className="text-muted-foreground font-normal">Strategic partnership with</span>
-            <img
-              src={bytetechLogo}
-              alt="ByteTech"
-              className="inline-block h-5 w-auto shrink-0 align-middle"
-              loading="lazy"
-            />
-            <img
-              src={cnvLogo}
-              alt="CNV CDP"
-              className="inline-block h-5 w-auto shrink-0 align-middle"
-              loading="lazy"
-            />
-            <img
-              src={cxgenieLogo}
-              alt="CX Genie"
-              className="inline-block h-5 w-auto shrink-0 align-middle"
-              loading="lazy"
-            />
-          </div>
+        {/* Label */}
+        <div className="text-center uppercase tracking-[0.18em] text-[hsl(var(--primary-deep))] text-lg sm:text-xl md:text-2xl font-extrabold">
+          AI Customer Engagement Platform
         </div>
 
-        {/* Animated illustration — sits above the divider line */}
-        <div className="relative w-full flex-1 min-h-[130px]">
+        {/* Animated illustration */}
+        <div className="relative w-full flex-1 min-h-[260px]">
           <CDPWave />
-        </div>
-
-        {/* Bullets + Badge row */}
-        <div className="flex items-center gap-4 border-t border-[hsl(var(--primary))]/10 pt-3">
-          <ul className="flex flex-1 flex-col gap-1.5 text-base">
-            {CDP_BULLETS.map((t) => (
-              <li
-                key={t}
-                className="inline-flex items-center gap-2 leading-snug text-muted-foreground text-xs"
-              >
-                <span
-                  aria-hidden
-                  className="h-1.5 w-1.5 shrink-0 rounded-full bg-[hsl(var(--primary))]"
-                />
-                {t}
-              </li>
-            ))}
-          </ul>
-
-          {/* 99% Delivery Rate — refined light badge */}
-          <div
-            className="relative z-20 w-[370px] shrink-0 overflow-hidden rounded-2xl border border-[hsl(145_45%_70%)]/50 bg-[hsl(145_55%_94%)] px-[18px] py-[8px] shadow-[0_8px_20px_-12px_hsl(145_45%_35%/0.25)]"
-            style={{
-              opacity: visible ? 1 : 0,
-              transform: visible ? "translateY(0)" : "translateY(10px)",
-              transition: "opacity 600ms ease-out 280ms, transform 600ms ease-out 280ms",
-            }}
-          >
-            <div className="relative flex items-center gap-2.5">
-              <div className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-[hsl(145_55%_85%)]">
-                <Zap className="h-4 w-4 text-[hsl(145_60%_28%)]" />
-              </div>
-              <div className="min-w-0 flex-1">
-                <div className="flex items-baseline gap-2">
-                  <span className="font-display text-[28px] font-black leading-none tabular-nums text-[hsl(145_60%_25%)]">
-                    {n}%
-                  </span>
-                  <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-[hsl(145_55%_30%)]">
-                    Delivery Rate
-                  </span>
-                </div>
-                <p className="mt-1 text-[12px] leading-[1.5] text-slate-600">
-                  Built-in messaging failover ensures uninterrupted customer communications.
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
   );
 };
+
 
 /* ---------- Animated CDP illustration — Holographic Data Stream (bright) ---------- */
 
