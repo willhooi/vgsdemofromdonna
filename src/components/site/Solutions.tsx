@@ -16,13 +16,11 @@ import {
   PhoneCall,
   LayoutGrid,
   Layers,
-  Zap,
 } from "lucide-react";
 import bytetechLogo from "@/assets/brand/bytetech.svg";
 import cnvLogo from "@/assets/brand/cnv.png";
 import cxgenieLogo from "@/assets/brand/cxgenie.svg";
 import shopperImg from "@/assets/channels-girl.png";
-import { useCountUp } from "@/hooks/use-count-up";
 
 /**
  * Solutions — Outcome-first storytelling
