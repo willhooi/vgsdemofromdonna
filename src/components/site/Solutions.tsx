@@ -605,10 +605,8 @@ const CDPWave = () => {
         .cdp-badge-out { background: #f0faf2; border: 1px solid rgba(57,180,74,0.25); }
         .cdp-badge svg, .cdp-badge-out svg { flex-shrink: 0; }
         .cdp-badge-label {
-          font-size: 11px; font-weight: 600;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
+          font-size: 10px; font-weight: 600;
+          line-height: 1.2;
           flex: 1 1 auto;
           min-width: 0;
           text-align: center;
@@ -618,16 +616,17 @@ const CDPWave = () => {
         .cdp-badge-out .cdp-badge-label { color: #2a8038; }
 
         .cdp-connector { display: flex; align-items: stretch; flex-shrink: 0; align-self: stretch; min-width: 0; }
-        .cdp-connector svg { height: 100%; width: 56px; }
+        .cdp-connector svg { height: 100%; width: 40px; }
 
 
         .cdp-orb-wrap2 {
           position: relative; flex-shrink: 0;
           align-self: stretch;
-          width: clamp(150px, 18vw, 200px);
+          width: clamp(120px, 14vw, 160px);
           display: flex;
           animation: cdp-orb-bob 4s ease-in-out infinite;
         }
+
         .cdp-hub-card {
           position: relative;
           width: 100%;
