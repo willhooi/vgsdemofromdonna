@@ -542,28 +542,29 @@ const CDPWave = () => {
           align-self: stretch;
           display: flex;
           flex-direction: column;
-          padding: 12px 10px;
+          padding: 10px 7px;
           border-radius: 14px;
           background: #ffffff;
         }
         .cdp-src {
-          width: 175px;
+          width: 130px;
           border: 1px solid rgba(255,138,114,0.30);
           box-shadow: 0 2px 16px rgba(255,138,114,0.12);
-          transform: perspective(900px) rotateY(5deg);
+          transform: perspective(900px) rotateY(4deg);
           transform-origin: right center;
           animation: cdp-src-float 6s ease-in-out infinite;
         }
         .cdp-out {
-          width: 195px;
+          width: 150px;
           border: 1px solid rgba(57,180,74,0.25);
           box-shadow: 0 2px 16px rgba(57,180,74,0.12);
-          transform: perspective(900px) rotateY(-5deg);
+          transform: perspective(900px) rotateY(-4deg);
           transform-origin: left center;
           animation: cdp-out-float 6s ease-in-out infinite;
         }
-        @keyframes cdp-src-float { 0%,100% { transform: perspective(900px) rotateY(5deg) translateY(0); } 50% { transform: perspective(900px) rotateY(5deg) translateY(-4px); } }
-        @keyframes cdp-out-float { 0%,100% { transform: perspective(900px) rotateY(-5deg) translateY(0); } 50% { transform: perspective(900px) rotateY(-5deg) translateY(-4px); } }
+        @keyframes cdp-src-float { 0%,100% { transform: perspective(900px) rotateY(4deg) translateY(0); } 50% { transform: perspective(900px) rotateY(4deg) translateY(-4px); } }
+        @keyframes cdp-out-float { 0%,100% { transform: perspective(900px) rotateY(-4deg) translateY(0); } 50% { transform: perspective(900px) rotateY(-4deg) translateY(-4px); } }
+
         .cdp-src::before, .cdp-out::before {
           content: ""; position: absolute; inset: 0;
           background-image:
