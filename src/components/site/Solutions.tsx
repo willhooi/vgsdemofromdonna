@@ -538,7 +538,6 @@ const CDPWave = () => {
 
         .cdp-src, .cdp-out {
           position: relative;
-          width: 185px;
           flex-shrink: 0;
           align-self: stretch;
           display: flex;
@@ -546,24 +545,25 @@ const CDPWave = () => {
           padding: 12px 10px;
           border-radius: 14px;
           background: #ffffff;
-          overflow: hidden;
         }
         .cdp-src {
+          width: 175px;
           border: 1px solid rgba(255,138,114,0.30);
           box-shadow: 0 2px 16px rgba(255,138,114,0.12);
-          transform: perspective(700px) rotateY(8deg);
+          transform: perspective(900px) rotateY(5deg);
           transform-origin: right center;
           animation: cdp-src-float 6s ease-in-out infinite;
         }
         .cdp-out {
+          width: 195px;
           border: 1px solid rgba(57,180,74,0.25);
           box-shadow: 0 2px 16px rgba(57,180,74,0.12);
-          transform: perspective(700px) rotateY(-8deg);
+          transform: perspective(900px) rotateY(-5deg);
           transform-origin: left center;
           animation: cdp-out-float 6s ease-in-out infinite;
         }
-        @keyframes cdp-src-float { 0%,100% { transform: perspective(700px) rotateY(8deg) translateY(0); } 50% { transform: perspective(700px) rotateY(8deg) translateY(-4px); } }
-        @keyframes cdp-out-float { 0%,100% { transform: perspective(700px) rotateY(-8deg) translateY(0); } 50% { transform: perspective(700px) rotateY(-8deg) translateY(-4px); } }
+        @keyframes cdp-src-float { 0%,100% { transform: perspective(900px) rotateY(5deg) translateY(0); } 50% { transform: perspective(900px) rotateY(5deg) translateY(-4px); } }
+        @keyframes cdp-out-float { 0%,100% { transform: perspective(900px) rotateY(-5deg) translateY(0); } 50% { transform: perspective(900px) rotateY(-5deg) translateY(-4px); } }
         .cdp-src::before, .cdp-out::before {
           content: ""; position: absolute; inset: 0;
           background-image:
@@ -595,20 +595,27 @@ const CDPWave = () => {
         }
         .cdp-badge, .cdp-badge-out {
           display: flex; align-items: center; gap: 6px;
-          padding: 8px 10px; border-radius: 999px;
+          padding: 7px 10px; border-radius: 999px;
           animation: cdp-badge-float 4s ease-in-out infinite;
           justify-content: center;
+          min-width: 0;
         }
         .cdp-badge { background: #fff3ef; border: 1px solid rgba(255,138,114,0.30); }
         .cdp-badge-out { background: #f0faf2; border: 1px solid rgba(57,180,74,0.25); }
+        .cdp-badge svg, .cdp-badge-out svg { flex-shrink: 0; }
         .cdp-badge-label {
-          font-size: 11px; font-weight: 600; white-space: nowrap;
+          font-size: 11px; font-weight: 600;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          min-width: 0;
         }
         .cdp-badge .cdp-badge-label { color: #b14b32; }
         .cdp-badge-out .cdp-badge-label { color: #2a8038; }
 
-        .cdp-connector { display: flex; align-items: stretch; flex-shrink: 0; align-self: stretch; }
-        .cdp-connector svg { height: 100%; width: 64px; }
+        .cdp-connector { display: flex; align-items: stretch; flex-shrink: 0; align-self: stretch; min-width: 0; }
+        .cdp-connector svg { height: 100%; width: 56px; }
+
 
         .cdp-orb-wrap2 {
           position: relative; flex-shrink: 0;
