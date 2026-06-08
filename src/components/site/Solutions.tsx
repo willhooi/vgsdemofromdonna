@@ -72,9 +72,6 @@ export const Solutions = () => {
       <div className="container-tight relative">
         {/* Header */}
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-[hsl(var(--primary))] mb-3">
-            Comprehensive Solution
-          </p>
           <h2 className="heading-display text-balance text-[24px] sm:text-[28px] md:text-[38px] lg:text-[46px] text-foreground leading-tight">
             Every conversation,{" "}
             <span className="text-[hsl(var(--primary))]">a moment of growth</span>.
@@ -84,13 +81,21 @@ export const Solutions = () => {
           </p>
         </div>
 
-        {/* Stage + Right column (99% + CDP) */}
-        <div className="relative mx-auto mt-8 md:mt-12 max-w-6xl">
-          <div className="grid gap-8 lg:grid-cols-[minmax(0,42%)_1fr] lg:gap-6 items-stretch">
-            <div className="flex justify-center lg:justify-start lg:translate-x-[55px]">
+        {/* Strategic partnership strip */}
+        <div className="mt-6 md:mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+          <span className="text-[13px] text-muted-foreground">Strategic partnership with</span>
+          <img src={bytetechLogo} alt="ByteTech" className="h-5 w-auto" loading="lazy" />
+          <img src={cnvLogo} alt="CNV CDP" className="h-5 w-auto" loading="lazy" />
+          <img src={cxgenieLogo} alt="CX Genie" className="h-5 w-auto" loading="lazy" />
+        </div>
+
+        {/* Animation flow (left) + OutcomeStage (right) */}
+        <div className="relative mx-auto mt-8 md:mt-10 max-w-6xl">
+          <div className="grid gap-8 lg:grid-cols-[1fr_minmax(0,38%)] lg:gap-6 items-stretch">
+            <AIPlatformCard visible={visible} />
+            <div className="flex justify-center lg:justify-end">
               <OutcomeStage visible={visible} />
             </div>
-            <CDPSupportStrip visible={visible} />
           </div>
         </div>
 
