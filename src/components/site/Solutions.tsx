@@ -608,8 +608,11 @@ const CDPWave = () => {
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
+          flex: 1 1 auto;
           min-width: 0;
+          text-align: center;
         }
+
         .cdp-badge .cdp-badge-label { color: #b14b32; }
         .cdp-badge-out .cdp-badge-label { color: #2a8038; }
 
