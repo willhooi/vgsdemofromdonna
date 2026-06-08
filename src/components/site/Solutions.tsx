@@ -462,7 +462,7 @@ const AIPlatformCard = ({ visible }: { visible: boolean }) => {
         </div>
 
         {/* Animated illustration */}
-        <div className="relative w-full flex-1 min-h-[260px]">
+        <div className="relative w-full flex-1 min-h-[420px]">
           <CDPWave />
         </div>
       </div>

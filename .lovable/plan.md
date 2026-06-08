@@ -1,55 +1,38 @@
 ## Mục tiêu
-Tái bố cục `src/components/site/Solutions.tsx` theo flow dọc mới, đơn giản hoá nội dung.
+Card "AI Customer Engagement Platform" hiện đang thấp & rộng (INPUT/OUTPUT dùng grid 2 cột). Cần biến nó thành layout **dọc cao** giống ảnh đính kèm, để chiều cao card mapping vừa với chiều cao cột phải (cô gái + popups).
 
-## Bố cục mới (top → bottom)
+## Thay đổi trong `src/components/site/Solutions.tsx`
 
-```text
-┌──────────────────────────────────────────────────────────┐
-│  H2: Every conversation, a moment of growth.             │  ← bỏ eyebrow "Comprehensive Solution"
-│  short description (giữ nguyên text hiện tại)            │
-├──────────────────────────────────────────────────────────┤
-│  Strategic partnership with [ByteTech] [CNV] [CX Genie]  │  ← tách ra khỏi CDP card, đặt center
-├──────────────────────────────────────────────────────────┤
-│  AI CUSTOMER ENGAGEMENT PLATFORM (label trên cùng)        │
-│  ┌─────────────────────────────────┬──────────────────┐  │
-│  │  INPUT  →  AI HUB  →  OUTPUT    │   Girl + popups  │  │
-│  │  (animation flow 3 cột)         │  (OutcomeStage)  │  │
-│  └─────────────────────────────────┴──────────────────┘  │
-└──────────────────────────────────────────────────────────┘
-```
+### 1. Container card (vùng wrapper bên trái, ~ line 443-470)
+- Bỏ `min-h-[260px]` cứng trên `<div>` chứa `<CDPWave />` (line 465).
+- Thêm `h-full` để card stretch theo grid row height (đang là `lg:grid-cols-[1fr_minmax(0,38%)]` → 2 cột stretch bằng nhau).
+- Đảm bảo wrapper card (line 444-445) đã có `h-full` (giữ nguyên).
 
-## Thay đổi cụ thể
+### 2. `CDPWave` panels — chuyển INPUT & OUTPUT thành cột dọc (giống reference)
+- `.cdp-src-grid`, `.cdp-out-grid`: đổi `grid-template-columns: 1fr 1fr` → `1fr` (1 cột), gap 8px.
+- `.cdp-src`, `.cdp-out`: tăng `width: 170px` → `180px`; thêm `align-self: stretch` để panel cao full theo flex container.
+- `.cdp-stage` (line 524): thêm `items-stretch` thay vì `items-center`; các panel sẽ tự cao full.
+- `.cdp-badge`, `.cdp-badge-out`: tăng padding dọc một chút (`8px 10px`), label căn giữa cho gọn.
 
-1. **Header block (lines 74–85)**: xoá `<p>Comprehensive Solution</p>`. Giữ H2 + description.
+### 3. Connector SVG (input→hub, hub→output)
+- Tăng chiều cao SVG: `height="64"` → một giá trị responsive lớn hơn (dùng `height="100%"` với min 200px, hoặc cho SVG `preserveAspectRatio="none"` và để parent `flex-1`).
+- Cách đơn giản: đổi `.cdp-connector` thành `align-self: stretch; height: 100%`, SVG dùng `width="64" height="100%" viewBox="0 0 64 200" preserveAspectRatio="none"`, vẽ lại path để fan-out từ 6 input points (y=20,50,80,110,140,170 chẳng hạn) hội tụ về điểm giữa phải (64, 100). Tương tự cho output (mirror).
+- Particles `animateMotion` vẫn chạy trên các path mới.
 
-2. **Partnership strip mới**: tách logo strip ra khỏi `CDPSupportStrip`, render center ngay dưới description. Layout: "Strategic partnership with" + 3 logos inline, căn giữa, spacing thoáng.
+### 4. AI HUB orb
+- Tăng `width: clamp(90px, 12vw, 130px)` → `clamp(110px, 14vw, 160px)` để cân với panel cao hơn.
+- Orb tự `align-self: center` trong flex row dọc.
 
-3. **Xoá hoàn toàn**:
-   - `DeliveryRateCard` (không còn dùng, lines 241–276)
-   - 99% Delivery Rate badge bên trong `CDPSupportStrip` (lines 552–579)
-   - `CDP_BULLETS` + `<ul>` (lines 419–423, 537–550)
-   - Eyebrow "CDP Solution" (lines 504–506) — thay bằng label mới "AI Customer Engagement Platform" đặt trên animation
+### 5. Responsive
+- `@media (max-width: 1199px)`: panel width 160px, grid vẫn 1 cột.
+- `@media (max-width: 767px)`: giữ logic stack dọc hiện có (flex-direction: column), grid panel có thể quay lại 2 cột để không quá dài.
 
-4. **Animation flow mới** (mở rộng `CDPWave`):
-   - Cột trái — **INPUT** badges: ERP, POS, Loyalty App, Ecom Website, Social Channel, MKT Campaign (dùng style `cdp-src` hiện có, đổi tiêu đề "DATA SOURCES" → "INPUT")
-   - Cột giữa — **AI HUB**: giữ orb hiện tại, đổi label "CDP / PLATFORM" → "AI HUB"
-   - Cột phải — **OUTPUT** badges mới: SMS, Zalo, Email, Voice, Business Report, Retargeting (panel mirror cột trái, particles xanh chạy từ orb sang output, dùng lại keyframes `cdp-src-float`, `cdp-badge-float`)
-   - Thêm 2 path SVG connector cho luồng OUTPUT (orb → output panel), particles màu xanh & cam giống connector input
-   - Label "AI CUSTOMER ENGAGEMENT PLATFORM" trên cùng card (thay "CDP Solution")
+### 6. Label trên cùng
+- Giữ "AI Customer Engagement Platform" như hiện tại.
 
-5. **Layout 2 cột mới** cho phần dưới partnership:
-   - Grid `lg:grid-cols-[1fr_minmax(0,38%)]`
-   - Trái: card chứa animation flow (INPUT→AI HUB→OUTPUT)
-   - Phải: `OutcomeStage` (girl + popups) — giữ nguyên component
-   - Đảo lại vị trí so với hiện tại (trước đây girl bên trái, CDP bên phải)
-
-6. **Cleanup**: xoá import `useCountUp` ở `CDPSupportStrip` nếu không còn dùng, xoá `Zap` import nếu chỉ còn dùng cho 99% badge.
+## Kết quả mong đợi
+- Card trái cao bằng cột phải (cô gái + popup), không còn khoảng trống dư.
+- Layout flow trông giống reference: 3 cột dọc (INPUT list • HUB ở giữa • OUTPUT list) với dotted connectors fan-out theo chiều dọc.
 
 ## Files
-- `src/components/site/Solutions.tsx` — toàn bộ thay đổi ở 1 file
-- Không tạo file mới, không đụng routes/data
-
-## Responsive
-- Mobile: stack dọc — animation flow chuyển column (input → hub → output stacked), girl popup nằm dưới
-- Tablet: giữ 2 cột nhưng giảm output badges xuống 4
-- Reuse media queries có sẵn trong `<style>` của `CDPWave`
+- Chỉ sửa `src/components/site/Solutions.tsx`. Không tạo file mới.
