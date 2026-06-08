@@ -87,14 +87,9 @@ export const Solutions = () => {
           <img src={cxgenieLogo} alt="CX Genie" className="h-5 w-auto" loading="lazy" />
         </div>
 
-        {/* Animation flow (left) + OutcomeStage (right) */}
+        {/* Unified flow card: INPUT → HUB → OUTPUT → Outcome (girl + popups) */}
         <div className="relative mx-auto mt-8 md:mt-10 max-w-6xl">
-          <div className="grid gap-8 lg:grid-cols-[1fr_minmax(0,38%)] lg:gap-6 items-stretch">
-            <AIPlatformCard visible={visible} />
-            <div className="flex justify-center lg:justify-end">
-              <OutcomeStage visible={visible} />
-            </div>
-          </div>
+          <AIPlatformCard visible={visible} />
         </div>
 
       </div>
