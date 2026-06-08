@@ -442,7 +442,7 @@ const AIPlatformCard = ({ visible }: { visible: boolean }) => {
 
   return (
     <div
-      className="relative w-full h-full overflow-hidden rounded-2xl border border-[hsl(var(--primary))]/15 bg-white px-5 py-4 flex flex-col"
+      className="relative w-full h-full overflow-hidden rounded-2xl border border-[hsl(var(--primary))]/15 bg-white px-3 py-4 sm:px-4 lg:px-5 flex flex-col"
       style={{
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(10px)",
@@ -518,7 +518,7 @@ const CDPWave = () => {
     <div
       role="img"
       aria-label="AI Customer Engagement Platform flow: input data sources to AI hub to output channels"
-      className="cdp-stage absolute inset-0 flex items-stretch justify-center gap-3 overflow-hidden rounded-xl px-2 py-3"
+      className="cdp-stage absolute inset-0 flex items-stretch justify-center gap-1 sm:gap-2 lg:gap-3 overflow-hidden rounded-xl px-1 py-3 sm:px-2"
       style={{
         background:
           "radial-gradient(ellipse at 50% 50%, rgba(57,180,74,0.05), transparent 65%), #ffffff",
@@ -538,32 +538,33 @@ const CDPWave = () => {
 
         .cdp-src, .cdp-out {
           position: relative;
-          width: 185px;
           flex-shrink: 0;
           align-self: stretch;
           display: flex;
           flex-direction: column;
-          padding: 12px 10px;
+          padding: 10px 7px;
           border-radius: 14px;
           background: #ffffff;
-          overflow: hidden;
         }
         .cdp-src {
+          width: 130px;
           border: 1px solid rgba(255,138,114,0.30);
           box-shadow: 0 2px 16px rgba(255,138,114,0.12);
-          transform: perspective(700px) rotateY(8deg);
+          transform: perspective(900px) rotateY(4deg);
           transform-origin: right center;
           animation: cdp-src-float 6s ease-in-out infinite;
         }
         .cdp-out {
+          width: 150px;
           border: 1px solid rgba(57,180,74,0.25);
           box-shadow: 0 2px 16px rgba(57,180,74,0.12);
-          transform: perspective(700px) rotateY(-8deg);
+          transform: perspective(900px) rotateY(-4deg);
           transform-origin: left center;
           animation: cdp-out-float 6s ease-in-out infinite;
         }
-        @keyframes cdp-src-float { 0%,100% { transform: perspective(700px) rotateY(8deg) translateY(0); } 50% { transform: perspective(700px) rotateY(8deg) translateY(-4px); } }
-        @keyframes cdp-out-float { 0%,100% { transform: perspective(700px) rotateY(-8deg) translateY(0); } 50% { transform: perspective(700px) rotateY(-8deg) translateY(-4px); } }
+        @keyframes cdp-src-float { 0%,100% { transform: perspective(900px) rotateY(4deg) translateY(0); } 50% { transform: perspective(900px) rotateY(4deg) translateY(-4px); } }
+        @keyframes cdp-out-float { 0%,100% { transform: perspective(900px) rotateY(-4deg) translateY(0); } 50% { transform: perspective(900px) rotateY(-4deg) translateY(-4px); } }
+
         .cdp-src::before, .cdp-out::before {
           content: ""; position: absolute; inset: 0;
           background-image:
@@ -595,28 +596,37 @@ const CDPWave = () => {
         }
         .cdp-badge, .cdp-badge-out {
           display: flex; align-items: center; gap: 6px;
-          padding: 8px 10px; border-radius: 999px;
+          padding: 7px 10px; border-radius: 999px;
           animation: cdp-badge-float 4s ease-in-out infinite;
           justify-content: center;
+          min-width: 0;
         }
         .cdp-badge { background: #fff3ef; border: 1px solid rgba(255,138,114,0.30); }
         .cdp-badge-out { background: #f0faf2; border: 1px solid rgba(57,180,74,0.25); }
+        .cdp-badge svg, .cdp-badge-out svg { flex-shrink: 0; }
         .cdp-badge-label {
-          font-size: 11px; font-weight: 600; white-space: nowrap;
+          font-size: 10px; font-weight: 600;
+          line-height: 1.2;
+          flex: 1 1 auto;
+          min-width: 0;
+          text-align: center;
         }
+
         .cdp-badge .cdp-badge-label { color: #b14b32; }
         .cdp-badge-out .cdp-badge-label { color: #2a8038; }
 
-        .cdp-connector { display: flex; align-items: stretch; flex-shrink: 0; align-self: stretch; }
-        .cdp-connector svg { height: 100%; width: 64px; }
+        .cdp-connector { display: flex; align-items: stretch; flex-shrink: 0; align-self: stretch; min-width: 0; }
+        .cdp-connector svg { height: 100%; width: 40px; }
+
 
         .cdp-orb-wrap2 {
           position: relative; flex-shrink: 0;
           align-self: stretch;
-          width: clamp(150px, 18vw, 200px);
+          width: clamp(120px, 14vw, 160px);
           display: flex;
           animation: cdp-orb-bob 4s ease-in-out infinite;
         }
+
         .cdp-hub-card {
           position: relative;
           width: 100%;
@@ -661,14 +671,22 @@ const CDPWave = () => {
         }
 
 
-        @media (max-width: 1199px) {
-          .cdp-src, .cdp-out { width: 160px; padding: 10px 8px; }
-          .cdp-badge, .cdp-badge-out { padding: 6px 8px; }
-          .cdp-badge-label { font-size: 10px; }
-          .cdp-connector svg { width: 48px; }
-          .cdp-orb-wrap2 { width: clamp(140px, 16vw, 170px); }
+        @media (max-width: 1279px) {
+          .cdp-src { width: 120px; padding: 10px 6px; transform: none; animation: none; }
+          .cdp-out { width: 140px; padding: 10px 6px; transform: none; animation: none; }
+          .cdp-badge, .cdp-badge-out { padding: 5px 7px; gap: 4px; }
+          .cdp-badge-label { font-size: 9.5px; white-space: normal; line-height: 1.15; text-align: left; }
+          .cdp-connector svg { width: 28px; }
+          .cdp-orb-wrap2 { width: 120px; }
+          .cdp-hub-card { padding: 10px 7px; gap: 7px; border-radius: 16px; }
+          .cdp-hub-pill { font-size: 9.5px; padding: 5px 6px; font-weight: 700; }
+          .cdp-hub-circle { font-size: 9.5px; width: 88%; }
+          .cdp-hub-arrow { font-size: 9px; }
           .cdp-particle-extra { display: none; }
         }
+
+
+
         @media (max-width: 767px) {
           .cdp-stage { flex-direction: column; gap: 10px; padding: 8px; align-items: center; }
           .cdp-src, .cdp-out { width: 100%; max-width: 320px; transform: none; animation: none; transform-origin: center; align-self: center; }
