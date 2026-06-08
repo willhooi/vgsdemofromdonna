@@ -241,45 +241,6 @@ const Popup = ({
   );
 };
 
-/* ---------- 99% Delivery Rate highlight ---------- */
-
-const DeliveryRateCard = ({ visible }: { visible: boolean }) => {
-  const n = useCountUp(visible ? 99 : 0, 1400);
-  return (
-    <div
-      className="relative w-full overflow-hidden rounded-2xl border border-[hsl(var(--primary))]/20 bg-[hsl(var(--primary))] bg-gradient-to-br from-[hsl(var(--primary))] to-[hsl(var(--primary-deep))] px-4 py-3 text-white shadow-[0_18px_36px_-18px_hsl(128_52%_40%/0.45)]"
-      style={{
-        opacity: visible ? 1 : 0,
-        transform: visible ? "translateY(0)" : "translateY(10px)",
-        transition: "opacity 600ms ease-out 280ms, transform 600ms ease-out 280ms",
-      }}
-    >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-white/10 blur-2xl"
-      />
-      <div className="relative flex items-center gap-4">
-        <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white/15 backdrop-blur">
-          <Zap className="h-5 w-5" />
-        </div>
-        <div className="flex-1 min-w-0">
-          <div className="flex items-baseline gap-2">
-            <span className="font-display text-[32px] font-extrabold leading-none tabular-nums">
-              {n}%
-            </span>
-            <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-white/90">
-              Delivery Rate
-            </span>
-          </div>
-          <p className="mt-1 text-[12px] leading-[1.5] text-white/70">
-            Built-in messaging failover ensures uninterrupted customer communications.
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-};
-
 /* ---------- Services bento ---------- */
 
 type Service = {
