@@ -80,8 +80,7 @@ export const Solutions = () => {
             <span className="text-[hsl(var(--primary))]">a moment of growth</span>.
           </h2>
           <p className="mt-4 text-sm sm:text-base text-muted-foreground max-w-xl mx-auto">
-            From SMS to Zalo, Voice to Email — VietGuys connects your brand to every
-            customer, across every touchpoint, with built-in reliability at scale.
+            Unify customer data, personalize every interaction, and turn conversations into meaningful engagement through AI, CDP, and omnichannel messaging
           </p>
         </div>
 
