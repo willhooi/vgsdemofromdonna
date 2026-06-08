@@ -668,17 +668,20 @@ const CDPWave = () => {
         }
 
 
-        @media (max-width: 1199px) {
-          .cdp-src { width: 150px; padding: 10px 8px; }
-          .cdp-out { width: 170px; padding: 10px 8px; }
-          .cdp-badge, .cdp-badge-out { padding: 6px 8px; }
+        @media (max-width: 1279px) {
+          .cdp-src { width: 132px; padding: 10px 7px; transform: none; animation: none; }
+          .cdp-out { width: 160px; padding: 10px 7px; transform: none; animation: none; }
+          .cdp-badge, .cdp-badge-out { padding: 6px 8px; gap: 5px; }
           .cdp-badge-label { font-size: 10px; }
-          .cdp-connector svg { width: 40px; }
-          .cdp-orb-wrap2 { width: clamp(130px, 14vw, 155px); }
-          .cdp-hub-pill { font-size: 10px; padding: 6px 8px; }
-          .cdp-hub-circle { font-size: 10px; }
+          .cdp-connector svg { width: 36px; }
+          .cdp-orb-wrap2 { width: 135px; }
+          .cdp-hub-card { padding: 10px 8px; gap: 8px; border-radius: 18px; }
+          .cdp-hub-pill { font-size: 10px; padding: 5px 6px; }
+          .cdp-hub-circle { font-size: 10px; width: 84%; }
+          .cdp-hub-arrow { font-size: 9px; }
           .cdp-particle-extra { display: none; }
         }
+
 
         @media (max-width: 767px) {
           .cdp-stage { flex-direction: column; gap: 10px; padding: 8px; align-items: center; }
