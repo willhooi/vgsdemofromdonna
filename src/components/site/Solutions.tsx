@@ -541,9 +541,12 @@ const CDPWave = () => {
 
         .cdp-src, .cdp-out {
           position: relative;
-          width: 170px;
+          width: 185px;
           flex-shrink: 0;
-          padding: 10px;
+          align-self: stretch;
+          display: flex;
+          flex-direction: column;
+          padding: 12px 10px;
           border-radius: 14px;
           background: #ffffff;
           overflow: hidden;
@@ -551,17 +554,19 @@ const CDPWave = () => {
         .cdp-src {
           border: 1px solid rgba(255,138,114,0.30);
           box-shadow: 0 2px 16px rgba(255,138,114,0.12);
-          transform: perspective(700px) rotateY(10deg);
+          transform: perspective(700px) rotateY(8deg);
           transform-origin: right center;
           animation: cdp-src-float 6s ease-in-out infinite;
         }
         .cdp-out {
           border: 1px solid rgba(57,180,74,0.25);
           box-shadow: 0 2px 16px rgba(57,180,74,0.12);
-          transform: perspective(700px) rotateY(-10deg);
+          transform: perspective(700px) rotateY(-8deg);
           transform-origin: left center;
           animation: cdp-out-float 6s ease-in-out infinite;
         }
+        @keyframes cdp-src-float { 0%,100% { transform: perspective(700px) rotateY(8deg) translateY(0); } 50% { transform: perspective(700px) rotateY(8deg) translateY(-4px); } }
+        @keyframes cdp-out-float { 0%,100% { transform: perspective(700px) rotateY(-8deg) translateY(0); } 50% { transform: perspective(700px) rotateY(-8deg) translateY(-4px); } }
         .cdp-src::before, .cdp-out::before {
           content: ""; position: absolute; inset: 0;
           background-image:
@@ -573,9 +578,9 @@ const CDPWave = () => {
         }
         .cdp-src-head, .cdp-out-head {
           display: flex; align-items: center; gap: 5px;
-          font-size: 9px; font-weight: 700;
-          letter-spacing: 0.14em;
-          margin-bottom: 8px; position: relative; z-index: 1;
+          font-size: 10px; font-weight: 700;
+          letter-spacing: 0.18em;
+          margin-bottom: 10px; position: relative; z-index: 1;
         }
         .cdp-src-head { color: #ff7a5e; justify-content: flex-start; }
         .cdp-out-head { color: #2a8038; justify-content: flex-end; }
@@ -587,26 +592,31 @@ const CDPWave = () => {
         .cdp-out-head .dot { background: #39B44A; }
         .cdp-src-grid, .cdp-out-grid {
           position: relative; z-index: 1;
-          display: grid; grid-template-columns: 1fr 1fr; gap: 6px;
+          display: flex; flex-direction: column; gap: 8px;
+          flex: 1;
+          justify-content: space-between;
         }
         .cdp-badge, .cdp-badge-out {
-          display: flex; align-items: center; gap: 5px;
-          padding: 7px 6px; border-radius: 10px;
+          display: flex; align-items: center; gap: 6px;
+          padding: 8px 10px; border-radius: 999px;
           animation: cdp-badge-float 4s ease-in-out infinite;
+          justify-content: center;
         }
         .cdp-badge { background: #fff3ef; border: 1px solid rgba(255,138,114,0.30); }
         .cdp-badge-out { background: #f0faf2; border: 1px solid rgba(57,180,74,0.25); }
         .cdp-badge-label {
-          font-size: 9px; font-weight: 500; white-space: nowrap;
+          font-size: 11px; font-weight: 600; white-space: nowrap;
         }
         .cdp-badge .cdp-badge-label { color: #b14b32; }
         .cdp-badge-out .cdp-badge-label { color: #2a8038; }
 
-        .cdp-connector { display: flex; flex-direction: column; align-items: center; gap: 4px; flex-shrink: 0; }
+        .cdp-connector { display: flex; align-items: stretch; flex-shrink: 0; align-self: stretch; }
+        .cdp-connector svg { height: 100%; width: 64px; }
 
         .cdp-orb-wrap2 {
           position: relative; flex-shrink: 0;
-          width: clamp(90px, 12vw, 130px);
+          align-self: center;
+          width: clamp(110px, 14vw, 160px);
           aspect-ratio: 1 / 1;
           animation: cdp-orb-bob 4s ease-in-out infinite;
         }
