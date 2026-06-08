@@ -1,38 +1,55 @@
 ## Mục tiêu
-Card "AI Customer Engagement Platform" hiện đang thấp & rộng (INPUT/OUTPUT dùng grid 2 cột). Cần biến nó thành layout **dọc cao** giống ảnh đính kèm, để chiều cao card mapping vừa với chiều cao cột phải (cô gái + popups).
+Hiện tại section "AI Customer Engagement Platform" đang là 2 card tách biệt trong grid `lg:grid-cols-[1fr_minmax(0,38%)]`:
+- **Card trái**: `AIPlatformCard` (INPUT → AI HUB → OUTPUT)
+- **Card phải**: `OutcomeStage` (cô gái + 3 popup: review 5★, ORDER STATUS, OTP)
+
+Trên màn nhỏ hai card xếp chồng, mất cảm giác "flow liền mạch từ input đến outcome người dùng cuối". Cần **gộp thành 1 card duy nhất** chứa toàn bộ flow `INPUT → HUB → OUTPUT → cô gái/popup`, hiển thị trọn vẹn trên mọi thiết bị.
 
 ## Thay đổi trong `src/components/site/Solutions.tsx`
 
-### 1. Container card (vùng wrapper bên trái, ~ line 443-470)
-- Bỏ `min-h-[260px]` cứng trên `<div>` chứa `<CDPWave />` (line 465).
-- Thêm `h-full` để card stretch theo grid row height (đang là `lg:grid-cols-[1fr_minmax(0,38%)]` → 2 cột stretch bằng nhau).
-- Đảm bảo wrapper card (line 444-445) đã có `h-full` (giữ nguyên).
+### 1. Wrapper layout (lines 90-98)
+Bỏ grid 2 cột. Thay bằng **1 card duy nhất** full-width chứa cả `AIPlatformCard` (đã mở rộng) và `OutcomeStage` bên trong.
 
-### 2. `CDPWave` panels — chuyển INPUT & OUTPUT thành cột dọc (giống reference)
-- `.cdp-src-grid`, `.cdp-out-grid`: đổi `grid-template-columns: 1fr 1fr` → `1fr` (1 cột), gap 8px.
-- `.cdp-src`, `.cdp-out`: tăng `width: 170px` → `180px`; thêm `align-self: stretch` để panel cao full theo flex container.
-- `.cdp-stage` (line 524): thêm `items-stretch` thay vì `items-center`; các panel sẽ tự cao full.
-- `.cdp-badge`, `.cdp-badge-out`: tăng padding dọc một chút (`8px 10px`), label căn giữa cho gọn.
+```text
+┌─────────────────────────────────────────────────────────────┐
+│              AI Customer Engagement Platform                 │
+│  ┌──────┐    ┌─────┐    ┌───────┐    ┌──────────────────┐  │
+│  │INPUT │───▶│ HUB │───▶│OUTPUT │───▶│  Girl + Popups    │  │
+│  │ list │    │card │    │ list  │    │  (outcome stage)  │  │
+│  └──────┘    └─────┘    └───────┘    └──────────────────┘  │
+└─────────────────────────────────────────────────────────────┘
+```
 
-### 3. Connector SVG (input→hub, hub→output)
-- Tăng chiều cao SVG: `height="64"` → một giá trị responsive lớn hơn (dùng `height="100%"` với min 200px, hoặc cho SVG `preserveAspectRatio="none"` và để parent `flex-1`).
-- Cách đơn giản: đổi `.cdp-connector` thành `align-self: stretch; height: 100%`, SVG dùng `width="64" height="100%" viewBox="0 0 64 200" preserveAspectRatio="none"`, vẽ lại path để fan-out từ 6 input points (y=20,50,80,110,140,170 chẳng hạn) hội tụ về điểm giữa phải (64, 100). Tương tự cho output (mirror).
-- Particles `animateMotion` vẫn chạy trên các path mới.
+### 2. `AIPlatformCard` (lines 443-470)
+- Đổi container thành single card wrapping cả 2 phần
+- Khu vực animation `CDPWave` chiếm khoảng 60-65% chiều ngang trái
+- Thêm cột phụ bên phải chứa `<OutcomeStage>` (cô gái + popup), ngăn cách bằng connector dotted từ OUTPUT panel sang cô gái (animated particles tiếp nối flow)
+- Bỏ `min-h-[420px]` cứng, dùng aspect ratio mềm hoặc auto-height
 
-### 4. AI HUB orb
-- Tăng `width: clamp(90px, 12vw, 130px)` → `clamp(110px, 14vw, 160px)` để cân với panel cao hơn.
-- Orb tự `align-self: center` trong flex row dọc.
+### 3. Layout responsive trong card gộp
+- **Desktop (≥1024px)**: flex-row, CDPWave bên trái (flex 1) + OutcomeStage bên phải (width ~340px). Có connector SVG nối từ panel OUTPUT sang khu vực cô gái.
+- **Tablet (768-1023px)**: vẫn flex-row nhưng OutcomeStage thu nhỏ (~260px), CDPWave gọn lại (giảm panel width còn 110/130px, hub nhỏ hơn).
+- **Mobile (<768px)**: flex-col — CDPWave ở trên (full width, panel có thể quay về grid 2 cột compact như cũ), OutcomeStage ở dưới (max-w 320px, căn giữa). Connector ẩn hoặc chuyển thành mũi tên dọc đơn giản.
 
-### 5. Responsive
-- `@media (max-width: 1199px)`: panel width 160px, grid vẫn 1 cột.
-- `@media (max-width: 767px)`: giữ logic stack dọc hiện có (flex-direction: column), grid panel có thể quay lại 2 cột để không quá dài.
+### 4. `OutcomeStage` (lines 119-207)
+- Giữ nguyên cấu trúc (girl + 3 popup + blob backdrop)
+- Bỏ wrapper `max-w-[380px]` cứng, cho phép parent điều khiển width
+- Giảm scale popup ở breakpoint nhỏ (`scale-[0.7]` thay `scale-[0.85]`)
 
-### 6. Label trên cùng
-- Giữ "AI Customer Engagement Platform" như hiện tại.
+### 5. Connector OUTPUT → Girl (mới)
+- Thêm 1 SVG dotted curve nhỏ ở giữa OUTPUT panel và OutcomeStage (chỉ hiển thị từ `md:` trở lên)
+- Vài particle xanh `animateMotion` chạy từ OUTPUT panel đến vùng cô gái → cảm giác flow liền mạch
+- Mobile: ẩn (`hidden md:block`)
+
+### 6. CSS điều chỉnh
+- `.cdp-stage`: bỏ `absolute inset-0`, dùng `relative w-full h-full` để fit vào flex parent
+- Media query `@media (max-width: 767px)`: stack column, panel width về `calc(50% - 4px)` dạng grid như reference cũ
+- Đảm bảo overflow visible cho popup không bị cắt
 
 ## Kết quả mong đợi
-- Card trái cao bằng cột phải (cô gái + popup), không còn khoảng trống dư.
-- Layout flow trông giống reference: 3 cột dọc (INPUT list • HUB ở giữa • OUTPUT list) với dotted connectors fan-out theo chiều dọc.
+- **1 card duy nhất** kể trọn câu chuyện: Dữ liệu (INPUT) → AI xử lý (HUB) → Kích hoạt kênh (OUTPUT) → Khách hàng nhận được giá trị (cô gái + thông báo OTP/Order/Review).
+- Trên mobile: flow dọc từ trên xuống, không bị tách rời cảm xúc.
+- Trên desktop: flow ngang liền mạch, có particle chạy từ trái sang phải xuyên suốt.
 
 ## Files
-- Chỉ sửa `src/components/site/Solutions.tsx`. Không tạo file mới.
+- Chỉ sửa `src/components/site/Solutions.tsx`.
