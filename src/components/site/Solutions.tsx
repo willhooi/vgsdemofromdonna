@@ -16,13 +16,11 @@ import {
   PhoneCall,
   LayoutGrid,
   Layers,
-  Zap,
 } from "lucide-react";
 import bytetechLogo from "@/assets/brand/bytetech.svg";
 import cnvLogo from "@/assets/brand/cnv.png";
 import cxgenieLogo from "@/assets/brand/cxgenie.svg";
 import shopperImg from "@/assets/channels-girl.png";
-import { useCountUp } from "@/hooks/use-count-up";
 
 /**
  * Solutions — Outcome-first storytelling
@@ -72,9 +70,6 @@ export const Solutions = () => {
       <div className="container-tight relative">
         {/* Header */}
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-[hsl(var(--primary))] mb-3">
-            Comprehensive Solution
-          </p>
           <h2 className="heading-display text-balance text-[24px] sm:text-[28px] md:text-[38px] lg:text-[46px] text-foreground leading-tight">
             Every conversation,{" "}
             <span className="text-[hsl(var(--primary))]">a moment of growth</span>.
@@ -84,13 +79,21 @@ export const Solutions = () => {
           </p>
         </div>
 
-        {/* Stage + Right column (99% + CDP) */}
-        <div className="relative mx-auto mt-8 md:mt-12 max-w-6xl">
-          <div className="grid gap-8 lg:grid-cols-[minmax(0,42%)_1fr] lg:gap-6 items-stretch">
-            <div className="flex justify-center lg:justify-start lg:translate-x-[55px]">
+        {/* Strategic partnership strip */}
+        <div className="mt-6 md:mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+          <span className="text-[13px] text-muted-foreground">Strategic partnership with</span>
+          <img src={bytetechLogo} alt="ByteTech" className="h-5 w-auto" loading="lazy" />
+          <img src={cnvLogo} alt="CNV CDP" className="h-5 w-auto" loading="lazy" />
+          <img src={cxgenieLogo} alt="CX Genie" className="h-5 w-auto" loading="lazy" />
+        </div>
+
+        {/* Animation flow (left) + OutcomeStage (right) */}
+        <div className="relative mx-auto mt-8 md:mt-10 max-w-6xl">
+          <div className="grid gap-8 lg:grid-cols-[1fr_minmax(0,38%)] lg:gap-6 items-stretch">
+            <AIPlatformCard visible={visible} />
+            <div className="flex justify-center lg:justify-end">
               <OutcomeStage visible={visible} />
             </div>
-            <CDPSupportStrip visible={visible} />
           </div>
         </div>
 
@@ -236,45 +239,6 @@ const Popup = ({
   );
 };
 
-/* ---------- 99% Delivery Rate highlight ---------- */
-
-const DeliveryRateCard = ({ visible }: { visible: boolean }) => {
-  const n = useCountUp(visible ? 99 : 0, 1400);
-  return (
-    <div
-      className="relative w-full overflow-hidden rounded-2xl border border-[hsl(var(--primary))]/20 bg-[hsl(var(--primary))] bg-gradient-to-br from-[hsl(var(--primary))] to-[hsl(var(--primary-deep))] px-4 py-3 text-white shadow-[0_18px_36px_-18px_hsl(128_52%_40%/0.45)]"
-      style={{
-        opacity: visible ? 1 : 0,
-        transform: visible ? "translateY(0)" : "translateY(10px)",
-        transition: "opacity 600ms ease-out 280ms, transform 600ms ease-out 280ms",
-      }}
-    >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-white/10 blur-2xl"
-      />
-      <div className="relative flex items-center gap-4">
-        <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-white/15 backdrop-blur">
-          <Zap className="h-5 w-5" />
-        </div>
-        <div className="flex-1 min-w-0">
-          <div className="flex items-baseline gap-2">
-            <span className="font-display text-[32px] font-extrabold leading-none tabular-nums">
-              {n}%
-            </span>
-            <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-white/90">
-              Delivery Rate
-            </span>
-          </div>
-          <p className="mt-1 text-[12px] leading-[1.5] text-white/70">
-            Built-in messaging failover ensures uninterrupted customer communications.
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-};
-
 /* ---------- Services bento ---------- */
 
 type Service = {
@@ -414,16 +378,9 @@ const ServiceTile = ({ s, index }: { s: Service; index: number }) => {
 };
 
 
-/* ---------- Support strip — CDP × ByteTech ---------- */
+/* ---------- AI Customer Engagement Platform card ---------- */
 
-const CDP_BULLETS = [
-  "Drive personalized customer experiences",
-  "Maximize conversion rates",
-  "Optimize costs",
-];
-
-const CDPSupportStrip = ({ visible }: { visible: boolean }) => {
-  const n = useCountUp(visible ? 99 : 0, 1400);
+const AIPlatformCard = ({ visible }: { visible: boolean }) => {
   const ambientCanvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
@@ -485,7 +442,7 @@ const CDPSupportStrip = ({ visible }: { visible: boolean }) => {
 
   return (
     <div
-      className="relative w-full h-full overflow-hidden rounded-2xl border border-[hsl(var(--primary))]/15 bg-white px-5 py-3.5 flex flex-col"
+      className="relative w-full h-full overflow-hidden rounded-2xl border border-[hsl(var(--primary))]/15 bg-white px-5 py-4 flex flex-col"
       style={{
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(10px)",
@@ -499,178 +456,113 @@ const CDPSupportStrip = ({ visible }: { visible: boolean }) => {
         style={{ zIndex: 1 }}
       />
       <div className="relative z-10 flex h-full flex-col gap-3">
-        {/* Header */}
-        <div className="min-w-0">
-          <div className="uppercase tracking-[0.18em] text-[hsl(var(--primary-deep))] text-3xl font-extrabold px-0 mx-0">
-            CDP Solution
-          </div>
-          <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-[13px] font-semibold leading-tight text-foreground">
-            <span className="text-muted-foreground font-normal">Strategic partnership with</span>
-            <img
-              src={bytetechLogo}
-              alt="ByteTech"
-              className="inline-block h-5 w-auto shrink-0 align-middle"
-              loading="lazy"
-            />
-            <img
-              src={cnvLogo}
-              alt="CNV CDP"
-              className="inline-block h-5 w-auto shrink-0 align-middle"
-              loading="lazy"
-            />
-            <img
-              src={cxgenieLogo}
-              alt="CX Genie"
-              className="inline-block h-5 w-auto shrink-0 align-middle"
-              loading="lazy"
-            />
-          </div>
+        {/* Label */}
+        <div className="text-center uppercase tracking-[0.18em] text-[hsl(var(--primary-deep))] text-lg sm:text-xl md:text-2xl font-extrabold">
+          AI Customer Engagement Platform
         </div>
 
-        {/* Animated illustration — sits above the divider line */}
-        <div className="relative w-full flex-1 min-h-[130px]">
+        {/* Animated illustration */}
+        <div className="relative w-full flex-1 min-h-[260px]">
           <CDPWave />
-        </div>
-
-        {/* Bullets + Badge row */}
-        <div className="flex items-center gap-4 border-t border-[hsl(var(--primary))]/10 pt-3">
-          <ul className="flex flex-1 flex-col gap-1.5 text-base">
-            {CDP_BULLETS.map((t) => (
-              <li
-                key={t}
-                className="inline-flex items-center gap-2 leading-snug text-muted-foreground text-xs"
-              >
-                <span
-                  aria-hidden
-                  className="h-1.5 w-1.5 shrink-0 rounded-full bg-[hsl(var(--primary))]"
-                />
-                {t}
-              </li>
-            ))}
-          </ul>
-
-          {/* 99% Delivery Rate — refined light badge */}
-          <div
-            className="relative z-20 w-[370px] shrink-0 overflow-hidden rounded-2xl border border-[hsl(145_45%_70%)]/50 bg-[hsl(145_55%_94%)] px-[18px] py-[8px] shadow-[0_8px_20px_-12px_hsl(145_45%_35%/0.25)]"
-            style={{
-              opacity: visible ? 1 : 0,
-              transform: visible ? "translateY(0)" : "translateY(10px)",
-              transition: "opacity 600ms ease-out 280ms, transform 600ms ease-out 280ms",
-            }}
-          >
-            <div className="relative flex items-center gap-2.5">
-              <div className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-[hsl(145_55%_85%)]">
-                <Zap className="h-4 w-4 text-[hsl(145_60%_28%)]" />
-              </div>
-              <div className="min-w-0 flex-1">
-                <div className="flex items-baseline gap-2">
-                  <span className="font-display text-[28px] font-black leading-none tabular-nums text-[hsl(145_60%_25%)]">
-                    {n}%
-                  </span>
-                  <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-[hsl(145_55%_30%)]">
-                    Delivery Rate
-                  </span>
-                </div>
-                <p className="mt-1 text-[12px] leading-[1.5] text-slate-600">
-                  Built-in messaging failover ensures uninterrupted customer communications.
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
   );
 };
 
-/* ---------- Animated CDP illustration — Holographic Data Stream (bright) ---------- */
+
+/* ---------- Animated AI Customer Engagement flow ---------- */
 
 const CDPWave = () => {
-  // 4 outline icons (stroke #39B44A) — E-commerce, POS, Web, Search
-  const Icon = ({ name }: { name: "bag" | "pos" | "globe" | "search" }) => (
-    <svg
-      width="18"
-      height="18"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="#39B44A"
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden
-    >
-      {name === "bag" && (
-        <>
-          <path d="M5 8h14l-1 12H6L5 8z" />
-          <path d="M9 8a3 3 0 1 1 6 0" />
-        </>
-      )}
-      {name === "pos" && (
-        <>
-          <rect x="3" y="4" width="18" height="12" rx="1.5" />
-          <path d="M8 20h8M12 16v4" />
-        </>
-      )}
-      {name === "globe" && (
-        <>
-          <circle cx="12" cy="12" r="9" />
-          <ellipse cx="12" cy="12" rx="9" ry="4" />
-          <path d="M12 3c2.5 2.5 2.5 15 0 18M12 3c-2.5 2.5-2.5 15 0 18" />
-        </>
-      )}
-      {name === "search" && (
-        <>
-          <circle cx="11" cy="11" r="6" />
-          <path d="M20 20l-4.5-4.5" />
-        </>
-      )}
+  type InKey = "erp" | "pos" | "web" | "loyalty" | "social" | "mkt";
+  type OutKey = "sms" | "zalo" | "email" | "voice" | "report" | "retarget";
+
+  const InIcon = ({ name }: { name: InKey }) => (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff8a72" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      {name === "erp" && (<><rect x="3" y="4" width="18" height="16" rx="2" /><path d="M3 9h18M8 14h3M8 17h6" /></>)}
+      {name === "pos" && (<><rect x="3" y="4" width="18" height="12" rx="1.5" /><path d="M8 20h8M12 16v4" /></>)}
+      {name === "web" && (<><circle cx="12" cy="12" r="9" /><ellipse cx="12" cy="12" rx="9" ry="4" /><path d="M12 3v18" /></>)}
+      {name === "loyalty" && (<><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z" /></>)}
+      {name === "social" && (<><circle cx="6" cy="6" r="2.5" /><circle cx="18" cy="6" r="2.5" /><circle cx="12" cy="18" r="2.5" /><path d="M8 7l8 0M7 8l4 8M17 8l-4 8" /></>)}
+      {name === "mkt" && (<><path d="M3 11l16-7v16L3 13z" /><path d="M9 13v5" /></>)}
     </svg>
   );
 
-  const badges: { key: "bag" | "pos" | "globe" | "search"; label: string }[] = [
-    { key: "bag", label: "E-commerce" },
+  const OutIcon = ({ name }: { name: OutKey }) => (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#39B44A" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      {name === "sms" && (<><path d="M4 5h16v11H8l-4 4z" /></>)}
+      {name === "zalo" && (<><path d="M4 5h16v11H8l-4 4z" /><path d="M9 10h6M9 13h4" /></>)}
+      {name === "email" && (<><rect x="3" y="5" width="18" height="14" rx="2" /><path d="M3 7l9 7 9-7" /></>)}
+      {name === "voice" && (<><path d="M5 4h4l2 5-3 2a12 12 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z" /></>)}
+      {name === "report" && (<><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M8 17V11M12 17V7M16 17v-4" /></>)}
+      {name === "retarget" && (<><circle cx="12" cy="12" r="8" /><circle cx="12" cy="12" r="4" /><circle cx="12" cy="12" r="1" /></>)}
+    </svg>
+  );
+
+  const inputs: { key: InKey; label: string }[] = [
+    { key: "erp", label: "ERP" },
+    { key: "loyalty", label: "Loyalty App" },
     { key: "pos", label: "POS" },
-    { key: "globe", label: "Web" },
-    { key: "search", label: "Search" },
+    { key: "web", label: "Ecom Web" },
+    { key: "social", label: "Social" },
+    { key: "mkt", label: "MKT Campaign" },
+  ];
+
+  const outputs: { key: OutKey; label: string }[] = [
+    { key: "sms", label: "SMS" },
+    { key: "zalo", label: "Zalo" },
+    { key: "email", label: "Email" },
+    { key: "voice", label: "Voice" },
+    { key: "report", label: "Report" },
+    { key: "retarget", label: "Retarget" },
   ];
 
   return (
     <div
       role="img"
-      aria-label="CDP data flow diagram"
-      className="cdp-stage absolute inset-0 flex items-center justify-center gap-6 overflow-hidden rounded-xl px-3"
+      aria-label="AI Customer Engagement Platform flow: input data sources to AI hub to output channels"
+      className="cdp-stage absolute inset-0 flex items-center justify-center gap-3 overflow-hidden rounded-xl px-2"
       style={{
         background:
-          "radial-gradient(ellipse at 85% 50%, rgba(57,180,74,0.04), transparent 60%), #ffffff",
+          "radial-gradient(ellipse at 50% 50%, rgba(57,180,74,0.05), transparent 65%), #ffffff",
       }}
     >
       <style>{`
         @keyframes cdp-src-float { 0%,100% { transform: perspective(700px) rotateY(10deg) translateY(0); } 50% { transform: perspective(700px) rotateY(10deg) translateY(-4px); } }
+        @keyframes cdp-out-float { 0%,100% { transform: perspective(700px) rotateY(-10deg) translateY(0); } 50% { transform: perspective(700px) rotateY(-10deg) translateY(-4px); } }
         @keyframes cdp-dot-blink { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
         @keyframes cdp-badge-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
-        
+
         @keyframes cdp-ring-cw { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes cdp-ring-ccw { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
         @keyframes cdp-node-orbit { from { transform: rotate(0deg) translateX(48px) rotate(0deg); } to { transform: rotate(360deg) translateX(48px) rotate(-360deg); } }
         @keyframes cdp-orb-glow { 0%,100% { transform: scale(1); opacity: 0.3; } 50% { transform: scale(1.06); opacity: 1; } }
         @keyframes cdp-orb-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
 
-        /* Source panel */
-        .cdp-src {
+        .cdp-src, .cdp-out {
           position: relative;
-          width: 200px;
+          width: 170px;
           flex-shrink: 0;
           padding: 10px;
           border-radius: 14px;
           background: #ffffff;
-          border: 1px solid rgba(57,180,74,0.20);
-          box-shadow: 0 2px 16px rgba(57,180,74,0.10);
+          overflow: hidden;
+        }
+        .cdp-src {
+          border: 1px solid rgba(255,138,114,0.30);
+          box-shadow: 0 2px 16px rgba(255,138,114,0.12);
           transform: perspective(700px) rotateY(10deg);
           transform-origin: right center;
           animation: cdp-src-float 6s ease-in-out infinite;
-          overflow: hidden;
         }
-        .cdp-src::before {
+        .cdp-out {
+          border: 1px solid rgba(57,180,74,0.25);
+          box-shadow: 0 2px 16px rgba(57,180,74,0.12);
+          transform: perspective(700px) rotateY(-10deg);
+          transform-origin: left center;
+          animation: cdp-out-float 6s ease-in-out infinite;
+        }
+        .cdp-src::before, .cdp-out::before {
           content: ""; position: absolute; inset: 0;
           background-image:
             linear-gradient(rgba(57,180,74,0.05) 1px, transparent 1px),
@@ -679,39 +571,42 @@ const CDPWave = () => {
           pointer-events: none;
           border-radius: inherit;
         }
-        .cdp-src-head {
+        .cdp-src-head, .cdp-out-head {
           display: flex; align-items: center; gap: 5px;
-          font-size: 9px; font-weight: 600;
-          letter-spacing: 0.1em; color: #39B44A;
+          font-size: 9px; font-weight: 700;
+          letter-spacing: 0.14em;
           margin-bottom: 8px; position: relative; z-index: 1;
         }
-        .cdp-src-head .dot {
-          width: 5px; height: 5px; border-radius: 50%; background: #39B44A;
+        .cdp-src-head { color: #ff7a5e; justify-content: flex-start; }
+        .cdp-out-head { color: #2a8038; justify-content: flex-end; }
+        .cdp-src-head .dot, .cdp-out-head .dot {
+          width: 5px; height: 5px; border-radius: 50%;
           animation: cdp-dot-blink 2s ease-in-out infinite;
         }
-        .cdp-src-grid {
+        .cdp-src-head .dot { background: #ff8a72; }
+        .cdp-out-head .dot { background: #39B44A; }
+        .cdp-src-grid, .cdp-out-grid {
           position: relative; z-index: 1;
-          display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+          display: grid; grid-template-columns: 1fr 1fr; gap: 6px;
         }
-        .cdp-badge {
+        .cdp-badge, .cdp-badge-out {
           display: flex; align-items: center; gap: 5px;
-          padding: 9px 7px; border-radius: 10px;
-          background: #f0faf2;
-          border: 1px solid rgba(57,180,74,0.25);
+          padding: 7px 6px; border-radius: 10px;
           animation: cdp-badge-float 4s ease-in-out infinite;
         }
+        .cdp-badge { background: #fff3ef; border: 1px solid rgba(255,138,114,0.30); }
+        .cdp-badge-out { background: #f0faf2; border: 1px solid rgba(57,180,74,0.25); }
         .cdp-badge-label {
-          font-size: 9px; color: #2a8038; font-weight: 500;
-          white-space: nowrap;
+          font-size: 9px; font-weight: 500; white-space: nowrap;
         }
+        .cdp-badge .cdp-badge-label { color: #b14b32; }
+        .cdp-badge-out .cdp-badge-label { color: #2a8038; }
 
-        /* Connector */
         .cdp-connector { display: flex; flex-direction: column; align-items: center; gap: 4px; flex-shrink: 0; }
 
-        /* Orb */
         .cdp-orb-wrap2 {
           position: relative; flex-shrink: 0;
-          width: clamp(100px, 15vw, 150px);
+          width: clamp(90px, 12vw, 130px);
           aspect-ratio: 1 / 1;
           animation: cdp-orb-bob 4s ease-in-out infinite;
         }
@@ -734,7 +629,7 @@ const CDPWave = () => {
           pointer-events: none;
         }
         .cdp-core {
-          position: absolute; inset: 16px; border-radius: 50%;
+          position: absolute; inset: 14px; border-radius: 50%;
           background: #39B44A;
           border: 2px solid rgba(255,255,255,0.6);
           display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
@@ -748,21 +643,18 @@ const CDPWave = () => {
           transform: rotate(-30deg);
           pointer-events: none;
         }
-        .cdp-core-label { font-size: 14px; font-weight: 700; color: #fff; letter-spacing: 0.06em; z-index: 2; }
-        .cdp-core-sub   { font-size: 8px; color: rgba(255,255,255,0.72); letter-spacing: 0.12em; z-index: 2; }
+        .cdp-core-label { font-size: 13px; font-weight: 800; color: #fff; letter-spacing: 0.06em; z-index: 2; }
+        .cdp-core-sub   { font-size: 7px; color: rgba(255,255,255,0.78); letter-spacing: 0.14em; z-index: 2; }
 
-        /* Tablet */
-        @media (max-width: 1023px) {
-          .cdp-src { width: 165px; padding: 8px; }
-          .cdp-src-head { font-size: 8px; }
+        @media (max-width: 1199px) {
+          .cdp-src, .cdp-out { width: 145px; padding: 8px; }
           .cdp-badge-label { font-size: 8px; }
           .cdp-ring-3 { display: none; }
           .cdp-particle-extra { display: none; }
         }
-        /* Mobile */
         @media (max-width: 767px) {
-          .cdp-stage { flex-direction: column; gap: 12px; padding: 8px; }
-          .cdp-src { width: 100%; max-width: 300px; transform: none; animation: none; transform-origin: center; }
+          .cdp-stage { flex-direction: column; gap: 10px; padding: 8px; }
+          .cdp-src, .cdp-out { width: 100%; max-width: 280px; transform: none; animation: none; transform-origin: center; }
           .cdp-connector svg { transform: rotate(90deg); }
           .cdp-particle, .cdp-particle-extra { display: none; }
           .cdp-ring-3, .cdp-ring-2 { display: none; }
@@ -770,87 +662,113 @@ const CDPWave = () => {
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .cdp-src, .cdp-orb-wrap2, .cdp-orb-pulse,
+          .cdp-src, .cdp-out, .cdp-orb-wrap2, .cdp-orb-pulse,
           .cdp-ring-1, .cdp-ring-2, .cdp-ring-3,
-          .cdp-badge, .cdp-node, .cdp-particle, .cdp-particle-extra,
+          .cdp-badge, .cdp-badge-out, .cdp-node, .cdp-particle, .cdp-particle-extra,
           .cdp-core, .cdp-core-label, .cdp-core-sub {
             animation: none !important;
           }
-          .cdp-src { transform: perspective(700px) rotateY(10deg); }
-          
         }
       `}</style>
 
-      {/* ============ SOURCE PANEL ============ */}
+      {/* ============ INPUT PANEL ============ */}
       <div className="cdp-src">
         <div className="cdp-src-head">
           <span className="dot" />
-          DATA SOURCES
+          INPUT
         </div>
         <div className="cdp-src-grid">
-          {badges.map((b, i) => (
-            <div key={b.key} className="cdp-badge" style={{ animationDelay: `${i * 0.8}s` }}>
-              <Icon name={b.key} />
+          {inputs.map((b, i) => (
+            <div key={b.key} className="cdp-badge" style={{ animationDelay: `${i * 0.5}s` }}>
+              <InIcon name={b.key} />
               <span className="cdp-badge-label">{b.label}</span>
             </div>
           ))}
         </div>
       </div>
 
-      {/* ============ CONNECTOR — particle stream ============ */}
+      {/* ============ INPUT → HUB CONNECTOR ============ */}
       <div className="cdp-connector">
-        <svg width="88" height="64" viewBox="0 0 88 64" style={{ overflow: "visible" }} fill="none" aria-hidden>
+        <svg width="64" height="64" viewBox="0 0 64 64" style={{ overflow: "visible" }} fill="none" aria-hidden>
           <defs>
-            <path id="cdpTop" d="M 0,20 C 30,20 60,32 88,32" />
-            <path id="cdpBot" d="M 0,44 C 30,44 60,32 88,32" />
+            <path id="cdpTop" d="M 0,20 C 22,20 44,32 64,32" />
+            <path id="cdpBot" d="M 0,44 C 22,44 44,32 64,32" />
           </defs>
-
-          {/* Visible base curves */}
-          <use href="#cdpTop" stroke="#39B44A" strokeWidth="1" opacity="0.12" />
-          <use href="#cdpBot" stroke="#ff8a72" strokeWidth="1" opacity="0.12" />
-
-          {/* Green particles on top path */}
-          <circle className="cdp-particle" r="3" fill="#39B44A">
+          <use href="#cdpTop" stroke="#ff8a72" strokeWidth="1" opacity="0.15" />
+          <use href="#cdpBot" stroke="#ff8a72" strokeWidth="1" opacity="0.15" />
+          <circle className="cdp-particle" r="3" fill="#ff8a72">
             <animateMotion dur="2.2s" begin="0s" repeatCount="indefinite"><mpath href="#cdpTop" /></animateMotion>
           </circle>
-          <circle className="cdp-particle" r="2.2" fill="#39B44A">
+          <circle className="cdp-particle" r="2.2" fill="#ff8a72">
             <animateMotion dur="2.2s" begin="0.7s" repeatCount="indefinite"><mpath href="#cdpTop" /></animateMotion>
           </circle>
-          <circle className="cdp-particle-extra" r="1.6" fill="#39B44A">
-            <animateMotion dur="2.2s" begin="1.4s" repeatCount="indefinite"><mpath href="#cdpTop" /></animateMotion>
-          </circle>
-
-          {/* Orange particles on bottom path */}
           <circle className="cdp-particle" r="2.8" fill="#ff8a72">
             <animateMotion dur="2.8s" begin="0.35s" repeatCount="indefinite"><mpath href="#cdpBot" /></animateMotion>
           </circle>
-          <circle className="cdp-particle-extra" r="2" fill="#ff8a72">
+          <circle className="cdp-particle-extra" r="1.8" fill="#ff8a72">
             <animateMotion dur="2.8s" begin="1.2s" repeatCount="indefinite"><mpath href="#cdpBot" /></animateMotion>
           </circle>
         </svg>
-
       </div>
 
-      {/* ============ CDP CORE ORB ============ */}
+      {/* ============ AI HUB ORB ============ */}
       <div className="cdp-orb-wrap2">
         <div className="cdp-ring cdp-ring-3" aria-hidden />
         <div className="cdp-ring cdp-ring-2" aria-hidden />
         <div className="cdp-ring cdp-ring-1" aria-hidden />
-
         <div className="cdp-node cdp-node-g" aria-hidden />
         <div className="cdp-node cdp-node-o" aria-hidden />
-
         <div className="cdp-orb-pulse" aria-hidden />
-
         <div className="cdp-core">
           <div className="cdp-gloss" aria-hidden />
-          <span className="cdp-core-label">CDP</span>
-          <span className="cdp-core-sub">PLATFORM</span>
+          <span className="cdp-core-label">AI HUB</span>
+          <span className="cdp-core-sub">ENGAGEMENT</span>
+        </div>
+      </div>
+
+      {/* ============ HUB → OUTPUT CONNECTOR ============ */}
+      <div className="cdp-connector">
+        <svg width="64" height="64" viewBox="0 0 64 64" style={{ overflow: "visible" }} fill="none" aria-hidden>
+          <defs>
+            <path id="cdpOutTop" d="M 0,32 C 20,32 42,20 64,20" />
+            <path id="cdpOutBot" d="M 0,32 C 20,32 42,44 64,44" />
+          </defs>
+          <use href="#cdpOutTop" stroke="#39B44A" strokeWidth="1" opacity="0.18" />
+          <use href="#cdpOutBot" stroke="#39B44A" strokeWidth="1" opacity="0.18" />
+          <circle className="cdp-particle" r="3" fill="#39B44A">
+            <animateMotion dur="2.2s" begin="0s" repeatCount="indefinite"><mpath href="#cdpOutTop" /></animateMotion>
+          </circle>
+          <circle className="cdp-particle" r="2.2" fill="#39B44A">
+            <animateMotion dur="2.2s" begin="0.7s" repeatCount="indefinite"><mpath href="#cdpOutTop" /></animateMotion>
+          </circle>
+          <circle className="cdp-particle" r="2.8" fill="#39B44A">
+            <animateMotion dur="2.8s" begin="0.35s" repeatCount="indefinite"><mpath href="#cdpOutBot" /></animateMotion>
+          </circle>
+          <circle className="cdp-particle-extra" r="1.8" fill="#39B44A">
+            <animateMotion dur="2.8s" begin="1.2s" repeatCount="indefinite"><mpath href="#cdpOutBot" /></animateMotion>
+          </circle>
+        </svg>
+      </div>
+
+      {/* ============ OUTPUT PANEL ============ */}
+      <div className="cdp-out">
+        <div className="cdp-out-head">
+          OUTPUT
+          <span className="dot" />
+        </div>
+        <div className="cdp-out-grid">
+          {outputs.map((b, i) => (
+            <div key={b.key} className="cdp-badge-out" style={{ animationDelay: `${i * 0.5}s` }}>
+              <OutIcon name={b.key} />
+              <span className="cdp-badge-label">{b.label}</span>
+            </div>
+          ))}
         </div>
       </div>
     </div>
   );
 };
+
 
 
 
