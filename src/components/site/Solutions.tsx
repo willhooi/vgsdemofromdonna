@@ -612,46 +612,54 @@ const CDPWave = () => {
 
         .cdp-orb-wrap2 {
           position: relative; flex-shrink: 0;
-          align-self: center;
-          width: clamp(110px, 14vw, 160px);
-          aspect-ratio: 1 / 1;
+          align-self: stretch;
+          width: clamp(150px, 18vw, 200px);
+          display: flex;
           animation: cdp-orb-bob 4s ease-in-out infinite;
         }
-        .cdp-ring { position: absolute; border-radius: 50%; pointer-events: none; }
-        .cdp-ring-3 { inset: -18px; border: 1px dashed rgba(57,180,74,0.15); animation: cdp-ring-cw 28s linear infinite; }
-        .cdp-ring-2 { inset: -6px;  border: 1px solid rgba(57,180,74,0.22); animation: cdp-ring-ccw 18s linear infinite; }
-        .cdp-ring-1 { inset: 4px;   border: 1.5px dashed rgba(57,180,74,0.35); animation: cdp-ring-cw 12s linear infinite; }
-        .cdp-node {
-          position: absolute; top: 50%; left: 50%;
-          width: 8px; height: 8px; margin: -4px 0 0 -4px;
-          border-radius: 50%;
-          transform-origin: 4px 4px;
-        }
-        .cdp-node-g { background: #39B44A; animation: cdp-node-orbit 6s linear infinite; }
-        .cdp-node-o { background: #ff8a72; animation: cdp-node-orbit 4s linear infinite; animation-delay: -2s; }
-        .cdp-orb-pulse {
-          position: absolute; inset: -2px; border-radius: 50%;
-          border: 2px solid rgba(57,180,74,0.18);
-          animation: cdp-orb-glow 3s ease-in-out infinite;
-          pointer-events: none;
-        }
-        .cdp-core {
-          position: absolute; inset: 14px; border-radius: 50%;
-          background: #39B44A;
-          border: 2px solid rgba(255,255,255,0.6);
-          display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+        .cdp-hub-card {
+          position: relative;
+          width: 100%;
+          border-radius: 22px;
+          background: linear-gradient(180deg, #6dc97a 0%, #4eb866 100%);
+          border: 1px solid rgba(57,180,74,0.45);
+          box-shadow: 0 10px 30px rgba(57,180,74,0.25), inset 0 1px 0 rgba(255,255,255,0.3);
+          padding: 14px 12px;
+          display: flex; flex-direction: column; align-items: stretch;
+          justify-content: space-between;
+          gap: 10px;
           overflow: hidden;
         }
-        .cdp-gloss {
-          position: absolute; top: 22%; left: 22%;
-          width: 32%; height: 22%;
-          background: rgba(255,255,255,0.30);
-          border-radius: 50%;
-          transform: rotate(-30deg);
-          pointer-events: none;
+        .cdp-hub-pill {
+          background: #ffffff;
+          border-radius: 999px;
+          padding: 7px 10px;
+          text-align: center;
+          font-size: 11px; font-weight: 700;
+          color: #1f5e2b;
+          box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+          white-space: nowrap;
         }
-        .cdp-core-label { font-size: 13px; font-weight: 800; color: #fff; letter-spacing: 0.06em; z-index: 2; }
-        .cdp-core-sub   { font-size: 7px; color: rgba(255,255,255,0.78); letter-spacing: 0.14em; z-index: 2; }
+        .cdp-hub-circle {
+          align-self: center;
+          width: 76%; aspect-ratio: 1/1;
+          background: #ffffff;
+          border-radius: 50%;
+          display: flex; align-items: center; justify-content: center;
+          text-align: center;
+          font-size: 11px; font-weight: 800;
+          color: #1f5e2b;
+          line-height: 1.2;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+          padding: 6px;
+        }
+        .cdp-hub-arrow {
+          align-self: center;
+          color: rgba(255,255,255,0.85);
+          font-size: 10px;
+          line-height: 1;
+        }
+
 
         @media (max-width: 1199px) {
           .cdp-src, .cdp-out { width: 160px; padding: 10px 8px; }
