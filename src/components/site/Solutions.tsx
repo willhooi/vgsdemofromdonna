@@ -475,7 +475,7 @@ const AIPlatformCard = ({ visible }: { visible: boolean }) => {
 
 const CDPWave = () => {
   type InKey = "erp" | "pos" | "web" | "loyalty" | "social" | "mkt";
-  type OutKey = "sms" | "zalo" | "email" | "voice" | "report" | "retarget";
+  type OutKey = "bizReport" | "campReport" | "retarget" | "zaloEng";
 
   const InIcon = ({ name }: { name: InKey }) => (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff8a72" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
@@ -490,12 +490,10 @@ const CDPWave = () => {
 
   const OutIcon = ({ name }: { name: OutKey }) => (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#39B44A" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      {name === "sms" && (<><path d="M4 5h16v11H8l-4 4z" /></>)}
-      {name === "zalo" && (<><path d="M4 5h16v11H8l-4 4z" /><path d="M9 10h6M9 13h4" /></>)}
-      {name === "email" && (<><rect x="3" y="5" width="18" height="14" rx="2" /><path d="M3 7l9 7 9-7" /></>)}
-      {name === "voice" && (<><path d="M5 4h4l2 5-3 2a12 12 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z" /></>)}
-      {name === "report" && (<><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M8 17V11M12 17V7M16 17v-4" /></>)}
+      {name === "bizReport" && (<><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M8 17V11M12 17V7M16 17v-4" /></>)}
+      {name === "campReport" && (<><path d="M3 12l4-7h10l4 7-9 9z" /><path d="M9 12h6" /></>)}
       {name === "retarget" && (<><circle cx="12" cy="12" r="8" /><circle cx="12" cy="12" r="4" /><circle cx="12" cy="12" r="1" /></>)}
+      {name === "zaloEng" && (<><path d="M4 5h16v11H8l-4 4z" /><path d="M9 10h6M9 13h4" /></>)}
     </svg>
   );
 
@@ -509,13 +507,12 @@ const CDPWave = () => {
   ];
 
   const outputs: { key: OutKey; label: string }[] = [
-    { key: "sms", label: "SMS" },
-    { key: "zalo", label: "Zalo" },
-    { key: "email", label: "Email" },
-    { key: "voice", label: "Voice" },
-    { key: "report", label: "Report" },
-    { key: "retarget", label: "Retarget" },
+    { key: "bizReport", label: "Business Report" },
+    { key: "campReport", label: "Campaign Report" },
+    { key: "retarget", label: "Retargeting" },
+    { key: "zaloEng", label: "Zalo Engagement" },
   ];
+
 
   return (
     <div
