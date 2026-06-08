@@ -727,18 +727,15 @@ const CDPWave = () => {
       </div>
 
 
-      {/* ============ AI HUB ORB ============ */}
+      {/* ============ AI HUB CARD ============ */}
       <div className="cdp-orb-wrap2">
-        <div className="cdp-ring cdp-ring-3" aria-hidden />
-        <div className="cdp-ring cdp-ring-2" aria-hidden />
-        <div className="cdp-ring cdp-ring-1" aria-hidden />
-        <div className="cdp-node cdp-node-g" aria-hidden />
-        <div className="cdp-node cdp-node-o" aria-hidden />
-        <div className="cdp-orb-pulse" aria-hidden />
-        <div className="cdp-core">
-          <div className="cdp-gloss" aria-hidden />
-          <span className="cdp-core-label">AI HUB</span>
-          <span className="cdp-core-sub">ENGAGEMENT</span>
+        <div className="cdp-hub-card">
+          <div className="cdp-hub-pill">Data collected</div>
+          <div className="cdp-hub-arrow" aria-hidden>▼</div>
+          <div className="cdp-hub-circle">Customer<br/>Profile 360</div>
+          <div className="cdp-hub-arrow" aria-hidden>▼</div>
+          <div className="cdp-hub-pill">Segmentation</div>
+          <div className="cdp-hub-pill">Automation</div>
         </div>
       </div>
 
@@ -746,23 +743,22 @@ const CDPWave = () => {
       <div className="cdp-connector">
         <svg viewBox="0 0 64 400" preserveAspectRatio="none" style={{ overflow: "visible" }} fill="none" aria-hidden>
           <defs>
-            <path id="cdpOut1" d="M 0,200 C 24,200 36,30  64,30" />
-            <path id="cdpOut2" d="M 0,200 C 24,200 36,100 64,100" />
-            <path id="cdpOut3" d="M 0,200 C 24,200 36,170 64,170" />
-            <path id="cdpOut4" d="M 0,200 C 24,200 36,230 64,230" />
-            <path id="cdpOut5" d="M 0,200 C 24,200 36,300 64,300" />
-            <path id="cdpOut6" d="M 0,200 C 24,200 36,370 64,370" />
+            <path id="cdpOut1" d="M 0,200 C 24,200 36,50  64,50" />
+            <path id="cdpOut2" d="M 0,200 C 24,200 36,150 64,150" />
+            <path id="cdpOut3" d="M 0,200 C 24,200 36,250 64,250" />
+            <path id="cdpOut4" d="M 0,200 C 24,200 36,350 64,350" />
           </defs>
-          {["cdpOut1","cdpOut2","cdpOut3","cdpOut4","cdpOut5","cdpOut6"].map(id => (
+          {["cdpOut1","cdpOut2","cdpOut3","cdpOut4"].map(id => (
             <use key={id} href={`#${id}`} stroke="#39B44A" strokeWidth="1" strokeDasharray="3 4" opacity="0.4" />
           ))}
-          {["cdpOut1","cdpOut2","cdpOut3","cdpOut4","cdpOut5","cdpOut6"].map((id, i) => (
+          {["cdpOut1","cdpOut2","cdpOut3","cdpOut4"].map((id, i) => (
             <circle key={id} className="cdp-particle" r="2.4" fill="#39B44A">
-              <animateMotion dur="2.6s" begin={`${i * 0.35}s`} repeatCount="indefinite"><mpath href={`#${id}`} /></animateMotion>
+              <animateMotion dur="2.6s" begin={`${i * 0.4}s`} repeatCount="indefinite"><mpath href={`#${id}`} /></animateMotion>
             </circle>
           ))}
         </svg>
       </div>
+
 
 
       {/* ============ OUTPUT PANEL ============ */}
