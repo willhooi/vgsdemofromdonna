@@ -19,6 +19,8 @@ import {
   Zap,
 } from "lucide-react";
 import bytetechLogo from "@/assets/brand/bytetech.svg";
+import cnvLogo from "@/assets/brand/cnv.png";
+import cxgenieLogo from "@/assets/brand/cxgenie.svg";
 import shopperImg from "@/assets/channels-girl.png";
 import { useCountUp } from "@/hooks/use-count-up";
 
@@ -503,11 +505,23 @@ const CDPSupportStrip = ({ visible }: { visible: boolean }) => {
           <div className="uppercase tracking-[0.18em] text-[hsl(var(--primary-deep))] text-3xl font-extrabold px-0 mx-0">
             CDP Solution
           </div>
-          <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] font-semibold leading-tight text-foreground">
+          <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-[13px] font-semibold leading-tight text-foreground">
             <span className="text-muted-foreground font-normal">Strategic partnership with</span>
             <img
               src={bytetechLogo}
               alt="ByteTech"
+              className="inline-block h-5 w-auto shrink-0 align-middle"
+              loading="lazy"
+            />
+            <img
+              src={cnvLogo}
+              alt="CNV CDP"
+              className="inline-block h-5 w-auto shrink-0 align-middle"
+              loading="lazy"
+            />
+            <img
+              src={cxgenieLogo}
+              alt="CX Genie"
               className="inline-block h-5 w-auto shrink-0 align-middle"
               loading="lazy"
             />
