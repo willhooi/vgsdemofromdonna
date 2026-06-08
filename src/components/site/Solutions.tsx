@@ -699,27 +699,26 @@ const CDPWave = () => {
 
       {/* ============ INPUT → HUB CONNECTOR ============ */}
       <div className="cdp-connector">
-        <svg width="64" height="64" viewBox="0 0 64 64" style={{ overflow: "visible" }} fill="none" aria-hidden>
+        <svg viewBox="0 0 64 400" preserveAspectRatio="none" style={{ overflow: "visible" }} fill="none" aria-hidden>
           <defs>
-            <path id="cdpTop" d="M 0,20 C 22,20 44,32 64,32" />
-            <path id="cdpBot" d="M 0,44 C 22,44 44,32 64,32" />
+            <path id="cdpIn1" d="M 0,30  C 28,30  40,200 64,200" />
+            <path id="cdpIn2" d="M 0,100 C 28,100 40,200 64,200" />
+            <path id="cdpIn3" d="M 0,170 C 28,170 40,200 64,200" />
+            <path id="cdpIn4" d="M 0,230 C 28,230 40,200 64,200" />
+            <path id="cdpIn5" d="M 0,300 C 28,300 40,200 64,200" />
+            <path id="cdpIn6" d="M 0,370 C 28,370 40,200 64,200" />
           </defs>
-          <use href="#cdpTop" stroke="#ff8a72" strokeWidth="1" opacity="0.15" />
-          <use href="#cdpBot" stroke="#ff8a72" strokeWidth="1" opacity="0.15" />
-          <circle className="cdp-particle" r="3" fill="#ff8a72">
-            <animateMotion dur="2.2s" begin="0s" repeatCount="indefinite"><mpath href="#cdpTop" /></animateMotion>
-          </circle>
-          <circle className="cdp-particle" r="2.2" fill="#ff8a72">
-            <animateMotion dur="2.2s" begin="0.7s" repeatCount="indefinite"><mpath href="#cdpTop" /></animateMotion>
-          </circle>
-          <circle className="cdp-particle" r="2.8" fill="#ff8a72">
-            <animateMotion dur="2.8s" begin="0.35s" repeatCount="indefinite"><mpath href="#cdpBot" /></animateMotion>
-          </circle>
-          <circle className="cdp-particle-extra" r="1.8" fill="#ff8a72">
-            <animateMotion dur="2.8s" begin="1.2s" repeatCount="indefinite"><mpath href="#cdpBot" /></animateMotion>
-          </circle>
+          {["cdpIn1","cdpIn2","cdpIn3","cdpIn4","cdpIn5","cdpIn6"].map(id => (
+            <use key={id} href={`#${id}`} stroke="#ff8a72" strokeWidth="1" strokeDasharray="3 4" opacity="0.35" />
+          ))}
+          {["cdpIn1","cdpIn2","cdpIn3","cdpIn4","cdpIn5","cdpIn6"].map((id, i) => (
+            <circle key={id} className="cdp-particle" r="2.4" fill="#ff8a72">
+              <animateMotion dur="2.6s" begin={`${i * 0.35}s`} repeatCount="indefinite"><mpath href={`#${id}`} /></animateMotion>
+            </circle>
+          ))}
         </svg>
       </div>
+
 
       {/* ============ AI HUB ORB ============ */}
       <div className="cdp-orb-wrap2">
