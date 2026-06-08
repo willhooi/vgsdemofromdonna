@@ -87,14 +87,9 @@ export const Solutions = () => {
           <img src={cxgenieLogo} alt="CX Genie" className="h-5 w-auto" loading="lazy" />
         </div>
 
-        {/* Animation flow (left) + OutcomeStage (right) */}
+        {/* Unified flow card: INPUT → HUB → OUTPUT → Outcome (girl + popups) */}
         <div className="relative mx-auto mt-8 md:mt-10 max-w-6xl">
-          <div className="grid gap-8 lg:grid-cols-[1fr_minmax(0,38%)] lg:gap-6 items-stretch">
-            <AIPlatformCard visible={visible} />
-            <div className="flex justify-center lg:justify-end">
-              <OutcomeStage visible={visible} />
-            </div>
-          </div>
+          <AIPlatformCard visible={visible} />
         </div>
 
       </div>
@@ -116,9 +111,9 @@ const CHANNEL_CHIPS = [
   { id: "custom", label: "Customized Solution", dot: "#f59e0b", Icon: LayoutGrid },
 ] as const;
 
-const OutcomeStage = ({ visible }: { visible: boolean }) => (
+const OutcomeStage = ({ visible, className = "" }: { visible: boolean; className?: string }) => (
   <div
-    className="relative mx-auto w-full max-w-[380px] lg:mx-0"
+    className={`relative mx-auto w-full max-w-[340px] ${className}`}
     style={{
       opacity: visible ? 1 : 0,
       transform: visible ? "translateY(0)" : "translateY(12px)",
@@ -461,9 +456,14 @@ const AIPlatformCard = ({ visible }: { visible: boolean }) => {
           AI Customer Engagement Platform
         </div>
 
-        {/* Animated illustration */}
-        <div className="relative w-full flex-1 min-h-[420px]">
-          <CDPWave />
+        {/* Flow row: CDPWave (left) + OutcomeStage (right) */}
+        <div className="relative flex w-full flex-1 flex-col items-stretch gap-4 md:flex-row md:gap-3 lg:gap-4">
+          <div className="relative w-full flex-1 min-h-[380px] md:min-h-[420px]">
+            <CDPWave />
+          </div>
+          <div className="relative flex w-full items-center justify-center md:w-[36%] md:max-w-[340px] md:flex-shrink-0">
+            <OutcomeStage visible={visible} className="md:max-w-[320px]" />
+          </div>
         </div>
       </div>
     </div>
