@@ -732,13 +732,13 @@ const StepCustomerExperience = ({ visible }: { visible: boolean }) => (
         );
       })}
 
-      {/* Girl + review */}
-      <div className="relative mt-2 flex items-end justify-center">
+      {/* Girl + review — overlaps to the right on desktop, inline on mobile */}
+      <div className="relative mt-2 flex items-end justify-center lg:absolute lg:-right-20 lg:-bottom-4 lg:mt-0 lg:w-[170px] lg:justify-end xl:-right-24 xl:w-[200px]">
         <img
           src={shopperImg}
           alt="Happy customer receiving personalized offers"
           loading="lazy"
-          className="h-auto w-full max-w-[170px] object-contain drop-shadow-[0_15px_25px_rgba(0,0,0,0.12)]"
+          className="h-auto w-full max-w-[170px] object-contain drop-shadow-[0_18px_30px_rgba(0,0,0,0.15)] lg:max-w-none"
         />
         <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-white/95 px-2.5 py-1 shadow-[0_8px_20px_-10px_rgba(0,0,0,0.25)] ring-1 ring-border backdrop-blur">
           <div className="flex items-center gap-1">
@@ -746,10 +746,10 @@ const StepCustomerExperience = ({ visible }: { visible: boolean }) => (
               <Star key={i} className="h-2.5 w-2.5 fill-[#ff9b17] text-[#ff9b17]" />
             ))}
             <span className="ml-0.5 text-[9px] font-bold text-foreground">5.0</span>
+            <span className="ml-1 text-[9px] italic text-muted-foreground">"Thanks!"</span>
           </div>
         </div>
       </div>
-      <div className="mt-3 text-center text-[9.5px] italic text-muted-foreground">"Thanks for your feedback!"</div>
     </div>
   </StepCard>
 );
