@@ -456,13 +456,13 @@ const CX_CARDS = [
   { Icon: ShoppingBag, title: "Recommended for you", body: "Check this out!", accent: "green" as const },
 ];
 
-/* Orbit nodes around Customer Profile (Col2 inner coords; profile center 185,250, r=75) */
+/* Orbit nodes around Customer Profile (Col2 inner coords; profile center 180,250, r=75) */
 const ORBIT = [
-  { label: "Purchase\nHistory", x: 185, y: 130 },
-  { label: "Interests\n& Behavior", x: 285, y: 200 },
-  { label: "Channel\nPreference", x: 285, y: 320 },
-  { label: "Lifetime\nValue", x: 85,  y: 360 },
-  { label: "Loyalty\nTier", x: 85,  y: 200 },
+  { label: "Purchase\nHistory", x: 180, y: 130 },
+  { label: "Interests\n& Behavior", x: 290, y: 200 },
+  { label: "Channel\nPreference", x: 290, y: 320 },
+  { label: "Lifetime\nValue", x: 70,  y: 360 },
+  { label: "Loyalty\nTier", x: 70,  y: 200 },
 ];
 
 const DesktopInfographic = ({ visible }: { visible: boolean }) => {
