@@ -459,7 +459,7 @@ const AIPlatformCard = ({ visible }: { visible: boolean }) => {
 
   return (
     <div
-      className="relative w-full overflow-hidden rounded-2xl border border-[hsl(var(--primary))]/15 bg-white px-3 py-5 sm:px-5 sm:py-6 lg:px-6 lg:py-7"
+      className="relative w-full rounded-2xl border border-[hsl(var(--primary))]/15 bg-white px-3 py-5 sm:px-5 sm:py-6 lg:px-6 lg:py-7 lg:pr-24 xl:pr-28 overflow-hidden lg:overflow-visible"
       style={{
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(10px)",
