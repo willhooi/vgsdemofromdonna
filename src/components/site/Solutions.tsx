@@ -459,7 +459,7 @@ const AIPlatformCard = ({ visible }: { visible: boolean }) => {
 
   return (
     <div
-      className="relative w-full rounded-2xl border border-[hsl(var(--primary))]/15 bg-white px-3 py-5 sm:px-5 sm:py-6 lg:px-6 lg:py-7 overflow-hidden"
+      className="relative w-full rounded-2xl border border-[hsl(var(--primary))]/15 bg-white px-3 py-5 sm:px-6 sm:py-7 lg:px-10 lg:py-9 overflow-hidden"
       style={{
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(10px)",
@@ -476,7 +476,7 @@ const AIPlatformCard = ({ visible }: { visible: boolean }) => {
       <div className="relative z-10">
 
         {/* 4-step journey */}
-        <div className="relative grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-5 lg:grid-cols-4 lg:gap-6">
+        <div className="relative grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-4 lg:gap-8">
           {/* Desktop connector overlay — full flow lines */}
           <svg
             aria-hidden
