@@ -691,7 +691,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
       {/* ===== Column 4 — CUSTOMER EXPERIENCE ===== */}
       <div
         className="absolute rounded-xl border border-[hsl(145_55%_80%)]/50 bg-gradient-to-b from-[hsl(145_60%_98%)] to-white shadow-[0_2px_10px_rgba(0,0,0,0.03)]"
-        style={{ left: 1210, top: 40, width: 350, height: 560, zIndex: 2, overflow: "visible" }}
+        style={{ left: 1220, top: 40, width: 340, height: 560, zIndex: 2, overflow: "visible" }}
       >
         <DesktopColumnHeader index={4} accent="green" title="CUSTOMER EXPERIENCE" subtitle="Deliver personalized experiences that customers love" />
 
@@ -700,7 +700,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
           aria-hidden
           className="pointer-events-none absolute rounded-full"
           style={{
-            right: 0, bottom: 40, width: 260, height: 300,
+            right: -10, bottom: 30, width: 260, height: 310,
             background: "radial-gradient(circle, rgba(43,196,105,0.22), rgba(43,196,105,0.04), transparent)",
             zIndex: 0,
           }}
@@ -712,7 +712,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
           alt="Happy customer receiving personalized offers"
           loading="lazy"
           className="absolute object-contain drop-shadow-[0_18px_28px_rgba(0,0,0,0.18)]"
-          style={{ right: 8, bottom: 28, width: 280, maxWidth: "58%", height: "auto", zIndex: 2 }}
+          style={{ right: 0, bottom: 24, width: 200, maxWidth: "56%", height: "auto", zIndex: 2 }}
         />
 
         {/* Engagement cards (floating, left side) */}
@@ -724,14 +724,14 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
             <div
               key={p.title}
               className={`absolute flex items-center gap-2 rounded-xl border ${ring} bg-white px-2.5 py-2 shadow-[0_4px_10px_rgba(0,0,0,0.08)]`}
-              style={{ left: 24, width: 200, height: 68, top: CX_TOPS_REL[i], zIndex: 3 }}
+              style={{ left: 22, width: 190, height: 66, top: CX_TOPS_REL[i], zIndex: 3 }}
             >
               <span className={`grid h-9 w-9 shrink-0 place-items-center rounded-md ${iconBg}`}>
                 <p.Icon className="h-[18px] w-[18px]" />
               </span>
               <div className="min-w-0 flex-1">
-                <div className="text-[10.5px] font-semibold leading-tight text-muted-foreground truncate">{p.title}</div>
-                <div className="text-[12px] font-bold leading-tight text-foreground truncate">{p.body}</div>
+                <div className="text-[10.5px] font-semibold leading-tight text-muted-foreground line-clamp-2">{p.title}</div>
+                <div className="text-[12px] font-bold leading-tight text-foreground line-clamp-2">{p.body}</div>
               </div>
             </div>
           );
@@ -740,7 +740,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
         {/* Rating card */}
         <div
           className="absolute rounded-2xl bg-white px-3 py-2 shadow-[0_8px_20px_-10px_rgba(0,0,0,0.25)] ring-1 ring-border"
-          style={{ left: 32, bottom: 54, width: 250, height: 76, zIndex: 3 }}
+          style={{ left: 22, bottom: 28, width: 230, height: 72, zIndex: 3 }}
         >
           <div className="flex items-center gap-1">
             {Array.from({ length: 5 }).map((_, i) => (
