@@ -759,7 +759,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
               style={{ animationDelay: `${i * 0.75}s` }}
             >
               <p.Icon className="h-4 w-4 shrink-0 text-[hsl(145_50%_35%)]" />
-              <span className="text-[15px] font-semibold text-[hsl(145_50%_25%)]">{p.label}</span>
+              <span className="text-[15px] font-semibold leading-none text-[hsl(145_50%_25%)]">{p.label}</span>
             </div>
           ))}
         </div>
