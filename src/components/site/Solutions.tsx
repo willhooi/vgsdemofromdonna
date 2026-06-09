@@ -474,15 +474,6 @@ const AIPlatformCard = ({ visible }: { visible: boolean }) => {
       />
 
       <div className="relative z-10">
-        {/* Header */}
-        <div className="text-center mb-5 sm:mb-6">
-          <div className="uppercase tracking-[0.18em] text-[hsl(var(--primary-deep))] text-lg sm:text-xl md:text-2xl font-extrabold">
-            AI Customer Engagement Platform
-          </div>
-          <p className="mt-1.5 text-xs sm:text-sm text-muted-foreground">
-            From raw signals to delightful customer moments — in one continuous flow
-          </p>
-        </div>
 
         {/* 4-step journey */}
         <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-3.5">
