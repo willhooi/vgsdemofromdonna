@@ -723,14 +723,14 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
             <div
               key={p.title}
               className={`absolute flex items-center gap-2 rounded-xl border ${ring} bg-white px-2.5 py-2 shadow-[0_4px_10px_rgba(0,0,0,0.08)]`}
-              style={{ left: 24, width: 200, height: 68, top: CX_TOPS_REL[i], zIndex: 3 }}
+              style={{ left: 20, width: 210, height: 68, top: CX_TOPS_REL[i], zIndex: 3 }}
             >
               <span className={`grid h-9 w-9 shrink-0 place-items-center rounded-md ${iconBg}`}>
                 <p.Icon className="h-[18px] w-[18px]" />
               </span>
               <div className="min-w-0 flex-1">
-                <div className="text-[10.5px] font-semibold leading-tight text-muted-foreground truncate">{p.title}</div>
-                <div className="text-[12px] font-bold leading-tight text-foreground truncate">{p.body}</div>
+                <div className="text-[10.5px] font-semibold leading-tight text-muted-foreground">{p.title}</div>
+                <div className="text-[12px] font-bold leading-tight text-foreground">{p.body}</div>
               </div>
             </div>
           );
