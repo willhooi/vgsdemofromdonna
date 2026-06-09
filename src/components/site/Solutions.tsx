@@ -824,9 +824,11 @@ const AIPlatformCard = ({ visible }: { visible: boolean }) => {
 
       <div className="relative z-10">
 
-        {/* ============ DESKTOP (≥1200px): fixed absolute infographic ============ */}
+        {/* ============ DESKTOP (≥1024px): fixed absolute infographic ============ */}
         <div className="hidden lg:block">
-          <DesktopInfographic visible={visible} />
+          <DesktopInfographicScaler>
+            <DesktopInfographic visible={visible} />
+          </DesktopInfographicScaler>
         </div>
 
         {/* ============ TABLET / MOBILE: responsive stacked layout ============ */}
