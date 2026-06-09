@@ -613,18 +613,19 @@ const StepAIBrain = ({ visible }: { visible: boolean }) => (
         className="step-anim absolute inset-[10%] rounded-full border border-dashed border-[hsl(145_45%_55%)]/40"
         style={{ animation: "brain-ring-cw 30s linear infinite" }}
       />
-      {/* Satellites */}
+      {/* Satellites — plain labels like reference */}
       {BRAIN_SATELLITES.map((s) => {
         const rad = (s.angle * Math.PI) / 180;
-        const r = 46; // % of half
+        const r = 48;
         const x = 50 + r * Math.cos(rad);
         const y = 50 + r * Math.sin(rad);
         return (
           <div
             key={s.label}
-            className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full border border-[hsl(145_50%_70%)]/50 bg-white px-1.5 py-0.5 text-center text-[8.5px] font-semibold leading-[1.1] text-[hsl(145_50%_28%)] shadow-sm whitespace-pre-line"
+            className="absolute -translate-x-1/2 -translate-y-1/2 text-center text-[8.5px] font-semibold leading-[1.15] text-[hsl(145_45%_25%)] whitespace-pre-line"
             style={{ left: `${x}%`, top: `${y}%` }}
           >
+            <span className="mb-0.5 mx-auto block h-1.5 w-1.5 rounded-full bg-[hsl(145_55%_45%)]" />
             {s.label}
           </div>
         );
