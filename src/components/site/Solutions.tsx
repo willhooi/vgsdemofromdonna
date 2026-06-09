@@ -933,8 +933,8 @@ const StepDataSources = ({ visible }: { visible: boolean }) => (
             <it.Icon className="h-3.5 w-3.5" />
           </span>
           <div className="min-w-0 flex-1">
-            <div className="text-[11px] font-semibold leading-tight text-foreground truncate">{it.name}</div>
-            <div className="text-[9.5px] leading-tight text-muted-foreground truncate">{it.sub}</div>
+            <div className="text-[11px] font-semibold leading-tight text-foreground">{it.name}</div>
+            <div className="text-[9.5px] leading-tight text-muted-foreground line-clamp-2">{it.sub}</div>
           </div>
         </div>
       ))}
