@@ -654,7 +654,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
 
           {/* Static connector lines to orbit nodes */}
           {ORBIT.map((s) => {
-            const cx = 180, cy = 250, r = 78;
+            const cx = 200, cy = 250, r = 78;
             const dx = s.x - cx, dy = s.y - cy;
             const len = Math.hypot(dx, dy) || 1;
             const ux = dx / len, uy = dy / len;
