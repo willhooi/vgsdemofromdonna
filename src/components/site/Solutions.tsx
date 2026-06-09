@@ -623,7 +623,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
       >
         <DesktopColumnHeader index={2} accent="green" title="AI CUSTOMER BRAIN" subtitle="Unify, understand and predict" />
 
-        {/* Flow lines connecting Customer Profile 360° with orbit nodes + pills */}
+        {/* Flow lines + animated orbit connecting Customer Profile 360° with orbit nodes + pills */}
         <svg
           className="pointer-events-none absolute inset-0"
           viewBox="0 0 360 560"
@@ -635,7 +635,25 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
             <marker id="brain-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
               <path d="M0,0 L10,5 L0,10 z" fill="hsl(145 55% 45%)" />
             </marker>
+            {/* Circular orbit path (used for both visible orbit + animateMotion particles) */}
+            <path
+              id="brain-orbit"
+              d="M 180,140 A 110,110 0 1 1 179.99,140 Z"
+            />
           </defs>
+
+          {/* Visible dotted orbit */}
+          <use
+            href="#brain-orbit"
+            fill="none"
+            stroke="#53C46B"
+            strokeWidth={1.5}
+            strokeDasharray="4 7"
+            opacity={0.45}
+            className="brain-orbit-path"
+          />
+
+          {/* Static connector lines to orbit nodes */}
           {ORBIT.map((s) => {
             const cx = 180, cy = 250, r = 78;
             const dx = s.x - cx, dy = s.y - cy;
@@ -646,38 +664,72 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
             const x2 = s.x - ux * 14;
             const y2 = s.y - uy * 14;
             return (
-              <g key={s.label}>
-                <line
-                  x1={x1} y1={y1} x2={x2} y2={y2}
-                  stroke="hsl(145 55% 45%)"
-                  strokeWidth={1.5}
-                  strokeDasharray="4 5"
-                  strokeLinecap="round"
-                />
-                <circle cx={x2} cy={y2} r={2.5} fill="hsl(145 55% 45%)" />
-              </g>
+              <line
+                key={s.label}
+                x1={x1} y1={y1} x2={x2} y2={y2}
+                stroke="hsl(145 55% 45%)"
+                strokeWidth={1.5}
+                strokeDasharray="4 5"
+                strokeLinecap="round"
+              />
             );
           })}
-          {/* Down arrow from circle bottom to pills */}
+
+          {/* Signal particles travelling along orbit (clockwise) */}
+          {[0, 2.2, 4.4, 6.6].map((delay, i) => (
+            <circle key={i} r={3.2} fill="#35B96B" className="brain-particle">
+              <animateMotion
+                dur="9s"
+                begin={`-${delay}s`}
+                repeatCount="indefinite"
+                rotate="auto"
+              >
+                <mpath href="#brain-orbit" />
+              </animateMotion>
+            </circle>
+          ))}
+
+          {/* Vertical dotted signal line from profile down through pills */}
+          <line
+            x1={180} y1={328} x2={180} y2={575}
+            stroke="#53C46B"
+            strokeWidth={1.5}
+            strokeDasharray="4 7"
+            opacity={0.55}
+            className="brain-down-path"
+          />
+          {/* Arrow head pointing at first pill */}
           <line
             x1={180} y1={328} x2={180} y2={420}
-            stroke="hsl(145 55% 45%)"
-            strokeWidth={1.5}
-            strokeDasharray="4 5"
-            strokeLinecap="round"
+            stroke="transparent"
             markerEnd="url(#brain-arrow)"
           />
+          {/* Downward signal particle */}
+          <circle r={3} fill="#35B96B" className="brain-particle">
+            <animateMotion dur="3s" repeatCount="indefinite" path="M 180,328 L 180,575" />
+          </circle>
+
         </svg>
 
 
+        {/* Breathing glow behind Customer Profile 360° */}
+        <span
+          className="brain-glow"
+          style={{ left: 180, top: 250, width: 220, height: 220, zIndex: 1 }}
+          aria-hidden
+        />
+
         {/* Orbit nodes */}
-        {ORBIT.map((s) => (
+        {ORBIT.map((s, i) => (
           <div
             key={s.label}
             className="absolute -translate-x-1/2 -translate-y-1/2 whitespace-pre-line text-center text-[10.5px] font-semibold leading-[1.2] text-[hsl(145_45%_25%)]"
-            style={{ left: s.x, top: s.y }}
+            style={{ left: s.x, top: s.y, zIndex: 3 }}
           >
-            <span className="mx-auto mb-1 block h-2 w-2 rounded-full bg-[hsl(145_55%_45%)]" />
+            <span
+              className="brain-node-dot mx-auto mb-1 block h-2 w-2 rounded-full bg-[hsl(145_55%_45%)]"
+              style={{ animationDelay: `${i * 0.35}s` }}
+            />
             {s.label}
           </div>
         ))}
@@ -685,7 +737,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
         {/* Customer Profile 360° — center 180,250, size 150 */}
         <div
           className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center rounded-full bg-white text-center shadow-[0_10px_28px_rgba(57,180,74,0.3)] ring-2 ring-[hsl(145_55%_45%)]/40"
-          style={{ left: 180, top: 250, width: 150, height: 150 }}
+          style={{ left: 180, top: 250, width: 150, height: 150, zIndex: 3 }}
         >
           <UserIcon className="h-7 w-7 text-[hsl(145_50%_35%)]" />
           <div className="mt-1 text-[13px] font-bold leading-tight text-[hsl(145_50%_22%)]">
@@ -694,22 +746,24 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
         </div>
 
         {/* Capability pills bottom */}
-        <div className="absolute left-1/2 -translate-x-1/2 flex flex-col gap-2" style={{ top: 430, width: 240 }}>
+        <div className="absolute left-1/2 -translate-x-1/2 flex flex-col gap-2" style={{ top: 430, width: 240, zIndex: 3 }}>
           {[
             { Icon: Database, label: "Data Collected" },
             { Icon: Users, label: "AI Segmentation" },
             { Icon: BarChart3, label: "Predictive Insights" },
             { Icon: GitBranch, label: "Journey Automation" },
-          ].map((p) => (
+          ].map((p, i) => (
             <div
               key={p.label}
-              className="flex items-center gap-2 rounded-full border border-[hsl(145_45%_75%)]/50 bg-[hsl(145_60%_97%)] px-3 py-1.5"
+              className="brain-pill flex items-center gap-2 rounded-full border border-[hsl(145_45%_75%)]/50 bg-[hsl(145_60%_97%)] px-3 py-1.5"
+              style={{ animationDelay: `${i * 0.75}s` }}
             >
               <p.Icon className="h-3.5 w-3.5 shrink-0 text-[hsl(145_50%_35%)]" />
               <span className="text-[11.5px] font-semibold text-[hsl(145_50%_25%)]">{p.label}</span>
             </div>
           ))}
         </div>
+
       </div>
 
       {/* ===== Column 3 — BUSINESS IMPACT ===== */}

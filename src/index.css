@@ -483,6 +483,58 @@
   to { stroke-dashoffset: -400; }
 }
 
+/* ====== AI Customer Brain animations ====== */
+@keyframes brain-orbit-dash {
+  to { stroke-dashoffset: -220; }
+}
+@keyframes brain-down-dash {
+  to { stroke-dashoffset: -110; }
+}
+@keyframes brain-glow-breathe {
+  0%, 100% { transform: translate(-50%, -50%) scale(1);    opacity: 0.55; }
+  50%      { transform: translate(-50%, -50%) scale(1.08); opacity: 0.85; }
+}
+@keyframes brain-node-pulse {
+  0%, 100% { transform: scale(1);    opacity: 0.7; }
+  50%      { transform: scale(1.35); opacity: 1; }
+}
+@keyframes brain-pill-activate {
+  0%, 100% {
+    background-color: hsl(140 60% 97%);
+    box-shadow: 0 0 0 rgba(53,185,107,0);
+    border-color: hsl(145 45% 75% / 0.5);
+  }
+  50% {
+    background-color: hsl(140 65% 94%);
+    box-shadow: 0 0 18px rgba(53,185,107,0.22);
+    border-color: rgba(53,185,107,0.45);
+  }
+}
+.brain-glow {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(53,185,107,0.28) 0%, rgba(53,185,107,0) 70%);
+  animation: brain-glow-breathe 4s ease-in-out infinite;
+}
+.brain-node-dot {
+  display: inline-block;
+  transform-origin: center;
+  animation: brain-node-pulse 2.8s ease-in-out infinite;
+}
+.brain-orbit-path {
+  animation: brain-orbit-dash 14s linear infinite;
+}
+.brain-down-path {
+  animation: brain-down-dash 3s linear infinite;
+}
+.brain-particle {
+  filter: drop-shadow(0 0 6px rgba(53,185,107,0.65));
+}
+.brain-pill {
+  animation: brain-pill-activate 8s ease-in-out infinite;
+}
+
 /* Metallic shimmer sweep across a chip/badge */
 @keyframes metallic-sweep {
   0%   { transform: translateX(-150%) skewX(-20deg); }
