@@ -690,7 +690,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
       {/* ===== Column 4 — CUSTOMER EXPERIENCE ===== */}
       <div
         className="absolute rounded-xl border border-[hsl(145_55%_80%)]/50 bg-gradient-to-b from-[hsl(145_60%_98%)] to-white shadow-[0_2px_10px_rgba(0,0,0,0.03)]"
-        style={{ left: 1210, top: 40, width: 350, height: 560, zIndex: 2, overflow: "visible" }}
+        style={{ left: 1420, top: 40, width: 340, height: 560, zIndex: 2, overflow: "visible" }}
       >
         <DesktopColumnHeader index={4} accent="green" title="CUSTOMER EXPERIENCE" subtitle="Deliver personalized experiences that customers love" />
 
