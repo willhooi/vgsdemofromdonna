@@ -406,7 +406,7 @@ const DesktopInfographicScaler = ({ children }: { children: React.ReactNode }) =
     const el = wrapRef.current;
     const ro = new ResizeObserver(() => {
       const w = el.clientWidth;
-      setScale(Math.min(1.18, w / 1600));
+      setScale(Math.min(1.35, w / 1600));
     });
     ro.observe(el);
     return () => ro.disconnect();
@@ -609,8 +609,8 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
               <it.Icon className="h-4 w-4" />
             </span>
             <div className="min-w-0 flex-1">
-              <div className="text-[12px] font-semibold leading-tight text-foreground">{it.name}</div>
-              <div className="text-[10px] leading-tight text-muted-foreground">{it.sub}</div>
+              <div className="text-[13.5px] font-semibold leading-tight text-foreground">{it.name}</div>
+              <div className="text-[11px] leading-tight text-muted-foreground">{it.sub}</div>
             </div>
           </div>
         ))}
@@ -723,7 +723,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
         {ORBIT.map((s, i) => (
           <div
             key={s.label}
-            className="absolute -translate-x-1/2 -translate-y-1/2 whitespace-pre-line text-center text-[10.5px] font-semibold leading-[1.2] text-[hsl(145_45%_25%)]"
+            className="absolute -translate-x-1/2 -translate-y-1/2 whitespace-pre-line text-center text-[12px] font-semibold leading-[1.2] text-[hsl(145_45%_25%)]"
             style={{ left: s.x, top: s.y, zIndex: 3 }}
           >
             <span
@@ -739,8 +739,8 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
           className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center rounded-full bg-white text-center shadow-[0_10px_28px_rgba(57,180,74,0.3)] ring-2 ring-[hsl(145_55%_45%)]/40"
           style={{ left: 180, top: 250, width: 150, height: 150, zIndex: 3 }}
         >
-          <UserIcon className="h-7 w-7 text-[hsl(145_50%_35%)]" />
-          <div className="mt-1 text-[13px] font-bold leading-tight text-[hsl(145_50%_22%)]">
+          <UserIcon className="h-8 w-8 text-[hsl(145_50%_35%)]" />
+          <div className="mt-1 text-[14.5px] font-bold leading-tight text-[hsl(145_50%_22%)]">
             Customer<br />Profile 360°
           </div>
         </div>
@@ -758,8 +758,8 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
               className="brain-pill flex items-center gap-2 rounded-full border border-[hsl(145_45%_75%)]/50 bg-[hsl(145_60%_97%)] px-3 py-1.5"
               style={{ animationDelay: `${i * 0.75}s` }}
             >
-              <p.Icon className="h-3.5 w-3.5 shrink-0 text-[hsl(145_50%_35%)]" />
-              <span className="text-[11.5px] font-semibold text-[hsl(145_50%_25%)]">{p.label}</span>
+              <p.Icon className="h-4 w-4 shrink-0 text-[hsl(145_50%_35%)]" />
+              <span className="text-[13px] font-semibold text-[hsl(145_50%_25%)]">{p.label}</span>
             </div>
           ))}
         </div>
@@ -782,8 +782,8 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
               <it.Icon className="h-[18px] w-[18px]" />
             </span>
             <div className="min-w-0 flex-1">
-              <div className="text-[13px] font-semibold leading-tight text-[hsl(145_50%_28%)]">{it.name}</div>
-              <div className="mt-1 text-[11px] leading-snug text-muted-foreground">{it.sub}</div>
+              <div className="text-[14.5px] font-semibold leading-tight text-[hsl(145_50%_28%)]">{it.name}</div>
+              <div className="mt-1 text-[12px] leading-snug text-muted-foreground">{it.sub}</div>
             </div>
           </div>
         ))}
@@ -831,8 +831,8 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
                 <p.Icon className="h-[18px] w-[18px]" />
               </span>
               <div className="min-w-0 flex-1">
-                <div className="text-[10.5px] font-semibold leading-tight text-muted-foreground line-clamp-2">{p.title}</div>
-                <div className="text-[12px] font-bold leading-tight text-foreground line-clamp-2">{p.body}</div>
+                <div className="text-[12px] font-semibold leading-tight text-muted-foreground line-clamp-2">{p.title}</div>
+                <div className="text-[13.5px] font-bold leading-tight text-foreground line-clamp-2">{p.body}</div>
               </div>
             </div>
           );
@@ -847,9 +847,9 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
             {Array.from({ length: 5 }).map((_, i) => (
               <Star key={i} className="h-4 w-4 fill-[#ff9b17] text-[#ff9b17]" />
             ))}
-            <span className="ml-1 text-[13px] font-bold text-foreground">5.0</span>
+            <span className="ml-1 text-[14.5px] font-bold text-foreground">5.0</span>
           </div>
-          <div className="mt-1 text-[11px] italic text-muted-foreground">"Thanks for your feedback!"</div>
+          <div className="mt-1 text-[12.5px] italic text-muted-foreground">"Thanks for your feedback!"</div>
         </div>
       </div>
     </div>
@@ -864,14 +864,14 @@ const DesktopColumnHeader = ({
   const titleColor = isOrange ? "text-[hsl(22_85%_45%)]" : "text-[hsl(145_55%_30%)]";
   return (
     <div className="absolute left-4 right-4 top-4 flex items-start gap-2">
-      <span className={`grid h-7 w-7 shrink-0 place-items-center rounded-full ${numBg} text-[12px] font-bold text-white shadow-sm`}>
+      <span className={`grid h-8 w-8 shrink-0 place-items-center rounded-full ${numBg} text-[13px] font-bold text-white shadow-sm`}>
         {index}
       </span>
       <div className="min-w-0">
-        <div className={`text-[14px] font-extrabold uppercase tracking-wider ${titleColor} leading-tight`}>
+        <div className={`text-[15.5px] font-extrabold uppercase tracking-wider ${titleColor} leading-tight`}>
           {title}
         </div>
-        <div className="mt-0.5 text-[11px] leading-tight text-muted-foreground">{subtitle}</div>
+        <div className="mt-0.5 text-[12px] leading-tight text-muted-foreground">{subtitle}</div>
       </div>
     </div>
   );
