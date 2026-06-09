@@ -475,127 +475,19 @@ const AIPlatformCard = ({ visible }: { visible: boolean }) => {
 
       <div className="relative z-10">
 
-        {/* 4-step journey */}
-        <div className="relative grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-4 lg:gap-8">
-          {/* Desktop connector overlay — full flow lines */}
-          <svg
-            aria-hidden
-            className="pointer-events-none absolute inset-0 hidden h-full w-full lg:block"
-            preserveAspectRatio="none"
-            viewBox="0 0 1000 600"
-            style={{ zIndex: 2 }}
-          >
-            <defs>
-              <filter id="conn-soft" x="-20%" y="-20%" width="140%" height="140%">
-                <feGaussianBlur stdDeviation="0.6" />
-              </filter>
-            </defs>
+        {/* ============ DESKTOP (≥1200px): fixed absolute infographic ============ */}
+        <div className="hidden lg:block">
+          <DesktopInfographic visible={visible} />
+        </div>
 
-            {/* ===== Step 1 → Step 2: 7 orange curves converging to a hub on left of brain ===== */}
-            {/* Hub point at ~(285, 300) */}
-            {[
-              { y: 90 },   // ERP
-              { y: 160 },  // POS
-              { y: 230 },  // Website
-              { y: 300 },  // Social
-              { y: 370 },  // Zalo
-              { y: 440 },  // Loyalty
-              { y: 510 },  // Campaign
-            ].map((row, i) => (
-              <path
-                key={`o-${i}`}
-                d={`M 235 ${row.y} C 260 ${row.y}, 270 300, 285 300`}
-                stroke="hsl(22 85% 55%)"
-                strokeWidth="1.3"
-                strokeDasharray="3 3"
-                fill="none"
-                vectorEffect="non-scaling-stroke"
-                className={`flow-dash flow-${(i % 6) + 1}`}
-                opacity="0.75"
-              />
-            ))}
-            {/* Hub dot orange */}
-            <circle cx="285" cy="300" r="4" fill="hsl(22 85% 55%)" />
-            {/* From hub into brain core */}
-            <path
-              d="M 289 300 L 360 300"
-              stroke="hsl(22 85% 55%)"
-              strokeWidth="1.3"
-              strokeDasharray="3 3"
-              fill="none"
-              vectorEffect="non-scaling-stroke"
-              className="flow-dash flow-2"
-              opacity="0.75"
-            />
-
-            {/* ===== Step 2 → Step 3: 4 green curves from brain to 4 business impact rows ===== */}
-            {/* Brain right edge at ~(490, 300) */}
-            <circle cx="490" cy="300" r="4" fill="hsl(145 55% 42%)" />
-            {[
-              { y: 145 }, // Business Reports
-              { y: 245 }, // Audience
-              { y: 345 }, // Automated
-              { y: 445 }, // Omnichannel
-            ].map((row, i) => (
-              <path
-                key={`g1-${i}`}
-                d={`M 494 300 C 560 300, 580 ${row.y}, 645 ${row.y}`}
-                stroke="hsl(145 55% 42%)"
-                strokeWidth="1.3"
-                strokeDasharray="3 3"
-                fill="none"
-                vectorEffect="non-scaling-stroke"
-                className={`flow-dash flow-${(i % 4) + 3}`}
-                opacity="0.75"
-              />
-            ))}
-
-            {/* ===== Step 3 → Step 4: 4 green curves from business impact rows to CX hub ===== */}
-            {/* CX hub at ~(750, 300) */}
-            {[
-              { y: 145 },
-              { y: 245 },
-              { y: 345 },
-              { y: 445 },
-            ].map((row, i) => (
-              <path
-                key={`g2-${i}`}
-                d={`M 720 ${row.y} C 735 ${row.y}, 740 300, 750 300`}
-                stroke="hsl(145 55% 42%)"
-                strokeWidth="1.3"
-                strokeDasharray="3 3"
-                fill="none"
-                vectorEffect="non-scaling-stroke"
-                className={`flow-dash flow-${(i % 4) + 5}`}
-                opacity="0.75"
-              />
-            ))}
-            <circle cx="750" cy="300" r="4" fill="hsl(145 55% 42%)" />
-            {/* From CX hub fanning to 4 popup rows */}
-            {[
-              { y: 130 },
-              { y: 230 },
-              { y: 330 },
-              { y: 430 },
-            ].map((row, i) => (
-              <path
-                key={`g3-${i}`}
-                d={`M 754 300 C 770 300, 780 ${row.y}, 805 ${row.y}`}
-                stroke="hsl(145 55% 42%)"
-                strokeWidth="1.3"
-                strokeDasharray="3 3"
-                fill="none"
-                vectorEffect="non-scaling-stroke"
-                className={`flow-dash flow-${(i % 4) + 7}`}
-                opacity="0.75"
-              />
-            ))}
-          </svg>
-
-          <StepDataSources visible={visible} />
-          <StepAIBrain visible={visible} />
-          <StepBusinessImpact visible={visible} />
-          <StepCustomerExperience visible={visible} />
+        {/* ============ TABLET / MOBILE: responsive stacked layout ============ */}
+        <div className="lg:hidden">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6">
+            <StepDataSources visible={visible} />
+            <StepAIBrain visible={visible} />
+            <StepBusinessImpact visible={visible} />
+            <StepCustomerExperience visible={visible} />
+          </div>
         </div>
       </div>
 
