@@ -406,7 +406,7 @@ const DesktopInfographicScaler = ({ children }: { children: React.ReactNode }) =
     const el = wrapRef.current;
     const ro = new ResizeObserver(() => {
       const w = el.clientWidth;
-      setScale(Math.min(1.35, w / 1600));
+      setScale(Math.min(1.35, w / 1790));
     });
     ro.observe(el);
     return () => ro.disconnect();
@@ -415,7 +415,7 @@ const DesktopInfographicScaler = ({ children }: { children: React.ReactNode }) =
     <div ref={wrapRef} className="relative w-full" style={{ height: 640 * scale }}>
       <div
         style={{
-          width: 1600,
+          width: 1790,
           height: 640,
           transform: `scale(${scale})`,
           transformOrigin: "top left",
@@ -423,8 +423,7 @@ const DesktopInfographicScaler = ({ children }: { children: React.ReactNode }) =
       >
         {children}
       </div>
-    </div>
-  );
+    </div>);
 };
 
 
@@ -456,41 +455,41 @@ const CX_CARDS = [
   { Icon: ShoppingBag, title: "Recommended for you", body: "Check this out!", accent: "green" as const },
 ];
 
-/* Orbit nodes around Customer Profile (Col2 inner coords; profile center 180,250, r=75) */
+/* Orbit nodes around Customer Profile (Col2 inner coords; profile center 200,250, r=78) */
 const ORBIT = [
-  { label: "Purchase\nHistory", x: 180, y: 130 },
-  { label: "Interests\n& Behavior", x: 290, y: 200 },
-  { label: "Channel\nPreference", x: 290, y: 320 },
-  { label: "Lifetime\nValue", x: 70,  y: 360 },
-  { label: "Loyalty\nTier", x: 70,  y: 200 },
+  { label: "Purchase\nHistory", x: 200, y: 130 },
+  { label: "Interests\n& Behavior", x: 320, y: 200 },
+  { label: "Channel\nPreference", x: 320, y: 320 },
+  { label: "Lifetime\nValue", x: 80,  y: 360 },
+  { label: "Loyalty\nTier", x: 80,  y: 200 },
 ];
 
 const DesktopInfographic = ({ visible }: { visible: boolean }) => {
-  // Balanced grid: 40 | 320 | 60 | 360 | 60 | 320 | 60 | 340 | 40 = 1600
+  // Balanced grid: 40 | 360 | 70 | 400 | 70 | 360 | 70 | 380 | 40 = 1790
   // Col tops at y=40, height 560.
 
   // Col1 — 7 Data Source cards. top:92 + i*66, height 54 → center = 92 + i*66 + 27
   const DS_CENTERS = DS_ROWS.map((_, i) => 40 + 92 + i * 66 + 27);
-  const DS_RIGHT_X = 40 + 320 - 14; // right edge of card minus inner padding
+  const DS_RIGHT_X = 40 + 360 - 14; // right edge of card minus inner padding
 
   // Col3 — 4 Business Impact cards. tops relative 108,220,332,444, height 92 → centers
   const BI_TOPS_REL = [108, 220, 332, 444];
   const BI_CENTERS = BI_TOPS_REL.map((t) => 40 + t + 46);
-  const BI_LEFT_X = 840 + 22;        // card left edge absolute
-  const BI_RIGHT_X = 840 + 22 + 276; // card right edge absolute
+  const BI_LEFT_X = 940 + 22;        // card left edge absolute
+  const BI_RIGHT_X = 940 + 22 + 316; // card right edge absolute
 
   // Col4 — 4 CX cards. tops relative: 108,196,284,372, height 66
   const CX_TOPS_REL = [108, 196, 284, 372];
   const CX_CENTERS = CX_TOPS_REL.map((t) => 40 + t + 33);
-  const CX_LEFT_X = 1220 + 22;
+  const CX_LEFT_X = 1370 + 22;
 
-  // Hubs (absolute page coords) — sit in the 60px gaps between columns
-  const HUB_ORANGE  = { x: 390, y: 320 };
-  const HUB_GREEN_A = { x: 810, y: 320 };
-  const HUB_GREEN_B = { x: 1190, y: 320 };
+  // Hubs (absolute page coords) — sit in the 70px gaps between columns
+  const HUB_ORANGE  = { x: 435, y: 320 };
+  const HUB_GREEN_A = { x: 905, y: 320 };
+  const HUB_GREEN_B = { x: 1335, y: 320 };
 
-  // Customer Profile center (absolute) — Col2 starts at left 420
-  const PROFILE_C = { x: 420 + 180, y: 40 + 250, r: 75 };
+  // Customer Profile center (absolute) — Col2 starts at left 470, inner cx=200
+  const PROFILE_C = { x: 470 + 200, y: 40 + 250, r: 78 };
   const PROFILE_LEFT = { x: PROFILE_C.x - PROFILE_C.r, y: PROFILE_C.y };
   const PROFILE_RIGHT = { x: PROFILE_C.x + PROFILE_C.r, y: PROFILE_C.y };
 
@@ -499,7 +498,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
       className="relative mx-auto"
       style={{
         width: "100%",
-        maxWidth: 1600,
+        maxWidth: 1790,
         height: 640,
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(10px)",
@@ -510,7 +509,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
       <svg
         aria-hidden
         className="pointer-events-none absolute inset-0"
-        viewBox="0 0 1600 640"
+        viewBox="0 0 1790 640"
         preserveAspectRatio="none"
         style={{ width: "100%", height: "100%", overflow: "visible", zIndex: 1 }}
       >
@@ -596,7 +595,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
       {/* ===== Column 1 — DATA SOURCES ===== */}
       <div
         className="absolute rounded-xl border border-[hsl(22_85%_85%)]/60 bg-gradient-to-b from-[hsl(22_100%_98%)] to-white shadow-[0_2px_10px_rgba(0,0,0,0.03)]"
-        style={{ left: 40, top: 40, width: 320, height: 560, zIndex: 2 }}
+        style={{ left: 40, top: 40, width: 360, height: 560, zIndex: 2 }}
       >
         <DesktopColumnHeader index={1} accent="orange" title="DATA SOURCES" subtitle="Collect data from every touchpoint" />
         {DS_ROWS.map((it, i) => (
@@ -619,14 +618,14 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
       {/* ===== Column 2 — AI CUSTOMER BRAIN ===== */}
       <div
         className="absolute rounded-xl border border-[hsl(145_55%_80%)]/50 bg-gradient-to-b from-[hsl(145_60%_98%)] to-white shadow-[0_2px_10px_rgba(0,0,0,0.03)]"
-        style={{ left: 420, top: 40, width: 360, height: 560, zIndex: 2 }}
+        style={{ left: 470, top: 40, width: 400, height: 560, zIndex: 2 }}
       >
         <DesktopColumnHeader index={2} accent="green" title="AI CUSTOMER BRAIN" subtitle="Unify, understand and predict" centered />
 
         {/* Flow lines + animated orbit connecting Customer Profile 360° with orbit nodes + pills */}
         <svg
           className="pointer-events-none absolute inset-0"
-          viewBox="0 0 360 560"
+          viewBox="0 0 400 560"
           preserveAspectRatio="none"
           style={{ width: "100%", height: "100%", overflow: "visible", zIndex: 1 }}
           aria-hidden
@@ -638,7 +637,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
             {/* Circular orbit path (used for both visible orbit + animateMotion particles) */}
             <path
               id="brain-orbit"
-              d="M 180,140 A 110,110 0 1 1 179.99,140 Z"
+              d="M 200,140 A 110,110 0 1 1 199.99,140 Z"
             />
           </defs>
 
@@ -655,7 +654,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
 
           {/* Static connector lines to orbit nodes */}
           {ORBIT.map((s) => {
-            const cx = 180, cy = 250, r = 78;
+            const cx = 200, cy = 250, r = 78;
             const dx = s.x - cx, dy = s.y - cy;
             const len = Math.hypot(dx, dy) || 1;
             const ux = dx / len, uy = dy / len;
@@ -691,7 +690,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
 
           {/* Vertical dotted signal line from profile down through pills */}
           <line
-            x1={180} y1={328} x2={180} y2={575}
+            x1={200} y1={328} x2={200} y2={575}
             stroke="#53C46B"
             strokeWidth={1.5}
             strokeDasharray="4 7"
@@ -700,13 +699,13 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
           />
           {/* Arrow head pointing at first pill */}
           <line
-            x1={180} y1={328} x2={180} y2={420}
+            x1={200} y1={328} x2={200} y2={420}
             stroke="transparent"
             markerEnd="url(#brain-arrow)"
           />
           {/* Downward signal particle */}
           <circle r={3} fill="#35B96B" className="brain-particle">
-            <animateMotion dur="3s" repeatCount="indefinite" path="M 180,328 L 180,575" />
+            <animateMotion dur="3s" repeatCount="indefinite" path="M 200,328 L 200,575" />
           </circle>
 
         </svg>
@@ -715,7 +714,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
         {/* Breathing glow behind Customer Profile 360° */}
         <span
           className="brain-glow"
-          style={{ left: 180, top: 250, width: 220, height: 220, zIndex: 1 }}
+          style={{ left: 200, top: 250, width: 230, height: 230, zIndex: 1 }}
           aria-hidden
         />
 
@@ -734,10 +733,10 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
           </div>
         ))}
 
-        {/* Customer Profile 360° — center 180,250, size 150 */}
+        {/* Customer Profile 360° — center 200,250, size 156 */}
         <div
           className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center rounded-full bg-white text-center shadow-[0_10px_28px_rgba(57,180,74,0.3)] ring-2 ring-[hsl(145_55%_45%)]/40"
-          style={{ left: 180, top: 250, width: 150, height: 150, zIndex: 3 }}
+          style={{ left: 200, top: 250, width: 156, height: 156, zIndex: 3 }}
         >
           <UserIcon className="h-8 w-8 text-[hsl(145_50%_35%)]" />
           <div className="mt-1 text-[16.5px] font-bold leading-tight text-[hsl(145_50%_22%)]">
@@ -746,7 +745,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
         </div>
 
         {/* Capability pills bottom */}
-        <div className="absolute left-1/2 -translate-x-1/2 flex flex-col gap-2" style={{ top: 430, width: 240, zIndex: 3 }}>
+        <div className="absolute left-1/2 -translate-x-1/2 flex flex-col gap-2" style={{ top: 430, width: 280, zIndex: 3 }}>
           {[
             { Icon: Database, label: "Data Collected" },
             { Icon: Users, label: "AI Segmentation" },
@@ -769,14 +768,14 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
       {/* ===== Column 3 — BUSINESS IMPACT ===== */}
       <div
         className="absolute rounded-xl border border-[hsl(145_55%_80%)]/50 bg-gradient-to-b from-[hsl(145_60%_98%)] to-white shadow-[0_2px_10px_rgba(0,0,0,0.03)]"
-        style={{ left: 840, top: 40, width: 320, height: 560, zIndex: 2 }}
+        style={{ left: 940, top: 40, width: 360, height: 560, zIndex: 2 }}
       >
         <DesktopColumnHeader index={3} accent="green" title="BUSINESS IMPACT" subtitle="Turn insights into measurable results" />
         {BI_CARDS.map((it, i) => (
           <div
             key={it.name}
             className="absolute flex items-start gap-3 rounded-lg border border-[hsl(145_45%_80%)]/50 bg-white px-3 py-2.5 shadow-[0_1px_3px_rgba(57,180,74,0.08)]"
-            style={{ left: 22, width: 276, height: 92, top: BI_TOPS_REL[i] }}
+            style={{ left: 22, width: 316, height: 92, top: BI_TOPS_REL[i] }}
           >
             <span className="grid h-9 w-9 shrink-0 place-items-center rounded-md bg-[hsl(145_60%_95%)] text-[hsl(145_50%_35%)]">
               <it.Icon className="h-[18px] w-[18px]" />
@@ -792,7 +791,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
       {/* ===== Column 4 — CUSTOMER EXPERIENCE ===== */}
       <div
         className="absolute rounded-xl border border-[hsl(145_55%_80%)]/50 bg-gradient-to-b from-[hsl(145_60%_98%)] to-white shadow-[0_2px_10px_rgba(0,0,0,0.03)]"
-        style={{ left: 1220, top: 40, width: 340, height: 560, zIndex: 2, overflow: "visible" }}
+        style={{ left: 1370, top: 40, width: 380, height: 560, zIndex: 2, overflow: "visible" }}
       >
         <DesktopColumnHeader index={4} accent="green" title="CUSTOMER EXPERIENCE" subtitle="Deliver personalized experiences that customers love" />
 
@@ -801,7 +800,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
           aria-hidden
           className="pointer-events-none absolute rounded-full"
           style={{
-            right: -10, bottom: 30, width: 260, height: 310,
+            right: -10, bottom: 30, width: 280, height: 330,
             background: "radial-gradient(circle, rgba(43,196,105,0.22), rgba(43,196,105,0.04), transparent)",
             zIndex: 0,
           }}
@@ -813,7 +812,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
           alt="Happy customer receiving personalized offers"
           loading="lazy"
           className="absolute object-contain drop-shadow-[0_18px_28px_rgba(0,0,0,0.18)]"
-          style={{ right: 0, bottom: 24, width: 200, maxWidth: "56%", height: "auto", zIndex: 2 }}
+          style={{ right: 0, bottom: 24, width: 220, maxWidth: "58%", height: "auto", zIndex: 2 }}
         />
 
         {/* Engagement cards (floating, left side) */}
@@ -825,7 +824,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
             <div
               key={p.title}
               className={`absolute flex items-center gap-2 rounded-xl border ${ring} bg-white px-2.5 py-2 shadow-[0_4px_10px_rgba(0,0,0,0.08)]`}
-              style={{ left: 22, width: 190, height: 66, top: CX_TOPS_REL[i], zIndex: 3 }}
+              style={{ left: 22, width: 220, height: 66, top: CX_TOPS_REL[i], zIndex: 3 }}
             >
               <span className={`grid h-9 w-9 shrink-0 place-items-center rounded-md ${iconBg}`}>
                 <p.Icon className="h-[18px] w-[18px]" />
@@ -841,7 +840,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
         {/* Rating card */}
         <div
           className="absolute rounded-2xl bg-white px-3 py-2 shadow-[0_8px_20px_-10px_rgba(0,0,0,0.25)] ring-1 ring-border"
-          style={{ left: 22, bottom: 28, width: 230, height: 72, zIndex: 3 }}
+          style={{ left: 22, bottom: 28, width: 250, height: 72, zIndex: 3 }}
         >
           <div className="flex items-center gap-1">
             {Array.from({ length: 5 }).map((_, i) => (
