@@ -865,7 +865,7 @@ const AIPlatformCard = ({ visible }: { visible: boolean }) => {
 
         {/* ============ TABLET / MOBILE: responsive stacked layout ============ */}
         <div className="lg:hidden">
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6">
+          <div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2 md:gap-5">
             <StepDataSources visible={visible} />
             <StepAIBrain visible={visible} />
             <StepBusinessImpact visible={visible} />
