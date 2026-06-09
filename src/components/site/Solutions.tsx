@@ -397,6 +397,355 @@ const ServiceTile = ({ s, index }: { s: Service; index: number }) => {
 
 /* ---------- AI Customer Engagement Platform card ---------- */
 
+/* ===================== DESKTOP ABSOLUTE INFOGRAPHIC ===================== */
+/* Fixed pixel layout — applies at lg (≥1024px) breakpoint via parent. */
+
+const DS_ROWS = [
+  { Icon: Database, name: "ERP", sub: "Business systems" },
+  { Icon: Store, name: "POS", sub: "In-store transactions" },
+  { Icon: Globe, name: "Website / App", sub: "Behavior & analytics" },
+  { Icon: ThumbsUp, name: "Social Channels", sub: "Facebook, Instagram, TikTok" },
+  { Icon: MessageCircle, name: "Zalo OA", sub: "Messages & interactions" },
+  { Icon: Award, name: "Loyalty Program", sub: "Points & Membership" },
+  { Icon: Megaphone, name: "Campaign / Ads", sub: "Ads & promotions" },
+];
+
+const BI_CARDS = [
+  { Icon: BarChart3, name: "Business Reports", sub: "Real-time dashboards and analytics" },
+  { Icon: Users, name: "Audience Segmentation", sub: "Smart segments for better targeting" },
+  { Icon: GitBranch, name: "Automated Journeys", sub: "Trigger personalized journeys at scale" },
+  { Icon: MessageSquare, name: "Omnichannel Engagement", sub: "Engage customers on their favorite channels" },
+];
+
+const CX_CARDS = [
+  { Icon: Tag, title: "Personalized Offer", body: "15% OFF for you!", accent: "orange" as const },
+  { Icon: CheckCircle2, title: "Order Confirmed", body: "#VG123456", accent: "green" as const },
+  { Icon: Gift, title: "Birthday Reward", body: "100 points earned!", accent: "orange" as const },
+  { Icon: ShoppingBag, title: "Recommended for you", body: "Check this out!", accent: "green" as const },
+];
+
+/* Orbit nodes around Customer Profile (Col2 inner coords; profile center 185,250, r=75) */
+const ORBIT = [
+  { label: "Purchase\nHistory", x: 185, y: 130 },
+  { label: "Interests\n& Behavior", x: 285, y: 200 },
+  { label: "Channel\nPreference", x: 285, y: 320 },
+  { label: "Lifetime\nValue", x: 85,  y: 360 },
+  { label: "Loyalty\nTier", x: 85,  y: 200 },
+];
+
+const DesktopInfographic = ({ visible }: { visible: boolean }) => {
+  // Card geometry (absolute Y centers used by connectors)
+  // Column tops at y=40. Each column 560 tall.
+
+  // Col1 — 7 Data Source cards. top:96 + i*68, height 56 → centers at 124 + i*68
+  const DS_CENTERS = DS_ROWS.map((_, i) => 40 + 96 + i * 68 + 28); // absolute Y
+  const DS_RIGHT_X = 40 + 330 - 14; // right edge of card minus inner padding
+
+  // Col3 — 4 Business Impact cards. tops 120,220,320,420 (relative), height 88 → centers
+  const BI_TOPS_REL = [120, 220, 320, 420];
+  const BI_CENTERS = BI_TOPS_REL.map((t) => 40 + t + 44);
+  const BI_LEFT_X = 820 + 30;        // card left edge absolute
+  const BI_RIGHT_X = 820 + 30 + 290; // card right edge absolute
+
+  // Col4 — 4 CX cards. tops relative to col4: 60,144,228,312, height 72
+  const CX_TOPS_REL = [60, 144, 228, 312];
+  const CX_CENTERS = CX_TOPS_REL.map((t) => 40 + t + 36);
+  const CX_LEFT_X = 1210 + 24;
+
+  // Hubs (absolute page coords)
+  const HUB_ORANGE = { x: 395, y: 315 };
+  const HUB_GREEN_A = { x: 790, y: 315 };
+  const HUB_GREEN_B = { x: 1195, y: 315 };
+
+  // Customer Profile center (absolute)
+  const PROFILE_C = { x: 410 + 185, y: 40 + 250, r: 75 };
+  const PROFILE_LEFT = { x: PROFILE_C.x - PROFILE_C.r, y: PROFILE_C.y };
+  const PROFILE_RIGHT = { x: PROFILE_C.x + PROFILE_C.r, y: PROFILE_C.y };
+
+  return (
+    <div
+      className="relative mx-auto"
+      style={{
+        width: "100%",
+        maxWidth: 1600,
+        height: 640,
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(10px)",
+        transition: "opacity 600ms ease-out 200ms, transform 600ms ease-out 200ms",
+      }}
+    >
+      {/* ===== SVG connector overlay ===== */}
+      <svg
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        viewBox="0 0 1600 640"
+        preserveAspectRatio="none"
+        style={{ width: "100%", height: "100%", zIndex: 1 }}
+      >
+        {/* Orange: Data Source cards → orange hub */}
+        {DS_CENTERS.map((cy, i) => (
+          <path
+            key={`ds-${i}`}
+            d={`M ${DS_RIGHT_X} ${cy} C ${DS_RIGHT_X + 30} ${cy}, ${HUB_ORANGE.x - 30} ${HUB_ORANGE.y}, ${HUB_ORANGE.x} ${HUB_ORANGE.y}`}
+            stroke="hsl(22 85% 55%)"
+            strokeWidth="2"
+            strokeDasharray="5 7"
+            fill="none"
+            className={`flow-dash flow-${(i % 6) + 1}`}
+            opacity="0.85"
+          />
+        ))}
+        {/* Orange hub → Customer Profile left */}
+        <path
+          d={`M ${HUB_ORANGE.x} ${HUB_ORANGE.y} L ${PROFILE_LEFT.x} ${PROFILE_LEFT.y}`}
+          stroke="hsl(22 85% 55%)"
+          strokeWidth="2"
+          strokeDasharray="5 7"
+          fill="none"
+          className="flow-dash flow-2"
+          opacity="0.85"
+        />
+        <circle cx={HUB_ORANGE.x} cy={HUB_ORANGE.y} r="5" fill="hsl(22 85% 55%)" />
+
+        {/* Green: Customer Profile right → green hub A */}
+        <path
+          d={`M ${PROFILE_RIGHT.x} ${PROFILE_RIGHT.y} C ${PROFILE_RIGHT.x + 50} ${PROFILE_RIGHT.y}, ${HUB_GREEN_A.x - 50} ${HUB_GREEN_A.y}, ${HUB_GREEN_A.x} ${HUB_GREEN_A.y}`}
+          stroke="hsl(145 55% 42%)"
+          strokeWidth="2"
+          strokeDasharray="5 7"
+          fill="none"
+          className="flow-dash flow-3"
+          opacity="0.85"
+        />
+        {/* Green hub A → 4 Business Impact cards (left edge) */}
+        {BI_CENTERS.map((cy, i) => (
+          <path
+            key={`bi-in-${i}`}
+            d={`M ${HUB_GREEN_A.x} ${HUB_GREEN_A.y} C ${HUB_GREEN_A.x + 30} ${HUB_GREEN_A.y}, ${BI_LEFT_X - 30} ${cy}, ${BI_LEFT_X} ${cy}`}
+            stroke="hsl(145 55% 42%)"
+            strokeWidth="2"
+            strokeDasharray="5 7"
+            fill="none"
+            className={`flow-dash flow-${(i % 4) + 4}`}
+            opacity="0.85"
+          />
+        ))}
+        <circle cx={HUB_GREEN_A.x} cy={HUB_GREEN_A.y} r="5" fill="hsl(145 55% 42%)" />
+
+        {/* Green: Business Impact right → green hub B */}
+        {BI_CENTERS.map((cy, i) => (
+          <path
+            key={`bi-out-${i}`}
+            d={`M ${BI_RIGHT_X} ${cy} C ${BI_RIGHT_X + 30} ${cy}, ${HUB_GREEN_B.x - 30} ${HUB_GREEN_B.y}, ${HUB_GREEN_B.x} ${HUB_GREEN_B.y}`}
+            stroke="hsl(145 55% 42%)"
+            strokeWidth="2"
+            strokeDasharray="5 7"
+            fill="none"
+            className={`flow-dash flow-${(i % 4) + 5}`}
+            opacity="0.85"
+          />
+        ))}
+        {/* Green hub B → 4 CX cards (left edge) */}
+        {CX_CENTERS.map((cy, i) => (
+          <path
+            key={`cx-in-${i}`}
+            d={`M ${HUB_GREEN_B.x} ${HUB_GREEN_B.y} C ${HUB_GREEN_B.x + 12} ${HUB_GREEN_B.y}, ${CX_LEFT_X - 18} ${cy}, ${CX_LEFT_X} ${cy}`}
+            stroke="hsl(145 55% 42%)"
+            strokeWidth="2"
+            strokeDasharray="5 7"
+            fill="none"
+            className={`flow-dash flow-${(i % 4) + 7}`}
+            opacity="0.85"
+          />
+        ))}
+        <circle cx={HUB_GREEN_B.x} cy={HUB_GREEN_B.y} r="5" fill="hsl(145 55% 42%)" />
+      </svg>
+
+      {/* ===== Column 1 — DATA SOURCES ===== */}
+      <div
+        className="absolute rounded-xl border border-[hsl(22_85%_85%)]/60 bg-gradient-to-b from-[hsl(22_100%_98%)] to-white shadow-[0_2px_10px_rgba(0,0,0,0.03)]"
+        style={{ left: 40, top: 40, width: 330, height: 560, zIndex: 2 }}
+      >
+        <DesktopColumnHeader index={1} accent="orange" title="DATA SOURCES" subtitle="Collect data from every touchpoint" />
+        {DS_ROWS.map((it, i) => (
+          <div
+            key={it.name}
+            className="absolute flex items-center gap-2 rounded-lg border border-[hsl(22_95%_85%)]/60 bg-white px-3 py-2 shadow-[0_1px_3px_rgba(255,138,114,0.08)]"
+            style={{ left: 14, right: 14, top: 96 + i * 68, height: 56 }}
+          >
+            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-md bg-[hsl(22_100%_96%)] text-[hsl(22_85%_50%)]">
+              <it.Icon className="h-4 w-4" />
+            </span>
+            <div className="min-w-0 flex-1">
+              <div className="text-[12px] font-semibold leading-tight text-foreground">{it.name}</div>
+              <div className="text-[10px] leading-tight text-muted-foreground">{it.sub}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* ===== Column 2 — AI CUSTOMER BRAIN ===== */}
+      <div
+        className="absolute rounded-xl border border-[hsl(145_55%_80%)]/50 bg-gradient-to-b from-[hsl(145_60%_98%)] to-white shadow-[0_2px_10px_rgba(0,0,0,0.03)]"
+        style={{ left: 410, top: 40, width: 370, height: 560, zIndex: 2 }}
+      >
+        <DesktopColumnHeader index={2} accent="green" title="AI CUSTOMER BRAIN" subtitle="Unify, understand and predict" />
+
+        {/* Orbit nodes */}
+        {ORBIT.map((s) => (
+          <div
+            key={s.label}
+            className="absolute -translate-x-1/2 -translate-y-1/2 whitespace-pre-line text-center text-[10.5px] font-semibold leading-[1.2] text-[hsl(145_45%_25%)]"
+            style={{ left: s.x, top: s.y }}
+          >
+            <span className="mx-auto mb-1 block h-2 w-2 rounded-full bg-[hsl(145_55%_45%)]" />
+            {s.label}
+          </div>
+        ))}
+
+        {/* Customer Profile 360° — center 185,250, size 150 */}
+        <div
+          className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center rounded-full bg-white text-center shadow-[0_10px_28px_rgba(57,180,74,0.3)] ring-2 ring-[hsl(145_55%_45%)]/40"
+          style={{ left: 185, top: 250, width: 150, height: 150 }}
+        >
+          <UserIcon className="h-7 w-7 text-[hsl(145_50%_35%)]" />
+          <div className="mt-1 text-[13px] font-bold leading-tight text-[hsl(145_50%_22%)]">
+            Customer<br />Profile 360°
+          </div>
+        </div>
+
+        {/* Capability pills bottom */}
+        <div className="absolute left-1/2 -translate-x-1/2 flex flex-col gap-2" style={{ top: 420, width: 220 }}>
+          {[
+            { Icon: Database, label: "Data Collected" },
+            { Icon: Users, label: "AI Segmentation" },
+            { Icon: BarChart3, label: "Predictive Insights" },
+            { Icon: GitBranch, label: "Journey Automation" },
+          ].map((p) => (
+            <div
+              key={p.label}
+              className="flex items-center gap-2 rounded-full border border-[hsl(145_45%_75%)]/50 bg-[hsl(145_60%_97%)] px-3 py-1.5"
+            >
+              <p.Icon className="h-3.5 w-3.5 shrink-0 text-[hsl(145_50%_35%)]" />
+              <span className="text-[11.5px] font-semibold text-[hsl(145_50%_25%)]">{p.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ===== Column 3 — BUSINESS IMPACT ===== */}
+      <div
+        className="absolute rounded-xl border border-[hsl(145_55%_80%)]/50 bg-gradient-to-b from-[hsl(145_60%_98%)] to-white shadow-[0_2px_10px_rgba(0,0,0,0.03)]"
+        style={{ left: 820, top: 40, width: 350, height: 560, zIndex: 2 }}
+      >
+        <DesktopColumnHeader index={3} accent="green" title="BUSINESS IMPACT" subtitle="Turn insights into measurable results" />
+        {BI_CARDS.map((it, i) => (
+          <div
+            key={it.name}
+            className="absolute flex items-start gap-3 rounded-lg border border-[hsl(145_45%_80%)]/50 bg-white px-3 py-2.5 shadow-[0_1px_3px_rgba(57,180,74,0.08)]"
+            style={{ left: 30, width: 290, height: 88, top: BI_TOPS_REL[i] }}
+          >
+            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-md bg-[hsl(145_60%_95%)] text-[hsl(145_50%_35%)]">
+              <it.Icon className="h-4.5 w-4.5" />
+            </span>
+            <div className="min-w-0 flex-1">
+              <div className="text-[13px] font-semibold leading-tight text-[hsl(145_50%_28%)]">{it.name}</div>
+              <div className="mt-1 text-[11px] leading-snug text-muted-foreground">{it.sub}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* ===== Column 4 — CUSTOMER EXPERIENCE ===== */}
+      <div
+        className="absolute rounded-xl border border-[hsl(145_55%_80%)]/50 bg-gradient-to-b from-[hsl(145_60%_98%)] to-white shadow-[0_2px_10px_rgba(0,0,0,0.03)] overflow-hidden"
+        style={{ left: 1210, top: 40, width: 350, height: 560, zIndex: 2 }}
+      >
+        <DesktopColumnHeader index={4} accent="green" title="CUSTOMER EXPERIENCE" subtitle="Deliver personalized experiences that customers love" />
+
+        {/* Soft green glow behind girl */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute rounded-full"
+          style={{
+            right: -40, bottom: -30, width: 320, height: 320,
+            background: "radial-gradient(circle at 55% 50%, hsl(145 65% 78% / 0.6) 0%, hsl(145 65% 70% / 0.3) 50%, transparent 75%)",
+            zIndex: 1,
+          }}
+        />
+
+        {/* Customer image */}
+        <img
+          src={shopperImg}
+          alt="Happy customer receiving personalized offers"
+          loading="lazy"
+          className="absolute object-contain drop-shadow-[0_18px_28px_rgba(0,0,0,0.15)]"
+          style={{ right: 20, bottom: 20, width: 210, height: "auto", zIndex: 2 }}
+        />
+
+        {/* Engagement cards */}
+        {CX_CARDS.map((p, i) => {
+          const isOrange = p.accent === "orange";
+          const iconBg = isOrange ? "bg-[hsl(35_100%_94%)] text-[hsl(35_100%_45%)]" : "bg-[hsl(145_60%_95%)] text-[hsl(145_50%_35%)]";
+          const ring = isOrange ? "border-[hsl(35_100%_85%)]/70" : "border-[hsl(145_55%_80%)]/60";
+          return (
+            <div
+              key={p.title}
+              className={`absolute flex items-center gap-2 rounded-xl border ${ring} bg-white px-2.5 py-2 shadow-[0_2px_6px_rgba(0,0,0,0.06)]`}
+              style={{ left: 24, width: 190, height: 72, top: CX_TOPS_REL[i], zIndex: 3 }}
+            >
+              <span className={`grid h-9 w-9 shrink-0 place-items-center rounded-md ${iconBg}`}>
+                <p.Icon className="h-4.5 w-4.5" />
+              </span>
+              <div className="min-w-0 flex-1">
+                <div className="text-[10.5px] font-semibold leading-tight text-muted-foreground line-clamp-2">{p.title}</div>
+                <div className="text-[12px] font-bold leading-tight text-foreground line-clamp-2">{p.body}</div>
+              </div>
+            </div>
+          );
+        })}
+
+        {/* Rating card */}
+        <div
+          className="absolute rounded-2xl bg-white px-3 py-2 shadow-[0_8px_20px_-10px_rgba(0,0,0,0.25)] ring-1 ring-border"
+          style={{ left: 24, bottom: 40, width: 250, height: 72, zIndex: 3 }}
+        >
+          <div className="flex items-center gap-1">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <Star key={i} className="h-4 w-4 fill-[#ff9b17] text-[#ff9b17]" />
+            ))}
+            <span className="ml-1 text-[13px] font-bold text-foreground">5.0</span>
+          </div>
+          <div className="mt-1 text-[11px] italic text-muted-foreground">"Thanks for your feedback!"</div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const DesktopColumnHeader = ({
+  index, accent, title, subtitle,
+}: { index: number; accent: "orange" | "green"; title: string; subtitle: string }) => {
+  const isOrange = accent === "orange";
+  const numBg = isOrange ? "bg-[hsl(22_85%_55%)]" : "bg-[hsl(145_55%_42%)]";
+  const titleColor = isOrange ? "text-[hsl(22_85%_45%)]" : "text-[hsl(145_55%_30%)]";
+  return (
+    <div className="absolute left-4 right-4 top-4 flex items-start gap-2">
+      <span className={`grid h-7 w-7 shrink-0 place-items-center rounded-full ${numBg} text-[12px] font-bold text-white shadow-sm`}>
+        {index}
+      </span>
+      <div className="min-w-0">
+        <div className={`text-[14px] font-extrabold uppercase tracking-wider ${titleColor} leading-tight`}>
+          {title}
+        </div>
+        <div className="mt-0.5 text-[11px] leading-tight text-muted-foreground">{subtitle}</div>
+      </div>
+    </div>
+  );
+};
+
+
+
 const AIPlatformCard = ({ visible }: { visible: boolean }) => {
   const ambientCanvasRef = useRef<HTMLCanvasElement | null>(null);
 
