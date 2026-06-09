@@ -674,7 +674,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
           <div
             key={it.name}
             className="absolute flex items-start gap-3 rounded-lg border border-[hsl(145_45%_80%)]/50 bg-white px-3 py-2.5 shadow-[0_1px_3px_rgba(57,180,74,0.08)]"
-            style={{ left: 30, width: 290, height: 88, top: BI_TOPS_REL[i] }}
+            style={{ left: 30, width: 300, height: 88, top: BI_TOPS_REL[i] }}
           >
             <span className="grid h-9 w-9 shrink-0 place-items-center rounded-md bg-[hsl(145_60%_95%)] text-[hsl(145_50%_35%)]">
               <it.Icon className="h-[18px] w-[18px]" />
