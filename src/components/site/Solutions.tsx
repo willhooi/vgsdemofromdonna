@@ -1115,10 +1115,10 @@ const StepAIBrain = ({ visible }: { visible: boolean }) => (
       {BRAIN_PILLS.map((p) => (
         <div
           key={p.label}
-          className="flex items-center gap-2 rounded-full border border-[hsl(145_45%_75%)]/50 bg-[hsl(145_60%_97%)] px-3 py-1"
+          className="flex items-center justify-center gap-2 rounded-full border border-[hsl(145_45%_75%)]/50 bg-[hsl(145_60%_97%)] px-3 py-1"
         >
           <p.Icon className="h-3 w-3 shrink-0 text-[hsl(145_50%_35%)]" />
-          <span className="text-[10.5px] font-semibold text-[hsl(145_50%_25%)]">{p.label}</span>
+          <span className="text-[10.5px] font-semibold leading-none text-[hsl(145_50%_25%)]">{p.label}</span>
         </div>
       ))}
     </div>
