@@ -618,14 +618,14 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
       {/* ===== Column 2 — AI CUSTOMER BRAIN ===== */}
       <div
         className="absolute rounded-xl border border-[hsl(145_55%_80%)]/50 bg-gradient-to-b from-[hsl(145_60%_98%)] to-white shadow-[0_2px_10px_rgba(0,0,0,0.03)]"
-        style={{ left: 420, top: 40, width: 360, height: 560, zIndex: 2 }}
+        style={{ left: 470, top: 40, width: 400, height: 560, zIndex: 2 }}
       >
         <DesktopColumnHeader index={2} accent="green" title="AI CUSTOMER BRAIN" subtitle="Unify, understand and predict" centered />
 
         {/* Flow lines + animated orbit connecting Customer Profile 360° with orbit nodes + pills */}
         <svg
           className="pointer-events-none absolute inset-0"
-          viewBox="0 0 360 560"
+          viewBox="0 0 400 560"
           preserveAspectRatio="none"
           style={{ width: "100%", height: "100%", overflow: "visible", zIndex: 1 }}
           aria-hidden
@@ -637,7 +637,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
             {/* Circular orbit path (used for both visible orbit + animateMotion particles) */}
             <path
               id="brain-orbit"
-              d="M 180,140 A 110,110 0 1 1 179.99,140 Z"
+              d="M 200,140 A 110,110 0 1 1 199.99,140 Z"
             />
           </defs>
 
