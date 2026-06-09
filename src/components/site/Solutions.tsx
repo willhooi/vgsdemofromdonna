@@ -159,58 +159,66 @@ const OutcomeStage = ({ visible, className = "" }: { visible: boolean; className
       className="relative mx-auto aspect-square w-full max-w-[360px] object-contain drop-shadow-[0_25px_40px_rgba(0,0,0,0.12)]"
     />
 
-    {/* Floating pop-ups */}
-    <Popup
-      className="absolute left-[-8%] top-[10%] scale-[0.85]"
-      delay={300}
-      visible={visible}
+    {/* Floating pop-ups (Customer Experience outcomes) */}
+    <Popup className="absolute left-[-10%] top-[6%] scale-[0.82]" delay={250} visible={visible} accent="accent">
+      <div className="flex items-start gap-1.5">
+        <Tag className="mt-0.5 h-3 w-3 text-[hsl(35_100%_50%)]" />
+        <div>
+          <div className="text-[9px] font-semibold text-muted-foreground">Personalized Offer</div>
+          <div className="text-[11px] font-bold text-foreground">15% OFF for you!</div>
+        </div>
+      </div>
+    </Popup>
+
+    <Popup className="absolute left-[-10%] top-[30%] scale-[0.82]" delay={400} visible={visible} accent="primary">
+      <div className="flex items-start gap-1.5">
+        <CheckCircle2 className="mt-0.5 h-3 w-3 text-[hsl(var(--primary))]" />
+        <div>
+          <div className="text-[9px] font-semibold text-muted-foreground">Order Confirmed</div>
+          <div className="text-[11px] font-bold text-foreground">#VG123456</div>
+        </div>
+      </div>
+    </Popup>
+
+    <Popup className="absolute left-[-10%] top-[54%] scale-[0.82]" delay={550} visible={visible} accent="accent">
+      <div className="flex items-start gap-1.5">
+        <Gift className="mt-0.5 h-3 w-3 text-[hsl(35_100%_50%)]" />
+        <div>
+          <div className="text-[9px] font-semibold text-muted-foreground">Birthday Reward</div>
+          <div className="text-[11px] font-bold text-foreground">100 points earned!</div>
+        </div>
+      </div>
+    </Popup>
+
+    <Popup className="absolute left-[-10%] top-[78%] scale-[0.82]" delay={700} visible={visible} accent="primary">
+      <div className="flex items-start gap-1.5">
+        <ShoppingBag className="mt-0.5 h-3 w-3 text-[hsl(var(--primary))]" />
+        <div>
+          <div className="text-[9px] font-semibold text-muted-foreground">Recommended for you</div>
+          <div className="text-[11px] font-bold text-foreground">Check this out!</div>
+        </div>
+      </div>
+    </Popup>
+
+    {/* Review bubble bottom-right */}
+    <div
+      className="absolute bottom-[2%] right-[-4%] scale-[0.82] rounded-2xl bg-white/95 px-3 py-2 shadow-[0_12px_30px_-14px_rgba(0,0,0,0.25)] ring-1 ring-border backdrop-blur"
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(8px)",
+        transition: "opacity 600ms ease-out 850ms, transform 600ms ease-out 850ms",
+      }}
     >
       <div className="flex items-center gap-1.5">
         <div className="flex">
           {Array.from({ length: 5 }).map((_, i) => (
-            <Star
-              key={i}
-              className="h-3 w-3 fill-[#ff9b17] text-[#ff9b17]"
-            />
+            <Star key={i} className="h-3 w-3 fill-[#ff9b17] text-[#ff9b17]" />
           ))}
         </div>
         <span className="text-[10px] font-semibold text-foreground">5.0</span>
       </div>
-      <p className="mt-0.5 text-[10px] text-muted-foreground">
-        "Thanks for your feedback!"
-      </p>
-    </Popup>
-
-    <Popup
-      className="absolute left-[-10%] top-[44%] scale-[0.85]"
-      delay={500}
-      visible={visible}
-      accent="primary"
-    >
-      <div className="text-[9px] font-bold uppercase tracking-wider text-[hsl(var(--primary-deep))]">
-        ORDER STATUS
-      </div>
-      <div className="mt-0.5 flex items-center gap-1.5">
-        <PackageCheck className="h-3 w-3 text-[hsl(var(--primary))]" />
-        <span className="text-[11px] font-semibold text-foreground">
-          Confirmed
-        </span>
-      </div>
-    </Popup>
-
-    <Popup
-      className="absolute left-[-8%] top-[74%] scale-[0.85]"
-      delay={700}
-      visible={visible}
-      accent="accent"
-    >
-      <div className="text-[9px] font-bold uppercase tracking-wider text-[hsl(35_100%_45%)] text-center">
-        your otp code
-      </div>
-      <div className="mt-0.5 font-mono text-[13px] font-extrabold tracking-[0.18em] text-foreground text-center">
-        371 235
-      </div>
-    </Popup>
+      <p className="mt-0.5 text-[10px] text-muted-foreground">"Thanks for your feedback!"</p>
+    </div>
 
   </div>
 );
