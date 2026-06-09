@@ -857,21 +857,21 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
 };
 
 const DesktopColumnHeader = ({
-  index, accent, title, subtitle,
-}: { index: number; accent: "orange" | "green"; title: string; subtitle: string }) => {
+  index, accent, title, subtitle, centered,
+}: { index: number; accent: "orange" | "green"; title: string; subtitle: string; centered?: boolean }) => {
   const isOrange = accent === "orange";
   const numBg = isOrange ? "bg-[hsl(22_85%_55%)]" : "bg-[hsl(145_55%_42%)]";
   const titleColor = isOrange ? "text-[hsl(22_85%_45%)]" : "text-[hsl(145_55%_30%)]";
   return (
-    <div className="absolute left-4 right-4 top-4 flex items-start gap-2">
-      <span className={`grid h-8 w-8 shrink-0 place-items-center rounded-full ${numBg} text-[13px] font-bold text-white shadow-sm`}>
+    <div className={`absolute left-4 right-4 top-4 flex items-start gap-2 ${centered ? "justify-center" : ""}`}>
+      <span className={`grid h-8 w-8 shrink-0 place-items-center rounded-full ${numBg} text-[15px] font-bold text-white shadow-sm`}>
         {index}
       </span>
-      <div className="min-w-0">
-        <div className={`text-[15.5px] font-extrabold uppercase tracking-wider ${titleColor} leading-tight`}>
+      <div className={`min-w-0 ${centered ? "text-center" : ""}`}>
+        <div className={`text-[17.5px] font-extrabold uppercase tracking-wider ${titleColor} leading-tight`}>
           {title}
         </div>
-        <div className="mt-0.5 text-[12px] leading-tight text-muted-foreground">{subtitle}</div>
+        <div className="mt-0.5 text-[14px] leading-tight text-muted-foreground">{subtitle}</div>
       </div>
     </div>
   );
