@@ -706,9 +706,9 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
           />
           {/* Downward signal particle */}
           <circle r={3} fill="#35B96B" className="brain-particle">
-            <animateMotion dur="3s" repeatCount="indefinite" path="M 0,0 L 0,247" />
+            <animateMotion dur="3s" repeatCount="indefinite" path="M 180,328 L 180,575" />
           </circle>
-          <circle cx={180} cy={328} r={0} fill="transparent" />
+
         </svg>
 
 
