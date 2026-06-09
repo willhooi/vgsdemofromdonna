@@ -16,6 +16,20 @@ import {
   PhoneCall,
   LayoutGrid,
   Layers,
+  Database,
+  Store,
+  Globe,
+  ThumbsUp,
+  Award,
+  Megaphone,
+  User as UserIcon,
+  BarChart3,
+  Users,
+  GitBranch,
+  Brain,
+  Tag,
+  CheckCircle2,
+  ShoppingBag,
 } from "lucide-react";
 import bytetechLogo from "@/assets/brand/bytetech.svg";
 import cnvLogo from "@/assets/brand/cnv.png";
