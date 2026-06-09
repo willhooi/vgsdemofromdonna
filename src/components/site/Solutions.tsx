@@ -596,14 +596,14 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
       {/* ===== Column 1 — DATA SOURCES ===== */}
       <div
         className="absolute rounded-xl border border-[hsl(22_85%_85%)]/60 bg-gradient-to-b from-[hsl(22_100%_98%)] to-white shadow-[0_2px_10px_rgba(0,0,0,0.03)]"
-        style={{ left: 40, top: 40, width: 330, height: 560, zIndex: 2 }}
+        style={{ left: 40, top: 40, width: 320, height: 560, zIndex: 2 }}
       >
         <DesktopColumnHeader index={1} accent="orange" title="DATA SOURCES" subtitle="Collect data from every touchpoint" />
         {DS_ROWS.map((it, i) => (
           <div
             key={it.name}
             className="absolute flex items-center gap-2 rounded-lg border border-[hsl(22_95%_85%)]/60 bg-white px-3 py-2 shadow-[0_1px_3px_rgba(255,138,114,0.08)]"
-            style={{ left: 14, right: 14, top: 96 + i * 68, height: 56 }}
+            style={{ left: 14, right: 14, top: 92 + i * 66, height: 54 }}
           >
             <span className="grid h-8 w-8 shrink-0 place-items-center rounded-md bg-[hsl(22_100%_96%)] text-[hsl(22_85%_50%)]">
               <it.Icon className="h-4 w-4" />
