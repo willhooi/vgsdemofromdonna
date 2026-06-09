@@ -690,7 +690,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
 
           {/* Vertical dotted signal line from profile down through pills */}
           <line
-            x1={180} y1={328} x2={180} y2={575}
+            x1={200} y1={328} x2={200} y2={575}
             stroke="#53C46B"
             strokeWidth={1.5}
             strokeDasharray="4 7"
@@ -699,13 +699,13 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
           />
           {/* Arrow head pointing at first pill */}
           <line
-            x1={180} y1={328} x2={180} y2={420}
+            x1={200} y1={328} x2={200} y2={420}
             stroke="transparent"
             markerEnd="url(#brain-arrow)"
           />
           {/* Downward signal particle */}
           <circle r={3} fill="#35B96B" className="brain-particle">
-            <animateMotion dur="3s" repeatCount="indefinite" path="M 180,328 L 180,575" />
+            <animateMotion dur="3s" repeatCount="indefinite" path="M 200,328 L 200,575" />
           </circle>
 
         </svg>
