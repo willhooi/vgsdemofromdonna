@@ -160,7 +160,7 @@ const OutcomeStage = ({ visible, className = "" }: { visible: boolean; className
     />
 
     {/* Floating pop-ups (Customer Experience outcomes) */}
-    <Popup className="absolute left-[-10%] top-[6%] scale-[0.82]" delay={250} visible={visible} accent="accent">
+    <Popup className="absolute left-[-14%] top-[4%] scale-[0.7] origin-top-left" delay={250} visible={visible} accent="accent">
       <div className="flex items-start gap-1.5">
         <Tag className="mt-0.5 h-3 w-3 text-[hsl(35_100%_50%)]" />
         <div>
@@ -170,7 +170,7 @@ const OutcomeStage = ({ visible, className = "" }: { visible: boolean; className
       </div>
     </Popup>
 
-    <Popup className="absolute left-[-10%] top-[30%] scale-[0.82]" delay={400} visible={visible} accent="primary">
+    <Popup className="absolute left-[-14%] top-[26%] scale-[0.7] origin-top-left" delay={400} visible={visible} accent="primary">
       <div className="flex items-start gap-1.5">
         <CheckCircle2 className="mt-0.5 h-3 w-3 text-[hsl(var(--primary))]" />
         <div>
@@ -180,7 +180,7 @@ const OutcomeStage = ({ visible, className = "" }: { visible: boolean; className
       </div>
     </Popup>
 
-    <Popup className="absolute left-[-10%] top-[54%] scale-[0.82]" delay={550} visible={visible} accent="accent">
+    <Popup className="absolute left-[-14%] top-[48%] scale-[0.7] origin-top-left" delay={550} visible={visible} accent="accent">
       <div className="flex items-start gap-1.5">
         <Gift className="mt-0.5 h-3 w-3 text-[hsl(35_100%_50%)]" />
         <div>
@@ -190,7 +190,7 @@ const OutcomeStage = ({ visible, className = "" }: { visible: boolean; className
       </div>
     </Popup>
 
-    <Popup className="absolute left-[-10%] top-[78%] scale-[0.82]" delay={700} visible={visible} accent="primary">
+    <Popup className="absolute left-[-14%] top-[70%] scale-[0.7] origin-top-left" delay={700} visible={visible} accent="primary">
       <div className="flex items-start gap-1.5">
         <ShoppingBag className="mt-0.5 h-3 w-3 text-[hsl(var(--primary))]" />
         <div>
@@ -200,12 +200,12 @@ const OutcomeStage = ({ visible, className = "" }: { visible: boolean; className
       </div>
     </Popup>
 
-    {/* Review bubble bottom-right */}
+    {/* Review bubble bottom */}
     <div
-      className="absolute bottom-[2%] right-[-4%] scale-[0.82] rounded-2xl bg-white/95 px-3 py-2 shadow-[0_12px_30px_-14px_rgba(0,0,0,0.25)] ring-1 ring-border backdrop-blur"
+      className="absolute -bottom-2 left-1/2 -translate-x-1/2 scale-[0.78] origin-bottom rounded-2xl bg-white/95 px-3 py-1.5 shadow-[0_12px_30px_-14px_rgba(0,0,0,0.25)] ring-1 ring-border backdrop-blur whitespace-nowrap"
       style={{
         opacity: visible ? 1 : 0,
-        transform: visible ? "translateY(0)" : "translateY(8px)",
+        transform: visible ? "translateX(-50%) scale(0.78) translateY(0)" : "translateX(-50%) scale(0.78) translateY(8px)",
         transition: "opacity 600ms ease-out 850ms, transform 600ms ease-out 850ms",
       }}
     >
@@ -216,8 +216,8 @@ const OutcomeStage = ({ visible, className = "" }: { visible: boolean; className
           ))}
         </div>
         <span className="text-[10px] font-semibold text-foreground">5.0</span>
+        <span className="text-[9.5px] text-muted-foreground">"Thanks!"</span>
       </div>
-      <p className="mt-0.5 text-[10px] text-muted-foreground">"Thanks for your feedback!"</p>
     </div>
 
   </div>
