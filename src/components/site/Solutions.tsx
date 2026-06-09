@@ -805,52 +805,48 @@ const StepCustomerExperience = ({ visible }: { visible: boolean }) => (
     visible={visible}
     delay={360}
   >
-    <div className="flex flex-col gap-2">
-      {/* Top area: popups left, girl right */}
-      <div className="grid grid-cols-[1fr_1.1fr] gap-2 items-start">
-        {/* Left: 4 popups stacked */}
-        <div className="flex flex-col gap-1.5">
-          {CX_POPUPS.map((p, i) => {
-            const iconBg = "bg-[hsl(145_60%_95%)] text-[hsl(145_50%_35%)]";
-            return (
-              <div
-                key={p.title}
-                className="step-anim flex items-center gap-2 rounded-full bg-white px-2 py-1.5 shadow-[0_4px_14px_-6px_rgba(0,0,0,0.15)] ring-1 ring-black/5"
-                style={{ animation: `step-row-float 4s ease-in-out ${i * 0.3 + 0.15}s infinite` }}
-              >
-                <span className={`grid h-7 w-7 shrink-0 place-items-center rounded-full ${iconBg}`}>
-                  <p.Icon className="h-3.5 w-3.5" />
-                </span>
-                <div className="min-w-0 flex-1">
-                  <div className="text-[9px] font-medium leading-tight text-[hsl(145_45%_38%)]">{p.title}</div>
-                  <div className="text-[10.5px] font-bold leading-tight text-foreground truncate">{p.body}</div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Right: girl image with green glow */}
-        <div className="relative">
+    <div className="relative min-h-[420px]">
+      {/* Girl image — large, anchored right, with green glow */}
+      <div className="absolute inset-0 flex items-end justify-end">
+        <div className="relative h-full w-[78%]">
           <div
             aria-hidden
-            className="pointer-events-none absolute right-0 top-1/2 -z-0 h-[90%] w-[95%] -translate-y-1/2 rounded-full"
+            className="pointer-events-none absolute right-0 top-1/2 h-[95%] w-[95%] -translate-y-1/2 rounded-full"
             style={{
               background:
-                "radial-gradient(circle at 60% 50%, hsl(145 65% 75% / 0.75) 0%, hsl(145 65% 70% / 0.35) 55%, transparent 78%)",
+                "radial-gradient(circle at 55% 50%, hsl(145 65% 75% / 0.8) 0%, hsl(145 65% 70% / 0.35) 55%, transparent 78%)",
             }}
           />
           <img
             src={shopperImg}
             alt="Happy customer receiving personalized offers"
             loading="lazy"
-            className="relative ml-auto block h-auto w-full max-w-[240px] object-contain drop-shadow-[0_14px_26px_rgba(0,0,0,0.14)]"
+            className="relative ml-auto block h-full w-full object-contain object-bottom drop-shadow-[0_14px_26px_rgba(0,0,0,0.14)]"
           />
         </div>
       </div>
 
-      {/* Bottom: review badge full width */}
-      <div className="self-start rounded-full bg-white px-4 py-2 shadow-[0_8px_22px_-12px_rgba(0,0,0,0.22)] ring-1 ring-black/5">
+      {/* Popups overlapping the girl on the left */}
+      <div className="relative z-10 flex flex-col gap-2 w-[58%]">
+        {CX_POPUPS.map((p, i) => (
+          <div
+            key={p.title}
+            className="step-anim flex items-center gap-2 rounded-full bg-white px-2.5 py-1.5 shadow-[0_6px_16px_-6px_rgba(0,0,0,0.18)] ring-1 ring-black/5"
+            style={{ animation: `step-row-float 4s ease-in-out ${i * 0.3 + 0.15}s infinite` }}
+          >
+            <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[hsl(145_60%_95%)] text-[hsl(145_50%_35%)]">
+              <p.Icon className="h-4 w-4" />
+            </span>
+            <div className="min-w-0 flex-1">
+              <div className="text-[9.5px] font-medium leading-tight text-[hsl(145_45%_38%)]">{p.title}</div>
+              <div className="text-[11px] font-bold leading-tight text-foreground truncate">{p.body}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Review badge — bottom-left, overlaps girl slightly */}
+      <div className="absolute bottom-0 left-0 z-10 rounded-full bg-white px-4 py-2 shadow-[0_8px_22px_-12px_rgba(0,0,0,0.22)] ring-1 ring-black/5">
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-0.5">
             {Array.from({ length: 5 }).map((_, i) => (
