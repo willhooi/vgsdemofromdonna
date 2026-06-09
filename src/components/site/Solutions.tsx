@@ -466,31 +466,30 @@ const ORBIT = [
 ];
 
 const DesktopInfographic = ({ visible }: { visible: boolean }) => {
-  // Card geometry (absolute Y centers used by connectors)
-  // Column tops at y=40. Each column 560 tall.
+  // Container: 1800 x 640. Wider gutters between columns so flow lines breathe.
 
-  // Col1 — 7 Data Source cards. top:96 + i*68, height 56 → centers at 124 + i*68
-  const DS_CENTERS = DS_ROWS.map((_, i) => 40 + 96 + i * 68 + 28); // absolute Y
-  const DS_RIGHT_X = 40 + 330 - 14; // right edge of card minus inner padding
+  // Col1 — 7 Data Source cards. left:40 w:340 → right edge 380.
+  const DS_CENTERS = DS_ROWS.map((_, i) => 40 + 96 + i * 68 + 28);
+  const DS_RIGHT_X = 40 + 340 - 14; // 366
 
-  // Col3 — 4 Business Impact cards. tops 120,220,320,420 (relative), height 88 → centers
+  // Col3 — 4 Business Impact cards. left:960 w:360. inner left padding 30, card width 300
   const BI_TOPS_REL = [120, 220, 320, 420];
   const BI_CENTERS = BI_TOPS_REL.map((t) => 40 + t + 44);
-  const BI_LEFT_X = 820 + 30;        // card left edge absolute
-  const BI_RIGHT_X = 820 + 30 + 290; // card right edge absolute
+  const BI_LEFT_X = 960 + 30;
+  const BI_RIGHT_X = 960 + 30 + 300;
 
-  // Col4 — 4 CX cards. tops relative to col4: 120,205,290,375, height 68
+  // Col4 — 4 CX cards. left:1420 w:340
   const CX_TOPS_REL = [120, 205, 290, 375];
   const CX_CENTERS = CX_TOPS_REL.map((t) => 40 + t + 34);
-  const CX_LEFT_X = 1210 + 32;
+  const CX_LEFT_X = 1420 + 24;
 
-  // Hubs (absolute page coords)
-  const HUB_ORANGE = { x: 395, y: 315 };
-  const HUB_GREEN_A = { x: 790, y: 315 };
-  const HUB_GREEN_B = { x: 1195, y: 315 };
+  // Hubs (absolute coords) — centered in each gutter
+  const HUB_ORANGE = { x: 430, y: 320 };
+  const HUB_GREEN_A = { x: 910, y: 320 };
+  const HUB_GREEN_B = { x: 1380, y: 320 };
 
-  // Customer Profile center (absolute)
-  const PROFILE_C = { x: 410 + 185, y: 40 + 250, r: 75 };
+  // Customer Profile center (absolute) — col2 starts at 480
+  const PROFILE_C = { x: 480 + 185, y: 40 + 250, r: 75 };
   const PROFILE_LEFT = { x: PROFILE_C.x - PROFILE_C.r, y: PROFILE_C.y };
   const PROFILE_RIGHT = { x: PROFILE_C.x + PROFILE_C.r, y: PROFILE_C.y };
 
@@ -499,18 +498,18 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
       className="relative mx-auto"
       style={{
         width: "100%",
-        maxWidth: 1600,
+        maxWidth: 1800,
         height: 640,
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(10px)",
         transition: "opacity 600ms ease-out 200ms, transform 600ms ease-out 200ms",
       }}
     >
-      {/* ===== SVG connector overlay (full section, on top of background, beneath cards) ===== */}
+      {/* ===== SVG connector overlay ===== */}
       <svg
         aria-hidden
         className="pointer-events-none absolute inset-0"
-        viewBox="0 0 1600 640"
+        viewBox="0 0 1800 640"
         preserveAspectRatio="none"
         style={{ width: "100%", height: "100%", overflow: "visible", zIndex: 1 }}
       >
