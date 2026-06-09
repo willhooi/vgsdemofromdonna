@@ -678,8 +678,8 @@ const StepCustomerExperience = ({ visible }: { visible: boolean }) => (
     visible={visible}
     delay={360}
   >
-    <div className="relative flex w-full items-center justify-center pt-2 pb-1">
-      <OutcomeStage visible={visible} className="max-w-[260px] sm:max-w-[280px]" />
+    <div className="relative flex w-full items-start justify-center pt-1 pb-1 min-h-[280px]">
+      <OutcomeStage visible={visible} className="max-w-[220px] sm:max-w-[240px]" />
     </div>
   </StepCard>
 );
