@@ -397,6 +397,38 @@ const ServiceTile = ({ s, index }: { s: Service; index: number }) => {
 
 /* ---------- AI Customer Engagement Platform card ---------- */
 
+/* Scales the fixed 1600x640 infographic down to fit narrower viewports without overflow */
+const DesktopInfographicScaler = ({ children }: { children: React.ReactNode }) => {
+  const wrapRef = useRef<HTMLDivElement | null>(null);
+  const [scale, setScale] = useState(1);
+  useEffect(() => {
+    if (!wrapRef.current) return;
+    const el = wrapRef.current;
+    const ro = new ResizeObserver(() => {
+      const w = el.clientWidth;
+      setScale(Math.min(1, w / 1600));
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+  return (
+    <div ref={wrapRef} className="relative w-full" style={{ height: 640 * scale }}>
+      <div
+        style={{
+          width: 1600,
+          height: 640,
+          transform: `scale(${scale})`,
+          transformOrigin: "top left",
+        }}
+      >
+        {children}
+      </div>
+    </div>
+  );
+};
+
+
+
 /* ===================== DESKTOP ABSOLUTE INFOGRAPHIC ===================== */
 /* Fixed pixel layout — applies at lg (≥1024px) breakpoint via parent. */
 
