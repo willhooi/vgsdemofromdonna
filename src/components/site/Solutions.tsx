@@ -16,6 +16,20 @@ import {
   PhoneCall,
   LayoutGrid,
   Layers,
+  Database,
+  Store,
+  Globe,
+  ThumbsUp,
+  Award,
+  Megaphone,
+  User as UserIcon,
+  BarChart3,
+  Users,
+  GitBranch,
+  Brain,
+  Tag,
+  CheckCircle2,
+  ShoppingBag,
 } from "lucide-react";
 import bytetechLogo from "@/assets/brand/bytetech.svg";
 import cnvLogo from "@/assets/brand/cnv.png";
@@ -145,58 +159,66 @@ const OutcomeStage = ({ visible, className = "" }: { visible: boolean; className
       className="relative mx-auto aspect-square w-full max-w-[360px] object-contain drop-shadow-[0_25px_40px_rgba(0,0,0,0.12)]"
     />
 
-    {/* Floating pop-ups */}
-    <Popup
-      className="absolute left-[-8%] top-[10%] scale-[0.85]"
-      delay={300}
-      visible={visible}
+    {/* Floating pop-ups (Customer Experience outcomes) */}
+    <Popup className="absolute left-[-14%] top-[4%] scale-[0.7] origin-top-left" delay={250} visible={visible} accent="accent">
+      <div className="flex items-start gap-1.5">
+        <Tag className="mt-0.5 h-3 w-3 text-[hsl(35_100%_50%)]" />
+        <div>
+          <div className="text-[9px] font-semibold text-muted-foreground">Personalized Offer</div>
+          <div className="text-[11px] font-bold text-foreground">15% OFF for you!</div>
+        </div>
+      </div>
+    </Popup>
+
+    <Popup className="absolute left-[-14%] top-[26%] scale-[0.7] origin-top-left" delay={400} visible={visible} accent="primary">
+      <div className="flex items-start gap-1.5">
+        <CheckCircle2 className="mt-0.5 h-3 w-3 text-[hsl(var(--primary))]" />
+        <div>
+          <div className="text-[9px] font-semibold text-muted-foreground">Order Confirmed</div>
+          <div className="text-[11px] font-bold text-foreground">#VG123456</div>
+        </div>
+      </div>
+    </Popup>
+
+    <Popup className="absolute left-[-14%] top-[48%] scale-[0.7] origin-top-left" delay={550} visible={visible} accent="accent">
+      <div className="flex items-start gap-1.5">
+        <Gift className="mt-0.5 h-3 w-3 text-[hsl(35_100%_50%)]" />
+        <div>
+          <div className="text-[9px] font-semibold text-muted-foreground">Birthday Reward</div>
+          <div className="text-[11px] font-bold text-foreground">100 points earned!</div>
+        </div>
+      </div>
+    </Popup>
+
+    <Popup className="absolute left-[-14%] top-[70%] scale-[0.7] origin-top-left" delay={700} visible={visible} accent="primary">
+      <div className="flex items-start gap-1.5">
+        <ShoppingBag className="mt-0.5 h-3 w-3 text-[hsl(var(--primary))]" />
+        <div>
+          <div className="text-[9px] font-semibold text-muted-foreground">Recommended for you</div>
+          <div className="text-[11px] font-bold text-foreground">Check this out!</div>
+        </div>
+      </div>
+    </Popup>
+
+    {/* Review bubble bottom */}
+    <div
+      className="absolute -bottom-2 left-1/2 -translate-x-1/2 scale-[0.78] origin-bottom rounded-2xl bg-white/95 px-3 py-1.5 shadow-[0_12px_30px_-14px_rgba(0,0,0,0.25)] ring-1 ring-border backdrop-blur whitespace-nowrap"
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateX(-50%) scale(0.78) translateY(0)" : "translateX(-50%) scale(0.78) translateY(8px)",
+        transition: "opacity 600ms ease-out 850ms, transform 600ms ease-out 850ms",
+      }}
     >
       <div className="flex items-center gap-1.5">
         <div className="flex">
           {Array.from({ length: 5 }).map((_, i) => (
-            <Star
-              key={i}
-              className="h-3 w-3 fill-[#ff9b17] text-[#ff9b17]"
-            />
+            <Star key={i} className="h-3 w-3 fill-[#ff9b17] text-[#ff9b17]" />
           ))}
         </div>
         <span className="text-[10px] font-semibold text-foreground">5.0</span>
+        <span className="text-[9.5px] text-muted-foreground">"Thanks!"</span>
       </div>
-      <p className="mt-0.5 text-[10px] text-muted-foreground">
-        "Thanks for your feedback!"
-      </p>
-    </Popup>
-
-    <Popup
-      className="absolute left-[-10%] top-[44%] scale-[0.85]"
-      delay={500}
-      visible={visible}
-      accent="primary"
-    >
-      <div className="text-[9px] font-bold uppercase tracking-wider text-[hsl(var(--primary-deep))]">
-        ORDER STATUS
-      </div>
-      <div className="mt-0.5 flex items-center gap-1.5">
-        <PackageCheck className="h-3 w-3 text-[hsl(var(--primary))]" />
-        <span className="text-[11px] font-semibold text-foreground">
-          Confirmed
-        </span>
-      </div>
-    </Popup>
-
-    <Popup
-      className="absolute left-[-8%] top-[74%] scale-[0.85]"
-      delay={700}
-      visible={visible}
-      accent="accent"
-    >
-      <div className="text-[9px] font-bold uppercase tracking-wider text-[hsl(35_100%_45%)] text-center">
-        your otp code
-      </div>
-      <div className="mt-0.5 font-mono text-[13px] font-extrabold tracking-[0.18em] text-foreground text-center">
-        371 235
-      </div>
-    </Popup>
+    </div>
 
   </div>
 );
@@ -395,14 +417,14 @@ const AIPlatformCard = ({ visible }: { visible: boolean }) => {
       const rect = canvas.getBoundingClientRect();
       W = canvas.width = rect.width;
       H = canvas.height = rect.height;
-      particles = Array.from({ length: 42 }, () => ({
+      particles = Array.from({ length: 36 }, () => ({
         cx: Math.random() * W,
         cy: Math.random() * H,
         r: 14 + Math.random() * 38,
         a: Math.random() * Math.PI * 2,
         spd: (0.12 + Math.random() * 0.18) * (Math.random() > 0.5 ? 1 : -1),
-        size: 1.0 + Math.random() * 1.8,
-        baseOp: 0.18 + Math.random() * 0.28,
+        size: 1.0 + Math.random() * 1.6,
+        baseOp: 0.14 + Math.random() * 0.24,
         opFreq: 0.01 + Math.random() * 0.012,
         opPhase: Math.random() * Math.PI * 2,
         t: Math.random() * 300,
@@ -437,7 +459,7 @@ const AIPlatformCard = ({ visible }: { visible: boolean }) => {
 
   return (
     <div
-      className="relative w-full h-full overflow-hidden rounded-2xl border border-[hsl(var(--primary))]/15 bg-white px-3 py-4 sm:px-4 lg:px-5 flex flex-col"
+      className="relative w-full overflow-hidden rounded-2xl border border-[hsl(var(--primary))]/15 bg-white px-3 py-5 sm:px-5 sm:py-6 lg:px-6 lg:py-7"
       style={{
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(10px)",
@@ -450,353 +472,274 @@ const AIPlatformCard = ({ visible }: { visible: boolean }) => {
         className="pointer-events-none absolute inset-0 h-full w-full"
         style={{ zIndex: 1 }}
       />
-      <div className="relative z-10 flex h-full flex-col gap-3">
-        {/* Label */}
-        <div className="text-center uppercase tracking-[0.18em] text-[hsl(var(--primary-deep))] text-lg sm:text-xl md:text-2xl font-extrabold">
-          AI Customer Engagement Platform
+
+      <div className="relative z-10">
+        {/* Header */}
+        <div className="text-center mb-5 sm:mb-6">
+          <div className="uppercase tracking-[0.18em] text-[hsl(var(--primary-deep))] text-lg sm:text-xl md:text-2xl font-extrabold">
+            AI Customer Engagement Platform
+          </div>
+          <p className="mt-1.5 text-xs sm:text-sm text-muted-foreground">
+            From raw signals to delightful customer moments — in one continuous flow
+          </p>
         </div>
 
-        {/* Flow row: CDPWave (left) + OutcomeStage (right) */}
-        <div className="relative flex w-full flex-1 flex-col items-stretch gap-4 md:flex-row md:gap-3 lg:gap-4">
-          <div className="relative w-full flex-1 min-h-[380px] md:min-h-[420px]">
-            <CDPWave />
-          </div>
-          <div className="relative flex w-full items-center justify-center md:w-[36%] md:max-w-[340px] md:flex-shrink-0">
-            <OutcomeStage visible={visible} className="md:max-w-[320px]" />
-          </div>
+        {/* 4-step journey */}
+        <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-3.5">
+          <StepDataSources visible={visible} />
+          <StepAIBrain visible={visible} />
+          <StepBusinessImpact visible={visible} />
+          <StepCustomerExperience visible={visible} />
         </div>
       </div>
+
+      <style>{`
+        @keyframes step-pulse-orange { 0%,100% { opacity: 0.3; } 50% { opacity: 0.9; } }
+        @keyframes step-pulse-green { 0%,100% { opacity: 0.3; } 50% { opacity: 0.9; } }
+        @keyframes brain-orb-glow { 0%,100% { transform: scale(1); opacity: 0.55; } 50% { transform: scale(1.08); opacity: 1; } }
+        @keyframes brain-ring-cw { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes step-row-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
+        @media (prefers-reduced-motion: reduce) {
+          .step-anim { animation: none !important; }
+        }
+      `}</style>
     </div>
   );
 };
 
+/* ---------- Step 1: Data Sources ---------- */
 
-/* ---------- Animated AI Customer Engagement flow ---------- */
+const DATA_SOURCES = [
+  { Icon: Database, name: "ERP", sub: "Business systems" },
+  { Icon: Store, name: "POS", sub: "In-store transactions" },
+  { Icon: Globe, name: "Website / App", sub: "Behavior & analytics" },
+  { Icon: ThumbsUp, name: "Social Channels", sub: "Facebook, Instagram, TikTok" },
+  { Icon: MessageCircle, name: "Zalo OA", sub: "Messages & interactions" },
+  { Icon: Award, name: "Loyalty Program", sub: "Points & Membership" },
+  { Icon: Megaphone, name: "Campaign / Ads", sub: "Ads & promotions" },
+];
 
-const CDPWave = () => {
-  type InKey = "erp" | "pos" | "web" | "loyalty" | "social" | "mkt";
-  type OutKey = "bizReport" | "campReport" | "retarget" | "zaloEng";
+const StepDataSources = ({ visible }: { visible: boolean }) => (
+  <StepCard
+    index={1}
+    accent="orange"
+    title="DATA SOURCES"
+    subtitle="Collect data from every touchpoint"
+    visible={visible}
+    delay={0}
+  >
+    <div className="flex flex-col gap-1.5">
+      {DATA_SOURCES.map((it, i) => (
+        <div
+          key={it.name}
+          className="step-anim flex items-start gap-2 rounded-lg border border-[hsl(22_95%_85%)]/60 bg-white px-2.5 py-1.5 shadow-[0_1px_3px_rgba(255,138,114,0.08)]"
+          style={{ animation: `step-row-float 4s ease-in-out ${i * 0.3}s infinite` }}
+        >
+          <span className="grid h-6 w-6 shrink-0 place-items-center rounded-md bg-[hsl(22_100%_96%)] text-[hsl(22_85%_50%)]">
+            <it.Icon className="h-3.5 w-3.5" />
+          </span>
+          <div className="min-w-0 flex-1">
+            <div className="text-[11px] font-semibold leading-tight text-foreground truncate">{it.name}</div>
+            <div className="text-[9.5px] leading-tight text-muted-foreground truncate">{it.sub}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </StepCard>
+);
 
-  const InIcon = ({ name }: { name: InKey }) => (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ff8a72" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      {name === "erp" && (<><rect x="3" y="4" width="18" height="16" rx="2" /><path d="M3 9h18M8 14h3M8 17h6" /></>)}
-      {name === "pos" && (<><rect x="3" y="4" width="18" height="12" rx="1.5" /><path d="M8 20h8M12 16v4" /></>)}
-      {name === "web" && (<><circle cx="12" cy="12" r="9" /><ellipse cx="12" cy="12" rx="9" ry="4" /><path d="M12 3v18" /></>)}
-      {name === "loyalty" && (<><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z" /></>)}
-      {name === "social" && (<><circle cx="6" cy="6" r="2.5" /><circle cx="18" cy="6" r="2.5" /><circle cx="12" cy="18" r="2.5" /><path d="M8 7l8 0M7 8l4 8M17 8l-4 8" /></>)}
-      {name === "mkt" && (<><path d="M3 11l16-7v16L3 13z" /><path d="M9 13v5" /></>)}
-    </svg>
-  );
+/* ---------- Step 2: AI Customer Brain ---------- */
 
-  const OutIcon = ({ name }: { name: OutKey }) => (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#39B44A" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      {name === "bizReport" && (<><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M8 17V11M12 17V7M16 17v-4" /></>)}
-      {name === "campReport" && (<><path d="M3 12l4-7h10l4 7-9 9z" /><path d="M9 12h6" /></>)}
-      {name === "retarget" && (<><circle cx="12" cy="12" r="8" /><circle cx="12" cy="12" r="4" /><circle cx="12" cy="12" r="1" /></>)}
-      {name === "zaloEng" && (<><path d="M4 5h16v11H8l-4 4z" /><path d="M9 10h6M9 13h4" /></>)}
-    </svg>
-  );
+const BRAIN_SATELLITES = [
+  { label: "Purchase\nHistory", angle: -90 },
+  { label: "Interests\n& Behavior", angle: -22 },
+  { label: "Channel\nPreference", angle: 45 },
+  { label: "Lifetime\nValue", angle: 135 },
+  { label: "Loyalty\nTier", angle: -158 },
+];
 
-  const inputs: { key: InKey; label: string }[] = [
-    { key: "erp", label: "ERP" },
-    { key: "loyalty", label: "Loyalty App" },
-    { key: "pos", label: "POS" },
-    { key: "web", label: "Ecom Web" },
-    { key: "social", label: "Social" },
-    { key: "mkt", label: "MKT Campaign" },
-  ];
+const BRAIN_PILLS = [
+  { Icon: Database, label: "Data Collected" },
+  { Icon: Users, label: "AI Segmentation" },
+  { Icon: BarChart3, label: "Predictive Insights" },
+  { Icon: GitBranch, label: "Journey Automation" },
+];
 
-  const outputs: { key: OutKey; label: string }[] = [
-    { key: "bizReport", label: "Business Report" },
-    { key: "campReport", label: "Campaign Report" },
-    { key: "retarget", label: "Retargeting" },
-    { key: "zaloEng", label: "Zalo Engagement" },
-  ];
+const StepAIBrain = ({ visible }: { visible: boolean }) => (
+  <StepCard
+    index={2}
+    accent="green"
+    title="AI CUSTOMER BRAIN"
+    subtitle="Unify, understand and predict"
+    visible={visible}
+    delay={120}
+  >
+    {/* Orbit core */}
+    <div className="relative mx-auto aspect-square w-full max-w-[200px]">
+      {/* Glow */}
+      <div
+        className="absolute left-1/2 top-1/2 h-[55%] w-[55%] -translate-x-1/2 -translate-y-1/2 rounded-full"
+        style={{
+          background: "radial-gradient(circle, hsl(145 70% 70% / 0.45), transparent 70%)",
+          animation: "brain-orb-glow 3.5s ease-in-out infinite",
+        }}
+      />
+      {/* Dashed ring */}
+      <div
+        className="step-anim absolute inset-[10%] rounded-full border border-dashed border-[hsl(145_45%_55%)]/40"
+        style={{ animation: "brain-ring-cw 30s linear infinite" }}
+      />
+      {/* Satellites */}
+      {BRAIN_SATELLITES.map((s) => {
+        const rad = (s.angle * Math.PI) / 180;
+        const r = 46; // % of half
+        const x = 50 + r * Math.cos(rad);
+        const y = 50 + r * Math.sin(rad);
+        return (
+          <div
+            key={s.label}
+            className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full border border-[hsl(145_50%_70%)]/50 bg-white px-1.5 py-0.5 text-center text-[8.5px] font-semibold leading-[1.1] text-[hsl(145_50%_28%)] shadow-sm whitespace-pre-line"
+            style={{ left: `${x}%`, top: `${y}%` }}
+          >
+            {s.label}
+          </div>
+        );
+      })}
+      {/* Center core */}
+      <div className="absolute left-1/2 top-1/2 flex aspect-square w-[42%] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full bg-white text-center shadow-[0_6px_18px_rgba(57,180,74,0.25)] ring-2 ring-[hsl(145_55%_45%)]/30">
+        <UserIcon className="h-4 w-4 text-[hsl(145_50%_35%)]" />
+        <div className="mt-0.5 text-[9px] font-bold leading-tight text-[hsl(145_50%_22%)]">
+          Customer<br />Profile 360°
+        </div>
+      </div>
+    </div>
 
+    {/* Capability pills */}
+    <div className="mt-3 flex flex-col gap-1.5">
+      {BRAIN_PILLS.map((p) => (
+        <div
+          key={p.label}
+          className="flex items-center gap-2 rounded-full border border-[hsl(145_45%_75%)]/50 bg-[hsl(145_60%_97%)] px-3 py-1"
+        >
+          <p.Icon className="h-3 w-3 shrink-0 text-[hsl(145_50%_35%)]" />
+          <span className="text-[10.5px] font-semibold text-[hsl(145_50%_25%)]">{p.label}</span>
+        </div>
+      ))}
+    </div>
+  </StepCard>
+);
+
+/* ---------- Step 3: Business Impact ---------- */
+
+const BUSINESS_IMPACT = [
+  { Icon: BarChart3, name: "Business Reports", sub: "Real-time dashboards and analytics" },
+  { Icon: Users, name: "Audience Segmentation", sub: "Smart segments for better targeting" },
+  { Icon: GitBranch, name: "Automated Journeys", sub: "Trigger personalized journeys at scale" },
+  { Icon: MessageSquare, name: "Omnichannel Engagement", sub: "Engage customers on their favorite channels" },
+];
+
+const StepBusinessImpact = ({ visible }: { visible: boolean }) => (
+  <StepCard
+    index={3}
+    accent="green"
+    title="BUSINESS IMPACT"
+    subtitle="Turn insights into measurable results"
+    visible={visible}
+    delay={240}
+  >
+    <div className="flex flex-col gap-2">
+      {BUSINESS_IMPACT.map((it, i) => (
+        <div
+          key={it.name}
+          className="step-anim flex items-start gap-2 rounded-lg border border-[hsl(145_45%_80%)]/50 bg-white px-2.5 py-2 shadow-[0_1px_3px_rgba(57,180,74,0.08)]"
+          style={{ animation: `step-row-float 4s ease-in-out ${i * 0.35}s infinite` }}
+        >
+          <span className="grid h-7 w-7 shrink-0 place-items-center rounded-md bg-[hsl(145_60%_95%)] text-[hsl(145_50%_35%)]">
+            <it.Icon className="h-4 w-4" />
+          </span>
+          <div className="min-w-0 flex-1">
+            <div className="text-[11.5px] font-semibold leading-tight text-[hsl(145_50%_28%)]">{it.name}</div>
+            <div className="mt-0.5 text-[9.5px] leading-snug text-muted-foreground">{it.sub}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </StepCard>
+);
+
+/* ---------- Step 4: Customer Experience ---------- */
+
+const StepCustomerExperience = ({ visible }: { visible: boolean }) => (
+  <StepCard
+    index={4}
+    accent="green"
+    title="CUSTOMER EXPERIENCE"
+    subtitle="Deliver personalized experiences that customers love"
+    visible={visible}
+    delay={360}
+  >
+    <div className="relative flex w-full items-start justify-center pt-1 pb-1 min-h-[280px]">
+      <OutcomeStage visible={visible} className="max-w-[220px] sm:max-w-[240px]" />
+    </div>
+  </StepCard>
+);
+
+/* ---------- Reusable Step Card ---------- */
+
+const StepCard = ({
+  index,
+  accent,
+  title,
+  subtitle,
+  visible,
+  delay,
+  children,
+}: {
+  index: number;
+  accent: "orange" | "green";
+  title: string;
+  subtitle: string;
+  visible: boolean;
+  delay: number;
+  children: React.ReactNode;
+}) => {
+  const isOrange = accent === "orange";
+  const numBg = isOrange ? "bg-[hsl(22_85%_55%)]" : "bg-[hsl(145_55%_42%)]";
+  const titleColor = isOrange ? "text-[hsl(22_85%_45%)]" : "text-[hsl(145_55%_30%)]";
+  const borderColor = isOrange
+    ? "border-[hsl(22_85%_85%)]/60"
+    : "border-[hsl(145_55%_80%)]/50";
+  const bgTint = isOrange
+    ? "bg-gradient-to-b from-[hsl(22_100%_98%)] to-white"
+    : "bg-gradient-to-b from-[hsl(145_60%_98%)] to-white";
 
   return (
     <div
-      role="img"
-      aria-label="AI Customer Engagement Platform flow: input data sources to AI hub to output channels"
-      className="cdp-stage absolute inset-0 flex items-stretch justify-center gap-1 sm:gap-2 lg:gap-3 overflow-hidden rounded-xl px-1 py-3 sm:px-2"
+      className={`relative rounded-xl border ${borderColor} ${bgTint} p-3 sm:p-3.5 shadow-[0_2px_10px_rgba(0,0,0,0.03)]`}
       style={{
-        background:
-          "radial-gradient(ellipse at 50% 50%, rgba(57,180,74,0.05), transparent 65%), #ffffff",
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(12px)",
+        transition: `opacity 600ms ease-out ${delay}ms, transform 600ms ease-out ${delay}ms`,
       }}
     >
-      <style>{`
-        @keyframes cdp-src-float { 0%,100% { transform: perspective(700px) rotateY(10deg) translateY(0); } 50% { transform: perspective(700px) rotateY(10deg) translateY(-4px); } }
-        @keyframes cdp-out-float { 0%,100% { transform: perspective(700px) rotateY(-10deg) translateY(0); } 50% { transform: perspective(700px) rotateY(-10deg) translateY(-4px); } }
-        @keyframes cdp-dot-blink { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
-        @keyframes cdp-badge-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
-
-        @keyframes cdp-ring-cw { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        @keyframes cdp-ring-ccw { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
-        @keyframes cdp-node-orbit { from { transform: rotate(0deg) translateX(48px) rotate(0deg); } to { transform: rotate(360deg) translateX(48px) rotate(-360deg); } }
-        @keyframes cdp-orb-glow { 0%,100% { transform: scale(1); opacity: 0.3; } 50% { transform: scale(1.06); opacity: 1; } }
-        @keyframes cdp-orb-bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
-
-        .cdp-src, .cdp-out {
-          position: relative;
-          flex-shrink: 0;
-          align-self: stretch;
-          display: flex;
-          flex-direction: column;
-          padding: 10px 7px;
-          border-radius: 14px;
-          background: #ffffff;
-        }
-        .cdp-src {
-          width: 130px;
-          border: 1px solid rgba(255,138,114,0.30);
-          box-shadow: 0 2px 16px rgba(255,138,114,0.12);
-          transform: perspective(900px) rotateY(4deg);
-          transform-origin: right center;
-          animation: cdp-src-float 6s ease-in-out infinite;
-        }
-        .cdp-out {
-          width: 150px;
-          border: 1px solid rgba(57,180,74,0.25);
-          box-shadow: 0 2px 16px rgba(57,180,74,0.12);
-          transform: perspective(900px) rotateY(-4deg);
-          transform-origin: left center;
-          animation: cdp-out-float 6s ease-in-out infinite;
-        }
-        @keyframes cdp-src-float { 0%,100% { transform: perspective(900px) rotateY(4deg) translateY(0); } 50% { transform: perspective(900px) rotateY(4deg) translateY(-4px); } }
-        @keyframes cdp-out-float { 0%,100% { transform: perspective(900px) rotateY(-4deg) translateY(0); } 50% { transform: perspective(900px) rotateY(-4deg) translateY(-4px); } }
-
-        .cdp-src::before, .cdp-out::before {
-          content: ""; position: absolute; inset: 0;
-          background-image:
-            linear-gradient(rgba(57,180,74,0.05) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(57,180,74,0.05) 1px, transparent 1px);
-          background-size: 18px 18px;
-          pointer-events: none;
-          border-radius: inherit;
-        }
-        .cdp-src-head, .cdp-out-head {
-          display: flex; align-items: center; gap: 5px;
-          font-size: 10px; font-weight: 700;
-          letter-spacing: 0.18em;
-          margin-bottom: 10px; position: relative; z-index: 1;
-        }
-        .cdp-src-head { color: #ff7a5e; justify-content: flex-start; }
-        .cdp-out-head { color: #2a8038; justify-content: flex-end; }
-        .cdp-src-head .dot, .cdp-out-head .dot {
-          width: 5px; height: 5px; border-radius: 50%;
-          animation: cdp-dot-blink 2s ease-in-out infinite;
-        }
-        .cdp-src-head .dot { background: #ff8a72; }
-        .cdp-out-head .dot { background: #39B44A; }
-        .cdp-src-grid, .cdp-out-grid {
-          position: relative; z-index: 1;
-          display: flex; flex-direction: column; gap: 8px;
-          flex: 1;
-          justify-content: space-between;
-        }
-        .cdp-badge, .cdp-badge-out {
-          display: flex; align-items: center; gap: 6px;
-          padding: 7px 10px; border-radius: 999px;
-          animation: cdp-badge-float 4s ease-in-out infinite;
-          justify-content: center;
-          min-width: 0;
-        }
-        .cdp-badge { background: #fff3ef; border: 1px solid rgba(255,138,114,0.30); }
-        .cdp-badge-out { background: #f0faf2; border: 1px solid rgba(57,180,74,0.25); }
-        .cdp-badge svg, .cdp-badge-out svg { flex-shrink: 0; }
-        .cdp-badge-label {
-          font-size: 10px; font-weight: 600;
-          line-height: 1.2;
-          flex: 1 1 auto;
-          min-width: 0;
-          text-align: center;
-        }
-
-        .cdp-badge .cdp-badge-label { color: #b14b32; }
-        .cdp-badge-out .cdp-badge-label { color: #2a8038; }
-
-        .cdp-connector { display: flex; align-items: stretch; flex-shrink: 0; align-self: stretch; min-width: 0; }
-        .cdp-connector svg { height: 100%; width: 40px; }
-
-
-        .cdp-orb-wrap2 {
-          position: relative; flex-shrink: 0;
-          align-self: stretch;
-          width: clamp(120px, 14vw, 160px);
-          display: flex;
-          animation: cdp-orb-bob 4s ease-in-out infinite;
-        }
-
-        .cdp-hub-card {
-          position: relative;
-          width: 100%;
-          border-radius: 22px;
-          background: linear-gradient(180deg, #6dc97a 0%, #4eb866 100%);
-          border: 1px solid rgba(57,180,74,0.45);
-          box-shadow: 0 10px 30px rgba(57,180,74,0.25), inset 0 1px 0 rgba(255,255,255,0.3);
-          padding: 14px 12px;
-          display: flex; flex-direction: column; align-items: stretch;
-          justify-content: space-between;
-          gap: 10px;
-          overflow: hidden;
-        }
-        .cdp-hub-pill {
-          background: #ffffff;
-          border-radius: 999px;
-          padding: 7px 10px;
-          text-align: center;
-          font-size: 11px; font-weight: 700;
-          color: #1f5e2b;
-          box-shadow: 0 2px 6px rgba(0,0,0,0.06);
-          white-space: nowrap;
-        }
-        .cdp-hub-circle {
-          align-self: center;
-          width: 76%; aspect-ratio: 1/1;
-          background: #ffffff;
-          border-radius: 50%;
-          display: flex; align-items: center; justify-content: center;
-          text-align: center;
-          font-size: 11px; font-weight: 800;
-          color: #1f5e2b;
-          line-height: 1.2;
-          box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-          padding: 6px;
-        }
-        .cdp-hub-arrow {
-          align-self: center;
-          color: rgba(255,255,255,0.85);
-          font-size: 10px;
-          line-height: 1;
-        }
-
-
-        @media (max-width: 1279px) {
-          .cdp-src { width: 120px; padding: 10px 6px; transform: none; animation: none; }
-          .cdp-out { width: 140px; padding: 10px 6px; transform: none; animation: none; }
-          .cdp-badge, .cdp-badge-out { padding: 5px 7px; gap: 4px; }
-          .cdp-badge-label { font-size: 9.5px; white-space: normal; line-height: 1.15; text-align: left; }
-          .cdp-connector svg { width: 28px; }
-          .cdp-orb-wrap2 { width: 120px; }
-          .cdp-hub-card { padding: 10px 7px; gap: 7px; border-radius: 16px; }
-          .cdp-hub-pill { font-size: 9.5px; padding: 5px 6px; font-weight: 700; }
-          .cdp-hub-circle { font-size: 9.5px; width: 88%; }
-          .cdp-hub-arrow { font-size: 9px; }
-          .cdp-particle-extra { display: none; }
-        }
-
-
-
-        @media (max-width: 767px) {
-          .cdp-stage { flex-direction: column; gap: 10px; padding: 8px; align-items: center; }
-          .cdp-src, .cdp-out { width: 100%; max-width: 320px; transform: none; animation: none; transform-origin: center; align-self: center; }
-          .cdp-src-grid, .cdp-out-grid { display: grid; grid-template-columns: 1fr 1fr; }
-          .cdp-connector { display: none; }
-          .cdp-particle, .cdp-particle-extra { display: none; }
-          .cdp-orb-wrap2 { width: 100%; max-width: 320px; align-self: center; }
-        }
-
-
-        @media (prefers-reduced-motion: reduce) {
-          .cdp-src, .cdp-out, .cdp-orb-wrap2,
-          .cdp-badge, .cdp-badge-out, .cdp-particle, .cdp-particle-extra {
-            animation: none !important;
-          }
-        }
-
-      `}</style>
-
-      {/* ============ INPUT PANEL ============ */}
-      <div className="cdp-src">
-        <div className="cdp-src-head">
-          <span className="dot" />
-          INPUT
-        </div>
-        <div className="cdp-src-grid">
-          {inputs.map((b, i) => (
-            <div key={b.key} className="cdp-badge" style={{ animationDelay: `${i * 0.5}s` }}>
-              <InIcon name={b.key} />
-              <span className="cdp-badge-label">{b.label}</span>
-            </div>
-          ))}
+      <div className="mb-3 flex items-center gap-2">
+        <span
+          className={`grid h-6 w-6 shrink-0 place-items-center rounded-full ${numBg} text-[11px] font-bold text-white shadow-sm`}
+        >
+          {index}
+        </span>
+        <div className="min-w-0">
+          <div className={`text-[12px] sm:text-[13px] font-extrabold uppercase tracking-wider ${titleColor} leading-tight`}>
+            {title}
+          </div>
+          <div className="text-[10px] leading-tight text-muted-foreground mt-0.5">{subtitle}</div>
         </div>
       </div>
-
-      {/* ============ INPUT → HUB CONNECTOR ============ */}
-      <div className="cdp-connector">
-        <svg viewBox="0 0 64 400" preserveAspectRatio="none" style={{ overflow: "visible" }} fill="none" aria-hidden>
-          <defs>
-            <path id="cdpIn1" d="M 0,30  C 28,30  40,200 64,200" />
-            <path id="cdpIn2" d="M 0,100 C 28,100 40,200 64,200" />
-            <path id="cdpIn3" d="M 0,170 C 28,170 40,200 64,200" />
-            <path id="cdpIn4" d="M 0,230 C 28,230 40,200 64,200" />
-            <path id="cdpIn5" d="M 0,300 C 28,300 40,200 64,200" />
-            <path id="cdpIn6" d="M 0,370 C 28,370 40,200 64,200" />
-          </defs>
-          {["cdpIn1","cdpIn2","cdpIn3","cdpIn4","cdpIn5","cdpIn6"].map(id => (
-            <use key={id} href={`#${id}`} stroke="#ff8a72" strokeWidth="1" strokeDasharray="3 4" opacity="0.35" />
-          ))}
-          {["cdpIn1","cdpIn2","cdpIn3","cdpIn4","cdpIn5","cdpIn6"].map((id, i) => (
-            <circle key={id} className="cdp-particle" r="2.4" fill="#ff8a72">
-              <animateMotion dur="2.6s" begin={`${i * 0.35}s`} repeatCount="indefinite"><mpath href={`#${id}`} /></animateMotion>
-            </circle>
-          ))}
-        </svg>
-      </div>
-
-
-      {/* ============ AI HUB CARD ============ */}
-      <div className="cdp-orb-wrap2">
-        <div className="cdp-hub-card">
-          <div className="cdp-hub-pill">Data collected</div>
-          <div className="cdp-hub-arrow" aria-hidden>▼</div>
-          <div className="cdp-hub-circle">Customer<br/>Profile 360</div>
-          <div className="cdp-hub-arrow" aria-hidden>▼</div>
-          <div className="cdp-hub-pill">Segmentation</div>
-          <div className="cdp-hub-pill">Automation</div>
-        </div>
-      </div>
-
-      {/* ============ HUB → OUTPUT CONNECTOR ============ */}
-      <div className="cdp-connector">
-        <svg viewBox="0 0 64 400" preserveAspectRatio="none" style={{ overflow: "visible" }} fill="none" aria-hidden>
-          <defs>
-            <path id="cdpOut1" d="M 0,200 C 24,200 36,50  64,50" />
-            <path id="cdpOut2" d="M 0,200 C 24,200 36,150 64,150" />
-            <path id="cdpOut3" d="M 0,200 C 24,200 36,250 64,250" />
-            <path id="cdpOut4" d="M 0,200 C 24,200 36,350 64,350" />
-          </defs>
-          {["cdpOut1","cdpOut2","cdpOut3","cdpOut4"].map(id => (
-            <use key={id} href={`#${id}`} stroke="#39B44A" strokeWidth="1" strokeDasharray="3 4" opacity="0.4" />
-          ))}
-          {["cdpOut1","cdpOut2","cdpOut3","cdpOut4"].map((id, i) => (
-            <circle key={id} className="cdp-particle" r="2.4" fill="#39B44A">
-              <animateMotion dur="2.6s" begin={`${i * 0.4}s`} repeatCount="indefinite"><mpath href={`#${id}`} /></animateMotion>
-            </circle>
-          ))}
-        </svg>
-      </div>
-
-
-
-      {/* ============ OUTPUT PANEL ============ */}
-      <div className="cdp-out">
-        <div className="cdp-out-head">
-          OUTPUT
-          <span className="dot" />
-        </div>
-        <div className="cdp-out-grid">
-          {outputs.map((b, i) => (
-            <div key={b.key} className="cdp-badge-out" style={{ animationDelay: `${i * 0.5}s` }}>
-              <OutIcon name={b.key} />
-              <span className="cdp-badge-label">{b.label}</span>
-            </div>
-          ))}
-        </div>
-      </div>
+      {children}
     </div>
   );
 };
+
 
 
 

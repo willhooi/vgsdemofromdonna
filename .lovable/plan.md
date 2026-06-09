@@ -1,55 +1,94 @@
 ## Mục tiêu
-Hiện tại section "AI Customer Engagement Platform" đang là 2 card tách biệt trong grid `lg:grid-cols-[1fr_minmax(0,38%)]`:
-- **Card trái**: `AIPlatformCard` (INPUT → AI HUB → OUTPUT)
-- **Card phải**: `OutcomeStage` (cô gái + 3 popup: review 5★, ORDER STATUS, OTP)
-
-Trên màn nhỏ hai card xếp chồng, mất cảm giác "flow liền mạch từ input đến outcome người dùng cuối". Cần **gộp thành 1 card duy nhất** chứa toàn bộ flow `INPUT → HUB → OUTPUT → cô gái/popup`, hiển thị trọn vẹn trên mọi thiết bị.
-
-## Thay đổi trong `src/components/site/Solutions.tsx`
-
-### 1. Wrapper layout (lines 90-98)
-Bỏ grid 2 cột. Thay bằng **1 card duy nhất** full-width chứa cả `AIPlatformCard` (đã mở rộng) và `OutcomeStage` bên trong.
+Thay thế hoàn toàn nội dung và layout hiện tại của `AIPlatformCard` trong `src/components/site/Solutions.tsx` bằng câu chuyện 4 bước theo đúng hình tham khảo:
 
 ```text
-┌─────────────────────────────────────────────────────────────┐
-│              AI Customer Engagement Platform                 │
-│  ┌──────┐    ┌─────┐    ┌───────┐    ┌──────────────────┐  │
-│  │INPUT │───▶│ HUB │───▶│OUTPUT │───▶│  Girl + Popups    │  │
-│  │ list │    │card │    │ list  │    │  (outcome stage)  │  │
-│  └──────┘    └─────┘    └───────┘    └──────────────────┘  │
-└─────────────────────────────────────────────────────────────┘
+① DATA SOURCES  →  ② AI CUSTOMER BRAIN  →  ③ BUSINESS IMPACT  →  ④ CUSTOMER EXPERIENCE
+   (6 nguồn dữ liệu)   (Customer Profile 360°)   (4 kết quả KD)        (Cô gái + 4 popup)
 ```
 
-### 2. `AIPlatformCard` (lines 443-470)
-- Đổi container thành single card wrapping cả 2 phần
-- Khu vực animation `CDPWave` chiếm khoảng 60-65% chiều ngang trái
-- Thêm cột phụ bên phải chứa `<OutcomeStage>` (cô gái + popup), ngăn cách bằng connector dotted từ OUTPUT panel sang cô gái (animated particles tiếp nối flow)
-- Bỏ `min-h-[420px]` cứng, dùng aspect ratio mềm hoặc auto-height
+## Nội dung chính xác (theo hình)
 
-### 3. Layout responsive trong card gộp
-- **Desktop (≥1024px)**: flex-row, CDPWave bên trái (flex 1) + OutcomeStage bên phải (width ~340px). Có connector SVG nối từ panel OUTPUT sang khu vực cô gái.
-- **Tablet (768-1023px)**: vẫn flex-row nhưng OutcomeStage thu nhỏ (~260px), CDPWave gọn lại (giảm panel width còn 110/130px, hub nhỏ hơn).
-- **Mobile (<768px)**: flex-col — CDPWave ở trên (full width, panel có thể quay về grid 2 cột compact như cũ), OutcomeStage ở dưới (max-w 320px, căn giữa). Connector ẩn hoặc chuyển thành mũi tên dọc đơn giản.
+**① DATA SOURCES** — *Collect data from every touchpoint*
+- ERP — Business systems
+- POS — In-store transactions
+- Website / App — Behavior & analytics
+- Social Channels — Facebook, Instagram, TikTok
+- Zalo OA — Messages & interactions
+- Loyalty Program — Points & Membership
+- Campaign / Ads — Ads & promotions
 
-### 4. `OutcomeStage` (lines 119-207)
-- Giữ nguyên cấu trúc (girl + 3 popup + blob backdrop)
-- Bỏ wrapper `max-w-[380px]` cứng, cho phép parent điều khiển width
-- Giảm scale popup ở breakpoint nhỏ (`scale-[0.7]` thay `scale-[0.85]`)
+**② AI CUSTOMER BRAIN** — *Unify, understand and predict*
+- Vòng tròn trung tâm: icon user + "Customer Profile 360°"
+- 5 satellite nodes quanh vòng tròn: Purchase History, Interests & Behavior, Channel Preference, Lifetime Value, Loyalty Tier
+- 4 capability pills bên dưới: Data Collected, AI Segmentation, Predictive Insights, Journey Automation
 
-### 5. Connector OUTPUT → Girl (mới)
-- Thêm 1 SVG dotted curve nhỏ ở giữa OUTPUT panel và OutcomeStage (chỉ hiển thị từ `md:` trở lên)
-- Vài particle xanh `animateMotion` chạy từ OUTPUT panel đến vùng cô gái → cảm giác flow liền mạch
-- Mobile: ẩn (`hidden md:block`)
+**③ BUSINESS IMPACT** — *Turn insights into measurable results*
+- Business Reports — Real-time dashboards and analytics
+- Audience Segmentation — Smart segments for better targeting
+- Automated Journeys — Trigger personalized journeys at scale
+- Omnichannel Engagement — Engage customers on their favorite channels
 
-### 6. CSS điều chỉnh
-- `.cdp-stage`: bỏ `absolute inset-0`, dùng `relative w-full h-full` để fit vào flex parent
-- Media query `@media (max-width: 767px)`: stack column, panel width về `calc(50% - 4px)` dạng grid như reference cũ
-- Đảm bảo overflow visible cho popup không bị cắt
+**④ CUSTOMER EXPERIENCE** — *Deliver personalized experiences that customers love*
+- Cô gái (giữ ảnh `channels-girl.png` hiện tại)
+- 4 popup nổi: Personalized Offer "15% OFF for you!", Order Confirmed "#VG123456", Birthday Reward "100 points earned!", Recommended for you "Check this out!"
+- Review 5★ "Thanks for your feedback!" ở dưới
 
-## Kết quả mong đợi
-- **1 card duy nhất** kể trọn câu chuyện: Dữ liệu (INPUT) → AI xử lý (HUB) → Kích hoạt kênh (OUTPUT) → Khách hàng nhận được giá trị (cô gái + thông báo OTP/Order/Review).
-- Trên mobile: flow dọc từ trên xuống, không bị tách rời cảm xúc.
-- Trên desktop: flow ngang liền mạch, có particle chạy từ trái sang phải xuyên suốt.
+## Layout & responsive
+
+### Desktop (≥1024px)
+- Grid 4 cột: `grid-cols-[1fr_1.1fr_1fr_1.1fr]` trong cùng 1 card lớn (giữ wrapper card hiện tại).
+- Mỗi cột là 1 panel nhẹ (border + bg trắng/tinted), có số thứ tự ①②③④ + tiêu đề + sub-line, items list bên dưới.
+- Connector: dotted SVG lines giữa các cột (cam → xanh dần) + particle chạy ngang để tiếp nối flow animation hiện có.
+- Cột ② có lõi tròn animate (giữ logic `cdp-orb` hiện tại nhưng đặt giữa cột) + satellite nodes orbit nhẹ.
+- Cột ④ giữ `OutcomeStage` (cô gái + popup), bỏ wrapper max-width cứng để fit vào cột.
+
+### Tablet (768–1023px)
+- Grid 2×2: `grid-cols-2` — ①② hàng trên, ③④ hàng dưới.
+- Connectors chuyển thành mũi tên ngang/dọc đơn giản giữa các ô.
+- Brain core thu nhỏ, satellite nodes giảm xuống 3.
+
+### Mobile (<768px)
+- Stack dọc 1 cột: ① → ② → ③ → ④.
+- Mỗi step có chip số "Step 1/2/3/4" + tiêu đề + sub-line + items (list compact, icon nhỏ).
+- Cô gái + popup scale `0.7`, max-w-[300px] căn giữa.
+- Connector: mũi tên dọc ↓ giữa các step (subtle, dotted).
+- Bỏ 3D rotateY trên panels để tiết kiệm không gian.
+
+## Thay đổi kỹ thuật
+
+### File: `src/components/site/Solutions.tsx`
+
+1. **Xóa/thay thế** toàn bộ `CDPWave` component và CSS `.cdp-src/.cdp-out/.cdp-orb*` hiện tại (không còn dùng pattern INPUT/HUB/OUTPUT 3-panel).
+
+2. **Tạo 4 component con** (trong cùng file để gọn):
+   - `<StepDataSources />` — column ① với 7 item rows
+   - `<StepAIBrain />` — column ② với circle core + orbit nodes + 4 pills
+   - `<StepBusinessImpact />` — column ③ với 4 item cards
+   - `<StepCustomerExperience />` — column ④ wrap `OutcomeStage` (đã có sẵn, cập nhật 4 popup theo nội dung mới)
+
+3. **Cập nhật `OutcomeStage`** (lines 119–207):
+   - Thay nội dung 3 popup hiện tại bằng 4 popup mới đúng hình: Personalized Offer 15% OFF, Order Confirmed #VG123456, Birthday Reward 100 points, Recommended for you.
+   - Review 5★ giữ nguyên với text "Thanks for your feedback!".
+   - Bỏ max-width cứng, nhận `className` từ parent.
+
+4. **Rewrite `AIPlatformCard`** (lines 443–470):
+   - Container card lớn (giữ shadow/border hiện tại).
+   - Header: title "AI Customer Engagement Platform" + subtitle ngắn.
+   - Body: grid responsive `grid-cols-1 md:grid-cols-2 lg:grid-cols-4` chứa 4 step components.
+   - SVG overlay connector cho desktop (absolute, hidden md:block).
+
+5. **Icons** dùng từ `lucide-react` (đã import sẵn nhiều): Database, Store, Globe, ThumbsUp, MessageCircle, Award, Megaphone (data sources); BarChart3, Users, GitBranch, MessageSquare (business impact); User, ShoppingBag, Heart, Clock, Crown (brain satellites).
+
+6. **Animation**: 
+   - Giữ keyframes orbit/glow cho brain core.
+   - Connector particles dùng SVG `animateMotion` chạy ngang qua 3 dotted curves (hoặc CSS `@keyframes` translate).
+   - Reveal stagger nhẹ cho từng step khi `visible=true`.
+
+## Kết quả
+- Đúng nội dung và cảm giác visual của hình tham khảo.
+- 4 cột rõ ràng trên desktop, 2×2 trên tablet, stack dọc trên mobile — không bị cắt nội dung.
+- Cô gái + popup vẫn nằm trong cùng 1 card, là điểm cuối của flow.
+- Animation flow Input → AI → Impact → Customer liền mạch nhờ connector + particles.
 
 ## Files
 - Chỉ sửa `src/components/site/Solutions.tsx`.
