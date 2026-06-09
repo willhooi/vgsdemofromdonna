@@ -726,9 +726,9 @@ const StepAIBrain = ({ visible }: { visible: boolean }) => (
         );
       })}
       {/* Center core */}
-      <div className="absolute left-1/2 top-1/2 flex aspect-square w-[42%] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full bg-white text-center shadow-[0_6px_18px_rgba(57,180,74,0.25)] ring-2 ring-[hsl(145_55%_45%)]/30">
-        <UserIcon className="h-4 w-4 text-[hsl(145_50%_35%)]" />
-        <div className="mt-0.5 text-[9px] font-bold leading-tight text-[hsl(145_50%_22%)]">
+      <div className="absolute left-1/2 top-1/2 flex aspect-square w-[48%] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full bg-white text-center shadow-[0_8px_22px_rgba(57,180,74,0.28)] ring-2 ring-[hsl(145_55%_45%)]/35">
+        <UserIcon className="h-5 w-5 text-[hsl(145_50%_35%)]" />
+        <div className="mt-1 text-[10.5px] font-bold leading-tight text-[hsl(145_50%_22%)]">
           Customer<br />Profile 360°
         </div>
       </div>
