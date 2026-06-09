@@ -609,8 +609,8 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
               <it.Icon className="h-4 w-4" />
             </span>
             <div className="min-w-0 flex-1">
-              <div className="text-[13.5px] font-semibold leading-tight text-foreground">{it.name}</div>
-              <div className="text-[11px] leading-tight text-muted-foreground">{it.sub}</div>
+              <div className="text-[15.5px] font-semibold leading-tight text-foreground">{it.name}</div>
+              <div className="text-[13px] leading-tight text-muted-foreground">{it.sub}</div>
             </div>
           </div>
         ))}
@@ -621,7 +621,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
         className="absolute rounded-xl border border-[hsl(145_55%_80%)]/50 bg-gradient-to-b from-[hsl(145_60%_98%)] to-white shadow-[0_2px_10px_rgba(0,0,0,0.03)]"
         style={{ left: 420, top: 40, width: 360, height: 560, zIndex: 2 }}
       >
-        <DesktopColumnHeader index={2} accent="green" title="AI CUSTOMER BRAIN" subtitle="Unify, understand and predict" />
+        <DesktopColumnHeader index={2} accent="green" title="AI CUSTOMER BRAIN" subtitle="Unify, understand and predict" centered />
 
         {/* Flow lines + animated orbit connecting Customer Profile 360° with orbit nodes + pills */}
         <svg
@@ -723,7 +723,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
         {ORBIT.map((s, i) => (
           <div
             key={s.label}
-            className="absolute -translate-x-1/2 -translate-y-1/2 whitespace-pre-line text-center text-[12px] font-semibold leading-[1.2] text-[hsl(145_45%_25%)]"
+            className="absolute -translate-x-1/2 -translate-y-1/2 whitespace-pre-line text-center text-[14px] font-semibold leading-[1.2] text-[hsl(145_45%_25%)]"
             style={{ left: s.x, top: s.y, zIndex: 3 }}
           >
             <span
@@ -740,7 +740,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
           style={{ left: 180, top: 250, width: 150, height: 150, zIndex: 3 }}
         >
           <UserIcon className="h-8 w-8 text-[hsl(145_50%_35%)]" />
-          <div className="mt-1 text-[14.5px] font-bold leading-tight text-[hsl(145_50%_22%)]">
+          <div className="mt-1 text-[16.5px] font-bold leading-tight text-[hsl(145_50%_22%)]">
             Customer<br />Profile 360°
           </div>
         </div>
@@ -755,11 +755,11 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
           ].map((p, i) => (
             <div
               key={p.label}
-              className="brain-pill flex items-center gap-2 rounded-full border border-[hsl(145_45%_75%)]/50 bg-[hsl(145_60%_97%)] px-3 py-1.5"
+              className="brain-pill flex items-center justify-center gap-2 rounded-full border border-[hsl(145_45%_75%)]/50 bg-[hsl(145_60%_97%)] px-3 py-1.5"
               style={{ animationDelay: `${i * 0.75}s` }}
             >
               <p.Icon className="h-4 w-4 shrink-0 text-[hsl(145_50%_35%)]" />
-              <span className="text-[13px] font-semibold text-[hsl(145_50%_25%)]">{p.label}</span>
+              <span className="text-[15px] font-semibold text-[hsl(145_50%_25%)]">{p.label}</span>
             </div>
           ))}
         </div>
@@ -782,8 +782,8 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
               <it.Icon className="h-[18px] w-[18px]" />
             </span>
             <div className="min-w-0 flex-1">
-              <div className="text-[14.5px] font-semibold leading-tight text-[hsl(145_50%_28%)]">{it.name}</div>
-              <div className="mt-1 text-[12px] leading-snug text-muted-foreground">{it.sub}</div>
+              <div className="text-[16.5px] font-semibold leading-tight text-[hsl(145_50%_28%)]">{it.name}</div>
+              <div className="mt-1 text-[14px] leading-snug text-muted-foreground">{it.sub}</div>
             </div>
           </div>
         ))}
@@ -831,8 +831,8 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
                 <p.Icon className="h-[18px] w-[18px]" />
               </span>
               <div className="min-w-0 flex-1">
-                <div className="text-[12px] font-semibold leading-tight text-muted-foreground line-clamp-2">{p.title}</div>
-                <div className="text-[13.5px] font-bold leading-tight text-foreground line-clamp-2">{p.body}</div>
+                <div className="text-[14px] font-semibold leading-tight text-muted-foreground line-clamp-2">{p.title}</div>
+                <div className="text-[15.5px] font-bold leading-tight text-foreground line-clamp-2">{p.body}</div>
               </div>
             </div>
           );
@@ -847,9 +847,9 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
             {Array.from({ length: 5 }).map((_, i) => (
               <Star key={i} className="h-4 w-4 fill-[#ff9b17] text-[#ff9b17]" />
             ))}
-            <span className="ml-1 text-[14.5px] font-bold text-foreground">5.0</span>
+            <span className="ml-1 text-[16.5px] font-bold text-foreground">5.0</span>
           </div>
-          <div className="mt-1 text-[12.5px] italic text-muted-foreground">"Thanks for your feedback!"</div>
+          <div className="mt-1 text-[14.5px] italic text-muted-foreground">"Thanks for your feedback!"</div>
         </div>
       </div>
     </div>
@@ -857,21 +857,21 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
 };
 
 const DesktopColumnHeader = ({
-  index, accent, title, subtitle,
-}: { index: number; accent: "orange" | "green"; title: string; subtitle: string }) => {
+  index, accent, title, subtitle, centered,
+}: { index: number; accent: "orange" | "green"; title: string; subtitle: string; centered?: boolean }) => {
   const isOrange = accent === "orange";
   const numBg = isOrange ? "bg-[hsl(22_85%_55%)]" : "bg-[hsl(145_55%_42%)]";
   const titleColor = isOrange ? "text-[hsl(22_85%_45%)]" : "text-[hsl(145_55%_30%)]";
   return (
-    <div className="absolute left-4 right-4 top-4 flex items-start gap-2">
-      <span className={`grid h-8 w-8 shrink-0 place-items-center rounded-full ${numBg} text-[13px] font-bold text-white shadow-sm`}>
+    <div className={`absolute left-4 right-4 top-4 flex items-start gap-2 ${centered ? "justify-center" : ""}`}>
+      <span className={`grid h-8 w-8 shrink-0 place-items-center rounded-full ${numBg} text-[15px] font-bold text-white shadow-sm`}>
         {index}
       </span>
-      <div className="min-w-0">
-        <div className={`text-[15.5px] font-extrabold uppercase tracking-wider ${titleColor} leading-tight`}>
+      <div className={`min-w-0 ${centered ? "text-center" : ""}`}>
+        <div className={`text-[17.5px] font-extrabold uppercase tracking-wider ${titleColor} leading-tight`}>
           {title}
         </div>
-        <div className="mt-0.5 text-[12px] leading-tight text-muted-foreground">{subtitle}</div>
+        <div className="mt-0.5 text-[14px] leading-tight text-muted-foreground">{subtitle}</div>
       </div>
     </div>
   );
