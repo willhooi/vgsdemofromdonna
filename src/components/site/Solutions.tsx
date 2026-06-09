@@ -805,49 +805,64 @@ const StepCustomerExperience = ({ visible }: { visible: boolean }) => (
     visible={visible}
     delay={360}
   >
-    <div className="relative flex flex-col gap-1.5">
-      {CX_POPUPS.map((p, i) => {
-        const isAccent = p.tone === "accent";
-        const iconBg = isAccent ? "bg-[hsl(35_100%_94%)] text-[hsl(35_100%_45%)]" : "bg-[hsl(145_60%_95%)] text-[hsl(145_50%_35%)]";
-        const ring = isAccent ? "border-[hsl(35_100%_85%)]/60" : "border-[hsl(145_55%_80%)]/50";
-        return (
-          <div
-            key={p.title}
-            className={`step-anim flex items-start gap-2 rounded-lg border ${ring} bg-white px-2.5 py-1.5 shadow-[0_1px_3px_rgba(0,0,0,0.05)]`}
-            style={{ animation: `step-row-float 4s ease-in-out ${i * 0.3 + 0.15}s infinite` }}
-          >
-            <span className={`grid h-6 w-6 shrink-0 place-items-center rounded-md ${iconBg}`}>
-              <p.Icon className="h-3.5 w-3.5" />
-            </span>
-            <div className="min-w-0 flex-1">
-              <div className="text-[9.5px] font-semibold leading-tight text-muted-foreground">{p.title}</div>
-              <div className="text-[11px] font-bold leading-tight text-foreground truncate">{p.body}</div>
+    <div className="grid grid-cols-1 gap-3 sm:grid-cols-[1.05fr_0.95fr] sm:gap-2">
+      {/* Left: 4 popups */}
+      <div className="flex flex-col gap-1.5">
+        {CX_POPUPS.map((p, i) => {
+          const isAccent = p.tone === "accent";
+          const iconBg = isAccent ? "bg-[hsl(35_100%_94%)] text-[hsl(35_100%_45%)]" : "bg-[hsl(145_60%_95%)] text-[hsl(145_50%_35%)]";
+          const ring = isAccent ? "border-[hsl(35_100%_85%)]/60" : "border-[hsl(145_55%_80%)]/50";
+          return (
+            <div
+              key={p.title}
+              className={`step-anim flex items-start gap-2 rounded-lg border ${ring} bg-white px-2 py-1.5 shadow-[0_1px_3px_rgba(0,0,0,0.05)]`}
+              style={{ animation: `step-row-float 4s ease-in-out ${i * 0.3 + 0.15}s infinite` }}
+            >
+              <span className={`grid h-6 w-6 shrink-0 place-items-center rounded-md ${iconBg}`}>
+                <p.Icon className="h-3.5 w-3.5" />
+              </span>
+              <div className="min-w-0 flex-1">
+                <div className="text-[9.5px] font-semibold leading-tight text-muted-foreground">{p.title}</div>
+                <div className="text-[10.5px] font-bold leading-tight text-foreground truncate">{p.body}</div>
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
 
-      {/* Girl + review — overlaps to the right on desktop, inline on mobile */}
-      <div className="relative mt-2 flex items-end justify-center lg:absolute lg:-right-20 lg:-bottom-4 lg:mt-0 lg:w-[170px] lg:justify-end xl:-right-24 xl:w-[200px]">
-        <img
-          src={shopperImg}
-          alt="Happy customer receiving personalized offers"
-          loading="lazy"
-          className="h-auto w-full max-w-[170px] object-contain drop-shadow-[0_18px_30px_rgba(0,0,0,0.15)] lg:max-w-none"
-        />
-        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-white/95 px-2.5 py-1 shadow-[0_8px_20px_-10px_rgba(0,0,0,0.25)] ring-1 ring-border backdrop-blur">
-          <div className="flex items-center gap-1">
+      {/* Right: girl + review badge */}
+      <div className="relative flex flex-col items-center justify-between">
+        <div className="relative w-full">
+          {/* Soft green glow backdrop */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute left-1/2 top-1/2 -z-0 h-[85%] w-[85%] -translate-x-1/2 -translate-y-1/2 rounded-full"
+            style={{
+              background:
+                "radial-gradient(circle at 50% 50%, hsl(145 65% 78% / 0.7) 0%, hsl(145 65% 70% / 0.4) 50%, transparent 75%)",
+            }}
+          />
+          <img
+            src={shopperImg}
+            alt="Happy customer receiving personalized offers"
+            loading="lazy"
+            className="relative mx-auto block h-auto w-full max-w-[200px] object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.12)]"
+          />
+        </div>
+        <div className="mt-1.5 w-full rounded-2xl bg-white px-2.5 py-1.5 text-center shadow-[0_8px_20px_-12px_rgba(0,0,0,0.2)] ring-1 ring-border">
+          <div className="flex items-center justify-center gap-1">
             {Array.from({ length: 5 }).map((_, i) => (
               <Star key={i} className="h-2.5 w-2.5 fill-[#ff9b17] text-[#ff9b17]" />
             ))}
-            <span className="ml-0.5 text-[9px] font-bold text-foreground">5.0</span>
-            <span className="ml-1 text-[9px] italic text-muted-foreground">"Thanks!"</span>
+            <span className="ml-0.5 text-[10px] font-bold text-foreground">5.0</span>
           </div>
+          <div className="mt-0.5 text-[9px] italic text-muted-foreground">"Thanks for your feedback!"</div>
         </div>
       </div>
     </div>
   </StepCard>
 );
+
 
 /* ---------- Reusable Step Card ---------- */
 
