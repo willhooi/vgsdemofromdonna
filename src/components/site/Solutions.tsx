@@ -459,7 +459,7 @@ const AIPlatformCard = ({ visible }: { visible: boolean }) => {
 
   return (
     <div
-      className="relative w-full overflow-hidden rounded-2xl border border-[hsl(var(--primary))]/15 bg-white px-3 py-5 sm:px-5 sm:py-6 lg:px-6 lg:py-7"
+      className="relative w-full rounded-2xl border border-[hsl(var(--primary))]/15 bg-white px-3 py-5 sm:px-5 sm:py-6 lg:px-6 lg:py-7 lg:pr-24 xl:pr-28 overflow-hidden lg:overflow-visible"
       style={{
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(10px)",
@@ -613,18 +613,19 @@ const StepAIBrain = ({ visible }: { visible: boolean }) => (
         className="step-anim absolute inset-[10%] rounded-full border border-dashed border-[hsl(145_45%_55%)]/40"
         style={{ animation: "brain-ring-cw 30s linear infinite" }}
       />
-      {/* Satellites */}
+      {/* Satellites — plain labels like reference */}
       {BRAIN_SATELLITES.map((s) => {
         const rad = (s.angle * Math.PI) / 180;
-        const r = 46; // % of half
+        const r = 48;
         const x = 50 + r * Math.cos(rad);
         const y = 50 + r * Math.sin(rad);
         return (
           <div
             key={s.label}
-            className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full border border-[hsl(145_50%_70%)]/50 bg-white px-1.5 py-0.5 text-center text-[8.5px] font-semibold leading-[1.1] text-[hsl(145_50%_28%)] shadow-sm whitespace-pre-line"
+            className="absolute -translate-x-1/2 -translate-y-1/2 text-center text-[8.5px] font-semibold leading-[1.15] text-[hsl(145_45%_25%)] whitespace-pre-line"
             style={{ left: `${x}%`, top: `${y}%` }}
           >
+            <span className="mb-0.5 mx-auto block h-1.5 w-1.5 rounded-full bg-[hsl(145_55%_45%)]" />
             {s.label}
           </div>
         );
@@ -731,13 +732,13 @@ const StepCustomerExperience = ({ visible }: { visible: boolean }) => (
         );
       })}
 
-      {/* Girl + review */}
-      <div className="relative mt-2 flex items-end justify-center">
+      {/* Girl + review — overlaps to the right on desktop, inline on mobile */}
+      <div className="relative mt-2 flex items-end justify-center lg:absolute lg:-right-20 lg:-bottom-4 lg:mt-0 lg:w-[170px] lg:justify-end xl:-right-24 xl:w-[200px]">
         <img
           src={shopperImg}
           alt="Happy customer receiving personalized offers"
           loading="lazy"
-          className="h-auto w-full max-w-[170px] object-contain drop-shadow-[0_15px_25px_rgba(0,0,0,0.12)]"
+          className="h-auto w-full max-w-[170px] object-contain drop-shadow-[0_18px_30px_rgba(0,0,0,0.15)] lg:max-w-none"
         />
         <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-white/95 px-2.5 py-1 shadow-[0_8px_20px_-10px_rgba(0,0,0,0.25)] ring-1 ring-border backdrop-blur">
           <div className="flex items-center gap-1">
@@ -745,10 +746,10 @@ const StepCustomerExperience = ({ visible }: { visible: boolean }) => (
               <Star key={i} className="h-2.5 w-2.5 fill-[#ff9b17] text-[#ff9b17]" />
             ))}
             <span className="ml-0.5 text-[9px] font-bold text-foreground">5.0</span>
+            <span className="ml-1 text-[9px] italic text-muted-foreground">"Thanks!"</span>
           </div>
         </div>
       </div>
-      <div className="mt-3 text-center text-[9.5px] italic text-muted-foreground">"Thanks for your feedback!"</div>
     </div>
   </StepCard>
 );
