@@ -646,7 +646,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
             style={{ left: 30, width: 290, height: 88, top: BI_TOPS_REL[i] }}
           >
             <span className="grid h-9 w-9 shrink-0 place-items-center rounded-md bg-[hsl(145_60%_95%)] text-[hsl(145_50%_35%)]">
-              <it.Icon className="h-4.5 w-4.5" />
+              <it.Icon className="h-[18px] w-[18px]" />
             </span>
             <div className="min-w-0 flex-1">
               <div className="text-[13px] font-semibold leading-tight text-[hsl(145_50%_28%)]">{it.name}</div>
@@ -695,7 +695,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
               style={{ left: 24, width: 190, height: 72, top: CX_TOPS_REL[i], zIndex: 3 }}
             >
               <span className={`grid h-9 w-9 shrink-0 place-items-center rounded-md ${iconBg}`}>
-                <p.Icon className="h-4.5 w-4.5" />
+                <p.Icon className="h-[18px] w-[18px]" />
               </span>
               <div className="min-w-0 flex-1">
                 <div className="text-[10.5px] font-semibold leading-tight text-muted-foreground line-clamp-2">{p.title}</div>
