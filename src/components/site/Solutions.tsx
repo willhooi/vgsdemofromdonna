@@ -1116,7 +1116,7 @@ const StepCustomerExperience = ({ visible }: { visible: boolean }) => (
               </span>
               <div className="min-w-0 flex-1">
                 <div className="text-[9.5px] font-semibold leading-tight text-muted-foreground">{p.title}</div>
-                <div className="text-[10.5px] font-bold leading-tight text-foreground truncate">{p.body}</div>
+                <div className="text-[10.5px] font-bold leading-tight text-foreground line-clamp-2">{p.body}</div>
               </div>
             </div>
           );
