@@ -1169,7 +1169,7 @@ const StepCard = ({
 
   return (
     <div
-      className={`relative rounded-xl border ${borderColor} ${bgTint} p-3 sm:p-3.5 shadow-[0_2px_10px_rgba(0,0,0,0.03)]`}
+      className={`relative rounded-xl border ${borderColor} ${bgTint} p-3 sm:p-4 shadow-[0_2px_10px_rgba(0,0,0,0.03)] md:min-h-[420px]`}
       style={{
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(12px)",
