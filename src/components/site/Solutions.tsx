@@ -805,58 +805,60 @@ const StepCustomerExperience = ({ visible }: { visible: boolean }) => (
     visible={visible}
     delay={360}
   >
-    <div className="grid grid-cols-1 gap-3 sm:grid-cols-[1.05fr_0.95fr] sm:gap-2">
-      {/* Left: 4 popups */}
-      <div className="flex flex-col gap-1.5">
-        {CX_POPUPS.map((p, i) => {
-          const isAccent = p.tone === "accent";
-          const iconBg = isAccent ? "bg-[hsl(35_100%_94%)] text-[hsl(35_100%_45%)]" : "bg-[hsl(145_60%_95%)] text-[hsl(145_50%_35%)]";
-          const ring = isAccent ? "border-[hsl(35_100%_85%)]/60" : "border-[hsl(145_55%_80%)]/50";
-          return (
-            <div
-              key={p.title}
-              className={`step-anim flex items-start gap-2 rounded-lg border ${ring} bg-white px-2 py-1.5 shadow-[0_1px_3px_rgba(0,0,0,0.05)]`}
-              style={{ animation: `step-row-float 4s ease-in-out ${i * 0.3 + 0.15}s infinite` }}
-            >
-              <span className={`grid h-6 w-6 shrink-0 place-items-center rounded-md ${iconBg}`}>
-                <p.Icon className="h-3.5 w-3.5" />
-              </span>
-              <div className="min-w-0 flex-1">
-                <div className="text-[9.5px] font-semibold leading-tight text-muted-foreground">{p.title}</div>
-                <div className="text-[10.5px] font-bold leading-tight text-foreground truncate">{p.body}</div>
+    <div className="flex flex-col gap-2">
+      {/* Top area: popups left, girl right */}
+      <div className="grid grid-cols-[1fr_1.1fr] gap-2 items-start">
+        {/* Left: 4 popups stacked */}
+        <div className="flex flex-col gap-1.5">
+          {CX_POPUPS.map((p, i) => {
+            const iconBg = "bg-[hsl(145_60%_95%)] text-[hsl(145_50%_35%)]";
+            return (
+              <div
+                key={p.title}
+                className="step-anim flex items-center gap-2 rounded-full bg-white px-2 py-1.5 shadow-[0_4px_14px_-6px_rgba(0,0,0,0.15)] ring-1 ring-black/5"
+                style={{ animation: `step-row-float 4s ease-in-out ${i * 0.3 + 0.15}s infinite` }}
+              >
+                <span className={`grid h-7 w-7 shrink-0 place-items-center rounded-full ${iconBg}`}>
+                  <p.Icon className="h-3.5 w-3.5" />
+                </span>
+                <div className="min-w-0 flex-1">
+                  <div className="text-[9px] font-medium leading-tight text-[hsl(145_45%_38%)]">{p.title}</div>
+                  <div className="text-[10.5px] font-bold leading-tight text-foreground truncate">{p.body}</div>
+                </div>
               </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
 
-      {/* Right: girl + review badge */}
-      <div className="relative flex flex-col items-center justify-between">
-        <div className="relative w-full">
-          {/* Soft green glow backdrop */}
+        {/* Right: girl image with green glow */}
+        <div className="relative">
           <div
             aria-hidden
-            className="pointer-events-none absolute left-1/2 top-1/2 -z-0 h-[85%] w-[85%] -translate-x-1/2 -translate-y-1/2 rounded-full"
+            className="pointer-events-none absolute right-0 top-1/2 -z-0 h-[90%] w-[95%] -translate-y-1/2 rounded-full"
             style={{
               background:
-                "radial-gradient(circle at 50% 50%, hsl(145 65% 78% / 0.7) 0%, hsl(145 65% 70% / 0.4) 50%, transparent 75%)",
+                "radial-gradient(circle at 60% 50%, hsl(145 65% 75% / 0.75) 0%, hsl(145 65% 70% / 0.35) 55%, transparent 78%)",
             }}
           />
           <img
             src={shopperImg}
             alt="Happy customer receiving personalized offers"
             loading="lazy"
-            className="relative mx-auto block h-auto w-full max-w-[200px] object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.12)]"
+            className="relative ml-auto block h-auto w-full max-w-[240px] object-contain drop-shadow-[0_14px_26px_rgba(0,0,0,0.14)]"
           />
         </div>
-        <div className="mt-1.5 w-full rounded-2xl bg-white px-2.5 py-1.5 text-center shadow-[0_8px_20px_-12px_rgba(0,0,0,0.2)] ring-1 ring-border">
-          <div className="flex items-center justify-center gap-1">
+      </div>
+
+      {/* Bottom: review badge full width */}
+      <div className="self-start rounded-full bg-white px-4 py-2 shadow-[0_8px_22px_-12px_rgba(0,0,0,0.22)] ring-1 ring-black/5">
+        <div className="flex items-center gap-2">
+          <div className="flex items-center gap-0.5">
             {Array.from({ length: 5 }).map((_, i) => (
-              <Star key={i} className="h-2.5 w-2.5 fill-[#ff9b17] text-[#ff9b17]" />
+              <Star key={i} className="h-3 w-3 fill-[#ff9b17] text-[#ff9b17]" />
             ))}
-            <span className="ml-0.5 text-[10px] font-bold text-foreground">5.0</span>
           </div>
-          <div className="mt-0.5 text-[9px] italic text-muted-foreground">"Thanks for your feedback!"</div>
+          <span className="text-[11px] font-bold text-foreground">5.0</span>
+          <span className="text-[10.5px] italic text-muted-foreground">"Thanks for your feedback!"</span>
         </div>
       </div>
     </div>
