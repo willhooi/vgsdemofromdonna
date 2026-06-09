@@ -102,7 +102,7 @@ export const Solutions = () => {
         </div>
 
         {/* Unified flow card: INPUT → HUB → OUTPUT → Outcome (girl + popups) */}
-        <div className="relative mx-auto mt-8 md:mt-10 max-w-6xl">
+        <div className="relative mx-auto mt-8 md:mt-10 w-full max-w-[1500px]">
           <AIPlatformCard visible={visible} />
         </div>
 
