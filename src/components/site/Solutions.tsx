@@ -506,13 +506,13 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
         transition: "opacity 600ms ease-out 200ms, transform 600ms ease-out 200ms",
       }}
     >
-      {/* ===== SVG connector overlay ===== */}
+      {/* ===== SVG connector overlay (full section, on top of background, beneath cards) ===== */}
       <svg
         aria-hidden
         className="pointer-events-none absolute inset-0"
         viewBox="0 0 1600 640"
         preserveAspectRatio="none"
-        style={{ width: "100%", height: "100%", zIndex: 1 }}
+        style={{ width: "100%", height: "100%", overflow: "visible", zIndex: 1 }}
       >
         {/* Orange: Data Source cards → orange hub */}
         {DS_CENTERS.map((cy, i) => (
