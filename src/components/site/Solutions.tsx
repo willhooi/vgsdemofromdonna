@@ -840,7 +840,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
         {/* Rating card */}
         <div
           className="absolute rounded-2xl bg-white px-3 py-2 shadow-[0_8px_20px_-10px_rgba(0,0,0,0.25)] ring-1 ring-border"
-          style={{ left: 22, bottom: 28, width: 230, height: 72, zIndex: 3 }}
+          style={{ left: 22, bottom: 28, width: 250, height: 72, zIndex: 3 }}
         >
           <div className="flex items-center gap-1">
             {Array.from({ length: 5 }).map((_, i) => (
