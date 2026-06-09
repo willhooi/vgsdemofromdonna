@@ -479,10 +479,10 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
   const BI_LEFT_X = 820 + 30;        // card left edge absolute
   const BI_RIGHT_X = 820 + 30 + 290; // card right edge absolute
 
-  // Col4 — 4 CX cards. tops relative to col4: 60,144,228,312, height 72
-  const CX_TOPS_REL = [60, 144, 228, 312];
-  const CX_CENTERS = CX_TOPS_REL.map((t) => 40 + t + 36);
-  const CX_LEFT_X = 1210 + 24;
+  // Col4 — 4 CX cards. tops relative to col4: 120,205,290,375, height 68
+  const CX_TOPS_REL = [120, 205, 290, 375];
+  const CX_CENTERS = CX_TOPS_REL.map((t) => 40 + t + 34);
+  const CX_LEFT_X = 1210 + 32;
 
   // Hubs (absolute page coords)
   const HUB_ORANGE = { x: 395, y: 315 };
