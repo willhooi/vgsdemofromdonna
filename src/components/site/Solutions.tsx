@@ -102,7 +102,7 @@ export const Solutions = () => {
         </div>
 
         {/* Unified flow card: INPUT → HUB → OUTPUT → Outcome (girl + popups) */}
-        <div className="relative mx-auto mt-8 md:mt-10 w-full max-w-[1500px]">
+        <div className="relative mx-auto mt-8 md:mt-10 w-full max-w-[1760px]">
           <AIPlatformCard visible={visible} />
         </div>
 
@@ -406,7 +406,7 @@ const DesktopInfographicScaler = ({ children }: { children: React.ReactNode }) =
     const el = wrapRef.current;
     const ro = new ResizeObserver(() => {
       const w = el.clientWidth;
-      setScale(Math.min(1, w / 1600));
+      setScale(Math.min(1, w / 1800));
     });
     ro.observe(el);
     return () => ro.disconnect();
@@ -415,7 +415,7 @@ const DesktopInfographicScaler = ({ children }: { children: React.ReactNode }) =
     <div ref={wrapRef} className="relative w-full" style={{ height: 640 * scale }}>
       <div
         style={{
-          width: 1600,
+          width: 1800,
           height: 640,
           transform: `scale(${scale})`,
           transformOrigin: "top left",
@@ -466,31 +466,30 @@ const ORBIT = [
 ];
 
 const DesktopInfographic = ({ visible }: { visible: boolean }) => {
-  // Card geometry (absolute Y centers used by connectors)
-  // Column tops at y=40. Each column 560 tall.
+  // Container: 1800 x 640. Wider gutters between columns so flow lines breathe.
 
-  // Col1 — 7 Data Source cards. top:96 + i*68, height 56 → centers at 124 + i*68
-  const DS_CENTERS = DS_ROWS.map((_, i) => 40 + 96 + i * 68 + 28); // absolute Y
-  const DS_RIGHT_X = 40 + 330 - 14; // right edge of card minus inner padding
+  // Col1 — 7 Data Source cards. left:40 w:340 → right edge 380.
+  const DS_CENTERS = DS_ROWS.map((_, i) => 40 + 96 + i * 68 + 28);
+  const DS_RIGHT_X = 40 + 340 - 14; // 366
 
-  // Col3 — 4 Business Impact cards. tops 120,220,320,420 (relative), height 88 → centers
+  // Col3 — 4 Business Impact cards. left:960 w:360. inner left padding 30, card width 300
   const BI_TOPS_REL = [120, 220, 320, 420];
   const BI_CENTERS = BI_TOPS_REL.map((t) => 40 + t + 44);
-  const BI_LEFT_X = 820 + 30;        // card left edge absolute
-  const BI_RIGHT_X = 820 + 30 + 290; // card right edge absolute
+  const BI_LEFT_X = 960 + 30;
+  const BI_RIGHT_X = 960 + 30 + 300;
 
-  // Col4 — 4 CX cards. tops relative to col4: 120,205,290,375, height 68
+  // Col4 — 4 CX cards. left:1420 w:340
   const CX_TOPS_REL = [120, 205, 290, 375];
   const CX_CENTERS = CX_TOPS_REL.map((t) => 40 + t + 34);
-  const CX_LEFT_X = 1210 + 32;
+  const CX_LEFT_X = 1420 + 24;
 
-  // Hubs (absolute page coords)
-  const HUB_ORANGE = { x: 395, y: 315 };
-  const HUB_GREEN_A = { x: 790, y: 315 };
-  const HUB_GREEN_B = { x: 1195, y: 315 };
+  // Hubs (absolute coords) — centered in each gutter
+  const HUB_ORANGE = { x: 430, y: 320 };
+  const HUB_GREEN_A = { x: 910, y: 320 };
+  const HUB_GREEN_B = { x: 1380, y: 320 };
 
-  // Customer Profile center (absolute)
-  const PROFILE_C = { x: 410 + 185, y: 40 + 250, r: 75 };
+  // Customer Profile center (absolute) — col2 starts at 480
+  const PROFILE_C = { x: 480 + 185, y: 40 + 250, r: 75 };
   const PROFILE_LEFT = { x: PROFILE_C.x - PROFILE_C.r, y: PROFILE_C.y };
   const PROFILE_RIGHT = { x: PROFILE_C.x + PROFILE_C.r, y: PROFILE_C.y };
 
@@ -499,18 +498,18 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
       className="relative mx-auto"
       style={{
         width: "100%",
-        maxWidth: 1600,
+        maxWidth: 1800,
         height: 640,
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(10px)",
         transition: "opacity 600ms ease-out 200ms, transform 600ms ease-out 200ms",
       }}
     >
-      {/* ===== SVG connector overlay (full section, on top of background, beneath cards) ===== */}
+      {/* ===== SVG connector overlay ===== */}
       <svg
         aria-hidden
         className="pointer-events-none absolute inset-0"
-        viewBox="0 0 1600 640"
+        viewBox="0 0 1800 640"
         preserveAspectRatio="none"
         style={{ width: "100%", height: "100%", overflow: "visible", zIndex: 1 }}
       >
@@ -596,7 +595,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
       {/* ===== Column 1 — DATA SOURCES ===== */}
       <div
         className="absolute rounded-xl border border-[hsl(22_85%_85%)]/60 bg-gradient-to-b from-[hsl(22_100%_98%)] to-white shadow-[0_2px_10px_rgba(0,0,0,0.03)]"
-        style={{ left: 40, top: 40, width: 330, height: 560, zIndex: 2 }}
+        style={{ left: 40, top: 40, width: 340, height: 560, zIndex: 2 }}
       >
         <DesktopColumnHeader index={1} accent="orange" title="DATA SOURCES" subtitle="Collect data from every touchpoint" />
         {DS_ROWS.map((it, i) => (
@@ -619,7 +618,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
       {/* ===== Column 2 — AI CUSTOMER BRAIN ===== */}
       <div
         className="absolute rounded-xl border border-[hsl(145_55%_80%)]/50 bg-gradient-to-b from-[hsl(145_60%_98%)] to-white shadow-[0_2px_10px_rgba(0,0,0,0.03)]"
-        style={{ left: 410, top: 40, width: 370, height: 560, zIndex: 2 }}
+        style={{ left: 480, top: 40, width: 370, height: 560, zIndex: 2 }}
       >
         <DesktopColumnHeader index={2} accent="green" title="AI CUSTOMER BRAIN" subtitle="Unify, understand and predict" />
 
@@ -668,14 +667,14 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
       {/* ===== Column 3 — BUSINESS IMPACT ===== */}
       <div
         className="absolute rounded-xl border border-[hsl(145_55%_80%)]/50 bg-gradient-to-b from-[hsl(145_60%_98%)] to-white shadow-[0_2px_10px_rgba(0,0,0,0.03)]"
-        style={{ left: 820, top: 40, width: 350, height: 560, zIndex: 2 }}
+        style={{ left: 960, top: 40, width: 360, height: 560, zIndex: 2 }}
       >
         <DesktopColumnHeader index={3} accent="green" title="BUSINESS IMPACT" subtitle="Turn insights into measurable results" />
         {BI_CARDS.map((it, i) => (
           <div
             key={it.name}
             className="absolute flex items-start gap-3 rounded-lg border border-[hsl(145_45%_80%)]/50 bg-white px-3 py-2.5 shadow-[0_1px_3px_rgba(57,180,74,0.08)]"
-            style={{ left: 30, width: 290, height: 88, top: BI_TOPS_REL[i] }}
+            style={{ left: 30, width: 300, height: 88, top: BI_TOPS_REL[i] }}
           >
             <span className="grid h-9 w-9 shrink-0 place-items-center rounded-md bg-[hsl(145_60%_95%)] text-[hsl(145_50%_35%)]">
               <it.Icon className="h-[18px] w-[18px]" />
@@ -691,7 +690,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
       {/* ===== Column 4 — CUSTOMER EXPERIENCE ===== */}
       <div
         className="absolute rounded-xl border border-[hsl(145_55%_80%)]/50 bg-gradient-to-b from-[hsl(145_60%_98%)] to-white shadow-[0_2px_10px_rgba(0,0,0,0.03)]"
-        style={{ left: 1210, top: 40, width: 350, height: 560, zIndex: 2, overflow: "visible" }}
+        style={{ left: 1420, top: 40, width: 340, height: 560, zIndex: 2, overflow: "visible" }}
       >
         <DesktopColumnHeader index={4} accent="green" title="CUSTOMER EXPERIENCE" subtitle="Deliver personalized experiences that customers love" />
 
@@ -724,14 +723,14 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
             <div
               key={p.title}
               className={`absolute flex items-center gap-2 rounded-xl border ${ring} bg-white px-2.5 py-2 shadow-[0_4px_10px_rgba(0,0,0,0.08)]`}
-              style={{ left: 24, width: 200, height: 68, top: CX_TOPS_REL[i], zIndex: 3 }}
+              style={{ left: 20, width: 210, height: 68, top: CX_TOPS_REL[i], zIndex: 3 }}
             >
               <span className={`grid h-9 w-9 shrink-0 place-items-center rounded-md ${iconBg}`}>
                 <p.Icon className="h-[18px] w-[18px]" />
               </span>
               <div className="min-w-0 flex-1">
-                <div className="text-[10.5px] font-semibold leading-tight text-muted-foreground truncate">{p.title}</div>
-                <div className="text-[12px] font-bold leading-tight text-foreground truncate">{p.body}</div>
+                <div className="text-[10.5px] font-semibold leading-tight text-muted-foreground">{p.title}</div>
+                <div className="text-[12px] font-bold leading-tight text-foreground">{p.body}</div>
               </div>
             </div>
           );
