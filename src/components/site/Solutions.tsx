@@ -694,7 +694,7 @@ const StepAIBrain = ({ visible }: { visible: boolean }) => (
     delay={120}
   >
     {/* Orbit core */}
-    <div className="relative mx-auto aspect-square w-full max-w-[200px]">
+    <div className="relative mx-auto aspect-square w-full max-w-[240px]">
       {/* Glow */}
       <div
         className="absolute left-1/2 top-1/2 h-[55%] w-[55%] -translate-x-1/2 -translate-y-1/2 rounded-full"
