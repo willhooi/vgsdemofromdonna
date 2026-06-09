@@ -485,11 +485,39 @@ const AIPlatformCard = ({ visible }: { visible: boolean }) => {
         </div>
 
         {/* 4-step journey */}
-        <div className="relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-3.5">
+        <div className="relative grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-5 lg:grid-cols-4 lg:gap-6">
+          {/* Desktop connector overlay */}
+          <svg
+            aria-hidden
+            className="pointer-events-none absolute inset-0 hidden lg:block"
+            width="100%"
+            height="100%"
+            preserveAspectRatio="none"
+            viewBox="0 0 100 100"
+          >
+            <defs>
+              <marker id="arr-orange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M0,0 L10,5 L0,10 Z" fill="hsl(22 85% 55%)" />
+              </marker>
+              <marker id="arr-green" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                <path d="M0,0 L10,5 L0,10 Z" fill="hsl(145 55% 42%)" />
+              </marker>
+            </defs>
+            {/* 1 → 2 (orange dashed) */}
+            <path d="M24,50 C26,50 26,50 28,50" stroke="hsl(22 85% 55%)" strokeWidth="0.35" strokeDasharray="1.2 1" fill="none" markerEnd="url(#arr-orange)" className="flow-dash flow-1" />
+            {/* 2 → 3 (green dashed) */}
+            <path d="M50,50 C52,50 52,50 54,50" stroke="hsl(145 55% 42%)" strokeWidth="0.35" strokeDasharray="1.2 1" fill="none" markerEnd="url(#arr-green)" className="flow-dash flow-2" />
+            {/* 3 → 4 (green dashed) */}
+            <path d="M76,50 C78,50 78,50 80,50" stroke="hsl(145 55% 42%)" strokeWidth="0.35" strokeDasharray="1.2 1" fill="none" markerEnd="url(#arr-green)" className="flow-dash flow-3" />
+          </svg>
+
           <StepDataSources visible={visible} />
           <StepAIBrain visible={visible} />
           <StepBusinessImpact visible={visible} />
           <StepCustomerExperience visible={visible} />
+
+          {/* Mobile vertical connectors (between stacked steps) */}
+          <div aria-hidden className="pointer-events-none absolute inset-0 hidden md:hidden" />
         </div>
       </div>
 
@@ -499,8 +527,12 @@ const AIPlatformCard = ({ visible }: { visible: boolean }) => {
         @keyframes brain-orb-glow { 0%,100% { transform: scale(1); opacity: 0.55; } 50% { transform: scale(1.08); opacity: 1; } }
         @keyframes brain-ring-cw { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes step-row-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
+        @keyframes flow-dash-move { to { stroke-dashoffset: -22; } }
+        .flow-dash { animation: flow-dash-move 1.6s linear infinite; }
+        .flow-2 { animation-delay: 0.4s; }
+        .flow-3 { animation-delay: 0.8s; }
         @media (prefers-reduced-motion: reduce) {
-          .step-anim { animation: none !important; }
+          .step-anim, .flow-dash { animation: none !important; }
         }
       `}</style>
     </div>
