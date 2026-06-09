@@ -406,7 +406,7 @@ const DesktopInfographicScaler = ({ children }: { children: React.ReactNode }) =
     const el = wrapRef.current;
     const ro = new ResizeObserver(() => {
       const w = el.clientWidth;
-      setScale(Math.min(1, w / 1600));
+      setScale(Math.min(1, w / 1800));
     });
     ro.observe(el);
     return () => ro.disconnect();
@@ -415,7 +415,7 @@ const DesktopInfographicScaler = ({ children }: { children: React.ReactNode }) =
     <div ref={wrapRef} className="relative w-full" style={{ height: 640 * scale }}>
       <div
         style={{
-          width: 1600,
+          width: 1800,
           height: 640,
           transform: `scale(${scale})`,
           transformOrigin: "top left",
