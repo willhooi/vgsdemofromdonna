@@ -406,7 +406,7 @@ const DesktopInfographicScaler = ({ children }: { children: React.ReactNode }) =
     const el = wrapRef.current;
     const ro = new ResizeObserver(() => {
       const w = el.clientWidth;
-      setScale(Math.min(1, w / 1600));
+      setScale(Math.min(1.18, w / 1600));
     });
     ro.observe(el);
     return () => ro.disconnect();
