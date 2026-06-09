@@ -102,7 +102,7 @@ export const Solutions = () => {
         </div>
 
         {/* Unified flow card: INPUT → HUB → OUTPUT → Outcome (girl + popups) */}
-        <div className="relative mx-auto mt-8 md:mt-10 w-full max-w-[1500px]">
+        <div className="relative mx-auto mt-8 md:mt-10 w-full max-w-[1760px]">
           <AIPlatformCard visible={visible} />
         </div>
 
@@ -406,7 +406,7 @@ const DesktopInfographicScaler = ({ children }: { children: React.ReactNode }) =
     const el = wrapRef.current;
     const ro = new ResizeObserver(() => {
       const w = el.clientWidth;
-      setScale(Math.min(1, w / 1600));
+      setScale(Math.min(1.18, w / 1600));
     });
     ro.observe(el);
     return () => ro.disconnect();
@@ -840,7 +840,7 @@ const AIPlatformCard = ({ visible }: { visible: boolean }) => {
 
   return (
     <div
-      className="relative w-full rounded-2xl border border-[hsl(var(--primary))]/15 bg-white px-3 py-5 sm:px-6 sm:py-7 lg:px-10 lg:py-9 overflow-hidden"
+      className="relative w-full rounded-2xl border border-[hsl(var(--primary))]/15 bg-white px-3 py-5 sm:px-6 sm:py-7 lg:px-4 lg:py-6 xl:px-6 xl:py-8 overflow-hidden"
       style={{
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(10px)",
