@@ -714,7 +714,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
         {/* Breathing glow behind Customer Profile 360° */}
         <span
           className="brain-glow"
-          style={{ left: 180, top: 250, width: 220, height: 220, zIndex: 1 }}
+          style={{ left: 200, top: 250, width: 230, height: 230, zIndex: 1 }}
           aria-hidden
         />
 
@@ -733,10 +733,10 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
           </div>
         ))}
 
-        {/* Customer Profile 360° — center 180,250, size 150 */}
+        {/* Customer Profile 360° — center 200,250, size 156 */}
         <div
           className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center rounded-full bg-white text-center shadow-[0_10px_28px_rgba(57,180,74,0.3)] ring-2 ring-[hsl(145_55%_45%)]/40"
-          style={{ left: 180, top: 250, width: 150, height: 150, zIndex: 3 }}
+          style={{ left: 200, top: 250, width: 156, height: 156, zIndex: 3 }}
         >
           <UserIcon className="h-8 w-8 text-[hsl(145_50%_35%)]" />
           <div className="mt-1 text-[16.5px] font-bold leading-tight text-[hsl(145_50%_22%)]">
@@ -745,7 +745,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
         </div>
 
         {/* Capability pills bottom */}
-        <div className="absolute left-1/2 -translate-x-1/2 flex flex-col gap-2" style={{ top: 430, width: 240, zIndex: 3 }}>
+        <div className="absolute left-1/2 -translate-x-1/2 flex flex-col gap-2" style={{ top: 430, width: 280, zIndex: 3 }}>
           {[
             { Icon: Database, label: "Data Collected" },
             { Icon: Users, label: "AI Segmentation" },
