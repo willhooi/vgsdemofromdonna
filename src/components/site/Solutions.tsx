@@ -623,6 +623,53 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
       >
         <DesktopColumnHeader index={2} accent="green" title="AI CUSTOMER BRAIN" subtitle="Unify, understand and predict" />
 
+        {/* Flow lines connecting Customer Profile 360° with orbit nodes + pills */}
+        <svg
+          className="pointer-events-none absolute inset-0"
+          viewBox="0 0 360 560"
+          preserveAspectRatio="none"
+          style={{ width: "100%", height: "100%", overflow: "visible", zIndex: 1 }}
+          aria-hidden
+        >
+          <defs>
+            <marker id="brain-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="hsl(145 55% 45%)" />
+            </marker>
+          </defs>
+          {ORBIT.map((s) => {
+            const cx = 180, cy = 250, r = 78;
+            const dx = s.x - cx, dy = s.y - cy;
+            const len = Math.hypot(dx, dy) || 1;
+            const ux = dx / len, uy = dy / len;
+            const x1 = cx + ux * r;
+            const y1 = cy + uy * r;
+            const x2 = s.x - ux * 14;
+            const y2 = s.y - uy * 14;
+            return (
+              <g key={s.label}>
+                <line
+                  x1={x1} y1={y1} x2={x2} y2={y2}
+                  stroke="hsl(145 55% 45%)"
+                  strokeWidth={1.5}
+                  strokeDasharray="4 5"
+                  strokeLinecap="round"
+                />
+                <circle cx={x2} cy={y2} r={2.5} fill="hsl(145 55% 45%)" />
+              </g>
+            );
+          })}
+          {/* Down arrow from circle bottom to pills */}
+          <line
+            x1={180} y1={328} x2={180} y2={420}
+            stroke="hsl(145 55% 45%)"
+            strokeWidth={1.5}
+            strokeDasharray="4 5"
+            strokeLinecap="round"
+            markerEnd="url(#brain-arrow)"
+          />
+        </svg>
+
+
         {/* Orbit nodes */}
         {ORBIT.map((s) => (
           <div
