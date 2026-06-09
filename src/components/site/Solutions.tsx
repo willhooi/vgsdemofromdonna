@@ -504,11 +504,12 @@ const AIPlatformCard = ({ visible }: { visible: boolean }) => {
               </marker>
             </defs>
             {/* 1 → 2 (orange dashed) */}
-            <path d="M24,50 C26,50 26,50 28,50" stroke="hsl(22 85% 55%)" strokeWidth="0.35" strokeDasharray="1.2 1" fill="none" markerEnd="url(#arr-orange)" className="flow-dash flow-1" />
+            <path d="M24,50 L28,50" stroke="hsl(22 85% 55%)" strokeWidth="1.5" strokeDasharray="4 3" fill="none" markerEnd="url(#arr-orange)" vectorEffect="non-scaling-stroke" className="flow-dash flow-1" />
             {/* 2 → 3 (green dashed) */}
-            <path d="M50,50 C52,50 52,50 54,50" stroke="hsl(145 55% 42%)" strokeWidth="0.35" strokeDasharray="1.2 1" fill="none" markerEnd="url(#arr-green)" className="flow-dash flow-2" />
+            <path d="M49,50 L53,50" stroke="hsl(145 55% 42%)" strokeWidth="1.5" strokeDasharray="4 3" fill="none" markerEnd="url(#arr-green)" vectorEffect="non-scaling-stroke" className="flow-dash flow-2" />
             {/* 3 → 4 (green dashed) */}
-            <path d="M76,50 C78,50 78,50 80,50" stroke="hsl(145 55% 42%)" strokeWidth="0.35" strokeDasharray="1.2 1" fill="none" markerEnd="url(#arr-green)" className="flow-dash flow-3" />
+            <path d="M74,50 L78,50" stroke="hsl(145 55% 42%)" strokeWidth="1.5" strokeDasharray="4 3" fill="none" markerEnd="url(#arr-green)" vectorEffect="non-scaling-stroke" className="flow-dash flow-3" />
+
           </svg>
 
           <StepDataSources visible={visible} />
