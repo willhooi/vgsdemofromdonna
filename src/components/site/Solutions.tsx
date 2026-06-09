@@ -466,31 +466,31 @@ const ORBIT = [
 ];
 
 const DesktopInfographic = ({ visible }: { visible: boolean }) => {
-  // Card geometry (absolute Y centers used by connectors)
-  // Column tops at y=40. Each column 560 tall.
+  // Balanced grid: 40 | 320 | 60 | 360 | 60 | 320 | 60 | 340 | 40 = 1600
+  // Col tops at y=40, height 560.
 
-  // Col1 — 7 Data Source cards. top:96 + i*68, height 56 → centers at 124 + i*68
-  const DS_CENTERS = DS_ROWS.map((_, i) => 40 + 96 + i * 68 + 28); // absolute Y
-  const DS_RIGHT_X = 40 + 330 - 14; // right edge of card minus inner padding
+  // Col1 — 7 Data Source cards. top:92 + i*66, height 54 → center = 92 + i*66 + 27
+  const DS_CENTERS = DS_ROWS.map((_, i) => 40 + 92 + i * 66 + 27);
+  const DS_RIGHT_X = 40 + 320 - 14; // right edge of card minus inner padding
 
-  // Col3 — 4 Business Impact cards. tops 120,220,320,420 (relative), height 88 → centers
-  const BI_TOPS_REL = [120, 220, 320, 420];
-  const BI_CENTERS = BI_TOPS_REL.map((t) => 40 + t + 44);
-  const BI_LEFT_X = 820 + 30;        // card left edge absolute
-  const BI_RIGHT_X = 820 + 30 + 290; // card right edge absolute
+  // Col3 — 4 Business Impact cards. tops relative 108,220,332,444, height 92 → centers
+  const BI_TOPS_REL = [108, 220, 332, 444];
+  const BI_CENTERS = BI_TOPS_REL.map((t) => 40 + t + 46);
+  const BI_LEFT_X = 840 + 22;        // card left edge absolute
+  const BI_RIGHT_X = 840 + 22 + 276; // card right edge absolute
 
-  // Col4 — 4 CX cards. tops relative to col4: 120,205,290,375, height 68
-  const CX_TOPS_REL = [120, 205, 290, 375];
-  const CX_CENTERS = CX_TOPS_REL.map((t) => 40 + t + 34);
-  const CX_LEFT_X = 1210 + 32;
+  // Col4 — 4 CX cards. tops relative: 108,196,284,372, height 66
+  const CX_TOPS_REL = [108, 196, 284, 372];
+  const CX_CENTERS = CX_TOPS_REL.map((t) => 40 + t + 33);
+  const CX_LEFT_X = 1220 + 22;
 
-  // Hubs (absolute page coords)
-  const HUB_ORANGE = { x: 395, y: 315 };
-  const HUB_GREEN_A = { x: 790, y: 315 };
-  const HUB_GREEN_B = { x: 1195, y: 315 };
+  // Hubs (absolute page coords) — sit in the 60px gaps between columns
+  const HUB_ORANGE  = { x: 390, y: 320 };
+  const HUB_GREEN_A = { x: 810, y: 320 };
+  const HUB_GREEN_B = { x: 1190, y: 320 };
 
-  // Customer Profile center (absolute)
-  const PROFILE_C = { x: 410 + 185, y: 40 + 250, r: 75 };
+  // Customer Profile center (absolute) — Col2 starts at left 420
+  const PROFILE_C = { x: 420 + 180, y: 40 + 250, r: 75 };
   const PROFILE_LEFT = { x: PROFILE_C.x - PROFILE_C.r, y: PROFILE_C.y };
   const PROFILE_RIGHT = { x: PROFILE_C.x + PROFILE_C.r, y: PROFILE_C.y };
 
