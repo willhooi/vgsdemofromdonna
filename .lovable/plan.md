@@ -1,114 +1,86 @@
-## Mục tiêu
-Bám sát chính xác hình tham khảo cho 2 vùng:
-1. **Connector lines / Data Flow Lines** — đường nối giữa 4 step.
-2. **Khu vực Customer Experience (Step 4)** — bố cục cô gái + 4 popup + review.
+# Rebalance Solutions Infographic — Desktop / Tablet / Mobile
+
+Goal: balance whitespace inside and between the 4 columns, keep all data-flow lines visible without crossing text, and ensure content stays readable at every breakpoint.
+
+Scope: `src/components/site/Solutions.tsx` only (presentation). No business-logic changes.
 
 ---
 
-## 1) Connector Lines (theo đúng reference)
+## 1) Desktop (≥1024px) — fixed 1600×640 infographic
 
-Hiện tại chỉ có 3 đoạn dashed cực ngắn giữa các step. Hình tham khảo có hệ thống connector phong phú hơn:
+### Column geometry — even spacing, uniform widths
+Replace the current mixed widths (330 / 370 / 350 / 350, gaps 40) with a balanced grid:
 
-### Step 1 → Step 2 (cam, dashed)
-- **7 đường cong cam** đi từ cạnh phải của từng row Data Source (ERP, POS, Website/App, Social, Zalo OA, Loyalty, Campaign) → **hội tụ về 1 điểm cam tròn** ở cạnh trái cột AI Brain → tiếp tục thành 1 đường vào vòng tròn "Customer Profile 360°".
-- Màu: `hsl(22 85% 55%)`, `stroke-dasharray="3 3"`, độ dày 1.25, đầu mút có dot tròn.
-- Animate dash chạy nhẹ (giữ `flow-dash-move`).
-
-### Step 2 → Step 3 (xanh, dashed)
-- **4 đường cong xanh** đi từ cạnh phải vòng Customer Profile 360° → 4 row của Business Impact (Business Reports, Audience Segmentation, Automated Journeys, Omnichannel Engagement).
-- Điểm xuất phát: 1 dot xanh ở cạnh phải vòng tròn brain, rồi tỏa ra 4 nhánh.
-- Màu: `hsl(145 55% 42%)`, `stroke-dasharray="3 3"`.
-
-### Step 3 → Step 4 (xanh, dashed)
-- **4 đường cong xanh** từ cạnh phải 4 row Business Impact → hội tụ về 1 dot xanh ở cạnh trái khu CX → tỏa thành 4 đường ngắn vào 4 popup CX.
-
-### Kỹ thuật
-- Dùng 1 SVG overlay duy nhất `absolute inset-0` (đã có sẵn), nâng `viewBox="0 0 1000 600"` để vẽ Bezier curve mượt.
-- Đặt SVG `z-index: 2` trên `bg` nhưng dưới content card (content `z-10`). Connector chỉ hiển thị `hidden lg:block`.
-- Mobile (<lg): không vẽ connector, dùng mũi tên dọc nhỏ ↓ giữa các step (subtle, dot chain).
-
----
-
-## 2) Customer Experience (Step 4) — bố cục mới
-
-Hiện tại: cô gái nằm absolute đè ra ngoài card, popup xếp dọc bên trong. Reference: **popup nằm bên trái, cô gái nằm bên phải, cùng trong card**, review badge nằm dưới cô gái.
-
-### Layout mới (desktop ≥lg)
-```
-┌─────────────────────────────────────┐
-│ ④ CUSTOMER EXPERIENCE               │
-│ Deliver personalized experiences... │
-│                                     │
-│ ┌──────────┐    ┌─────────────┐    │
-│ │ Tag      │    │             │    │
-│ │ Personali│    │             │    │
-│ │ 15% OFF  │    │   👧 Cô gái │    │
-│ ├──────────┤    │   (ảnh)     │    │
-│ │ ✓ Order  │    │             │    │
-│ │ #VG12345 │    │             │    │
-│ ├──────────┤    │             │    │
-│ │ 🎁 Birth │    │             │    │
-│ │ 100 pts  │    │             │    │
-│ ├──────────┤    └─────────────┘    │
-│ │ 🛍 Recomm│    ┌─────────────┐    │
-│ │ Check... │    │ ⭐⭐⭐⭐⭐ 5.0│    │
-│ └──────────┘    │ "Thanks..."  │    │
-│                 └─────────────┘    │
-└─────────────────────────────────────┘
+```text
+Inner padding 40 | Col1 320 | gap 60 | Col2 360 | gap 60 | Col3 320 | gap 60 | Col4 340 | 40
+Total = 1600 ✓
 ```
 
-- Card Step 4 chuyển thành **2 cột nội bộ**: cột trái (popup list, ~55% width), cột phải (ảnh + review badge, ~45% width).
-- Bỏ logic `lg:absolute -right-20` overflow ra ngoài → ảnh nằm **trong card** sạch sẽ.
-- Bỏ `lg:pr-24 xl:pr-28 overflow-visible` ở `AIPlatformCard` wrapper.
-- Review badge: full pill có `⭐⭐⭐⭐⭐ 5.0` + dòng `"Thanks for your feedback!"` (đúng text reference, không phải "Thanks!").
-- Ảnh cô gái: `object-contain`, max-h khoảng 220px, có soft green glow phía sau (radial gradient nhẹ giống reference).
+- Col1 (Data Sources): `left:40,  width:320, height:560`
+- Col2 (AI Brain):     `left:420, width:360, height:560`
+- Col3 (Business):     `left:840, width:320, height:560`
+- Col4 (Customer Exp): `left:1220,width:340, height:560`
 
-### Layout mobile (<md)
-- Stack dọc: 4 popup trước, sau đó ảnh + review badge.
-- Ảnh max-w-[200px] căn giữa.
+### Internal balance per column
+- **Col1**: 7 source cards. `top: 92 + i*66, height: 54`. Right padding equal to left (14/14). Bottom whitespace ≈ 30px.
+- **Col2**: Customer Profile orb stays centered at `(180, 250)`, radius 75. Orbit nodes adjusted to new col width (`x ∈ {80, 180, 280}`). Pills block: `top: 430, width: 240, gap 8`.
+- **Col3**: 4 BI cards. `top: [108, 220, 332, 444], height: 92`, even 20px gaps, vertical block centered.
+- **Col4**: 4 CX cards left-aligned `left: 22, width: 190, height: 66, top: [108, 196, 284, 372]`. Customer image moves to the **right half**: `right: 0, bottom: 24, width: 200, maxWidth: 56%`. Rating card: `left: 22, bottom: 28, width: 230`. Soft green glow re-centered behind girl.
 
-### Layout tablet (md-lg)
-- Giữ 2 cột nội bộ nhưng compact hơn.
+### Data-flow connectors
+Recompute connector endpoints from new column edges so:
+- Orange hub stays in the gap between Col1↔Col2 (`x ≈ 390`).
+- Green hub A in gap Col2↔Col3 (`x ≈ 810`).
+- Green hub B in gap Col3↔Col4 (`x ≈ 1190`).
+- All horizontal connector segments live **inside the inter-column gaps** (60px wide, more headroom than today's 40px), so dashed lines never cross card text.
+- Keep `stroke-width 2`, `dasharray 5 7`, animated `flow-dash`.
+- SVG keeps `overflow: visible`.
 
----
-
-## Thay đổi kỹ thuật
-
-### File duy nhất: `src/components/site/Solutions.tsx`
-
-1. **`AIPlatformCard`** (line 460-532):
-   - Bỏ `lg:pr-24 xl:pr-28 lg:overflow-visible` → trở về `overflow-hidden`.
-   - Thay block SVG connector (lines 481-504) bằng SVG mới với `viewBox="0 0 1000 600"`, vẽ:
-     - 7 path cong cam từ left zone (Data Sources rows) → 1 dot cam → vào brain core
-     - 4 path cong xanh từ brain → 4 row Business Impact
-     - 4 path cong xanh từ Business Impact → 1 dot xanh → 4 popup CX
-   - Toạ độ tính sẵn dựa trên grid 4 cột đều (mỗi cột ~250px wide), Bezier control points cho cong mượt.
-   - Tất cả path dùng class `flow-dash` + delay so le (`flow-1` → `flow-12`).
-
-2. **`StepCustomerExperience`** (line 704-755):
-   - Rewrite body: thay flex-col đơn bằng `grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-3`.
-   - Cột trái: map 4 popup (giữ logic hiện tại nhưng bỏ `step-row-float` để gọn).
-   - Cột phải: 
-     ```tsx
-     <div className="relative flex flex-col items-center">
-       <div className="relative">
-         <div className="absolute inset-0 -z-10 rounded-full bg-[radial-gradient(...green glow...)]" />
-         <img src={shopperImg} className="h-auto w-full max-w-[200px] object-contain" />
-       </div>
-       <div className="mt-2 rounded-2xl bg-white px-3 py-1.5 shadow ring-1 ring-border">
-         ⭐⭐⭐⭐⭐ 5.0 + "Thanks for your feedback!"
-       </div>
-     </div>
-     ```
-
-3. **CSS thêm** trong `<style>` block (line 516):
-   - Bổ sung `.flow-4` → `.flow-12` với delay khác nhau (0.1s, 0.2s... 1.2s) cho stagger animation mượt.
-
-4. **Connector dots**: 2 SVG `<circle>` (1 cam ở trái brain, 1 xanh ở phải brain / trái CX), có `animate-pulse` opacity.
+### Scaler
+Keep `DesktopInfographicScaler` (transform-scale to fit viewport ≥1024). With wider gaps, content remains readable when scaled to ~0.8 at 1280px.
 
 ---
 
-## Kết quả
-- Đường nối toả/hội tụ rõ ràng theo flow ①→②→③→④ y như reference.
-- Cô gái + review nằm gọn trong card, popup bên trái — không còn cảnh ảnh đè ra ngoài hay popup chồng lên ảnh.
-- Mobile: stack dọc sạch, connector ẩn để tối ưu space.
+## 2) Tablet (md, 768–1023px)
+
+Currently uses a 2×2 grid of `StepCard`s. Improvements:
+- Increase outer card padding: `px-6 py-7` on the AIPlatformCard wrapper at `md:`.
+- Grid gap: `md:gap-5 lg:gap-6` (already close). Ensure each `StepCard` has `min-h-[420px]` so the 4 tiles match heights.
+- Within each StepCard:
+  - Step1: keep 7 rows, slightly bump row height to `py-2`.
+  - Step2: cap orbit at `max-w-[260px]` and add `mt-3` before pills.
+  - Step4 (CX): stack engagement cards full-width with shopper image as a 40% right-floated visual, rating row pinned bottom.
+- No SVG connectors on tablet/mobile (current behavior) — instead show small downward chevrons between rows of the grid to imply flow (optional polish, low risk).
+
+---
+
+## 3) Mobile (<768px)
+
+- Single column stack already used. Tighten:
+  - Section padding `pt-12 pb-6`.
+  - StepCard inner padding `p-4`, gap between cards `gap-3`.
+  - Step2 orb max-width `220px`.
+  - Step4 image max-width `180px`, centered, with cards above and rating below — no overlap.
+- Ensure no text uses `truncate` where wrapping is acceptable on small screens: switch `truncate` → `line-clamp-2` for card titles/subs in `StepDataSources` / CX cards.
+
+---
+
+## 4) Implementation notes (technical)
+
+Files touched:
+- `src/components/site/Solutions.tsx`
+  - Update column `left/width` constants and recompute `DS_RIGHT_X`, `BI_LEFT_X`, `BI_RIGHT_X`, `CX_LEFT_X`, `HUB_ORANGE/GREEN_A/GREEN_B.x`, `PROFILE_C`.
+  - Update orbit node coordinates for new Col2 width.
+  - Reposition Col4 image, CX cards, rating to keep image fully inside column with `overflow: visible`.
+  - Adjust tablet/mobile `StepCard` paddings + replace `truncate` with `line-clamp-2` where needed.
+
+No new dependencies. No changes to data, routing, or other components.
+
+---
+
+## Acceptance checklist
+- Desktop ≥1280px: all 4 columns equal visual weight, ≥60px gaps, every dashed connector visible and routed inside gaps (no crossing card text).
+- Desktop 1024–1279px: scaler keeps layout intact, text still readable.
+- Tablet 768–1023px: 2×2 grid with equal card heights, no truncation.
+- Mobile <768px: single stack, image and cards fully contained, no overflow.
+- Customer image stays inside Col4 in every breakpoint.
