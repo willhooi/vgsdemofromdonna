@@ -768,14 +768,14 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
       {/* ===== Column 3 — BUSINESS IMPACT ===== */}
       <div
         className="absolute rounded-xl border border-[hsl(145_55%_80%)]/50 bg-gradient-to-b from-[hsl(145_60%_98%)] to-white shadow-[0_2px_10px_rgba(0,0,0,0.03)]"
-        style={{ left: 840, top: 40, width: 320, height: 560, zIndex: 2 }}
+        style={{ left: 940, top: 40, width: 360, height: 560, zIndex: 2 }}
       >
         <DesktopColumnHeader index={3} accent="green" title="BUSINESS IMPACT" subtitle="Turn insights into measurable results" />
         {BI_CARDS.map((it, i) => (
           <div
             key={it.name}
             className="absolute flex items-start gap-3 rounded-lg border border-[hsl(145_45%_80%)]/50 bg-white px-3 py-2.5 shadow-[0_1px_3px_rgba(57,180,74,0.08)]"
-            style={{ left: 22, width: 276, height: 92, top: BI_TOPS_REL[i] }}
+            style={{ left: 22, width: 316, height: 92, top: BI_TOPS_REL[i] }}
           >
             <span className="grid h-9 w-9 shrink-0 place-items-center rounded-md bg-[hsl(145_60%_95%)] text-[hsl(145_50%_35%)]">
               <it.Icon className="h-[18px] w-[18px]" />
