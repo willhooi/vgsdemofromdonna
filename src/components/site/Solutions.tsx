@@ -619,7 +619,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
       {/* ===== Column 2 — AI CUSTOMER BRAIN ===== */}
       <div
         className="absolute rounded-xl border border-[hsl(145_55%_80%)]/50 bg-gradient-to-b from-[hsl(145_60%_98%)] to-white shadow-[0_2px_10px_rgba(0,0,0,0.03)]"
-        style={{ left: 410, top: 40, width: 370, height: 560, zIndex: 2 }}
+        style={{ left: 420, top: 40, width: 360, height: 560, zIndex: 2 }}
       >
         <DesktopColumnHeader index={2} accent="green" title="AI CUSTOMER BRAIN" subtitle="Unify, understand and predict" />
 
@@ -635,10 +635,10 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
           </div>
         ))}
 
-        {/* Customer Profile 360° — center 185,250, size 150 */}
+        {/* Customer Profile 360° — center 180,250, size 150 */}
         <div
           className="absolute -translate-x-1/2 -translate-y-1/2 flex flex-col items-center justify-center rounded-full bg-white text-center shadow-[0_10px_28px_rgba(57,180,74,0.3)] ring-2 ring-[hsl(145_55%_45%)]/40"
-          style={{ left: 185, top: 250, width: 150, height: 150 }}
+          style={{ left: 180, top: 250, width: 150, height: 150 }}
         >
           <UserIcon className="h-7 w-7 text-[hsl(145_50%_35%)]" />
           <div className="mt-1 text-[13px] font-bold leading-tight text-[hsl(145_50%_22%)]">
@@ -647,7 +647,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
         </div>
 
         {/* Capability pills bottom */}
-        <div className="absolute left-1/2 -translate-x-1/2 flex flex-col gap-2" style={{ top: 420, width: 220 }}>
+        <div className="absolute left-1/2 -translate-x-1/2 flex flex-col gap-2" style={{ top: 430, width: 240 }}>
           {[
             { Icon: Database, label: "Data Collected" },
             { Icon: Users, label: "AI Segmentation" },
@@ -668,14 +668,14 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
       {/* ===== Column 3 — BUSINESS IMPACT ===== */}
       <div
         className="absolute rounded-xl border border-[hsl(145_55%_80%)]/50 bg-gradient-to-b from-[hsl(145_60%_98%)] to-white shadow-[0_2px_10px_rgba(0,0,0,0.03)]"
-        style={{ left: 820, top: 40, width: 350, height: 560, zIndex: 2 }}
+        style={{ left: 840, top: 40, width: 320, height: 560, zIndex: 2 }}
       >
         <DesktopColumnHeader index={3} accent="green" title="BUSINESS IMPACT" subtitle="Turn insights into measurable results" />
         {BI_CARDS.map((it, i) => (
           <div
             key={it.name}
             className="absolute flex items-start gap-3 rounded-lg border border-[hsl(145_45%_80%)]/50 bg-white px-3 py-2.5 shadow-[0_1px_3px_rgba(57,180,74,0.08)]"
-            style={{ left: 30, width: 290, height: 88, top: BI_TOPS_REL[i] }}
+            style={{ left: 22, width: 276, height: 92, top: BI_TOPS_REL[i] }}
           >
             <span className="grid h-9 w-9 shrink-0 place-items-center rounded-md bg-[hsl(145_60%_95%)] text-[hsl(145_50%_35%)]">
               <it.Icon className="h-[18px] w-[18px]" />
