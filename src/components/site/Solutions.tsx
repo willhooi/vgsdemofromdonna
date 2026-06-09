@@ -791,7 +791,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
       {/* ===== Column 4 — CUSTOMER EXPERIENCE ===== */}
       <div
         className="absolute rounded-xl border border-[hsl(145_55%_80%)]/50 bg-gradient-to-b from-[hsl(145_60%_98%)] to-white shadow-[0_2px_10px_rgba(0,0,0,0.03)]"
-        style={{ left: 1220, top: 40, width: 340, height: 560, zIndex: 2, overflow: "visible" }}
+        style={{ left: 1370, top: 40, width: 380, height: 560, zIndex: 2, overflow: "visible" }}
       >
         <DesktopColumnHeader index={4} accent="green" title="CUSTOMER EXPERIENCE" subtitle="Deliver personalized experiences that customers love" />
 
@@ -800,7 +800,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
           aria-hidden
           className="pointer-events-none absolute rounded-full"
           style={{
-            right: -10, bottom: 30, width: 260, height: 310,
+            right: -10, bottom: 30, width: 280, height: 330,
             background: "radial-gradient(circle, rgba(43,196,105,0.22), rgba(43,196,105,0.04), transparent)",
             zIndex: 0,
           }}
@@ -812,7 +812,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
           alt="Happy customer receiving personalized offers"
           loading="lazy"
           className="absolute object-contain drop-shadow-[0_18px_28px_rgba(0,0,0,0.18)]"
-          style={{ right: 0, bottom: 24, width: 200, maxWidth: "56%", height: "auto", zIndex: 2 }}
+          style={{ right: 0, bottom: 24, width: 220, maxWidth: "58%", height: "auto", zIndex: 2 }}
         />
 
         {/* Engagement cards (floating, left side) */}
