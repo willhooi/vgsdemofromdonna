@@ -102,7 +102,7 @@ export const Solutions = () => {
         </div>
 
         {/* Unified flow card: INPUT → HUB → OUTPUT → Outcome (girl + popups) */}
-        <div className="relative mx-auto mt-8 md:mt-10 max-w-6xl">
+        <div className="relative mx-auto mt-8 md:mt-10 w-full max-w-[1500px]">
           <AIPlatformCard visible={visible} />
         </div>
 
@@ -459,7 +459,7 @@ const AIPlatformCard = ({ visible }: { visible: boolean }) => {
 
   return (
     <div
-      className="relative w-full rounded-2xl border border-[hsl(var(--primary))]/15 bg-white px-3 py-5 sm:px-5 sm:py-6 lg:px-6 lg:py-7 overflow-hidden"
+      className="relative w-full rounded-2xl border border-[hsl(var(--primary))]/15 bg-white px-3 py-5 sm:px-6 sm:py-7 lg:px-10 lg:py-9 overflow-hidden"
       style={{
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(10px)",
@@ -476,7 +476,7 @@ const AIPlatformCard = ({ visible }: { visible: boolean }) => {
       <div className="relative z-10">
 
         {/* 4-step journey */}
-        <div className="relative grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-5 lg:grid-cols-4 lg:gap-6">
+        <div className="relative grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-4 lg:gap-8">
           {/* Desktop connector overlay — full flow lines */}
           <svg
             aria-hidden
@@ -694,7 +694,7 @@ const StepAIBrain = ({ visible }: { visible: boolean }) => (
     delay={120}
   >
     {/* Orbit core */}
-    <div className="relative mx-auto aspect-square w-full max-w-[200px]">
+    <div className="relative mx-auto aspect-square w-full max-w-[240px]">
       {/* Glow */}
       <div
         className="absolute left-1/2 top-1/2 h-[55%] w-[55%] -translate-x-1/2 -translate-y-1/2 rounded-full"
@@ -726,9 +726,9 @@ const StepAIBrain = ({ visible }: { visible: boolean }) => (
         );
       })}
       {/* Center core */}
-      <div className="absolute left-1/2 top-1/2 flex aspect-square w-[42%] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full bg-white text-center shadow-[0_6px_18px_rgba(57,180,74,0.25)] ring-2 ring-[hsl(145_55%_45%)]/30">
-        <UserIcon className="h-4 w-4 text-[hsl(145_50%_35%)]" />
-        <div className="mt-0.5 text-[9px] font-bold leading-tight text-[hsl(145_50%_22%)]">
+      <div className="absolute left-1/2 top-1/2 flex aspect-square w-[48%] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full bg-white text-center shadow-[0_8px_22px_rgba(57,180,74,0.28)] ring-2 ring-[hsl(145_55%_45%)]/35">
+        <UserIcon className="h-5 w-5 text-[hsl(145_50%_35%)]" />
+        <div className="mt-1 text-[10.5px] font-bold leading-tight text-[hsl(145_50%_22%)]">
           Customer<br />Profile 360°
         </div>
       </div>
@@ -805,9 +805,27 @@ const StepCustomerExperience = ({ visible }: { visible: boolean }) => (
     visible={visible}
     delay={360}
   >
-    <div className="grid grid-cols-1 gap-3 sm:grid-cols-[1.05fr_0.95fr] sm:gap-2">
-      {/* Left: 4 popups */}
-      <div className="flex flex-col gap-1.5">
+    <div className="relative min-h-[340px]">
+      {/* Soft green glow behind girl */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute right-[-10%] bottom-[10%] -z-0 h-[70%] w-[70%] rounded-full"
+        style={{
+          background:
+            "radial-gradient(circle at 60% 50%, hsl(145 65% 78% / 0.65) 0%, hsl(145 65% 70% / 0.35) 50%, transparent 75%)",
+        }}
+      />
+
+      {/* Girl image — bottom-right inside column */}
+      <img
+        src={shopperImg}
+        alt="Happy customer receiving personalized offers"
+        loading="lazy"
+        className="pointer-events-none absolute bottom-0 right-[-6%] z-0 h-auto w-[46%] max-w-[170px] object-contain drop-shadow-[0_14px_24px_rgba(0,0,0,0.14)]"
+      />
+
+      {/* Popups column — left side, wraps ~60% width */}
+      <div className="relative z-10 flex flex-col gap-1.5 pr-[44%]">
         {CX_POPUPS.map((p, i) => {
           const isAccent = p.tone === "accent";
           const iconBg = isAccent ? "bg-[hsl(35_100%_94%)] text-[hsl(35_100%_45%)]" : "bg-[hsl(145_60%_95%)] text-[hsl(145_50%_35%)]";
@@ -830,34 +848,15 @@ const StepCustomerExperience = ({ visible }: { visible: boolean }) => (
         })}
       </div>
 
-      {/* Right: girl + review badge */}
-      <div className="relative flex flex-col items-center justify-between">
-        <div className="relative w-full">
-          {/* Soft green glow backdrop */}
-          <div
-            aria-hidden
-            className="pointer-events-none absolute left-1/2 top-1/2 -z-0 h-[85%] w-[85%] -translate-x-1/2 -translate-y-1/2 rounded-full"
-            style={{
-              background:
-                "radial-gradient(circle at 50% 50%, hsl(145 65% 78% / 0.7) 0%, hsl(145 65% 70% / 0.4) 50%, transparent 75%)",
-            }}
-          />
-          <img
-            src={shopperImg}
-            alt="Happy customer receiving personalized offers"
-            loading="lazy"
-            className="relative mx-auto block h-auto w-full max-w-[200px] object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.12)]"
-          />
+      {/* Review badge — bottom-left under popups */}
+      <div className="relative z-10 mt-2 inline-block rounded-2xl bg-white px-3 py-1.5 shadow-[0_8px_20px_-12px_rgba(0,0,0,0.2)] ring-1 ring-border">
+        <div className="flex items-center gap-1">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <Star key={i} className="h-3 w-3 fill-[#ff9b17] text-[#ff9b17]" />
+          ))}
+          <span className="ml-1 text-[11px] font-bold text-foreground">5.0</span>
         </div>
-        <div className="mt-1.5 w-full rounded-2xl bg-white px-2.5 py-1.5 text-center shadow-[0_8px_20px_-12px_rgba(0,0,0,0.2)] ring-1 ring-border">
-          <div className="flex items-center justify-center gap-1">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <Star key={i} className="h-2.5 w-2.5 fill-[#ff9b17] text-[#ff9b17]" />
-            ))}
-            <span className="ml-0.5 text-[10px] font-bold text-foreground">5.0</span>
-          </div>
-          <div className="mt-0.5 text-[9px] italic text-muted-foreground">"Thanks for your feedback!"</div>
-        </div>
+        <div className="mt-0.5 text-[9.5px] italic text-muted-foreground">"Thanks for your feedback!"</div>
       </div>
     </div>
   </StepCard>
