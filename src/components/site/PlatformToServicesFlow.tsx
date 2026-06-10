@@ -1,75 +1,147 @@
 /**
- * Visual continuity layer between the AIPlatformCard (Solutions) and the
- * ServicesGrid. Three dotted "signal rails" carry small green dots from the
- * platform downward, fanning into the 3 service columns.
+ * ConstellationOverlay — visual bridge between the AIPlatformCard (above) and
+ * the ServicesGrid (below). Renders a constellation of dashed lines fanning
+ * from 4 platform "nodes" (top) into 3 service "nodes" (bottom of bridge),
+ * with animated stroke-dashoffset so data appears to stream outward.
  *
- * Pure SVG + CSS, pointer-events:none, sits above GalaxyBackdrop and below
- * card content. Animations honor prefers-reduced-motion via index.css.
+ * Pure SVG + CSS, pointer-events: none. Honors prefers-reduced-motion via
+ * index.css (.constellation-flow & .star-twinkle).
+ *
+ * Kept the original component name (PlatformToServicesFlow) so Index.tsx
+ * remains untouched.
  */
+
+const PLATFORM_X = [16, 38, 62, 84]; // 4 platform columns
+const SERVICE_X = [16, 50, 84]; // 3 service columns
+
+// Background "floating stars" sprinkled across the layer
+const STARS: Array<{ x: number; y: number; r: number; delay: number }> = [
+  { x: 8, y: 18, r: 1.8, delay: 0.0 },
+  { x: 24, y: 62, r: 1.4, delay: 0.8 },
+  { x: 48, y: 30, r: 2.2, delay: 1.6 },
+  { x: 72, y: 70, r: 1.6, delay: 0.4 },
+  { x: 92, y: 24, r: 2.0, delay: 2.1 },
+  { x: 33, y: 88, r: 1.4, delay: 1.2 },
+  { x: 58, y: 12, r: 1.2, delay: 2.6 },
+  { x: 80, y: 52, r: 1.6, delay: 0.6 },
+  { x: 12, y: 78, r: 1.2, delay: 2.0 },
+  { x: 66, y: 90, r: 1.8, delay: 1.4 },
+];
+
 export const PlatformToServicesFlow = () => {
-  // 3 rails at 16% / 50% / 84% horizontally — aligned to the 3 service columns.
-  const RAILS = [
-    { x: "16%", delays: [0, 1.6, 3.2] },
-    { x: "50%", delays: [0.6, 2.2, 3.8] },
-    { x: "84%", delays: [1.1, 2.7, 4.3] },
-  ];
+  // Pair each platform node with 1-2 nearest service nodes for fan-out lines
+  const LINES: Array<{ x1: number; x2: number; delay: number }> = [];
+  PLATFORM_X.forEach((px, pi) => {
+    SERVICE_X.forEach((sx, si) => {
+      const dist = Math.abs(px - sx);
+      if (dist < 30) {
+        LINES.push({ x1: px, x2: sx, delay: (pi * 0.4 + si * 0.3) % 3 });
+      }
+    });
+  });
 
   return (
     <div
       aria-hidden
       className="pointer-events-none absolute inset-x-0 top-0 z-0 h-full overflow-hidden"
     >
-      {/* Fan-out glow right under the AIPlatformCard */}
+      {/* Soft halo right under the AIPlatformCard */}
       <div
-        className="absolute left-1/2 h-[260px] w-[78%] -translate-x-1/2"
+        className="absolute left-1/2 h-[220px] w-[78%] -translate-x-1/2"
         style={{
-          top: "0",
+          top: 0,
           background:
-            "radial-gradient(ellipse 70% 90% at 50% 0%, hsl(var(--primary) / 0.18) 0%, hsl(var(--primary) / 0.08) 35%, transparent 70%)",
+            "radial-gradient(ellipse 70% 90% at 50% 0%, hsl(var(--primary) / 0.16) 0%, hsl(var(--primary) / 0.06) 35%, transparent 72%)",
           filter: "blur(2px)",
         }}
       />
 
-      {/* Rails + traveling dots */}
-      <div className="container-tight relative h-full">
-        <svg
-          className="absolute inset-0 h-full w-full"
-          preserveAspectRatio="none"
-          aria-hidden
-        >
-          {RAILS.map((r) => (
-            <line
-              key={r.x}
-              x1={r.x}
-              x2={r.x}
-              y1="0"
-              y2="100%"
-              stroke="hsl(var(--primary))"
-              strokeOpacity="0.32"
-              strokeWidth="1.2"
-              strokeDasharray="3 7"
-              strokeLinecap="round"
-            />
-          ))}
-        </svg>
+      <svg
+        className="absolute inset-0 h-full w-full"
+        preserveAspectRatio="none"
+        viewBox="0 0 100 100"
+        aria-hidden
+      >
+        {/* Fan-out constellation lines (platform → services) */}
+        {LINES.map((l, i) => (
+          <line
+            key={`l-${i}`}
+            x1={l.x1}
+            y1={0}
+            x2={l.x2}
+            y2={100}
+            stroke="hsl(145 55% 42%)"
+            strokeOpacity="0.28"
+            strokeWidth="0.18"
+            strokeDasharray="0.9 1.6"
+            strokeLinecap="round"
+            vectorEffect="non-scaling-stroke"
+            className="constellation-flow"
+            style={{ animationDelay: `-${l.delay}s` }}
+          />
+        ))}
 
-        {RAILS.map((r) =>
-          r.delays.map((d, i) => (
-            <span
-              key={`${r.x}-${i}`}
-              className="signal-drop absolute -translate-x-1/2 rounded-full bg-[hsl(var(--primary))]"
-              style={{
-                left: r.x,
-                top: 0,
-                width: 6,
-                height: 6,
-                boxShadow: "0 0 10px 2px hsl(var(--primary) / 0.5)",
-                animationDelay: `${d}s`,
-              }}
-            />
-          ))
-        )}
-      </div>
+        {/* Horizontal "chòm sao" tether — gently knits the 3 service columns */}
+        <line
+          x1={SERVICE_X[0]}
+          y1={96}
+          x2={SERVICE_X[2]}
+          y2={96}
+          stroke="hsl(145 55% 42%)"
+          strokeOpacity="0.18"
+          strokeWidth="0.14"
+          strokeDasharray="0.7 1.4"
+          vectorEffect="non-scaling-stroke"
+          className="constellation-flow"
+          style={{ animationDelay: "-1.4s" }}
+        />
+
+        {/* Anchor nodes — platform (top) */}
+        {PLATFORM_X.map((x, i) => (
+          <circle
+            key={`pn-${i}`}
+            cx={x}
+            cy={0.6}
+            r={0.7}
+            fill="hsl(145 55% 42%)"
+            className="star-twinkle"
+            style={{
+              animationDelay: `${i * 0.4}s`,
+              filter: "drop-shadow(0 0 3px hsl(145 55% 42% / 0.6))",
+            }}
+          />
+        ))}
+
+        {/* Anchor nodes — services (bottom) */}
+        {SERVICE_X.map((x, i) => (
+          <circle
+            key={`sn-${i}`}
+            cx={x}
+            cy={99.4}
+            r={0.85}
+            fill="hsl(145 55% 42%)"
+            className="star-twinkle"
+            style={{
+              animationDelay: `${i * 0.6 + 0.3}s`,
+              filter: "drop-shadow(0 0 4px hsl(145 55% 42% / 0.7))",
+            }}
+          />
+        ))}
+
+        {/* Sprinkled background stars */}
+        {STARS.map((s, i) => (
+          <circle
+            key={`st-${i}`}
+            cx={s.x}
+            cy={s.y}
+            r={s.r * 0.35}
+            fill="hsl(145 55% 42%)"
+            opacity="0.55"
+            className="star-twinkle"
+            style={{ animationDelay: `${s.delay}s` }}
+          />
+        ))}
+      </svg>
     </div>
   );
 };

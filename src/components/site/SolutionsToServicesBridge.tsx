@@ -1,7 +1,7 @@
 /**
- * Compact cosmic warp transition between Solutions (platform nucleus) and
- * ServicesGrid (orbiting services). Sits transparently on top of the shared
- * GalaxyBackdrop and the PlatformToServicesFlow rails.
+ * Minimal bridge headline between AIPlatformCard and ServicesGrid.
+ * Visual heavy lifting is delegated to the surrounding ConstellationOverlay
+ * (rendered via PlatformToServicesFlow) so this stays a thin, semantic anchor.
  */
 export const SolutionsToServicesBridge = () => {
   return (
@@ -11,44 +11,24 @@ export const SolutionsToServicesBridge = () => {
       className="relative"
     >
       <div className="container-tight relative">
-        <div className="mx-auto flex max-w-2xl flex-col items-center gap-3 py-6 text-center md:py-10">
-          {/* Warp streak above */}
-          <div aria-hidden className="relative h-8 w-px">
-            <span className="warp-streak absolute left-1/2 top-0 h-8 w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-[hsl(var(--primary)/0.55)] to-transparent" />
-            <span
-              className="warp-streak absolute left-1/2 top-0 h-6 w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-[hsl(var(--primary)/0.4)] to-transparent"
-              style={{ animationDelay: "0.6s" }}
-            />
-          </div>
+        <div className="mx-auto flex max-w-3xl flex-col items-center gap-3 py-8 text-center md:py-12">
+          {/* Thin vertical tether picks up the constellation flow */}
+          <span
+            aria-hidden
+            className="h-10 w-px bg-gradient-to-b from-transparent via-[hsl(var(--primary)/0.5)] to-transparent"
+          />
 
-          {/* Orbit ring + pulsing core */}
-          <div className="relative grid h-14 w-14 place-items-center">
-            <span
-              aria-hidden
-              className="absolute inset-0 rounded-full border border-dashed border-[hsl(var(--primary)/0.55)] galaxy-orbit-medium"
-            />
-            <span
-              aria-hidden
-              className="absolute inset-2 rounded-full border border-[hsl(var(--primary)/0.3)] galaxy-orbit-reverse-medium"
-            />
-            <span
-              aria-hidden
-              className="absolute h-2.5 w-2.5 rounded-full bg-[hsl(var(--primary))] shadow-[0_0_16px_4px_hsl(var(--primary)/0.45)] animate-pulse"
-            />
-          </div>
-
-          <h3 className="heading-display text-balance text-[18px] sm:text-[22px] md:text-[26px] text-foreground leading-tight">
-            From the platform{" "}
+          <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-muted-foreground">
+            <span className="text-muted-foreground/70">From the platform</span>{" "}
             <span className="text-[hsl(var(--primary))]">
               to the services that orbit it
             </span>
-            .
-          </h3>
+          </p>
 
-          {/* Warp streak below */}
-          <div aria-hidden className="relative h-6 w-px">
-            <span className="warp-streak absolute left-1/2 top-0 h-6 w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-[hsl(var(--primary)/0.5)] to-transparent" />
-          </div>
+          <span
+            aria-hidden
+            className="h-10 w-px bg-gradient-to-b from-[hsl(var(--primary)/0.5)] via-[hsl(var(--primary)/0.25)] to-transparent"
+          />
         </div>
       </div>
     </section>
