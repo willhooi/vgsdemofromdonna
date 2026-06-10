@@ -1,60 +1,60 @@
-# Plan — Galaxy flow continuity & service card polish
+## Mục tiêu
+Triển khai hướng **Constellation orbit** (v3): biến toàn section Solutions thành một bản đồ chòm sao — AIPlatformCard là cụm sao trung tâm, ServicesGrid là chùm vệ tinh, nối nhau bằng các đường nét đứt phát sáng với data flow chạy dọc (animate `stroke-dashoffset`).
 
-Four small, focused changes across the Solutions → Bridge → ServicesGrid block. No business logic touched.
+**Ràng buộc cứng:** Không sửa cấu trúc/nội dung AIPlatformCard. Chỉ thêm layer SVG overlay + đổi background hợp nhất. Không dark mode, light theme xanh lá hiện tại.
 
-## 1. Dot lan toả từ AIPlatformCard xuống ServicesGrid
+## Các thay đổi
 
-The AIPlatformCard already emits signal dots (orbit particles + the vertical particle from Customer Profile down through pills). Right now they die inside the card. We extend that "signal" visually so it reads as continuous flow into the service cards below.
+### 1. New `src/components/site/ConstellationOverlay.tsx`
+Layer SVG full-section, `position: absolute inset-0 pointer-events-none z-[5]`, render phía trên GalaxyBackdrop và phía dưới các card.
+- **Anchor points** đo bằng `ResizeObserver` + `getBoundingClientRect` của 4 cột AIPlatformCard (bottom-center mỗi cột) và 9 service card (top-center). Section ref được forward từ `Solutions` qua context hoặc prop.
+- **Constellation lines:** vẽ `<path>` từ mỗi cột AIPlatformCard fan-out tới 2-3 service card gần nhất; cộng thêm các đường ngang nối các service trong cùng hàng tạo cảm giác chòm sao.
+- **Style:** `stroke="hsl(145 55% 42% / 0.22)"`, `stroke-width="1"`, `stroke-dasharray="4 6"`, `stroke-linecap="round"`.
+- **Data flow animation:** `@keyframes constellation-flow { to { stroke-dashoffset: -200 } }` chạy 6s linear infinite. Mỗi path random delay 0-3s để dòng dữ liệu trông tự nhiên, không đồng loạt.
+- **Node stars:** `<circle r="3">` tại mỗi anchor + 8-12 floating stars rải rác, dùng `animate-pulse` với staggered delay; thêm 3 "bright nodes" `r="2.5"` với `filter: drop-shadow(0 0 6px ...)`.
+- **Reduced motion:** wrap keyframe trong `@media (prefers-reduced-motion: no-preference)`.
 
-Approach: a new lightweight overlay `PlatformToServicesFlow` (pure SVG + CSS, no JS layout math) rendered inside the existing `relative isolate` wrapper in `Index.tsx`, positioned between the bridge and the services grid, `pointer-events-none`, `-z-[1]` (above GalaxyBackdrop, below cards).
+### 2. `src/components/site/Solutions.tsx`
+- Bọc nguyên section bằng `ref={sectionRef}` và truyền `aiCardRef` + `servicesRef` xuống.
+- Thêm `<ConstellationOverlay sectionRef={...} aiCardRef={...} servicesRef={...} />` trước children, sau backdrop.
+- Giữ nguyên markup AIPlatformCard.
 
-Visuals:
-- 3 vertical dotted "signal rails" aligned to the 3 service columns (left / center / right), starting from the bottom edge of the AIPlatformCard, passing through the bridge, ending at the top of the services grid.
-- On each rail, 2–3 small green dots travel downward on a loop (`@keyframes signal-drop` translateY 0 → 100% + opacity in/out), staggered delays so the cascade feels organic.
-- Rails use `stroke-dasharray="3 6"` at ~35% opacity, color `hsl(var(--primary))`, so they match the existing brain orbit dots.
-- A faint conic "spread" right under the AIPlatformCard (radial green glow fanning out into 3 directions) sells the "lan toả" feeling.
-- All animations respect `prefers-reduced-motion`.
+### 3. `src/components/site/ServicesGrid.tsx`
+- Forward `ref` ra ngoài (hoặc nhận `gridRef` qua prop) để overlay đo vị trí 9 card.
+- Gắn `data-service-anchor` lên mỗi DesktopCard wrapper để overlay query.
 
-Files: new `src/components/site/PlatformToServicesFlow.tsx`, edit `src/pages/Index.tsx`, add keyframe `signal-drop` in `src/index.css`.
+### 4. `src/components/site/AIPlatformCard` (chỉ thêm anchor, không đổi layout)
+- Gắn `data-platform-anchor` lên 4 column root (không thay đổi class/spacing/content).
 
-## 2. Giảm khoảng cách AIPlatformCard ↔ ServiceCard
+### 5. `src/components/site/PlatformToServicesFlow.tsx`
+- Giảm vai trò: giữ glow halo dưới AICard, **bỏ 3 signal rails** vì đã được thay bằng constellation lines từ overlay (tránh chồng chéo). Hoặc xoá hẳn import nếu trùng lặp hoàn toàn.
 
-Current vertical stack:
-- `Solutions` section: `pb-0` (ok)
-- `SolutionsToServicesBridge`: `py-14 md:py-20` (too tall — 56–80px each side)
-- `ServicesGrid`: `pt-4 md:pt-6`
+### 6. `src/index.css`
+- Thêm:
+```css
+@keyframes constellation-flow {
+  to { stroke-dashoffset: -200; }
+}
+.constellation-flow { animation: constellation-flow 6s linear infinite; }
+@keyframes star-twinkle {
+  0%,100% { opacity: .25; transform: scale(.9); }
+  50% { opacity: .9; transform: scale(1.15); }
+}
+.star-twinkle { animation: star-twinkle 3.6s ease-in-out infinite; transform-origin: center; }
+@media (prefers-reduced-motion: reduce) {
+  .constellation-flow, .star-twinkle { animation: none; }
+}
+```
 
-Changes:
-- Bridge: `py-14 md:py-20` → `py-6 md:py-10`, shrink internal `gap-5` → `gap-3`, shorten warp streak heights `h-14`/`h-10` → `h-8`/`h-6`, orbit ring `h-20 w-20` → `h-14 w-14`.
-- ServicesGrid: keep `pt-4 md:pt-6` but it now sits closer because the bridge is tighter. Bottom `pb-20` unchanged.
-
-File: `src/components/site/SolutionsToServicesBridge.tsx`.
-
-## 3. Fix chiều rộng service cards (không tràn viền)
-
-Root cause: the desktop grid uses `md:flex md:gap-[14px]` with three `flex-1` columns, but inner column divs are missing `min-w-0`, so long titles / nowrap children can push columns past their share of the row, overflowing the container on mid-width viewports (≈768–1100px). The mobile swiper also uses `px-1` per slide which can cause a 2px horizontal overflow.
-
-Changes in `src/components/site/ServicesGrid.tsx`:
-- Wrap the grid in `w-full max-w-full overflow-hidden` and keep the existing `container-tight`.
-- Each column: add `min-w-0 basis-0` next to `flex-1`.
-- `DesktopCard`: add `w-full min-w-0`, ensure `<h3>` and tag get `truncate` / `min-w-0` so long labels never push width.
-- Mobile swiper outer: `overflow-hidden` already there — change slide wrapper from `px-1` to `px-0` and add `box-border` so 100% width slides don't overflow when combined with the parent's container padding.
-- Add a responsive height clamp: replace fixed `height: open ? 360 : 116` with `minHeight` so cards can grow vertically instead of forcing horizontal overflow when content wraps on narrower columns.
-
-## 4. Đồng bộ CTA text → "Learn more"
-
-In `ServicesGrid.tsx`, every service in `SERVICES` currently has its own `cta` ("Learn about SMS Brandname", etc.) and the Coming Soon form uses "Notify me".
-
-Change: replace every `cta` value in the `SERVICES` array with the string `"Learn more"`. The Coming Soon button ("Notify me") stays — it is a different action, not a Learn-more CTA. No other component references `cta`.
+### 7. `src/components/site/SolutionsToServicesBridge.tsx`
+- Giảm visual weight để overlay là nhân vật chính: bỏ orbit ring + warp streaks, chỉ giữ headline "From the platform to the services that orbit it" trên 1 thin vertical line (như prototype). Padding `py-8 md:py-12`.
 
 ## Out of scope
+- Không đổi nội dung text, icon, copy các service.
+- Không đổi cấu trúc/spacing AIPlatformCard.
+- Không tạo Three.js/canvas; chỉ SVG + CSS keyframes.
+- GalaxyBackdrop giữ nguyên (chỉ làm lớp nền).
 
-- No changes to AIPlatformCard internals (columns, copy, orbit math).
-- No changes to GalaxyBackdrop.
-- No copy changes besides the CTA unification.
-- No new dependencies.
-
-## Files touched
-
-- New: `src/components/site/PlatformToServicesFlow.tsx`
-- Edit: `src/pages/Index.tsx`, `src/components/site/SolutionsToServicesBridge.tsx`, `src/components/site/ServicesGrid.tsx`, `src/index.css`
+## Files
+- **New:** `src/components/site/ConstellationOverlay.tsx`
+- **Edit:** `src/components/site/Solutions.tsx`, `src/components/site/ServicesGrid.tsx`, `src/components/site/AIPlatformCard.tsx` (chỉ thêm `data-*` anchors), `src/components/site/PlatformToServicesFlow.tsx`, `src/components/site/SolutionsToServicesBridge.tsx`, `src/index.css`
