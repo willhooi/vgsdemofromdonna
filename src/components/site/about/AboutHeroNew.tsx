@@ -105,34 +105,42 @@ export const AboutHeroNew = () => (
               <div
                 className="rounded-[20px] bg-background px-4 py-6 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.18)] md:px-10 md:py-7"
               >
-                <dl className="grid grid-cols-2 gap-y-6 md:grid-cols-4 md:divide-x md:divide-border md:gap-y-0">
-                  {stats.map((s, i) => (
-                    <div
-                      key={s.label}
-                      className={`flex flex-col items-center text-center md:px-4 ${
-                        i < 2 ? "border-b border-border pb-6 md:border-b-0 md:pb-0" : ""
-                      } ${i % 2 === 1 ? "border-l border-border md:border-l" : ""}`}
-                    >
-                      <dt
-                        className="bg-clip-text font-extrabold leading-none text-transparent"
-                        style={{
-                          backgroundImage:
-                            "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-deep)))",
-                          fontSize: "clamp(36px, 4vw, 52px)",
-                        }}
+                <dl className="grid grid-cols-2 gap-y-6 md:grid-cols-4 md:gap-y-0">
+                  {stats.map((s, i) => {
+                    const mobileLeftBorder = i % 2 === 1;
+                    const mobileBottomBorder = i < 2;
+                    const desktopLeftBorder = i > 0;
+                    return (
+                      <div
+                        key={s.label}
+                        className={[
+                          "flex flex-col items-center text-center md:px-4",
+                          mobileBottomBorder ? "border-b border-border pb-6 md:border-b-0 md:pb-0" : "",
+                          mobileLeftBorder ? "border-l border-border" : "",
+                          desktopLeftBorder ? "md:border-l md:border-border" : "md:border-l-0",
+                        ].join(" ")}
                       >
-                        <CountUp target={s.num} suffix={s.suffix} format={s.display} />
-                      </dt>
-                      <span
-                        aria-hidden
-                        className="mt-3 block h-1 w-[34px] rounded-full"
-                        style={{ background: "hsl(var(--accent))" }}
-                      />
-                      <dd className="mt-3 text-[11px] font-bold uppercase leading-tight tracking-[0.16em] text-muted-foreground">
-                        {s.label}
-                      </dd>
-                    </div>
-                  ))}
+                        <dt
+                          className="bg-clip-text font-extrabold leading-none text-transparent"
+                          style={{
+                            backgroundImage:
+                              "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-deep)))",
+                            fontSize: "clamp(36px, 4vw, 52px)",
+                          }}
+                        >
+                          <CountUp target={s.num} suffix={s.suffix} format={s.display} />
+                        </dt>
+                        <span
+                          aria-hidden
+                          className="mt-2 block h-[3px] w-[28px] rounded-full"
+                          style={{ background: "hsl(var(--accent))" }}
+                        />
+                        <dd className="mt-3 text-[11px] font-bold uppercase leading-tight tracking-[0.16em] text-muted-foreground">
+                          {s.label}
+                        </dd>
+                      </div>
+                    );
+                  })}
                 </dl>
               </div>
             </Reveal>
