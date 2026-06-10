@@ -1,6 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Phudu:wght@400;500;600;700;800;900&display=swap');
 
 @tailwind base;
+/* signal-drop: small dots fall along rails from AIPlatformCard down into ServicesGrid */
+@keyframes signal-drop {
+  0%   { transform: translate(-50%, 0)    scale(0.6); opacity: 0; }
+  15%  { opacity: 1; }
+  85%  { opacity: 1; }
+  100% { transform: translate(-50%, 520px) scale(1);  opacity: 0; }
+}
+.signal-drop { animation: signal-drop 4.8s linear infinite; will-change: transform, opacity; }
+@media (prefers-reduced-motion: reduce) {
+  .signal-drop { animation: none; opacity: 0.6; }
+}
 @tailwind components;
 @tailwind utilities;
 

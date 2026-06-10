@@ -8,6 +8,7 @@ import { Solutions } from "@/components/site/Solutions";
 import { SolutionsToServicesBridge } from "@/components/site/SolutionsToServicesBridge";
 import { ServicesGrid } from "@/components/site/ServicesGrid";
 import { GalaxyBackdrop } from "@/components/site/GalaxyBackdrop";
+import { PlatformToServicesFlow } from "@/components/site/PlatformToServicesFlow";
 
 import { VietGuysCaseStudies } from "@/components/site/VietGuysCaseStudies";
 import { FAQ } from "@/components/site/FAQ";
