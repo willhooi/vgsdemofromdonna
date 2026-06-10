@@ -497,6 +497,14 @@
 @keyframes line-flow {
   to { stroke-dashoffset: -400; }
 }
+@keyframes constellation-flow {
+  to { stroke-dashoffset: -40; }
+}
+.constellation-flow { animation: constellation-flow 6s linear infinite; }
+.star-twinkle       { animation: star-twinkle 3.6s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+@media (prefers-reduced-motion: reduce) {
+  .constellation-flow, .star-twinkle { animation: none !important; }
+}
 
 /* ====== Galaxy backdrop (shared by Solutions → Bridge → ServicesGrid) ====== */
 @keyframes galaxy-spin {
