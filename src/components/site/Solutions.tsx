@@ -32,7 +32,7 @@ import {
   ShoppingBag,
 } from "lucide-react";
 import bytetechLogo from "@/assets/brand/bytetech.svg";
-import cnvLogo from "@/assets/brand/cnv.png";
+import cnvLogo from "@/assets/cnvcdp-logo.png.asset.json";
 import cxgenieLogo from "@/assets/brand/cxgenie.svg";
 import shopperImg from "@/assets/channels-girl.png";
 
