@@ -1235,21 +1235,21 @@ const StepCustomerExperience = ({ visible }: { visible: boolean }) => (
         return (
           <div
             key={p.title}
-            className={`step-anim absolute flex items-center gap-2 rounded-2xl border ${ring} bg-white px-2.5 py-2 shadow-[0_10px_25px_rgba(0,0,0,0.08)]
+            className={`step-anim absolute flex items-center gap-2 rounded-2xl border ${ring} bg-white/60 backdrop-blur-sm px-2 py-1.5 shadow-[0_10px_25px_rgba(0,0,0,0.08)]
                        left-[18px] md:left-[24px]
-                       h-[68px] w-[42%] min-w-[190px] max-w-[230px] md:w-[44%] md:max-w-[220px] ${mdTops[i]}`}
+                       h-[56px] w-[38%] min-w-[170px] max-w-[200px] md:w-[40%] md:max-w-[200px] ${mdTops[i]}`}
             style={{
               top: `${topsMobile[i]}px`,
               zIndex: 3,
               animation: `step-row-float 4s ease-in-out ${i * 0.3 + 0.15}s infinite`,
             }}
           >
-            <span className={`grid h-9 w-9 shrink-0 place-items-center rounded-md ${iconBg}`}>
-              <p.Icon className="h-[18px] w-[18px]" />
+            <span className={`grid h-8 w-8 shrink-0 place-items-center rounded-md ${iconBg}`}>
+              <p.Icon className="h-[16px] w-[16px]" />
             </span>
             <div className="min-w-0 flex-1">
-              <div className="text-[11px] font-semibold leading-tight text-muted-foreground line-clamp-2">{p.title}</div>
-              <div className="text-[12.5px] font-bold leading-tight text-foreground line-clamp-2">{p.body}</div>
+              <div className="text-[10px] font-semibold leading-tight text-muted-foreground line-clamp-2">{p.title}</div>
+              <div className="text-[11.5px] font-bold leading-tight text-foreground line-clamp-2">{p.body}</div>
             </div>
           </div>
         );
@@ -1257,9 +1257,9 @@ const StepCustomerExperience = ({ visible }: { visible: boolean }) => (
 
       {/* Rating popup */}
       <div
-        className="absolute rounded-2xl bg-white px-3 py-2 shadow-[0_10px_25px_rgba(0,0,0,0.08)] ring-1 ring-border
-                   left-[28px] bottom-[24px] w-[46%] min-w-[210px] max-w-[250px]
-                   md:left-[36px] md:bottom-[28px] md:w-[46%] md:max-w-[240px]"
+        className="absolute rounded-2xl bg-white/70 backdrop-blur-sm px-2.5 py-1.5 shadow-[0_10px_25px_rgba(0,0,0,0.08)] ring-1 ring-border
+                   left-[28px] bottom-[24px] w-[42%] min-w-[190px] max-w-[220px]
+                   md:left-[36px] md:bottom-[28px] md:w-[44%] md:max-w-[210px]"
         style={{ zIndex: 4, transform: "translateX(6%)" }}
       >
         <div className="flex items-center gap-1">
