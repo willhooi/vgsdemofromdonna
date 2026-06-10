@@ -576,7 +576,7 @@ export function ServicesGrid() {
   return (
     <section
       id="services"
-      className="relative overflow-hidden py-20"
+      className="relative overflow-hidden pt-8 pb-20 md:pt-10"
       style={{
         fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
         background:
@@ -665,10 +665,10 @@ export function ServicesGrid() {
 
         {/* Top & bottom white fade for smooth blending with adjacent sections */}
         <div
-          className="absolute inset-x-0 top-0 h-[180px]"
+          className="absolute inset-x-0 top-0 h-[80px]"
           style={{
             background:
-              "linear-gradient(180deg, #FFFFFF 0%, rgba(255,255,255,0.85) 40%, rgba(255,255,255,0) 100%)",
+              "linear-gradient(180deg, hsl(145 60% 95%) 0%, rgba(244,251,245,0.6) 50%, rgba(255,255,255,0) 100%)",
           }}
         />
         <div

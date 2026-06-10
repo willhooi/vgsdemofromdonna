@@ -5,6 +5,7 @@ import { Hero } from "@/components/site/Hero";
 
 import { TrustBand } from "@/components/site/TrustBand";
 import { Solutions } from "@/components/site/Solutions";
+import { SolutionsToServicesBridge } from "@/components/site/SolutionsToServicesBridge";
 import { ServicesGrid } from "@/components/site/ServicesGrid";
 
 import { VietGuysCaseStudies } from "@/components/site/VietGuysCaseStudies";
@@ -36,7 +37,7 @@ const Index = () => {
       <TrustBand />
       <div className="container-tight"><VDivider /></div>
       <Solutions />
-      <div className="container-tight"><VDivider /></div>
+      <SolutionsToServicesBridge />
       <ServicesGrid />
       <VietGuysCaseStudies />
       <div className="container-tight"><VDivider /></div>
