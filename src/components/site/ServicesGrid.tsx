@@ -538,6 +538,41 @@ export function ServicesGrid() {
     }));
   };
 
+  const closeAll = () =>
+    setOpenByCol((prev) =>
+      prev[0] === null && prev[1] === null && prev[2] === null
+        ? prev
+        : { 0: null, 1: null, 2: null }
+    );
+
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isMobile) return;
+    const anyOpen =
+      openByCol[0] !== null || openByCol[1] !== null || openByCol[2] !== null;
+    if (!anyOpen) return;
+
+    const onPointerDown = (e: MouseEvent | TouchEvent) => {
+      const target = e.target as Node | null;
+      if (gridRef.current && target && !gridRef.current.contains(target)) {
+        closeAll();
+      }
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeAll();
+    };
+    document.addEventListener("mousedown", onPointerDown);
+    document.addEventListener("touchstart", onPointerDown);
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onPointerDown);
+      document.removeEventListener("touchstart", onPointerDown);
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [openByCol, isMobile]);
+
+
   return (
     <section
       id="services"
@@ -652,7 +687,7 @@ export function ServicesGrid() {
         {isMobile ? (
           <MobileSwiper />
         ) : (
-          <div className="hidden md:flex md:gap-[14px]">
+          <div ref={gridRef} className="hidden md:flex md:gap-[14px]">
             {[0, 1, 2].map((col) => (
               <div key={col} className="flex flex-1 flex-col gap-[14px]">
                 {[0, 1, 2].map((row) => {
