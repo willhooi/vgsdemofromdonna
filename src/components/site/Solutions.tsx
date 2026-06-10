@@ -97,7 +97,7 @@ export const Solutions = () => {
         <div className="mt-6 md:mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
           <span className="text-[13px] text-muted-foreground">Strategic partnership with</span>
           <img src={bytetechLogo} alt="ByteTech" className="h-5 w-auto" loading="lazy" />
-          <img src={cnvLogo} alt="CNV CDP" className="h-5 w-auto" loading="lazy" />
+          <img src={cnvLogo.url} alt="CNV CDP" className="h-5 w-auto" loading="lazy" />
           <img src={cxgenieLogo} alt="CX Genie" className="h-5 w-auto" loading="lazy" />
         </div>
 
