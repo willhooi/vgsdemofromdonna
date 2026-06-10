@@ -807,23 +807,22 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
           }}
         />
 
-        {/* Customer image — hero visual */}
+        {/* Customer image — hero visual, fills column height */}
         <img
           src={shopperImg}
           alt="Happy customer receiving personalized offers"
           loading="lazy"
           className="absolute object-contain object-bottom drop-shadow-[0_18px_28px_rgba(0,0,0,0.18)] animate-[cx-float_8s_ease-in-out_infinite]"
           style={{
-            right: -8, bottom: 0,
-            width: 300,
-            height: 470,
-            maxWidth: "82%",
+            right: -14, bottom: 0,
+            height: 500,
+            width: "auto",
             objectPosition: "right bottom",
             zIndex: 2,
           }}
         />
 
-        {/* Engagement cards (floating, left side) */}
+        {/* Engagement cards (floating, left side) — translucent so girl shows through */}
         {CX_CARDS.map((p, i) => {
           const isOrange = p.accent === "orange";
           const iconBg = isOrange ? "bg-[hsl(35_100%_94%)] text-[hsl(35_100%_45%)]" : "bg-[hsl(145_60%_95%)] text-[hsl(145_50%_35%)]";
@@ -831,9 +830,9 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
           return (
             <div
               key={p.title}
-              className={`absolute flex items-center gap-2 border ${ring} bg-white px-2.5 py-2`}
+              className={`absolute flex items-center gap-2 border ${ring} bg-white/75 backdrop-blur-sm px-2.5 py-2`}
               style={{
-                left: 24, width: 210, height: 68, top: CX_TOPS_REL[i], zIndex: 3,
+                left: 18, width: 200, height: 68, top: CX_TOPS_REL[i], zIndex: 3,
                 borderRadius: 18, boxShadow: "0 10px 25px rgba(0,0,0,0.08)",
               }}
             >
@@ -850,8 +849,8 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
 
         {/* Rating card */}
         <div
-          className="absolute rounded-2xl bg-white px-3 py-2 shadow-[0_10px_25px_rgba(0,0,0,0.08)] ring-1 ring-border"
-          style={{ left: 56, bottom: 34, width: 250, height: 72, zIndex: 4, transform: "translateX(12%)" }}
+          className="absolute rounded-2xl bg-white/80 backdrop-blur-sm px-3 py-2 shadow-[0_10px_25px_rgba(0,0,0,0.08)] ring-1 ring-border"
+          style={{ left: 40, bottom: 28, width: 230, height: 72, zIndex: 4 }}
         >
           <div className="flex items-center gap-1">
             {Array.from({ length: 5 }).map((_, i) => (
