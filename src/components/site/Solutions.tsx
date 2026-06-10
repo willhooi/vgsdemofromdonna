@@ -480,8 +480,8 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
 
   // Col4 — 4 CX cards. tops relative: 108,196,284,372, height 66
  const CX_TOPS_REL = [110, 195, 280, 365];
- const CX_CENTERS = CX_TOPS_REL.map((t) => 40 + t + 36);
-  const CX_LEFT_X = 1370 + 22;
+ const CX_CENTERS = CX_TOPS_REL.map((t) => 40 + t + 34);
+  const CX_LEFT_X = 1370 + 24;
 
   // Hubs (absolute page coords) — sit in the 70px gaps between columns
   const HUB_ORANGE  = { x: 435, y: 320 };
@@ -800,9 +800,9 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
           aria-hidden
           className="pointer-events-none absolute rounded-full"
           style={{
-            right: -20, bottom: 40, width: 300, height: 320,
+            right: "-8%", bottom: "6%", width: 360, height: 390,
             background:
-              "radial-gradient(circle, rgba(53,185,107,0.22) 0%, rgba(53,185,107,0.12) 45%, rgba(53,185,107,0.04) 70%, transparent 100%)",
+              "radial-gradient(circle, rgba(53,185,107,0.24) 0%, rgba(53,185,107,0.12) 46%, rgba(53,185,107,0.04) 72%, transparent 100%)",
             zIndex: 0,
           }}
         />
@@ -813,7 +813,13 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
           alt="Happy customer receiving personalized offers"
           loading="lazy"
           className="absolute object-contain drop-shadow-[0_18px_28px_rgba(0,0,0,0.18)] animate-[cx-float_8s_ease-in-out_infinite]"
-          style={{ right: 0, bottom: 0, top: 0, width: "70%", height: "100%", objectPosition: "right bottom", zIndex: 1 }}
+          style={{
+            right: "-6%", bottom: 0,
+            width: "clamp(260px, 58%, 340px)",
+            height: "auto",
+            objectPosition: "right bottom",
+            zIndex: 2,
+          }}
         />
 
         {/* Engagement cards (floating, left side) */}
@@ -826,7 +832,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
               key={p.title}
               className={`absolute flex items-center gap-2 border ${ring} bg-white px-2.5 py-2`}
               style={{
-                left: 10, width: 185, height: 72, top: CX_TOPS_REL[i], zIndex: 3,
+                left: 24, width: 210, height: 68, top: CX_TOPS_REL[i], zIndex: 3,
                 borderRadius: 18, boxShadow: "0 10px 25px rgba(0,0,0,0.08)",
               }}
             >
@@ -844,7 +850,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
         {/* Rating card */}
         <div
           className="absolute rounded-2xl bg-white px-3 py-2 shadow-[0_10px_25px_rgba(0,0,0,0.08)] ring-1 ring-border"
-          style={{ left: 10, bottom: 30, width: 230, height: 72, zIndex: 4 }}
+          style={{ left: 56, bottom: 34, width: 250, height: 72, zIndex: 4, transform: "translateX(12%)" }}
         >
           <div className="flex items-center gap-1">
             {Array.from({ length: 5 }).map((_, i) => (
@@ -1184,58 +1190,82 @@ const StepCustomerExperience = ({ visible }: { visible: boolean }) => (
     visible={visible}
     delay={360}
   >
-    <div className="relative min-h-[340px]">
-      {/* Soft green glow behind girl */}
+    <div
+      className="relative w-full min-h-[620px] md:min-h-[560px]"
+      style={{ height: "auto", overflow: "visible" }}
+    >
+
+      {/* Green glow */}
       <div
         aria-hidden
-        className="pointer-events-none absolute right-[-10%] bottom-[10%] -z-0 h-[70%] w-[70%] rounded-full"
+        className="pointer-events-none absolute rounded-full
+                   right-[-12%] bottom-[8%] w-[300px] h-[330px]
+                   md:right-[-6%] md:bottom-[8%] md:w-[330px] md:h-[360px]"
         style={{
           background:
-            "radial-gradient(circle at 60% 50%, hsl(145 65% 78% / 0.65) 0%, hsl(145 65% 70% / 0.35) 50%, transparent 75%)",
+            "radial-gradient(circle, rgba(53,185,107,0.24) 0%, rgba(53,185,107,0.12) 46%, rgba(53,185,107,0.04) 72%, transparent 100%)",
+          zIndex: 0,
         }}
       />
 
-      {/* Girl image — bottom-right inside column */}
+      {/* Customer image — hero visual */}
       <img
         src={shopperImg}
         alt="Happy customer receiving personalized offers"
         loading="lazy"
-        className="pointer-events-none absolute bottom-0 right-[-6%] z-0 h-auto w-[46%] max-w-[255px] object-contain drop-shadow-[0_14px_24px_rgba(0,0,0,0.14)]"
+        className="pointer-events-none absolute object-contain drop-shadow-[0_14px_24px_rgba(0,0,0,0.14)]
+                   right-[-4%] bottom-[-2%] md:bottom-[2%]"
+        style={{
+          width: "clamp(220px, 72%, 300px)",
+          height: "auto",
+          zIndex: 2,
+        }}
       />
 
-      {/* Popups column — left side, wraps ~60% width */}
-      <div className="relative z-10 flex flex-col gap-1.5 pr-[44%]">
-        {CX_POPUPS.map((p, i) => {
-          const isAccent = p.tone === "accent";
-          const iconBg = isAccent ? "bg-[hsl(35_100%_94%)] text-[hsl(35_100%_45%)]" : "bg-[hsl(145_60%_95%)] text-[hsl(145_50%_35%)]";
-          const ring = isAccent ? "border-[hsl(35_100%_85%)]/60" : "border-[hsl(145_55%_80%)]/50";
-          return (
-            <div
-              key={p.title}
-              className={`step-anim flex items-start gap-2 rounded-lg border ${ring} bg-white px-2 py-1.5 shadow-[0_1px_3px_rgba(0,0,0,0.05)]`}
-              style={{ animation: `step-row-float 4s ease-in-out ${i * 0.3 + 0.15}s infinite` }}
-            >
-              <span className={`grid h-6 w-6 shrink-0 place-items-center rounded-md ${iconBg}`}>
-                <p.Icon className="h-3.5 w-3.5" />
-              </span>
-              <div className="min-w-0 flex-1">
-                <div className="text-[9.5px] font-semibold leading-tight text-muted-foreground">{p.title}</div>
-                <div className="text-[10.5px] font-bold leading-tight text-foreground line-clamp-2">{p.body}</div>
-              </div>
+      {/* Engagement cards — left side */}
+      {CX_POPUPS.map((p, i) => {
+        const isAccent = p.tone === "accent";
+        const iconBg = isAccent ? "bg-[hsl(35_100%_94%)] text-[hsl(35_100%_45%)]" : "bg-[hsl(145_60%_95%)] text-[hsl(145_50%_35%)]";
+        const ring = isAccent ? "border-[hsl(35_100%_85%)]/60" : "border-[hsl(145_55%_80%)]/50";
+        const topsMobile = [118, 204, 290, 376];
+        const mdTops = [`md:!top-[112px]`, `md:!top-[198px]`, `md:!top-[284px]`, `md:!top-[370px]`];
+        return (
+          <div
+            key={p.title}
+            className={`step-anim absolute flex items-center gap-2 rounded-2xl border ${ring} bg-white px-2.5 py-2 shadow-[0_10px_25px_rgba(0,0,0,0.08)]
+                       left-[20px] md:left-[28px]
+                       h-[68px] w-[min(72%,250px)] md:w-[220px] ${mdTops[i]}`}
+            style={{
+              top: `${topsMobile[i]}px`,
+              zIndex: 3,
+              animation: `step-row-float 4s ease-in-out ${i * 0.3 + 0.15}s infinite`,
+            }}
+          >
+            <span className={`grid h-9 w-9 shrink-0 place-items-center rounded-md ${iconBg}`}>
+              <p.Icon className="h-[18px] w-[18px]" />
+            </span>
+            <div className="min-w-0 flex-1">
+              <div className="text-[11px] font-semibold leading-tight text-muted-foreground line-clamp-2">{p.title}</div>
+              <div className="text-[12.5px] font-bold leading-tight text-foreground line-clamp-2">{p.body}</div>
             </div>
-          );
-        })}
-      </div>
+          </div>
+        );
+      })}
 
-      {/* Review badge — bottom-left under popups */}
-      <div className="relative z-10 mt-2 inline-block rounded-2xl bg-white px-3 py-1.5 shadow-[0_8px_20px_-12px_rgba(0,0,0,0.2)] ring-1 ring-border">
+      {/* Rating popup */}
+      <div
+        className="absolute rounded-2xl bg-white px-3 py-2 shadow-[0_10px_25px_rgba(0,0,0,0.08)] ring-1 ring-border
+                   left-[36px] bottom-[28px] w-[min(76%,270px)]
+                   md:left-[48px] md:bottom-[30px] md:w-[250px]"
+        style={{ zIndex: 4, transform: "translateX(8%)" }}
+      >
         <div className="flex items-center gap-1">
           {Array.from({ length: 5 }).map((_, i) => (
-            <Star key={i} className="h-3 w-3 fill-[#ff9b17] text-[#ff9b17]" />
+            <Star key={i} className="h-4 w-4 fill-[#ff9b17] text-[#ff9b17]" />
           ))}
-          <span className="ml-1 text-[11px] font-bold text-foreground">5.0</span>
+          <span className="ml-1 text-[13px] font-bold text-foreground">5.0</span>
         </div>
-        <div className="mt-0.5 text-[9.5px] italic text-muted-foreground">"Thanks for your feedback!"</div>
+        <div className="mt-0.5 text-[11px] italic text-muted-foreground">"Thanks for your feedback!"</div>
       </div>
     </div>
   </StepCard>
