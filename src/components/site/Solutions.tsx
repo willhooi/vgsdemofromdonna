@@ -812,8 +812,8 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
           src={shopperImg}
           alt="Happy customer receiving personalized offers"
           loading="lazy"
-          className="absolute object-contain drop-shadow-[0_18px_28px_rgba(0,0,0,0.18)] animate-[cx-float_8s_ease-in-out_infinite]"
-          style={{ right: -10, bottom: 0, width: 240, height: "auto", zIndex: 1 }}
+          className="absolute object-contain object-bottom drop-shadow-[0_18px_28px_rgba(0,0,0,0.18)] animate-[cx-float_8s_ease-in-out_infinite]"
+          style={{ right: -10, bottom: 0, top: 0, width: "auto", height: "100%", maxWidth: "92%", zIndex: 1 }}
         />
 
         {/* Engagement cards (floating, left side) */}
