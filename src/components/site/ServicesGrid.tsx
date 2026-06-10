@@ -463,7 +463,7 @@ function MobileSwiper() {
           }}
         >
           {SERVICES.map((s) => (
-            <div key={s.name} className="w-full flex-shrink-0 px-1">
+            <div key={s.name} className="box-border w-full flex-shrink-0 px-0">
               <MobileCard svc={s} />
             </div>
           ))}
@@ -593,9 +593,9 @@ export function ServicesGrid() {
         {isMobile ? (
           <MobileSwiper />
         ) : (
-          <div ref={gridRef} className="hidden md:flex md:gap-[14px]">
+          <div ref={gridRef} className="hidden w-full max-w-full overflow-hidden md:flex md:gap-[14px]">
             {[0, 1, 2].map((col) => (
-              <div key={col} className="flex flex-1 flex-col gap-[14px]">
+              <div key={col} className="flex min-w-0 basis-0 flex-1 flex-col gap-[14px]">
                 {[0, 1, 2].map((row) => {
                   const i = row * 3 + col;
                   const s = SERVICES[i];
