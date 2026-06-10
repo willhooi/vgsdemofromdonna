@@ -101,7 +101,7 @@ const Bullet = ({ children }: { children: React.ReactNode }) => (
 );
 
 export const AboutMissionVisionNew = () => (
-  <section className="bg-background py-24 md:py-32">
+  <section className="bg-background py-20 md:py-24">
     <div className="container-tight">
       <Reveal variant="fade-up" className="mx-auto max-w-3xl text-center">
         <span
@@ -133,7 +133,7 @@ export const AboutMissionVisionNew = () => (
           </ul>
         </Reveal>
         <Reveal variant="scale-soft" delay={120}>
-          <div className="overflow-hidden rounded-[24px]" style={{ height: 360 }}>
+          <div className="overflow-hidden rounded-[24px] bg-[#f4f5f7]" style={{ height: 360 }}>
             <MissionArt />
           </div>
         </Reveal>
@@ -142,7 +142,7 @@ export const AboutMissionVisionNew = () => (
       {/* Vision */}
       <div className="mt-20 grid items-center gap-10 md:grid-cols-[0.95fr_1.05fr] md:gap-[60px]">
         <Reveal variant="scale-soft" className="md:order-1">
-          <div className="overflow-hidden rounded-[24px]" style={{ height: 360 }}>
+          <div className="overflow-hidden rounded-[24px] bg-[#f4f5f7]" style={{ height: 360 }}>
             <VisionArt />
           </div>
         </Reveal>

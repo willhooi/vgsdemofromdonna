@@ -10,7 +10,7 @@ const partners = [
 
 export const AboutPartners = () => (
   <section
-    className="py-24 md:py-32"
+    className="py-20 md:py-24"
     style={{
       background:
         "linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(0 0% 97%) 20%, hsl(0 0% 97%) 80%, hsl(0 0% 100%) 100%)",
