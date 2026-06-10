@@ -1,62 +1,60 @@
+# Plan — Galaxy flow continuity & service card polish
 
-# Galaxy unification — Solutions → Bridge → ServicesGrid
+Four small, focused changes across the Solutions → Bridge → ServicesGrid block. No business logic touched.
 
-Direction chosen: **Cosmic orbit narrative**, but adapted to a **clean / clear / bright background** (light theme, không dark) — ý tưởng galaxy thể hiện qua artwork (orbits, nebula glow, stars) và animation flow, không qua màu nền tối.
+## 1. Dot lan toả từ AIPlatformCard xuống ServicesGrid
 
-## 1. Hợp nhất background (bright galaxy)
+The AIPlatformCard already emits signal dots (orbit particles + the vertical particle from Customer Profile down through pills). Right now they die inside the card. We extend that "signal" visually so it reads as continuous flow into the service cards below.
 
-Tạo một component nền dùng chung `GalaxyBackdrop` (`src/components/site/GalaxyBackdrop.tsx`), được đặt như một lớp `absolute inset-0 -z-10` ở wrapper bao cả `<Solutions />`, `<SolutionsToServicesBridge />`, `<ServicesGrid />`.
+Approach: a new lightweight overlay `PlatformToServicesFlow` (pure SVG + CSS, no JS layout math) rendered inside the existing `relative isolate` wrapper in `Index.tsx`, positioned between the bridge and the services grid, `pointer-events-none`, `-z-[1]` (above GalaxyBackdrop, below cards).
 
-- Nền: trắng → `hsl(145 60% 97%)` rất nhạt, **không** đổi sang dark.
-- 2 vùng radial nebula màu primary green (`hsl(var(--primary)/0.10-0.14)`) đặt lệch tâm — một ở khu vực Solutions, một ở khu vực ServicesGrid → tạo cảm giác hai "thiên hà" cùng một dải.
-- 2–3 vòng orbit SVG mảnh, `stroke-dasharray`, opacity 15–25%, trải dài qua cả 3 section, xoay rất chậm (`animation: spin 90s linear infinite`).
-- Lớp stars: dots SVG nhỏ thưa, opacity 25–40%, drift rất nhẹ (`translateY` 8s ease-in-out infinite).
-- Mọi animation tôn trọng `prefers-reduced-motion`.
+Visuals:
+- 3 vertical dotted "signal rails" aligned to the 3 service columns (left / center / right), starting from the bottom edge of the AIPlatformCard, passing through the bridge, ending at the top of the services grid.
+- On each rail, 2–3 small green dots travel downward on a loop (`@keyframes signal-drop` translateY 0 → 100% + opacity in/out), staggered delays so the cascade feels organic.
+- Rails use `stroke-dasharray="3 6"` at ~35% opacity, color `hsl(var(--primary))`, so they match the existing brain orbit dots.
+- A faint conic "spread" right under the AIPlatformCard (radial green glow fanning out into 3 directions) sells the "lan toả" feeling.
+- All animations respect `prefers-reduced-motion`.
 
-Trong `Index.tsx`: bọc 3 section trong `<div className="relative isolate">` + `<GalaxyBackdrop />`. Bỏ background riêng của Solutions và ServicesGrid (để chúng trong suốt) — chỉ giữ padding/spacing.
+Files: new `src/components/site/PlatformToServicesFlow.tsx`, edit `src/pages/Index.tsx`, add keyframe `signal-drop` in `src/index.css`.
 
-## 2. Bridge → Cosmic warp transition
+## 2. Giảm khoảng cách AIPlatformCard ↔ ServiceCard
 
-Refactor `SolutionsToServicesBridge.tsx`:
-- Bỏ "Chapter 02 — Activation" chip + chevron tròn cũ.
-- Thay bằng: một **orbit ring SVG** ở giữa (vòng dashed green xoay chậm) ôm lấy một core dot pulsing green; phía trên/dưới là 2 streak particle mảnh chạy dọc (`@keyframes warp-streak` translateY + fade) → cảm giác "data warp" từ platform xuống services.
-- Giữ tiêu đề ngắn ở giữa: `From the platform → to the services that run on it.` (rút gọn 1 câu, bỏ paragraph mô tả dài).
-- Không còn nền riêng — trong suốt trên `GalaxyBackdrop`.
+Current vertical stack:
+- `Solutions` section: `pb-0` (ok)
+- `SolutionsToServicesBridge`: `py-14 md:py-20` (too tall — 56–80px each side)
+- `ServicesGrid`: `pt-4 md:pt-6`
 
-## 3. Service cards — giảm text
+Changes:
+- Bridge: `py-14 md:py-20` → `py-6 md:py-10`, shrink internal `gap-5` → `gap-3`, shorten warp streak heights `h-14`/`h-10` → `h-8`/`h-6`, orbit ring `h-20 w-20` → `h-14 w-14`.
+- ServicesGrid: keep `pt-4 md:pt-6` but it now sits closer because the bridge is tighter. Bottom `pb-20` unchanged.
 
-Trong `ServicesGrid.tsx` data + render card:
-- Bỏ trường `description` dài; thay bằng `tag` ngắn ≤ 4 từ (vd `Rich Media · Engagement`, `Branded ID · Trust`).
-- Card layout mới: icon nhỏ trong ô bo tròn (bg `primary/10`), tiêu đề 1 dòng, dòng tag uppercase tracking-wider text-[11px] màu `muted-foreground`.
-- Bỏ chế độ "mở rộng chi tiết" hoặc giữ nó nhưng chỉ kích hoạt khi click → mặc định card cực gọn (icon + title + tag).
-- Hover: viền `primary/40`, glow nhẹ `shadow-[0_0_24px_-8px_hsl(var(--primary)/0.35)]`, icon scale 1.08.
-- Grid 3×3 giữ nguyên, `backdrop-blur-sm` + `bg-white/60` để card "nổi" trên galaxy backdrop.
+File: `src/components/site/SolutionsToServicesBridge.tsx`.
 
-## 4. Solutions section adaptions
+## 3. Fix chiều rộng service cards (không tràn viền)
 
-- Bỏ background gradient cục bộ của `Solutions.tsx` (đã extend xuống trắng); thay bằng `bg-transparent`.
-- Giữ nguyên cấu trúc tier/infographic nội dung — chỉ chỉnh nền + thêm 1 "core glow" nhỏ phía sau headline để khớp ngôn ngữ galaxy.
+Root cause: the desktop grid uses `md:flex md:gap-[14px]` with three `flex-1` columns, but inner column divs are missing `min-w-0`, so long titles / nowrap children can push columns past their share of the row, overflowing the container on mid-width viewports (≈768–1100px). The mobile swiper also uses `px-1` per slide which can cause a 2px horizontal overflow.
 
-## 5. Files touched
+Changes in `src/components/site/ServicesGrid.tsx`:
+- Wrap the grid in `w-full max-w-full overflow-hidden` and keep the existing `container-tight`.
+- Each column: add `min-w-0 basis-0` next to `flex-1`.
+- `DesktopCard`: add `w-full min-w-0`, ensure `<h3>` and tag get `truncate` / `min-w-0` so long labels never push width.
+- Mobile swiper outer: `overflow-hidden` already there — change slide wrapper from `px-1` to `px-0` and add `box-border` so 100% width slides don't overflow when combined with the parent's container padding.
+- Add a responsive height clamp: replace fixed `height: open ? 360 : 116` with `minHeight` so cards can grow vertically instead of forcing horizontal overflow when content wraps on narrower columns.
 
-- **New**: `src/components/site/GalaxyBackdrop.tsx`
-- **Edit**: `src/pages/Index.tsx` (bọc wrapper + render backdrop)
-- **Edit**: `src/components/site/Solutions.tsx` (bg transparent, core glow nhỏ)
-- **Edit**: `src/components/site/SolutionsToServicesBridge.tsx` (orbit + warp streaks, bỏ chip & chevron cũ)
-- **Edit**: `src/components/site/ServicesGrid.tsx` (data: bỏ description dài → tag ngắn; card layout gọn; nền transparent)
-- **Edit**: `src/index.css` (keyframes: `orbit-spin`, `warp-streak`, `star-drift`)
+## 4. Đồng bộ CTA text → "Learn more"
 
-## Acceptance
+In `ServicesGrid.tsx`, every service in `SERVICES` currently has its own `cta` ("Learn about SMS Brandname", etc.) and the Coming Soon form uses "Notify me".
 
-- Cả 3 section dùng chung một bright galaxy backdrop liền mạch, không còn vạch màu hay đổi tông giữa các vùng.
-- Orbit rings + stars + nebula glow thấy rõ nhưng không cướp sự chú ý khỏi nội dung.
-- Bridge là orbit ring + streaks, không còn chip "Chapter 02".
-- Mỗi service card chỉ còn icon + title + 1 dòng tag ngắn.
-- Animation mượt, tắt khi `prefers-reduced-motion`.
-- Không thay đổi business logic, số lượng tier/service, hay routing.
+Change: replace every `cta` value in the `SERVICES` array with the string `"Learn more"`. The Coming Soon button ("Notify me") stays — it is a different action, not a Learn-more CTA. No other component references `cta`.
 
 ## Out of scope
 
-- Đổi sang dark theme.
-- Thay nội dung tier Solutions hay icon services.
-- Thêm 3D/Three.js (chỉ SVG + CSS).
+- No changes to AIPlatformCard internals (columns, copy, orbit math).
+- No changes to GalaxyBackdrop.
+- No copy changes besides the CTA unification.
+- No new dependencies.
+
+## Files touched
+
+- New: `src/components/site/PlatformToServicesFlow.tsx`
+- Edit: `src/pages/Index.tsx`, `src/components/site/SolutionsToServicesBridge.tsx`, `src/components/site/ServicesGrid.tsx`, `src/index.css`
