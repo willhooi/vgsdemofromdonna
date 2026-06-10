@@ -268,15 +268,21 @@ function DesktopCard({
 
       {/* Smooth accordion drop using grid-template-rows trick */}
       <div
-        className="grid transition-[grid-template-rows,opacity] duration-400 ease-out"
+        className="grid ease-out"
         style={{
           gridTemplateRows: open ? "1fr" : "0fr",
-          opacity: open ? 1 : 0,
-          transitionDuration: "400ms",
+          transition: "grid-template-rows 500ms cubic-bezier(0.16, 1, 0.3, 1)",
         }}
       >
         <div className="overflow-hidden">
-          <div className="pt-2">
+          <div
+            className="pt-2"
+            style={{
+              opacity: open ? 1 : 0,
+              transform: open ? "translateY(0)" : "translateY(10px)",
+              transition: "opacity 400ms cubic-bezier(0.16, 1, 0.3, 1) 80ms, transform 500ms cubic-bezier(0.16, 1, 0.3, 1) 80ms",
+            }}
+          >
             <p className="text-[12px] leading-[1.6] text-muted-foreground">
               {svc.desc}
             </p>
@@ -285,7 +291,14 @@ function DesktopCard({
               <ComingSoonForm />
             ) : (
               <>
-                <div className="mt-3 grid grid-cols-2 gap-1.5">
+                <div
+                  className="mt-3 grid grid-cols-2 gap-1.5"
+                  style={{
+                    opacity: open ? 1 : 0,
+                    transform: open ? "translateY(0)" : "translateY(8px)",
+                    transition: "opacity 400ms cubic-bezier(0.16, 1, 0.3, 1) 160ms, transform 500ms cubic-bezier(0.16, 1, 0.3, 1) 160ms",
+                  }}
+                >
                   {svc.stats.map((s) => (
                     <div key={s.label} className="rounded-[10px] py-2 px-2.5" style={{ background: "rgba(255,255,255,0.6)" }}>
                       <div
@@ -303,8 +316,13 @@ function DesktopCard({
 
                 <button
                   onClick={(e) => e.stopPropagation()}
-                  className="mt-3 rounded-[9px] px-4 py-2 text-[12px] font-bold text-white transition-opacity hover:opacity-90"
-                  style={{ background: GREEN }}
+                  className="mt-3 rounded-[9px] px-4 py-2 text-[12px] font-bold text-white hover:opacity-90"
+                  style={{
+                    background: GREEN,
+                    opacity: open ? 1 : 0,
+                    transform: open ? "translateY(0)" : "translateY(6px)",
+                    transition: "opacity 350ms cubic-bezier(0.16, 1, 0.3, 1) 240ms, transform 450ms cubic-bezier(0.16, 1, 0.3, 1) 240ms, opacity 0.2s",
+                  }}
                 >
                   {svc.cta}
                 </button>
