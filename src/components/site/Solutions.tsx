@@ -479,8 +479,8 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
   const BI_RIGHT_X = 940 + 22 + 316; // card right edge absolute
 
   // Col4 — 4 CX cards. tops relative: 108,196,284,372, height 66
-  const CX_TOPS_REL = [108, 196, 284, 372];
-  const CX_CENTERS = CX_TOPS_REL.map((t) => 40 + t + 33);
+ const CX_TOPS_REL = [110, 195, 280, 365];
+ const CX_CENTERS = CX_TOPS_REL.map((t) => 40 + t + 36);
   const CX_LEFT_X = 1370 + 22;
 
   // Hubs (absolute page coords) — sit in the 70px gaps between columns
