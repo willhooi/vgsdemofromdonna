@@ -1,86 +1,57 @@
-# Rebalance Solutions Infographic — Desktop / Tablet / Mobile
+# Seamlessly connect Solutions → ServicesGrid
 
-Goal: balance whitespace inside and between the 4 columns, keep all data-flow lines visible without crossing text, and ensure content stays readable at every breakpoint.
+Goal: make the page read as one story — "From the infrastructure that unifies data & AI → to the services that activate it" — instead of two visually separate sections.
 
-Scope: `src/components/site/Solutions.tsx` only (presentation). No business-logic changes.
+Today there's a hard cut: `<Solutions />` → `<VDivider />` → `<ServicesGrid />`. Backgrounds, rhythm and copy don't hand off to each other.
 
----
+## What changes
 
-## 1) Desktop (≥1024px) — fixed 1600×640 infographic
+Scope is presentation only. No business logic, no data changes.
 
-### Column geometry — even spacing, uniform widths
-Replace the current mixed widths (330 / 370 / 350 / 350, gaps 40) with a balanced grid:
+### 1. Remove the hard divider
+In `src/pages/Index.tsx`, drop the `<VDivider />` between `<Solutions />` and `<ServicesGrid />`. The divider visually says "new chapter"; we want continuity.
 
-```text
-Inner padding 40 | Col1 320 | gap 60 | Col2 360 | gap 60 | Col3 320 | gap 60 | Col4 340 | 40
-Total = 1600 ✓
-```
+### 2. Add a `SolutionsToServicesBridge` component
+New file `src/components/site/SolutionsToServicesBridge.tsx`, rendered between the two sections. It is a short, full-width band (~140–180px tall) that:
 
-- Col1 (Data Sources): `left:40,  width:320, height:560`
-- Col2 (AI Brain):     `left:420, width:360, height:560`
-- Col3 (Business):     `left:840, width:320, height:560`
-- Col4 (Customer Exp): `left:1220,width:340, height:560`
+- Inherits the green radial wash from Solutions at the top and fades into the white→green aurora of ServicesGrid at the bottom (matching gradient stops at the seam → invisible boundary).
+- Contains a centered narrative line:
+  - Eyebrow (mono, uppercase): `Chapter 02 — Activation`
+  - Headline: `From the platform to the services that run on it.`
+  - Sub: `The infrastructure above powers the 9 messaging services below.`
+- A vertical dashed connector (SVG, same `stroke-dasharray 5 7` + `flow-dash` animation already used in the Solutions infographic) running from the bottom of Solutions through the bridge into the top of ServicesGrid — visually "the data flow keeps flowing".
+- A small downward chevron / `↓` glyph at the end of the dashed line as a scroll affordance.
 
-### Internal balance per column
-- **Col1**: 7 source cards. `top: 92 + i*66, height: 54`. Right padding equal to left (14/14). Bottom whitespace ≈ 30px.
-- **Col2**: Customer Profile orb stays centered at `(180, 250)`, radius 75. Orbit nodes adjusted to new col width (`x ∈ {80, 180, 280}`). Pills block: `top: 430, width: 240, gap 8`.
-- **Col3**: 4 BI cards. `top: [108, 220, 332, 444], height: 92`, even 20px gaps, vertical block centered.
-- **Col4**: 4 CX cards left-aligned `left: 22, width: 190, height: 66, top: [108, 196, 284, 372]`. Customer image moves to the **right half**: `right: 0, bottom: 24, width: 200, maxWidth: 56%`. Rating card: `left: 22, bottom: 28, width: 230`. Soft green glow re-centered behind girl.
+### 3. Match section backgrounds at the seam
+- `Solutions.tsx`: change bottom padding to `pb-0` and extend the radial gradient so its lightest stop reaches the bottom edge (currently fades to white at 60%).
+- `ServicesGrid.tsx`: reduce the top white fade (`absolute inset-x-0 top-0 h-[180px]`) to `h-[80px]` and start the aurora gradient higher, so the bridge band sits on the same color the ServicesGrid begins with.
+- Reduce `ServicesGrid` `py-20` to `pt-10 pb-20` since the bridge now provides the top breathing room.
 
-### Data-flow connectors
-Recompute connector endpoints from new column edges so:
-- Orange hub stays in the gap between Col1↔Col2 (`x ≈ 390`).
-- Green hub A in gap Col2↔Col3 (`x ≈ 810`).
-- Green hub B in gap Col3↔Col4 (`x ≈ 1190`).
-- All horizontal connector segments live **inside the inter-column gaps** (60px wide, more headroom than today's 40px), so dashed lines never cross card text.
-- Keep `stroke-width 2`, `dasharray 5 7`, animated `flow-dash`.
-- SVG keeps `overflow: visible`.
+### 4. Reuse the dashed-flow visual language
+Extract the `@keyframes flow-dash` already defined inside `Solutions.tsx` into `src/index.css` (single source) so both the Solutions infographic and the new bridge connector animate in sync.
 
-### Scaler
-Keep `DesktopInfographicScaler` (transform-scale to fit viewport ≥1024). With wider gaps, content remains readable when scaled to ~0.8 at 1280px.
+### 5. Anchor + a11y
+- Give the bridge `id="services-intro"` and update the header nav anchor for "Services" to point there (so clicking the nav lands users on the narrative bridge, not mid-grid).
+- Bridge headline uses an `<h3>` (Solutions has `h2`, ServicesGrid has its own `h2`) to keep the heading hierarchy clean.
 
----
+## Files touched
 
-## 2) Tablet (md, 768–1023px)
+- `src/pages/Index.tsx` — remove `VDivider`, insert `<SolutionsToServicesBridge />`.
+- `src/components/site/SolutionsToServicesBridge.tsx` — new.
+- `src/components/site/Solutions.tsx` — bottom padding + gradient extension only.
+- `src/components/site/ServicesGrid.tsx` — top fade + top padding only.
+- `src/index.css` — promote `flow-dash` keyframes.
 
-Currently uses a 2×2 grid of `StepCard`s. Improvements:
-- Increase outer card padding: `px-6 py-7` on the AIPlatformCard wrapper at `md:`.
-- Grid gap: `md:gap-5 lg:gap-6` (already close). Ensure each `StepCard` has `min-h-[420px]` so the 4 tiles match heights.
-- Within each StepCard:
-  - Step1: keep 7 rows, slightly bump row height to `py-2`.
-  - Step2: cap orbit at `max-w-[260px]` and add `mt-3` before pills.
-  - Step4 (CX): stack engagement cards full-width with shopper image as a 40% right-floated visual, rating row pinned bottom.
-- No SVG connectors on tablet/mobile (current behavior) — instead show small downward chevrons between rows of the grid to imply flow (optional polish, low risk).
+## Acceptance
 
----
+- Scrolling from Solutions into ServicesGrid shows no visible seam (same color at the boundary).
+- A single dashed vertical line visually continues from the Solutions infographic into the ServicesGrid area.
+- The bridge copy makes the narrative explicit: platform → services.
+- Mobile: bridge collapses to a shorter band (~100px) with the same copy, no SVG connector (matches the rest of the mobile layout which already drops connectors).
+- No layout shift in either section's content; only paddings and background stops change.
 
-## 3) Mobile (<768px)
+## Out of scope
 
-- Single column stack already used. Tighten:
-  - Section padding `pt-12 pb-6`.
-  - StepCard inner padding `p-4`, gap between cards `gap-3`.
-  - Step2 orb max-width `220px`.
-  - Step4 image max-width `180px`, centered, with cards above and rating below — no overlap.
-- Ensure no text uses `truncate` where wrapping is acceptable on small screens: switch `truncate` → `line-clamp-2` for card titles/subs in `StepDataSources` / CX cards.
-
----
-
-## 4) Implementation notes (technical)
-
-Files touched:
-- `src/components/site/Solutions.tsx`
-  - Update column `left/width` constants and recompute `DS_RIGHT_X`, `BI_LEFT_X`, `BI_RIGHT_X`, `CX_LEFT_X`, `HUB_ORANGE/GREEN_A/GREEN_B.x`, `PROFILE_C`.
-  - Update orbit node coordinates for new Col2 width.
-  - Reposition Col4 image, CX cards, rating to keep image fully inside column with `overflow: visible`.
-  - Adjust tablet/mobile `StepCard` paddings + replace `truncate` with `line-clamp-2` where needed.
-
-No new dependencies. No changes to data, routing, or other components.
-
----
-
-## Acceptance checklist
-- Desktop ≥1280px: all 4 columns equal visual weight, ≥60px gaps, every dashed connector visible and routed inside gaps (no crossing card text).
-- Desktop 1024–1279px: scaler keeps layout intact, text still readable.
-- Tablet 768–1023px: 2×2 grid with equal card heights, no truncation.
-- Mobile <768px: single stack, image and cards fully contained, no overflow.
-- Customer image stays inside Col4 in every breakpoint.
+- Restructuring the Solutions infographic or the ServicesGrid cards.
+- Copy rewrites inside either section.
+- Adding a new section between them with its own content beyond the bridge band.
