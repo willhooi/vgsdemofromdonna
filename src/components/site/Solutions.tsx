@@ -800,9 +800,9 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
           aria-hidden
           className="pointer-events-none absolute rounded-full"
           style={{
-            right: "-8%", bottom: "6%", width: 360, height: 390,
+            right: "-10%", bottom: "4%", width: 380, height: 420,
             background:
-              "radial-gradient(circle, rgba(53,185,107,0.24) 0%, rgba(53,185,107,0.12) 46%, rgba(53,185,107,0.04) 72%, transparent 100%)",
+              "radial-gradient(circle, rgba(53,185,107,0.26) 0%, rgba(53,185,107,0.12) 46%, rgba(53,185,107,0.04) 72%, transparent 100%)",
             zIndex: 0,
           }}
         />
@@ -812,11 +812,12 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
           src={shopperImg}
           alt="Happy customer receiving personalized offers"
           loading="lazy"
-          className="absolute object-contain drop-shadow-[0_18px_28px_rgba(0,0,0,0.18)] animate-[cx-float_8s_ease-in-out_infinite]"
+          className="absolute object-contain object-bottom drop-shadow-[0_18px_28px_rgba(0,0,0,0.18)] animate-[cx-float_8s_ease-in-out_infinite]"
           style={{
-            right: "-6%", bottom: 0,
-            width: "clamp(260px, 58%, 340px)",
-            height: "auto",
+            right: -8, bottom: 0,
+            width: 300,
+            height: 470,
+            maxWidth: "82%",
             objectPosition: "right bottom",
             zIndex: 2,
           }}
