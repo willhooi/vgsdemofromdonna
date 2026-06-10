@@ -800,9 +800,9 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
           aria-hidden
           className="pointer-events-none absolute rounded-full"
           style={{
-            right: -20, bottom: 40, width: 300, height: 320,
+            right: "-8%", bottom: "6%", width: 360, height: 390,
             background:
-              "radial-gradient(circle, rgba(53,185,107,0.22) 0%, rgba(53,185,107,0.12) 45%, rgba(53,185,107,0.04) 70%, transparent 100%)",
+              "radial-gradient(circle, rgba(53,185,107,0.24) 0%, rgba(53,185,107,0.12) 46%, rgba(53,185,107,0.04) 72%, transparent 100%)",
             zIndex: 0,
           }}
         />
@@ -813,7 +813,13 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
           alt="Happy customer receiving personalized offers"
           loading="lazy"
           className="absolute object-contain drop-shadow-[0_18px_28px_rgba(0,0,0,0.18)] animate-[cx-float_8s_ease-in-out_infinite]"
-          style={{ right: 0, bottom: 0, top: 0, width: "70%", height: "100%", objectPosition: "right bottom", zIndex: 1 }}
+          style={{
+            right: "-6%", bottom: 0,
+            width: "clamp(260px, 58%, 340px)",
+            height: "auto",
+            objectPosition: "right bottom",
+            zIndex: 2,
+          }}
         />
 
         {/* Engagement cards (floating, left side) */}
@@ -826,7 +832,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
               key={p.title}
               className={`absolute flex items-center gap-2 border ${ring} bg-white px-2.5 py-2`}
               style={{
-                left: 10, width: 185, height: 72, top: CX_TOPS_REL[i], zIndex: 3,
+                left: 24, width: 210, height: 68, top: CX_TOPS_REL[i], zIndex: 3,
                 borderRadius: 18, boxShadow: "0 10px 25px rgba(0,0,0,0.08)",
               }}
             >
@@ -844,7 +850,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
         {/* Rating card */}
         <div
           className="absolute rounded-2xl bg-white px-3 py-2 shadow-[0_10px_25px_rgba(0,0,0,0.08)] ring-1 ring-border"
-          style={{ left: 10, bottom: 30, width: 230, height: 72, zIndex: 4 }}
+          style={{ left: 56, bottom: 34, width: 250, height: 72, zIndex: 4, transform: "translateX(12%)" }}
         >
           <div className="flex items-center gap-1">
             {Array.from({ length: 5 }).map((_, i) => (
