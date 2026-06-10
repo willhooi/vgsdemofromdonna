@@ -1191,7 +1191,8 @@ const StepCustomerExperience = ({ visible }: { visible: boolean }) => (
     delay={360}
   >
     <div
-      className="relative w-full min-h-[540px] sm:min-h-[580px] md:min-h-[560px] overflow-visible"
+      className="relative w-full h-[540px] sm:h-[560px] md:h-[560px] max-h-[560px] overflow-hidden"
+      style={{ contain: "size layout paint" }}
     >
 
       {/* Green glow */}
