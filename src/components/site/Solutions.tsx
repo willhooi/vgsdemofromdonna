@@ -156,7 +156,7 @@ const OutcomeStage = ({ visible, className = "" }: { visible: boolean; className
       width={896}
       height={1024}
       loading="lazy"
-      className="relative mx-auto aspect-square w-full max-w-[360px] object-contain drop-shadow-[0_25px_40px_rgba(0,0,0,0.12)]"
+      className="relative mx-auto aspect-square w-full max-w-[540px] object-contain drop-shadow-[0_25px_40px_rgba(0,0,0,0.12)]"
     />
 
     {/* Floating pop-ups (Customer Experience outcomes) */}
@@ -812,7 +812,7 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
           alt="Happy customer receiving personalized offers"
           loading="lazy"
           className="absolute object-contain drop-shadow-[0_18px_28px_rgba(0,0,0,0.18)]"
-          style={{ right: 0, bottom: 24, width: 220, maxWidth: "58%", height: "auto", zIndex: 2 }}
+          style={{ right: 0, bottom: 24, width: 330, maxWidth: "87%", height: "auto", zIndex: 2 }}
         />
 
         {/* Engagement cards (floating, left side) */}
@@ -1196,7 +1196,7 @@ const StepCustomerExperience = ({ visible }: { visible: boolean }) => (
         src={shopperImg}
         alt="Happy customer receiving personalized offers"
         loading="lazy"
-        className="pointer-events-none absolute bottom-0 right-[-6%] z-0 h-auto w-[46%] max-w-[170px] object-contain drop-shadow-[0_14px_24px_rgba(0,0,0,0.14)]"
+        className="pointer-events-none absolute bottom-0 right-[-6%] z-0 h-auto w-[46%] max-w-[255px] object-contain drop-shadow-[0_14px_24px_rgba(0,0,0,0.14)]"
       />
 
       {/* Popups column — left side, wraps ~60% width */}
