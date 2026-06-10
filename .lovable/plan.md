@@ -1,57 +1,62 @@
-# Seamlessly connect Solutions → ServicesGrid
 
-Goal: make the page read as one story — "From the infrastructure that unifies data & AI → to the services that activate it" — instead of two visually separate sections.
+# Galaxy unification — Solutions → Bridge → ServicesGrid
 
-Today there's a hard cut: `<Solutions />` → `<VDivider />` → `<ServicesGrid />`. Backgrounds, rhythm and copy don't hand off to each other.
+Direction chosen: **Cosmic orbit narrative**, but adapted to a **clean / clear / bright background** (light theme, không dark) — ý tưởng galaxy thể hiện qua artwork (orbits, nebula glow, stars) và animation flow, không qua màu nền tối.
 
-## What changes
+## 1. Hợp nhất background (bright galaxy)
 
-Scope is presentation only. No business logic, no data changes.
+Tạo một component nền dùng chung `GalaxyBackdrop` (`src/components/site/GalaxyBackdrop.tsx`), được đặt như một lớp `absolute inset-0 -z-10` ở wrapper bao cả `<Solutions />`, `<SolutionsToServicesBridge />`, `<ServicesGrid />`.
 
-### 1. Remove the hard divider
-In `src/pages/Index.tsx`, drop the `<VDivider />` between `<Solutions />` and `<ServicesGrid />`. The divider visually says "new chapter"; we want continuity.
+- Nền: trắng → `hsl(145 60% 97%)` rất nhạt, **không** đổi sang dark.
+- 2 vùng radial nebula màu primary green (`hsl(var(--primary)/0.10-0.14)`) đặt lệch tâm — một ở khu vực Solutions, một ở khu vực ServicesGrid → tạo cảm giác hai "thiên hà" cùng một dải.
+- 2–3 vòng orbit SVG mảnh, `stroke-dasharray`, opacity 15–25%, trải dài qua cả 3 section, xoay rất chậm (`animation: spin 90s linear infinite`).
+- Lớp stars: dots SVG nhỏ thưa, opacity 25–40%, drift rất nhẹ (`translateY` 8s ease-in-out infinite).
+- Mọi animation tôn trọng `prefers-reduced-motion`.
 
-### 2. Add a `SolutionsToServicesBridge` component
-New file `src/components/site/SolutionsToServicesBridge.tsx`, rendered between the two sections. It is a short, full-width band (~140–180px tall) that:
+Trong `Index.tsx`: bọc 3 section trong `<div className="relative isolate">` + `<GalaxyBackdrop />`. Bỏ background riêng của Solutions và ServicesGrid (để chúng trong suốt) — chỉ giữ padding/spacing.
 
-- Inherits the green radial wash from Solutions at the top and fades into the white→green aurora of ServicesGrid at the bottom (matching gradient stops at the seam → invisible boundary).
-- Contains a centered narrative line:
-  - Eyebrow (mono, uppercase): `Chapter 02 — Activation`
-  - Headline: `From the platform to the services that run on it.`
-  - Sub: `The infrastructure above powers the 9 messaging services below.`
-- A vertical dashed connector (SVG, same `stroke-dasharray 5 7` + `flow-dash` animation already used in the Solutions infographic) running from the bottom of Solutions through the bridge into the top of ServicesGrid — visually "the data flow keeps flowing".
-- A small downward chevron / `↓` glyph at the end of the dashed line as a scroll affordance.
+## 2. Bridge → Cosmic warp transition
 
-### 3. Match section backgrounds at the seam
-- `Solutions.tsx`: change bottom padding to `pb-0` and extend the radial gradient so its lightest stop reaches the bottom edge (currently fades to white at 60%).
-- `ServicesGrid.tsx`: reduce the top white fade (`absolute inset-x-0 top-0 h-[180px]`) to `h-[80px]` and start the aurora gradient higher, so the bridge band sits on the same color the ServicesGrid begins with.
-- Reduce `ServicesGrid` `py-20` to `pt-10 pb-20` since the bridge now provides the top breathing room.
+Refactor `SolutionsToServicesBridge.tsx`:
+- Bỏ "Chapter 02 — Activation" chip + chevron tròn cũ.
+- Thay bằng: một **orbit ring SVG** ở giữa (vòng dashed green xoay chậm) ôm lấy một core dot pulsing green; phía trên/dưới là 2 streak particle mảnh chạy dọc (`@keyframes warp-streak` translateY + fade) → cảm giác "data warp" từ platform xuống services.
+- Giữ tiêu đề ngắn ở giữa: `From the platform → to the services that run on it.` (rút gọn 1 câu, bỏ paragraph mô tả dài).
+- Không còn nền riêng — trong suốt trên `GalaxyBackdrop`.
 
-### 4. Reuse the dashed-flow visual language
-Extract the `@keyframes flow-dash` already defined inside `Solutions.tsx` into `src/index.css` (single source) so both the Solutions infographic and the new bridge connector animate in sync.
+## 3. Service cards — giảm text
 
-### 5. Anchor + a11y
-- Give the bridge `id="services-intro"` and update the header nav anchor for "Services" to point there (so clicking the nav lands users on the narrative bridge, not mid-grid).
-- Bridge headline uses an `<h3>` (Solutions has `h2`, ServicesGrid has its own `h2`) to keep the heading hierarchy clean.
+Trong `ServicesGrid.tsx` data + render card:
+- Bỏ trường `description` dài; thay bằng `tag` ngắn ≤ 4 từ (vd `Rich Media · Engagement`, `Branded ID · Trust`).
+- Card layout mới: icon nhỏ trong ô bo tròn (bg `primary/10`), tiêu đề 1 dòng, dòng tag uppercase tracking-wider text-[11px] màu `muted-foreground`.
+- Bỏ chế độ "mở rộng chi tiết" hoặc giữ nó nhưng chỉ kích hoạt khi click → mặc định card cực gọn (icon + title + tag).
+- Hover: viền `primary/40`, glow nhẹ `shadow-[0_0_24px_-8px_hsl(var(--primary)/0.35)]`, icon scale 1.08.
+- Grid 3×3 giữ nguyên, `backdrop-blur-sm` + `bg-white/60` để card "nổi" trên galaxy backdrop.
 
-## Files touched
+## 4. Solutions section adaptions
 
-- `src/pages/Index.tsx` — remove `VDivider`, insert `<SolutionsToServicesBridge />`.
-- `src/components/site/SolutionsToServicesBridge.tsx` — new.
-- `src/components/site/Solutions.tsx` — bottom padding + gradient extension only.
-- `src/components/site/ServicesGrid.tsx` — top fade + top padding only.
-- `src/index.css` — promote `flow-dash` keyframes.
+- Bỏ background gradient cục bộ của `Solutions.tsx` (đã extend xuống trắng); thay bằng `bg-transparent`.
+- Giữ nguyên cấu trúc tier/infographic nội dung — chỉ chỉnh nền + thêm 1 "core glow" nhỏ phía sau headline để khớp ngôn ngữ galaxy.
+
+## 5. Files touched
+
+- **New**: `src/components/site/GalaxyBackdrop.tsx`
+- **Edit**: `src/pages/Index.tsx` (bọc wrapper + render backdrop)
+- **Edit**: `src/components/site/Solutions.tsx` (bg transparent, core glow nhỏ)
+- **Edit**: `src/components/site/SolutionsToServicesBridge.tsx` (orbit + warp streaks, bỏ chip & chevron cũ)
+- **Edit**: `src/components/site/ServicesGrid.tsx` (data: bỏ description dài → tag ngắn; card layout gọn; nền transparent)
+- **Edit**: `src/index.css` (keyframes: `orbit-spin`, `warp-streak`, `star-drift`)
 
 ## Acceptance
 
-- Scrolling from Solutions into ServicesGrid shows no visible seam (same color at the boundary).
-- A single dashed vertical line visually continues from the Solutions infographic into the ServicesGrid area.
-- The bridge copy makes the narrative explicit: platform → services.
-- Mobile: bridge collapses to a shorter band (~100px) with the same copy, no SVG connector (matches the rest of the mobile layout which already drops connectors).
-- No layout shift in either section's content; only paddings and background stops change.
+- Cả 3 section dùng chung một bright galaxy backdrop liền mạch, không còn vạch màu hay đổi tông giữa các vùng.
+- Orbit rings + stars + nebula glow thấy rõ nhưng không cướp sự chú ý khỏi nội dung.
+- Bridge là orbit ring + streaks, không còn chip "Chapter 02".
+- Mỗi service card chỉ còn icon + title + 1 dòng tag ngắn.
+- Animation mượt, tắt khi `prefers-reduced-motion`.
+- Không thay đổi business logic, số lượng tier/service, hay routing.
 
 ## Out of scope
 
-- Restructuring the Solutions infographic or the ServicesGrid cards.
-- Copy rewrites inside either section.
-- Adding a new section between them with its own content beyond the bridge band.
+- Đổi sang dark theme.
+- Thay nội dung tier Solutions hay icon services.
+- Thêm 3D/Three.js (chỉ SVG + CSS).

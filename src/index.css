@@ -487,6 +487,48 @@
   to { stroke-dashoffset: -400; }
 }
 
+/* ====== Galaxy backdrop (shared by Solutions → Bridge → ServicesGrid) ====== */
+@keyframes galaxy-spin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+@keyframes galaxy-spin-reverse {
+  from { transform: translate(-50%, -50%) rotate(360deg); }
+  to   { transform: translate(-50%, -50%) rotate(0deg); }
+}
+@keyframes galaxy-star-drift {
+  0%, 100% { transform: translateY(0); opacity: 0.6; }
+  50%      { transform: translateY(-6px); opacity: 0.9; }
+}
+@keyframes galaxy-orbit-self {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes galaxy-orbit-self-reverse {
+  from { transform: rotate(360deg); }
+  to   { transform: rotate(0deg); }
+}
+@keyframes warp-streak-move {
+  0%   { transform: translate(-50%, -100%); opacity: 0; }
+  20%  { opacity: 1; }
+  80%  { opacity: 1; }
+  100% { transform: translate(-50%, 100%); opacity: 0; }
+}
+.galaxy-orbit-slow      { animation: galaxy-spin 120s linear infinite; }
+.galaxy-orbit-reverse   { animation: galaxy-spin-reverse 180s linear infinite; }
+.galaxy-orbit-medium    { animation: galaxy-orbit-self 18s linear infinite; }
+.galaxy-orbit-reverse-medium { animation: galaxy-orbit-self-reverse 26s linear infinite; }
+.galaxy-stars           { animation: galaxy-star-drift 9s ease-in-out infinite; }
+.warp-streak            { animation: warp-streak-move 2.4s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .galaxy-orbit-slow,
+  .galaxy-orbit-reverse,
+  .galaxy-orbit-medium,
+  .galaxy-orbit-reverse-medium,
+  .galaxy-stars,
+  .warp-streak { animation: none !important; }
+}
+
 /* ====== AI Customer Brain animations ====== */
 @keyframes brain-orbit-dash {
   to { stroke-dashoffset: -220; }

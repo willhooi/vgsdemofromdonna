@@ -7,6 +7,7 @@ import { TrustBand } from "@/components/site/TrustBand";
 import { Solutions } from "@/components/site/Solutions";
 import { SolutionsToServicesBridge } from "@/components/site/SolutionsToServicesBridge";
 import { ServicesGrid } from "@/components/site/ServicesGrid";
+import { GalaxyBackdrop } from "@/components/site/GalaxyBackdrop";
 
 import { VietGuysCaseStudies } from "@/components/site/VietGuysCaseStudies";
 import { FAQ } from "@/components/site/FAQ";
@@ -36,9 +37,12 @@ const Index = () => {
       <div className="container-tight"><VDivider /></div>
       <TrustBand />
       <div className="container-tight"><VDivider /></div>
-      <Solutions />
-      <SolutionsToServicesBridge />
-      <ServicesGrid />
+      <div className="relative isolate">
+        <GalaxyBackdrop />
+        <Solutions />
+        <SolutionsToServicesBridge />
+        <ServicesGrid />
+      </div>
       <VietGuysCaseStudies />
       <div className="container-tight"><VDivider /></div>
       <div className="bg-muted">

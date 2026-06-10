@@ -62,24 +62,8 @@ export const Solutions = () => {
     <section
       ref={ref}
       id="solutions"
-      className="relative overflow-hidden pt-16 md:pt-24 pb-0"
-      style={{
-        background:
-          "radial-gradient(ellipse at 50% 0%, hsl(145 60% 96%) 0%, hsl(0 0% 100%) 55%, hsl(0 0% 100%) 100%)",
-      }}
+      className="relative overflow-hidden pt-16 md:pt-24 pb-0 bg-transparent"
     >
-      {/* Subtle grid backdrop */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.3]"
-        style={{
-          backgroundImage:
-            "linear-gradient(hsl(145 30% 88%) 1px, transparent 1px), linear-gradient(90deg, hsl(145 30% 88%) 1px, transparent 1px)",
-          backgroundSize: "44px 44px",
-          maskImage:
-            "radial-gradient(ellipse at 50% 40%, black 25%, transparent 75%)",
-        }}
-      />
 
       <div className="container-tight relative">
         {/* Header */}
