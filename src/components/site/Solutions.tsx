@@ -479,8 +479,8 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
   const BI_RIGHT_X = 940 + 22 + 316; // card right edge absolute
 
   // Col4 — 4 CX cards. tops relative: 108,196,284,372, height 66
-  const CX_TOPS_REL = [108, 196, 284, 372];
-  const CX_CENTERS = CX_TOPS_REL.map((t) => 40 + t + 33);
+ const CX_TOPS_REL = [110, 195, 280, 365];
+ const CX_CENTERS = CX_TOPS_REL.map((t) => 40 + t + 36);
   const CX_LEFT_X = 1370 + 22;
 
   // Hubs (absolute page coords) — sit in the 70px gaps between columns
@@ -800,8 +800,9 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
           aria-hidden
           className="pointer-events-none absolute rounded-full"
           style={{
-            right: -10, bottom: 30, width: 280, height: 330,
-            background: "radial-gradient(circle, rgba(43,196,105,0.22), rgba(43,196,105,0.04), transparent)",
+            right: -20, bottom: 40, width: 300, height: 320,
+            background:
+              "radial-gradient(circle, rgba(53,185,107,0.22) 0%, rgba(53,185,107,0.12) 45%, rgba(53,185,107,0.04) 70%, transparent 100%)",
             zIndex: 0,
           }}
         />
@@ -811,8 +812,8 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
           src={shopperImg}
           alt="Happy customer receiving personalized offers"
           loading="lazy"
-          className="absolute object-contain drop-shadow-[0_18px_28px_rgba(0,0,0,0.18)]"
-          style={{ right: 0, bottom: 24, width: 330, maxWidth: "87%", height: "auto", zIndex: 2 }}
+          className="absolute object-contain drop-shadow-[0_18px_28px_rgba(0,0,0,0.18)] animate-[cx-float_8s_ease-in-out_infinite]"
+          style={{ right: -10, bottom: 0, width: 240, height: "auto", zIndex: 1 }}
         />
 
         {/* Engagement cards (floating, left side) */}
@@ -823,15 +824,18 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
           return (
             <div
               key={p.title}
-              className={`absolute flex items-center gap-2 rounded-xl border ${ring} bg-white px-2.5 py-2 shadow-[0_4px_10px_rgba(0,0,0,0.08)]`}
-              style={{ left: 22, width: 220, height: 66, top: CX_TOPS_REL[i], zIndex: 3 }}
+              className={`absolute flex items-center gap-2 border ${ring} bg-white px-2.5 py-2`}
+              style={{
+                left: 10, width: 185, height: 72, top: CX_TOPS_REL[i], zIndex: 3,
+                borderRadius: 18, boxShadow: "0 10px 25px rgba(0,0,0,0.08)",
+              }}
             >
               <span className={`grid h-9 w-9 shrink-0 place-items-center rounded-md ${iconBg}`}>
                 <p.Icon className="h-[18px] w-[18px]" />
               </span>
               <div className="min-w-0 flex-1">
-                <div className="text-[14px] font-semibold leading-tight text-muted-foreground line-clamp-2">{p.title}</div>
-                <div className="text-[15.5px] font-bold leading-tight text-foreground line-clamp-2">{p.body}</div>
+                <div className="text-[12px] font-semibold leading-tight text-muted-foreground">{p.title}</div>
+                <div className="text-[13.5px] font-bold leading-tight text-foreground">{p.body}</div>
               </div>
             </div>
           );
@@ -839,16 +843,16 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
 
         {/* Rating card */}
         <div
-          className="absolute rounded-2xl bg-white px-3 py-2 shadow-[0_8px_20px_-10px_rgba(0,0,0,0.25)] ring-1 ring-border"
-          style={{ left: 22, bottom: 28, width: 250, height: 72, zIndex: 3 }}
+          className="absolute rounded-2xl bg-white px-3 py-2 shadow-[0_10px_25px_rgba(0,0,0,0.08)] ring-1 ring-border"
+          style={{ left: 10, bottom: 30, width: 230, height: 72, zIndex: 4 }}
         >
           <div className="flex items-center gap-1">
             {Array.from({ length: 5 }).map((_, i) => (
               <Star key={i} className="h-4 w-4 fill-[#ff9b17] text-[#ff9b17]" />
             ))}
-            <span className="ml-1 text-[16.5px] font-bold text-foreground">5.0</span>
+            <span className="ml-1 text-[15px] font-bold text-foreground">5.0</span>
           </div>
-          <div className="mt-1 text-[14.5px] italic text-muted-foreground">"Thanks for your feedback!"</div>
+          <div className="mt-1 text-[13px] italic text-muted-foreground">"Thanks for your feedback!"</div>
         </div>
       </div>
     </div>
