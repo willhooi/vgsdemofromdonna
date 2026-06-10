@@ -62,10 +62,10 @@ export const Solutions = () => {
     <section
       ref={ref}
       id="solutions"
-      className="relative overflow-hidden pt-16 md:pt-24 pb-8 md:pb-12"
+      className="relative overflow-hidden pt-16 md:pt-24 pb-0"
       style={{
         background:
-          "radial-gradient(ellipse at 50% 0%, hsl(145 60% 96%) 0%, hsl(0 0% 100%) 60%)",
+          "radial-gradient(ellipse at 50% 0%, hsl(145 60% 96%) 0%, hsl(0 0% 100%) 55%, hsl(0 0% 100%) 100%)",
       }}
     >
       {/* Subtle grid backdrop */}
