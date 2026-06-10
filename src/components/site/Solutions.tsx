@@ -800,9 +800,9 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
           aria-hidden
           className="pointer-events-none absolute rounded-full"
           style={{
-            right: "-8%", bottom: "6%", width: 360, height: 390,
+            right: "-10%", bottom: "4%", width: 380, height: 420,
             background:
-              "radial-gradient(circle, rgba(53,185,107,0.24) 0%, rgba(53,185,107,0.12) 46%, rgba(53,185,107,0.04) 72%, transparent 100%)",
+              "radial-gradient(circle, rgba(53,185,107,0.26) 0%, rgba(53,185,107,0.12) 46%, rgba(53,185,107,0.04) 72%, transparent 100%)",
             zIndex: 0,
           }}
         />
@@ -812,11 +812,12 @@ const DesktopInfographic = ({ visible }: { visible: boolean }) => {
           src={shopperImg}
           alt="Happy customer receiving personalized offers"
           loading="lazy"
-          className="absolute object-contain drop-shadow-[0_18px_28px_rgba(0,0,0,0.18)] animate-[cx-float_8s_ease-in-out_infinite]"
+          className="absolute object-contain object-bottom drop-shadow-[0_18px_28px_rgba(0,0,0,0.18)] animate-[cx-float_8s_ease-in-out_infinite]"
           style={{
-            right: "-6%", bottom: 0,
-            width: "clamp(260px, 58%, 340px)",
-            height: "auto",
+            right: -8, bottom: 0,
+            width: 300,
+            height: 470,
+            maxWidth: "82%",
             objectPosition: "right bottom",
             zIndex: 2,
           }}
@@ -1191,33 +1192,35 @@ const StepCustomerExperience = ({ visible }: { visible: boolean }) => (
     delay={360}
   >
     <div
-      className="relative w-full min-h-[620px] md:min-h-[560px]"
-      style={{ height: "auto", overflow: "visible" }}
+      className="relative w-full min-h-[540px] sm:min-h-[580px] md:min-h-[560px] overflow-visible"
     >
 
       {/* Green glow */}
       <div
         aria-hidden
         className="pointer-events-none absolute rounded-full
-                   right-[-12%] bottom-[8%] w-[300px] h-[330px]
-                   md:right-[-6%] md:bottom-[8%] md:w-[330px] md:h-[360px]"
+                   right-[-10%] bottom-[4%] w-[320px] h-[360px]
+                   sm:w-[360px] sm:h-[400px]
+                   md:right-[-8%] md:bottom-[4%] md:w-[340px] md:h-[380px]"
         style={{
           background:
-            "radial-gradient(circle, rgba(53,185,107,0.24) 0%, rgba(53,185,107,0.12) 46%, rgba(53,185,107,0.04) 72%, transparent 100%)",
+            "radial-gradient(circle, rgba(53,185,107,0.26) 0%, rgba(53,185,107,0.12) 46%, rgba(53,185,107,0.04) 72%, transparent 100%)",
           zIndex: 0,
         }}
       />
 
-      {/* Customer image — hero visual */}
+      {/* Customer image — hero visual, always large & right-aligned */}
       <img
         src={shopperImg}
         alt="Happy customer receiving personalized offers"
         loading="lazy"
-        className="pointer-events-none absolute object-contain drop-shadow-[0_14px_24px_rgba(0,0,0,0.14)]
-                   right-[-4%] bottom-[-2%] md:bottom-[2%]"
+        className="pointer-events-none absolute object-contain object-bottom drop-shadow-[0_14px_24px_rgba(0,0,0,0.14)]
+                   right-[-6%] bottom-0
+                   w-[58%] min-w-[230px] max-w-[320px] h-[88%] max-h-[460px]
+                   sm:w-[55%] sm:max-w-[340px]
+                   md:right-[-4%] md:w-[58%] md:max-w-[300px] md:h-[90%]"
         style={{
-          width: "clamp(220px, 72%, 300px)",
-          height: "auto",
+          objectPosition: "right bottom",
           zIndex: 2,
         }}
       />
@@ -1227,14 +1230,14 @@ const StepCustomerExperience = ({ visible }: { visible: boolean }) => (
         const isAccent = p.tone === "accent";
         const iconBg = isAccent ? "bg-[hsl(35_100%_94%)] text-[hsl(35_100%_45%)]" : "bg-[hsl(145_60%_95%)] text-[hsl(145_50%_35%)]";
         const ring = isAccent ? "border-[hsl(35_100%_85%)]/60" : "border-[hsl(145_55%_80%)]/50";
-        const topsMobile = [118, 204, 290, 376];
-        const mdTops = [`md:!top-[112px]`, `md:!top-[198px]`, `md:!top-[284px]`, `md:!top-[370px]`];
+        const topsMobile = [110, 192, 274, 356];
+        const mdTops = [`md:!top-[108px]`, `md:!top-[192px]`, `md:!top-[276px]`, `md:!top-[360px]`];
         return (
           <div
             key={p.title}
             className={`step-anim absolute flex items-center gap-2 rounded-2xl border ${ring} bg-white px-2.5 py-2 shadow-[0_10px_25px_rgba(0,0,0,0.08)]
-                       left-[20px] md:left-[28px]
-                       h-[68px] w-[min(72%,250px)] md:w-[220px] ${mdTops[i]}`}
+                       left-[18px] md:left-[24px]
+                       h-[68px] w-[42%] min-w-[190px] max-w-[230px] md:w-[44%] md:max-w-[220px] ${mdTops[i]}`}
             style={{
               top: `${topsMobile[i]}px`,
               zIndex: 3,
@@ -1255,9 +1258,9 @@ const StepCustomerExperience = ({ visible }: { visible: boolean }) => (
       {/* Rating popup */}
       <div
         className="absolute rounded-2xl bg-white px-3 py-2 shadow-[0_10px_25px_rgba(0,0,0,0.08)] ring-1 ring-border
-                   left-[36px] bottom-[28px] w-[min(76%,270px)]
-                   md:left-[48px] md:bottom-[30px] md:w-[250px]"
-        style={{ zIndex: 4, transform: "translateX(8%)" }}
+                   left-[28px] bottom-[24px] w-[46%] min-w-[210px] max-w-[250px]
+                   md:left-[36px] md:bottom-[28px] md:w-[46%] md:max-w-[240px]"
+        style={{ zIndex: 4, transform: "translateX(6%)" }}
       >
         <div className="flex items-center gap-1">
           {Array.from({ length: 5 }).map((_, i) => (
