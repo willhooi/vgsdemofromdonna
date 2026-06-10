@@ -1191,13 +1191,9 @@ const StepCustomerExperience = ({ visible }: { visible: boolean }) => (
     delay={360}
   >
     <div
-      className="relative w-full"
-      style={{ minHeight: "var(--cx-h, 620px)", height: "auto", overflow: "visible" }}
+      className="relative w-full min-h-[620px] md:min-h-[560px]"
+      style={{ height: "auto", overflow: "visible" }}
     >
-      <style>{`
-        @media (min-width: 768px) { .cx-col { --cx-h: 560px; } }
-      `}</style>
-      <div className="cx-col absolute inset-0" style={{ minHeight: "inherit" }} />
 
       {/* Green glow */}
       <div
