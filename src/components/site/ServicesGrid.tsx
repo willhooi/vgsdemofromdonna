@@ -40,7 +40,7 @@ const SERVICES: Service[] = [
       { value: "98%", label: "Open rate within 3 min" },
       { value: "API & Webtool", label: "Flexible integration" },
     ],
-    cta: "Learn about SMS Brandname",
+    cta: "Learn more",
   },
   {
     name: "Zalo ZBS",
@@ -52,7 +52,7 @@ const SERVICES: Service[] = [
       { value: "80M+", label: "Zalo users in Vietnam" },
       { value: "3× CTR", label: "vs standard SMS" },
     ],
-    cta: "Learn about Zalo ZBS",
+    cta: "Learn more",
   },
   {
     name: "Viber Message",
@@ -64,7 +64,7 @@ const SERVICES: Service[] = [
       { value: "1B+", label: "Global users" },
       { value: "60%", label: "Viber Ads market share VN" },
     ],
-    cta: "Learn about Viber Message",
+    cta: "Learn more",
   },
   {
     name: "Email Marketing",
@@ -76,7 +76,7 @@ const SERVICES: Service[] = [
       { value: "A/B Testing", label: "Content optimization" },
       { value: "Auto Journey", label: "Behavior-triggered flows" },
     ],
-    cta: "Learn about Email Marketing",
+    cta: "Learn more",
   },
   {
     name: "Mobile Topup",
@@ -88,7 +88,7 @@ const SERVICES: Service[] = [
       { value: "All Carriers", label: "Full Vietnam coverage" },
       { value: "API", label: "System integration" },
     ],
-    cta: "Learn about Mobile Topup",
+    cta: "Learn more",
   },
   {
     name: "SMS Short Code",
@@ -100,7 +100,7 @@ const SERVICES: Service[] = [
       { value: "2-way SMS", label: "Interactive messaging" },
       { value: "Auto-reply", label: "Instant response" },
     ],
-    cta: "Learn about SMS Short Code",
+    cta: "Learn more",
   },
   {
     name: "Voice Brandname",
@@ -112,7 +112,7 @@ const SERVICES: Service[] = [
       { value: "Brand Caller ID", label: "Displayed on every call" },
       { value: "Pay per answer", label: "No charge for missed calls" },
     ],
-    cta: "Learn about Voice Brandname",
+    cta: "Learn more",
   },
   {
     name: "Customized Solution",
@@ -124,7 +124,7 @@ const SERVICES: Service[] = [
       { value: "White-label", label: "Your own platform" },
       { value: "CDP / CRM", label: "Data integration" },
     ],
-    cta: "Learn about Customized Solution",
+    cta: "Learn more",
   },
   {
     name: "OTP Multichannel",
@@ -136,7 +136,7 @@ const SERVICES: Service[] = [
       { value: "Automatic failover", label: "Failover mechanism" },
       { value: "99%", label: "Delivery Rate" },
     ],
-    cta: "Learn about OTP Multichannel",
+    cta: "Learn more",
   },
 ];
 
@@ -208,7 +208,7 @@ function DesktopCard({
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
       onClick={onToggle}
-      className="group relative flex cursor-pointer flex-col self-start overflow-hidden rounded-[14px] p-5 transition-all duration-300 hover:-translate-y-0.5"
+      className="group relative flex w-full min-w-0 cursor-pointer flex-col self-start overflow-hidden rounded-[14px] p-5 transition-all duration-300 hover:-translate-y-0.5"
       style={{
         background: open ? "rgba(255,255,255,0.75)" : "rgba(255,255,255,0.06)",
         backdropFilter: open ? "blur(14px) saturate(140%)" : "blur(6px) saturate(120%)",
@@ -217,7 +217,7 @@ function DesktopCard({
         boxShadow: open
           ? "0 18px 40px -14px rgba(57,180,74,0.35)"
           : "0 2px 10px -6px rgba(0,0,0,0.12)",
-        height: open ? 360 : 116,
+        minHeight: open ? 360 : 116,
       }}
     >
       <header className="flex items-start justify-between gap-3">
@@ -248,9 +248,9 @@ function DesktopCard({
         )}
       </header>
 
-      <div className="mt-3">
+      <div className="mt-3 min-w-0">
         <h3
-          className="font-bold transition-all"
+          className="truncate font-bold transition-all"
           style={{
             fontSize: open ? 16 : 14,
             color: open ? GREEN_DEEP : "hsl(var(--foreground))",
@@ -463,7 +463,7 @@ function MobileSwiper() {
           }}
         >
           {SERVICES.map((s) => (
-            <div key={s.name} className="w-full flex-shrink-0 px-1">
+            <div key={s.name} className="box-border w-full flex-shrink-0 px-0">
               <MobileCard svc={s} />
             </div>
           ))}
@@ -593,9 +593,9 @@ export function ServicesGrid() {
         {isMobile ? (
           <MobileSwiper />
         ) : (
-          <div ref={gridRef} className="hidden md:flex md:gap-[14px]">
+          <div ref={gridRef} className="hidden w-full max-w-full overflow-hidden md:flex md:gap-[14px]">
             {[0, 1, 2].map((col) => (
-              <div key={col} className="flex flex-1 flex-col gap-[14px]">
+              <div key={col} className="flex min-w-0 basis-0 flex-1 flex-col gap-[14px]">
                 {[0, 1, 2].map((row) => {
                   const i = row * 3 + col;
                   const s = SERVICES[i];
