@@ -1232,7 +1232,6 @@ const StepCustomerExperience = ({ visible }: { visible: boolean }) => (
         const iconBg = isAccent ? "bg-[hsl(35_100%_94%)] text-[hsl(35_100%_45%)]" : "bg-[hsl(145_60%_95%)] text-[hsl(145_50%_35%)]";
         const ring = isAccent ? "border-[hsl(35_100%_85%)]/60" : "border-[hsl(145_55%_80%)]/50";
         const topsMobile = [118, 204, 290, 376];
-        const topsTablet = [112, 198, 284, 370];
         const mdTops = [`md:!top-[112px]`, `md:!top-[198px]`, `md:!top-[284px]`, `md:!top-[370px]`];
         return (
           <div
