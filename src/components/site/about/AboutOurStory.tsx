@@ -64,6 +64,47 @@ const milestones: Milestone[] = [
   },
 ];
 
+const MilestoneCard = ({ m, align }: { m: Milestone; align: "left" | "right" }) => (
+  <div className={align === "left" ? "md:text-right" : "md:text-left"}>
+    <h3
+      className="text-lg font-bold md:text-xl"
+      style={{ color: m.highlight ? "#a7f070" : "#fff" }}
+    >
+      {m.title}
+    </h3>
+    <p className="mt-2 text-sm leading-relaxed text-white/65">{m.body}</p>
+  </div>
+);
+
+const YearPill = ({ m }: { m: Milestone }) => (
+  <span
+    className="inline-flex items-center rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-wider"
+    style={
+      m.tbc
+        ? {
+            background: "rgba(255,255,255,0.04)",
+            borderColor: "rgba(255,255,255,0.18)",
+            color: "rgba(255,255,255,0.5)",
+          }
+        : m.highlight
+        ? {
+            background: "hsl(var(--accent))",
+            borderColor: "hsl(var(--accent))",
+            color: "#fff",
+            boxShadow:
+              "0 0 0 4px rgba(255,155,23,0.25), 0 8px 24px -8px rgba(255,155,23,0.55)",
+          }
+        : {
+            background: "rgba(255,255,255,0.08)",
+            borderColor: "#a7f070",
+            color: "#a7f070",
+          }
+    }
+  >
+    {m.year}
+  </span>
+);
+
 export const AboutOurStory = () => {
   const sectionRef = useRef<HTMLElement | null>(null);
   const [progress, setProgress] = useState(0);
@@ -90,7 +131,7 @@ export const AboutOurStory = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden py-20 md:py-28"
+      className="relative overflow-hidden py-20 md:py-24"
       style={{ background: "linear-gradient(180deg, #0c3b20, #0a2f1a)" }}
     >
       <ParticleField
@@ -135,64 +176,37 @@ export const AboutOurStory = () => {
             />
           </div>
 
-          <ol className="space-y-12 md:space-y-16">
+          <ol className="space-y-10 md:space-y-14">
             {milestones.map((m, i) => {
-              const isRight = i % 2 === 1;
+              // Milestone 1 (i=0) → RIGHT, Milestone 2 (i=1) → LEFT, alternating.
+              const onRight = i % 2 === 0;
               return (
                 <Reveal
                   as="li"
-                  key={`${m.year}-${m.title}`}
+                  key={`${i}-${m.title}`}
                   variant="fade-up"
                   delay={60}
                   className="relative grid gap-4 md:grid-cols-[1fr_120px_1fr] md:items-center md:gap-6"
                 >
-                  {/* left slot */}
-                  <div
-                    className={`pl-14 md:pl-0 ${
-                      isRight ? "md:order-3 md:text-left" : "md:text-right"
-                    }`}
-                  >
-                    {(isRight ? false : true) && (
+                  {/* LEFT column */}
+                  <div className="hidden md:block">
+                    {!onRight && <MilestoneCard m={m} align="left" />}
+                  </div>
+
+                  {/* year pill — centered on the line */}
+                  <div className="absolute left-5 -translate-x-1/2 md:static md:flex md:justify-center md:translate-x-0">
+                    <YearPill m={m} />
+                  </div>
+
+                  {/* RIGHT column (also the only column on mobile) */}
+                  <div className="pl-14 md:pl-0">
+                    {onRight ? (
                       <MilestoneCard m={m} align="right" />
+                    ) : (
+                      <div className="md:hidden">
+                        <MilestoneCard m={m} align="right" />
+                      </div>
                     )}
-                  </div>
-
-                  {/* year pill */}
-                  <div className="absolute left-5 -translate-x-1/2 md:static md:order-2 md:flex md:justify-center md:translate-x-0">
-                    <span
-                      className="inline-flex items-center rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-wider"
-                      style={
-                        m.tbc
-                          ? {
-                              background: "rgba(255,255,255,0.04)",
-                              borderColor: "rgba(255,255,255,0.18)",
-                              color: "rgba(255,255,255,0.5)",
-                            }
-                          : m.highlight
-                          ? {
-                              background: "hsl(var(--accent))",
-                              borderColor: "hsl(var(--accent))",
-                              color: "#fff",
-                              boxShadow: "0 0 0 4px rgba(255,155,23,0.25), 0 8px 24px -8px rgba(255,155,23,0.55)",
-                            }
-                          : {
-                              background: "rgba(255,255,255,0.08)",
-                              borderColor: "#a7f070",
-                              color: "#a7f070",
-                            }
-                      }
-                    >
-                      {m.year}
-                    </span>
-                  </div>
-
-                  {/* right slot */}
-                  <div
-                    className={`pl-14 md:pl-0 ${
-                      isRight ? "md:order-1 md:text-right" : "md:order-3"
-                    } ${i === 0 ? "" : ""}`}
-                  >
-                    <MilestoneCard m={m} align={isRight ? "right-mobile" : "left"} />
                   </div>
                 </Reveal>
               );
@@ -203,15 +217,3 @@ export const AboutOurStory = () => {
     </section>
   );
 };
-
-const MilestoneCard = ({ m, align }: { m: Milestone; align: string }) => (
-  <div>
-    <h3
-      className="text-lg font-bold md:text-xl"
-      style={{ color: m.highlight ? "#a7f070" : "#fff" }}
-    >
-      {m.title}
-    </h3>
-    <p className="mt-2 text-sm leading-relaxed text-white/65">{m.body}</p>
-  </div>
-);

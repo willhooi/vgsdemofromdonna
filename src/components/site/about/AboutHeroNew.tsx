@@ -17,25 +17,35 @@ const CountUp = ({ target, suffix, format }: { target: number; suffix: string; f
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    const start = () => {
+      if (started.current) return;
+      started.current = true;
+      const t0 = performance.now();
+      const dur = 1600;
+      const tick = (t: number) => {
+        const p = Math.min(1, (t - t0) / dur);
+        const eased = 1 - Math.pow(1 - p, 3);
+        setV(Math.round(target * eased));
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    };
+    const rect = el.getBoundingClientRect();
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    if (rect.top < vh && rect.bottom > 0) start();
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e) => {
-        if (e.isIntersecting && !started.current) {
-          started.current = true;
-          const t0 = performance.now();
-          const dur = 1600;
-          const tick = (t: number) => {
-            const p = Math.min(1, (t - t0) / dur);
-            const eased = 1 - Math.pow(1 - p, 3);
-            setV(Math.round(target * eased));
-            if (p < 1) requestAnimationFrame(tick);
-          };
-          requestAnimationFrame(tick);
+        if (e.isIntersecting) {
+          start();
+          io.unobserve(e.target);
         }
       });
-    }, { threshold: 0.3 });
+    }, { threshold: 0 });
     io.observe(el);
-    return () => io.disconnect();
+    const fallback = window.setTimeout(start, 1800);
+    return () => { io.disconnect(); window.clearTimeout(fallback); };
   }, [target]);
+
   return (
     <span ref={ref}>
       {format ? format(v) : v}
