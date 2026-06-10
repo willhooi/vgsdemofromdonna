@@ -1257,9 +1257,9 @@ const StepCustomerExperience = ({ visible }: { visible: boolean }) => (
 
       {/* Rating popup */}
       <div
-        className="absolute rounded-2xl bg-white px-3 py-2 shadow-[0_10px_25px_rgba(0,0,0,0.08)] ring-1 ring-border
-                   left-[28px] bottom-[24px] w-[46%] min-w-[210px] max-w-[250px]
-                   md:left-[36px] md:bottom-[28px] md:w-[46%] md:max-w-[240px]"
+        className="absolute rounded-2xl bg-white/70 backdrop-blur-sm px-2.5 py-1.5 shadow-[0_10px_25px_rgba(0,0,0,0.08)] ring-1 ring-border
+                   left-[28px] bottom-[24px] w-[42%] min-w-[190px] max-w-[220px]
+                   md:left-[36px] md:bottom-[28px] md:w-[44%] md:max-w-[210px]"
         style={{ zIndex: 4, transform: "translateX(6%)" }}
       >
         <div className="flex items-center gap-1">
