@@ -217,7 +217,7 @@ function DesktopCard({
         boxShadow: open
           ? "0 18px 40px -14px rgba(57,180,74,0.35)"
           : "0 2px 10px -6px rgba(0,0,0,0.12)",
-        height: open ? 360 : 140,
+        height: open ? 360 : 116,
       }}
     >
       <header className="flex items-start justify-between gap-3">
@@ -252,16 +252,20 @@ function DesktopCard({
         <h3
           className="font-bold transition-all"
           style={{
-            fontSize: open ? 16 : 13,
+            fontSize: open ? 16 : 14,
             color: open ? GREEN_DEEP : "hsl(var(--foreground))",
             fontWeight: open ? 900 : 700,
           }}
         >
           {svc.name}
         </h3>
-        {svc.short && (
-          <p className="mt-1.5 line-clamp-2 text-[11px] leading-snug text-muted-foreground">
-            {svc.short}
+        {!open && (
+          <p
+            className="mt-1.5 truncate text-[10px] font-bold uppercase tracking-[0.14em]"
+            style={{ color: GREEN }}
+            title={svc.tag}
+          >
+            {svc.tag.split("—")[0].trim()}
           </p>
         )}
       </div>
@@ -576,109 +580,11 @@ export function ServicesGrid() {
   return (
     <section
       id="services"
-      className="relative overflow-hidden pt-8 pb-20 md:pt-10"
+      className="relative overflow-hidden pt-4 pb-20 md:pt-6 bg-transparent"
       style={{
         fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
-        background:
-          "linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 8%, #F4FBF5 25%, #E8F7EA 50%, #F4FBF5 75%, #FFFFFF 92%, #FFFFFF 100%)",
       }}
     >
-      {/* Aurora background layers */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
-        {/* Top arc */}
-        <svg
-          className="absolute left-0 top-0 h-[55%] w-full"
-          viewBox="0 0 1440 600"
-          preserveAspectRatio="none"
-          fill="none"
-        >
-          <defs>
-            <radialGradient id="auroraTop" cx="50%" cy="0%" r="75%">
-              <stop offset="0%" stopColor="rgba(57,180,74,0.22)" />
-              <stop offset="60%" stopColor="rgba(57,180,74,0.06)" />
-              <stop offset="100%" stopColor="rgba(57,180,74,0)" />
-            </radialGradient>
-          </defs>
-          <path
-            d="M0,0 L1440,0 L1440,420 C1080,560 360,560 0,420 Z"
-            fill="url(#auroraTop)"
-          />
-        </svg>
-
-        {/* Bottom arc (horizon) */}
-        <svg
-          className="absolute bottom-0 left-0 h-[45%] w-full"
-          viewBox="0 0 1440 500"
-          preserveAspectRatio="none"
-          fill="none"
-        >
-          <defs>
-            <radialGradient id="auroraBottom" cx="50%" cy="100%" r="80%">
-              <stop offset="0%" stopColor="rgba(57,180,74,0.32)" />
-              <stop offset="55%" stopColor="rgba(57,180,74,0.10)" />
-              <stop offset="100%" stopColor="rgba(57,180,74,0)" />
-            </radialGradient>
-          </defs>
-          <path
-            d="M0,500 L1440,500 L1440,140 C1080,0 360,0 0,140 Z"
-            fill="url(#auroraBottom)"
-          />
-        </svg>
-
-        {/* Soft blobs */}
-        <div
-          className="absolute -right-24 -top-24 h-[420px] w-[420px] rounded-full"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(115,220,140,0.45) 0%, rgba(115,220,140,0) 70%)",
-            filter: "blur(80px)",
-          }}
-        />
-        <div
-          className="absolute -bottom-32 -left-24 h-[480px] w-[480px] rounded-full"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(57,180,74,0.35) 0%, rgba(57,180,74,0) 70%)",
-            filter: "blur(100px)",
-          }}
-        />
-
-        {/* Animated aurora drift + mountain silhouette backdrop */}
-        <AuroraBlobs />
-        <MountainBackdrop />
-
-        {/* Side vignette (kept very subtle so plexus stays visible) */}
-        <div
-          className="absolute inset-y-0 left-0 w-12"
-          style={{
-            background:
-              "linear-gradient(90deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 100%)",
-          }}
-        />
-        <div
-          className="absolute inset-y-0 right-0 w-12"
-          style={{
-            background:
-              "linear-gradient(270deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 100%)",
-          }}
-        />
-
-        {/* Top & bottom white fade for smooth blending with adjacent sections */}
-        <div
-          className="absolute inset-x-0 top-0 h-[80px]"
-          style={{
-            background:
-              "linear-gradient(180deg, hsl(145 60% 95%) 0%, rgba(244,251,245,0.6) 50%, rgba(255,255,255,0) 100%)",
-          }}
-        />
-        <div
-          className="absolute inset-x-0 bottom-0 h-[200px]"
-          style={{
-            background:
-              "linear-gradient(0deg, #FFFFFF 0%, rgba(255,255,255,0.85) 40%, rgba(255,255,255,0) 100%)",
-          }}
-        />
-      </div>
 
 
       <div className="container-tight relative z-10">
