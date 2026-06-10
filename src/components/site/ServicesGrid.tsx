@@ -192,22 +192,20 @@ function ComingSoonForm() {
 function DesktopCard({
   svc,
   open,
-  onEnter,
-  onLeave,
   onToggle,
 }: {
   svc: Service;
   open: boolean;
-  onEnter: () => void;
-  onLeave: () => void;
   onToggle: () => void;
 }) {
   const Icon = svc.icon;
   return (
     <article
-      onMouseEnter={onEnter}
-      onMouseLeave={onLeave}
-      onClick={onToggle}
+      data-services-card
+      onClick={(e) => {
+        e.stopPropagation();
+        onToggle();
+      }}
       className="group relative flex cursor-pointer flex-col self-start overflow-hidden rounded-[14px] p-5 transition-all duration-300 hover:-translate-y-0.5"
       style={{
         background: open ? "rgba(255,255,255,0.75)" : "rgba(255,255,255,0.06)",
