@@ -24,7 +24,7 @@ const certs = [
 ];
 
 export const AboutCertificatesNew = () => (
-  <section id="certificates" className="bg-background py-24 md:py-32">
+  <section id="certificates" className="bg-background py-20 md:py-24">
     <div className="container-tight">
       <Reveal variant="fade-up" className="mx-auto max-w-2xl text-center">
         <span

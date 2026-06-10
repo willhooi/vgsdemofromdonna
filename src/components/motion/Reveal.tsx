@@ -20,7 +20,7 @@ export const Reveal = ({
   className,
   style,
   children,
-  threshold = 0.15,
+  threshold = 0,
 }: RevealProps) => {
   const ref = useRef<HTMLElement | null>(null);
   const [shown, setShown] = useState(false);
@@ -32,19 +32,34 @@ export const Reveal = ({
       setShown(true);
       return;
     }
+
+    // Immediate check: if already in (or above) viewport, show right away.
+    const rect = el.getBoundingClientRect();
+    const vh = window.innerHeight || document.documentElement.clientHeight;
+    if (rect.top < vh && rect.bottom > 0) {
+      setShown(true);
+    }
+
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
           if (e.isIntersecting) {
             setShown(true);
-            io.disconnect();
+            io.unobserve(e.target);
           }
         });
       },
-      { threshold, rootMargin: "0px 0px -8% 0px" }
+      { threshold, rootMargin: "0px 0px -5% 0px" }
     );
     io.observe(el);
-    return () => io.disconnect();
+
+    // Safety fallback — never let content stay invisible.
+    const t = window.setTimeout(() => setShown(true), 1500);
+
+    return () => {
+      io.disconnect();
+      window.clearTimeout(t);
+    };
   }, [threshold]);
 
   return (

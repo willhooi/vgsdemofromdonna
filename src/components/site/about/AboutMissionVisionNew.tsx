@@ -2,9 +2,10 @@ import { Check } from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
 
 const MissionArt = () => (
-  <svg viewBox="0 0 400 360" aria-hidden className="h-full w-full">
+  <svg viewBox="0 0 400 360" aria-hidden preserveAspectRatio="xMidYMid meet" className="h-full w-full">
     <rect width="400" height="360" fill="#f4f5f7" />
-    <circle cx="80" cy="90" r="58" fill="#cd3734" />
+    <circle cx="80" cy="80" r="44" fill="#cd3734" />
+
     {/* skyline strip */}
     <g fill="#b6b9bd">
       <rect x="20" y="280" width="14" height="40" />
@@ -42,9 +43,10 @@ const MissionArt = () => (
 );
 
 const VisionArt = () => (
-  <svg viewBox="0 0 400 360" aria-hidden className="h-full w-full">
+  <svg viewBox="0 0 400 360" aria-hidden preserveAspectRatio="xMidYMid meet" className="h-full w-full">
     <rect width="400" height="360" fill="#f4f5f7" />
-    <circle cx="200" cy="130" r="62" fill="#cd3734" />
+    <circle cx="200" cy="140" r="48" fill="#cd3734" />
+
     {/* bridge arc */}
     <path d="M40 230 Q200 140 360 230" stroke="#b6b9bd" strokeWidth="3" fill="none" />
     <path d="M40 230 L360 230" stroke="#b6b9bd" strokeWidth="2" />
@@ -99,7 +101,7 @@ const Bullet = ({ children }: { children: React.ReactNode }) => (
 );
 
 export const AboutMissionVisionNew = () => (
-  <section className="bg-background py-24 md:py-32">
+  <section className="bg-background py-20 md:py-24">
     <div className="container-tight">
       <Reveal variant="fade-up" className="mx-auto max-w-3xl text-center">
         <span
@@ -131,7 +133,7 @@ export const AboutMissionVisionNew = () => (
           </ul>
         </Reveal>
         <Reveal variant="scale-soft" delay={120}>
-          <div className="overflow-hidden rounded-[24px]" style={{ height: 360 }}>
+          <div className="overflow-hidden rounded-[24px] bg-[#f4f5f7]" style={{ height: 360 }}>
             <MissionArt />
           </div>
         </Reveal>
@@ -140,7 +142,7 @@ export const AboutMissionVisionNew = () => (
       {/* Vision */}
       <div className="mt-20 grid items-center gap-10 md:grid-cols-[0.95fr_1.05fr] md:gap-[60px]">
         <Reveal variant="scale-soft" className="md:order-1">
-          <div className="overflow-hidden rounded-[24px]" style={{ height: 360 }}>
+          <div className="overflow-hidden rounded-[24px] bg-[#f4f5f7]" style={{ height: 360 }}>
             <VisionArt />
           </div>
         </Reveal>

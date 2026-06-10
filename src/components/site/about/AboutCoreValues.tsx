@@ -111,7 +111,7 @@ const NetworkArt = () => (
 
 export const AboutCoreValues = () => (
   <section
-    className="relative overflow-hidden py-24 md:py-32"
+    className="relative overflow-hidden py-20 md:py-24"
     style={{
       background:
         "linear-gradient(180deg, hsl(0 0% 97%) 0%, hsl(0 0% 100%) 100%)",
