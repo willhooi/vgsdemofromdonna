@@ -668,7 +668,7 @@ export function ServicesGrid() {
         {isMobile ? (
           <MobileSwiper />
         ) : (
-          <div className="hidden md:flex md:gap-[14px]">
+          <div ref={gridRef} className="hidden md:flex md:gap-[14px]">
             {[0, 1, 2].map((col) => (
               <div key={col} className="flex flex-1 flex-col gap-[14px]">
                 {[0, 1, 2].map((row) => {
@@ -680,8 +680,6 @@ export function ServicesGrid() {
                       key={s.name}
                       svc={s}
                       open={isOpen(i)}
-                      onEnter={() => openAt(i)}
-                      onLeave={() => {}}
                       onToggle={() => toggleAt(i)}
                     />
                   );
@@ -689,6 +687,7 @@ export function ServicesGrid() {
               </div>
             ))}
           </div>
+
         )}
       </div>
     </section>
