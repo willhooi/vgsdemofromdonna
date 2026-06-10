@@ -208,7 +208,7 @@ function DesktopCard({
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
       onClick={onToggle}
-      className="group relative flex cursor-pointer flex-col self-start overflow-hidden rounded-[14px] p-5 transition-all duration-300 hover:-translate-y-0.5"
+      className="group relative flex w-full min-w-0 cursor-pointer flex-col self-start overflow-hidden rounded-[14px] p-5 transition-all duration-300 hover:-translate-y-0.5"
       style={{
         background: open ? "rgba(255,255,255,0.75)" : "rgba(255,255,255,0.06)",
         backdropFilter: open ? "blur(14px) saturate(140%)" : "blur(6px) saturate(120%)",
@@ -217,7 +217,7 @@ function DesktopCard({
         boxShadow: open
           ? "0 18px 40px -14px rgba(57,180,74,0.35)"
           : "0 2px 10px -6px rgba(0,0,0,0.12)",
-        height: open ? 360 : 116,
+        minHeight: open ? 360 : 116,
       }}
     >
       <header className="flex items-start justify-between gap-3">
@@ -248,9 +248,9 @@ function DesktopCard({
         )}
       </header>
 
-      <div className="mt-3">
+      <div className="mt-3 min-w-0">
         <h3
-          className="font-bold transition-all"
+          className="truncate font-bold transition-all"
           style={{
             fontSize: open ? 16 : 14,
             color: open ? GREEN_DEEP : "hsl(var(--foreground))",
