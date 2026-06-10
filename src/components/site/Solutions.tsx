@@ -1233,16 +1233,16 @@ const StepCustomerExperience = ({ visible }: { visible: boolean }) => (
         const ring = isAccent ? "border-[hsl(35_100%_85%)]/60" : "border-[hsl(145_55%_80%)]/50";
         const topsMobile = [118, 204, 290, 376];
         const topsTablet = [112, 198, 284, 370];
+        const mdTops = [`md:!top-[112px]`, `md:!top-[198px]`, `md:!top-[284px]`, `md:!top-[370px]`];
         return (
           <div
             key={p.title}
             className={`step-anim absolute flex items-center gap-2 rounded-2xl border ${ring} bg-white px-2.5 py-2 shadow-[0_10px_25px_rgba(0,0,0,0.08)]
                        left-[20px] md:left-[28px]
-                       h-[68px] w-[min(72%,250px)] md:w-[220px]`}
+                       h-[68px] w-[min(72%,250px)] md:w-[220px] ${mdTops[i]}`}
             style={{
-              top: `clamp(${topsMobile[i]}px, ${topsMobile[i]}px, ${topsMobile[i]}px)`,
+              top: `${topsMobile[i]}px`,
               zIndex: 3,
-              ['--md-top' as any]: `${topsTablet[i]}px`,
               animation: `step-row-float 4s ease-in-out ${i * 0.3 + 0.15}s infinite`,
             }}
           >
