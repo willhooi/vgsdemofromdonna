@@ -490,11 +490,11 @@ function MobileSwiper() {
 
 export function ServicesGrid() {
   const isMobile = useIsMobile();
-  // One open card per column by default (top row of each column).
+  // No card open by default — all cards show title + short description uniformly.
   const [openByCol, setOpenByCol] = useState<Record<number, number | null>>({
-    0: 0,
-    1: 0,
-    2: 0,
+    0: null,
+    1: null,
+    2: null,
   });
 
   const isOpen = (i: number) => {
