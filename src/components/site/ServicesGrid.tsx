@@ -40,7 +40,7 @@ const SERVICES: Service[] = [
       { value: "98%", label: "Open rate within 3 min" },
       { value: "API & Webtool", label: "Flexible integration" },
     ],
-    cta: "Learn about SMS Brandname",
+    cta: "Learn more",
   },
   {
     name: "Zalo ZBS",
@@ -52,7 +52,7 @@ const SERVICES: Service[] = [
       { value: "80M+", label: "Zalo users in Vietnam" },
       { value: "3× CTR", label: "vs standard SMS" },
     ],
-    cta: "Learn about Zalo ZBS",
+    cta: "Learn more",
   },
   {
     name: "Viber Message",
@@ -64,7 +64,7 @@ const SERVICES: Service[] = [
       { value: "1B+", label: "Global users" },
       { value: "60%", label: "Viber Ads market share VN" },
     ],
-    cta: "Learn about Viber Message",
+    cta: "Learn more",
   },
   {
     name: "Email Marketing",
@@ -76,7 +76,7 @@ const SERVICES: Service[] = [
       { value: "A/B Testing", label: "Content optimization" },
       { value: "Auto Journey", label: "Behavior-triggered flows" },
     ],
-    cta: "Learn about Email Marketing",
+    cta: "Learn more",
   },
   {
     name: "Mobile Topup",
@@ -88,7 +88,7 @@ const SERVICES: Service[] = [
       { value: "All Carriers", label: "Full Vietnam coverage" },
       { value: "API", label: "System integration" },
     ],
-    cta: "Learn about Mobile Topup",
+    cta: "Learn more",
   },
   {
     name: "SMS Short Code",
@@ -100,7 +100,7 @@ const SERVICES: Service[] = [
       { value: "2-way SMS", label: "Interactive messaging" },
       { value: "Auto-reply", label: "Instant response" },
     ],
-    cta: "Learn about SMS Short Code",
+    cta: "Learn more",
   },
   {
     name: "Voice Brandname",
@@ -112,7 +112,7 @@ const SERVICES: Service[] = [
       { value: "Brand Caller ID", label: "Displayed on every call" },
       { value: "Pay per answer", label: "No charge for missed calls" },
     ],
-    cta: "Learn about Voice Brandname",
+    cta: "Learn more",
   },
   {
     name: "Customized Solution",
@@ -124,7 +124,7 @@ const SERVICES: Service[] = [
       { value: "White-label", label: "Your own platform" },
       { value: "CDP / CRM", label: "Data integration" },
     ],
-    cta: "Learn about Customized Solution",
+    cta: "Learn more",
   },
   {
     name: "OTP Multichannel",
@@ -136,7 +136,7 @@ const SERVICES: Service[] = [
       { value: "Automatic failover", label: "Failover mechanism" },
       { value: "99%", label: "Delivery Rate" },
     ],
-    cta: "Learn about OTP Multichannel",
+    cta: "Learn more",
   },
 ];
 
