@@ -192,22 +192,20 @@ function ComingSoonForm() {
 function DesktopCard({
   svc,
   open,
-  onEnter,
-  onLeave,
   onToggle,
 }: {
   svc: Service;
   open: boolean;
-  onEnter: () => void;
-  onLeave: () => void;
   onToggle: () => void;
 }) {
   const Icon = svc.icon;
   return (
     <article
-      onMouseEnter={onEnter}
-      onMouseLeave={onLeave}
-      onClick={onToggle}
+      data-services-card
+      onClick={(e) => {
+        e.stopPropagation();
+        onToggle();
+      }}
       className="group relative flex cursor-pointer flex-col self-start overflow-hidden rounded-[14px] p-5 transition-all duration-300 hover:-translate-y-0.5"
       style={{
         background: open ? "rgba(255,255,255,0.75)" : "rgba(255,255,255,0.06)",
@@ -514,6 +512,7 @@ export function ServicesGrid() {
     1: null,
     2: null,
   });
+  const gridRef = useRef<HTMLDivElement>(null);
 
   const isOpen = (i: number) => {
     const col = i % 3;
@@ -521,13 +520,10 @@ export function ServicesGrid() {
     return openByCol[col] === row;
   };
 
-  const openAt = (i: number) => {
-    const col = i % 3;
-    const row = Math.floor(i / 3);
-    setOpenByCol((prev) =>
-      prev[col] === row ? prev : { ...prev, [col]: row }
-    );
-  };
+  const closeAll = () =>
+    setOpenByCol({ 0: null, 1: null, 2: null });
+
+  const hasAnyOpen = openByCol[0] !== null || openByCol[1] !== null || openByCol[2] !== null;
 
   const toggleAt = (i: number) => {
     const col = i % 3;
@@ -537,6 +533,26 @@ export function ServicesGrid() {
       [col]: prev[col] === row ? null : row,
     }));
   };
+
+  useEffect(() => {
+    if (!hasAnyOpen) return;
+    const onDocClick = (e: MouseEvent) => {
+      const target = e.target as Node | null;
+      if (gridRef.current && target && !gridRef.current.contains(target)) {
+        closeAll();
+      }
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeAll();
+    };
+    document.addEventListener("mousedown", onDocClick);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDocClick);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [hasAnyOpen]);
+
 
   return (
     <section
@@ -652,7 +668,7 @@ export function ServicesGrid() {
         {isMobile ? (
           <MobileSwiper />
         ) : (
-          <div className="hidden md:flex md:gap-[14px]">
+          <div ref={gridRef} className="hidden md:flex md:gap-[14px]">
             {[0, 1, 2].map((col) => (
               <div key={col} className="flex flex-1 flex-col gap-[14px]">
                 {[0, 1, 2].map((row) => {
@@ -664,8 +680,6 @@ export function ServicesGrid() {
                       key={s.name}
                       svc={s}
                       open={isOpen(i)}
-                      onEnter={() => openAt(i)}
-                      onLeave={() => {}}
                       onToggle={() => toggleAt(i)}
                     />
                   );
@@ -673,6 +687,7 @@ export function ServicesGrid() {
               </div>
             ))}
           </div>
+
         )}
       </div>
     </section>
