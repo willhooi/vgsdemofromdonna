@@ -32,8 +32,10 @@ const About = () => {
 
       <AboutHeroNew />
 
-      <div className="relative z-[3] -mt-[90px]">
-        <WaveDivider from="hsl(0 0% 100%)" to="#0c3b20" />
+      <div style={{ display: "block", width: "100%", height: "90px", marginBottom: "-1px", marginTop: "-90px", position: "relative", zIndex: 3, background: "#ffffff" }}>
+        <svg viewBox="0 0 1440 90" preserveAspectRatio="none" style={{ display: "block", width: "100%", height: "100%" }}>
+          <path d="M0,46 C240,92 480,4 720,40 C960,76 1200,14 1440,52 L1440,90 L0,90 Z" fill="#0c3b20" />
+        </svg>
       </div>
       <AboutOurStory />
       <WaveDivider from="#0a2f1a" to="hsl(0 0% 97%)" flip />
