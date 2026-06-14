@@ -1,5 +1,6 @@
 import { Check } from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
+import missionImage from "@/assets/mission-upweb.jpg.asset.json";
 
 const MissionArt = () => (
   <svg viewBox="0 0 400 360" aria-hidden preserveAspectRatio="xMidYMid meet" className="h-full w-full">
