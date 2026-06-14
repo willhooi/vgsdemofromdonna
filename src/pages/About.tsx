@@ -32,7 +32,9 @@ const About = () => {
 
       <AboutHeroNew />
 
-      <WaveDivider from="hsl(0 0% 100%)" to="#0c3b20" />
+      <div className="relative z-[3] -mt-[90px]">
+        <WaveDivider from="hsl(0 0% 100%)" to="#0c3b20" />
+      </div>
       <AboutOurStory />
       <WaveDivider from="#0a2f1a" to="hsl(0 0% 97%)" flip />
 
