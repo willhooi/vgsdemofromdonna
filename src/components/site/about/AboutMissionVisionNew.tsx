@@ -1,6 +1,6 @@
 import { Check } from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
-import missionImage from "@/assets/mission-upweb.jpg.asset.json";
+import missionImage from "@/assets/mission-2.jpg.asset.json";
 import visionImage from "@/assets/vision-upweb.jpg.asset.json";
 
 const MissionArt = () => (
