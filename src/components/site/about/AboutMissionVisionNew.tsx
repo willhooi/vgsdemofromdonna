@@ -1,5 +1,6 @@
 import { Check } from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
+import missionImage from "@/assets/mission-upweb.jpg.asset.json";
 
 const MissionArt = () => (
   <svg viewBox="0 0 400 360" aria-hidden preserveAspectRatio="xMidYMid meet" className="h-full w-full">
@@ -134,7 +135,12 @@ export const AboutMissionVisionNew = () => (
         </Reveal>
         <Reveal variant="scale-soft" delay={120}>
           <div className="overflow-hidden rounded-[24px] bg-[#f4f5f7]" style={{ height: 360 }}>
-            <MissionArt />
+            <img
+              src={missionImage.url}
+              alt="VietGuys team presenting CDP platform to enterprise clients"
+              loading="lazy"
+              className="h-full w-full object-cover"
+            />
           </div>
         </Reveal>
       </div>
