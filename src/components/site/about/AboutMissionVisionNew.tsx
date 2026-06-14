@@ -150,7 +150,12 @@ export const AboutMissionVisionNew = () => (
       <div className="mt-20 grid items-center gap-10 md:grid-cols-[0.95fr_1.05fr] md:gap-[60px]">
         <Reveal variant="scale-soft" className="md:order-1">
           <div className="overflow-hidden rounded-[24px] bg-[#f4f5f7]" style={{ height: 360 }}>
-            <VisionArt />
+            <img
+              src={visionImage.url}
+              alt="VietGuys team presenting CDP platform to enterprise clients"
+              loading="lazy"
+              className="h-full w-full object-cover"
+            />
           </div>
         </Reveal>
         <Reveal variant="fade-up" delay={120} className="md:order-2">
