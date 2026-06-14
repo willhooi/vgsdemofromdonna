@@ -1,24 +1,25 @@
-## Goal
-Make the triangle-mesh plexus background span the entire block — from the "From the platform → to the services that orbit it" bridge all the way down through the last of the 9 service cards. Remove the dark-green blinking dots/stars that currently sit on top of that area, keeping only the plexus background.
+## Mục tiêu
+Thay nền plexus đều hiện tại (sau "From the platform → ..." và 9 ô dịch vụ) bằng plexus hữu cơ kiểu cụm, có các nút giao nhấp nháy nhẹ + glow xanh mềm, giữ nguyên tông xanh VietGuys.
 
-## Changes
+## Thay đổi
+**File duy nhất: `src/components/site/ServicesPlexusBackdrop.tsx`** — viết lại hoàn toàn:
 
-1. **`src/pages/Index.tsx`**
-   - Import `ServicesPlexusBackdrop`.
-   - In the wrapper `<div className="relative">` that contains `PlatformToServicesFlow`, `SolutionsToServicesBridge`, and `ServicesGrid`:
-     - Add `isolate overflow-hidden` so the plexus is properly clipped.
-     - Mount `<ServicesPlexusBackdrop />` as the FIRST child so it covers bridge + services as one continuous layer.
-     - Remove `<PlatformToServicesFlow />` from this wrapper (it owned the blinking green dots and fan-out lines the user wants gone). The import is also removed.
+- Một SVG `absolute inset-0 w-full h-full` với `preserveAspectRatio="xMidYMid slice"`, viewBox `0 0 1800 1200`.
+- Một `<defs>` chứa:
+  - `@keyframes twinkle` (opacity 0.2 ↔ 0.85, scale 1 ↔ 1.35, 3.5s ease-in-out infinite).
+  - `<filter id="nodeGlow">` dùng `feGaussianBlur stdDeviation="2.5"` + merge → glow xanh mềm quanh node.
+  - Class `.line` (stroke `hsl(128 52% 46%)`, opacity 0.18, width 0.75), `.node` (fill `hsl(145 100% 25%)`, filter glow, animation twinkle).
+- Sinh ~36 điểm theo lưới jitter (6×6) trong JS một lần (useMemo) để có cảm giác cụm hữu cơ nhưng phủ đều toàn vùng — đảm bảo coverage từ trên xuống dưới, không bị mảng trống.
+- Nối mỗi điểm với 2–3 điểm gần nhất → mảng `<line>` với class `.line`.
+- Render circles cho từng điểm, r ngẫu nhiên 1.8–3, `animation-delay` ngẫu nhiên 0–3.5s.
+- Wrapper: `absolute inset-0 pointer-events-none opacity-60 md:opacity-70` (mobile nhẹ hơn: `opacity-40`).
+- Respect `prefers-reduced-motion`: thêm `<style>` media query tắt animation.
 
-2. **`src/components/site/ServicesGrid.tsx`**
-   - Remove the local `<ServicesPlexusBackdrop />` mount (line 589) and its import — the parent wrapper now provides it, so we avoid double-rendering.
-   - Keep `container-tight relative z-10` wrapper so cards stay above the plexus.
+## Không đổi
+- `index.css`, tokens màu, `ServicesGrid.tsx`, `SolutionsToServicesBridge.tsx`, `Index.tsx` (component vẫn được mount cùng chỗ).
+- Không thêm thư viện mới.
 
-3. **No changes** to `ServicesPlexusBackdrop.tsx`, `SolutionsToServicesBridge.tsx`, card styles, copy, colors, header, footer, or any other section. `GalaxyBackdrop` on the outer `relative isolate` block keeps running underneath.
-
-4. **`PlatformToServicesFlow.tsx`** stays in the repo but is no longer rendered. (Not deleted, to keep the diff minimal and reversible.)
-
-## Verification
-- Scroll from the bridge headline down through all 9 service cards: a single, evenly tiled triangle-mesh plexus runs across the whole area.
-- No more dark-green pulsing dots or fan-out dashed lines on top of the bridge.
-- Cards remain crisp white, GalaxyBackdrop still visible behind the platform card above, mobile opacity remains lower, `prefers-reduced-motion` still disables animation.
+## Verify
+- Scroll qua bridge + 9 cards thấy mạng lưới hữu cơ phủ đều, nodes xanh đậm nhấp nháy với glow mềm.
+- Cards trắng vẫn rõ, không bị nhiễu.
+- Mobile dịu hơn; reduced-motion tắt twinkle.
