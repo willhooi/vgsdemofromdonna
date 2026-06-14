@@ -1,30 +1,24 @@
 ## Goal
-Add an evenly-tiled triangle-mesh plexus effect to the background behind the 9 service cards in `ServicesGrid`, matching the selected "Even Triangle Mesh" prototype. Cards, layout, copy and surrounding sections stay untouched.
+Make the triangle-mesh plexus background span the entire block — from the "From the platform → to the services that orbit it" bridge all the way down through the last of the 9 service cards. Remove the dark-green blinking dots/stars that currently sit on top of that area, keeping only the plexus background.
 
-## Scope
-- Only `src/components/site/ServicesGrid.tsx` gets a new background layer.
-- No changes to cards, grid, spacing, header/nav, footer, or other sections.
-- The existing `GalaxyBackdrop` continues running on the parent wrapper; the new plexus sits *above* it but *below* the cards, scoped to the ServicesGrid section.
+## Changes
 
-## Implementation
-1. Create `src/components/site/ServicesPlexusBackdrop.tsx`:
-   - Absolute-positioned, `pointer-events-none`, `-z-0` layer covering its parent.
-   - Inline SVG using a `<pattern>` (200×200 tile) repeated across the full area.
-   - Each tile: 5 nodes (primary green + deep green) + connecting segments with `stroke-dasharray="4 2"`, `stroke-width=0.5`.
-   - Colors via tokens: `hsl(var(--primary))` and `hsl(var(--primary-deep))`.
-   - Opacity ~0.35 so cards remain crisp; reduced to ~0.2 on mobile via Tailwind.
-   - Subtle 20s `translate` drift animation; gated by `@media (prefers-reduced-motion: reduce)` to disable.
-   - Bonus: a slow `stroke-dashoffset` animation on the segments to suggest data flow (respects reduced motion).
+1. **`src/pages/Index.tsx`**
+   - Import `ServicesPlexusBackdrop`.
+   - In the wrapper `<div className="relative">` that contains `PlatformToServicesFlow`, `SolutionsToServicesBridge`, and `ServicesGrid`:
+     - Add `isolate overflow-hidden` so the plexus is properly clipped.
+     - Mount `<ServicesPlexusBackdrop />` as the FIRST child so it covers bridge + services as one continuous layer.
+     - Remove `<PlatformToServicesFlow />` from this wrapper (it owned the blinking green dots and fan-out lines the user wants gone). The import is also removed.
 
-2. In `ServicesGrid.tsx`:
-   - Wrap the section content in `relative isolate` (if not already) and mount `<ServicesPlexusBackdrop />` as the first child.
-   - Ensure the cards container sits at `relative z-10`.
+2. **`src/components/site/ServicesGrid.tsx`**
+   - Remove the local `<ServicesPlexusBackdrop />` mount (line 589) and its import — the parent wrapper now provides it, so we avoid double-rendering.
+   - Keep `container-tight relative z-10` wrapper so cards stay above the plexus.
 
-## Out of scope
-- No edits to GalaxyBackdrop, Solutions, PlatformToServicesFlow, SolutionsToServicesBridge, or anything outside ServicesGrid.
-- No card style changes.
+3. **No changes** to `ServicesPlexusBackdrop.tsx`, `SolutionsToServicesBridge.tsx`, card styles, copy, colors, header, footer, or any other section. `GalaxyBackdrop` on the outer `relative isolate` block keeps running underneath.
+
+4. **`PlatformToServicesFlow.tsx`** stays in the repo but is no longer rendered. (Not deleted, to keep the diff minimal and reversible.)
 
 ## Verification
-- Visit `/`, scroll to the 9 services grid: triangle mesh visible evenly across the entire green background, cards remain crisp white, slight drift + line shimmer animation.
-- Mobile: lower opacity, animation still subtle.
-- `prefers-reduced-motion`: no animation.
+- Scroll from the bridge headline down through all 9 service cards: a single, evenly tiled triangle-mesh plexus runs across the whole area.
+- No more dark-green pulsing dots or fan-out dashed lines on top of the bridge.
+- Cards remain crisp white, GalaxyBackdrop still visible behind the platform card above, mobile opacity remains lower, `prefers-reduced-motion` still disables animation.
