@@ -32,7 +32,7 @@ const About = () => {
 
       <AboutHeroNew />
 
-      <WaveDivider from="#ffffff" to="#0c3b20" className="-mt-10" />
+      <WaveDivider from="#ffffff" to="#0c3b20" className="-mt-24 md:-mt-[100px]" />
       <AboutOurStory />
 
       <div style={{ width:'100%', height:'90px', marginBottom:'-1px', position:'relative', background:'#0a2f1a', lineHeight: 0 }}>
