@@ -55,7 +55,7 @@ const CountUp = ({ target, suffix, format }: { target: number; suffix: string; f
 };
 
 export const AboutHeroNew = () => (
-  <section className="relative overflow-hidden bg-background pt-28 pb-72 md:pt-36 md:pb-80">
+  <section className="relative overflow-hidden bg-background pt-28 pb-40 md:pt-36 md:pb-44">
     <ParticleField
       dotColor="rgba(58,168,79,0.5)"
       lineColor="rgba(58,168,79,0.22)"
@@ -99,7 +99,7 @@ export const AboutHeroNew = () => (
           </div>
 
           {/* Floating stats card */}
-          <div className="absolute inset-x-4 -bottom-[60px] md:inset-x-10 md:-bottom-[50px]">
+          <div className="absolute inset-x-4 -bottom-[80px] md:inset-x-10 md:-bottom-[90px]">
             <Reveal variant="fade-up" delay={400}>
               <div
                 className="rounded-[20px] bg-background px-4 py-6 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.18)] md:px-10 md:py-7"
