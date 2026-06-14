@@ -586,7 +586,7 @@ export function ServicesGrid() {
         fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
       }}
     >
-
+      <ServicesPlexusBackdrop />
 
       <div className="container-tight relative z-10">
 
