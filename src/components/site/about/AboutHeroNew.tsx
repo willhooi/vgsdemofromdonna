@@ -101,10 +101,10 @@ export const AboutHeroNew = () => (
       </Reveal>
 
       {/* Floating stats card — overlaps banner via negative margin (mockup behavior) */}
-      <div className="relative z-10 mx-auto -mt-16 max-w-5xl px-4 md:-mt-[86px] md:px-6">
+      <div className="relative z-[4] mx-auto -mt-16 max-w-5xl px-4 md:-mt-[86px] md:px-6">
         <Reveal variant="fade-up" delay={400}>
           <div
-            className="rounded-[20px] bg-background px-4 py-7 shadow-[0_30px_50px_-12px_rgba(15,40,25,0.28),0_18px_30px_-15px_rgba(0,0,0,0.18)] md:px-6 md:py-10"
+            className="rounded-[20px] bg-background px-4 py-7 shadow-[0_24px_70px_rgba(0,0,0,0.12),0_12px_36px_rgba(0,0,0,0.22)] md:px-6 md:py-10"
           >
             <dl className="grid grid-cols-2 gap-y-8 md:grid-cols-4 md:gap-y-0">
               {stats.map((s, i) => {
