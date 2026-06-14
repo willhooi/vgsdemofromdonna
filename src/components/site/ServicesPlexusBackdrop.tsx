@@ -1,76 +1,133 @@
+import { useMemo } from "react";
+
 /**
- * ServicesPlexusBackdrop — evenly-tiled triangle-mesh plexus background
- * for the ServicesGrid section. Sits above GalaxyBackdrop, below cards.
- *
- * Implementation: a single 200×200 SVG <pattern> repeats across the section
- * with five nodes + connecting dashed segments per tile, giving a uniform
- * triangle network. Slow drift + dash-offset shimmer simulate data flow.
+ * ServicesPlexusBackdrop — organic-cluster plexus background.
+ * Jittered 6×6 grid of nodes connected to nearest neighbors.
+ * Nodes twinkle softly with a green glow. Lines stay subtle.
  * Respects prefers-reduced-motion.
  */
+const VIEW_W = 1800;
+const VIEW_H = 1200;
+const COLS = 7;
+const ROWS = 5;
+
+// Deterministic pseudo-random so SSR/CSR match and layout is stable.
+function mulberry32(seed: number) {
+  return function () {
+    let t = (seed += 0x6d2b79f5);
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+type Node = { x: number; y: number; r: number; delay: number; dur: number };
+
+function buildGraph() {
+  const rand = mulberry32(20260614);
+  const cellW = VIEW_W / COLS;
+  const cellH = VIEW_H / ROWS;
+  const nodes: Node[] = [];
+
+  for (let r = 0; r < ROWS; r++) {
+    for (let c = 0; c < COLS; c++) {
+      const jitterX = (rand() - 0.5) * cellW * 0.8;
+      const jitterY = (rand() - 0.5) * cellH * 0.8;
+      nodes.push({
+        x: cellW * (c + 0.5) + jitterX,
+        y: cellH * (r + 0.5) + jitterY,
+        r: 1.8 + rand() * 1.4,
+        delay: rand() * 3.5,
+        dur: 3 + rand() * 2.5,
+      });
+    }
+  }
+
+  // Connect each node to its 3 nearest neighbors (dedup).
+  const edgeSet = new Set<string>();
+  const edges: [number, number][] = [];
+  nodes.forEach((n, i) => {
+    const dists = nodes
+      .map((m, j) => ({ j, d: (m.x - n.x) ** 2 + (m.y - n.y) ** 2 }))
+      .filter((e) => e.j !== i)
+      .sort((a, b) => a.d - b.d)
+      .slice(0, 3);
+    dists.forEach(({ j }) => {
+      const key = i < j ? `${i}-${j}` : `${j}-${i}`;
+      if (!edgeSet.has(key)) {
+        edgeSet.add(key);
+        edges.push([i, j]);
+      }
+    });
+  });
+
+  return { nodes, edges };
+}
+
 export const ServicesPlexusBackdrop = () => {
+  const { nodes, edges } = useMemo(buildGraph, []);
+
   return (
     <div
       aria-hidden
-      className="pointer-events-none absolute inset-0 z-0 opacity-30 md:opacity-40"
+      className="pointer-events-none absolute inset-0 z-0 opacity-40 md:opacity-70"
     >
       <style>{`
-        @keyframes services-plexus-drift {
-          0%, 100% { transform: translate3d(0, 0, 0); }
-          50%      { transform: translate3d(-10px, -10px, 0); }
+        @keyframes services-plexus-twinkle {
+          0%, 100% { opacity: 0.25; transform: scale(1); }
+          50%      { opacity: 0.9;  transform: scale(1.35); }
         }
-        @keyframes services-plexus-flow {
-          to { stroke-dashoffset: -60; }
-        }
-        .services-plexus-rect { animation: services-plexus-drift 24s ease-in-out infinite; }
-        .services-plexus-edges path {
-          animation: services-plexus-flow 6s linear infinite;
+        .services-plexus-node {
+          transform-origin: center;
+          transform-box: fill-box;
+          animation: services-plexus-twinkle var(--dur, 4s) ease-in-out infinite;
+          animation-delay: var(--delay, 0s);
+          filter: url(#services-plexus-glow);
         }
         @media (prefers-reduced-motion: reduce) {
-          .services-plexus-rect,
-          .services-plexus-edges path { animation: none !important; }
+          .services-plexus-node { animation: none !important; opacity: 0.6 !important; }
         }
       `}</style>
-      <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <svg
+        width="100%"
+        height="100%"
+        viewBox={`0 0 ${VIEW_W} ${VIEW_H}`}
+        preserveAspectRatio="xMidYMid slice"
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <defs>
-          <pattern
-            id="services-plexus-pattern"
-            x="0"
-            y="0"
-            width="200"
-            height="200"
-            patternUnits="userSpaceOnUse"
-          >
-            {/* edges drawn first so nodes sit on top */}
-            <g
-              className="services-plexus-edges"
-              stroke="hsl(var(--primary))"
-              strokeWidth="0.5"
-              fill="none"
-              strokeDasharray="4 2"
-            >
-              <path d="M20 20 L100 100" />
-              <path d="M100 100 L180 40" />
-              <path d="M100 100 L40 160" />
-              <path d="M40 160 L160 180" />
-              <path d="M180 40 L160 180" />
-              <path d="M100 100 L160 180" />
-              <path d="M20 20 L180 40" />
-            </g>
-            <circle cx="20" cy="20" r="2" fill="hsl(var(--primary))" />
-            <circle cx="180" cy="40" r="1.5" fill="hsl(var(--primary-deep))" />
-            <circle cx="100" cy="100" r="2" fill="hsl(var(--primary))" />
-            <circle cx="40" cy="160" r="1.5" fill="hsl(var(--primary-deep))" />
-            <circle cx="160" cy="180" r="2" fill="hsl(var(--primary))" />
-          </pattern>
+          <filter id="services-plexus-glow" x="-100%" y="-100%" width="300%" height="300%">
+            <feGaussianBlur stdDeviation="2.5" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
         </defs>
-        <rect
-          className="services-plexus-rect"
-          x="-20"
-          y="-20"
-          width="calc(100% + 40px)"
-          height="calc(100% + 40px)"
-          fill="url(#services-plexus-pattern)"
-        />
+
+        <g stroke="hsl(var(--primary))" strokeWidth="0.75" strokeOpacity="0.18" fill="none">
+          {edges.map(([a, b], i) => (
+            <line key={i} x1={nodes[a].x} y1={nodes[a].y} x2={nodes[b].x} y2={nodes[b].y} />
+          ))}
+        </g>
+
+        <g fill="hsl(var(--primary-deep))">
+          {nodes.map((n, i) => (
+            <circle
+              key={i}
+              className="services-plexus-node"
+              cx={n.x}
+              cy={n.y}
+              r={n.r}
+              style={
+                {
+                  ["--delay" as never]: `${n.delay}s`,
+                  ["--dur" as never]: `${n.dur}s`,
+                } as React.CSSProperties
+              }
+            />
+          ))}
+        </g>
       </svg>
     </div>
   );
