@@ -1,25 +1,39 @@
-## Mục tiêu
-Thay nền plexus đều hiện tại (sau "From the platform → ..." và 9 ô dịch vụ) bằng plexus hữu cơ kiểu cụm, có các nút giao nhấp nháy nhẹ + glow xanh mềm, giữ nguyên tông xanh VietGuys.
+## Build plan — Mở rộng & làm rõ plexus hiện tại
 
-## Thay đổi
-**File duy nhất: `src/components/site/ServicesPlexusBackdrop.tsx`** — viết lại hoàn toàn:
+Giữ nguyên phong cách **organic cluster plexus** đang có (node tròn xanh nhấp nháy + glow + đường nối nearest-neighbors). Chỉ làm 3 việc: (1) mở rộng vùng phủ từ trên 4 ô conversation xuống hết 9 ô services, (2) tăng độ rõ nét, (3) mask plexus quanh dòng "From the platform → to the services that orbit it".
 
-- Một SVG `absolute inset-0 w-full h-full` với `preserveAspectRatio="xMidYMid slice"`, viewBox `0 0 1800 1200`.
-- Một `<defs>` chứa:
-  - `@keyframes twinkle` (opacity 0.2 ↔ 0.85, scale 1 ↔ 1.35, 3.5s ease-in-out infinite).
-  - `<filter id="nodeGlow">` dùng `feGaussianBlur stdDeviation="2.5"` + merge → glow xanh mềm quanh node.
-  - Class `.line` (stroke `hsl(128 52% 46%)`, opacity 0.18, width 0.75), `.node` (fill `hsl(145 100% 25%)`, filter glow, animation twinkle).
-- Sinh ~36 điểm theo lưới jitter (6×6) trong JS một lần (useMemo) để có cảm giác cụm hữu cơ nhưng phủ đều toàn vùng — đảm bảo coverage từ trên xuống dưới, không bị mảng trống.
-- Nối mỗi điểm với 2–3 điểm gần nhất → mảng `<line>` với class `.line`.
-- Render circles cho từng điểm, r ngẫu nhiên 1.8–3, `animation-delay` ngẫu nhiên 0–3.5s.
-- Wrapper: `absolute inset-0 pointer-events-none opacity-60 md:opacity-70` (mobile nhẹ hơn: `opacity-40`).
-- Respect `prefers-reduced-motion`: thêm `<style>` media query tắt animation.
+### 1. `src/pages/Index.tsx` — gộp 3 section vào một wrapper
+- Bọc `Solutions` (4 ô conversation) + `SolutionsToServicesBridge` + `ServicesGrid` (9 ô) vào **một** `<div className="relative isolate overflow-hidden">`.
+- Mount `ServicesPlexusBackdrop` **một lần** ở wrapper này (absolute inset-0 z-0) để mesh trải liên tục từ đầu khối conversation đến hết khối services.
+- Giữ `GalaxyBackdrop` cho hero, không đụng các section khác.
 
-## Không đổi
-- `index.css`, tokens màu, `ServicesGrid.tsx`, `SolutionsToServicesBridge.tsx`, `Index.tsx` (component vẫn được mount cùng chỗ).
-- Không thêm thư viện mới.
+### 2. `src/components/site/ServicesGrid.tsx` — gỡ mount cũ
+- Bỏ `<ServicesPlexusBackdrop />` đang mount bên trong (đã đẩy lên Index wrapper).
+- Card vẫn `bg-card` để nổi trên mesh.
 
-## Verify
-- Scroll qua bridge + 9 cards thấy mạng lưới hữu cơ phủ đều, nodes xanh đậm nhấp nháy với glow mềm.
-- Cards trắng vẫn rõ, không bị nhiễu.
-- Mobile dịu hơn; reduced-motion tắt twinkle.
+### 3. `src/components/site/ServicesPlexusBackdrop.tsx` — làm rõ nét (không đổi kiểu)
+Giữ nguyên kiến trúc hiện tại (grid jitter + nearest-neighbors + twinkle + glow). Chỉ tăng các thông số:
+- Wrapper opacity: `opacity-40 md:opacity-70` → `opacity-65 md:opacity-95`.
+- Line: stroke-opacity `0.18 → 0.40`, stroke-width `0.75 → 1.1`.
+- Node: bán kính range `1.8–3 → 2.6–4.2`; fill opacity `0.5 → 0.95`; glow `feGaussianBlur stdDeviation 2.5 → 3.2`.
+- Grid density: `6×7 → 8×9` jittered points (vẫn dùng `mulberry32` PRNG xác định, không random mỗi render).
+- Twinkle keyframes giữ nguyên (0.25↔0.9 opacity, scale 1↔1.35), respect `prefers-reduced-motion`.
+- ViewBox tăng chiều dọc `0 0 1800 1200 → 0 0 1800 1600` để phân bố node đều khi section cao hơn.
+
+### 4. `src/components/site/SolutionsToServicesBridge.tsx` — mask quanh chữ
+- Bọc dòng headline trong `relative` container.
+- Thêm lớp absolute phía sau (z-0, pointer-events-none):
+  - background: `radial-gradient(ellipse 70% 160% at 50% 50%, hsl(var(--background)) 0%, hsl(var(--background)/0.92) 55%, transparent 100%)`
+  - `backdrop-blur-[2px]`
+- Chữ ở `relative z-10`, giữ nguyên typography & màu.
+- Hiệu quả: plexus mờ dần quanh chữ, không có viền cứng, chữ nổi bật.
+
+### Không đổi
+- `index.css`, tokens màu, `GalaxyBackdrop`, `Solutions.tsx` (nội dung 4 ô), `ServicesGrid` (nội dung 9 ô), các section khác.
+
+### Verify
+- Plexus liên tục, rõ nét từ trên 4 ô conversation xuống hết 9 ô services.
+- Dòng "From the platform..." nổi bật, plexus fade quanh chữ, không viền cứng.
+- Card trắng vẫn sắc nét.
+- `prefers-reduced-motion`: tắt nhấp nháy.
+- Mobile: opacity giảm hơn desktop, không vỡ layout.
