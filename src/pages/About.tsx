@@ -34,7 +34,7 @@ const About = () => {
 
       <div style={{ display: "block", width: "100%", height: "90px", marginBottom: "-1px", marginTop: "-90px", position: "relative", zIndex: 3, background: "#ffffff" }}>
         <svg viewBox="0 0 1440 90" preserveAspectRatio="none" style={{ display: "block", width: "100%", height: "100%" }}>
-          <path d="M0,46 C240,92 480,4 720,40 C960,76 1200,14 1440,52 L1440,90 L0,90 Z" fill="#0c3b20" />
+          <path d="M0,50 C240,10 600,15 840,40 C1080,65 1260,70 1440,55 L1440,90 L0,90 Z" fill="#0c3b20" />
         </svg>
       </div>
       <AboutOurStory />
