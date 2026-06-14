@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import mountainsImg from "@/assets/services-mountains.png";
-import { ServicesPlexusBackdrop } from "./ServicesPlexusBackdrop";
+
 import {
   MessageSquare,
   MessageCircle,
@@ -586,7 +586,6 @@ export function ServicesGrid() {
         fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
       }}
     >
-      <ServicesPlexusBackdrop />
 
       <div className="container-tight relative z-10">
 

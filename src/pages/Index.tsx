@@ -8,7 +8,7 @@ import { Solutions } from "@/components/site/Solutions";
 import { SolutionsToServicesBridge } from "@/components/site/SolutionsToServicesBridge";
 import { ServicesGrid } from "@/components/site/ServicesGrid";
 import { GalaxyBackdrop } from "@/components/site/GalaxyBackdrop";
-import { PlatformToServicesFlow } from "@/components/site/PlatformToServicesFlow";
+import { ServicesPlexusBackdrop } from "@/components/site/ServicesPlexusBackdrop";
 
 import { VietGuysCaseStudies } from "@/components/site/VietGuysCaseStudies";
 import { FAQ } from "@/components/site/FAQ";
@@ -41,8 +41,8 @@ const Index = () => {
       <div className="relative isolate">
         <GalaxyBackdrop />
         <Solutions />
-        <div className="relative">
-          <PlatformToServicesFlow />
+        <div className="relative isolate overflow-hidden">
+          <ServicesPlexusBackdrop />
           <SolutionsToServicesBridge />
           <ServicesGrid />
         </div>
