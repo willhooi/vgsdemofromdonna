@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import mountainsImg from "@/assets/services-mountains.png";
-import { ServicesPlexusBackdrop } from "./ServicesPlexusBackdrop";
+
 import {
   MessageSquare,
   MessageCircle,
