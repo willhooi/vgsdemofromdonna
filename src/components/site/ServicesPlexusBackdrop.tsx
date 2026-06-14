@@ -2,14 +2,16 @@ import { useMemo } from "react";
 
 /**
  * ServicesPlexusBackdrop — organic-cluster plexus background.
- * Jittered grid of nodes connected to nearest neighbors.
- * Nodes twinkle softly with a green glow. Respects prefers-reduced-motion.
+ * Jittered 6×6 grid of nodes connected to nearest neighbors.
+ * Nodes twinkle softly with a green glow. Lines stay subtle.
+ * Respects prefers-reduced-motion.
  */
 const VIEW_W = 1800;
-const VIEW_H = 1600;
-const COLS = 9;
-const ROWS = 8;
+const VIEW_H = 1200;
+const COLS = 7;
+const ROWS = 5;
 
+// Deterministic pseudo-random so SSR/CSR match and layout is stable.
 function mulberry32(seed: number) {
   return function () {
     let t = (seed += 0x6d2b79f5);
@@ -34,13 +36,14 @@ function buildGraph() {
       nodes.push({
         x: cellW * (c + 0.5) + jitterX,
         y: cellH * (r + 0.5) + jitterY,
-        r: 2.6 + rand() * 1.6,
+        r: 1.8 + rand() * 1.4,
         delay: rand() * 3.5,
         dur: 3 + rand() * 2.5,
       });
     }
   }
 
+  // Connect each node to its 3 nearest neighbors (dedup).
   const edgeSet = new Set<string>();
   const edges: [number, number][] = [];
   nodes.forEach((n, i) => {
@@ -67,12 +70,12 @@ export const ServicesPlexusBackdrop = () => {
   return (
     <div
       aria-hidden
-      className="pointer-events-none absolute inset-0 z-0 opacity-65 md:opacity-95"
+      className="pointer-events-none absolute inset-0 z-0 opacity-40 md:opacity-70"
     >
       <style>{`
         @keyframes services-plexus-twinkle {
-          0%, 100% { opacity: 0.3; transform: scale(1); }
-          50%      { opacity: 0.95; transform: scale(1.35); }
+          0%, 100% { opacity: 0.25; transform: scale(1); }
+          50%      { opacity: 0.9;  transform: scale(1.35); }
         }
         .services-plexus-node {
           transform-origin: center;
@@ -82,7 +85,7 @@ export const ServicesPlexusBackdrop = () => {
           filter: url(#services-plexus-glow);
         }
         @media (prefers-reduced-motion: reduce) {
-          .services-plexus-node { animation: none !important; opacity: 0.7 !important; }
+          .services-plexus-node { animation: none !important; opacity: 0.6 !important; }
         }
       `}</style>
       <svg
@@ -94,7 +97,7 @@ export const ServicesPlexusBackdrop = () => {
       >
         <defs>
           <filter id="services-plexus-glow" x="-100%" y="-100%" width="300%" height="300%">
-            <feGaussianBlur stdDeviation="3.2" result="blur" />
+            <feGaussianBlur stdDeviation="2.5" result="blur" />
             <feMerge>
               <feMergeNode in="blur" />
               <feMergeNode in="SourceGraphic" />
@@ -102,7 +105,7 @@ export const ServicesPlexusBackdrop = () => {
           </filter>
         </defs>
 
-        <g stroke="hsl(var(--primary))" strokeWidth="1.1" strokeOpacity="0.4" fill="none">
+        <g stroke="hsl(var(--primary))" strokeWidth="0.75" strokeOpacity="0.18" fill="none">
           {edges.map(([a, b], i) => (
             <line key={i} x1={nodes[a].x} y1={nodes[a].y} x2={nodes[b].x} y2={nodes[b].y} />
           ))}

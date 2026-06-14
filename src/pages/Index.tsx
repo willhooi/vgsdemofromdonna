@@ -38,9 +38,12 @@ const Index = () => {
       <div className="container-tight"><VDivider /></div>
       <TrustBand />
       <div className="container-tight"><VDivider /></div>
+      <div className="relative isolate">
+        <GalaxyBackdrop />
+        <Solutions />
+      </div>
       <div className="relative isolate overflow-hidden">
         <ServicesPlexusBackdrop />
-        <Solutions />
         <SolutionsToServicesBridge />
         <ServicesGrid />
       </div>
