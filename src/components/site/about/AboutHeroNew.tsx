@@ -55,7 +55,7 @@ const CountUp = ({ target, suffix, format }: { target: number; suffix: string; f
 };
 
 export const AboutHeroNew = () => (
-  <section className="relative overflow-hidden bg-background pt-28 pb-40 md:pt-36 md:pb-44">
+  <section className="relative overflow-hidden bg-background pt-28 pb-20 md:pt-36 md:pb-24">
     <ParticleField
       dotColor="rgba(58,168,79,0.5)"
       lineColor="rgba(58,168,79,0.22)"
@@ -87,7 +87,7 @@ export const AboutHeroNew = () => (
       </div>
 
       <Reveal variant="scale-soft" delay={200}>
-        <div className="relative mx-auto mt-14 max-w-6xl">
+        <div className="mx-auto mt-14 max-w-6xl">
           <div className="relative h-[300px] overflow-hidden rounded-[24px] md:h-[480px]">
             <img
               src={aboutHeroBanner.url}
@@ -97,55 +97,55 @@ export const AboutHeroNew = () => (
               className="h-full w-full object-cover"
             />
           </div>
-
-          {/* Floating stats card */}
-          <div className="absolute inset-x-4 -bottom-[80px] md:inset-x-10 md:-bottom-[90px]">
-            <Reveal variant="fade-up" delay={400}>
-              <div
-                className="rounded-[20px] bg-background px-4 py-6 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.18)] md:px-10 md:py-7"
-              >
-                <dl className="grid grid-cols-2 gap-y-6 md:grid-cols-4 md:gap-y-0">
-                  {stats.map((s, i) => {
-                    const mobileLeftBorder = i % 2 === 1;
-                    const mobileBottomBorder = i < 2;
-                    const desktopLeftBorder = i > 0;
-                    return (
-                      <div
-                        key={s.label}
-                        className={[
-                          "flex flex-col items-center text-center md:px-4",
-                          mobileBottomBorder ? "border-b border-border pb-6 md:border-b-0 md:pb-0" : "",
-                          mobileLeftBorder ? "border-l border-border" : "",
-                          desktopLeftBorder ? "md:border-l md:border-border" : "md:border-l-0",
-                        ].join(" ")}
-                      >
-                        <dt
-                          className="bg-clip-text font-extrabold leading-none text-transparent"
-                          style={{
-                            backgroundImage:
-                              "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-deep)))",
-                            fontSize: "clamp(36px, 4vw, 52px)",
-                          }}
-                        >
-                          <CountUp target={s.num} suffix={s.suffix} format={s.display} />
-                        </dt>
-                        <span
-                          aria-hidden
-                          className="mt-2 block h-[3px] w-[28px] rounded-full"
-                          style={{ background: "hsl(var(--accent))" }}
-                        />
-                        <dd className="mt-3 text-[11px] font-bold uppercase leading-tight tracking-[0.16em] text-muted-foreground">
-                          {s.label}
-                        </dd>
-                      </div>
-                    );
-                  })}
-                </dl>
-              </div>
-            </Reveal>
-          </div>
         </div>
       </Reveal>
+
+      {/* Floating stats card — overlaps banner via negative margin (mockup behavior) */}
+      <div className="relative z-10 mx-auto -mt-16 max-w-5xl px-4 md:-mt-[86px] md:px-6">
+        <Reveal variant="fade-up" delay={400}>
+          <div
+            className="rounded-[20px] bg-background px-4 py-7 shadow-[0_24px_70px_-20px_rgba(0,0,0,0.18)] md:px-6 md:py-10"
+          >
+            <dl className="grid grid-cols-2 gap-y-8 md:grid-cols-4 md:gap-y-0">
+              {stats.map((s, i) => {
+                const mobileLeftBorder = i % 2 === 1;
+                const mobileBottomBorder = i < 2;
+                const desktopLeftBorder = i > 0;
+                return (
+                  <div
+                    key={s.label}
+                    className={[
+                      "flex flex-col items-center text-center md:px-3",
+                      mobileBottomBorder ? "border-b border-border pb-8 md:border-b-0 md:pb-0" : "",
+                      mobileLeftBorder ? "border-l border-border" : "",
+                      desktopLeftBorder ? "md:border-l md:border-border" : "md:border-l-0",
+                    ].join(" ")}
+                  >
+                    <dt
+                      className="bg-clip-text font-extrabold leading-none text-transparent"
+                      style={{
+                        backgroundImage:
+                          "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-deep)))",
+                        fontSize: "clamp(34px, 3.6vw, 48px)",
+                      }}
+                    >
+                      <CountUp target={s.num} suffix={s.suffix} format={s.display} />
+                    </dt>
+                    <span
+                      aria-hidden
+                      className="mt-3 block h-[3px] w-[28px] rounded-full"
+                      style={{ background: "hsl(var(--accent))" }}
+                    />
+                    <dd className="mt-3 text-[11px] font-bold uppercase leading-tight tracking-[0.16em] text-muted-foreground">
+                      {s.label}
+                    </dd>
+                  </div>
+                );
+              })}
+            </dl>
+          </div>
+        </Reveal>
+      </div>
     </div>
   </section>
 );
