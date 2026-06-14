@@ -41,8 +41,8 @@ const Index = () => {
       <div className="relative isolate">
         <GalaxyBackdrop />
         <Solutions />
-        <div className="relative">
-          <PlatformToServicesFlow />
+        <div className="relative isolate overflow-hidden">
+          <ServicesPlexusBackdrop />
           <SolutionsToServicesBridge />
           <ServicesGrid />
         </div>
