@@ -55,7 +55,7 @@ const CountUp = ({ target, suffix, format }: { target: number; suffix: string; f
 };
 
 export const AboutHeroNew = () => (
-  <section className="relative overflow-hidden bg-background pt-28 pb-20 md:pt-36 md:pb-24">
+  <section className="relative overflow-hidden bg-background pt-28 pb-4 md:pt-36 md:pb-6">
     <ParticleField
       dotColor="rgba(58,168,79,0.5)"
       lineColor="rgba(58,168,79,0.22)"
