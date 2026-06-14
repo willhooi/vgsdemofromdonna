@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { Image as ImageIcon } from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
 import { ParticleField } from "./ParticleField";
+import aboutHeroBanner from "@/assets/about-hero-banner.jpg.asset.json";
 
 const stats = [
   { num: 19, suffix: "+", label: "Years of Operation" },
@@ -88,15 +88,14 @@ export const AboutHeroNew = () => (
 
       <Reveal variant="scale-soft" delay={200}>
         <div className="relative mx-auto mt-14 max-w-6xl">
-          <div
-            className="relative flex h-[300px] items-center justify-center overflow-hidden rounded-[24px] border-2 border-dashed border-border bg-muted/40 md:h-[480px]"
-          >
-            <div className="flex flex-col items-center gap-3 text-muted-foreground">
-              <ImageIcon className="h-10 w-10" />
-              <span className="text-xs font-semibold uppercase tracking-[0.18em]">
-                Hero image placeholder — 2400×960px
-              </span>
-            </div>
+          <div className="relative h-[300px] overflow-hidden rounded-[24px] md:h-[480px]">
+            <img
+              src={aboutHeroBanner.url}
+              alt="VietGuys × Japan partnership — enterprise engagement bridging Vietnam and Japan"
+              loading="eager"
+              decoding="async"
+              className="h-full w-full object-cover"
+            />
           </div>
 
           {/* Floating stats card */}
