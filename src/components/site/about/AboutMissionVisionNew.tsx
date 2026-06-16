@@ -1,7 +1,7 @@
 import { Check } from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
 import missionImage from "@/assets/mission.png.asset.json";
-import visionImage from "@/assets/vision-city.png.asset.json";
+import visionImage from "@/assets/vision-final.png.asset.json";
 
 const MissionArt = () => (
   <svg viewBox="0 0 400 360" aria-hidden preserveAspectRatio="xMidYMid meet" className="h-full w-full">
