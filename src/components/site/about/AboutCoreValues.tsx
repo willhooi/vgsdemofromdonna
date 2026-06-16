@@ -260,49 +260,6 @@ const AccentTile = ({
   </Reveal>
 );
 
-const GiantDivider = ({ children }: { children: React.ReactNode }) => (
-  <div className="col-span-12 flex justify-center py-2 md:py-4">
-    <InViewGroup className="opacity-60">
-      <div
-        style={{ color: "hsl(var(--primary))" }}
-        className="opacity-30"
-      >
-        {children}
-      </div>
-    </InViewGroup>
-  </div>
-);
-
-/* Giant outline icons used in mosaic + dividers */
-const GiantCogPeople = (
-  <DrawIcon
-    className="h-32 w-32 md:h-40 md:w-40"
-    strokeWidth={1.1}
-    viewBox="0 0 64 64"
-  >
-    <circle cx="32" cy="22" r="6" />
-    <path d="M20 44c0-6 5-10 12-10s12 4 12 10" />
-    <circle cx="12" cy="26" r="4" />
-    <circle cx="52" cy="26" r="4" />
-    <path d="M4 44c0-4 3-7 8-7" />
-    <path d="M60 44c0-4-3-7-8-7" />
-    <circle cx="32" cy="55" r="3" />
-  </DrawIcon>
-);
-
-const GiantHandshake = (
-  <DrawIcon
-    className="h-32 w-32 md:h-40 md:w-40"
-    strokeWidth={1.1}
-    viewBox="0 0 64 64"
-  >
-    <path d="M6 36l8-12 10 4 8-4 8 4 10-4 8 12" />
-    <path d="M20 40l8 8 4-4 8 8 4-4 8 4" />
-    <line x1="6" y1="36" x2="6" y2="48" />
-    <line x1="58" y1="36" x2="58" y2="48" />
-  </DrawIcon>
-);
-
 const GiantTarget = (
   <DrawIcon
     className="h-40 w-40 md:h-48 md:w-48"
@@ -316,18 +273,6 @@ const GiantTarget = (
     <line x1="32" y1="44" x2="32" y2="58" />
     <line x1="6" y1="32" x2="20" y2="32" />
     <line x1="44" y1="32" x2="58" y2="32" />
-  </DrawIcon>
-);
-
-const GiantSparkle = (
-  <DrawIcon
-    className="h-40 w-40 md:h-48 md:w-48"
-    strokeWidth={1.1}
-    viewBox="0 0 64 64"
-  >
-    <path d="M32 6 L36 28 L58 32 L36 36 L32 58 L28 36 L6 32 L28 28 Z" />
-    <circle cx="52" cy="14" r="3" />
-    <circle cx="12" cy="50" r="2" />
   </DrawIcon>
 );
 
