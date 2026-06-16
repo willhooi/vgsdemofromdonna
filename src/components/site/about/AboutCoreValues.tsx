@@ -49,8 +49,8 @@ const values = [
     ),
   },
   {
-    title: "Owned, end-to-end.",
-    body: "Direct carrier connections and infrastructure we operate ourselves — no middle layers.",
+    title: "Accountability",
+    body: "We are fully accountable for our own actions. We understand how our business decisions will affect our customers.",
     icon: (
       <DrawIcon>
         <rect x="3" y="4" width="18" height="13" rx="1.5" />
@@ -61,8 +61,8 @@ const values = [
     ),
   },
   {
-    title: "Built for the next campaign.",
-    body: "5M+ messages a day, engineered for the moment your campaign goes live at 2 AM.",
+    title: "Creativity\n& Innovation",
+    body: "We never rest on our laurels. We always strive to be ahead of the curve.",
     icon: (
       <DrawIcon>
         <polygon points="13,2 4,14 11,14 10,22 20,10 13,10" />
@@ -70,7 +70,7 @@ const values = [
     ),
   },
   {
-    title: "Constantly improved.",
+    title: "Innovation",
     body: "From SMS to AI — we adopt what makes customer engagement smarter, faster, safer.",
     icon: (
       <DrawIcon>
