@@ -341,10 +341,6 @@ const AccentTile = ({
 export const AboutCoreValues = () => (
   <section
     className="group/section relative overflow-hidden py-20 md:py-28"
-    style={{
-      background:
-        "linear-gradient(180deg, hsl(0 0% 97%) 0%, hsl(0 0% 100%) 100%)",
-    }}
   >
     <SailboatBackdrop />
 
@@ -373,10 +369,6 @@ export const AboutCoreValues = () => (
                 The compass behind every decision, every product, and every
                 partnership we build at VietGuys.
               </p>
-              {/* signature accent icon, anchors the section visually */}
-              <div className="mt-8 hidden lg:flex items-center justify-start text-primary/80">
-                {GiantTarget}
-              </div>
             </div>
           </Reveal>
         </div>
