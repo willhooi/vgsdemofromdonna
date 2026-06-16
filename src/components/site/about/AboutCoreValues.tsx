@@ -337,29 +337,10 @@ const AccentTile = ({
   </Reveal>
 );
 
-const GiantTarget = (
-  <DrawIcon
-    className="h-40 w-40 md:h-48 md:w-48"
-    strokeWidth={1.1}
-    viewBox="0 0 64 64"
-  >
-    <circle cx="32" cy="32" r="22" />
-    <circle cx="32" cy="32" r="14" />
-    <circle cx="32" cy="32" r="6" />
-    <line x1="32" y1="6" x2="32" y2="20" />
-    <line x1="32" y1="44" x2="32" y2="58" />
-    <line x1="6" y1="32" x2="20" y2="32" />
-    <line x1="44" y1="32" x2="58" y2="32" />
-  </DrawIcon>
-);
 
 export const AboutCoreValues = () => (
   <section
     className="group/section relative overflow-hidden py-20 md:py-28"
-    style={{
-      background:
-        "linear-gradient(180deg, hsl(0 0% 97%) 0%, hsl(0 0% 100%) 100%)",
-    }}
   >
     <SailboatBackdrop />
 
@@ -388,10 +369,6 @@ export const AboutCoreValues = () => (
                 The compass behind every decision, every product, and every
                 partnership we build at VietGuys.
               </p>
-              {/* signature accent icon, anchors the section visually */}
-              <div className="mt-8 hidden lg:flex items-center justify-start text-primary/80">
-                {GiantTarget}
-              </div>
             </div>
           </Reveal>
         </div>
