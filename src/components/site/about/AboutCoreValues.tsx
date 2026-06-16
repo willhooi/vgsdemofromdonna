@@ -287,65 +287,57 @@ export const AboutCoreValues = () => (
     <NetworkArt />
 
     <div className="container-tight relative">
-      <div className="grid grid-cols-1 gap-5 md:grid-cols-12 md:gap-6">
-        {/* === ROW 1: Heading block (col 1-4) + People first (col 5-8) + Quality (col 9-12) === */}
-        <div className="md:col-span-4">
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-12 lg:gap-6">
+        {/* Heading block — spans full width on mobile, sticky-feel side panel on desktop */}
+        <div className="sm:col-span-2 lg:col-span-4 lg:row-span-2 lg:self-stretch">
           <Reveal variant="fade-up">
-            <span
-              className="text-[11px] font-bold uppercase tracking-[0.24em]"
-              style={{ color: "hsl(var(--primary-deep))" }}
-            >
-              CORE VALUES
-            </span>
-            <h2 className="mt-4 font-display text-3xl font-extrabold leading-[1.1] text-foreground md:text-[34px] lg:text-[40px]">
-              Six values that have outlasted every trend.
-            </h2>
-            <span
-              aria-hidden
-              className="mt-5 block h-[3px] w-16 rounded-full"
-              style={{ background: "#cd3734" }}
-            />
-            <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground">
-              The compass behind every decision, every product, and every
-              partnership we build at VietGuys.
-            </p>
+            <div className="lg:sticky lg:top-24">
+              <span
+                className="text-[11px] font-bold uppercase tracking-[0.24em]"
+                style={{ color: "hsl(var(--primary-deep))" }}
+              >
+                CORE VALUES
+              </span>
+              <h2 className="mt-4 font-display text-3xl font-extrabold leading-[1.1] text-foreground md:text-[34px] lg:text-[40px]">
+                Six values that have outlasted every trend.
+              </h2>
+              <span
+                aria-hidden
+                className="mt-5 block h-[3px] w-16 rounded-full"
+                style={{ background: "#cd3734" }}
+              />
+              <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground">
+                The compass behind every decision, every product, and every
+                partnership we build at VietGuys.
+              </p>
+              {/* signature accent icon, anchors the section visually */}
+              <div className="mt-8 hidden lg:flex items-center justify-start text-primary/80">
+                {GiantTarget}
+              </div>
+            </div>
           </Reveal>
         </div>
 
-        <div className="md:col-span-4">
-          <ValueTile value={values[0]} delay={80} className="min-h-[260px]" />
+        {/* 2x2 grid of the first 4 values, right of heading on desktop */}
+        <div className="lg:col-span-4">
+          <ValueTile value={values[0]} delay={80} className="min-h-[240px]" />
         </div>
-        <div className="md:col-span-4">
-          <ValueTile value={values[1]} delay={160} className="min-h-[260px]" />
+        <div className="lg:col-span-4">
+          <ValueTile value={values[1]} delay={160} className="min-h-[240px]" />
         </div>
-
-
-
-        {/* === ROW 2: Integrity (col 1-4) + Accent tile (col 5-8) + Accountability (col 9-12) === */}
-        <div className="md:col-span-4">
-          <ValueTile value={values[2]} className="min-h-[260px]" />
+        <div className="lg:col-span-4">
+          <ValueTile value={values[2]} delay={80} className="min-h-[240px]" />
         </div>
-        <div className="md:col-span-4">
-          <AccentTile
-            className="min-h-[260px]"
-            giantIcon={GiantTarget}
-            caption="Built to last, designed to lead."
-          />
-        </div>
-        <div className="md:col-span-4">
-          <ValueTile value={values[3]} delay={120} className="min-h-[260px]" />
+        <div className="lg:col-span-4">
+          <ValueTile value={values[3]} delay={160} className="min-h-[240px]" />
         </div>
 
-
-        {/* === ROW 3: Creativity (col 1-7, wider) + Accent (col 8-? hidden md) + Honesty (col 8-12) === */}
-        <div className="md:col-span-7">
-          <ValueTile
-            value={values[4]}
-            className="min-h-[240px]"
-          />
+        {/* Last 2 values — full-width row, split 6/6 on desktop */}
+        <div className="sm:col-span-2 lg:col-span-6">
+          <ValueTile value={values[4]} delay={80} className="min-h-[220px]" />
         </div>
-        <div className="md:col-span-5">
-          <ValueTile value={values[5]} delay={120} className="min-h-[240px]" />
+        <div className="sm:col-span-2 lg:col-span-6">
+          <ValueTile value={values[5]} delay={160} className="min-h-[220px]" />
         </div>
       </div>
     </div>
