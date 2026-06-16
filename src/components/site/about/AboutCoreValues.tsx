@@ -18,8 +18,8 @@ const DrawIcon = ({ children }: { children: React.ReactNode }) => (
 
 const values = [
   {
-    title: "People first.",
-    body: "Engineers, product leads and customer partners who care about your campaigns as much as you do.",
+    title: "People first",
+    body: "We value every individual, respect every contribution, and empower each other to succeed together.",
     icon: (
       <DrawIcon>
         <circle cx="9" cy="8" r="3.2" />
@@ -30,8 +30,8 @@ const values = [
     ),
   },
   {
-    title: "Quality, never optional.",
-    body: "Enterprise-grade reliability learned from powering Samsung, LG and Vietnam's biggest brands.",
+    title: "Quality",
+    body: "We uphold high standards, deliver with excellence, and never compromise on quality.",
     icon: (
       <DrawIcon>
         <path d="M12 3l8 3v5c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-3z" />
@@ -40,8 +40,8 @@ const values = [
     ),
   },
   {
-    title: "Integrity & honesty.",
-    body: "Transparent in every quote, every report, every incident — trust is our only durable asset.",
+    title: "Integrity",
+    body: "We act with honesty, build trust through transparency, and create long-term value together.",
     icon: (
       <DrawIcon>
         <polygon points="12,3 14.5,9 21,9.5 16,13.5 17.8,20 12,16.5 6.2,20 8,13.5 3,9.5 9.5,9" />
