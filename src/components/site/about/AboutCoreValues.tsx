@@ -266,10 +266,12 @@ const ValueTile = ({
     <InViewGroup
       className="relative flex h-full min-h-[230px] flex-col justify-between overflow-hidden rounded-[20px] border p-7 backdrop-blur-[2px] transition-all duration-300 hover:-translate-y-1.5"
       style={{
-        background: "rgba(246,241,231,0.78)",
-        borderColor: SAIL.horizonTeal + "38",
-        boxShadow: "0 10px 30px -18px " + SAIL.oceanDeep + "55",
+        background: "rgba(246,241,231,0.92)",
+        borderColor: SAIL.horizonTeal + "44",
+        boxShadow:
+          "0 10px 30px -18px " + SAIL.oceanDeep + "66, inset 0 1px 0 rgba(255,255,255,0.6)",
       }}
+
     >
       <div
         aria-hidden
