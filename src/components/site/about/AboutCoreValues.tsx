@@ -3,7 +3,17 @@ import { Reveal } from "@/components/motion/Reveal";
 import sailboatAsset from "@/assets/sailboat-19.png.asset.json";
 
 
-const ICON_STROKE = "hsl(var(--primary))";
+// "Setting sail forward" palette — scoped to this section
+const SAIL = {
+  oceanDeep: "#0B2C4A",
+  horizonTeal: "#2A8C9E",
+  sailWhite: "#F6F1E7",
+  mist: "#E3ECEF",
+  sunriseCoral: "#E55A3C",
+  goldSpark: "#F2B441",
+};
+
+const ICON_STROKE = SAIL.oceanDeep;
 
 const DrawIcon = ({
   children,
