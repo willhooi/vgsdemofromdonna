@@ -145,8 +145,8 @@ const values: Value[] = [
   },
 ];
 
-/** Full-width horizon band at the bottom of the section — sailboat + waves */
-const HorizonBand = () => {
+/** Full-bleed ocean scene — sky + sun + sailboat + layered waves */
+const OceanScene = () => {
   const boatRef = useRef<HTMLImageElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
 
@@ -167,8 +167,8 @@ const HorizonBand = () => {
         const rect = wrap.getBoundingClientRect();
         const viewportCenter = window.innerHeight / 2;
         const sectionCenter = rect.top + rect.height / 2;
-        const delta = (viewportCenter - sectionCenter) * 0.05;
-        const y = Math.max(-20, Math.min(20, delta));
+        const delta = (viewportCenter - sectionCenter) * 0.06;
+        const y = Math.max(-26, Math.min(26, delta));
         boat.style.transform = `translate3d(0, ${y.toFixed(2)}px, 0)`;
       });
     };
@@ -185,61 +185,89 @@ const HorizonBand = () => {
     <div
       ref={wrapRef}
       aria-hidden
-      className="pointer-events-none absolute inset-x-0 bottom-0 h-[42%] min-h-[220px] overflow-hidden"
+      className="pointer-events-none absolute inset-0 overflow-hidden"
     >
-      {/* Soft fade so tiles above never collide with waves */}
+      {/* Sky gradient — full section */}
       <div
-        className="absolute inset-x-0 top-0 h-24"
+        className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(to bottom, rgba(246,241,231,0.6), rgba(246,241,231,0))",
+            "linear-gradient(180deg, #FFFFFF 0%, " +
+            SAIL.sailWhite +
+            " 38%, rgba(42,140,158,0.10) 60%, " +
+            SAIL.mist +
+            " 78%, " +
+            SAIL.mintBridge +
+            " 100%)",
         }}
       />
 
-      {/* Sailboat — anchored LEFT, bow pointing right ("forward") */}
+      {/* Sunrise glow — upper-right destination */}
+      <div
+        className="absolute right-[6%] top-[8%] h-[360px] w-[360px] rounded-full blur-3xl"
+        style={{
+          background:
+            "radial-gradient(circle, " +
+            SAIL.goldSpark +
+            "33 0%, " +
+            SAIL.sunriseCoral +
+            "1f 45%, transparent 70%)",
+        }}
+      />
+
+      {/* Sailboat — anchored upper-left in negative space beside heading */}
       <img
         ref={boatRef}
         src={sailboatAsset.url}
         alt=""
         loading="lazy"
-        className="absolute bottom-[26%] left-[3%] hidden h-[72%] max-h-[280px] w-auto opacity-95 transition-transform duration-700 ease-out will-change-transform md:block md:left-[5%] lg:left-[8%] group-hover/section:translate-y-[-8px] group-hover/section:scale-[1.02]"
+        className="absolute left-[3%] top-[14%] hidden h-auto w-[28%] max-w-[340px] opacity-95 transition-transform duration-700 ease-out will-change-transform md:block lg:left-[5%] group-hover/section:translate-y-[-8px] group-hover/section:scale-[1.02]"
+        style={{
+          filter: "drop-shadow(0 18px 28px " + SAIL.oceanDeep + "33)",
+        }}
       />
 
-
-      {/* Wave — full-width horizon line, fades to mint at the bottom to bridge into Mission/Vision */}
+      {/* Waterline — layered waves filling lower portion */}
       <svg
-        viewBox="0 0 1440 220"
+        viewBox="0 0 1440 600"
         preserveAspectRatio="none"
-        className="absolute inset-x-0 bottom-0 h-full w-full"
+        className="absolute inset-x-0 bottom-0 h-[55%] w-full"
       >
         <defs>
-          <linearGradient id="waveStroke" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor={SAIL.oceanDeep} stopOpacity="0.85" />
-            <stop offset="55%" stopColor={SAIL.horizonTeal} stopOpacity="0.7" />
-            <stop offset="100%" stopColor={SAIL.sunriseCoral} stopOpacity="0.75" />
+          <linearGradient id="oceanFillDeep" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor={SAIL.horizonTeal} stopOpacity="0.04" />
+            <stop offset="60%" stopColor={SAIL.horizonTeal} stopOpacity="0.18" />
+            <stop offset="100%" stopColor={SAIL.mintBridge} stopOpacity="0.98" />
           </linearGradient>
-          <linearGradient id="waveFill" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor={SAIL.horizonTeal} stopOpacity="0.06" />
-            <stop offset="100%" stopColor={SAIL.mintBridge} stopOpacity="0.95" />
+          <linearGradient id="oceanStroke" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor={SAIL.oceanDeep} stopOpacity="0.75" />
+            <stop offset="55%" stopColor={SAIL.horizonTeal} stopOpacity="0.6" />
+            <stop offset="100%" stopColor={SAIL.sunriseCoral} stopOpacity="0.7" />
           </linearGradient>
         </defs>
 
-        {/* filled mint wash that anchors into Mission/Vision color */}
+        {/* Deep fill */}
         <path
-          d="M0,150 C220,110 460,180 720,140 C980,100 1200,180 1440,140 L1440,220 L0,220 Z"
-          fill="url(#waveFill)"
+          d="M0,260 C220,200 460,300 720,240 C980,180 1200,300 1440,230 L1440,600 L0,600 Z"
+          fill="url(#oceanFillDeep)"
         />
-        {/* primary horizon line */}
+        {/* Mid wave wash */}
         <path
-          d="M0,140 C220,90 460,170 720,130 C980,90 1200,170 1440,120"
+          d="M0,330 C260,280 500,360 760,300 C1020,250 1220,340 1440,290 L1440,600 L0,600 Z"
+          fill={SAIL.horizonTeal}
+          fillOpacity="0.08"
+        />
+        {/* Horizon line */}
+        <path
+          d="M0,250 C220,190 460,290 720,230 C980,170 1200,290 1440,220"
           fill="none"
-          stroke="url(#waveStroke)"
+          stroke="url(#oceanStroke)"
           strokeWidth="1.8"
           strokeLinecap="round"
         />
-        {/* dashed secondary current */}
+        {/* Dashed current */}
         <path
-          d="M0,170 C260,130 500,200 760,160 C1020,120 1220,200 1440,160"
+          d="M0,300 C260,250 500,330 760,270 C1020,220 1220,310 1440,260"
           fill="none"
           stroke={SAIL.horizonTeal}
           strokeOpacity="0.35"
@@ -247,9 +275,17 @@ const HorizonBand = () => {
           strokeDasharray="2 6"
           className="transition-[stroke-dashoffset] duration-[2400ms] ease-linear group-hover/section:[stroke-dashoffset:-40]"
         />
-        {/* sunrise spark on the right horizon — destination */}
-        <circle cx="1330" cy="118" r="3.5" fill={SAIL.goldSpark} opacity="0.9" />
-        <circle cx="1330" cy="118" r="9" fill={SAIL.goldSpark} opacity="0.18" />
+        {/* Faint third ripple */}
+        <path
+          d="M0,420 C260,380 500,460 760,400 C1020,350 1220,440 1440,390"
+          fill="none"
+          stroke={SAIL.sailWhite}
+          strokeOpacity="0.6"
+          strokeWidth="1"
+        />
+        {/* Sunrise spark on horizon */}
+        <circle cx="1330" cy="208" r="4" fill={SAIL.goldSpark} opacity="0.95" />
+        <circle cx="1330" cy="208" r="11" fill={SAIL.goldSpark} opacity="0.2" />
       </svg>
     </div>
   );
@@ -266,12 +302,11 @@ const ValueTile = ({
     <InViewGroup
       className="relative flex h-full min-h-[230px] flex-col justify-between overflow-hidden rounded-[20px] border p-7 backdrop-blur-[2px] transition-all duration-300 hover:-translate-y-1.5"
       style={{
-        background: "rgba(246,241,231,0.92)",
+        background: "rgba(246,241,231,0.94)",
         borderColor: SAIL.horizonTeal + "44",
         boxShadow:
           "0 10px 30px -18px " + SAIL.oceanDeep + "66, inset 0 1px 0 rgba(255,255,255,0.6)",
       }}
-
     >
       <div
         aria-hidden
@@ -305,19 +340,16 @@ export const AboutCoreValues = () => (
   <section
     className="group/section relative overflow-hidden pt-20 md:pt-24"
     style={{
-      paddingBottom: "clamp(140px, 18vw, 220px)",
-      background:
-        "linear-gradient(180deg, #FFFFFF 0%, " +
-        SAIL.sailWhite +
-        " 55%, " +
-        SAIL.mintBridge +
-        " 100%)",
+      paddingBottom: "clamp(160px, 20vw, 260px)",
     }}
   >
+    {/* Full-bleed ocean scene — sky, sun, sailboat, waves */}
+    <OceanScene />
+
     <div className="container-tight relative z-10">
-      {/* Heading — centered top */}
+      {/* Heading — top-left, editorial axis */}
       <Reveal variant="fade-up">
-        <div className="mx-auto max-w-2xl text-center">
+        <div className="max-w-xl text-left">
           <span
             className="text-[11px] font-bold uppercase tracking-[0.24em]"
             style={{ color: SAIL.oceanDeep }}
@@ -332,36 +364,32 @@ export const AboutCoreValues = () => (
           </h2>
           <span
             aria-hidden
-            className="mx-auto mt-5 block h-[3px] w-16 rounded-full"
+            className="mt-5 block h-[3px] w-16 rounded-full"
             style={{ background: SAIL.sunriseCoral }}
           />
-          <p className="mx-auto mt-5 max-w-xl text-sm leading-relaxed text-muted-foreground">
+          <p className="mt-5 max-w-md text-sm leading-relaxed text-muted-foreground">
             The compass behind every decision, every product, and every
             partnership we build at VietGuys.
           </p>
         </div>
       </Reveal>
 
-      {/* Readability overlay — soft cream wash behind tiles so text stays crisp over boat/waves */}
+      {/* Readability wash behind tiles */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-[28%] -z-0 h-[55%]"
+        className="pointer-events-none absolute inset-x-0 top-[32%] -z-0 h-[60%]"
         style={{
           background:
-            "radial-gradient(ellipse at center, rgba(246,241,231,0.55) 0%, rgba(246,241,231,0.2) 60%, rgba(246,241,231,0) 100%)",
+            "radial-gradient(ellipse at center, rgba(246,241,231,0.7) 0%, rgba(246,241,231,0.28) 60%, rgba(246,241,231,0) 100%)",
         }}
       />
 
-      {/* 3×2 grid — symmetric, evenly weighted */}
-      <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+      {/* 3×2 grid */}
+      <div className="relative mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
         {values.map((v, i) => (
           <ValueTile key={v.title} value={v} delay={(i % 3) * 80} />
         ))}
       </div>
-
     </div>
-
-    {/* Full-width horizon — sailboat + waves at the bottom */}
-    <HorizonBand />
   </section>
 );
