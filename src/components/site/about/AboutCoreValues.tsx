@@ -167,8 +167,15 @@ const ValueTile = ({
 }) => (
   <Reveal variant="fade-up" delay={delay}>
     <InViewGroup
-      className={`relative flex h-full flex-col justify-between overflow-hidden rounded-[20px] border p-7 transition-all duration-300 hover:-translate-y-1.5 ${className}`}
+      className={`relative flex h-full flex-col justify-between overflow-hidden rounded-[20px] border p-7 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_40px_-20px_hsl(var(--primary)/0.35)] ${className}`}
     >
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10"
+        style={{
+          background: "hsl(var(--primary) / 0.05)",
+        }}
+      />
       <div
         aria-hidden
         className="pointer-events-none absolute -right-6 -top-6 h-28 w-28 rounded-full"
