@@ -319,8 +319,7 @@ export const AboutCoreValues = () => (
           <ValueTile value={values[1]} delay={160} className="min-h-[260px]" />
         </div>
 
-        {/* === DIVIDER 1 === */}
-        <GiantDivider>{GiantCogPeople}</GiantDivider>
+
 
         {/* === ROW 2: Integrity (col 1-4) + Accent tile (col 5-8) + Accountability (col 9-12) === */}
         <div className="md:col-span-4">
