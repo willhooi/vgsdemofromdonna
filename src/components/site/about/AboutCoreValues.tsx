@@ -342,12 +342,23 @@ export const AboutCoreValues = () => (
         </div>
       </Reveal>
 
+      {/* Readability overlay — soft cream wash behind tiles so text stays crisp over boat/waves */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-[28%] -z-0 h-[55%]"
+        style={{
+          background:
+            "radial-gradient(ellipse at center, rgba(246,241,231,0.55) 0%, rgba(246,241,231,0.2) 60%, rgba(246,241,231,0) 100%)",
+        }}
+      />
+
       {/* 3×2 grid — symmetric, evenly weighted */}
       <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
         {values.map((v, i) => (
           <ValueTile key={v.title} value={v} delay={(i % 3) * 80} />
         ))}
       </div>
+
     </div>
 
     {/* Full-width horizon — sailboat + waves at the bottom */}
