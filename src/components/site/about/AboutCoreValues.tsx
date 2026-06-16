@@ -187,60 +187,69 @@ const SailboatBackdrop = () => {
       aria-hidden
       className="pointer-events-none absolute inset-0 overflow-hidden"
     >
-      {/* Sailboat key visual — right side, desktop+ */}
+      {/* Sailboat key visual — LEFT side, desktop+, mirrored so bow points forward into layout */}
       <img
         ref={boatRef}
         src={sailboatAsset.url}
         alt=""
         loading="lazy"
-        className="absolute right-0 bottom-0 hidden md:block h-full w-auto max-w-[60%] object-cover object-left opacity-80 transition-transform duration-700 ease-out will-change-transform group-hover/section:-translate-y-2 group-hover/section:scale-[1.015]"
+        className="absolute left-0 bottom-0 hidden md:block h-full w-auto max-w-[60%] object-cover object-right opacity-85 transition-transform duration-700 ease-out will-change-transform [transform:scaleX(-1)] group-hover/section:[transform:scaleX(-1)_translateY(-8px)_scale(1.015)]"
         style={{
           maskImage:
-            "linear-gradient(to left, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
+            "linear-gradient(to right, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
           WebkitMaskImage:
-            "linear-gradient(to left, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
+            "linear-gradient(to right, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
         }}
       />
 
-      {/* Wave that visually connects the bottom row of tiles */}
+      {/* Wave — travels from ocean deep (left) toward sunrise (right): the "forward" direction */}
       <svg
         viewBox="0 0 1440 220"
         preserveAspectRatio="none"
-        className="absolute inset-x-0 bottom-[6%] h-[260px] w-full opacity-70"
+        className="absolute inset-x-0 bottom-[6%] h-[260px] w-full opacity-80"
       >
         <defs>
           <linearGradient id="waveStroke" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0" />
-            <stop offset="35%" stopColor="hsl(var(--primary))" stopOpacity="0.55" />
-            <stop offset="100%" stopColor="hsl(var(--primary-deep))" stopOpacity="0.85" />
+            <stop offset="0%" stopColor={SAIL.oceanDeep} stopOpacity="0.9" />
+            <stop offset="55%" stopColor={SAIL.horizonTeal} stopOpacity="0.75" />
+            <stop offset="100%" stopColor={SAIL.sunriseCoral} stopOpacity="0.85" />
           </linearGradient>
         </defs>
         <path
           d="M0,140 C220,90 420,180 700,130 C960,85 1180,170 1440,120"
           fill="none"
           stroke="url(#waveStroke)"
-          strokeWidth="1.6"
+          strokeWidth="1.8"
           strokeLinecap="round"
         />
         <path
           d="M0,170 C260,130 500,200 760,160 C1020,120 1220,200 1440,160"
           fill="none"
-          stroke="hsl(var(--primary) / 0.35)"
+          stroke={SAIL.horizonTeal}
+          strokeOpacity="0.45"
           strokeWidth="1"
           strokeDasharray="2 6"
           className="transition-[stroke-dashoffset] duration-[2400ms] ease-linear group-hover/section:[stroke-dashoffset:-40]"
         />
+        {/* sunrise spark on horizon */}
+        <circle cx="1380" cy="118" r="3.5" fill={SAIL.goldSpark} opacity="0.9" />
       </svg>
 
-      {/* Readability overlay — left side & bottom */}
+      {/* Readability overlay — strong on the RIGHT (over tiles), warm sail-cloth tone */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(to right, hsl(0 0% 100% / 0.96) 0%, hsl(0 0% 100% / 0.78) 45%, hsl(0 0% 100% / 0.25) 75%, hsl(0 0% 100% / 0.05) 100%)",
+            "linear-gradient(to left, " + SAIL.sailWhite + " 0%, rgba(246,241,231,0.85) 45%, rgba(246,241,231,0.25) 75%, rgba(246,241,231,0.05) 100%)",
         }}
       />
-      <div className="absolute inset-x-0 bottom-0 h-[40%] bg-gradient-to-t from-white/85 via-white/40 to-transparent" />
+      <div
+        className="absolute inset-x-0 bottom-0 h-[40%]"
+        style={{
+          background:
+            "linear-gradient(to top, rgba(246,241,231,0.9), rgba(246,241,231,0.4), transparent)",
+        }}
+      />
     </div>
   );
 };
