@@ -2,18 +2,8 @@ import { useEffect, useRef } from "react";
 import { Reveal } from "@/components/motion/Reveal";
 import sailboatAsset from "@/assets/sailboat-19.png.asset.json";
 
-// "Setting sail forward" palette — scoped to this section
-const SAIL = {
-  oceanDeep: "#0B2C4A",
-  horizonTeal: "#2A8C9E",
-  sailWhite: "#F6F1E7",
-  mist: "#E3ECEF",
-  sunriseCoral: "#E55A3C",
-  goldSpark: "#F2B441",
-  mintBridge: "hsl(130 60% 96.5%)", // matches AboutMissionVisionNew top stop
-};
 
-const ICON_STROKE = SAIL.oceanDeep;
+const ICON_STROKE = "hsl(var(--primary))";
 
 const DrawIcon = ({
   children,
@@ -39,6 +29,7 @@ const DrawIcon = ({
   </svg>
 );
 
+/** Observer wrapper to trigger DrawIcon animation when in viewport */
 const InViewGroup = ({
   children,
   className,
@@ -145,10 +136,9 @@ const values: Value[] = [
   },
 ];
 
-/** Full-bleed ocean scene — sky + sun + sailboat + layered waves */
-const OceanScene = () => {
+const SailboatBackdrop = () => {
   const boatRef = useRef<HTMLImageElement>(null);
-  const wrapRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const prefersReduced = window.matchMedia(
@@ -161,14 +151,14 @@ const OceanScene = () => {
       if (raf) return;
       raf = requestAnimationFrame(() => {
         raf = 0;
-        const wrap = wrapRef.current;
+        const section = sectionRef.current;
         const boat = boatRef.current;
-        if (!wrap || !boat) return;
-        const rect = wrap.getBoundingClientRect();
+        if (!section || !boat) return;
+        const rect = section.getBoundingClientRect();
         const viewportCenter = window.innerHeight / 2;
         const sectionCenter = rect.top + rect.height / 2;
-        const delta = (viewportCenter - sectionCenter) * 0.06;
-        const y = Math.max(-26, Math.min(26, delta));
+        const delta = (viewportCenter - sectionCenter) * 0.08;
+        const y = Math.max(-40, Math.min(40, delta));
         boat.style.transform = `translate3d(0, ${y.toFixed(2)}px, 0)`;
       });
     };
@@ -183,150 +173,106 @@ const OceanScene = () => {
 
   return (
     <div
-      ref={wrapRef}
+      ref={sectionRef}
       aria-hidden
       className="pointer-events-none absolute inset-0 overflow-hidden"
     >
-      {/* Sky gradient — full section */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(180deg, #FFFFFF 0%, " +
-            SAIL.sailWhite +
-            " 38%, rgba(42,140,158,0.10) 60%, " +
-            SAIL.mist +
-            " 78%, " +
-            SAIL.mintBridge +
-            " 100%)",
-        }}
-      />
-
-      {/* Sunrise glow — upper-right destination */}
-      <div
-        className="absolute right-[6%] top-[8%] h-[360px] w-[360px] rounded-full blur-3xl"
-        style={{
-          background:
-            "radial-gradient(circle, " +
-            SAIL.goldSpark +
-            "33 0%, " +
-            SAIL.sunriseCoral +
-            "1f 45%, transparent 70%)",
-        }}
-      />
-
-      {/* Sailboat — anchored upper-left in negative space beside heading */}
+      {/* Sailboat key visual — right side, desktop+ */}
       <img
         ref={boatRef}
         src={sailboatAsset.url}
         alt=""
         loading="lazy"
-        className="absolute left-[3%] top-[14%] hidden h-auto w-[28%] max-w-[340px] opacity-95 transition-transform duration-700 ease-out will-change-transform md:block lg:left-[5%] group-hover/section:translate-y-[-8px] group-hover/section:scale-[1.02]"
+        className="absolute right-0 bottom-0 hidden md:block h-full w-auto max-w-[60%] object-cover object-left opacity-80 transition-transform duration-700 ease-out will-change-transform group-hover/section:-translate-y-2 group-hover/section:scale-[1.015]"
         style={{
-          filter: "drop-shadow(0 18px 28px " + SAIL.oceanDeep + "33)",
+          maskImage:
+            "linear-gradient(to left, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
+          WebkitMaskImage:
+            "linear-gradient(to left, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
         }}
       />
 
-      {/* Waterline — layered waves filling lower portion */}
+      {/* Wave that visually connects the bottom row of tiles */}
       <svg
-        viewBox="0 0 1440 600"
+        viewBox="0 0 1440 220"
         preserveAspectRatio="none"
-        className="absolute inset-x-0 bottom-0 h-[55%] w-full"
+        className="absolute inset-x-0 bottom-[6%] h-[260px] w-full opacity-70"
       >
         <defs>
-          <linearGradient id="oceanFillDeep" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor={SAIL.horizonTeal} stopOpacity="0.04" />
-            <stop offset="60%" stopColor={SAIL.horizonTeal} stopOpacity="0.18" />
-            <stop offset="100%" stopColor={SAIL.mintBridge} stopOpacity="0.98" />
-          </linearGradient>
-          <linearGradient id="oceanStroke" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor={SAIL.oceanDeep} stopOpacity="0.75" />
-            <stop offset="55%" stopColor={SAIL.horizonTeal} stopOpacity="0.6" />
-            <stop offset="100%" stopColor={SAIL.sunriseCoral} stopOpacity="0.7" />
+          <linearGradient id="waveStroke" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0" />
+            <stop offset="35%" stopColor="hsl(var(--primary))" stopOpacity="0.55" />
+            <stop offset="100%" stopColor="hsl(var(--primary-deep))" stopOpacity="0.85" />
           </linearGradient>
         </defs>
-
-        {/* Deep fill */}
         <path
-          d="M0,260 C220,200 460,300 720,240 C980,180 1200,300 1440,230 L1440,600 L0,600 Z"
-          fill="url(#oceanFillDeep)"
-        />
-        {/* Mid wave wash */}
-        <path
-          d="M0,330 C260,280 500,360 760,300 C1020,250 1220,340 1440,290 L1440,600 L0,600 Z"
-          fill={SAIL.horizonTeal}
-          fillOpacity="0.08"
-        />
-        {/* Horizon line */}
-        <path
-          d="M0,250 C220,190 460,290 720,230 C980,170 1200,290 1440,220"
+          d="M0,140 C220,90 420,180 700,130 C960,85 1180,170 1440,120"
           fill="none"
-          stroke="url(#oceanStroke)"
-          strokeWidth="1.8"
+          stroke="url(#waveStroke)"
+          strokeWidth="1.6"
           strokeLinecap="round"
         />
-        {/* Dashed current */}
         <path
-          d="M0,300 C260,250 500,330 760,270 C1020,220 1220,310 1440,260"
+          d="M0,170 C260,130 500,200 760,160 C1020,120 1220,200 1440,160"
           fill="none"
-          stroke={SAIL.horizonTeal}
-          strokeOpacity="0.35"
+          stroke="hsl(var(--primary) / 0.35)"
           strokeWidth="1"
           strokeDasharray="2 6"
           className="transition-[stroke-dashoffset] duration-[2400ms] ease-linear group-hover/section:[stroke-dashoffset:-40]"
         />
-        {/* Faint third ripple */}
-        <path
-          d="M0,420 C260,380 500,460 760,400 C1020,350 1220,440 1440,390"
-          fill="none"
-          stroke={SAIL.sailWhite}
-          strokeOpacity="0.6"
-          strokeWidth="1"
-        />
-        {/* Sunrise spark on horizon */}
-        <circle cx="1330" cy="208" r="4" fill={SAIL.goldSpark} opacity="0.95" />
-        <circle cx="1330" cy="208" r="11" fill={SAIL.goldSpark} opacity="0.2" />
       </svg>
+
+      {/* Readability overlay — left side & bottom */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(to right, hsl(0 0% 100% / 0.96) 0%, hsl(0 0% 100% / 0.78) 45%, hsl(0 0% 100% / 0.25) 75%, hsl(0 0% 100% / 0.05) 100%)",
+        }}
+      />
+      <div className="absolute inset-x-0 bottom-0 h-[40%] bg-gradient-to-t from-white/85 via-white/40 to-transparent" />
     </div>
   );
 };
 
+
 const ValueTile = ({
   value,
   delay = 0,
+  className = "",
 }: {
   value: Value;
   delay?: number;
+  className?: string;
 }) => (
   <Reveal variant="fade-up" delay={delay}>
     <InViewGroup
-      className="relative flex h-full min-h-[230px] flex-col justify-between overflow-hidden rounded-[20px] border p-7 backdrop-blur-[2px] transition-all duration-300 hover:-translate-y-1.5"
+      className={`relative flex h-full flex-col justify-between overflow-hidden rounded-[20px] border p-7 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_40px_-20px_hsl(var(--primary)/0.35)] ${className}`}
       style={{
-        background: "rgba(246,241,231,0.94)",
-        borderColor: SAIL.horizonTeal + "44",
-        boxShadow:
-          "0 10px 30px -18px " + SAIL.oceanDeep + "66, inset 0 1px 0 rgba(255,255,255,0.6)",
+        background: "hsl(var(--primary) / 0.05)",
+        borderColor: "hsl(var(--primary) / 0.18)",
+        boxShadow: "0 10px 30px -18px hsl(var(--primary) / 0.25)",
       }}
     >
       <div
         aria-hidden
-        className="pointer-events-none absolute -right-4 -top-4 h-16 w-16 rounded-full transition-colors duration-300 group-hover:[background:rgba(242,180,65,0.22)]"
-        style={{ background: SAIL.horizonTeal + "14" }}
+        className="pointer-events-none absolute -right-6 -top-6 h-28 w-28 rounded-full"
+        style={{ background: "hsl(var(--primary) / 0.08)" }}
       />
       <div
         className="relative flex h-[52px] w-[52px] items-center justify-center rounded-full"
-        style={{ background: SAIL.horizonTeal + "22" }}
+        style={{ background: "hsl(var(--primary) / 0.12)" }}
       >
         {value.icon}
       </div>
       <div className="relative mt-6">
-        <h3 className="font-display text-lg font-bold" style={{ color: SAIL.oceanDeep }}>
+        <h3 className="font-display text-lg font-bold text-foreground">
           {value.title}
         </h3>
         <span
           aria-hidden
           className="mt-3 block h-[2px] w-8 rounded-full"
-          style={{ background: SAIL.sunriseCoral }}
+          style={{ background: "#cd3734" }}
         />
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
           {value.body}
@@ -336,59 +282,141 @@ const ValueTile = ({
   </Reveal>
 );
 
-export const AboutCoreValues = () => (
-  <section
-    className="group/section relative overflow-hidden pt-20 md:pt-24"
-    style={{
-      paddingBottom: "clamp(160px, 20vw, 260px)",
-    }}
-  >
-    {/* Full-bleed ocean scene — sky, sun, sailboat, waves */}
-    <OceanScene />
 
-    <div className="container-tight relative z-10">
-      {/* Heading — top-left, editorial axis */}
-      <Reveal variant="fade-up">
-        <div className="max-w-xl text-left">
-          <span
-            className="text-[11px] font-bold uppercase tracking-[0.24em]"
-            style={{ color: SAIL.oceanDeep }}
-          >
-            CORE VALUES
-          </span>
-          <h2
-            className="mt-4 font-display text-3xl font-extrabold leading-[1.1] md:text-[34px] lg:text-[40px]"
-            style={{ color: SAIL.oceanDeep }}
-          >
-            Six values that have outlasted every trend.
-          </h2>
-          <span
-            aria-hidden
-            className="mt-5 block h-[3px] w-16 rounded-full"
-            style={{ background: SAIL.sunriseCoral }}
-          />
-          <p className="mt-5 max-w-md text-sm leading-relaxed text-muted-foreground">
-            The compass behind every decision, every product, and every
-            partnership we build at VietGuys.
-          </p>
-        </div>
-      </Reveal>
-
-      {/* Readability wash behind tiles */}
+/** Accent gradient tile that takes the role of a "photo" in the mosaic */
+const AccentTile = ({
+  className = "",
+  giantIcon,
+  caption,
+}: {
+  className?: string;
+  giantIcon: React.ReactNode;
+  caption: string;
+}) => (
+  <Reveal variant="fade-up">
+    <InViewGroup
+      className={`relative overflow-hidden rounded-[20px] ${className}`}
+    >
       <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-[32%] -z-0 h-[60%]"
+        className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse at center, rgba(246,241,231,0.7) 0%, rgba(246,241,231,0.28) 60%, rgba(246,241,231,0) 100%)",
+            "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-deep)) 100%)",
         }}
       />
+      {/* subtle dotted texture */}
+      <div
+        aria-hidden
+        className="absolute inset-0 opacity-20"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle, rgba(255,255,255,0.35) 1px, transparent 1px)",
+          backgroundSize: "14px 14px",
+        }}
+      />
+      {/* red accent dot */}
+      <div
+        aria-hidden
+        className="absolute right-6 top-6 h-3 w-3 rounded-full"
+        style={{ background: "#cd3734", boxShadow: "0 0 0 6px rgba(205,55,52,0.18)" }}
+      />
+      {/* giant outline icon */}
+      <div className="absolute inset-0 flex items-center justify-center text-white/85">
+        {giantIcon}
+      </div>
+      <div className="relative flex h-full flex-col justify-end p-7">
+        <p className="font-display text-base font-semibold text-white/95">
+          {caption}
+        </p>
+        <span
+          aria-hidden
+          className="mt-2 block h-[2px] w-10 rounded-full bg-white/70"
+        />
+      </div>
+    </InViewGroup>
+  </Reveal>
+);
 
-      {/* 3×2 grid */}
-      <div className="relative mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
-        {values.map((v, i) => (
-          <ValueTile key={v.title} value={v} delay={(i % 3) * 80} />
-        ))}
+const GiantTarget = (
+  <DrawIcon
+    className="h-40 w-40 md:h-48 md:w-48"
+    strokeWidth={1.1}
+    viewBox="0 0 64 64"
+  >
+    <circle cx="32" cy="32" r="22" />
+    <circle cx="32" cy="32" r="14" />
+    <circle cx="32" cy="32" r="6" />
+    <line x1="32" y1="6" x2="32" y2="20" />
+    <line x1="32" y1="44" x2="32" y2="58" />
+    <line x1="6" y1="32" x2="20" y2="32" />
+    <line x1="44" y1="32" x2="58" y2="32" />
+  </DrawIcon>
+);
+
+export const AboutCoreValues = () => (
+  <section
+    className="group/section relative overflow-hidden py-20 md:py-28"
+    style={{
+      background:
+        "linear-gradient(180deg, hsl(0 0% 97%) 0%, hsl(0 0% 100%) 100%)",
+    }}
+  >
+    <SailboatBackdrop />
+
+    <div className="container-tight relative z-10">
+
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-12 lg:gap-6">
+        {/* Heading block — spans full width on mobile, sticky-feel side panel on desktop */}
+        <div className="sm:col-span-2 lg:col-span-4 lg:row-span-2 lg:self-stretch">
+          <Reveal variant="fade-up">
+            <div className="lg:sticky lg:top-24">
+              <span
+                className="text-[11px] font-bold uppercase tracking-[0.24em]"
+                style={{ color: "hsl(var(--primary-deep))" }}
+              >
+                CORE VALUES
+              </span>
+              <h2 className="mt-4 font-display text-3xl font-extrabold leading-[1.1] text-foreground md:text-[34px] lg:text-[40px]">
+                Six values that have outlasted every trend.
+              </h2>
+              <span
+                aria-hidden
+                className="mt-5 block h-[3px] w-16 rounded-full"
+                style={{ background: "#cd3734" }}
+              />
+              <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground">
+                The compass behind every decision, every product, and every
+                partnership we build at VietGuys.
+              </p>
+              {/* signature accent icon, anchors the section visually */}
+              <div className="mt-8 hidden lg:flex items-center justify-start text-primary/80">
+                {GiantTarget}
+              </div>
+            </div>
+          </Reveal>
+        </div>
+
+        {/* 2x2 grid of the first 4 values, right of heading on desktop */}
+        <div className="lg:col-span-4">
+          <ValueTile value={values[0]} delay={80} className="min-h-[240px]" />
+        </div>
+        <div className="lg:col-span-4">
+          <ValueTile value={values[1]} delay={160} className="min-h-[240px]" />
+        </div>
+        <div className="lg:col-span-4">
+          <ValueTile value={values[2]} delay={80} className="min-h-[240px]" />
+        </div>
+        <div className="lg:col-span-4">
+          <ValueTile value={values[3]} delay={160} className="min-h-[240px]" />
+        </div>
+
+        {/* Last 2 values — full-width row, split 6/6 on desktop */}
+        <div className="sm:col-span-2 lg:col-span-6">
+          <ValueTile value={values[4]} delay={80} className="min-h-[220px]" />
+        </div>
+        <div className="sm:col-span-2 lg:col-span-6">
+          <ValueTile value={values[5]} delay={160} className="min-h-[220px]" />
+        </div>
       </div>
     </div>
   </section>
