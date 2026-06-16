@@ -137,7 +137,6 @@ const values: Value[] = [
 ];
 
 const SailboatBackdrop = () => {
-  const boatRef = useRef<HTMLImageElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -152,14 +151,13 @@ const SailboatBackdrop = () => {
       raf = requestAnimationFrame(() => {
         raf = 0;
         const section = sectionRef.current;
-        const boat = boatRef.current;
-        if (!section || !boat) return;
+        if (!section) return;
         const rect = section.getBoundingClientRect();
         const viewportCenter = window.innerHeight / 2;
         const sectionCenter = rect.top + rect.height / 2;
         const delta = (viewportCenter - sectionCenter) * 0.08;
         const y = Math.max(-40, Math.min(40, delta));
-        boat.style.transform = `translate3d(0, ${y.toFixed(2)}px, 0)`;
+        section.style.setProperty("--boat-y", `${y.toFixed(2)}px`);
       });
     };
 
@@ -176,21 +174,28 @@ const SailboatBackdrop = () => {
       ref={sectionRef}
       aria-hidden
       className="pointer-events-none absolute inset-0 overflow-hidden"
+      style={{ "--boat-y": "0px" } as React.CSSProperties}
     >
-      {/* Sailboat key visual — right side, desktop+ */}
-      <img
-        ref={boatRef}
-        src={sailboatAsset.url}
-        alt=""
-        loading="lazy"
-        className="absolute right-0 bottom-0 hidden md:block h-full w-auto max-w-[60%] object-cover object-left opacity-80 transition-transform duration-700 ease-out will-change-transform group-hover/section:-translate-y-2 group-hover/section:scale-[1.015]"
-        style={{
-          maskImage:
-            "linear-gradient(to left, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
-          WebkitMaskImage:
-            "linear-gradient(to left, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
-        }}
-      />
+      {/* Sailboat key visual — bottom-left, desktop+ */}
+      <div
+        className="absolute left-0 bottom-0 hidden md:block"
+        style={{ transform: "scaleX(-1)" }}
+      >
+        <img
+          src={sailboatAsset.url}
+          alt=""
+          loading="lazy"
+          className="h-auto max-h-[78%] w-auto max-w-[50%] object-contain opacity-80 transition-transform duration-700 ease-out"
+          style={{
+            maskImage:
+              "linear-gradient(to right, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
+            WebkitMaskImage:
+              "linear-gradient(to right, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
+            transform:
+              "translate3d(0, var(--boat-y, 0px), 0)",
+          }}
+        />
+      </div>
 
       {/* Wave that visually connects the bottom row of tiles */}
       <svg
@@ -199,7 +204,7 @@ const SailboatBackdrop = () => {
         className="absolute inset-x-0 bottom-[6%] h-[260px] w-full opacity-70"
       >
         <defs>
-          <linearGradient id="waveStroke" x1="0" y1="0" x2="1" y2="0">
+          <linearGradient id="waveStroke" x1="1" y1="0" x2="0" y2="0">
             <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0" />
             <stop offset="35%" stopColor="hsl(var(--primary))" stopOpacity="0.55" />
             <stop offset="100%" stopColor="hsl(var(--primary-deep))" stopOpacity="0.85" />
@@ -222,15 +227,8 @@ const SailboatBackdrop = () => {
         />
       </svg>
 
-      {/* Readability overlay — left side & bottom */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(to right, hsl(0 0% 100% / 0.96) 0%, hsl(0 0% 100% / 0.78) 45%, hsl(0 0% 100% / 0.25) 75%, hsl(0 0% 100% / 0.05) 100%)",
-        }}
-      />
-      <div className="absolute inset-x-0 bottom-0 h-[40%] bg-gradient-to-t from-white/85 via-white/40 to-transparent" />
+      {/* Bottom readability overlay for tiles */}
+      <div className="absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-t from-white/85 via-white/40 to-transparent" />
     </div>
   );
 };
