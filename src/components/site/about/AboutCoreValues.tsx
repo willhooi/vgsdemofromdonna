@@ -337,21 +337,6 @@ const AccentTile = ({
   </Reveal>
 );
 
-const GiantTarget = (
-  <DrawIcon
-    className="h-40 w-40 md:h-48 md:w-48"
-    strokeWidth={1.1}
-    viewBox="0 0 64 64"
-  >
-    <circle cx="32" cy="32" r="22" />
-    <circle cx="32" cy="32" r="14" />
-    <circle cx="32" cy="32" r="6" />
-    <line x1="32" y1="6" x2="32" y2="20" />
-    <line x1="32" y1="44" x2="32" y2="58" />
-    <line x1="6" y1="32" x2="20" y2="32" />
-    <line x1="44" y1="32" x2="58" y2="32" />
-  </DrawIcon>
-);
 
 export const AboutCoreValues = () => (
   <section
