@@ -407,14 +407,5 @@ export const AboutCoreValues = () => (
         </div>
       </div>
     </div>
-
-    {/* Apply common tile style via CSS attribute */}
-    <style>{`
-      section [data-tile="value"] {
-        background: ${tileStyle.background};
-        border-color: ${tileStyle.borderColor};
-        box-shadow: ${tileStyle.boxShadow};
-      }
-    `}</style>
   </section>
 );
