@@ -196,14 +196,15 @@ const HorizonBand = () => {
         }}
       />
 
-      {/* Sailboat — bow pointing right ("forward"), nudged left of center */}
+      {/* Sailboat — anchored LEFT, bow pointing right ("forward") */}
       <img
         ref={boatRef}
         src={sailboatAsset.url}
         alt=""
         loading="lazy"
-        className="absolute bottom-[28%] left-[6%] hidden h-[60%] max-h-[240px] w-auto opacity-90 transition-transform duration-700 ease-out will-change-transform md:block md:left-[8%] lg:left-[12%] group-hover/section:translate-y-[-6px]"
+        className="absolute bottom-[26%] left-[3%] hidden h-[72%] max-h-[280px] w-auto opacity-95 transition-transform duration-700 ease-out will-change-transform md:block md:left-[5%] lg:left-[8%] group-hover/section:translate-y-[-8px] group-hover/section:scale-[1.02]"
       />
+
 
       {/* Wave — full-width horizon line, fades to mint at the bottom to bridge into Mission/Vision */}
       <svg
@@ -265,10 +266,12 @@ const ValueTile = ({
     <InViewGroup
       className="relative flex h-full min-h-[230px] flex-col justify-between overflow-hidden rounded-[20px] border p-7 backdrop-blur-[2px] transition-all duration-300 hover:-translate-y-1.5"
       style={{
-        background: "rgba(246,241,231,0.78)",
-        borderColor: SAIL.horizonTeal + "38",
-        boxShadow: "0 10px 30px -18px " + SAIL.oceanDeep + "55",
+        background: "rgba(246,241,231,0.92)",
+        borderColor: SAIL.horizonTeal + "44",
+        boxShadow:
+          "0 10px 30px -18px " + SAIL.oceanDeep + "66, inset 0 1px 0 rgba(255,255,255,0.6)",
       }}
+
     >
       <div
         aria-hidden
@@ -339,12 +342,23 @@ export const AboutCoreValues = () => (
         </div>
       </Reveal>
 
+      {/* Readability overlay — soft cream wash behind tiles so text stays crisp over boat/waves */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-[28%] -z-0 h-[55%]"
+        style={{
+          background:
+            "radial-gradient(ellipse at center, rgba(246,241,231,0.55) 0%, rgba(246,241,231,0.2) 60%, rgba(246,241,231,0) 100%)",
+        }}
+      />
+
       {/* 3×2 grid — symmetric, evenly weighted */}
       <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
         {values.map((v, i) => (
           <ValueTile key={v.title} value={v} delay={(i % 3) * 80} />
         ))}
       </div>
+
     </div>
 
     {/* Full-width horizon — sailboat + waves at the bottom */}
