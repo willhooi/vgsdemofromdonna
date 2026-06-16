@@ -3,7 +3,17 @@ import { Reveal } from "@/components/motion/Reveal";
 import sailboatAsset from "@/assets/sailboat-19.png.asset.json";
 
 
-const ICON_STROKE = "hsl(var(--primary))";
+// "Setting sail forward" palette — scoped to this section
+const SAIL = {
+  oceanDeep: "#0B2C4A",
+  horizonTeal: "#2A8C9E",
+  sailWhite: "#F6F1E7",
+  mist: "#E3ECEF",
+  sunriseCoral: "#E55A3C",
+  goldSpark: "#F2B441",
+};
+
+const ICON_STROKE = SAIL.oceanDeep;
 
 const DrawIcon = ({
   children,
@@ -177,60 +187,69 @@ const SailboatBackdrop = () => {
       aria-hidden
       className="pointer-events-none absolute inset-0 overflow-hidden"
     >
-      {/* Sailboat key visual — right side, desktop+ */}
+      {/* Sailboat key visual — LEFT side, desktop+, mirrored so bow points forward into layout */}
       <img
         ref={boatRef}
         src={sailboatAsset.url}
         alt=""
         loading="lazy"
-        className="absolute right-0 bottom-0 hidden md:block h-full w-auto max-w-[60%] object-cover object-left opacity-80 transition-transform duration-700 ease-out will-change-transform group-hover/section:-translate-y-2 group-hover/section:scale-[1.015]"
+        className="absolute left-0 bottom-0 hidden md:block h-full w-auto max-w-[60%] object-cover object-right opacity-85 transition-transform duration-700 ease-out will-change-transform [transform:scaleX(-1)] group-hover/section:[transform:scaleX(-1)_translateY(-8px)_scale(1.015)]"
         style={{
           maskImage:
-            "linear-gradient(to left, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
+            "linear-gradient(to right, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
           WebkitMaskImage:
-            "linear-gradient(to left, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
+            "linear-gradient(to right, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
         }}
       />
 
-      {/* Wave that visually connects the bottom row of tiles */}
+      {/* Wave — travels from ocean deep (left) toward sunrise (right): the "forward" direction */}
       <svg
         viewBox="0 0 1440 220"
         preserveAspectRatio="none"
-        className="absolute inset-x-0 bottom-[6%] h-[260px] w-full opacity-70"
+        className="absolute inset-x-0 bottom-[6%] h-[260px] w-full opacity-80"
       >
         <defs>
           <linearGradient id="waveStroke" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0" />
-            <stop offset="35%" stopColor="hsl(var(--primary))" stopOpacity="0.55" />
-            <stop offset="100%" stopColor="hsl(var(--primary-deep))" stopOpacity="0.85" />
+            <stop offset="0%" stopColor={SAIL.oceanDeep} stopOpacity="0.9" />
+            <stop offset="55%" stopColor={SAIL.horizonTeal} stopOpacity="0.75" />
+            <stop offset="100%" stopColor={SAIL.sunriseCoral} stopOpacity="0.85" />
           </linearGradient>
         </defs>
         <path
           d="M0,140 C220,90 420,180 700,130 C960,85 1180,170 1440,120"
           fill="none"
           stroke="url(#waveStroke)"
-          strokeWidth="1.6"
+          strokeWidth="1.8"
           strokeLinecap="round"
         />
         <path
           d="M0,170 C260,130 500,200 760,160 C1020,120 1220,200 1440,160"
           fill="none"
-          stroke="hsl(var(--primary) / 0.35)"
+          stroke={SAIL.horizonTeal}
+          strokeOpacity="0.45"
           strokeWidth="1"
           strokeDasharray="2 6"
           className="transition-[stroke-dashoffset] duration-[2400ms] ease-linear group-hover/section:[stroke-dashoffset:-40]"
         />
+        {/* sunrise spark on horizon */}
+        <circle cx="1380" cy="118" r="3.5" fill={SAIL.goldSpark} opacity="0.9" />
       </svg>
 
-      {/* Readability overlay — left side & bottom */}
+      {/* Readability overlay — strong on the RIGHT (over tiles), warm sail-cloth tone */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            "linear-gradient(to right, hsl(0 0% 100% / 0.96) 0%, hsl(0 0% 100% / 0.78) 45%, hsl(0 0% 100% / 0.25) 75%, hsl(0 0% 100% / 0.05) 100%)",
+            "linear-gradient(to left, " + SAIL.sailWhite + " 0%, rgba(246,241,231,0.85) 45%, rgba(246,241,231,0.25) 75%, rgba(246,241,231,0.05) 100%)",
         }}
       />
-      <div className="absolute inset-x-0 bottom-0 h-[40%] bg-gradient-to-t from-white/85 via-white/40 to-transparent" />
+      <div
+        className="absolute inset-x-0 bottom-0 h-[40%]"
+        style={{
+          background:
+            "linear-gradient(to top, rgba(246,241,231,0.9), rgba(246,241,231,0.4), transparent)",
+        }}
+      />
     </div>
   );
 };
@@ -247,32 +266,32 @@ const ValueTile = ({
 }) => (
   <Reveal variant="fade-up" delay={delay}>
     <InViewGroup
-      className={`relative flex h-full flex-col justify-between overflow-hidden rounded-[20px] border p-7 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_40px_-20px_hsl(var(--primary)/0.35)] ${className}`}
+      className={`relative flex h-full flex-col justify-between overflow-hidden rounded-[20px] border p-7 backdrop-blur-[2px] transition-all duration-300 hover:-translate-y-1.5 ${className}`}
       style={{
-        background: "hsl(var(--primary) / 0.05)",
-        borderColor: "hsl(var(--primary) / 0.18)",
-        boxShadow: "0 10px 30px -18px hsl(var(--primary) / 0.25)",
+        background: "rgba(246,241,231,0.72)",
+        borderColor: SAIL.horizonTeal + "38",
+        boxShadow: "0 10px 30px -18px " + SAIL.oceanDeep + "55",
       }}
     >
       <div
         aria-hidden
-        className="pointer-events-none absolute -right-6 -top-6 h-28 w-28 rounded-full"
-        style={{ background: "hsl(var(--primary) / 0.08)" }}
+        className="pointer-events-none absolute -right-6 -top-6 h-28 w-28 rounded-full transition-colors duration-300 group-hover:[background:rgba(242,180,65,0.22)]"
+        style={{ background: SAIL.horizonTeal + "18" }}
       />
       <div
         className="relative flex h-[52px] w-[52px] items-center justify-center rounded-full"
-        style={{ background: "hsl(var(--primary) / 0.12)" }}
+        style={{ background: SAIL.horizonTeal + "22" }}
       >
         {value.icon}
       </div>
       <div className="relative mt-6">
-        <h3 className="font-display text-lg font-bold text-foreground">
+        <h3 className="font-display text-lg font-bold" style={{ color: SAIL.oceanDeep }}>
           {value.title}
         </h3>
         <span
           aria-hidden
           className="mt-3 block h-[2px] w-8 rounded-full"
-          style={{ background: "#cd3734" }}
+          style={{ background: SAIL.sunriseCoral }}
         />
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
           {value.body}
@@ -337,28 +356,12 @@ const AccentTile = ({
   </Reveal>
 );
 
-const GiantTarget = (
-  <DrawIcon
-    className="h-40 w-40 md:h-48 md:w-48"
-    strokeWidth={1.1}
-    viewBox="0 0 64 64"
-  >
-    <circle cx="32" cy="32" r="22" />
-    <circle cx="32" cy="32" r="14" />
-    <circle cx="32" cy="32" r="6" />
-    <line x1="32" y1="6" x2="32" y2="20" />
-    <line x1="32" y1="44" x2="32" y2="58" />
-    <line x1="6" y1="32" x2="20" y2="32" />
-    <line x1="44" y1="32" x2="58" y2="32" />
-  </DrawIcon>
-);
-
 export const AboutCoreValues = () => (
   <section
     className="group/section relative overflow-hidden py-20 md:py-28"
     style={{
       background:
-        "linear-gradient(180deg, hsl(0 0% 97%) 0%, hsl(0 0% 100%) 100%)",
+        "linear-gradient(180deg, " + SAIL.sailWhite + " 0%, #FFFFFF 60%, " + SAIL.mist + " 100%)",
     }}
   >
     <SailboatBackdrop />
@@ -366,32 +369,28 @@ export const AboutCoreValues = () => (
     <div className="container-tight relative z-10">
 
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-12 lg:gap-6">
-        {/* Heading block — spans full width on mobile, sticky-feel side panel on desktop */}
-        <div className="sm:col-span-2 lg:col-span-4 lg:row-span-2 lg:self-stretch">
+        {/* Heading block — RIGHT on desktop to balance the sailboat on the LEFT */}
+        <div className="sm:col-span-2 lg:col-span-4 lg:col-start-9 lg:row-span-2 lg:self-stretch lg:order-last">
           <Reveal variant="fade-up">
             <div className="lg:sticky lg:top-24">
               <span
                 className="text-[11px] font-bold uppercase tracking-[0.24em]"
-                style={{ color: "hsl(var(--primary-deep))" }}
+                style={{ color: SAIL.oceanDeep }}
               >
                 CORE VALUES
               </span>
-              <h2 className="mt-4 font-display text-3xl font-extrabold leading-[1.1] text-foreground md:text-[34px] lg:text-[40px]">
+              <h2 className="mt-4 font-display text-3xl font-extrabold leading-[1.1] md:text-[34px] lg:text-[40px]" style={{ color: SAIL.oceanDeep }}>
                 Six values that have outlasted every trend.
               </h2>
               <span
                 aria-hidden
                 className="mt-5 block h-[3px] w-16 rounded-full"
-                style={{ background: "#cd3734" }}
+                style={{ background: SAIL.sunriseCoral }}
               />
               <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground">
                 The compass behind every decision, every product, and every
                 partnership we build at VietGuys.
               </p>
-              {/* signature accent icon, anchors the section visually */}
-              <div className="mt-8 hidden lg:flex items-center justify-start text-primary/80">
-                {GiantTarget}
-              </div>
             </div>
           </Reveal>
         </div>
