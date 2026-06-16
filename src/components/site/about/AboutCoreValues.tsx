@@ -196,14 +196,15 @@ const HorizonBand = () => {
         }}
       />
 
-      {/* Sailboat — bow pointing right ("forward"), nudged left of center */}
+      {/* Sailboat — anchored LEFT, bow pointing right ("forward") */}
       <img
         ref={boatRef}
         src={sailboatAsset.url}
         alt=""
         loading="lazy"
-        className="absolute bottom-[28%] left-[6%] hidden h-[60%] max-h-[240px] w-auto opacity-90 transition-transform duration-700 ease-out will-change-transform md:block md:left-[8%] lg:left-[12%] group-hover/section:translate-y-[-6px]"
+        className="absolute bottom-[26%] left-[3%] hidden h-[72%] max-h-[280px] w-auto opacity-95 transition-transform duration-700 ease-out will-change-transform md:block md:left-[5%] lg:left-[8%] group-hover/section:translate-y-[-8px] group-hover/section:scale-[1.02]"
       />
+
 
       {/* Wave — full-width horizon line, fades to mint at the bottom to bridge into Mission/Vision */}
       <svg
