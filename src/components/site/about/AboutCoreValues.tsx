@@ -41,7 +41,7 @@ const values = [
   },
   {
     title: "Integrity",
-    body: "We act with honesty, build trust through transparency, and create long-term value together.",
+    body: "We act with integrity, build trust through transparency, and create long-term value together.",
     icon: (
       <DrawIcon>
         <polygon points="12,3 14.5,9 21,9.5 16,13.5 17.8,20 12,16.5 6.2,20 8,13.5 3,9.5 9.5,9" />
@@ -70,8 +70,8 @@ const values = [
     ),
   },
   {
-    title: "Innovation",
-    body: "From SMS to AI — we adopt what makes customer engagement smarter, faster, safer.",
+    title: "Honesty",
+    body: "We speak truthfully, act responsibly, and uphold respect in all relationships.",
     icon: (
       <DrawIcon>
         <path d="M3 12a9 9 0 0 1 15.5-6.2" />
