@@ -1,62 +1,56 @@
-## Mục tiêu
-Redesign section **Core Values** trong `src/components/site/about/AboutCoreValues.tsx` từ grid 3 cột đều nhau hiện tại → **asymmetric bento mosaic** lấy cảm hứng từ trang vietguys.biz/en/about-us/vietguys, vẫn giữ VietGuys color palette (xanh lá primary + đỏ accent).
+## Goal
+Replace the current decorative compass (`NetworkArt`) in the Core Values section with the stylized "sailboat 19" key visual, positioned on the right with a wave that visually links the bottom two value tiles. Add a readability overlay and subtle parallax/hover motion.
 
-## Phân tích layout tham chiếu (vietguys.biz)
-- Tiêu đề **"Core Values"** đặt **lệch trái**, không center
-- Nội dung dàn theo **mosaic 3 cột bất đối xứng**: panel chữ (nền xám/tint) xen kẽ với **ảnh thật** team/sự kiện
-- **Icon outline khổng lồ** (cog-with-people, target, handshake…) đóng vai trò **divider** giữa các hàng — tạo nhịp thị giác mạnh
-- Mỗi value chiếm 1 ô tint, ảnh chiếm các ô còn lại → cảm giác "kể chuyện" thay vì "liệt kê thẻ"
+## Changes (1 file: `src/components/site/about/AboutCoreValues.tsx`)
 
-## Layout mới (6 values, không cần ảnh thật)
-Vì hiện tại chưa có ảnh team riêng cho từng value, dùng **bento grid 12-col asymmetric** kết hợp 3 chất liệu:
-1. **Value cards** (text + icon nhỏ) — nền tint xanh nhạt
-2. **Accent tiles** (ảnh/illustration hoặc gradient + giant icon outline) — đóng vai trò "ảnh" trong mosaic
-3. **Big outline icon dividers** giữa 2 hàng — cog-people / lightbulb / handshake stroke-only, opacity thấp, scale lớn
+### 1. Remove old decoration
+- Delete the `NetworkArt` component and its usage inside `<AboutCoreValues>`.
 
-### Cấu trúc lưới (desktop, 12 cột)
-```
-┌─────────────────────┬──────────────────────────────────┐
-│  CORE VALUES        │  People first          (col 5-8) │
-│  (label + heading,  │──────────────────────────────────┤
-│  col 1-4, sticky)   │  [photo tile]   │  Quality       │
-│                     │   (col 5-8)     │  (col 9-12)    │
-├─────────────────────┴──────────────────────────────────┤
-│             ⚙ giant divider icon (full width)          │
-├──────────────┬─────────────────────┬───────────────────┤
-│ Integrity    │  [accent tile]      │  Accountability   │
-│ (col 1-4)    │   (col 5-8)         │  (col 9-12)       │
-├──────────────┴─────────────────────┴───────────────────┤
-│             ✦ giant divider icon (full width)          │
-├────────────────────────┬───────────────────────────────┤
-│ Creativity & Innovation│  Honesty       (col 7-12)     │
-│ (col 1-6, wider)       │                               │
-└────────────────────────┴───────────────────────────────┘
+### 2. Upload the sailboat asset
+- Upload the user's sailboat-19 image via `lovable-assets create` → save pointer to `src/assets/sailboat-19.png.asset.json`.
+- (If you can confirm which uploaded file is the sailboat, please tell me the filename; otherwise I'll use the most recent matching upload.)
+
+### 3. New background layer (inside `<section>`, behind content)
+Stacked absolutely-positioned layers:
+
+```text
+┌─ section ──────────────────────────────────────────┐
+│  [base gradient bg]                                │
+│  [sailboat <img>]  ── right side, ~55% width,      │
+│                       bottom-aligned, parallax     │
+│  [SVG wave]        ── full width, sits across the  │
+│                       bottom row of value tiles    │
+│  [overlay]         ── white→transparent gradient   │
+│                       from left + soft blur mask   │
+│                       on the right to keep text    │
+│                       readable                     │
+│  [content grid]    ── existing tiles, z-10         │
+└────────────────────────────────────────────────────┘
 ```
 
-### Chất liệu visual
-- **Value tile**: nền `hsl(var(--primary) / 0.06)`, border `hsl(var(--primary) / 0.18)`, padding lớn, icon stroke ở góc trên, title font-display, body muted. Hover: nâng nhẹ + viền đậm hơn.
-- **Accent tile** (thay ảnh): gradient mềm `primary → primary-deep` + 1 giant outline icon SVG ở giữa (opacity ~25%), góc red accent dot (`#cd3734`) như network art hiện tại để đồng bộ với section khác.
-- **Divider icon row**: 1 SVG outline stroke-only chiếm chiều cao ~120px, opacity 0.10, primary color, căn giữa, animation `stroke-dasharray` draw-in khi vào viewport (giữ hệ thống animation `DrawIcon` hiện có).
-- **Sticky title block** (col 1-4 hàng đầu): label "CORE VALUES" + heading lệch trái, dưới có 1 đoạn intro ngắn 1 câu + 1 line strike đỏ accent ngắn dưới heading.
+Implementation notes:
+- Sailboat: `<img>` absolutely positioned `right-0 bottom-0 w-[55%] max-w-[640px] opacity-70 mix-blend-multiply` so it tints with the page, hidden `below md` (`hidden md:block`) to keep mobile clean.
+- Wave: inline SVG (`viewBox="0 0 1440 200"`) absolutely positioned across the bottom ~280px of the section, stroked in `hsl(var(--primary)/0.35)` with a softer secondary wave underneath; sits behind tiles but visually "carries" the bottom two value tiles.
+- Overlay: 
+  - `bg-gradient-to-r from-white via-white/85 to-transparent` covering left 60% (ensures heading + left column tiles stay crisp).
+  - A second `bg-gradient-to-t from-white/70 to-transparent` at the bottom so the wave fades into the tiles instead of cutting them.
 
-### Mobile (< md)
-- Stack 1 cột: title → value → divider icon → value → … 
-- Accent tile co lại thành banner ngang ngắn (h-32) hoặc ẩn để giữ gọn
+### 4. Parallax + hover motion
+- Sailboat parallax: a lightweight `useEffect` on the section that listens to `scroll` (passive) and applies `transform: translate3d(0, ${y}px, 0)` to the boat via a ref; `y = (sectionTop - viewportCenter) * 0.08`, clamped to ±40px. Respects `prefers-reduced-motion`.
+- Section hover: on `group-hover` of `<section className="group">`, the boat gets `transition-transform duration-700 group-hover:-translate-y-2 group-hover:scale-[1.02]` and the wave path gets a slow `stroke-dashoffset` drift for a "gentle sailing" feel.
 
-### Color palette giữ nguyên
-- Primary green: `hsl(var(--primary))`
-- Primary deep: `hsl(var(--primary-deep))`
-- Red accent: `#cd3734` (dot/strike)
-- Background section: gradient nhẹ `hsl(0 0% 98%) → white` (giữ như hiện tại) để vẫn nổi giữa các section khác
+### 5. Responsive
+- `md` and up: full background composition active.
+- Mobile (`<md`): hide sailboat + wave (or keep wave only at low opacity), drop overlay; tiles render on plain gradient bg like today. This avoids cluttering small screens.
 
-### Animation
-- Giữ component `Reveal` + `DrawIcon` hiện có
-- Stagger delay theo thứ tự đọc zigzag của mosaic (không đều theo index nữa)
-- Giant divider icons draw-in khi scroll tới
+### 6. Z-index
+- Background layers: `z-0`
+- Overlay: `z-[1]`
+- Content grid wrapper: add `relative z-10`
 
-## File đụng tới
-- `src/components/site/about/AboutCoreValues.tsx` — refactor toàn bộ JSX layout + bổ sung `GiantDividerIcon`, `AccentTile` components nội bộ. Mảng `values` giữ nguyên nội dung 6 mục.
+## Out of scope
+- No changes to the value tile content, order, or grid breakpoints.
+- No new dependencies.
 
-## Câu hỏi trước khi build
-1. **Accent tile**: dùng **gradient + giant outline icon** (an toàn, đồng bộ brand), hay anh muốn mình **generate ảnh minh hoạ** (team/office abstract) để chèn vào như layout tham chiếu?
-2. **Big divider icons**: dùng 2 icon (giữa hàng 1-2 và hàng 2-3) hay chỉ 1 icon duy nhất ở giữa section?
+## Open question
+Please confirm the source filename of the sailboat key visual you uploaded (e.g. `image-XX.png` or one of the UUID-named PNGs), so I upload the correct one to the CDN.

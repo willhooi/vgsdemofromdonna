@@ -1,4 +1,7 @@
+import { useEffect, useRef } from "react";
 import { Reveal } from "@/components/motion/Reveal";
+import sailboatAsset from "@/assets/sailboat-19.png.asset.json";
+
 
 const ICON_STROKE = "hsl(var(--primary))";
 
@@ -133,31 +136,105 @@ const values: Value[] = [
   },
 ];
 
-const NetworkArt = () => (
-  <svg
-    viewBox="0 0 280 200"
-    aria-hidden
-    className="pointer-events-none absolute right-0 top-0 h-[220px] w-[300px] opacity-55"
-  >
-    <g stroke="hsl(var(--primary))" strokeWidth="0.8" opacity="0.6" fill="none">
-      <line x1="40" y1="40" x2="120" y2="80" />
-      <line x1="120" y1="80" x2="220" y2="50" />
-      <line x1="220" y1="50" x2="260" y2="120" />
-      <line x1="120" y1="80" x2="180" y2="150" />
-      <line x1="40" y1="40" x2="80" y2="140" />
-      <line x1="80" y1="140" x2="180" y2="150" />
-    </g>
-    <g fill="hsl(var(--primary))">
-      <circle cx="40" cy="40" r="3" />
-      <circle cx="120" cy="80" r="4" />
-      <circle cx="220" cy="50" r="3" />
-      <circle cx="260" cy="120" r="3" />
-      <circle cx="180" cy="150" r="3" />
-      <circle cx="80" cy="140" r="2.5" />
-    </g>
-    <circle cx="230" cy="40" r="14" fill="#cd3734" opacity="0.18" />
-  </svg>
-);
+const SailboatBackdrop = () => {
+  const boatRef = useRef<HTMLImageElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (prefersReduced) return;
+
+    let raf = 0;
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        const section = sectionRef.current;
+        const boat = boatRef.current;
+        if (!section || !boat) return;
+        const rect = section.getBoundingClientRect();
+        const viewportCenter = window.innerHeight / 2;
+        const sectionCenter = rect.top + rect.height / 2;
+        const delta = (viewportCenter - sectionCenter) * 0.08;
+        const y = Math.max(-40, Math.min(40, delta));
+        boat.style.transform = `translate3d(0, ${y.toFixed(2)}px, 0)`;
+      });
+    };
+
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  return (
+    <div
+      ref={sectionRef}
+      aria-hidden
+      className="pointer-events-none absolute inset-0 overflow-hidden"
+    >
+      {/* Sailboat key visual — right side, desktop+ */}
+      <img
+        ref={boatRef}
+        src={sailboatAsset.url}
+        alt=""
+        loading="lazy"
+        className="absolute right-0 bottom-0 hidden md:block h-full w-auto max-w-[60%] object-cover object-left opacity-80 transition-transform duration-700 ease-out will-change-transform group-hover/section:-translate-y-2 group-hover/section:scale-[1.015]"
+        style={{
+          maskImage:
+            "linear-gradient(to left, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
+          WebkitMaskImage:
+            "linear-gradient(to left, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
+        }}
+      />
+
+      {/* Wave that visually connects the bottom row of tiles */}
+      <svg
+        viewBox="0 0 1440 220"
+        preserveAspectRatio="none"
+        className="absolute inset-x-0 bottom-[6%] h-[260px] w-full opacity-70"
+      >
+        <defs>
+          <linearGradient id="waveStroke" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0" />
+            <stop offset="35%" stopColor="hsl(var(--primary))" stopOpacity="0.55" />
+            <stop offset="100%" stopColor="hsl(var(--primary-deep))" stopOpacity="0.85" />
+          </linearGradient>
+        </defs>
+        <path
+          d="M0,140 C220,90 420,180 700,130 C960,85 1180,170 1440,120"
+          fill="none"
+          stroke="url(#waveStroke)"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+        />
+        <path
+          d="M0,170 C260,130 500,200 760,160 C1020,120 1220,200 1440,160"
+          fill="none"
+          stroke="hsl(var(--primary) / 0.35)"
+          strokeWidth="1"
+          strokeDasharray="2 6"
+          className="transition-[stroke-dashoffset] duration-[2400ms] ease-linear group-hover/section:[stroke-dashoffset:-40]"
+        />
+      </svg>
+
+      {/* Readability overlay — left side & bottom */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(to right, hsl(0 0% 100% / 0.96) 0%, hsl(0 0% 100% / 0.78) 45%, hsl(0 0% 100% / 0.25) 75%, hsl(0 0% 100% / 0.05) 100%)",
+        }}
+      />
+      <div className="absolute inset-x-0 bottom-0 h-[40%] bg-gradient-to-t from-white/85 via-white/40 to-transparent" />
+    </div>
+  );
+};
+
 
 const ValueTile = ({
   value,
@@ -278,15 +355,16 @@ const GiantTarget = (
 
 export const AboutCoreValues = () => (
   <section
-    className="relative overflow-hidden py-20 md:py-28"
+    className="group/section relative overflow-hidden py-20 md:py-28"
     style={{
       background:
         "linear-gradient(180deg, hsl(0 0% 97%) 0%, hsl(0 0% 100%) 100%)",
     }}
   >
-    <NetworkArt />
+    <SailboatBackdrop />
 
-    <div className="container-tight relative">
+    <div className="container-tight relative z-10">
+
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-12 lg:gap-6">
         {/* Heading block — spans full width on mobile, sticky-feel side panel on desktop */}
         <div className="sm:col-span-2 lg:col-span-4 lg:row-span-2 lg:self-stretch">
