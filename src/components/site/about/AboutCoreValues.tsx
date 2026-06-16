@@ -2,21 +2,68 @@ import { Reveal } from "@/components/motion/Reveal";
 
 const ICON_STROKE = "hsl(var(--primary))";
 
-const DrawIcon = ({ children }: { children: React.ReactNode }) => (
+const DrawIcon = ({
+  children,
+  className = "h-6 w-6",
+  strokeWidth = 1.75,
+  viewBox = "0 0 24 24",
+}: {
+  children: React.ReactNode;
+  className?: string;
+  strokeWidth?: number;
+  viewBox?: string;
+}) => (
   <svg
-    viewBox="0 0 24 24"
+    viewBox={viewBox}
     fill="none"
     stroke={ICON_STROKE}
-    strokeWidth={1.75}
+    strokeWidth={strokeWidth}
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="h-6 w-6 [&_path,&_circle,&_line,&_polyline,&_rect,&_polygon]:[stroke-dasharray:120] [&_path,&_circle,&_line,&_polyline,&_rect,&_polygon]:[stroke-dashoffset:120] group-data-[in=true]:[&_path]:[stroke-dashoffset:0] group-data-[in=true]:[&_circle]:[stroke-dashoffset:0] group-data-[in=true]:[&_line]:[stroke-dashoffset:0] group-data-[in=true]:[&_polyline]:[stroke-dashoffset:0] group-data-[in=true]:[&_rect]:[stroke-dashoffset:0] group-data-[in=true]:[&_polygon]:[stroke-dashoffset:0] [&_*]:transition-[stroke-dashoffset] [&_*]:duration-[1600ms] [&_*]:ease-out"
+    className={`${className} [&_path,&_circle,&_line,&_polyline,&_rect,&_polygon]:[stroke-dasharray:240] [&_path,&_circle,&_line,&_polyline,&_rect,&_polygon]:[stroke-dashoffset:240] group-data-[in=true]:[&_path]:[stroke-dashoffset:0] group-data-[in=true]:[&_circle]:[stroke-dashoffset:0] group-data-[in=true]:[&_line]:[stroke-dashoffset:0] group-data-[in=true]:[&_polyline]:[stroke-dashoffset:0] group-data-[in=true]:[&_rect]:[stroke-dashoffset:0] group-data-[in=true]:[&_polygon]:[stroke-dashoffset:0] [&_*]:transition-[stroke-dashoffset] [&_*]:duration-[1800ms] [&_*]:ease-out`}
   >
     {children}
   </svg>
 );
 
-const values = [
+/** Observer wrapper to trigger DrawIcon animation when in viewport */
+const InViewGroup = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => (
+  <div
+    data-in="false"
+    ref={(el) => {
+      if (!el) return;
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              el.setAttribute("data-in", "true");
+              io.disconnect();
+            }
+          });
+        },
+        { threshold: 0.25 }
+      );
+      io.observe(el);
+    }}
+    className={`group ${className ?? ""}`}
+  >
+    {children}
+  </div>
+);
+
+type Value = {
+  title: string;
+  body: string;
+  icon: React.ReactNode;
+};
+
+const values: Value[] = [
   {
     title: "People first",
     body: "We value every individual, respect every contribution, and empower each other to succeed together.",
@@ -61,7 +108,7 @@ const values = [
     ),
   },
   {
-    title: "Creativity\n& Innovation",
+    title: "Creativity & Innovation",
     body: "We never rest on our laurels. We always strive to be ahead of the curve.",
     icon: (
       <DrawIcon>
@@ -109,66 +156,262 @@ const NetworkArt = () => (
   </svg>
 );
 
+const ValueTile = ({
+  value,
+  delay = 0,
+  className = "",
+}: {
+  value: Value;
+  delay?: number;
+  className?: string;
+}) => (
+  <Reveal variant="fade-up" delay={delay}>
+    <InViewGroup
+      className={`relative flex h-full flex-col justify-between overflow-hidden rounded-[20px] border p-7 transition-all duration-300 hover:-translate-y-1.5 ${className}`}
+    >
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-6 -top-6 h-28 w-28 rounded-full"
+        style={{ background: "hsl(var(--primary) / 0.08)" }}
+      />
+      <div
+        className="relative flex h-[52px] w-[52px] items-center justify-center rounded-full"
+        style={{ background: "hsl(var(--primary) / 0.12)" }}
+      >
+        {value.icon}
+      </div>
+      <div className="relative mt-6">
+        <h3 className="font-display text-lg font-bold text-foreground">
+          {value.title}
+        </h3>
+        <span
+          aria-hidden
+          className="mt-3 block h-[2px] w-8 rounded-full"
+          style={{ background: "#cd3734" }}
+        />
+        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+          {value.body}
+        </p>
+      </div>
+    </InViewGroup>
+  </Reveal>
+);
+
+const tileStyle = {
+  background: "hsl(var(--primary) / 0.05)",
+  borderColor: "hsl(var(--primary) / 0.18)",
+  boxShadow: "0 10px 30px -18px hsl(var(--primary) / 0.25)",
+};
+
+/** Accent gradient tile that takes the role of a "photo" in the mosaic */
+const AccentTile = ({
+  className = "",
+  giantIcon,
+  caption,
+}: {
+  className?: string;
+  giantIcon: React.ReactNode;
+  caption: string;
+}) => (
+  <Reveal variant="fade-up">
+    <InViewGroup
+      className={`relative overflow-hidden rounded-[20px] ${className}`}
+    >
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary-deep)) 100%)",
+        }}
+      />
+      {/* subtle dotted texture */}
+      <div
+        aria-hidden
+        className="absolute inset-0 opacity-20"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle, rgba(255,255,255,0.35) 1px, transparent 1px)",
+          backgroundSize: "14px 14px",
+        }}
+      />
+      {/* red accent dot */}
+      <div
+        aria-hidden
+        className="absolute right-6 top-6 h-3 w-3 rounded-full"
+        style={{ background: "#cd3734", boxShadow: "0 0 0 6px rgba(205,55,52,0.18)" }}
+      />
+      {/* giant outline icon */}
+      <div className="absolute inset-0 flex items-center justify-center text-white/85">
+        {giantIcon}
+      </div>
+      <div className="relative flex h-full flex-col justify-end p-7">
+        <p className="font-display text-base font-semibold text-white/95">
+          {caption}
+        </p>
+        <span
+          aria-hidden
+          className="mt-2 block h-[2px] w-10 rounded-full bg-white/70"
+        />
+      </div>
+    </InViewGroup>
+  </Reveal>
+);
+
+const GiantDivider = ({ children }: { children: React.ReactNode }) => (
+  <div className="col-span-12 flex justify-center py-2 md:py-4">
+    <InViewGroup className="opacity-60">
+      <div
+        style={{ color: "hsl(var(--primary))" }}
+        className="opacity-30"
+      >
+        {children}
+      </div>
+    </InViewGroup>
+  </div>
+);
+
+/* Giant outline icons used in mosaic + dividers */
+const GiantCogPeople = (
+  <DrawIcon
+    className="h-32 w-32 md:h-40 md:w-40"
+    strokeWidth={1.1}
+    viewBox="0 0 64 64"
+  >
+    <circle cx="32" cy="22" r="6" />
+    <path d="M20 44c0-6 5-10 12-10s12 4 12 10" />
+    <circle cx="12" cy="26" r="4" />
+    <circle cx="52" cy="26" r="4" />
+    <path d="M4 44c0-4 3-7 8-7" />
+    <path d="M60 44c0-4-3-7-8-7" />
+    <circle cx="32" cy="55" r="3" />
+  </DrawIcon>
+);
+
+const GiantHandshake = (
+  <DrawIcon
+    className="h-32 w-32 md:h-40 md:w-40"
+    strokeWidth={1.1}
+    viewBox="0 0 64 64"
+  >
+    <path d="M6 36l8-12 10 4 8-4 8 4 10-4 8 12" />
+    <path d="M20 40l8 8 4-4 8 8 4-4 8 4" />
+    <line x1="6" y1="36" x2="6" y2="48" />
+    <line x1="58" y1="36" x2="58" y2="48" />
+  </DrawIcon>
+);
+
+const GiantTarget = (
+  <DrawIcon
+    className="h-40 w-40 md:h-48 md:w-48"
+    strokeWidth={1.1}
+    viewBox="0 0 64 64"
+  >
+    <circle cx="32" cy="32" r="22" />
+    <circle cx="32" cy="32" r="14" />
+    <circle cx="32" cy="32" r="6" />
+    <line x1="32" y1="6" x2="32" y2="20" />
+    <line x1="32" y1="44" x2="32" y2="58" />
+    <line x1="6" y1="32" x2="20" y2="32" />
+    <line x1="44" y1="32" x2="58" y2="32" />
+  </DrawIcon>
+);
+
+const GiantSparkle = (
+  <DrawIcon
+    className="h-40 w-40 md:h-48 md:w-48"
+    strokeWidth={1.1}
+    viewBox="0 0 64 64"
+  >
+    <path d="M32 6 L36 28 L58 32 L36 36 L32 58 L28 36 L6 32 L28 28 Z" />
+    <circle cx="52" cy="14" r="3" />
+    <circle cx="12" cy="50" r="2" />
+  </DrawIcon>
+);
+
 export const AboutCoreValues = () => (
   <section
-    className="relative overflow-hidden py-20 md:py-24"
+    className="relative overflow-hidden py-20 md:py-28"
     style={{
       background:
         "linear-gradient(180deg, hsl(0 0% 97%) 0%, hsl(0 0% 100%) 100%)",
     }}
   >
     <NetworkArt />
-    <div className="container-tight relative">
-      <div className="text-center">
-        <Reveal variant="fade-up">
-          <span
-            className="text-[11px] font-bold uppercase tracking-[0.24em]"
-            style={{ color: "hsl(var(--primary-deep))" }}
-          >
-            CORE VALUES
-          </span>
-          <h2 className="mx-auto mt-4 max-w-2xl font-display text-3xl font-extrabold text-foreground md:text-5xl">
-            Six values that have outlasted every trend.
-          </h2>
-        </Reveal>
-      </div>
 
-      <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {values.map((v, i) => (
-          <Reveal key={v.title} variant="fade-up" delay={i * 90}>
-            <article className="group h-full rounded-[18px] border border-border bg-background p-7 shadow-[var(--shadow-soft)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[var(--shadow-card)]">
-              <div
-                data-in="false"
-                ref={(el) => {
-                  if (!el) return;
-                  const io = new IntersectionObserver(
-                    (entries) => {
-                      entries.forEach((e) => {
-                        if (e.isIntersecting) {
-                          el.setAttribute("data-in", "true");
-                          io.disconnect();
-                        }
-                      });
-                    },
-                    { threshold: 0.4 }
-                  );
-                  io.observe(el);
-                }}
-                className="group flex h-[52px] w-[52px] items-center justify-center rounded-full"
-                style={{ background: "hsl(var(--primary) / 0.10)" }}
-              >
-                {v.icon}
-              </div>
-              <h3 className="mt-5 font-display text-lg font-bold text-foreground">
-                {v.title}
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                {v.body}
-              </p>
-            </article>
-          </Reveal>
-        ))}
+    <div className="container-tight relative">
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-12 md:gap-6">
+        {/* === ROW 1: Heading block (col 1-4) + People first (col 5-8) + Quality (col 9-12) === */}
+        <Reveal variant="fade-up">
+          <div className="md:col-span-4">
+            <span
+              className="text-[11px] font-bold uppercase tracking-[0.24em]"
+              style={{ color: "hsl(var(--primary-deep))" }}
+            >
+              CORE VALUES
+            </span>
+            <h2 className="mt-4 font-display text-3xl font-extrabold leading-[1.1] text-foreground md:text-[44px]">
+              Six values that have outlasted every trend.
+            </h2>
+            <span
+              aria-hidden
+              className="mt-5 block h-[3px] w-16 rounded-full"
+              style={{ background: "#cd3734" }}
+            />
+            <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground">
+              The compass behind every decision, every product, and every
+              partnership we build at VietGuys.
+            </p>
+          </div>
+        </Reveal>
+
+        <div className="md:col-span-4">
+          <ValueTile value={values[0]} delay={80} className="min-h-[260px]" />
+        </div>
+        <div className="md:col-span-4">
+          <ValueTile value={values[1]} delay={160} className="min-h-[260px]" />
+        </div>
+
+        {/* === DIVIDER 1 === */}
+        <GiantDivider>{GiantCogPeople}</GiantDivider>
+
+        {/* === ROW 2: Integrity (col 1-4) + Accent tile (col 5-8) + Accountability (col 9-12) === */}
+        <div className="md:col-span-4">
+          <ValueTile value={values[2]} className="min-h-[260px]" />
+        </div>
+        <div className="md:col-span-4">
+          <AccentTile
+            className="min-h-[260px]"
+            giantIcon={GiantTarget}
+            caption="Built to last, designed to lead."
+          />
+        </div>
+        <div className="md:col-span-4">
+          <ValueTile value={values[3]} delay={120} className="min-h-[260px]" />
+        </div>
+
+        {/* === DIVIDER 2 === */}
+        <GiantDivider>{GiantHandshake}</GiantDivider>
+
+        {/* === ROW 3: Creativity (col 1-7, wider) + Accent (col 8-? hidden md) + Honesty (col 8-12) === */}
+        <div className="md:col-span-7">
+          <ValueTile
+            value={values[4]}
+            className="min-h-[240px]"
+          />
+        </div>
+        <div className="md:col-span-5">
+          <ValueTile value={values[5]} delay={120} className="min-h-[240px]" />
+        </div>
       </div>
     </div>
+
+    {/* Apply common tile style via CSS attribute */}
+    <style>{`
+      section [data-tile="value"] {
+        background: ${tileStyle.background};
+        border-color: ${tileStyle.borderColor};
+        box-shadow: ${tileStyle.boxShadow};
+      }
+    `}</style>
   </section>
 );
