@@ -356,28 +356,12 @@ const AccentTile = ({
   </Reveal>
 );
 
-const GiantTarget = (
-  <DrawIcon
-    className="h-40 w-40 md:h-48 md:w-48"
-    strokeWidth={1.1}
-    viewBox="0 0 64 64"
-  >
-    <circle cx="32" cy="32" r="22" />
-    <circle cx="32" cy="32" r="14" />
-    <circle cx="32" cy="32" r="6" />
-    <line x1="32" y1="6" x2="32" y2="20" />
-    <line x1="32" y1="44" x2="32" y2="58" />
-    <line x1="6" y1="32" x2="20" y2="32" />
-    <line x1="44" y1="32" x2="58" y2="32" />
-  </DrawIcon>
-);
-
 export const AboutCoreValues = () => (
   <section
     className="group/section relative overflow-hidden py-20 md:py-28"
     style={{
       background:
-        "linear-gradient(180deg, hsl(0 0% 97%) 0%, hsl(0 0% 100%) 100%)",
+        "linear-gradient(180deg, " + SAIL.sailWhite + " 0%, #FFFFFF 60%, " + SAIL.mist + " 100%)",
     }}
   >
     <SailboatBackdrop />
@@ -385,32 +369,28 @@ export const AboutCoreValues = () => (
     <div className="container-tight relative z-10">
 
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-12 lg:gap-6">
-        {/* Heading block — spans full width on mobile, sticky-feel side panel on desktop */}
-        <div className="sm:col-span-2 lg:col-span-4 lg:row-span-2 lg:self-stretch">
+        {/* Heading block — RIGHT on desktop to balance the sailboat on the LEFT */}
+        <div className="sm:col-span-2 lg:col-span-4 lg:col-start-9 lg:row-span-2 lg:self-stretch lg:order-last">
           <Reveal variant="fade-up">
             <div className="lg:sticky lg:top-24">
               <span
                 className="text-[11px] font-bold uppercase tracking-[0.24em]"
-                style={{ color: "hsl(var(--primary-deep))" }}
+                style={{ color: SAIL.oceanDeep }}
               >
                 CORE VALUES
               </span>
-              <h2 className="mt-4 font-display text-3xl font-extrabold leading-[1.1] text-foreground md:text-[34px] lg:text-[40px]">
+              <h2 className="mt-4 font-display text-3xl font-extrabold leading-[1.1] md:text-[34px] lg:text-[40px]" style={{ color: SAIL.oceanDeep }}>
                 Six values that have outlasted every trend.
               </h2>
               <span
                 aria-hidden
                 className="mt-5 block h-[3px] w-16 rounded-full"
-                style={{ background: "#cd3734" }}
+                style={{ background: SAIL.sunriseCoral }}
               />
               <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground">
                 The compass behind every decision, every product, and every
                 partnership we build at VietGuys.
               </p>
-              {/* signature accent icon, anchors the section visually */}
-              <div className="mt-8 hidden lg:flex items-center justify-start text-primary/80">
-                {GiantTarget}
-              </div>
             </div>
           </Reveal>
         </div>
