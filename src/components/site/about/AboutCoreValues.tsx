@@ -50,7 +50,7 @@ const values = [
   },
   {
     title: "Accountability",
-    body: "We are fully accountable for our own actions. We understand how our business decisions will affect our customers.",
+    body: "We take ownership of our actions, decisions, and their impact on our customers.",
     icon: (
       <DrawIcon>
         <rect x="3" y="4" width="18" height="13" rx="1.5" />
