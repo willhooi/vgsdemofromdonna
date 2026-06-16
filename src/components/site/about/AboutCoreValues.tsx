@@ -352,7 +352,7 @@ export const AboutCoreValues = () => (
             >
               CORE VALUES
             </span>
-            <h2 className="mt-4 font-display text-3xl font-extrabold leading-[1.1] text-foreground md:text-[44px]">
+            <h2 className="mt-4 font-display text-3xl font-extrabold leading-[1.1] text-foreground md:text-[34px] lg:text-[40px]">
               Six values that have outlasted every trend.
             </h2>
             <span
