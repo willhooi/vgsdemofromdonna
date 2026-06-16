@@ -119,7 +119,7 @@ export const AboutCoreValues = () => (
   >
     <NetworkArt />
     <div className="container-tight relative">
-      <div className="grid gap-10 md:grid-cols-2 md:items-end md:gap-16">
+      <div className="text-center">
         <Reveal variant="fade-up">
           <span
             className="text-[11px] font-bold uppercase tracking-[0.24em]"
@@ -127,16 +127,9 @@ export const AboutCoreValues = () => (
           >
             Values
           </span>
-          <h2 className="mt-4 font-display text-3xl font-extrabold text-foreground md:text-5xl">
+          <h2 className="mx-auto mt-4 max-w-2xl font-display text-3xl font-extrabold text-foreground md:text-5xl">
             Six values that have outlasted every trend.
           </h2>
-        </Reveal>
-        <Reveal variant="fade-up" delay={120}>
-          <p className="text-base leading-relaxed text-muted-foreground">
-            The way we work hasn&apos;t changed since the first SMS left our gateway:
-            people first, quality always, and infrastructure we own end-to-end —
-            improved for every campaign that comes next.
-          </p>
         </Reveal>
       </div>
 
