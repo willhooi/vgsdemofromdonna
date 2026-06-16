@@ -205,11 +205,6 @@ const ValueTile = ({
   </Reveal>
 );
 
-const tileStyle = {
-  background: "hsl(var(--primary) / 0.05)",
-  borderColor: "hsl(var(--primary) / 0.18)",
-  boxShadow: "0 10px 30px -18px hsl(var(--primary) / 0.25)",
-};
 
 /** Accent gradient tile that takes the role of a "photo" in the mosaic */
 const AccentTile = ({
