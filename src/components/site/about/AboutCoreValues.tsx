@@ -30,12 +30,15 @@ const DrawIcon = ({
 const InViewGroup = ({
   children,
   className,
+  style,
 }: {
   children: React.ReactNode;
   className?: string;
+  style?: React.CSSProperties;
 }) => (
   <div
     data-in="false"
+    style={style}
     ref={(el) => {
       if (!el) return;
       const io = new IntersectionObserver(
