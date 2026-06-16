@@ -62,7 +62,7 @@ export const Solutions = () => {
     <section
       ref={ref}
       id="solutions"
-      className="relative overflow-hidden pt-16 md:pt-24 pb-0 bg-transparent"
+      className="relative overflow-hidden pt-6 md:pt-10 pb-0 bg-transparent"
     >
 
       <div className="container-tight relative">
