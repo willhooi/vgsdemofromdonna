@@ -355,15 +355,16 @@ const GiantTarget = (
 
 export const AboutCoreValues = () => (
   <section
-    className="relative overflow-hidden py-20 md:py-28"
+    className="group/section relative overflow-hidden py-20 md:py-28"
     style={{
       background:
         "linear-gradient(180deg, hsl(0 0% 97%) 0%, hsl(0 0% 100%) 100%)",
     }}
   >
-    <NetworkArt />
+    <SailboatBackdrop />
 
-    <div className="container-tight relative">
+    <div className="container-tight relative z-10">
+
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-12 lg:gap-6">
         {/* Heading block — spans full width on mobile, sticky-feel side panel on desktop */}
         <div className="sm:col-span-2 lg:col-span-4 lg:row-span-2 lg:self-stretch">
