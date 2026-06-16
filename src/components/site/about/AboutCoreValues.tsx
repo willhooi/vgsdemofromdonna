@@ -266,32 +266,32 @@ const ValueTile = ({
 }) => (
   <Reveal variant="fade-up" delay={delay}>
     <InViewGroup
-      className={`relative flex h-full flex-col justify-between overflow-hidden rounded-[20px] border p-7 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_18px_40px_-20px_hsl(var(--primary)/0.35)] ${className}`}
+      className={`relative flex h-full flex-col justify-between overflow-hidden rounded-[20px] border p-7 backdrop-blur-[2px] transition-all duration-300 hover:-translate-y-1.5 ${className}`}
       style={{
-        background: "hsl(var(--primary) / 0.05)",
-        borderColor: "hsl(var(--primary) / 0.18)",
-        boxShadow: "0 10px 30px -18px hsl(var(--primary) / 0.25)",
+        background: "rgba(246,241,231,0.72)",
+        borderColor: SAIL.horizonTeal + "38",
+        boxShadow: "0 10px 30px -18px " + SAIL.oceanDeep + "55",
       }}
     >
       <div
         aria-hidden
-        className="pointer-events-none absolute -right-6 -top-6 h-28 w-28 rounded-full"
-        style={{ background: "hsl(var(--primary) / 0.08)" }}
+        className="pointer-events-none absolute -right-6 -top-6 h-28 w-28 rounded-full transition-colors duration-300 group-hover:[background:rgba(242,180,65,0.22)]"
+        style={{ background: SAIL.horizonTeal + "18" }}
       />
       <div
         className="relative flex h-[52px] w-[52px] items-center justify-center rounded-full"
-        style={{ background: "hsl(var(--primary) / 0.12)" }}
+        style={{ background: SAIL.horizonTeal + "22" }}
       >
         {value.icon}
       </div>
       <div className="relative mt-6">
-        <h3 className="font-display text-lg font-bold text-foreground">
+        <h3 className="font-display text-lg font-bold" style={{ color: SAIL.oceanDeep }}>
           {value.title}
         </h3>
         <span
           aria-hidden
           className="mt-3 block h-[2px] w-8 rounded-full"
-          style={{ background: "#cd3734" }}
+          style={{ background: SAIL.sunriseCoral }}
         />
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
           {value.body}
