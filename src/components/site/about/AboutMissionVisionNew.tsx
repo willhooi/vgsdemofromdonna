@@ -130,7 +130,7 @@ export const AboutMissionVisionNew = () => (
           </p>
           <ul className="mt-6 space-y-3">
             <Bullet>Every interaction timely, relevant and personalised for the customer.</Bullet>
-            <Bullet>Secure and compliant — licensed infrastructure, ISO 27001 certified.</Bullet>
+            <Bullet>Secure and compliant - licensed infrastructure, ISO/IEC 27001:2022 certified.</Bullet>
             <Bullet>Worth more to both the brand and the customer, on every channel.</Bullet>
           </ul>
         </Reveal>
