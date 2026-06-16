@@ -1,4 +1,7 @@
+import { useEffect, useRef } from "react";
 import { Reveal } from "@/components/motion/Reveal";
+import sailboatAsset from "@/assets/sailboat-19.png.asset.json";
+
 
 const ICON_STROKE = "hsl(var(--primary))";
 
