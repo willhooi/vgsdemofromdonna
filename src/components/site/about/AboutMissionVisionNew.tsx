@@ -103,8 +103,31 @@ const Bullet = ({ children }: { children: React.ReactNode }) => (
 );
 
 export const AboutMissionVisionNew = () => (
-  <section className="bg-background py-20 md:py-24">
-    <div className="container-tight">
+  <section
+    className="relative py-20 md:py-24"
+    style={{
+      background:
+        "linear-gradient(180deg, hsl(130 60% 96.5%) 0%, hsl(130 45% 97.5%) 40%, hsl(0 0% 100%) 100%)",
+    }}
+  >
+    {/* soft decorative top-right glow */}
+    <div
+      className="pointer-events-none absolute right-0 top-0 h-[320px] w-[420px] opacity-40"
+      style={{
+        background:
+          "radial-gradient(ellipse at top right, hsl(var(--primary) / 0.10), transparent 65%)",
+      }}
+    />
+    {/* soft decorative bottom-left glow */}
+    <div
+      className="pointer-events-none absolute bottom-0 left-0 h-[260px] w-[360px] opacity-35"
+      style={{
+        background:
+          "radial-gradient(ellipse at bottom left, hsl(var(--accent) / 0.08), transparent 60%)",
+      }}
+    />
+
+    <div className="container-tight relative">
       <Reveal variant="fade-up" className="mx-auto max-w-3xl text-center">
         <span
           className="text-[11px] font-bold uppercase tracking-[0.24em]"
