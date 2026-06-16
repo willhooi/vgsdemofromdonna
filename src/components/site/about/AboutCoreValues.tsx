@@ -344,8 +344,8 @@ export const AboutCoreValues = () => (
     <div className="container-tight relative">
       <div className="grid grid-cols-1 gap-5 md:grid-cols-12 md:gap-6">
         {/* === ROW 1: Heading block (col 1-4) + People first (col 5-8) + Quality (col 9-12) === */}
-        <Reveal variant="fade-up">
-          <div className="md:col-span-4">
+        <div className="md:col-span-4">
+          <Reveal variant="fade-up">
             <span
               className="text-[11px] font-bold uppercase tracking-[0.24em]"
               style={{ color: "hsl(var(--primary-deep))" }}
@@ -364,8 +364,8 @@ export const AboutCoreValues = () => (
               The compass behind every decision, every product, and every
               partnership we build at VietGuys.
             </p>
-          </div>
-        </Reveal>
+          </Reveal>
+        </div>
 
         <div className="md:col-span-4">
           <ValueTile value={values[0]} delay={80} className="min-h-[260px]" />
