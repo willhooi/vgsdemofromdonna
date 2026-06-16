@@ -125,7 +125,7 @@ export const AboutCoreValues = () => (
             className="text-[11px] font-bold uppercase tracking-[0.24em]"
             style={{ color: "hsl(var(--primary-deep))" }}
           >
-            Values
+            CORE VALUES
           </span>
           <h2 className="mx-auto mt-4 max-w-2xl font-display text-3xl font-extrabold text-foreground md:text-5xl">
             Six values that have outlasted every trend.
