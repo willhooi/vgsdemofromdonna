@@ -158,7 +158,13 @@ export const AboutMissionVisionNew = () => (
           </ul>
         </Reveal>
         <Reveal variant="scale-soft" delay={120}>
-          <div className="overflow-hidden rounded-[24px] bg-[#f4f5f7]">
+          <div
+            className="overflow-hidden rounded-[24px] bg-[#f4f5f7]"
+            style={{
+              boxShadow:
+                "0 12px 40px -12px hsl(var(--primary) / 0.10), 0 4px 12px -4px hsl(var(--primary) / 0.06)",
+            }}
+          >
             <img
               src={missionImage.url}
               alt="VietGuys team presenting CDP platform to enterprise clients"
@@ -172,7 +178,13 @@ export const AboutMissionVisionNew = () => (
       {/* Vision */}
       <div className="mt-20 grid items-center gap-10 md:grid-cols-[0.95fr_1.05fr] md:gap-[60px]">
         <Reveal variant="scale-soft" className="md:order-1">
-          <div className="overflow-hidden rounded-[24px] bg-[#f4f5f7]">
+          <div
+            className="overflow-hidden rounded-[24px] bg-[#f4f5f7]"
+            style={{
+              boxShadow:
+                "0 12px 40px -12px hsl(var(--primary) / 0.10), 0 4px 12px -4px hsl(var(--primary) / 0.06)",
+            }}
+          >
             <img
               src={visionImage.url}
               alt="VietGuys team presenting CDP platform to enterprise clients"
