@@ -137,6 +137,7 @@ const values: Value[] = [
 ];
 
 const SailboatBackdrop = () => {
+  const boatRef = useRef<HTMLImageElement>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -151,13 +152,14 @@ const SailboatBackdrop = () => {
       raf = requestAnimationFrame(() => {
         raf = 0;
         const section = sectionRef.current;
-        if (!section) return;
+        const boat = boatRef.current;
+        if (!section || !boat) return;
         const rect = section.getBoundingClientRect();
         const viewportCenter = window.innerHeight / 2;
         const sectionCenter = rect.top + rect.height / 2;
         const delta = (viewportCenter - sectionCenter) * 0.08;
         const y = Math.max(-40, Math.min(40, delta));
-        section.style.setProperty("--boat-y", `${y.toFixed(2)}px`);
+        boat.style.transform = `translate3d(0, ${y.toFixed(2)}px, 0)`;
       });
     };
 
@@ -174,28 +176,21 @@ const SailboatBackdrop = () => {
       ref={sectionRef}
       aria-hidden
       className="pointer-events-none absolute inset-0 overflow-hidden"
-      style={{ "--boat-y": "0px" } as React.CSSProperties}
     >
-      {/* Sailboat key visual — bottom-left, desktop+ */}
-      <div
-        className="absolute left-0 bottom-0 hidden md:block"
-        style={{ transform: "scaleX(-1)" }}
-      >
-        <img
-          src={sailboatAsset.url}
-          alt=""
-          loading="lazy"
-          className="h-auto max-h-[78%] w-auto max-w-[50%] object-contain opacity-80 transition-transform duration-700 ease-out"
-          style={{
-            maskImage:
-              "linear-gradient(to right, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
-            WebkitMaskImage:
-              "linear-gradient(to right, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
-            transform:
-              "translate3d(0, var(--boat-y, 0px), 0)",
-          }}
-        />
-      </div>
+      {/* Sailboat key visual — right side, desktop+ */}
+      <img
+        ref={boatRef}
+        src={sailboatAsset.url}
+        alt=""
+        loading="lazy"
+        className="absolute right-0 bottom-0 hidden md:block h-full w-auto max-w-[60%] object-cover object-left opacity-80 transition-transform duration-700 ease-out will-change-transform group-hover/section:-translate-y-2 group-hover/section:scale-[1.015]"
+        style={{
+          maskImage:
+            "linear-gradient(to left, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
+          WebkitMaskImage:
+            "linear-gradient(to left, rgba(0,0,0,1) 55%, rgba(0,0,0,0) 100%)",
+        }}
+      />
 
       {/* Wave that visually connects the bottom row of tiles */}
       <svg
@@ -204,7 +199,7 @@ const SailboatBackdrop = () => {
         className="absolute inset-x-0 bottom-[6%] h-[260px] w-full opacity-70"
       >
         <defs>
-          <linearGradient id="waveStroke" x1="1" y1="0" x2="0" y2="0">
+          <linearGradient id="waveStroke" x1="0" y1="0" x2="1" y2="0">
             <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0" />
             <stop offset="35%" stopColor="hsl(var(--primary))" stopOpacity="0.55" />
             <stop offset="100%" stopColor="hsl(var(--primary-deep))" stopOpacity="0.85" />
@@ -227,8 +222,15 @@ const SailboatBackdrop = () => {
         />
       </svg>
 
-      {/* Bottom readability overlay for tiles */}
-      <div className="absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-t from-white/85 via-white/40 to-transparent" />
+      {/* Readability overlay — left side & bottom */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(to right, hsl(0 0% 100% / 0.96) 0%, hsl(0 0% 100% / 0.78) 45%, hsl(0 0% 100% / 0.25) 75%, hsl(0 0% 100% / 0.05) 100%)",
+        }}
+      />
+      <div className="absolute inset-x-0 bottom-0 h-[40%] bg-gradient-to-t from-white/85 via-white/40 to-transparent" />
     </div>
   );
 };
@@ -335,10 +337,29 @@ const AccentTile = ({
   </Reveal>
 );
 
+const GiantTarget = (
+  <DrawIcon
+    className="h-40 w-40 md:h-48 md:w-48"
+    strokeWidth={1.1}
+    viewBox="0 0 64 64"
+  >
+    <circle cx="32" cy="32" r="22" />
+    <circle cx="32" cy="32" r="14" />
+    <circle cx="32" cy="32" r="6" />
+    <line x1="32" y1="6" x2="32" y2="20" />
+    <line x1="32" y1="44" x2="32" y2="58" />
+    <line x1="6" y1="32" x2="20" y2="32" />
+    <line x1="44" y1="32" x2="58" y2="32" />
+  </DrawIcon>
+);
 
 export const AboutCoreValues = () => (
   <section
     className="group/section relative overflow-hidden py-20 md:py-28"
+    style={{
+      background:
+        "linear-gradient(180deg, hsl(0 0% 97%) 0%, hsl(0 0% 100%) 100%)",
+    }}
   >
     <SailboatBackdrop />
 
@@ -367,6 +388,10 @@ export const AboutCoreValues = () => (
                 The compass behind every decision, every product, and every
                 partnership we build at VietGuys.
               </p>
+              {/* signature accent icon, anchors the section visually */}
+              <div className="mt-8 hidden lg:flex items-center justify-start text-primary/80">
+                {GiantTarget}
+              </div>
             </div>
           </Reveal>
         </div>
