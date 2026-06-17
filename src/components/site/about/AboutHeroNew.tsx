@@ -65,7 +65,7 @@ export const AboutHeroNew = () => (
       <div className="mx-auto max-w-3xl text-center">
         <Reveal variant="fade-up">
           <span className="text-[11px] font-bold uppercase tracking-[0.24em]" style={{ color: "hsl(var(--primary-deep))" }}>
-            Since 2007 — Ho Chi Minh City
+            Since 2007 &nbsp;· A MEMBER OF ACCRETE INC. FROM JAPAN
           </span>
         </Reveal>
         <Reveal variant="fade-up" delay={120}>
