@@ -11,11 +11,11 @@ export const SolutionsToServicesBridge = () => {
       className="relative"
     >
       <div className="container-tight relative">
-        <div className="mx-auto flex max-w-3xl flex-col items-center gap-3 py-8 text-center md:py-12">
+        <div className="mx-auto flex max-w-3xl flex-col items-center gap-2 py-4 text-center md:py-6">
           {/* Thin vertical tether picks up the constellation flow */}
           <span
             aria-hidden
-            className="h-10 w-px bg-gradient-to-b from-transparent via-[hsl(var(--primary)/0.5)] to-transparent"
+            className="h-6 w-px bg-gradient-to-b from-transparent via-[hsl(var(--primary)/0.5)] to-transparent"
           />
 
           <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-muted-foreground">
@@ -27,7 +27,7 @@ export const SolutionsToServicesBridge = () => {
 
           <span
             aria-hidden
-            className="h-10 w-px bg-gradient-to-b from-[hsl(var(--primary)/0.5)] via-[hsl(var(--primary)/0.25)] to-transparent"
+            className="h-6 w-px bg-gradient-to-b from-[hsl(var(--primary)/0.5)] via-[hsl(var(--primary)/0.25)] to-transparent"
           />
         </div>
       </div>
