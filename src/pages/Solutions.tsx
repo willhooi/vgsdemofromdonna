@@ -552,12 +552,6 @@ const Solutions = () => {
             </IndCard>
           </div>
 
-          <div className="mstrip">
-            <div className="rv"><b><span className="count" data-to="16">0</span></b><span>Enterprise services</span></div>
-            <div className="rv d1"><b><span className="count" data-to="5">0</span><em>M+</em></b><span>Messages a day</span></div>
-            <div className="rv d2"><b>99.9<em>%</em></b><span>Uptime SLA</span></div>
-            <div className="rv d3"><b><span className="count" data-to="5000">0</span><em>+</em></b><span>Brands served</span></div>
-          </div>
         </div>
       </section>
 
