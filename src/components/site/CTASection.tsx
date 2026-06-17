@@ -103,7 +103,7 @@ export const CTASection = () => {
               </h2>
               <p className="mt-4 max-w-md text-muted-foreground">
                 Tell us about your goals. A VietGuys strategist will respond with a tailored
-                proposal — in Vietnamese, English, or Japanese.
+                proposal.
               </p>
             </div>
 
