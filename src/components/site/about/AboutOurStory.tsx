@@ -39,7 +39,7 @@ const milestones: Milestone[] = [
     body: "Information Security Management Systems, - audited and certified by BSI (British Standards Institution) and accredited by ANAB.",
   },
   {
-    year: "01/2026",
+    year: "4/2022",
     tbc: false,
     title: "PangoCDP launches",
     body: "VietGuys' customer data platform — adding data, segmentation and customer journeys to messaging.",
