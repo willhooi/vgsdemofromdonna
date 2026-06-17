@@ -581,7 +581,7 @@ export function ServicesGrid() {
   return (
     <section
       id="services"
-      className="relative overflow-hidden pt-4 pb-20 md:pt-6 bg-transparent"
+      className="relative overflow-hidden pt-4 pb-10 md:pt-6 md:pb-12 bg-transparent"
       style={{
         fontFamily: "'Plus Jakarta Sans', system-ui, sans-serif",
       }}
