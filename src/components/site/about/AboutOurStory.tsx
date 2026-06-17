@@ -57,7 +57,7 @@ const milestones: Milestone[] = [
     body: "Officially recognised by Zalo — Vietnam's largest messaging platform — as a trusted partner.",
   },
   {
-    year: "2026",
+    year: "01/2026",
     highlight: true,
     title: "Another I launches",
     body: "VietGuys' AI-powered customer engagement brand — the move from messaging vendor to AI-led engagement platform.",
