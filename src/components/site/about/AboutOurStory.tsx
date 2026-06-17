@@ -51,8 +51,8 @@ const milestones: Milestone[] = [
     body: "One of the few Vietnamese enterprises granted License No. 39/GP-CVT to provide non-facilities-based telecommunications services.",
   },
   {
-    year: "Year TBC",
-    tbc: true,
+    year: "01/2026",
+    tbc: false,
     title: "Zalo Trusted Partner",
     body: "Officially recognised by Zalo — Vietnam's largest messaging platform — as a trusted partner.",
   },
