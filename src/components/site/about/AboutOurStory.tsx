@@ -22,8 +22,8 @@ const milestones: Milestone[] = [
     body: "One of Vietnam's leading SMS Brandname providers — Samsung E-warranty (2008), LG (2017), Top #1 SMS in e-commerce (2018), serving banks, airlines, retailers and global brands.",
   },
   {
-    year: "Year TBC",
-    tbc: true,
+    year: "05/2014",
+    tbc: false,
     title: "Accrete Inc. is established",
     body: "Enterprise messaging specialist serving Japan's major mobile carriers — the foundation for the later partnership.",
   },
