@@ -107,7 +107,7 @@ export const AboutMissionVisionNew = () => (
     className="relative py-20 md:py-24"
     style={{
       background:
-        "linear-gradient(180deg, hsl(130 60% 96.5%) 0%, hsl(130 45% 97.5%) 40%, hsl(0 0% 100%) 100%)",
+        "linear-gradient(180deg, hsl(0 0% 97%) 0%, hsl(0 0% 100%) 100%)",
     }}
   >
     {/* soft decorative top-right glow */}
