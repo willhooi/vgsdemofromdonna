@@ -3,6 +3,7 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ChatBubble } from "@/components/site/ChatBubble";
 import { AboutCTAFinal } from "@/components/site/about/AboutCTAFinal";
+import { AboutCertificatesNew } from "@/components/site/about/AboutCertificatesNew";
 import { AboutHeroNew } from "@/components/site/about/AboutHeroNew";
 import { AboutOurStory } from "@/components/site/about/AboutOurStory";
 import { AboutCoreValues } from "@/components/site/about/AboutCoreValues";
@@ -51,6 +52,8 @@ const About = () => {
       <AboutMissionVisionNew />
 
       <AboutPartners />
+
+      <AboutCertificatesNew />
 
       <AboutCTAFinal />
 
