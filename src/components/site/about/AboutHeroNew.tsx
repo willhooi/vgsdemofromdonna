@@ -7,7 +7,7 @@ const stats = [
   { num: 19, suffix: "", label: "Years of Operation" },
   { num: 6000, suffix: "+", label: "Brands Served", display: (v: number) => v.toLocaleString() },
   { num: 8, suffix: "M+", label: "Messages a Day" },
-  { num: 7, suffix: "+", label: "INDUSTRIES SERVED" },
+  { num: 10, suffix: "+", label: "INDUSTRIES SERVED" },
 ];
 
 const CountUp = ({ target, suffix, format }: { target: number; suffix: string; format?: (v: number) => string }) => {
