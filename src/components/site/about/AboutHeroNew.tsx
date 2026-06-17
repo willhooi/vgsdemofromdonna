@@ -62,9 +62,9 @@ export const AboutHeroNew = () => (
       count={55}
     />
     <div className="container-tight relative">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
-        {/* Left Column: Branding & Headline */}
-        <div className="lg:col-span-5 lg:sticky lg:top-36">
+      <div className="grid grid-cols-1 gap-12 lg:gap-20 items-start">
+        {/* Full-Width Headline Area */}
+        <div className="max-w-5xl">
           <Reveal variant="fade-up">
             <div className="flex items-center gap-3 mb-6">
               <span className="h-[1px] w-8" style={{ backgroundColor: "hsl(var(--primary))" }}></span>
@@ -77,7 +77,7 @@ export const AboutHeroNew = () => (
           <Reveal variant="fade-up" delay={120}>
             <h1
               className="font-display font-extrabold leading-[1.05] text-foreground tracking-tight"
-              style={{ fontSize: "clamp(42px, 6vw, 72px)" }}
+              style={{ fontSize: "clamp(42px, 7vw, 86px)" }}
             >
               Intelligence in every{" "}
               <span style={{ color: "hsl(var(--primary))" }}>conversation.</span>
@@ -85,17 +85,17 @@ export const AboutHeroNew = () => (
           </Reveal>
         </div>
 
-        {/* Right Column: Scannable Copy */}
-        <div className="lg:col-span-7 space-y-12">
-          <Reveal variant="fade-up" delay={240}>
-            <div className="space-y-12 border-l border-border pl-8 lg:pl-12 relative">
-              {/* Vertical Decorative Bar Top */}
-              <div 
-                className="absolute left-[-2px] top-0 w-[3px] h-16 rounded-full" 
-                style={{ backgroundColor: "hsl(var(--primary))" }}
-              ></div>
+        {/* Body: Two Columns */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
+          <div className="lg:col-span-7">
+            <Reveal variant="fade-up" delay={240}>
+              <div className="space-y-6 border-l border-border pl-8 lg:pl-12 relative">
+                {/* Vertical Decorative Bar Top */}
+                <div 
+                  className="absolute left-[-2px] top-0 w-[3px] h-16 rounded-full" 
+                  style={{ backgroundColor: "hsl(var(--primary))" }}
+                ></div>
 
-              <div className="space-y-6">
                 <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
                   For nearly <span className="text-foreground font-semibold">two decades</span>, VietGuys has been a trusted engagement partner for <span className="text-foreground font-semibold">6,000+ brands</span> across banking, aviation, retail, healthcare, FMCG, and technology.
                 </p>
@@ -103,9 +103,13 @@ export const AboutHeroNew = () => (
                   Backed by Japan's <span className="text-foreground font-semibold">Accrete Inc.</span>, a Tokyo-listed Japanese technology group and a leading international messaging provider, we combine <span className="italic" style={{ color: "hsl(var(--primary))" }}>AI, data, and omnichannel communications</span> to help businesses build stronger customer relationships.
                 </p>
               </div>
+            </Reveal>
+          </div>
 
-              {/* Accrete Highlight Cards */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
+          {/* Accrete Highlight Cards */}
+          <div className="lg:col-span-5">
+            <Reveal variant="fade-up" delay={360}>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
                 <div className="p-6 rounded-2xl bg-muted/50 border border-border/50">
                   <p className="text-[10px] font-bold uppercase tracking-widest mb-2" style={{ color: "hsl(var(--primary))" }}>Reliability</p>
                   <p className="text-sm text-muted-foreground leading-relaxed">Enterprise grade infrastructure and international standards.</p>
@@ -115,8 +119,8 @@ export const AboutHeroNew = () => (
                   <p className="text-sm text-muted-foreground leading-relaxed">The advantage of AI specifically built for the Vietnamese market.</p>
                 </div>
               </div>
-            </div>
-          </Reveal>
+            </Reveal>
+          </div>
         </div>
       </div>
 
