@@ -53,6 +53,8 @@ const About = () => {
 
       <AboutPartners />
 
+      <AboutCertificatesNew />
+
       <AboutCTAFinal />
 
       <Footer />
