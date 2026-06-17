@@ -1,25 +1,46 @@
-Plan: Remove compass icon and relayout the 6 CoreValues cards
+## Goal
+Replace the current "Strategic Partners" section (3 partner cards) on `/about` with an "Our Valued Clients" section that mirrors the structure on vietguys.biz/en/about-us/vietguys: client logos grouped by industry.
 
-Current state:
-- The CoreValues section has a 12-column grid: a sticky left heading panel (4 cols) containing the title, description, and a large compass/target icon (`GiantTarget`) at the bottom.
-- The first 4 values sit in a 2x2 grid to the right of the heading; the last 2 values fill a full-width bottom row.
-- A sailboat background visual, wave SVG, and gradient overlays sit behind everything.
+## Industry groups & logos (sourced from vietguys.biz)
+12 industry groups, ~100 logos total:
+- **Finance - Banking** (13): FWD, Liberty, Fubon Life, Bao Minh, Hanwha, HSBC, MSB, Nam A Bank, Petro, Rong Viet, SSI, UOB, VPBank
+- **Retail** (11): Thegioididong, Nguyen Kim, Thien Hoa, Bach Hoa Xanh, Con Cung, Emart, FamilyMart, Lotte, AEON, Phong Vu, Sai Gon Center
+- **Hospitality** (13): Vietravel, Traveloka, Tokyo Deli, Tiniworld, Tinistore, The Coffee House, Ong Bau, McDonald's, Jumbo, Citigym, CGV, California, BHD Star
+- **E-Commerce** (7): Shopee, Cho Tot, Lazada, Haravan, KiotViet, Sapo, Nhat Tao
+- **Technology - Electronics** (12): Canon, Cashback, Comet, Dell, Foody, Garena, LG, Moca, MoMo, Samsung, ShopeePay, Sony
+- **Fashion - Beauty** (13): ACFC, Danh Gia, Elise, Hnoss, Kim Ngoc Thuy, Loc Phuc, Ngoc Dung, PNJ Watch, Shynh, The Face Shop, Triumph, Vascara, Zema
+- **Medicine & Pharmacy** (7): Bayer, Eco Pharma, GSK, Hoan My, Phano, Pharmacity, VNVC
+- **FMCG** (6): C2, Mead Johnson, Nutifood, P&G, San Miguel, Vitadairy
+- **Education** (10): American Learning Lab, Apollo, CD Sai Gon, CTIM, FPT, Hoa Sen, Saigon American English, VAS, Wall Street English, Yola
+- **Delivery - Travel** (5): Be, GHTK, Gojek, Grab, Lalamove
+- **Industry** (10): AkzoNobel, BVTV An Giang, Bridgestone, Dam Ca Mau, Duy Tan, Hoa Sen, Kubota, Loc Troi, Syngenta, VFC
+- **Real Estate** (6): Dat Xanh, Ecopark, Hung Thinh, Novaland, Propzy, Vinhomes
 
-Changes to make:
-1. Remove the compass icon
-   - Delete the `GiantTarget` DrawIcon constant.
-   - Remove the `div` that renders `{GiantTarget}` inside the heading block.
-   - Keep `DrawIcon` itself because each value card still uses it for its own small icon.
+## Implementation
 
-2. Relayout the heading and 6 value cards
-   - Move the heading block to the top of the section (full width, centered) instead of a sticky left panel. This keeps the title and description visible as requested.
-   - Arrange the 6 `ValueTile` cards in a responsive grid:
-     - Desktop: 3 columns x 2 rows
-     - Tablet: 2 columns x 3 rows
-     - Mobile: 1 column x 6 rows
-   - Keep existing `min-h` and animation delays so the staggered reveal effect remains.
+1. **Download & upload logos to Lovable CDN**
+   - Download all ~100 PNG logos from `vietguys.biz/images/partners/<group>/<file>.png` into `/tmp/clients/<group>/`.
+   - Upload each via `lovable-assets create`, writing the resulting `.asset.json` pointer files into `src/assets/clients/<group>/<file>.png.asset.json`.
+   - No binary files committed; only pointer JSONs.
 
-3. Preserve visual background
-   - Keep `SailboatBackdrop`, the sailboat image, top-edge blend, wave SVG, and readability gradients unchanged.
+2. **Rewrite `src/components/site/about/AboutPartners.tsx`** (rename concept, keep filename to avoid route/import changes):
+   - Eyebrow: `OUR VALUED CLIENTS`
+   - Heading: `Trusted by 6,000+ brands across Vietnam.` (green accent on the number, matches hero copy tone)
+   - Sub-line: short single sentence — `From banking to FMCG, brands of every scale choose VietGuys for engagement at scale.`
+   - Data: a `groups: { name, logos: {src, alt}[] }[]` array built from imported `.asset.json` pointers.
+   - Layout per group:
+     - Group label (small uppercase eyebrow, left-aligned, with a thin green divider line to its right).
+     - Responsive logo grid: `grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-7`, each cell a bordered rounded card with the logo centered, grayscale by default → color on hover, soft shadow on hover.
+   - Use semantic tokens (`text-foreground`, `text-muted-foreground`, `border-border`, `bg-background`, `hsl(var(--primary))`) — no hardcoded hex.
+   - Keep existing section background gradient so it fits the page flow.
+   - Remove the old `partners` cards and the `bytetech/cxgenie/cnvcdpLogo` imports if unused elsewhere (will verify with grep).
 
-Result: a cleaner, more balanced section that no longer shows the compass icon, keeps the heading and description, and lets the sailboat background breathe.
+3. **Verify**
+   - Run `bun run build` to confirm all imports resolve.
+   - Spot-check preview at `/about`.
+
+## Technical notes
+- Pointer-file pattern: `import logo from "@/assets/clients/finance-banking/hsbc.png.asset.json"; <img src={logo.url} />`.
+- Logos vary in aspect ratio; constrain with `h-10 w-auto max-w-[120px] object-contain` inside a fixed-height cell (`h-20`) for visual consistency.
+- Reveal animation: stagger per group, not per logo, to avoid 100 animation timers.
+- No changes to other About sections.
