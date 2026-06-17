@@ -28,11 +28,6 @@ const milestones: Milestone[] = [
     body: "Enterprise messaging specialist serving Japan's major mobile carriers — the foundation for the later partnership.",
   },
   {
-    year: "09/2019",
-    title: "Top 3 Largest Viber Providers in Vietnam",
-    body: "Ranked among Vietnam's top three Viber messaging providers.",
-  },
-  {
     year: "03/2022",
     title: "VietGuys joins the Accrete group",
     body: "Japanese backing, regional technology and international standards — a Tokyo Stock Exchange–listed partner with the same long-horizon thinking.",
