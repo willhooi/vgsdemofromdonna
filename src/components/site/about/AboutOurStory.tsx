@@ -47,8 +47,8 @@ const milestones: Milestone[] = [
   {
     year: "Year TBC",
     tbc: true,
-    title: "Telecommunications license granted",
-    body: "One of the few Vietnamese enterprises granted License No. 39/GP-CVT to provide non-facilities-based telecommunications services.",
+    title: "Trusted partner. Licensed provider",
+    body: "Officially recognized as a Zalo Trusted Partner and granted License No. 39/GP-CVT for non-facilities-based telecommunications services, reinforcing VietGuys' credibility and regulatory compliance.",
   },
   {
     year: "01/2026",
