@@ -48,7 +48,7 @@ const milestones: Milestone[] = [
     year: "Year TBC",
     tbc: true,
     title: "Telecommunications license granted",
-    body: "Confirms VietGuys' status as a licensed telecommunications operator — a rare legal foundation in Vietnam.",
+    body: "One of the few Vietnamese enterprises granted License No. 39/GP-CVT to provide non-facilities-based telecommunications services.",
   },
   {
     year: "Year TBC",
