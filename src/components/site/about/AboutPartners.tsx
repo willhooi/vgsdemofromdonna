@@ -49,7 +49,7 @@ const LogoCard = ({ url, name }: { url: string; name: string }) => (
       src={url}
       alt={prettyName(name)}
       loading="lazy"
-      className="max-h-10 w-auto max-w-[120px] object-contain opacity-80 grayscale transition duration-300 group-hover:opacity-100 group-hover:grayscale-0"
+      className="max-h-10 w-auto max-w-[120px] object-contain transition duration-300 group-hover:opacity-100"
     />
   </div>
 );
