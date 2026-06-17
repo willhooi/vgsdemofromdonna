@@ -92,8 +92,9 @@ export const ServicesPlexusBackdrop = () => {
         width="100%"
         height="100%"
         viewBox={`0 0 ${VIEW_W} ${VIEW_H}`}
-        preserveAspectRatio="xMidYMid slice"
+        preserveAspectRatio="xMidYMin slice"
         xmlns="http://www.w3.org/2000/svg"
+        style={{ willChange: "transform" }}
       >
         <defs>
           <filter id="services-plexus-glow" x="-100%" y="-100%" width="300%" height="300%">
