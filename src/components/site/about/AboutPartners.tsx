@@ -75,10 +75,10 @@ export const AboutPartners = () => {
             Our Valued Clients
           </span>
           <h2 className="mt-4 font-display text-3xl font-extrabold text-foreground md:text-5xl">
-            From Banking to FMCG, brands of every scale
+            Chosen by leaders across industries
           </h2>
           <p className="mt-4 text-base text-muted-foreground md:text-lg">
-            Brands of every scale choose VietGuys for customer engagement at scale.
+            From Banking to FMCG, brands of every scale choose VietGuys for customer engagement at scale.
           </p>
         </Reveal>
 
