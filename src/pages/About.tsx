@@ -8,7 +8,7 @@ import { AboutOurStory } from "@/components/site/about/AboutOurStory";
 import { AboutCoreValues } from "@/components/site/about/AboutCoreValues";
 import { AboutMissionVisionNew } from "@/components/site/about/AboutMissionVisionNew";
 import { AboutPartners } from "@/components/site/about/AboutPartners";
-import { AboutCertificatesNew } from "@/components/site/about/AboutCertificatesNew";
+
 import { WaveDivider } from "@/components/site/about/WaveDivider";
 import { FloatingActions } from "@/components/site/about/FloatingActions";
 
@@ -51,8 +51,6 @@ const About = () => {
       <AboutMissionVisionNew />
 
       <AboutPartners />
-
-      <AboutCertificatesNew />
 
       <AboutCTAFinal />
 
