@@ -1,4 +1,8 @@
 import { Reveal } from "@/components/motion/Reveal";
+import vntaLogo from "@/assets/certs/vnta.png";
+import bsiIsoLogo from "@/assets/certs/bsi-iso.png";
+import vncertLogo from "@/assets/certs/vncert.png";
+import zaloTrustedLogo from "@/assets/certs/zalo-trusted.svg";
 
 type LogoItem = {
   name: string;
@@ -12,10 +16,10 @@ type LogoItem = {
 // ============================================================
 
 const certifications: LogoItem[] = [
-  { name: "VNTA", caption: "Vietnam Telecommunications Authority", image: "" },
-  { name: "BSI", caption: "ISO/IEC 27001 Certified", image: "" },
-  { name: "VNCERT", caption: "Vietnam Cybersecurity Emergency Response Team", image: "" },
-  { name: "Zalo", caption: "Trusted Partner", image: "" },
+  { name: "VNTA", caption: "Vietnam Telecommunications Authority", image: vntaLogo },
+  { name: "BSI", caption: "ISO/IEC 27001 Certified", image: bsiIsoLogo },
+  { name: "VNCERT", caption: "Vietnam Cybersecurity Emergency Response Team", image: vncertLogo },
+  { name: "Zalo", caption: "Trusted Partner", image: zaloTrustedLogo },
 ];
 
 const memberships: LogoItem[] = [
