@@ -80,10 +80,7 @@ export const AboutHeroNew = () => (
         <Reveal variant="fade-up" delay={240}>
           <div className="mx-auto mt-6 max-w-[640px] text-base leading-relaxed text-muted-foreground md:text-lg space-y-4">
             <p>
-              VietGuys is one of Vietnam's pioneers in enterprise customer engagement. Since 2007, we've grown into a leading business messaging provider — trusted by more than 6,000 domestic and international brands across banking, aviation, retail, pharmaceuticals, and technology. Today we're evolving from a trusted messaging provider into an AI-powered customer engagement company, bringing intelligence and data to every conversation: the right person, the right time, the right channel.
-            </p>
-            <p>
-              We are also a member of Accrete Inc., a Tokyo listed Japanese technology group and a leading international messaging provider in Japan. This gives our clients the reliability of enterprise grade infrastructure, the assurance of international standards, and the advantage of AI built for the Vietnamese market. 
+              For nearly two decades, VietGuys has been a trusted engagement partner for 6,000+ brands across banking, aviation, retail, healthcare, FMCG, and technology. Backed by Japan's Accrete Inc., a Tokyo-listed Japanese technology group and a leading international messaging provider, we combine AI, data, and omnichannel communications to help businesses build stronger customer relationships.
             </p>
           </div>
         </Reveal>
