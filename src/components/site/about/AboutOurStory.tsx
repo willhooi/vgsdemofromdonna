@@ -14,7 +14,7 @@ const milestones: Milestone[] = [
   {
     year: "06/2007",
     title: "VietGuys is founded",
-    body: "Founded in Ho Chi Minh City as a pioneer in mobile and SMS marketing in Vietnam — first SMS gateway lit up from a 25m² workplace.",
+    body: "Founded in Ho Chi Minh City as a pioneer in mobile and SMS marketing in Vietnam.",
   },
   {
     year: "2008–2018",
