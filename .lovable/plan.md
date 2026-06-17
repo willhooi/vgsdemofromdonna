@@ -1,53 +1,25 @@
-# Plan: Section transition cho "Customers of VietGuys"
+Plan: Remove compass icon and relayout the 6 CoreValues cards
 
-## Mục tiêu
-Khi cuộn từ khối 9 dịch vụ (ServicesGrid) sang khối "Customers of VietGuys", người dùng cần một tín hiệu thị giác rõ ràng báo "đã sang section mới" — đồng bộ với cách các section khác trong trang đang xử lý (VDivider, đổi `bg-muted`, `chapter-eyebrow`).
+Current state:
+- The CoreValues section has a 12-column grid: a sticky left heading panel (4 cols) containing the title, description, and a large compass/target icon (`GiantTarget`) at the bottom.
+- The first 4 values sit in a 2x2 grid to the right of the heading; the last 2 values fill a full-width bottom row.
+- A sailboat background visual, wave SVG, and gradient overlays sit behind everything.
 
-## Mockup tham khảo (ASCII)
+Changes to make:
+1. Remove the compass icon
+   - Delete the `GiantTarget` DrawIcon constant.
+   - Remove the `div` that renders `{GiantTarget}` inside the heading block.
+   - Keep `DrawIcon` itself because each value card still uses it for its own small icon.
 
-```text
-┌──────────────────────────────────────────────────┐
-│  ServicesGrid (9 dịch vụ) — bg-background        │
-│  ……                                              │
-│  [ tile 7 ] [ tile 8 ] [ tile 9 ]                │
-└──────────────────────────────────────────────────┘
-        ▲ kết thúc bg-background
+2. Relayout the heading and 6 value cards
+   - Move the heading block to the top of the section (full width, centered) instead of a sticky left panel. This keeps the title and description visible as requested.
+   - Arrange the 6 `ValueTile` cards in a responsive grid:
+     - Desktop: 3 columns x 2 rows
+     - Tablet: 2 columns x 3 rows
+     - Mobile: 1 column x 6 rows
+   - Keep existing `min-h` and animation delays so the staggered reveal effect remains.
 
-╌╌╌╌╌╌╌╌╌╌╌  hairline gradient full-width  ╌╌╌╌╌╌╌╌  ← đường cắt mảnh 1px
-                                                       (transparent → primary/30 → transparent)
+3. Preserve visual background
+   - Keep `SailboatBackdrop`, the sailboat image, top-edge blend, wave SVG, and readability gradients unchanged.
 
-┌──────────────────────────────────────────────────┐
-│  bg-muted/40  (đổi tone nền nhẹ)                 │
-│                                                  │
-│            • 06 — CUSTOMERS •     ← chapter-eyebrow
-│        Customers of VietGuys      ← heading
-│  Leading brands trust VietGuys…   ← sub                 
-│                                                  │
-│   [ Sea ] [ LG ] [ CGV ] [ Pharma ] [ SMB ]     │
-└──────────────────────────────────────────────────┘
-```
-
-## Thay đổi
-
-### 1. `src/components/site/VietGuysCaseStudies.tsx`
-- Đổi `className` section:
-  - Từ `bg-background pt-8 pb-14 md:pt-10 md:pb-16`
-  - Thành `bg-muted/40 pt-12 pb-16 md:pt-16 md:pb-20`
-- Thêm ngay đầu `<section>` (trước `container-tight`) một hairline divider full-width:
-  ```tsx
-  <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[hsl(var(--primary)/0.35)] to-transparent" />
-  ```
-- Thêm `chapter-eyebrow` ngay trên `<h2>`:
-  ```tsx
-  <span className="chapter-eyebrow justify-center">06 — Customers</span>
-  ```
-  (đồng bộ với HumanStory `05 — Behind the messages`, CaseStudies `06 — Kết quả thật`.)
-- Khoảng cách giữa eyebrow và h2: `mt-3`.
-
-### 2. Không đụng `ServicesGrid` (giữ nguyên padding hiện tại) — sự đổi tone nền + hairline đã đủ ngắt nhịp.
-
-### 3. Không đụng `Index.tsx` — section đã đứng đúng vị trí.
-
-## Kiểm chứng
-- `npx tsc --noEmit`
-- Browser screenshot vùng giao giữa ServicesGrid và Customers để xác nhận hairline + đổi tone hiển thị đúng trên desktop và mobile.
+Result: a cleaner, more balanced section that no longer shows the compass icon, keeps the heading and description, and lets the sailboat background breathe.

@@ -348,22 +348,6 @@ const AccentTile = ({
   </Reveal>
 );
 
-const GiantTarget = (
-  <DrawIcon
-    className="h-40 w-40 md:h-48 md:w-48"
-    strokeWidth={1.1}
-    viewBox="0 0 64 64"
-  >
-    <circle cx="32" cy="32" r="22" />
-    <circle cx="32" cy="32" r="14" />
-    <circle cx="32" cy="32" r="6" />
-    <line x1="32" y1="6" x2="32" y2="20" />
-    <line x1="32" y1="44" x2="32" y2="58" />
-    <line x1="6" y1="32" x2="20" y2="32" />
-    <line x1="44" y1="32" x2="58" y2="32" />
-  </DrawIcon>
-);
-
 export const AboutCoreValues = () => (
   <section
     className="group/section relative overflow-hidden py-20 md:py-28"
@@ -375,60 +359,42 @@ export const AboutCoreValues = () => (
     <SailboatBackdrop />
 
     <div className="container-tight relative z-10">
+      {/* Heading block — full width on top */}
+      <Reveal variant="fade-up">
+        <div className="max-w-2xl">
+          <span
+            className="text-[11px] font-bold uppercase tracking-[0.24em]"
+            style={{ color: "hsl(var(--primary-deep))" }}
+          >
+            CORE VALUES
+          </span>
+          <h2 className="mt-4 font-display text-3xl font-extrabold leading-[1.1] text-foreground md:text-[34px] lg:text-[40px]">
+            Six values that have outlasted every trend.
+          </h2>
+          <span
+            aria-hidden
+            className="mt-5 block h-[3px] w-16 rounded-full"
+            style={{ background: "#cd3734" }}
+          />
+          <p className="mt-5 max-w-lg text-sm leading-relaxed text-muted-foreground">
+            Built in calm waters and rough ones alike. These six values are
+            why we're still sailing.
+          </p>
+        </div>
+      </Reveal>
 
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-12 lg:gap-6">
-        {/* Heading block — spans full width on mobile, sticky-feel side panel on desktop */}
-        <div className="sm:col-span-2 lg:col-span-4 lg:row-span-2 lg:self-stretch">
-          <Reveal variant="fade-up">
-            <div className="lg:sticky lg:top-24">
-              <span
-                className="text-[11px] font-bold uppercase tracking-[0.24em]"
-                style={{ color: "hsl(var(--primary-deep))" }}
-              >
-                CORE VALUES
-              </span>
-              <h2 className="mt-4 font-display text-3xl font-extrabold leading-[1.1] text-foreground md:text-[34px] lg:text-[40px]">
-                Six values that have outlasted every trend.
-              </h2>
-              <span
-                aria-hidden
-                className="mt-5 block h-[3px] w-16 rounded-full"
-                style={{ background: "#cd3734" }}
-              />
-              <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground">
-                Built in calm waters and rough ones alike. These six values are
-                why we're still sailing.
-              </p>
-              {/* signature accent icon, anchors the section visually */}
-              <div className="mt-8 hidden lg:flex items-center justify-start text-primary/80">
-                {GiantTarget}
-              </div>
-            </div>
-          </Reveal>
-        </div>
-
-        {/* 2x2 grid of the first 4 values, right of heading on desktop */}
-        <div className="lg:col-span-4">
-          <ValueTile value={values[0]} delay={80} className="min-h-[240px]" />
-        </div>
-        <div className="lg:col-span-4">
-          <ValueTile value={values[1]} delay={160} className="min-h-[240px]" />
-        </div>
-        <div className="lg:col-span-4">
-          <ValueTile value={values[2]} delay={80} className="min-h-[240px]" />
-        </div>
-        <div className="lg:col-span-4">
-          <ValueTile value={values[3]} delay={160} className="min-h-[240px]" />
-        </div>
-
-        {/* Last 2 values — full-width row, split 6/6 on desktop */}
-        <div className="sm:col-span-2 lg:col-span-6">
-          <ValueTile value={values[4]} delay={80} className="min-h-[220px]" />
-        </div>
-        <div className="sm:col-span-2 lg:col-span-6">
-          <ValueTile value={values[5]} delay={160} className="min-h-[220px]" />
-        </div>
+      {/* 3x2 grid of value tiles */}
+      <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+        {values.map((value, i) => (
+          <ValueTile
+            key={value.title}
+            value={value}
+            delay={(i % 3) * 80}
+            className="min-h-[240px]"
+          />
+        ))}
       </div>
     </div>
   </section>
 );
+
