@@ -39,8 +39,8 @@ const milestones: Milestone[] = [
     body: "Information Security Management Systems, - audited and certified by BSI (British Standards Institution) and accredited by ANAB.",
   },
   {
-    year: "Year TBC",
-    tbc: true,
+    year: "01/2026",
+    tbc: false,
     title: "PangoCDP launches",
     body: "VietGuys' customer data platform — adding data, segmentation and customer journeys to messaging.",
   },
@@ -49,12 +49,6 @@ const milestones: Milestone[] = [
     tbc: false,
     title: "Trusted partner. Licensed provider",
     body: "Officially recognized as a Zalo Trusted Partner and granted License No. 39/GP-CVT for non-facilities-based telecommunications services, reinforcing VietGuys' credibility and regulatory compliance.",
-  },
-  {
-    year: "01/2026",
-    tbc: false,
-    title: "Zalo Trusted Partner",
-    body: "Officially recognised by Zalo — Vietnam's largest messaging platform — as a trusted partner.",
   },
   {
     year: "01/2026",
