@@ -146,8 +146,7 @@ export const AboutOurStory = () => {
             Know more about us
           </h2>
           <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-white/70">
-            From an SMS pioneer in 2007 to Vietnam&apos;s AI-powered customer engagement
-            company — every milestone is a moment we earned the right to send the next
+            Every milestone is a moment we earned the right to send the next
             message.
           </p>
         </Reveal>
