@@ -37,21 +37,21 @@ const SectionHeading = ({ children }: { children: React.ReactNode }) => (
 );
 
 const LogoCard = ({ item }: { item: LogoItem }) => (
-  <article className="group flex aspect-[4/3] flex-col items-center justify-center rounded-2xl border border-border bg-card p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_18px_40px_-20px_hsl(var(--primary)/0.45)]">
+  <article className="group flex aspect-[4/3] flex-col items-center justify-center rounded-2xl border border-border bg-card p-4 text-center transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_18px_40px_-20px_hsl(var(--primary)/0.45)]">
     {item.image ? (
       <img
         src={item.image}
         alt={`${item.name} logo`}
-        className="max-h-20 w-full object-contain"
+        className="max-h-16 w-full object-contain"
         loading="lazy"
       />
     ) : (
-      <span className="font-display text-3xl font-extrabold tracking-tight text-primary md:text-4xl">
+      <span className="font-display text-2xl font-extrabold tracking-tight text-primary md:text-3xl">
         {item.name}
       </span>
     )}
     {item.caption && (
-      <p className="mt-3 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+      <p className="mt-2 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
         {item.caption}
       </p>
     )}
