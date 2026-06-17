@@ -924,3 +924,13 @@ body.accrete-morph-active [data-accrete-target] > * {
 /* Subtle V-glow halo for hero CTAs / featured tiles. */
 .vg-halo { box-shadow: var(--shadow-vg); }
 
+
+/* Horizontally auto-scrolling marquee used in Our Valued Clients */
+@keyframes marquee-x {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee-track { animation: marquee-x linear infinite; will-change: transform; }
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none !important; }
+}
