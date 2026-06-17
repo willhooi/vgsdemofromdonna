@@ -1,32 +1,42 @@
-# Convert "Our Valued Clients" to tabbed industry selector
+## Mục tiêu
+Thay component `AboutCertificatesNew.tsx` hiện tại (4 card phức tạp) bằng layout đơn giản giống ảnh tham chiếu: 2 khu vực logo, mỗi logo là 1 entry trong mảng — thêm/bớt chỉ bằng cách sửa array.
 
-Replace the stacked marquee rows in `src/components/site/about/AboutPartners.tsx` with a tabbed layout: industry chips on top, logos for the active industry below.
+## Cấu trúc
 
-## Changes (single file: `AboutPartners.tsx`)
+**Section 1 — "OUR CERTIFICATIONS ARE ISSUED BY"**
+Mặc định 4 ô:
+- VNTA (Vietnam Telecommunications Authority)
+- BSI — ISO/IEC 27001
+- VNCERT
+- (ô thứ 4 — placeholder, bạn upload logo + đặt tên sau)
 
-**1. Add tab state**
-- `const [active, setActive] = useState(groups[0].dir)`.
-- Derive `activeLogos = (logosByDir[active] ?? []).slice(0, 10)` so each industry shows at most 10 brands (5–10 range, depending on what's available).
+**Section 2 — "VIETGUYS IS CURRENTLY AN ACTIVE MEMBER OF"**
+Mặc định 3 ô:
+- MMA — Mobile Marketing Association
+- VECOM — Vietnam E-Commerce Association
+- VDCA — Vietnam Digital Communications Association
 
-**2. Tab bar (industry chips)**
-- Horizontal wrap of buttons, one per group that has logos.
-- Inactive: `bg-background border border-border text-muted-foreground hover:text-foreground hover:border-primary/40`.
-- Active: `bg-[hsl(var(--primary))] text-primary-foreground border-transparent shadow-[var(--shadow-soft)]`.
-- Rounded-full, `px-4 py-2`, `text-sm font-medium`, gap-2.
-- Center-aligned on desktop, horizontally scrollable on mobile (`overflow-x-auto`, `flex-nowrap md:flex-wrap md:justify-center`).
+## Thiết kế
+- Nền `bg-background` (sáng), giữ tone xanh để fit concept About.
+- Tiêu đề: chữ in hoa, letter-spacing rộng, có 2 line ngang 2 bên (giống ảnh).
+- Grid responsive: 2 cột (mobile) → 4 cột (cert) / 3 cột (member) (desktop).
+- Mỗi ô: khung trắng bo nhẹ, padding, logo `object-contain` căn giữa; nếu chưa có logo thì fallback hiển thị chữ viết tắt (MMA/VECOM/VDCA…) + dòng mô tả nhỏ phía dưới (như mock).
+- Hover: nhẹ nhàng (translate-y, shadow xanh mờ).
 
-**3. Logo panel**
-- Replace marquee with a responsive grid: `grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4`.
-- Reuse existing `LogoCard` styling (h-20 card, grayscale → color on hover, lift).
-- Wrap grid in a keyed container (`key={active}`) so it remounts on tab change with a soft fade-in (`animate-fade-in`).
-- Remove eyebrow + divider line above each group (no longer needed — tab bar replaces it).
+## Cách thêm/bớt logo
+Trong file, mỗi section có 1 mảng đơn giản:
+```ts
+const certifications = [
+  { name: "VNTA", caption: "Vietnam Telecom Authority", image: "" },
+  { name: "BSI",  caption: "ISO/IEC 27001",            image: "" },
+  ...
+];
+```
+Thêm/bớt: thêm/xóa 1 dòng. Khi upload logo, gán đường dẫn vào `image` — fallback chữ tự động ẩn.
 
-**4. Remove**
-- `MarqueeRow` component, per-group `Reveal` loop, and `space-y-10` stack.
-- Marquee-related CSS in `src/index.css` is left in place (harmless, may be reused) — no edit needed.
+## File chịu ảnh hưởng
+- Viết lại `src/components/site/about/AboutCertificatesNew.tsx`.
+- Không đổi vị trí mount trong `pages/About.tsx`.
 
-**5. Keep untouched**
-- Section heading, sub-line, background, padding.
-- `logosByDir` loader, `groups` array, `prettyName`, `LogoCard`.
-
-No other files modified.
+## Sau khi approve
+Mình tạo layout với placeholder. Khi bạn upload logo, mình gắn vào mảng và xóa fallback chữ.
