@@ -196,9 +196,6 @@ export const CTASection = () => {
                 {submitting ? "Sending..." : "Send your message"}
                 <Send className="h-4 w-4" />
               </Button>
-              <p className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
-                Average response · under 2 hours
-              </p>
             </form>
           </div>
         </div>
