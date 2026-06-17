@@ -94,12 +94,11 @@ export const VietGuysCaseStudies = () => {
   return (
     <section
       id="vg-case-studies"
-      className="relative overflow-hidden bg-background py-20 md:py-28"
+      className="relative overflow-hidden bg-background pt-8 pb-14 md:pt-10 md:pb-16"
     >
       <div className="container-tight">
         <div className="mx-auto max-w-3xl text-center">
-          <span className="chapter-eyebrow">Case studies</span>
-          <h2 className="heading-section mt-3">
+          <h2 className="heading-section">
             <span className="text-foreground">Customers of </span>
             <span className="bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--accent))] bg-clip-text text-transparent">
               VietGuys
