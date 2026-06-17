@@ -7,28 +7,28 @@ import {
 
 const faqs = [
   {
-    q: "VietGuys cung cấp những giải pháp tiếp thị di động nào?",
-    a: "VietGuys cung cấp hệ sinh thái đa kênh gồm SMS Brandname, SMS Fixed, SMS Short Code, Viber Message, Zalo ZNS, Email Marketing & OTP, Voice Brandname & OTP, Mobile Topup, Smart Warranty, OTPBox và các giải pháp tuỳ biến (Customized Solutions) cho doanh nghiệp.",
+    q: "What mobile marketing solutions does VietGuys provide?",
+    a: "VietGuys offers a multi-channel ecosystem including SMS Brandname, SMS Fixed, SMS Short Code, Viber Messages, Zalo ZNS, Email Marketing & OTP, Voice Brandname & OTP, Mobile Topup, Smart Warranty, OTPBox, and customized enterprise solutions.",
   },
   {
-    q: "Hệ thống của VietGuys có đảm bảo bảo mật và tốc độ không?",
-    a: "Có. VietGuys là một trong số ít công ty quảng cáo sở hữu chứng chỉ ISO 27001:2022 về An ninh thông tin, được cấp chứng chỉ VNCERT CERTIFICATtion bởi Bộ TT&TT, vận hành nhiều server back-up đảm bảo dịch vụ luôn ổn định và tốc độ gửi tin tính bằng giây.",
+    q: "Does VietGuys' system ensure security and speed?",
+    a: "Yes. VietGuys is one of the few advertising companies holding the ISO 27001:2022 certification for information security, certified by VNCERT/CC under the Ministry of Information and Communications, and operates multiple backup servers to ensure stable service and message delivery speed measured in seconds.",
   },
   {
-    q: "Quy mô vận hành của VietGuys ra sao?",
-    a: "Hơn 19 năm kinh nghiệm, phục vụ hơn 5,000 nhãn hàng và gửi đi khoảng 5,000,000 tin nhắn SMS & Email mỗi ngày. Đội ngũ chuyên gia hỗ trợ khách hàng 24/7.",
+    q: "What is the scale of VietGuys' operations?",
+    a: "More than 19 years of experience, serving over 5,000 brands and sending approximately 5,000,000 SMS & Email messages per day. Our expert team supports customers 24/7.",
   },
   {
-    q: "Lợi ích sau khi VietGuys M&A với Accrete Inc. (Nhật Bản) là gì?",
-    a: "Sau thương vụ M&A cùng Accrete Inc., VietGuys được tăng cường năng lực công nghệ AI/CDP, mở rộng giải pháp Account Intelligence và áp dụng quy chuẩn vận hành Nhật Bản, giúp khách hàng enterprise tiếp cận giải pháp tiếp thị thế hệ mới.",
+    q: "What are the benefits after VietGuys' M&A with Accrete Inc. (Japan)?",
+    a: "Following the M&A with Accrete Inc., VietGuys has strengthened its AI/CDP technology capabilities, expanded Account Intelligence solutions, and adopted Japanese operational standards, helping enterprise customers access next-generation marketing solutions.",
   },
   {
-    q: "VietGuys có thể tích hợp với hệ thống CRM hiện tại của doanh nghiệp không?",
-    a: "Có. Nền tảng của VietGuys được thiết kế linh hoạt, tương thích và kết nối API với nhiều hệ thống CRM, ERP, eCommerce trong nước và quốc tế. Đội ngũ kỹ thuật sẽ tuỳ biến theo từng nhu cầu của khách hàng.",
+    q: "Can VietGuys integrate with our existing CRM system?",
+    a: "Yes. The VietGuys platform is designed to be flexible, compatible, and API-connectable with many domestic and international CRM, ERP, and eCommerce systems. Our technical team will tailor the integration to each customer's needs.",
   },
   {
-    q: "Làm sao để nhận tư vấn và báo giá từ VietGuys?",
-    a: "Quý khách có thể liên hệ trực tiếp qua hotline 028-7300-8027, sử dụng AI Chat ngay trên website, hoặc bấm “Talk to Expert” để được chuyên gia của VietGuys tư vấn giải pháp phù hợp trong vòng 24 giờ.",
+    q: "How can I get advice and a quote from VietGuys?",
+    a: "You can contact us directly via the hotline 028-7300-8027, use the AI Chat on the website, or click 'Talk to Expert' to have a VietGuys expert recommend the right solution within 24 hours.",
   },
 ];
 
@@ -38,15 +38,15 @@ export const FAQ = () => (
       <div>
         <span className="eyebrow">FAQ</span>
         <h2 className="heading-section mt-3">
-          Câu hỏi <span className="text-primary">thường gặp</span>
+          Frequently Asked <span className="text-primary">Questions</span>
         </h2>
         <p className="mt-4 text-base text-muted-foreground">
-          Những thông tin quan trọng nhất về dịch vụ, bảo mật và quy trình triển khai của VietGuys.
+          Everything you need to know about VietGuys services, security, and deployment.
         </p>
         <div className="mt-8 rounded-2xl border border-border bg-secondary/40 p-5">
-          <p className="text-sm font-semibold text-foreground">Bạn cần câu trả lời cụ thể hơn?</p>
+          <p className="text-sm font-semibold text-foreground">Need a more specific answer?</p>
           <p className="mt-1 text-sm text-muted-foreground">
-            Đội ngũ chuyên gia sẵn sàng tư vấn 24/7.
+            Our experts are available to advise you 24/7.
           </p>
           <a
             href="tel:02873008027"
