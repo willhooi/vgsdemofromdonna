@@ -51,10 +51,10 @@ const milestones: Milestone[] = [
     body: "Officially recognized as a Zalo Trusted Partner and granted License No. 39/GP-CVT for non-facilities-based telecommunications services, reinforcing VietGuys' credibility and regulatory compliance.",
   },
   {
-    year: "01/2026",
+    year: "04/2026",
     highlight: true,
     title: "Another I launches",
-    body: "VietGuys' AI-powered customer engagement brand — the move from messaging vendor to AI-led engagement platform.",
+    body: "VietGuys' AI-powered customer engagement brand\u00A0 - the move from messaging vendor to AI-led engagement platform.",
   },
 ];
 
