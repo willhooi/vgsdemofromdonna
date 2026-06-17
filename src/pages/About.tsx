@@ -40,7 +40,7 @@ const About = () => {
         <svg viewBox="0 0 1440 90" preserveAspectRatio="none" style={{ display:'block', width:'100%', height:'100%' }}>
 
 
-          <path d="M0,46 C240,92 480,4 720,40 C960,76 1200,14 1440,52 L1440,90 L0,90 Z" fill="hsl(0 0% 97%)"/>
+          <path d="M0,46 C240,92 480,4 720,40 C960,76 1200,14 1440,52 L1440,90 L0,90 Z" fill="#0a2f1a"/>
 
         </svg>
 
