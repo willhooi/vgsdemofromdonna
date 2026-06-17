@@ -59,12 +59,6 @@ export const AboutPartners = () => (
           </Reveal>
         ))}
       </div>
-
-      <Reveal variant="fade" delay={300}>
-        <p className="mt-10 text-center text-sm text-muted-foreground">
-          Coming soon: Insight Genie &amp; ForwardEdge.
-        </p>
-      </Reveal>
     </div>
   </section>
 );
