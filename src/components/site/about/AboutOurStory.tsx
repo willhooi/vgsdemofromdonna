@@ -35,8 +35,8 @@ const milestones: Milestone[] = [
   {
     year: "Year TBC",
     tbc: true,
-    title: "ISO 27001 certification",
-    body: "Information security certification, audited by Bureau Veritas and UKAS — security our clients can rely on.",
+    title: "ISO/IEC 27001:2022",
+    body: "IInformation Security Management Systems, - audited and certified by BSI (British Standards Institution) and accredited by ANAB.",
   },
   {
     year: "Year TBC",
