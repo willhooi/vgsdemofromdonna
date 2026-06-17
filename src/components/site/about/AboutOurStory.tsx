@@ -36,7 +36,7 @@ const milestones: Milestone[] = [
     year: "10/2025",
     tbc: false,
     title: "ISO/IEC 27001:2022",
-    body: "IInformation Security Management Systems, - audited and certified by BSI (British Standards Institution) and accredited by ANAB.",
+    body: "Information Security Management Systems, - audited and certified by BSI (British Standards Institution) and accredited by ANAB.",
   },
   {
     year: "Year TBC",
