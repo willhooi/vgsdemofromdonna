@@ -62,31 +62,62 @@ export const AboutHeroNew = () => (
       count={55}
     />
     <div className="container-tight relative">
-      <div className="mx-auto max-w-3xl text-center">
-        <Reveal variant="fade-up">
-          <span className="text-[11px] font-bold uppercase tracking-[0.24em]" style={{ color: "hsl(var(--primary-deep))" }}>
-            Since 2007 &nbsp;· A MEMBER OF ACCRETE INC. FROM JAPAN
-          </span>
-        </Reveal>
-        <Reveal variant="fade-up" delay={120}>
-          <h1
-            className="mt-5 font-display font-extrabold leading-[1.05] text-foreground"
-            style={{ fontSize: "clamp(42px, 6vw, 72px)" }}
-          >
-            Intelligence in every{" "}
-            <span style={{ color: "hsl(var(--primary))" }}>conversation.</span>
-          </h1>
-        </Reveal>
-        <Reveal variant="fade-up" delay={240}>
-          <div className="mx-auto mt-6 max-w-[640px] text-base leading-relaxed text-muted-foreground md:text-lg space-y-4">
-            <p>
-              VietGuys is one of Vietnam's pioneers in enterprise customer engagement. Since 2007, we've grown into a leading business messaging provider — trusted by more than 6,000 domestic and international brands across banking, aviation, retail, pharmaceuticals, and technology. Today we're evolving from a trusted messaging provider into an AI-powered customer engagement company, bringing intelligence and data to every conversation: the right person, the right time, the right channel.
-            </p>
-            <p>
-              We are also a member of Accrete Inc., a Tokyo listed Japanese technology group and a leading international messaging provider in Japan. This gives our clients the reliability of enterprise grade infrastructure, the assurance of international standards, and the advantage of AI built for the Vietnamese market. 
-            </p>
-          </div>
-        </Reveal>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+        {/* Left Column: Branding & Headline */}
+        <div className="lg:col-span-5 lg:sticky lg:top-36">
+          <Reveal variant="fade-up">
+            <div className="flex items-center gap-3 mb-6">
+              <span className="h-[1px] w-8" style={{ backgroundColor: "hsl(var(--primary))" }}></span>
+              <span className="text-[11px] font-bold uppercase tracking-[0.24em]" style={{ color: "hsl(var(--primary-deep))" }}>
+                Since 2007 · A MEMBER OF ACCRETE INC. FROM JAPAN
+              </span>
+            </div>
+          </Reveal>
+          
+          <Reveal variant="fade-up" delay={120}>
+            <h1
+              className="font-display font-extrabold leading-[1.05] text-foreground tracking-tight"
+              style={{ fontSize: "clamp(42px, 6vw, 72px)" }}
+            >
+              Intelligence in every{" "}
+              <span style={{ color: "hsl(var(--primary))" }}>conversation.</span>
+            </h1>
+          </Reveal>
+        </div>
+
+        {/* Right Column: Scannable Copy */}
+        <div className="lg:col-span-7 space-y-12">
+          <Reveal variant="fade-up" delay={240}>
+            <div className="space-y-12 border-l border-border pl-8 lg:pl-12 relative">
+              {/* Vertical Decorative Bar Top */}
+              <div 
+                className="absolute left-[-2px] top-0 w-[3px] h-16 rounded-full" 
+                style={{ backgroundColor: "hsl(var(--primary))" }}
+              ></div>
+
+              <div className="space-y-6">
+                <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+                  For nearly <span className="text-foreground font-semibold">two decades</span>, VietGuys has been a trusted engagement partner for <span className="text-foreground font-semibold">6,000+ brands</span> across banking, aviation, retail, healthcare, FMCG, and technology.
+                </p>
+                <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+                  Backed by Japan's <span className="text-foreground font-semibold">Accrete Inc.</span>, a Tokyo-listed Japanese technology group and a leading international messaging provider, we combine <span className="italic" style={{ color: "hsl(var(--primary))" }}>AI, data, and omnichannel communications</span> to help businesses build stronger customer relationships.
+                </p>
+              </div>
+
+              {/* Accrete Highlight Cards */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
+                <div className="p-6 rounded-2xl bg-muted/50 border border-border/50">
+                  <p className="text-[10px] font-bold uppercase tracking-widest mb-2" style={{ color: "hsl(var(--primary))" }}>Reliability</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">Enterprise grade infrastructure and international standards.</p>
+                </div>
+                <div className="p-6 rounded-2xl bg-muted/50 border border-border/50">
+                  <p className="text-[10px] font-bold uppercase tracking-widest mb-2" style={{ color: "hsl(var(--primary))" }}>Innovation</p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">The advantage of AI specifically built for the Vietnamese market.</p>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+        </div>
       </div>
 
       <Reveal variant="scale-soft" delay={200}>
