@@ -70,7 +70,11 @@ export const ServicesPlexusBackdrop = () => {
   return (
     <div
       aria-hidden
-      className="pointer-events-none absolute inset-0 z-0 opacity-40 md:opacity-70"
+      className="pointer-events-none absolute left-0 right-0 top-0 z-0 opacity-40 md:opacity-70"
+      style={{
+        height: "1400px",
+        contain: "layout paint size",
+      }}
     >
       <style>{`
         @keyframes services-plexus-twinkle {
@@ -94,7 +98,7 @@ export const ServicesPlexusBackdrop = () => {
         viewBox={`0 0 ${VIEW_W} ${VIEW_H}`}
         preserveAspectRatio="xMidYMin slice"
         xmlns="http://www.w3.org/2000/svg"
-        style={{ willChange: "transform" }}
+        style={{ display: "block" }}
       >
         <defs>
           <filter id="services-plexus-glow" x="-100%" y="-100%" width="300%" height="300%">
