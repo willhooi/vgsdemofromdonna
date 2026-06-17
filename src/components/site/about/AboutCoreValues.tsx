@@ -192,6 +192,17 @@ const SailboatBackdrop = () => {
         }}
       />
 
+      {/* Top-edge blend — hides the image’s solid background at the top so the sailboat overlays the section background */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute right-0 top-0 h-[26%] w-[60%]"
+        style={{
+          background:
+            "linear-gradient(to bottom, hsl(0 0% 97%) 0%, hsl(0 0% 97% / 0.55) 45%, transparent 100%)",
+        }}
+      />
+
+
       {/* Wave that visually connects the bottom row of tiles */}
       <svg
         viewBox="0 0 1440 220"
