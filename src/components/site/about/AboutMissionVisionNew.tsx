@@ -128,7 +128,7 @@ export const AboutMissionVisionNew = () => (
     />
 
     <div className="container-tight relative">
-      <Reveal variant="fade-up" className="mx-auto max-w-3xl text-center">
+      <Reveal variant="fade-up" className="mx-auto max-w-5xl text-center">
         <span
           className="text-[11px] font-bold uppercase tracking-[0.24em]"
           style={{ color: "hsl(var(--primary-deep))" }}
