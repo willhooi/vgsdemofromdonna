@@ -33,16 +33,16 @@ const milestones: Milestone[] = [
     body: "Japanese backing, regional technology and international standards — a Tokyo Stock Exchange–listed partner with the same long-horizon thinking.",
   },
   {
-    year: "10/2025",
-    tbc: false,
-    title: "ISO/IEC 27001:2022",
-    body: "Information Security Management Systems, - audited and certified by BSI (British Standards Institution) and accredited by ANAB.",
-  },
-  {
     year: "4/2022",
     tbc: false,
     title: "PangoCDP launches",
     body: "VietGuys' customer data platform — adding data, segmentation and customer journeys to messaging.",
+  },
+  {
+    year: "10/2025",
+    tbc: false,
+    title: "ISO/IEC 27001:2022",
+    body: "Information Security Management Systems, - audited and certified by BSI (British Standards Institution) and accredited by ANAB.",
   },
   {
     year: "4/2022",
