@@ -75,13 +75,10 @@ export const AboutPartners = () => {
             Our Valued Clients
           </span>
           <h2 className="mt-4 font-display text-3xl font-extrabold text-foreground md:text-5xl">
-            Trusted by{" "}
-            <span style={{ color: "hsl(var(--primary))" }}>6,000+ brands</span>{" "}
-            across Vietnam.
+            From Banking to FMCG, brands of every scale
           </h2>
           <p className="mt-4 text-base text-muted-foreground md:text-lg">
-            From banking to FMCG, brands of every scale choose VietGuys for
-            customer engagement at scale.
+            Brands of every scale choose VietGuys for customer engagement at scale.
           </p>
         </Reveal>
 
