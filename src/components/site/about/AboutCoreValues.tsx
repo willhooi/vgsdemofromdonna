@@ -396,8 +396,8 @@ export const AboutCoreValues = () => (
                 style={{ background: "#cd3734" }}
               />
               <p className="mt-5 max-w-sm text-sm leading-relaxed text-muted-foreground">
-                The compass behind every decision, every product, and every
-                partnership we build at VietGuys.
+                Built in calm waters and rough ones alike. These six values are
+                why we're still sailing.
               </p>
               {/* signature accent icon, anchors the section visually */}
               <div className="mt-8 hidden lg:flex items-center justify-start text-primary/80">
