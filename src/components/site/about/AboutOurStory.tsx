@@ -19,7 +19,7 @@ const milestones: Milestone[] = [
   {
     year: "2008–2018",
     title: "Growth years",
-    body: "One of Vietnam's leading SMS Brandname providers in the country, serving banks, airlines, retailers, and global consumer brands: Samsung E-warranty Solutions (2008), LG E-warranty Solutions (2017), Top 1 SMS in e-commerce (2018), serving banks, airlines, retailers and global brands.",
+    body: "One of Vietnam's leading SMS Brandname providers in the country, serving banks, airlines, retailers, and global consumer brands: Samsung E-warranty Solutions (2008), LG E-warranty Solutions (2017), Top 1 SMS in E-commerce (2018).",
   },
   {
     year: "05/2014",
