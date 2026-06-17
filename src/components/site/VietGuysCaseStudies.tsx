@@ -94,7 +94,7 @@ export const VietGuysCaseStudies = () => {
   return (
     <section
       id="vg-case-studies"
-      className="relative overflow-hidden bg-muted/40 pt-12 pb-16 md:pt-16 md:pb-20"
+      className="relative overflow-hidden bg-muted/40 pt-8 pb-16 md:pt-10 md:pb-20"
     >
       <div
         aria-hidden
@@ -102,8 +102,7 @@ export const VietGuysCaseStudies = () => {
       />
       <div className="container-tight">
         <div className="mx-auto max-w-3xl text-center">
-          <span className="chapter-eyebrow justify-center">06 — Customers</span>
-          <h2 className="heading-section mt-3">
+          <h2 className="heading-section">
             <span className="text-foreground">Customers of </span>
             <span className="bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(var(--accent))] bg-clip-text text-transparent">
               VietGuys
