@@ -1,6 +1,8 @@
 import { Reveal } from "@/components/motion/Reveal";
 import bytetech from "@/assets/brand/bytetech.svg";
 import cxgenie from "@/assets/brand/cxgenie.svg";
+import cnvcdpLogo from "@/assets/brand/cnvcdp-logo.png.asset.json";
+
 
 const partners = [
   { logo: bytetech, name: "ByteTech", tag: "Enterprise CDP" },
