@@ -1,13 +1,43 @@
 import { Reveal } from "@/components/motion/Reveal";
-import bytetech from "@/assets/brand/bytetech.svg";
-import cxgenie from "@/assets/brand/cxgenie.svg";
-import cnvcdpLogo from "@/assets/brand/cnvcdp-logo.png.asset.json";
 
+type AssetPointer = { url: string; original_filename: string };
 
-const partners = [
-  { logo: bytetech, name: "ByteTech", tag: "Enterprise CDP" },
-  { logo: cnvcdpLogo.url, name: "CNV", tag: "Mini CDP" },
-  { logo: cxgenie, name: "CX Genie", tag: "AI Implementation" },
+const modules = import.meta.glob<{ default: AssetPointer }>(
+  "@/assets/clients/*/*.png.asset.json",
+  { eager: true }
+);
+
+const logosByDir: Record<string, { url: string; name: string }[]> = {};
+for (const path in modules) {
+  const m = (modules[path] as { default: AssetPointer }).default;
+  const parts = path.split("/");
+  const dir = parts[parts.length - 2];
+  const name = parts[parts.length - 1].replace(/\.png\.asset\.json$/, "");
+  (logosByDir[dir] ||= []).push({ url: m.url, name });
+}
+
+const prettyName = (slug: string) =>
+  slug
+    .replace(/-/g, " ")
+    .replace(/\bpng\b/gi, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .replace(/\b\w/g, (c) => c.toUpperCase());
+
+// Industry group order + display labels
+const groups: { dir: string; label: string }[] = [
+  { dir: "finance-banking", label: "Finance & Banking" },
+  { dir: "retail", label: "Retail" },
+  { dir: "technology-electronic", label: "Technology & Electronics" },
+  { dir: "ecommerce", label: "E-Commerce" },
+  { dir: "fmcg", label: "FMCG" },
+  { dir: "pharmacy", label: "Medicine & Pharmacy" },
+  { dir: "fashion-beauty", label: "Fashion & Beauty" },
+  { dir: "hospitality", label: "Hospitality & F&B" },
+  { dir: "education", label: "Education" },
+  { dir: "real-estate", label: "Real Estate" },
+  { dir: "carriage", label: "Delivery & Travel" },
+  { dir: "industry", label: "Industry & Manufacturing" },
 ];
 
 export const AboutPartners = () => (
@@ -24,40 +54,57 @@ export const AboutPartners = () => (
           className="text-[11px] font-bold uppercase tracking-[0.24em]"
           style={{ color: "hsl(var(--primary-deep))" }}
         >
-          Strategic Partners
+          Our Valued Clients
         </span>
         <h2 className="mt-4 font-display text-3xl font-extrabold text-foreground md:text-5xl">
-          An ecosystem built for{" "}
-          <span style={{ color: "hsl(var(--primary))" }}>intelligent engagement.</span>
+          Trusted by{" "}
+          <span style={{ color: "hsl(var(--primary))" }}>6,000+ brands</span>{" "}
+          across Vietnam.
         </h2>
+        <p className="mt-4 text-base text-muted-foreground md:text-lg">
+          From banking to FMCG, brands of every scale choose VietGuys for
+          customer engagement at scale.
+        </p>
       </Reveal>
 
-      <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {partners.map((p, i) => (
-          <Reveal key={p.name} variant="fade-up" delay={i * 110}>
-            <article className="flex h-full flex-col items-center rounded-[18px] border border-border bg-background p-8 text-center shadow-[var(--shadow-soft)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[var(--shadow-card)]">
-              <div className="flex h-16 items-center justify-center">
-                {p.logo ? (
-                  <img src={p.logo} alt={p.name} className="h-10 w-auto" />
-                ) : (
-                  <span className="font-display text-2xl font-extrabold text-foreground">
-                    {p.name}
+      <div className="mt-14 space-y-12">
+        {groups.map((g, gi) => {
+          const logos = logosByDir[g.dir];
+          if (!logos?.length) return null;
+          return (
+            <Reveal key={g.dir} variant="fade-up" delay={gi * 60}>
+              <div>
+                <div className="mb-5 flex items-center gap-4">
+                  <span
+                    className="text-[11px] font-bold uppercase tracking-[0.24em]"
+                    style={{ color: "hsl(var(--primary-deep))" }}
+                  >
+                    {g.label}
                   </span>
-                )}
+                  <span
+                    className="h-px flex-1"
+                    style={{ background: "hsl(var(--primary) / 0.18)" }}
+                  />
+                </div>
+                <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-7">
+                  {logos.map((l) => (
+                    <div
+                      key={l.name}
+                      className="group flex h-20 items-center justify-center rounded-xl border border-border bg-background px-3 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[var(--shadow-soft)]"
+                    >
+                      <img
+                        src={l.url}
+                        alt={prettyName(l.name)}
+                        loading="lazy"
+                        className="max-h-10 w-auto max-w-[120px] object-contain opacity-80 grayscale transition duration-300 group-hover:opacity-100 group-hover:grayscale-0"
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
-              <h3 className="mt-4 text-lg font-bold text-foreground">{p.name}</h3>
-              <span
-                className="mt-3 inline-flex items-center rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-wider"
-                style={{
-                  background: "hsl(var(--primary) / 0.12)",
-                  color: "hsl(var(--primary-deep))",
-                }}
-              >
-                {p.tag}
-              </span>
-            </article>
-          </Reveal>
-        ))}
+            </Reveal>
+          );
+        })}
       </div>
     </div>
   </section>
