@@ -59,14 +59,14 @@ const LogoCard = ({ item }: { item: LogoItem }) => (
 );
 
 export const AboutCertificatesNew = () => (
-  <section id="certificates" className="bg-background py-20 md:py-24">
-    <div className="container-tight space-y-20">
+  <section id="certificates" className="bg-background py-12 md:py-16">
+    <div className="container-tight space-y-12">
       {/* Certifications */}
       <div>
         <Reveal variant="fade-up">
           <SectionHeading>Our certifications are issued by</SectionHeading>
         </Reveal>
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {certifications.map((item, i) => (
             <Reveal key={item.name} variant="fade-up" delay={i * 80}>
               <LogoCard item={item} />
@@ -80,7 +80,7 @@ export const AboutCertificatesNew = () => (
         <Reveal variant="fade-up">
           <SectionHeading>VietGuys is currently an active member of</SectionHeading>
         </Reveal>
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {memberships.map((item, i) => (
             <Reveal key={item.name} variant="fade-up" delay={i * 80}>
               <LogoCard item={item} />
