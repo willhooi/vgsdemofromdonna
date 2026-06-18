@@ -241,9 +241,8 @@ const Solutions = () => {
             <span className="green">Every customer touchpoint.</span>
           </h1>
           <p className="sub rv d2">
-            A unified system of methodologies and enterprise-grade services across
-            messaging, verification, rewards, data, and AI, designed to support
-            every stage of the customer journey.
+            Enterprise-grade services across messaging, verification, rewards, data and AI — 
+            composable into the exact stack your customer journey needs.
           </p>
         </div>
       </header>
