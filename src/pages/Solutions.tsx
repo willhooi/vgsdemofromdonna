@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from "react";
+import smsBrandnameImg from "@/assets/solutions/sms-brandname.png.asset.json";
+import ottMultiServiceImg from "@/assets/solutions/ott-multi-service.jpg.asset.json";
 
 const SOLUTION_OPTIONS = [
   "SMS Brandname",
@@ -415,7 +417,12 @@ const Solutions = () => {
           {tab === "sms" && (
             <div className="pane show">
               <CatArt caption="Direct carrier connections">
-                <SmsArt />
+                <img
+                  src={smsBrandnameImg.url}
+                  alt="SMS Brandname on mobile keypad"
+                  className="h-full w-full rounded-2xl object-cover"
+                  loading="lazy"
+                />
               </CatArt>
               <div className="svc-grid">
                 <Svc title="SMS Brandname" body="Sender displays your brand name (HSBC, Samsung…) instead of a phone number — authenticated, nationwide.">
@@ -434,7 +441,12 @@ const Solutions = () => {
           {tab === "ott" && (
             <div className="pane show">
               <CatArt caption="Vietnam's most-used chat apps">
-                <OttArt />
+                <img
+                  src={ottMultiServiceImg.url}
+                  alt="People using Zalo and Viber on smartphones"
+                  className="h-full w-full rounded-2xl object-cover"
+                  loading="lazy"
+                />
               </CatArt>
               <div className="svc-grid">
                 <Svc title="Zalo ZBS Template" body="Customer-service alerts via API straight to Zalo numbers on Vietnam's #1 chat app." chip="80M+ USERS">
