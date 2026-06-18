@@ -1,7 +1,7 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { ArrowLeft, ArrowUpRight, Clock } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, Clock } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ChatBubble } from "@/components/site/ChatBubble";
