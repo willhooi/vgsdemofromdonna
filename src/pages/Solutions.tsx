@@ -207,30 +207,7 @@ const Solutions = () => {
     <div className="vg-sol">
       <style>{CSS}</style>
 
-      {/* HEADER */}
-      <nav id="nav" className={scrolled ? "scrolled" : ""}>
-        <div className="container">
-          <div className="logo">
-            Viet<span>Guys</span>
-          </div>
-          <div className="nav-links">
-            <a href="/solutions" className="active">
-              Solutions
-            </a>
-            <a href="/case-studies">Case Study</a>
-            <a href="/market-insights">Market Insight</a>
-            <a href="/about">About Us</a>
-          </div>
-          <div className="nav-right">
-            <span className="lang">
-              <b>EN</b> | VI
-            </span>
-            <a className="btn" href="#cta">
-              Contact Us
-            </a>
-          </div>
-        </div>
-      </nav>
+      <Header />
 
       {/* FAB */}
       <div className="fab">
