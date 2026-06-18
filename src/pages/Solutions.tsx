@@ -403,8 +403,8 @@ const Solutions = () => {
               VietGuys Services{"\u00a0"}<span className="green">Ecosystem</span>
             </h2>
             <p className="rv d2">
-              Inherited from two decades of carrier-grade delivery — pick a
-              group to explore.
+              A system of methodologies and tools for running marketing
+              campaigns{"\u00a0"}{"\u00a0"}
             </p>
           </div>
 
