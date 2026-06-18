@@ -103,7 +103,7 @@ export const ARTICLES: InsightArticle[] = [
     date: "2026-03-20",
     readMinutes: 6,
     tags: ["CX", "Chat", "Strategy"],
-    image: "/__l5e/assets-v1/fe555df2-08a0-425e-bbb3-a7675aae0932/fmcg-customer-service-insight.png",
+    image: "/__l5e/assets-v1/be2b35a5-cd6e-4002-958d-c20aed3f90be/sms-marketing-restaurants.png",
     featured: true,
     legacyUrl:
       "/vi/tin-tuc/chat-first-customer-experience-la-gi-vi-sao-chat-dang-tro-thanh-giao-dien-moi-cua-cx",
