@@ -6,21 +6,24 @@ const SOLUTION_OPTIONS = [
   "SMS Brandname",
   "Zalo ZBS / OA",
   "Viber Message",
-  "Voice Brandname",
   "Email Marketing",
-  "OTP / Verification",
+  "Email OTP",
+  "Voice Brandname",
+  "Voice OTP",
+  "OTPBox",
   "Mobile Topup / Rewards",
   "PangoCDP",
   "Another I (AI Engagement)",
   "Omnichannel / Multiple solutions",
 ];
 
-type TabKey = "sms" | "ott" | "ev" | "otp" | "rw";
+type TabKey = "sms" | "ott" | "email" | "voice" | "otp" | "rw";
 
 const TABS: { key: TabKey; label: string }[] = [
   { key: "sms", label: "SMS" },
   { key: "ott", label: "Zalo · Viber · OTT" },
-  { key: "ev", label: "Email & Voice" },
+  { key: "email", label: "Email" },
+  { key: "voice", label: "Voice" },
   { key: "otp", label: "Verification" },
   { key: "rw", label: "Rewards & Loyalty" },
 ];
@@ -394,7 +397,7 @@ const Solutions = () => {
           <div className="cat-head">
             <p className="label rv">ALL SERVICES</p>
             <h2 className="rv d1">
-              14 channel services, <span className="green">5 groups.</span>
+              14 channel services, <span className="green">6 groups.</span>
             </h2>
             <p className="rv d2">
               Inherited from two decades of carrier-grade delivery — pick a
@@ -462,17 +465,33 @@ const Solutions = () => {
             </div>
           )}
 
-          {tab === "ev" && (
+          {tab === "email" && (
             <div className="pane show">
               <CatArt caption="Reach beyond the inbox">
-                <EvArt />
+                <EmailArt />
               </CatArt>
               <div className="svc-grid" style={{ gridTemplateColumns: "repeat(2,1fr)" }}>
                 <Svc title="Email Marketing" body="Sales, promotions and product content with automation journeys and A/B testing.">
                   <IconMail />
                 </Svc>
+                <Svc title="Email OTP" body="One-time codes via email — automatic, fast and efficient for every transaction.">
+                  <IconMailCheck />
+                </Svc>
+              </div>
+            </div>
+          )}
+
+          {tab === "voice" && (
+            <div className="pane show">
+              <CatArt caption="Calls that build trust">
+                <VoiceArt />
+              </CatArt>
+              <div className="svc-grid" style={{ gridTemplateColumns: "repeat(2,1fr)" }}>
                 <Svc title="Voice Brandname" body="Calls display your brand name instead of a number — higher answer rates, instant trust.">
                   <IconPhone />
+                </Svc>
+                <Svc title="Voice OTP" body="OTP via automated calls — reach hundreds of users in seconds when SMS isn't an option.">
+                  <IconLockCall />
                 </Svc>
               </div>
             </div>
@@ -483,15 +502,9 @@ const Solutions = () => {
               <CatArt caption="Security at login speed">
                 <OtpArt />
               </CatArt>
-              <div className="svc-grid">
+              <div className="svc-grid" style={{ gridTemplateColumns: "repeat(1,1fr)" }}>
                 <Svc title="OTPBox" body="Multi-channel OTP on one API — intelligent routing picks the fastest path, lowest cost." chip="1 API">
                   <IconLock />
-                </Svc>
-                <Svc title="Voice OTP" body="OTP via automated calls — reach hundreds of users in seconds when SMS isn't an option.">
-                  <IconLockCall />
-                </Svc>
-                <Svc title="Email OTP" body="One-time codes via email — automatic, fast and efficient for every transaction.">
-                  <IconMailCheck />
                 </Svc>
               </div>
             </div>
@@ -883,6 +896,34 @@ const RwArt = () => (
     <path d="M84 222c0-8 8-12 14-7 6-5 14-1 14 7 0 7-9 12-14 16-5-4-14-9-14-16z" fill="#cd3734" opacity=".85" />
     <g stroke="#3aa84f" strokeWidth="1" opacity=".5" fill="none"><path d="M44 52L70 36L96 56M70 36L70 70" /></g>
     <g fill="#3aa84f" opacity=".8"><circle cx="44" cy="52" r="3" /><circle cx="70" cy="36" r="3.5" /><circle cx="96" cy="56" r="3" /></g>
+  </svg>
+);
+
+const EmailArt = () => (
+  <svg viewBox="0 0 230 280" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <rect width="230" height="280" fill="#f4f5f7" />
+    <circle cx="182" cy="48" r="38" fill="#cd3734" opacity=".9" />
+    <rect x="38" y="60" width="150" height="110" rx="12" fill="#fff" stroke="#d9dcdf" strokeWidth="2" />
+    <path d="M38 72l75 52 75-52" stroke="#3aa84f" strokeWidth="2" fill="none" />
+    <rect x="38" y="190" width="120" height="44" rx="10" fill="#0c3b20" />
+    <rect x="48" y="202" width="72" height="6" rx="3" fill="#a7f070" opacity=".8" />
+    <rect x="48" y="214" width="48" height="5" rx="2.5" fill="#a7f070" opacity=".4" />
+    <g stroke="#3aa84f" strokeWidth="1" opacity=".5" fill="none"><path d="M50 40L80 20L110 40" /></g>
+    <g fill="#3aa84f" opacity=".8"><circle cx="50" cy="40" r="3" /><circle cx="80" cy="20" r="3.5" /><circle cx="110" cy="40" r="3" /></g>
+  </svg>
+);
+
+const VoiceArt = () => (
+  <svg viewBox="0 0 230 280" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <rect width="230" height="280" fill="#f4f5f7" />
+    <circle cx="48" cy="232" r="38" fill="#cd3734" opacity=".9" />
+    <circle cx="115" cy="120" r="42" fill="#fff" stroke="#d9dcdf" strokeWidth="2" />
+    <path d="M100 100c0 16 6.7 28 15 28s15-12 15-28" stroke="#3aa84f" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+    <rect x="130" y="180" width="80" height="40" rx="10" fill="#0c3b20" />
+    <rect x="140" y="192" width="52" height="6" rx="3" fill="#a7f070" opacity=".8" />
+    <rect x="140" y="204" width="36" height="5" rx="2.5" fill="#a7f070" opacity=".4" />
+    <g stroke="#3aa84f" strokeWidth="1" opacity=".5" fill="none"><path d="M170 50L200 30L230 50" /></g>
+    <g fill="#3aa84f" opacity=".8"><circle cx="170" cy="50" r="3" /><circle cx="200" cy="30" r="3.5" /><circle cx="230" cy="50" r="3" /></g>
   </svg>
 );
 
