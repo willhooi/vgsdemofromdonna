@@ -19,7 +19,7 @@ export const CATEGORIES = [
   },
   {
     slug: "industry-playbooks",
-    title: "Industry Playbooks",
+    title: "INDUSTRY PLAYBOOK",
     description:
       "Sector-specific plays for banking, FMCG, retail, F&B, beauty, logistics and mobile-first businesses.",
   },
