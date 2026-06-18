@@ -19,6 +19,8 @@ const SITE = "https://vgsdemofromdonna.lovable.app";
 
 const MarketInsights = () => {
   const [active, setActive] = useState<string>("all");
+  const [page, setPage] = useState(1);
+  const PAGE_SIZE = 6;
 
   const featured = featuredArticles().slice(0, 2);
 
@@ -26,6 +28,17 @@ const MarketInsights = () => {
     const all = latestArticles();
     if (active === "all") return all;
     return all.filter((a) => a.category === active);
+  }, [active]);
+
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const currentPage = Math.min(page, totalPages);
+  const pageItems = filtered.slice(
+    (currentPage - 1) * PAGE_SIZE,
+    currentPage * PAGE_SIZE,
+  );
+
+  useEffect(() => {
+    setPage(1);
   }, [active]);
 
   return (
