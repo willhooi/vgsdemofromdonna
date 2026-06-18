@@ -354,6 +354,7 @@ const Card = ({ s, idx }: { s: Study; idx: number }) => {
         border: "1px solid hsl(0 0% 90%)",
         borderRadius: 16,
         overflow: "hidden",
+        height: "100%",
         transition: "transform .28s cubic-bezier(.16,1,.3,1), box-shadow .28s cubic-bezier(.16,1,.3,1), opacity .7s cubic-bezier(.16,1,.3,1)",
         transform: revealed
           ? hovered
@@ -430,6 +431,7 @@ const Card = ({ s, idx }: { s: Study; idx: number }) => {
           display: "flex",
           flexDirection: "column",
           justifyContent: s.featured ? "center" : undefined,
+          flex: 1,
         }}
       >
         <div
@@ -740,7 +742,7 @@ const CaseStudies = () => {
             display: "grid",
             gridTemplateColumns: "repeat(3, 1fr)",
             gap: 20,
-            alignItems: "start",
+            alignItems: "stretch",
           }}
         >
           {visible.map((s, i) => (
