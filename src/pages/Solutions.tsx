@@ -245,14 +245,6 @@ const Solutions = () => {
             data and AI — composable into the exact stack your customer
             journey needs.
           </p>
-          <div className="hero-cta rv d3">
-            <a className="btn" href="#cta">
-              Talk to a Strategist
-            </a>
-            <a className="btn ghost" href="#services">
-              Browse services ↓
-            </a>
-          </div>
         </div>
       </header>
 
