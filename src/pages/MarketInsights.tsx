@@ -189,7 +189,7 @@ const MarketInsights = () => {
           </Reveal>
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {filtered.map((a, idx) => (
+            {pageItems.map((a, idx) => (
               <Reveal
                 key={a.slug}
                 variant="fade-up"
@@ -238,6 +238,34 @@ const MarketInsights = () => {
             <p className="py-20 text-center text-sm text-muted-foreground">
               No articles in this category yet.
             </p>
+          )}
+
+          {filtered.length > 0 && totalPages > 1 && (
+            <div className="mt-12 flex items-center justify-between gap-4 border-t border-border pt-6">
+              <span className="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                Page {currentPage} / {totalPages}
+              </span>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setPage((p) => Math.max(1, p - 1))}
+                  disabled={currentPage === 1}
+                  aria-label="Previous page"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-background text-foreground transition-all hover:border-foreground disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-border"
+                >
+                  <ArrowLeft className="h-4 w-4" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                  disabled={currentPage === totalPages}
+                  aria-label="Next page"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-background text-foreground transition-all hover:border-foreground disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-border"
+                >
+                  <ArrowRight className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
           )}
         </div>
       </section>
