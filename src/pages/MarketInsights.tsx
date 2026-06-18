@@ -83,7 +83,7 @@ const MarketInsights = () => {
           </Reveal>
           <div className="mt-6">
             <Reveal variant="fade-up">
-              <span className="eyebrow">Market Insights</span>
+              <span className="eyebrow">INSIGHTS & PLAYBOOKS</span>
               <h1 className="heading-hero mt-4 text-balance">
                 <span className="text-primary">Insights</span> & playbooks.
               </h1>
