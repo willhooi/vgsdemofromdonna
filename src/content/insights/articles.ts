@@ -270,30 +270,6 @@ export const ARTICLES: InsightArticle[] = [
     legacyUrl:
       "/vi/tin-tuc/xu-huong-2026-chuyen-hoa-cskh-trong-fmcg-thanh-dong-luc-doanh-thu",
   },
-  {
-    slug: "sms-five-touchpoints-restaurants-cafes",
-    category: "industry-playbooks",
-    title: "The 5-touchpoint SMS strategy that lifts restaurant & cafe return rates",
-    excerpt:
-      "Restaurants and cafes spend on first-visit acquisition and forget the return journey. Five well-placed SMS touchpoints can quietly compound traffic without touching the ad budget.",
-    body: [
-      "In F&B, the second visit is where the unit economics flip. The first visit pays for acquisition; every visit after that pays the bills. SMS Brandname remains the most reliable channel to nudge that second visit in Vietnam, because phone numbers are collected at checkout anyway.",
-      "Touchpoint 1 — the thank-you. Send within an hour of the visit, no offer attached. Goal: anchor the brand in memory while the experience is still fresh.",
-      "Touchpoint 2 — the segmented offer at day 3. Use POS data to recommend the next dish or drink the customer is most likely to try. A relevant nudge converts at multiples of a generic promo.",
-      "Touchpoint 3 — the weekend reminder. A simple SMS on Friday afternoon to the segment that visited mid-week reliably lifts weekend covers without discounting.",
-      "Touchpoint 4 — the win-back at day 30. Customers who skip a month are at risk. A small, time-boxed incentive recovers a meaningful share before the silence becomes permanent.",
-      "Touchpoint 5 — the loyalty milestone. Acknowledge the 5th and 10th visit publicly inside the message. Recognition outperforms discounts on long-term repeat rate.",
-      "What makes the programme work is not the copy — it is having the customer data unified so each SMS is targeted, not blasted. That is where SMS Brandname plus a CDP layer outperforms a standalone messaging tool.",
-    ],
-    author: "VietGuys Team",
-    authorRole: "Industry",
-    date: "2026-06-02",
-    readMinutes: 7,
-    tags: ["F&B", "SMS", "Retention"],
-    image: img("photo-1554118811-1e0d58224f24"),
-    legacyUrl:
-      "/vi/tin-tuc/chien-luoc-5-diem-cham-giup-nha-hang-quan-ca-phe-tang-ty-le-khach-quay-lai-bang-sms-marketing",
-  },
 ];
 
 export const articlesByCategory = (slug: string) =>
