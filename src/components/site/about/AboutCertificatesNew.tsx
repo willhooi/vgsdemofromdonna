@@ -13,22 +13,22 @@ type CertItem = {
 const certifications: CertItem[] = [
   {
     name: "VNTA License",
-    caption: "Vietnam Telecommunications Authority",
+    caption: "LICENSE TO PROVIDE TELECOMMUNICATION SERVICES WITHOUT NETWORK INFRASTRUCTURE BY THE TELECOMMUNICATIONS AUTHORITY UNDER DECISION NO. 39/GP-CVT DATED JANUARY 30, 2026.",
     image: vntaCert.url,
   },
   {
     name: "ISO/IEC 27001:2022",
-    caption: "BSI Information Security Management",
+    caption: "CERTIFIED WITH ISO/IEC 27001:2022 FOR INFORMATION SECURITY MANAGEMENT SYSTEMS, AUDITED AND CERTIFIED BY BSI (BRITISH STANDARDS INSTITUTION) AND ACCREDITED BY ANAB.",
     image: bsiIsoCert.url,
   },
   {
     name: "VNCERT Registration",
-    caption: "Vietnam Cybersecurity Emergency Response Team",
+    caption: "WE ARE GRANTED THE VNCERT CERTIFICATES FOR SMS MARKETING AND EMAIL MARKETING BY THE VIETNAM MINISTRY OF INFORMATION AND TECHNOLOGY.",
     image: vncertCert.url,
   },
   {
     name: "Zalo Trusted Partner 2025",
-    caption: "Zalo Business Solutions",
+    caption: "RECOGNIZED FOR STABLE AND COMPLIANT ENTERPRISE MESSAGING WITHIN THE ZALO ECOSYSTEM",
     image: zaloTrustedCert.url,
   },
 ];
