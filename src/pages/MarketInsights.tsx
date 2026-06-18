@@ -270,32 +270,6 @@ const MarketInsights = () => {
         </div>
       </section>
 
-      {/* NEWSLETTER / CTA */}
-      <section className="pb-28">
-        <div className="container-tight">
-          <div className="relative overflow-hidden rounded-3xl border border-border bg-foreground p-10 text-background md:p-16">
-            <div className="grid gap-8 md:grid-cols-12 md:items-center">
-              <div className="md:col-span-8">
-                <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
-                  Get early access to reports
-                </h2>
-                <p className="mt-4 max-w-2xl text-sm text-background/70 md:text-base">
-                  Join our enterprise mailing list for quarterly insights,
-                  benchmark data and event invitations — no spam, unsubscribe
-                  any time.
-                </p>
-              </div>
-              <div className="md:col-span-4 md:text-right">
-                <Button variant="cta" size="lg" asChild>
-                  <Link to="/contact">
-                    Subscribe <ArrowUpRight className="ml-1 h-4 w-4" />
-                  </Link>
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       <Footer />
       <ChatBubble />
