@@ -406,7 +406,6 @@ const Solutions = () => {
               <br />
               We've already run it.
             </h2>
-            <a href="/case-studies" className="btn ghost inds-cta">More Case Study →</a>
           </div>
           <div className="ind-grid">
             <IndCard tag="Banking & Finance" title="OTP in seconds, statements on Zalo, zero compliance risk." d="" >
@@ -434,7 +433,9 @@ const Solutions = () => {
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7"><path d="M5 12.5a12 12 0 0 1 14 0M2 9a16.5 16.5 0 0 1 20 0M8.5 16a7.5 7.5 0 0 1 7 0" /><circle cx="12" cy="19.5" r="1.2" /></svg>
             </IndCard>
           </div>
-
+          <div className="inds-cta-wrap">
+            <a href="/case-studies" className="btn ghost inds-cta">More Case Study →</a>
+          </div>
         </div>
       </section>
 
@@ -767,7 +768,7 @@ const CSS = `
 .vg-sol .inds .label{color:var(--lime)}
 .vg-sol .inds h2{color:#fff}
 .vg-sol .inds-head{text-align:center;max-width:640px;margin:0 auto 40px}
-.vg-sol .inds-cta{margin-top:18px}
+.vg-sol .inds-cta-wrap{text-align:center;margin-top:28px}
 .vg-sol .inds .btn.ghost{color:#fff;border-color:rgba(167,240,112,.4)}
 .vg-sol .inds .btn.ghost:hover{background:rgba(167,240,112,.12);border-color:var(--lime)}
 .vg-sol .ind-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
