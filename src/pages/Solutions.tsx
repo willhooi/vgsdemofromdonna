@@ -841,9 +841,6 @@ const CSS = `
 .vg-sol .rv{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
 .vg-sol .rv.in{opacity:1;transform:none}
 .vg-sol .d1{transition-delay:.08s}.vg-sol .d2{transition-delay:.16s}.vg-sol .d3{transition-delay:.24s}
-.vg-sol nav{position:fixed;inset:0 0 auto 0;z-index:50;background:rgba(255,255,255,.65);backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:border .3s}
-.vg-sol nav.scrolled{border-bottom:1px solid var(--border)}
-.vg-sol nav .container{display:flex;align-items:center;justify-content:space-between;height:66px}
 .vg-sol .logo{font-weight:800;font-size:21px}
 .vg-sol .logo span{color:var(--primary)}
 .vg-sol .nav-links{display:flex;gap:30px;font-size:14px;font-weight:600;color:var(--muted-fg)}
