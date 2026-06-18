@@ -241,9 +241,9 @@ const Solutions = () => {
             <span className="green">Ecosystem</span>
           </h1>
           <p className="sub rv d2">
-            16 enterprise-grade services across messaging, verification, rewards,
-            data and AI — composable into the exact stack your customer
-            journey needs.
+            A unified system of methodologies and enterprise-grade services across
+            messaging, verification, rewards, data, and AI - composable into the
+            exact customer engagement stack your business needs.
           </p>
         </div>
       </header>
