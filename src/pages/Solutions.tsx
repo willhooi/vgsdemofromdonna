@@ -21,13 +21,12 @@ const SOLUTION_OPTIONS = [
   "Omnichannel / Multiple solutions",
 ];
 
-type TabKey = "sms" | "ott" | "email" | "voice" | "otp" | "rw";
+type TabKey = "sms" | "ott" | "emailVoice" | "otp" | "rw";
 
 const TABS: { key: TabKey; label: string }[] = [
   { key: "sms", label: "SMS" },
   { key: "ott", label: "Zalo · Viber · OTT" },
-  { key: "email", label: "Email" },
-  { key: "voice", label: "Voice" },
+  { key: "emailVoice", label: "Email · Voice" },
   { key: "otp", label: "Verification" },
   { key: "rw", label: "Rewards & Loyalty" },
 ];
