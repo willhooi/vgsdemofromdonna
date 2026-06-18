@@ -24,11 +24,11 @@ const img = (id: string) =>
 export const ARTICLES: InsightArticle[] = [
   // ─────────────────────────────  MESSAGING CHANNELS  ─────────────────────────────
   {
-    slug: "zalo-zns-template-explained",
-    category: "messaging-channels",
-    title: "Zalo ZNS Template, explained: how Vietnam's enterprises send 74M-reach messages",
+    slug: "ads-dependency-vs-owned-audience",
+    category: "customer-engagement",
+    title: "Ads dependency vs owned audience: the growth dilemma of Vietnam's beauty sector",
     excerpt:
-      "ZNS templates are the only way to reach Zalo's 74M+ Vietnamese users at scale with branded, verified content. Here is how the approval flow, pricing and use cases really work.",
+      "Many beauty brands run on Facebook and Google Ads alone. The booked calendar hides a fragile economics story — and a clear path to owned-channel growth.",
     body: [
       "Zalo Notification Service (ZNS) is Zalo's official channel for businesses to send template-based notifications to users who have interacted with the brand. Unlike SMS, every message must use a pre-approved template — which is the trade-off Zalo enforces in exchange for inbox-grade trust.",
       "For Vietnamese enterprises, ZNS is now a default layer in the customer journey: OTPs, order updates, appointment reminders, loyalty alerts. CellphoneS, for example, replaced a large share of legacy SMS notifications with ZNS templates and saw a measurable lift in open rate and customer satisfaction.",
@@ -111,24 +111,25 @@ export const ARTICLES: InsightArticle[] = [
     featured: true,
   },
   {
-    slug: "ads-dependency-vs-owned-audience",
-    category: "customer-engagement",
-    title: "Ads dependency vs owned audience: the growth dilemma of Vietnam's beauty sector",
+    slug: "zalo-zns-template-explained",
+    category: "messaging-channels",
+    title: "Zalo ZNS Template, explained: how Vietnam's enterprises send 74M-reach messages",
     excerpt:
-      "Many beauty brands run on Facebook and Google Ads alone. The booked calendar hides a fragile economics story — and a clear path to owned-channel growth.",
+      "ZNS templates are the only way to reach Zalo's 74M+ Vietnamese users at scale with branded, verified content. Here is how the approval flow, pricing and use cases really work.",
     body: [
-      "Vietnam's beauty industry has scaled on paid acquisition. The flip side is a CAC that creeps up every quarter and zero leverage when the platforms change their auctions.",
-      "The brands quietly winning the next cycle are the ones building owned audiences: Zalo OA followers, SMS-opted segments, and a CDP that lets them re-engage at a fraction of the paid cost.",
-      "Owned-channel growth is not anti-ads. It is the asset that makes ads profitable again.",
+      "Zalo Notification Service (ZNS) is Zalo's official channel for businesses to send template-based notifications to users who have interacted with the brand. Unlike SMS, every message must use a pre-approved template — which is the trade-off Zalo enforces in exchange for inbox-grade trust.",
+      "For Vietnamese enterprises, ZNS is now a default layer in the customer journey: OTPs, order updates, appointment reminders, loyalty alerts. CellphoneS, for example, replaced a large share of legacy SMS notifications with ZNS templates and saw a measurable lift in open rate and customer satisfaction.",
+      "Approval typically takes 24–48 hours, with template categories ranging from transactional to care and rating flows. Pricing is template-tier based, and a good rule of thumb is that ZNS becomes more cost-effective than SMS when monthly volume per template crosses a few thousand messages.",
+      "The biggest mistake we see is treating ZNS as a like-for-like SMS replacement. ZNS shines when you design the template natively — rich variables, action buttons, and a clear call to a Zalo Mini App or OA conversation.",
     ],
     author: "VietGuys Team",
-    authorRole: "Growth",
-    date: "2026-04-01",
+    authorRole: "Channel Strategy",
+    date: "2026-02-12",
     readMinutes: 6,
-    tags: ["Growth", "Beauty", "Owned media"],
-    image: img("photo-1487412947147-5cebf100ffc2"),
+    tags: ["Zalo ZNS", "CPaaS", "Vietnam"],
+    image: "/__l5e/assets-v1/44dc459e-7cf8-4900-91a7-1316714c90a9/beauty-ads-insight.png",
     legacyUrl:
-      "/vi/tin-tuc/phu-thuoc-ads-hay-xay-tai-san-bai-toan-tang-truong-cua-nganh-lam-dep-viet-nam",
+      "/vi/tin-tuc/cellphones-nang-cao-trai-nghiem-khach-hang-voi-zalo-zns-template",
   },
   {
     slug: "post-first-order-moment",
