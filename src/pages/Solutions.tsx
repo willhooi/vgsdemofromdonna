@@ -3,6 +3,23 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ChatBubble } from "@/components/site/ChatBubble";
 import { AutomationSection } from "@/components/solutions/AutomationSection";
+import { useCountUp } from "@/hooks/use-count-up";
+
+const MetricCountUp = ({ target, suffix = "" }: { target: number; suffix?: string }) => {
+  const ref = useRef<HTMLSpanElement>(null);
+  const [start, setStart] = useState(false);
+  const value = useCountUp(start ? target : 0, 1600);
+  useEffect(() => {
+    if (!ref.current) return;
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => e.isIntersecting && setStart(true)),
+      { threshold: 0.5 }
+    );
+    io.observe(ref.current);
+    return () => io.disconnect();
+  }, []);
+  return <span ref={ref}>{value}{suffix}</span>;
+};
 import smsBrandnameImg from "@/assets/solutions/sms-brandname.png.asset.json";
 import ottMultiServiceImg from "@/assets/solutions/ott-multi-service.jpg.asset.json";
 import emailServicesImg from "@/assets/solutions/email-services.jpg.asset.json";
@@ -432,8 +449,49 @@ const Solutions = () => {
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7"><path d="M5 12.5a12 12 0 0 1 14 0M2 9a16.5 16.5 0 0 1 20 0M8.5 16a7.5 7.5 0 0 1 7 0" /><circle cx="12" cy="19.5" r="1.2" /></svg>
             </IndCard>
           </div>
-          <div className="inds-cta-wrap">
-            <a href="/case-studies" className="btn ghost inds-cta">More Case Study →</a>
+          <div
+            style={{
+              marginTop: 56,
+              paddingTop: 32,
+              borderTop: "1px solid rgba(255,255,255,0.12)",
+              display: "grid",
+              gridTemplateColumns: "repeat(3, 1fr)",
+              alignItems: "center",
+              gap: 0,
+              textAlign: "center",
+            }}
+          >
+            {[
+              { num: <>99.9%</>, label: "Delivery Rate" },
+              { num: <><MetricCountUp target={40} suffix="%" /></>, label: "Cost Saving" },
+              { num: <>6+</>, label: "Report Index" },
+            ].map((m, i) => (
+              <div key={i}>
+                <div
+                  style={{
+                    fontSize: "clamp(30px, 3.5vw, 40px)",
+                    fontWeight: 800,
+                    color: "#a7f070",
+                    letterSpacing: "-0.02em",
+                    lineHeight: 1,
+                  }}
+                >
+                  {m.num}
+                </div>
+                <div
+                  style={{
+                    marginTop: 10,
+                    fontSize: 10.5,
+                    fontWeight: 700,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.1em",
+                    color: "rgba(255,255,255,0.60)",
+                  }}
+                >
+                  {m.label}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
