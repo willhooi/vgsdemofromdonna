@@ -865,6 +865,7 @@ const CaseStudies = () => {
       <ChatBubble />
 
       <style>{`
+        .cs-grid { align-items: stretch !important; }
         .cs-filter-scroll::-webkit-scrollbar { display: none; }
         @media (max-width: 960px) {
           .cs-grid { grid-template-columns: repeat(2, 1fr) !important; }
