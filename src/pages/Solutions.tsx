@@ -3,6 +3,7 @@ import smsBrandnameImg from "@/assets/solutions/sms-brandname.png.asset.json";
 import ottMultiServiceImg from "@/assets/solutions/ott-multi-service.jpg.asset.json";
 import emailServicesImg from "@/assets/solutions/email-services.jpg.asset.json";
 import voiceServicesImg from "@/assets/solutions/voice-services.jpg.asset.json";
+import rewardsLoyaltyImg from "@/assets/solutions/rewards-loyalty.jpg.asset.json";
 
 const SOLUTION_OPTIONS = [
   "SMS Brandname",
@@ -525,7 +526,12 @@ const Solutions = () => {
           {tab === "rw" && (
             <div className="pane show">
               <CatArt caption="Turn engagement into retention">
-                <RwArt />
+                <img
+                  src={rewardsLoyaltyImg.url}
+                  alt="Rewards and loyalty solutions on mobile"
+                  className="h-full w-full rounded-2xl object-cover"
+                  loading="lazy"
+                />
               </CatArt>
               <div className="svc-grid">
                 <Svc title="Mobile Topup" body="Instant airtime rewards across all carriers — fully automated, zero card risk.">
