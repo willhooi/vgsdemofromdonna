@@ -236,9 +236,9 @@ const Solutions = () => {
         <div className="container">
           <p className="label rv">SOLUTIONS &amp; SERVICES</p>
           <h1 className="rv d1">
-            Every channel.
+            VietGuys Services
             <br />
-            <span className="green">One partner.</span>
+            <span className="green">Ecosystem</span>
           </h1>
           <p className="sub rv d2">
             16 enterprise-grade services across messaging, verification, rewards,
