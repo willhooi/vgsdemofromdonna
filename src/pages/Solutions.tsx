@@ -441,7 +441,12 @@ const Solutions = () => {
           {tab === "ott" && (
             <div className="pane show">
               <CatArt caption="Vietnam's most-used chat apps">
-                <OttArt />
+                <img
+                  src={ottMultiServiceImg.url}
+                  alt="People using Zalo and Viber on smartphones"
+                  className="h-full w-full rounded-2xl object-cover"
+                  loading="lazy"
+                />
               </CatArt>
               <div className="svc-grid">
                 <Svc title="Zalo ZBS Template" body="Customer-service alerts via API straight to Zalo numbers on Vietnam's #1 chat app." chip="80M+ USERS">
