@@ -1,7 +1,7 @@
 export const CATEGORIES = [
   {
     slug: "messaging-channels",
-    title: "Messaging Channels",
+    title: "CUSTOMER ENGAGEMENT & CX",
     description:
       "How SMS Brandname, Zalo ZNS, Viber, OTP and email actually perform in Vietnam — benchmarks, costs and routing decisions.",
   },

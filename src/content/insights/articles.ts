@@ -26,7 +26,7 @@ export const ARTICLES: InsightArticle[] = [
   {
     slug: "zalo-zns-template-explained",
     category: "messaging-channels",
-    title: "Zalo ZNS Template, explained: how Vietnam's enterprises send 74M-reach messages",
+    title: "Ads dependency vs owned audience: the growth dilemma of Vietnam's beauty sector",
     excerpt:
       "ZNS templates are the only way to reach Zalo's 74M+ Vietnamese users at scale with branded, verified content. Here is how the approval flow, pricing and use cases really work.",
     body: [
