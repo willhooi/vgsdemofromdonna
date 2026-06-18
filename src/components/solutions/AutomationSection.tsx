@@ -162,7 +162,7 @@ export function AutomationSection() {
             <li><span className="dot" />Multi-channel data activation:  SMS, Zalo, Email, Voice...</li>
           </ul>
           <div className="auto-cta">
-            <a className="auto-btn primary" href="#cta">Explore PangoCDP</a>
+            <a className="auto-btn primary" href="#cta">Request a demo</a>
             <a className="auto-btn ghost" href="#cta">Request a demo</a>
           </div>
         </div>
