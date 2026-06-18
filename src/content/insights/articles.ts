@@ -24,11 +24,11 @@ const img = (id: string) =>
 export const ARTICLES: InsightArticle[] = [
   // ─────────────────────────────  MESSAGING CHANNELS  ─────────────────────────────
   {
-    slug: "zalo-zns-template-explained",
-    category: "messaging-channels",
-    title: "Zalo ZNS Template, explained: how Vietnam's enterprises send 74M-reach messages",
+    slug: "ads-dependency-vs-owned-audience",
+    category: "customer-engagement",
+    title: "Ads dependency vs owned audience: the growth dilemma of Vietnam's beauty sector",
     excerpt:
-      "ZNS templates are the only way to reach Zalo's 74M+ Vietnamese users at scale with branded, verified content. Here is how the approval flow, pricing and use cases really work.",
+      "Many beauty brands run on Facebook and Google Ads alone. The booked calendar hides a fragile economics story — and a clear path to owned-channel growth.",
     body: [
       "Zalo Notification Service (ZNS) is Zalo's official channel for businesses to send template-based notifications to users who have interacted with the brand. Unlike SMS, every message must use a pre-approved template — which is the trade-off Zalo enforces in exchange for inbox-grade trust.",
       "For Vietnamese enterprises, ZNS is now a default layer in the customer journey: OTPs, order updates, appointment reminders, loyalty alerts. CellphoneS, for example, replaced a large share of legacy SMS notifications with ZNS templates and saw a measurable lift in open rate and customer satisfaction.",
