@@ -514,7 +514,12 @@ const Solutions = () => {
           {tab === "otp" && (
             <div className="pane show">
               <CatArt caption="Security at login speed">
-                <OtpArt />
+                <img
+                  src={otpboxImg.url}
+                  alt="OTP verification on mobile"
+                  className="h-full w-full rounded-2xl object-cover"
+                  loading="lazy"
+                />
               </CatArt>
               <div className="svc-grid" style={{ gridTemplateColumns: "repeat(1,1fr)" }}>
                 <Svc title="OTPBox" body="Multi-channel OTP on one API — intelligent routing picks the fastest path, lowest cost." chip="1 API">
