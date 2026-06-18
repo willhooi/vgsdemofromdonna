@@ -3,7 +3,7 @@ import smsBrandnameImg from "@/assets/solutions/sms-brandname.png.asset.json";
 import ottMultiServiceImg from "@/assets/solutions/ott-multi-service.jpg.asset.json";
 import emailServicesImg from "@/assets/solutions/email-services.jpg.asset.json";
 
-import rewardsLoyaltyImg from "@/assets/solutions/rewards-loyalty.jpg.asset.json";
+import mobileTopupImg from "@/assets/solutions/mobile-topup-46.png.asset.json";
 import otpboxImg from "@/assets/solutions/otpbox.jpg.asset.json";
 
 const SOLUTION_OPTIONS = [
@@ -517,7 +517,7 @@ const Solutions = () => {
             <div className="pane show">
               <CatArt caption="Turn engagement into retention">
                 <img
-                  src={rewardsLoyaltyImg.url}
+                  src={mobileTopupImg.url}
                   alt="Rewards and loyalty solutions on mobile"
                   className="h-full w-full rounded-2xl object-cover"
                   loading="lazy"
