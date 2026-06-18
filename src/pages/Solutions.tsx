@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import smsBrandnameImg from "@/assets/solutions/sms-brandname.png.asset.json";
 import ottMultiServiceImg from "@/assets/solutions/ott-multi-service.jpg.asset.json";
 import emailServicesImg from "@/assets/solutions/email-services.jpg.asset.json";
-import voiceServicesImg from "@/assets/solutions/voice-services.jpg.asset.json";
+
 import rewardsLoyaltyImg from "@/assets/solutions/rewards-loyalty.jpg.asset.json";
 import otpboxImg from "@/assets/solutions/otpbox.jpg.asset.json";
 
