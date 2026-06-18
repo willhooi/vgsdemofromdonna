@@ -400,7 +400,7 @@ const Solutions = () => {
           <div className="cat-head">
             <p className="label rv">ALL SERVICES</p>
             <h2 className="rv d1">
-              14 channel services, <span className="green">6 groups.</span>
+              VietGuys Services{"\u00a0"}<span className="green">Ecosystem</span>
             </h2>
             <p className="rv d2">
               Inherited from two decades of carrier-grade delivery — pick a
