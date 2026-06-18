@@ -662,9 +662,11 @@ const Solutions = () => {
         </div>
       </div>
 
+      </div>
       <Footer />
       <ChatBubble />
-    </div>
+    </>
+
   );
 };
 
