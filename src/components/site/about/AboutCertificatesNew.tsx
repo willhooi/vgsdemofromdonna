@@ -22,11 +22,6 @@ const certifications: LogoItem[] = [
   { name: "Zalo", caption: "Trusted Partner", image: zaloTrustedLogo },
 ];
 
-const memberships: LogoItem[] = [
-  { name: "MMA", caption: "Mobile Marketing Association", image: "" },
-  { name: "VECOM", caption: "Vietnam E-Commerce Association", image: "" },
-  { name: "VDCA", caption: "Vietnam Digital Communications Association", image: "" },
-];
 
 // ============================================================
 
