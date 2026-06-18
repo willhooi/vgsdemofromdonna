@@ -1,29 +1,37 @@
 import { Reveal } from "@/components/motion/Reveal";
-import vntaLogo from "@/assets/certs/vnta.png";
-import bsiIsoLogo from "@/assets/certs/bsi-iso.png";
-import vncertLogo from "@/assets/certs/vncert.png";
-import zaloTrustedLogo from "@/assets/certs/zalo-trusted.svg";
+import vntaCert from "@/assets/certs/vnta-cert.png.asset.json";
+import bsiIsoCert from "@/assets/certs/bsi-iso-cert.png.asset.json";
+import vncertCert from "@/assets/certs/vncert-cert.png.asset.json";
+import zaloTrustedCert from "@/assets/certs/zalo-trusted-cert.png.asset.json";
 
-type LogoItem = {
+type CertItem = {
   name: string;
-  caption?: string;
-  /** Logo image URL — leave empty to show text fallback */
-  image?: string;
+  caption: string;
+  image: string;
 };
 
-// ============================================================
-// EDIT THESE ARRAYS TO ADD/REMOVE LOGOS
-// ============================================================
-
-const certifications: LogoItem[] = [
-  { name: "VNTA", caption: "Vietnam Telecommunications Authority", image: vntaLogo },
-  { name: "BSI", caption: "ISO/IEC 27001 Certified", image: bsiIsoLogo },
-  { name: "VNCERT", caption: "Vietnam Cybersecurity Emergency Response Team", image: vncertLogo },
-  { name: "Zalo", caption: "Trusted Partner", image: zaloTrustedLogo },
+const certifications: CertItem[] = [
+  {
+    name: "VNTA License",
+    caption: "Vietnam Telecommunications Authority",
+    image: vntaCert.url,
+  },
+  {
+    name: "ISO/IEC 27001:2022",
+    caption: "BSI Information Security Management",
+    image: bsiIsoCert.url,
+  },
+  {
+    name: "VNCERT Registration",
+    caption: "Vietnam Cybersecurity Emergency Response Team",
+    image: vncertCert.url,
+  },
+  {
+    name: "Zalo Trusted Partner 2025",
+    caption: "Zalo Business Solutions",
+    image: zaloTrustedCert.url,
+  },
 ];
-
-
-// ============================================================
 
 const SectionHeading = ({ children }: { children: React.ReactNode }) => (
   <div className="flex items-center gap-4">
@@ -35,45 +43,38 @@ const SectionHeading = ({ children }: { children: React.ReactNode }) => (
   </div>
 );
 
-const LogoCard = ({ item }: { item: LogoItem }) => (
-  <article className="group flex aspect-[4/3] flex-col items-center justify-center rounded-2xl border border-border bg-card p-4 text-center transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_18px_40px_-20px_hsl(var(--primary)/0.45)]">
-    {item.image ? (
+const CertCard = ({ item }: { item: CertItem }) => (
+  <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_18px_40px_-20px_hsl(var(--primary)/0.45)]">
+    <div className="flex aspect-[3/4] items-center justify-center overflow-hidden bg-muted/40 p-3">
       <img
         src={item.image}
-        alt={`${item.name} logo`}
-        className="max-h-16 w-full object-contain"
+        alt={`${item.name} certificate`}
+        className="max-h-full max-w-full object-contain transition-transform duration-500 group-hover:scale-[1.03]"
         loading="lazy"
       />
-    ) : (
-      <span className="font-display text-2xl font-extrabold tracking-tight text-primary md:text-3xl">
-        {item.name}
-      </span>
-    )}
-    {item.caption && (
-      <p className="mt-2 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+    </div>
+    <div className="flex flex-1 flex-col justify-center border-t border-border px-4 py-3 text-center">
+      <h3 className="text-sm font-bold text-foreground md:text-base">{item.name}</h3>
+      <p className="mt-1 text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
         {item.caption}
       </p>
-    )}
+    </div>
   </article>
 );
 
 export const AboutCertificatesNew = () => (
   <section id="certificates" className="bg-background py-12 md:py-16">
-    <div className="container-tight space-y-12">
-      {/* Certifications */}
-      <div>
-        <Reveal variant="fade-up">
-          <SectionHeading>Our certifications are issued by</SectionHeading>
-        </Reveal>
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {certifications.map((item, i) => (
-            <Reveal key={item.name} variant="fade-up" delay={i * 80}>
-              <LogoCard item={item} />
-            </Reveal>
-          ))}
-        </div>
+    <div className="container-tight space-y-8">
+      <Reveal variant="fade-up">
+        <SectionHeading>Our certifications are issued by</SectionHeading>
+      </Reveal>
+      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {certifications.map((item, i) => (
+          <Reveal key={item.name} variant="fade-up" delay={i * 80}>
+            <CertCard item={item} />
+          </Reveal>
+        ))}
       </div>
-
     </div>
   </section>
 );
