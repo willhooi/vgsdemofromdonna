@@ -22,11 +22,6 @@ const certifications: LogoItem[] = [
   { name: "Zalo", caption: "Trusted Partner", image: zaloTrustedLogo },
 ];
 
-const memberships: LogoItem[] = [
-  { name: "MMA", caption: "Mobile Marketing Association", image: "" },
-  { name: "VECOM", caption: "Vietnam E-Commerce Association", image: "" },
-  { name: "VDCA", caption: "Vietnam Digital Communications Association", image: "" },
-];
 
 // ============================================================
 
@@ -79,19 +74,6 @@ export const AboutCertificatesNew = () => (
         </div>
       </div>
 
-      {/* Memberships */}
-      <div>
-        <Reveal variant="fade-up">
-          <SectionHeading>VietGuys is currently an active member of</SectionHeading>
-        </Reveal>
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {memberships.map((item, i) => (
-            <Reveal key={item.name} variant="fade-up" delay={i * 80}>
-              <LogoCard item={item} />
-            </Reveal>
-          ))}
-        </div>
-      </div>
     </div>
   </section>
 );
