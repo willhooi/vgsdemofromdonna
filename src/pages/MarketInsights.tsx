@@ -83,7 +83,7 @@ const MarketInsights = () => {
       <Header />
 
       {/* HERO */}
-      <section className="relative overflow-hidden pt-32 pb-12 md:pt-40 md:pb-16">
+      <section className="relative overflow-hidden pt-20 pb-8 md:pt-28 md:pb-10">
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(60%_50%_at_50%_0%,hsl(var(--primary)/0.10),transparent_70%)]" />
         <div className="container-tight">
           <div className="mt-6">
