@@ -1,42 +1,37 @@
 ## Mục tiêu
-Thay component `AboutCertificatesNew.tsx` hiện tại (4 card phức tạp) bằng layout đơn giản giống ảnh tham chiếu: 2 khu vực logo, mỗi logo là 1 entry trong mảng — thêm/bớt chỉ bằng cách sửa array.
 
-## Cấu trúc
+Chỉnh sửa trang `/market-insights`:
+1. **Hero section**: rút gọn text — tiêu đề "Market Insights" và mô tả phía dưới ít chữ hơn (tách biệt, không liên quan đến list bài viết).
+2. **Featured section**: thay vì 1 bài viết lớn, hiển thị **2 bài viết nổi bật** xếp cạnh nhau theo dạng **2 cột bằng nhau**.
 
-**Section 1 — "OUR CERTIFICATIONS ARE ISSUED BY"**
-Mặc định 4 ô:
-- VNTA (Vietnam Telecommunications Authority)
-- BSI — ISO/IEC 27001
-- VNCERT
-- (ô thứ 4 — placeholder, bạn upload logo + đặt tên sau)
+## Chi tiết kỹ thuật
 
-**Section 2 — "VIETGUYS IS CURRENTLY AN ACTIVE MEMBER OF"**
-Mặc định 3 ô:
-- MMA — Mobile Marketing Association
-- VECOM — Vietnam E-Commerce Association
-- VDCA — Vietnam Digital Communications Association
+### 1. Hero text rút gọn
+- Trong `src/pages/MarketInsights.tsx`, phần hero (dòng 74–102):
+  - Đổi `h1` và `p` mô tả thành nội dung ngắn gọn hơn (tối đa 1 dòng tiêu đề + 1 dòng mô tả).
+  - Giữ lại breadcrumb "Back to home".
 
-## Thiết kế
-- Nền `bg-background` (sáng), giữ tone xanh để fit concept About.
-- Tiêu đề: chữ in hoa, letter-spacing rộng, có 2 line ngang 2 bên (giống ảnh).
-- Grid responsive: 2 cột (mobile) → 4 cột (cert) / 3 cột (member) (desktop).
-- Mỗi ô: khung trắng bo nhẹ, padding, logo `object-contain` căn giữa; nếu chưa có logo thì fallback hiển thị chữ viết tắt (MMA/VECOM/VDCA…) + dòng mô tả nhỏ phía dưới (như mock).
-- Hover: nhẹ nhàng (translate-y, shadow xanh mờ).
+### 2. 2 bài viết nổi bật (2 cột)
+- Thay đổi logic `featuredArticles()` hoặc sử dụng trực tiếp `featured[0]` và `featured[1]`.
+- Layout: thay thế card lớn 1 bài (grid 12 cols, 7+5) bằng **grid 2 cột** (`md:grid-cols-2`), mỗi cột là 1 card bài viết.
+- Mỗi card bao gồm:
+  - Ảnh bìa (aspect-ratio ~16/10)
+  - Badge category
+  - Tiêu đề bài viết (giữ nguyên, không rút gọn — vì user chỉ muốn rút gọn text hero)
+  - Excerpt rút gọn (2–3 dòng)
+  - Meta: tác giả, ngày, thời gian đọc
+  - Hover: border primary + shadow
+- Đảm bảo responsive: trên mobile xếp chồng (1 cột), trên tablet/desktop-2 cột.
 
-## Cách thêm/bớt logo
-Trong file, mỗi section có 1 mảng đơn giản:
-```ts
-const certifications = [
-  { name: "VNTA", caption: "Vietnam Telecom Authority", image: "" },
-  { name: "BSI",  caption: "ISO/IEC 27001",            image: "" },
-  ...
-];
-```
-Thêm/bớt: thêm/xóa 1 dòng. Khi upload logo, gán đường dẫn vào `image` — fallback chữ tự động ẩn.
+### 3. Data layer
+- Trong `src/content/insights/articles.ts`:
+  - Kiểm tra `featuredArticles()` trả về ít nhất 2 bài có `featured: true`.
+  - Nếu chỉ có 1 bài `featured`, bổ sung thêm 1 bài khác để đủ 2.
 
-## File chịu ảnh hưởng
-- Viết lại `src/components/site/about/AboutCertificatesNew.tsx`.
-- Không đổi vị trí mount trong `pages/About.tsx`.
+### 4. Các phần còn lại
+- Giữ nguyên category chips + grid các bài viết còn lại.
+- Giữ nguyên newsletter CTA và footer.
 
-## Sau khi approve
-Mình tạo layout với placeholder. Khi bạn upload logo, mình gắn vào mảng và xóa fallback chữ.
+## Files cần chỉnh sửa
+- `src/pages/MarketInsights.tsx`
+- `src/content/insights/articles.ts` (nếu cần bổ sung featured article)
