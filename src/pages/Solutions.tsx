@@ -433,7 +433,9 @@ const Solutions = () => {
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7"><path d="M5 12.5a12 12 0 0 1 14 0M2 9a16.5 16.5 0 0 1 20 0M8.5 16a7.5 7.5 0 0 1 7 0" /><circle cx="12" cy="19.5" r="1.2" /></svg>
             </IndCard>
           </div>
-
+          <div className="inds-cta-wrap">
+            <a href="/case-studies" className="btn ghost inds-cta">More Case Study →</a>
+          </div>
         </div>
       </section>
 
