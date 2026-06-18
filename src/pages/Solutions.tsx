@@ -791,12 +791,12 @@ const CSS = `
 .vg-sol .tab{font-size:13px;font-weight:700;color:var(--muted-fg);border:1.5px solid var(--border);background:#fff;border-radius:999px;padding:10px 22px;cursor:pointer;transition:all .25s;font-family:inherit}
 .vg-sol .tab:hover{border-color:var(--primary);color:var(--primary-deep)}
 .vg-sol .tab.on{background:linear-gradient(135deg,var(--primary),var(--primary-deep));color:#fff;border-color:transparent;box-shadow:0 8px 22px rgba(20,120,50,.25)}
-.vg-sol .pane.show{display:grid;grid-template-columns:230px 1fr;gap:22px;animation:vgpaneIn .45s cubic-bezier(.16,1,.3,1)}
+.vg-sol .pane.show{display:grid;grid-template-columns:230px 1fr;gap:22px;align-items:stretch;animation:vgpaneIn .45s cubic-bezier(.16,1,.3,1)}
 @keyframes vgpaneIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-.vg-sol .cat-art{border-radius:18px;background:var(--muted);border:1px solid var(--border);position:relative;overflow:hidden;min-height:280px}
+.vg-sol .cat-art{border-radius:18px;background:var(--muted);border:1px solid var(--border);position:relative;overflow:hidden;min-height:280px;height:100%}
 .vg-sol .cat-art svg{position:absolute;inset:0;width:100%;height:100%}
 .vg-sol .cat-art .cap{position:absolute;left:0;right:0;bottom:0;padding:14px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--primary-deep);text-align:center;background:linear-gradient(transparent,rgba(255,255,255,.85))}
-.vg-sol .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-content:start}
+.vg-sol .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-content:stretch;align-items:stretch;height:100%;grid-auto-rows:1fr}
 .vg-sol .svc{background:#fff;border:1px solid var(--border);border-radius:14px;padding:20px;display:flex;flex-direction:column;transition:all .3s;position:relative}
 .vg-sol .svc:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(0,0,0,.08);border-color:var(--primary)}
 .vg-sol .svc .ico{width:38px;height:38px;border-radius:10px;background:var(--primary-soft);display:flex;align-items:center;justify-content:center;color:var(--primary-deep);margin-bottom:12px}
