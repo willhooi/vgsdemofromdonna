@@ -256,19 +256,6 @@ const Solutions = () => {
         </div>
       </header>
 
-      {/* PLATFORM */}
-      <section className="plat" id="platform">
-        <div className="container">
-          <div className="plat-head">
-            <p className="label rv">THE PLATFORM LAYER</p>
-            <h2 className="rv d1">
-              Channels send messages.{" "}
-              <span className="green">Platforms create growth.</span>
-            </h2>
-          </div>
-        </div>
-      </section>
-
       {/* CATALOG */}
       <section id="catalog" style={{ paddingTop: 50 }}>
         <div className="container">
