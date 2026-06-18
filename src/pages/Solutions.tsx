@@ -902,10 +902,7 @@ const CSS = `
 .vg-sol .f-bottom a{color:inherit;text-decoration:none;letter-spacing:.08em;font-weight:600}
 @media(max-width:920px){
   .vg-sol .nav-links,.vg-sol .lang{display:none}
-  .vg-sol .hero .container{grid-template-columns:1fr;text-align:center}
-  .vg-sol .hero .sub{margin:18px auto 26px}
-  .vg-sol .hero-cta{justify-content:center}
-  .vg-sol .hero-art{height:330px}
+  .vg-sol .hero{padding:110px 0 50px}
   .vg-sol .plat-grid{grid-template-columns:1fr}
   .vg-sol .pane.show{grid-template-columns:1fr}
   .vg-sol .cat-art{min-height:160px}
