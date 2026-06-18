@@ -899,6 +899,34 @@ const RwArt = () => (
   </svg>
 );
 
+const EmailArt = () => (
+  <svg viewBox="0 0 230 280" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <rect width="230" height="280" fill="#f4f5f7" />
+    <circle cx="182" cy="48" r="38" fill="#cd3734" opacity=".9" />
+    <rect x="38" y="60" width="150" height="110" rx="12" fill="#fff" stroke="#d9dcdf" strokeWidth="2" />
+    <path d="M38 72l75 52 75-52" stroke="#3aa84f" strokeWidth="2" fill="none" />
+    <rect x="38" y="190" width="120" height="44" rx="10" fill="#0c3b20" />
+    <rect x="48" y="202" width="72" height="6" rx="3" fill="#a7f070" opacity=".8" />
+    <rect x="48" y="214" width="48" height="5" rx="2.5" fill="#a7f070" opacity=".4" />
+    <g stroke="#3aa84f" strokeWidth="1" opacity=".5" fill="none"><path d="M50 40L80 20L110 40" /></g>
+    <g fill="#3aa84f" opacity=".8"><circle cx="50" cy="40" r="3" /><circle cx="80" cy="20" r="3.5" /><circle cx="110" cy="40" r="3" /></g>
+  </svg>
+);
+
+const VoiceArt = () => (
+  <svg viewBox="0 0 230 280" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <rect width="230" height="280" fill="#f4f5f7" />
+    <circle cx="48" cy="232" r="38" fill="#cd3734" opacity=".9" />
+    <circle cx="115" cy="120" r="42" fill="#fff" stroke="#d9dcdf" strokeWidth="2" />
+    <path d="M100 100c0 16 6.7 28 15 28s15-12 15-28" stroke="#3aa84f" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+    <rect x="130" y="180" width="80" height="40" rx="10" fill="#0c3b20" />
+    <rect x="140" y="192" width="52" height="6" rx="3" fill="#a7f070" opacity=".8" />
+    <rect x="140" y="204" width="36" height="5" rx="2.5" fill="#a7f070" opacity=".4" />
+    <g stroke="#3aa84f" strokeWidth="1" opacity=".5" fill="none"><path d="M170 50L200 30L230 50" /></g>
+    <g fill="#3aa84f" opacity=".8"><circle cx="170" cy="50" r="3" /><circle cx="200" cy="30" r="3.5" /><circle cx="230" cy="50" r="3" /></g>
+  </svg>
+);
+
 const CSS = `
 .vg-sol{--primary:hsl(128 52% 46%);--primary-deep:hsl(145 100% 25%);--primary-soft:hsl(130 100% 94%);--accent:hsl(35 100% 54%);--accent-soft:hsl(36 100% 93%);--lime:#a7f070;--fg:hsl(0 0% 13%);--muted-fg:hsl(0 0% 36%);--muted:hsl(220 20% 97%);--border:hsl(0 0% 90%);--dark:#0c3b20;--dark2:#0a2f1a;font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:var(--fg);background:#fff;line-height:1.55;overflow-x:hidden}
 .vg-sol *{box-sizing:border-box}
