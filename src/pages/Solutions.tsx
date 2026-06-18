@@ -456,8 +456,7 @@ const Solutions = () => {
             </h2>
             <p>
               Share a few details and a VietGuys strategist will map the right
-              channels, data layer, and KPIs for your business — within 2
-              working hours.
+              channels, data layer, and KPIs for your business.
             </p>
             <ul className="cta-trust">
               <li>Dedicated account strategist, not a generic demo</li>
