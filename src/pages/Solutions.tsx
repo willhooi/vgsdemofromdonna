@@ -540,7 +540,7 @@ const Solutions = () => {
                 <Svc title="Smart Warranty" body="Digital warranty via QR + messaging — kills paper, captures customer data at POS.">
                   <IconShieldCheck />
                 </Svc>
-                <Svc title="Customized Solutions" body="Tech + marketing engineered into unique products — white-label, API-first builds.">
+                <Svc title="Customized Rewards Solutions" body="Tech + marketing engineered into unique products — white-label, API-first builds.">
                   <IconStar />
                 </Svc>
               </div>
