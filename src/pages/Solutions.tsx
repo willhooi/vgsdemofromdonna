@@ -204,10 +204,12 @@ const Solutions = () => {
   };
 
   return (
-    <div className="vg-sol">
-      <style>{CSS}</style>
-
+    <>
       <Header />
+      <div className="vg-sol">
+        <style>{CSS}</style>
+
+
 
       {/* FAB */}
       <div className="fab">
@@ -660,9 +662,11 @@ const Solutions = () => {
         </div>
       </div>
 
+      </div>
       <Footer />
       <ChatBubble />
-    </div>
+    </>
+
   );
 };
 
