@@ -1,7 +1,7 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { ArrowLeft, ArrowUpRight, Clock } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, Clock } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ChatBubble } from "@/components/site/ChatBubble";
@@ -19,6 +19,8 @@ const SITE = "https://vgsdemofromdonna.lovable.app";
 
 const MarketInsights = () => {
   const [active, setActive] = useState<string>("all");
+  const [page, setPage] = useState(1);
+  const PAGE_SIZE = 6;
 
   const featured = featuredArticles().slice(0, 2);
 
@@ -26,6 +28,17 @@ const MarketInsights = () => {
     const all = latestArticles();
     if (active === "all") return all;
     return all.filter((a) => a.category === active);
+  }, [active]);
+
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const currentPage = Math.min(page, totalPages);
+  const pageItems = filtered.slice(
+    (currentPage - 1) * PAGE_SIZE,
+    currentPage * PAGE_SIZE,
+  );
+
+  useEffect(() => {
+    setPage(1);
   }, [active]);
 
   return (
@@ -176,7 +189,7 @@ const MarketInsights = () => {
           </Reveal>
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {filtered.map((a, idx) => (
+            {pageItems.map((a, idx) => (
               <Reveal
                 key={a.slug}
                 variant="fade-up"
@@ -225,6 +238,34 @@ const MarketInsights = () => {
             <p className="py-20 text-center text-sm text-muted-foreground">
               No articles in this category yet.
             </p>
+          )}
+
+          {filtered.length > 0 && totalPages > 1 && (
+            <div className="mt-12 flex items-center justify-between gap-4 border-t border-border pt-6">
+              <span className="text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                Page {currentPage} / {totalPages}
+              </span>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setPage((p) => Math.max(1, p - 1))}
+                  disabled={currentPage === 1}
+                  aria-label="Previous page"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-background text-foreground transition-all hover:border-foreground disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-border"
+                >
+                  <ArrowLeft className="h-4 w-4" />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                  disabled={currentPage === totalPages}
+                  aria-label="Next page"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-background text-foreground transition-all hover:border-foreground disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-border"
+                >
+                  <ArrowRight className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
           )}
         </div>
       </section>
