@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from "react";
+import smsBrandnameImg from "@/assets/solutions/sms-brandname.png.asset.json";
+import ottMultiServiceImg from "@/assets/solutions/ott-multi-service.jpg.asset.json";
 
 const SOLUTION_OPTIONS = [
   "SMS Brandname",
