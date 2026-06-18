@@ -406,7 +406,6 @@ const Solutions = () => {
               <br />
               We've already run it.
             </h2>
-            <a href="/case-studies" className="btn ghost inds-cta">More Case Study →</a>
           </div>
           <div className="ind-grid">
             <IndCard tag="Banking & Finance" title="OTP in seconds, statements on Zalo, zero compliance risk." d="" >
