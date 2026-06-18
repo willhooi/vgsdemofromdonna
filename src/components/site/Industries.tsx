@@ -1,5 +1,7 @@
+import { useEffect, useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useCountUp } from "@/hooks/use-count-up";
 import { VWatermark } from "@/components/brand/VWatermark";
 
 
@@ -112,20 +114,125 @@ export const Industries = () => {
           ))}
         </div>
 
-        <div className="mt-12 flex flex-col items-center gap-4 text-center">
-          <p className="text-base font-medium text-foreground">
-            Need a tailored solution?
-          </p>
-          <Link
-            to="/contact"
-            className="vg-cta-slant group inline-flex items-center gap-2 rounded-full bg-[hsl(var(--accent))] px-6 py-3 text-sm font-semibold text-[hsl(var(--accent-foreground))] transition-transform hover:-translate-y-0.5"
-          >
-            Talk to us
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-          </Link>
+        <div
+          className="grid grid-cols-3 gap-0 text-center"
+          style={{
+            borderTop: "1px solid rgba(255,255,255,0.12)",
+            marginTop: "46px",
+            paddingTop: "38px",
+          }}
+        >
+          <div>
+            <div
+              style={{
+                fontSize: "clamp(30px, 3.5vw, 40px)",
+                fontWeight: 800,
+                color: "#a7f070",
+                letterSpacing: "-0.02em",
+              }}
+            >
+              99.9%
+            </div>
+            <div
+              style={{
+                fontSize: "10.5px",
+                fontWeight: 700,
+                textTransform: "uppercase",
+                letterSpacing: "0.1em",
+                color: "rgba(255,255,255,0.60)",
+                marginTop: "6px",
+              }}
+            >
+              Delivery Rate
+            </div>
+          </div>
+          <MetricCountUp target={40} suffix="%" label="Cost Saving" />
+          <div>
+            <div
+              style={{
+                fontSize: "clamp(30px, 3.5vw, 40px)",
+                fontWeight: 800,
+                color: "#a7f070",
+                letterSpacing: "-0.02em",
+              }}
+            >
+              6+
+            </div>
+            <div
+              style={{
+                fontSize: "10.5px",
+                fontWeight: 700,
+                textTransform: "uppercase",
+                letterSpacing: "0.1em",
+                color: "rgba(255,255,255,0.60)",
+                marginTop: "6px",
+              }}
+            >
+              Report Index
+            </div>
+          </div>
         </div>
       </div>
     </section>
+  );
+};
+
+const MetricCountUp = ({
+  target,
+  suffix,
+  label,
+}: {
+  target: number;
+  suffix: string;
+  label: string;
+}) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [started, setStarted] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStarted(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.5 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  const count = useCountUp(started ? target : 0);
+
+  return (
+    <div ref={ref}>
+      <div
+        style={{
+          fontSize: "clamp(30px, 3.5vw, 40px)",
+          fontWeight: 800,
+          color: "#a7f070",
+          letterSpacing: "-0.02em",
+        }}
+      >
+        {count}
+        {suffix}
+      </div>
+      <div
+        style={{
+          fontSize: "10.5px",
+          fontWeight: 700,
+          textTransform: "uppercase",
+          letterSpacing: "0.1em",
+          color: "rgba(255,255,255,0.60)",
+          marginTop: "6px",
+        }}
+      >
+        {label}
+      </div>
+    </div>
   );
 };
 
