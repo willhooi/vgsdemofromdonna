@@ -17,12 +17,13 @@ const SOLUTION_OPTIONS = [
   "Omnichannel / Multiple solutions",
 ];
 
-type TabKey = "sms" | "ott" | "ev" | "otp" | "rw";
+type TabKey = "sms" | "ott" | "email" | "voice" | "otp" | "rw";
 
 const TABS: { key: TabKey; label: string }[] = [
   { key: "sms", label: "SMS" },
   { key: "ott", label: "Zalo · Viber · OTT" },
-  { key: "ev", label: "Email & Voice" },
+  { key: "email", label: "Email" },
+  { key: "voice", label: "Voice" },
   { key: "otp", label: "Verification" },
   { key: "rw", label: "Rewards & Loyalty" },
 ];
@@ -396,7 +397,7 @@ const Solutions = () => {
           <div className="cat-head">
             <p className="label rv">ALL SERVICES</p>
             <h2 className="rv d1">
-              14 channel services, <span className="green">5 groups.</span>
+              14 channel services, <span className="green">6 groups.</span>
             </h2>
             <p className="rv d2">
               Inherited from two decades of carrier-grade delivery — pick a
@@ -464,17 +465,33 @@ const Solutions = () => {
             </div>
           )}
 
-          {tab === "ev" && (
+          {tab === "email" && (
             <div className="pane show">
               <CatArt caption="Reach beyond the inbox">
-                <EvArt />
+                <EmailArt />
               </CatArt>
               <div className="svc-grid" style={{ gridTemplateColumns: "repeat(2,1fr)" }}>
                 <Svc title="Email Marketing" body="Sales, promotions and product content with automation journeys and A/B testing.">
                   <IconMail />
                 </Svc>
+                <Svc title="Email OTP" body="One-time codes via email — automatic, fast and efficient for every transaction.">
+                  <IconMailCheck />
+                </Svc>
+              </div>
+            </div>
+          )}
+
+          {tab === "voice" && (
+            <div className="pane show">
+              <CatArt caption="Calls that build trust">
+                <VoiceArt />
+              </CatArt>
+              <div className="svc-grid" style={{ gridTemplateColumns: "repeat(2,1fr)" }}>
                 <Svc title="Voice Brandname" body="Calls display your brand name instead of a number — higher answer rates, instant trust.">
                   <IconPhone />
+                </Svc>
+                <Svc title="Voice OTP" body="OTP via automated calls — reach hundreds of users in seconds when SMS isn't an option.">
+                  <IconLockCall />
                 </Svc>
               </div>
             </div>
@@ -485,15 +502,9 @@ const Solutions = () => {
               <CatArt caption="Security at login speed">
                 <OtpArt />
               </CatArt>
-              <div className="svc-grid">
+              <div className="svc-grid" style={{ gridTemplateColumns: "repeat(1,1fr)" }}>
                 <Svc title="OTPBox" body="Multi-channel OTP on one API — intelligent routing picks the fastest path, lowest cost." chip="1 API">
                   <IconLock />
-                </Svc>
-                <Svc title="Voice OTP" body="OTP via automated calls — reach hundreds of users in seconds when SMS isn't an option.">
-                  <IconLockCall />
-                </Svc>
-                <Svc title="Email OTP" body="One-time codes via email — automatic, fast and efficient for every transaction.">
-                  <IconMailCheck />
                 </Svc>
               </div>
             </div>
