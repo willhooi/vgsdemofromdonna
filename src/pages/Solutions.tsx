@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import smsBrandnameImg from "@/assets/solutions/sms-brandname.png.asset.json";
 import ottMultiServiceImg from "@/assets/solutions/ott-multi-service.jpg.asset.json";
+import emailServicesImg from "@/assets/solutions/email-services.jpg.asset.json";
+import voiceServicesImg from "@/assets/solutions/voice-services.jpg.asset.json";
 
 const SOLUTION_OPTIONS = [
   "SMS Brandname",
@@ -468,7 +470,12 @@ const Solutions = () => {
           {tab === "email" && (
             <div className="pane show">
               <CatArt caption="Reach beyond the inbox">
-                <EmailArt />
+                <img
+                  src={emailServicesImg.url}
+                  alt="Email on phone and laptop"
+                  className="h-full w-full rounded-2xl object-cover"
+                  loading="lazy"
+                />
               </CatArt>
               <div className="svc-grid" style={{ gridTemplateColumns: "repeat(2,1fr)" }}>
                 <Svc title="Email Marketing" body="Sales, promotions and product content with automation journeys and A/B testing.">
@@ -484,7 +491,12 @@ const Solutions = () => {
           {tab === "voice" && (
             <div className="pane show">
               <CatArt caption="Calls that build trust">
-                <VoiceArt />
+                <img
+                  src={voiceServicesImg.url}
+                  alt="Person on a voice call at sunset"
+                  className="h-full w-full rounded-2xl object-cover"
+                  loading="lazy"
+                />
               </CatArt>
               <div className="svc-grid" style={{ gridTemplateColumns: "repeat(2,1fr)" }}>
                 <Svc title="Voice Brandname" body="Calls display your brand name instead of a number — higher answer rates, instant trust.">
