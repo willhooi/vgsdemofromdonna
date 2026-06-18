@@ -73,20 +73,9 @@ const MarketInsights = () => {
       <section className="relative overflow-hidden pt-32 pb-12 md:pt-40 md:pb-16">
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(60%_50%_at_50%_0%,hsl(var(--primary)/0.10),transparent_70%)]" />
         <div className="container-tight">
-          <Reveal variant="fade-up">
-            <Link
-              to="/"
-              className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground hover:text-foreground"
-            >
-              <ArrowLeft className="h-3.5 w-3.5" /> Back to home
-            </Link>
-          </Reveal>
           <div className="mt-6">
             <Reveal variant="fade-up">
               <span className="eyebrow">INSIGHTS & PLAYBOOKS</span>
-              <h1 className="heading-hero mt-4 text-balance">
-                <span className="text-primary">Insights</span> & playbooks.
-              </h1>
             </Reveal>
           </div>
         </div>
