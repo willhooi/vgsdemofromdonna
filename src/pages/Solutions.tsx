@@ -242,8 +242,8 @@ const Solutions = () => {
           </h1>
           <p className="sub rv d2">
             A unified system of methodologies and enterprise-grade services across
-            messaging, verification, rewards, data, and AI - composable into the
-            exact customer engagement stack your business needs.
+            messaging, verification, rewards, data, and AI, designed to support
+            every stage of the customer journey.
           </p>
         </div>
       </header>
