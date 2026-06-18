@@ -256,69 +256,6 @@ const Solutions = () => {
         </div>
       </header>
 
-      {/* PLATFORM */}
-      <section className="plat" id="platform">
-        <div className="container">
-          <div className="plat-head">
-            <p className="label rv">THE PLATFORM LAYER</p>
-            <h2 className="rv d1">
-              Channels send messages.{" "}
-              <span className="green">Platforms create growth.</span>
-            </h2>
-          </div>
-          <div className="plat-grid">
-            <div className="plat-card pango rv">
-              <svg className="bgnet" viewBox="0 0 200 200" fill="none" stroke="#fff">
-                <circle cx="40" cy="60" r="3" fill="#fff" />
-                <circle cx="120" cy="30" r="4" fill="#fff" />
-                <circle cx="160" cy="100" r="3" fill="#fff" />
-                <circle cx="80" cy="140" r="4" fill="#fff" />
-                <circle cx="170" cy="170" r="3" fill="#fff" />
-                <path d="M40 60L120 30L160 100L80 140L170 170M40 60L80 140M120 30L80 140" />
-              </svg>
-              <span className="k">Customer Data Platform</span>
-              <h3>PangoCDP</h3>
-              <p>
-                Unify customer data from every touchpoint into one actionable
-                profile — segment, orchestrate and measure omnichannel journeys
-                in real time.
-              </p>
-              <ul>
-                <li>360° profiles</li>
-                <li>Smart segments</li>
-                <li>Journey orchestration</li>
-                <li>Zero-party data</li>
-              </ul>
-              <a href="#cta">Explore PangoCDP →</a>
-            </div>
-            <div className="plat-card ai rv d1">
-              <span className="new">NEW · 2026</span>
-              <svg className="bgnet" viewBox="0 0 200 200" fill="none" stroke="#fff">
-                <circle cx="100" cy="100" r="36" />
-                <circle cx="100" cy="100" r="60" strokeDasharray="4 8" />
-                <circle cx="100" cy="40" r="4" fill="#fff" />
-                <circle cx="160" cy="100" r="4" fill="#fff" />
-                <circle cx="100" cy="160" r="4" fill="#fff" />
-                <circle cx="40" cy="100" r="4" fill="#fff" />
-              </svg>
-              <span className="k">AI-powered Customer Engagement</span>
-              <h3>Another I</h3>
-              <p>
-                AI tuned for Vietnamese consumer behaviour decides the right
-                channel, right time and right message for every customer —
-                automatically.
-              </p>
-              <ul>
-                <li>Next-best-channel</li>
-                <li>Send-time AI</li>
-                <li>Personalisation</li>
-                <li>Churn prediction</li>
-              </ul>
-              <a href="#cta">Meet Another I →</a>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* CATALOG */}
       <section id="catalog" style={{ paddingTop: 50 }}>
