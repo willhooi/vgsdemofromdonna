@@ -406,6 +406,7 @@ const Solutions = () => {
               <br />
               We've already run it.
             </h2>
+            <a href="/case-studies" className="btn ghost inds-cta">More Case Study →</a>
           </div>
           <div className="ind-grid">
             <IndCard tag="Banking & Finance" title="OTP in seconds, statements on Zalo, zero compliance risk." d="" >
@@ -766,6 +767,9 @@ const CSS = `
 .vg-sol .inds .label{color:var(--lime)}
 .vg-sol .inds h2{color:#fff}
 .vg-sol .inds-head{text-align:center;max-width:640px;margin:0 auto 40px}
+.vg-sol .inds-cta{margin-top:18px}
+.vg-sol .inds .btn.ghost{color:#fff;border-color:rgba(167,240,112,.4)}
+.vg-sol .inds .btn.ghost:hover{background:rgba(167,240,112,.12);border-color:var(--lime)}
 .vg-sol .ind-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 .vg-sol .indc{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:22px 20px;transition:all .3s;display:flex;flex-direction:column}
 .vg-sol .indc:hover{background:rgba(255,255,255,.09);border-color:var(--lime);transform:translateY(-4px)}
