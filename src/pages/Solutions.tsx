@@ -518,9 +518,12 @@ const Solutions = () => {
                   loading="lazy"
                 />
               </CatArt>
-              <div className="svc-grid" style={{ gridTemplateColumns: "repeat(1,1fr)" }}>
+              <div className="svc-grid" style={{ gridTemplateColumns: "repeat(2,1fr)" }}>
                 <Svc title="OTPBox" body="A multi-channel OTP solution that enables businesses to combine primary and backup delivery routes through a single API for maximum reliability." chip="1 API">
                   <IconLock />
+                </Svc>
+                <Svc title="Voice OTP" body="OTP via automated calls — reach hundreds of users in seconds when SMS isn't an option.">
+                  <IconLockCall />
                 </Svc>
               </div>
             </div>
