@@ -401,18 +401,6 @@ const Solutions = () => {
         </div>
       </section>
 
-      {/* PLATFORM */}
-      <section className="plat" id="platform">
-        <div className="container">
-          <div className="plat-head">
-            <p className="label rv">THE PLATFORM LAYER</p>
-            <h2 className="rv d1">
-              Channels send messages.{" "}
-              <span className="green">Platforms create growth.</span>
-            </h2>
-          </div>
-        </div>
-      </section>
 
       <AutomationSection />
 
