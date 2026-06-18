@@ -236,9 +236,9 @@ const Solutions = () => {
         <div className="container">
           <p className="label rv">SOLUTIONS &amp; SERVICES</p>
           <h1 className="rv d1">
-            VietGuys Services
+            One ecosystem.
             <br />
-            <span className="green">Ecosystem</span>
+            <span className="green">Every customer touchpoint.</span>
           </h1>
           <p className="sub rv d2">
             A unified system of methodologies and enterprise-grade services across
