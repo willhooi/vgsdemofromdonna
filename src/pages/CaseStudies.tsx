@@ -431,6 +431,7 @@ const Card = ({ s, idx }: { s: Study; idx: number }) => {
           display: "flex",
           flexDirection: "column",
           justifyContent: s.featured ? "center" : undefined,
+          flex: 1,
         }}
       >
         <div
