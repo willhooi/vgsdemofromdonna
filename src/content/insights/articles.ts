@@ -40,7 +40,7 @@ export const ARTICLES: InsightArticle[] = [
     date: "2026-02-12",
     readMinutes: 6,
     tags: ["Zalo ZNS", "CPaaS", "Vietnam"],
-    image: "/__l5e/assets-v1/d2c4503b-fc2d-40da-abcb-23bfa2fdb302/fbn-zalo-oa-ecosystem.png",
+    image: "/__l5e/assets-v1/44dc459e-7cf8-4900-91a7-1316714c90a9/beauty-ads-insight.png",
     featured: true,
     legacyUrl:
       "/vi/tin-tuc/cellphones-nang-cao-trai-nghiem-khach-hang-voi-zalo-zns-template",
