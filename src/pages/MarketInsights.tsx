@@ -20,8 +20,7 @@ const SITE = "https://vgsdemofromdonna.lovable.app";
 const MarketInsights = () => {
   const [active, setActive] = useState<string>("all");
 
-  const featured = featuredArticles();
-  const hero = featured[0];
+  const featured = featuredArticles().slice(0, 2);
 
   const filtered = useMemo(() => {
     const all = latestArticles();
@@ -82,74 +81,70 @@ const MarketInsights = () => {
               <ArrowLeft className="h-3.5 w-3.5" /> Back to home
             </Link>
           </Reveal>
-          <div className="mt-8 grid gap-10 md:grid-cols-12 md:items-end">
-            <Reveal variant="fade-up" className="md:col-span-8">
+          <div className="mt-6">
+            <Reveal variant="fade-up">
               <span className="eyebrow">Market Insights</span>
               <h1 className="heading-hero mt-4 text-balance">
-                Field notes from Vietnam's{" "}
-                <span className="text-primary">enterprise messaging</span>{" "}
-                frontline.
+                <span className="text-primary">Insights</span> & playbooks.
               </h1>
-            </Reveal>
-            <Reveal variant="fade-up" delay={120} className="md:col-span-4">
-              <p className="text-base leading-relaxed text-muted-foreground">
-                Benchmarks, playbooks and channel intelligence from the team
-                delivering 5 million messages a day across 5,000+ brands.
-              </p>
             </Reveal>
           </div>
         </div>
       </section>
 
-      {/* FEATURED HERO ARTICLE */}
-      {hero && (
+      {/* FEATURED — 2 ARTICLES */}
+      {featured.length > 0 && (
         <section className="pb-16">
           <div className="container-tight">
-            <Reveal variant="scale-soft">
-              <Link
-                to={`/market-insights/${hero.slug}`}
-                className="group grid gap-0 overflow-hidden rounded-3xl border border-border bg-card shadow-[var(--shadow-soft)] transition-all hover:border-primary/40 hover:shadow-[var(--shadow-glow)] md:grid-cols-12"
-              >
-                <div className="relative md:col-span-7">
-                  <div className="aspect-[16/10] w-full overflow-hidden md:h-full">
-                    <img
-                      src={hero.image}
-                      alt={hero.title}
-                      loading="eager"
-                      className="h-full w-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-105"
-                    />
-                  </div>
-                  <span className="absolute left-5 top-5 rounded-full bg-background/90 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary backdrop-blur">
-                    Featured
-                  </span>
-                </div>
-                <div className="flex flex-col justify-center gap-5 p-6 md:col-span-5 md:p-10">
-                  <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
-                    {CATEGORIES.find((c) => c.slug === hero.category)?.title}
-                  </span>
-                  <h2 className="text-2xl font-bold tracking-tight text-foreground md:text-3xl">
-                    {hero.title}
-                  </h2>
-                  <p className="text-sm leading-relaxed text-muted-foreground md:text-base">
-                    {hero.excerpt}
-                  </p>
-                  <div className="flex items-center gap-4 text-xs text-muted-foreground">
-                    <span className="font-semibold text-foreground">
-                      {hero.author}
-                    </span>
-                    <span aria-hidden>·</span>
-                    <span>{formatDate(hero.date)}</span>
-                    <span aria-hidden>·</span>
-                    <span className="inline-flex items-center gap-1">
-                      <Clock className="h-3 w-3" /> {hero.readMinutes} min
-                    </span>
-                  </div>
-                  <span className="inline-flex items-center gap-1 text-sm font-semibold text-primary">
-                    Read article <ArrowUpRight className="h-4 w-4" />
-                  </span>
-                </div>
-              </Link>
-            </Reveal>
+            <div className="grid gap-6 md:grid-cols-2">
+              {featured.map((a, idx) => (
+                <Reveal key={a.slug} variant="scale-soft" delay={idx * 80}>
+                  <Link
+                    to={`/market-insights/${a.slug}`}
+                    className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-[var(--shadow-soft)] transition-all hover:-translate-y-1 hover:border-primary/40 hover:shadow-[var(--shadow-glow)]"
+                  >
+                    <div className="relative">
+                      <div className="aspect-[16/10] w-full overflow-hidden">
+                        <img
+                          src={a.image}
+                          alt={a.title}
+                          loading="eager"
+                          className="h-full w-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-105"
+                        />
+                      </div>
+                      <span className="absolute left-5 top-5 rounded-full bg-background/90 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary backdrop-blur">
+                        Featured
+                      </span>
+                    </div>
+                    <div className="flex flex-1 flex-col gap-4 p-6 md:p-8">
+                      <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                        {CATEGORIES.find((c) => c.slug === a.category)?.title}
+                      </span>
+                      <h2 className="text-xl font-bold tracking-tight text-foreground md:text-2xl">
+                        {a.title}
+                      </h2>
+                      <p className="line-clamp-3 text-sm leading-relaxed text-muted-foreground">
+                        {a.excerpt}
+                      </p>
+                      <div className="mt-auto flex items-center gap-3 pt-2 text-xs text-muted-foreground">
+                        <span className="font-semibold text-foreground">
+                          {a.author}
+                        </span>
+                        <span aria-hidden>·</span>
+                        <span>{formatDate(a.date)}</span>
+                        <span aria-hidden>·</span>
+                        <span className="inline-flex items-center gap-1">
+                          <Clock className="h-3 w-3" /> {a.readMinutes} min
+                        </span>
+                      </div>
+                      <span className="inline-flex items-center gap-1 text-sm font-semibold text-primary">
+                        Read article <ArrowUpRight className="h-4 w-4" />
+                      </span>
+                    </div>
+                  </Link>
+                </Reveal>
+              ))}
+            </div>
           </div>
         </section>
       )}
