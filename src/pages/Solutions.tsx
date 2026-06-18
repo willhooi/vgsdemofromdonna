@@ -830,7 +830,6 @@ const CSS = `
 @media(max-width:920px){
   .vg-sol .nav-links,.vg-sol .lang{display:none}
   .vg-sol .hero{padding:110px 0 50px}
-  .vg-sol .plat-grid{grid-template-columns:1fr}
   .vg-sol .pane.show{grid-template-columns:1fr}
   .vg-sol .cat-art{min-height:160px}
   .vg-sol .svc-grid{grid-template-columns:1fr!important}
