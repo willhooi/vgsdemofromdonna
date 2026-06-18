@@ -1,4 +1,7 @@
 import { useEffect, useRef, useState } from "react";
+import { Header } from "@/components/site/Header";
+import { Footer } from "@/components/site/Footer";
+import { ChatBubble } from "@/components/site/ChatBubble";
 import smsBrandnameImg from "@/assets/solutions/sms-brandname.png.asset.json";
 import ottMultiServiceImg from "@/assets/solutions/ott-multi-service.jpg.asset.json";
 import emailServicesImg from "@/assets/solutions/email-services.jpg.asset.json";
@@ -35,7 +38,6 @@ const Solutions = () => {
   const [tab, setTab] = useState<TabKey>("sms");
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const heroCanvas = useRef<HTMLCanvasElement>(null);
   const indCanvas = useRef<HTMLCanvasElement>(null);
 
@@ -58,12 +60,6 @@ const Solutions = () => {
     }
   }, []);
 
-  // Nav border on scroll
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 10);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   // Scroll reveal + count up
   useEffect(() => {
@@ -211,30 +207,7 @@ const Solutions = () => {
     <div className="vg-sol">
       <style>{CSS}</style>
 
-      {/* HEADER */}
-      <nav id="nav" className={scrolled ? "scrolled" : ""}>
-        <div className="container">
-          <div className="logo">
-            Viet<span>Guys</span>
-          </div>
-          <div className="nav-links">
-            <a href="/solutions" className="active">
-              Solutions
-            </a>
-            <a href="/case-studies">Case Study</a>
-            <a href="/market-insights">Market Insight</a>
-            <a href="/about">About Us</a>
-          </div>
-          <div className="nav-right">
-            <span className="lang">
-              <b>EN</b> | VI
-            </span>
-            <a className="btn" href="#cta">
-              Contact Us
-            </a>
-          </div>
-        </div>
-      </nav>
+      <Header />
 
       {/* FAB */}
       <div className="fab">
@@ -687,89 +660,8 @@ const Solutions = () => {
         </div>
       </div>
 
-      {/* FOOTER */}
-      <footer>
-        <div className="container">
-          <div className="f-grid">
-            <div className="f-brand">
-              <div className="logo">
-                Viet<span>Guys</span>
-              </div>
-              <div className="f-jp">
-                🇯🇵 Backed by Accrete Inc. Japan
-                <small>TOKYO STOCK EXCHANGE LISTED</small>
-              </div>
-              <p>
-                1st Floor &amp; T Floor, HBT Building, 456–458 Hai Ba Trung St.,
-                Tan Dinh Ward, HCMC.
-                <br />
-                info@vietguys.biz
-                <br />
-                (+84) 28 7300 8027 · 0933 331 840
-              </p>
-            </div>
-            <div>
-              <h4>MESSAGING SOLUTION</h4>
-              <ul>
-                <li><a href="#">SMS Brandname</a></li>
-                <li><a href="#">Voice Brandname</a></li>
-                <li><a href="#">Viber Message</a></li>
-                <li><a href="#">Zalo ZBS Template</a></li>
-                <li><a href="#">Email Marketing</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4>AI &amp; DIGITAL</h4>
-              <ul>
-                <li><a href="#">AI Services</a></li>
-                <li><a href="#">Zalo Engagement Solution</a></li>
-                <li><a href="#">Smart Warranty</a></li>
-                <li><a href="#">Automation System</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4>VERIFICATION</h4>
-              <ul>
-                <li><a href="#">OTPBox</a></li>
-                <li><a href="#">Voice OTP</a></li>
-                <li><a href="#">Email OTP</a></li>
-              </ul>
-              <h4 style={{ marginTop: 24 }}>TOPUP</h4>
-              <ul>
-                <li><a href="#">Mobile Topup</a></li>
-                <li><a href="#">Customized Rewards</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4>COMPANY</h4>
-              <ul>
-                <li><a href="/about">About Us</a></li>
-                <li><a href="#">Strategic Partners</a></li>
-                <li><a href="#">Careers</a></li>
-                <li><a href="/case-studies">Case Studies</a></li>
-                <li><a href="/market-insights">Market Insights</a></li>
-              </ul>
-            </div>
-          </div>
-          <div className="f-badges">
-            <span>ISO/IEC 27001:2022</span>
-            <span>VNCERT CERTIFICATION</span>
-            <span>VNTA LICENSED</span>
-            <span>ZALO TRUSTED PARTNER</span>
-          </div>
-          <div className="f-bottom">
-            <span>
-              © 2026 VietGuys Joint Stock Company. Proudly part of Accrete
-              Group. All rights reserved.
-            </span>
-            <div className="links">
-              <a href="#">PRIVACY POLICY</a>
-              <a href="#">TERMS OF USE</a>
-              <a href="#">SITEMAP</a>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
+      <ChatBubble />
     </div>
   );
 };
