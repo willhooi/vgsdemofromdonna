@@ -233,74 +233,24 @@ const Solutions = () => {
       <header className="hero">
         <canvas id="dotsHero" ref={heroCanvas}></canvas>
         <div className="container">
-          <div>
-            <p className="label rv">SOLUTIONS &amp; SERVICES</p>
-            <h1 className="rv d1">
-              Every channel. One partner.
-              <br />
-              <span className="green">Built for growth.</span>
-            </h1>
-            <p className="sub rv d2">
-              16 enterprise services across messaging, verification, rewards,
-              data and AI — composable into the exact stack your customer
-              journey needs.
-            </p>
-            <div className="hero-cta rv d3">
-              <a className="btn" href="#cta">
-                Talk to a Strategist
-              </a>
-              <a className="btn ghost" href="#catalog">
-                Browse services ↓
-              </a>
-            </div>
-          </div>
-          <div className="hero-art rv d2" aria-hidden="true">
-            <svg viewBox="0 0 460 430" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle className="dashring" cx="230" cy="215" r="168" stroke="#3aa84f" strokeWidth="1.5" opacity=".5" />
-              <rect x="160" y="85" width="140" height="260" rx="22" fill="#fff" stroke="#d9dcdf" strokeWidth="2" />
-              <rect x="200" y="97" width="60" height="7" rx="3.5" fill="#e8eaec" />
-              <rect x="174" y="120" width="86" height="30" rx="9" fill="#e9f9ec" />
-              <rect x="182" y="129" width="62" height="6" rx="3" fill="#3aa84f" opacity=".55" />
-              <rect x="174" y="158" width="100" height="34" rx="9" fill="#e9f9ec" />
-              <rect x="182" y="167" width="76" height="5" rx="2.5" fill="#3aa84f" opacity=".5" />
-              <rect x="182" y="177" width="52" height="5" rx="2.5" fill="#3aa84f" opacity=".35" />
-              <rect x="206" y="200" width="80" height="30" rx="9" fill="#0c3b20" />
-              <rect x="214" y="209" width="56" height="6" rx="3" fill="#a7f070" opacity=".8" />
-              <rect x="174" y="238" width="92" height="30" rx="9" fill="#e9f9ec" />
-              <rect x="182" y="247" width="64" height="6" rx="3" fill="#3aa84f" opacity=".5" />
-              <circle cx="230" cy="320" r="11" fill="#f1f3f5" />
-              <g stroke="#3aa84f" strokeWidth="1" opacity=".35">
-                <path d="M230 47L230 85M362 130L300 165M398 215L300 215M362 300L300 262M98 130L160 165M62 215L160 215M98 300L160 262" />
-              </g>
-              <g className="float1">
-                <circle cx="230" cy="47" r="24" fill="#fff" stroke="#3aa84f" strokeWidth="1.5" />
-                <text x="230" y="52" textAnchor="middle" fontSize="11" fontWeight="800" fill="#0c7a35">SMS</text>
-              </g>
-              <g className="float2">
-                <circle cx="376" cy="122" r="24" fill="#fff" stroke="#3aa84f" strokeWidth="1.5" />
-                <text x="376" y="127" textAnchor="middle" fontSize="10" fontWeight="800" fill="#0c7a35">Zalo</text>
-              </g>
-              <g className="float3">
-                <circle cx="406" cy="226" r="24" fill="#fff" stroke="#3aa84f" strokeWidth="1.5" />
-                <text x="406" y="231" textAnchor="middle" fontSize="10" fontWeight="800" fill="#0c7a35">Viber</text>
-              </g>
-              <g className="float4">
-                <circle cx="370" cy="308" r="24" fill="#fff" stroke="#3aa84f" strokeWidth="1.5" />
-                <text x="370" y="313" textAnchor="middle" fontSize="13" fontWeight="800" fill="#0c7a35">@</text>
-              </g>
-              <g className="float5">
-                <circle cx="84" cy="122" r="24" fill="#fff" stroke="#3aa84f" strokeWidth="1.5" />
-                <text x="84" y="127" textAnchor="middle" fontSize="10" fontWeight="800" fill="#0c7a35">OTP</text>
-              </g>
-              <g className="float2">
-                <circle cx="54" cy="226" r="24" fill="#fff" stroke="#3aa84f" strokeWidth="1.5" />
-                <text x="54" y="231" textAnchor="middle" fontSize="9.5" fontWeight="800" fill="#0c7a35">Voice</text>
-              </g>
-              <g className="float3">
-                <circle cx="90" cy="308" r="24" fill="#fff" stroke="#e8821a" strokeWidth="1.5" />
-                <text x="90" y="313" textAnchor="middle" fontSize="10" fontWeight="800" fill="#cf7500">AI</text>
-              </g>
-            </svg>
+          <p className="label rv">SOLUTIONS &amp; SERVICES</p>
+          <h1 className="rv d1">
+            Every channel.
+            <br />
+            <span className="green">One partner.</span>
+          </h1>
+          <p className="sub rv d2">
+            16 enterprise-grade services across messaging, verification, rewards,
+            data and AI — composable into the exact stack your customer
+            journey needs.
+          </p>
+          <div className="hero-cta rv d3">
+            <a className="btn" href="#cta">
+              Talk to a Strategist
+            </a>
+            <a className="btn ghost" href="#services">
+              Browse services ↓
+            </a>
           </div>
         </div>
       </header>
@@ -860,21 +810,11 @@ const CSS = `
 .vg-sol .fab a{width:64px;height:64px;border-radius:14px;background:var(--accent);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:8.5px;font-weight:800;letter-spacing:.05em;text-align:center;text-decoration:none;box-shadow:0 10px 26px rgba(0,0,0,.2);transition:transform .2s,background .2s}
 .vg-sol .fab a:hover{transform:translateY(-3px);background:#cf7500}
 .vg-sol .fab svg{width:20px;height:20px}
-.vg-sol .hero{padding:120px 0 50px;position:relative;overflow:hidden}
-.vg-sol .hero .container{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
+.vg-sol .hero{padding:130px 0 60px;position:relative;overflow:hidden;text-align:center}
+.vg-sol .hero .container{position:relative;z-index:1;max-width:760px;margin:0 auto}
 .vg-sol #dotsHero{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
-.vg-sol .hero .sub{color:var(--muted-fg);font-size:16.5px;margin:18px 0 26px;max-width:480px}
-.vg-sol .hero-cta{display:flex;gap:12px}
-.vg-sol .hero-art{position:relative;height:430px}
-.vg-sol .hero-art svg{width:100%;height:100%}
-.vg-sol .float1{animation:vgfl 5s ease-in-out infinite}
-.vg-sol .float2{animation:vgfl 6s ease-in-out 1s infinite}
-.vg-sol .float3{animation:vgfl 5.5s ease-in-out .5s infinite}
-.vg-sol .float4{animation:vgfl 6.5s ease-in-out 1.5s infinite}
-.vg-sol .float5{animation:vgfl 5.2s ease-in-out 2s infinite}
-@keyframes vgfl{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
-.vg-sol .dashring{stroke-dasharray:6 10;animation:vgdash 30s linear infinite}
-@keyframes vgdash{to{stroke-dashoffset:-640}}
+.vg-sol .hero .sub{color:var(--muted-fg);font-size:17px;margin:20px auto 32px;max-width:560px}
+.vg-sol .hero-cta{display:flex;gap:12px;justify-content:center}
 .vg-sol .plat{background:linear-gradient(180deg,#fff,var(--muted) 120px,var(--muted) calc(100% - 120px),#fff);padding:56px 0}
 .vg-sol .plat-head{text-align:center;max-width:640px;margin:0 auto 36px}
 .vg-sol .plat-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
@@ -962,10 +902,7 @@ const CSS = `
 .vg-sol .f-bottom a{color:inherit;text-decoration:none;letter-spacing:.08em;font-weight:600}
 @media(max-width:920px){
   .vg-sol .nav-links,.vg-sol .lang{display:none}
-  .vg-sol .hero .container{grid-template-columns:1fr;text-align:center}
-  .vg-sol .hero .sub{margin:18px auto 26px}
-  .vg-sol .hero-cta{justify-content:center}
-  .vg-sol .hero-art{height:330px}
+  .vg-sol .hero{padding:110px 0 50px}
   .vg-sol .plat-grid{grid-template-columns:1fr}
   .vg-sol .pane.show{grid-template-columns:1fr}
   .vg-sol .cat-art{min-height:160px}
