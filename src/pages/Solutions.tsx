@@ -768,7 +768,7 @@ const CSS = `
 .vg-sol .inds .label{color:var(--lime)}
 .vg-sol .inds h2{color:#fff}
 .vg-sol .inds-head{text-align:center;max-width:640px;margin:0 auto 40px}
-.vg-sol .inds-cta{margin-top:18px}
+.vg-sol .inds-cta-wrap{text-align:center;margin-top:28px}
 .vg-sol .inds .btn.ghost{color:#fff;border-color:rgba(167,240,112,.4)}
 .vg-sol .inds .btn.ghost:hover{background:rgba(167,240,112,.12);border-color:var(--lime)}
 .vg-sol .ind-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
