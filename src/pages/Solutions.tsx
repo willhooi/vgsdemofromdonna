@@ -4,6 +4,7 @@ import ottMultiServiceImg from "@/assets/solutions/ott-multi-service.jpg.asset.j
 import emailServicesImg from "@/assets/solutions/email-services.jpg.asset.json";
 import voiceServicesImg from "@/assets/solutions/voice-services.jpg.asset.json";
 import rewardsLoyaltyImg from "@/assets/solutions/rewards-loyalty.jpg.asset.json";
+import otpboxImg from "@/assets/solutions/otpbox.jpg.asset.json";
 
 const SOLUTION_OPTIONS = [
   "SMS Brandname",
@@ -513,7 +514,12 @@ const Solutions = () => {
           {tab === "otp" && (
             <div className="pane show">
               <CatArt caption="Security at login speed">
-                <OtpArt />
+                <img
+                  src={otpboxImg.url}
+                  alt="OTP verification on mobile"
+                  className="h-full w-full rounded-2xl object-cover"
+                  loading="lazy"
+                />
               </CatArt>
               <div className="svc-grid" style={{ gridTemplateColumns: "repeat(1,1fr)" }}>
                 <Svc title="OTPBox" body="Multi-channel OTP on one API — intelligent routing picks the fastest path, lowest cost." chip="1 API">
