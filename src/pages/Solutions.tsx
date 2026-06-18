@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ChatBubble } from "@/components/site/ChatBubble";
+import { AutomationSection } from "@/components/solutions/AutomationSection";
 import smsBrandnameImg from "@/assets/solutions/sms-brandname.png.asset.json";
 import ottMultiServiceImg from "@/assets/solutions/ott-multi-service.jpg.asset.json";
 import emailServicesImg from "@/assets/solutions/email-services.jpg.asset.json";
@@ -463,6 +464,10 @@ const Solutions = () => {
           )}
         </div>
       </section>
+
+      <AutomationSection />
+
+
 
       {/* divider white → dark */}
       <div className="divider" style={{ background: "#fff" }}>
