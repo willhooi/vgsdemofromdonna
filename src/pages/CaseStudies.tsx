@@ -740,7 +740,7 @@ const CaseStudies = () => {
             display: "grid",
             gridTemplateColumns: "repeat(3, 1fr)",
             gap: 20,
-            alignItems: "start",
+            alignItems: "stretch",
           }}
         >
           {visible.map((s, i) => (
