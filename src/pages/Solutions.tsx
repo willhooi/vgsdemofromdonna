@@ -251,16 +251,6 @@ const Solutions = () => {
       {/* CATALOG */}
       <section id="catalog" style={{ paddingTop: 50 }}>
         <div className="container">
-          <div className="cat-head">
-            <p className="label rv">ALL SERVICES</p>
-            <h2 className="rv d1">
-              VietGuys Services{"\u00a0"}<span className="green">Ecosystem</span>
-            </h2>
-            <p className="rv d2">
-              A system of methodologies and tools for running marketing
-              campaigns{"\u00a0"}{"\u00a0"}
-            </p>
-          </div>
 
           <div className="tabs rv">
             {TABS.map((t) => (
