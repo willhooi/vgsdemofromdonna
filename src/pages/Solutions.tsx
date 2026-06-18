@@ -522,7 +522,7 @@ const Solutions = () => {
                 />
               </CatArt>
               <div className="svc-grid" style={{ gridTemplateColumns: "repeat(1,1fr)" }}>
-                <Svc title="OTPBox" body="Multi-channel OTP on one API — intelligent routing picks the fastest path, lowest cost." chip="1 API">
+                <Svc title="OTPBox" body="A multi-channel OTP solution that enables businesses to combine primary and backup delivery routes through a single API for maximum reliability." chip="1 API">
                   <IconLock />
                 </Svc>
               </div>
