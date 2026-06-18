@@ -468,7 +468,7 @@ const Solutions = () => {
             </div>
           )}
 
-          {tab === "email" && (
+          {tab === "emailVoice" && (
             <div className="pane show">
               <CatArt caption="Reach beyond the inbox">
                 <img
@@ -478,28 +478,13 @@ const Solutions = () => {
                   loading="lazy"
                 />
               </CatArt>
-              <div className="svc-grid" style={{ gridTemplateColumns: "repeat(2,1fr)" }}>
+              <div className="svc-grid" style={{ gridTemplateColumns: "repeat(3,1fr)" }}>
                 <Svc title="Email Marketing" body="Sales, promotions and product content with automation journeys and A/B testing.">
                   <IconMail />
                 </Svc>
                 <Svc title="Email OTP" body="One-time codes via email — automatic, fast and efficient for every transaction.">
                   <IconMailCheck />
                 </Svc>
-              </div>
-            </div>
-          )}
-
-          {tab === "voice" && (
-            <div className="pane show">
-              <CatArt caption="Calls that build trust">
-                <img
-                  src={voiceServicesImg.url}
-                  alt="Person on a voice call at sunset"
-                  className="h-full w-full rounded-2xl object-cover"
-                  loading="lazy"
-                />
-              </CatArt>
-              <div className="svc-grid" style={{ gridTemplateColumns: "repeat(1,1fr)" }}>
                 <Svc title="Voice Brandname" body="Calls display your brand name instead of a number — higher answer rates, instant trust.">
                   <IconPhone />
                 </Svc>
