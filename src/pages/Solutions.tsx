@@ -526,7 +526,12 @@ const Solutions = () => {
           {tab === "rw" && (
             <div className="pane show">
               <CatArt caption="Turn engagement into retention">
-                <RwArt />
+                <img
+                  src={rewardsLoyaltyImg.url}
+                  alt="Rewards and loyalty solutions on mobile"
+                  className="h-full w-full rounded-2xl object-cover"
+                  loading="lazy"
+                />
               </CatArt>
               <div className="svc-grid">
                 <Svc title="Mobile Topup" body="Instant airtime rewards across all carriers — fully automated, zero card risk.">
