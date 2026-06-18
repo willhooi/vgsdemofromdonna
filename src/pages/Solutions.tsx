@@ -810,21 +810,11 @@ const CSS = `
 .vg-sol .fab a{width:64px;height:64px;border-radius:14px;background:var(--accent);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:8.5px;font-weight:800;letter-spacing:.05em;text-align:center;text-decoration:none;box-shadow:0 10px 26px rgba(0,0,0,.2);transition:transform .2s,background .2s}
 .vg-sol .fab a:hover{transform:translateY(-3px);background:#cf7500}
 .vg-sol .fab svg{width:20px;height:20px}
-.vg-sol .hero{padding:120px 0 50px;position:relative;overflow:hidden}
-.vg-sol .hero .container{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
+.vg-sol .hero{padding:130px 0 60px;position:relative;overflow:hidden;text-align:center}
+.vg-sol .hero .container{position:relative;z-index:1;max-width:760px;margin:0 auto}
 .vg-sol #dotsHero{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
-.vg-sol .hero .sub{color:var(--muted-fg);font-size:16.5px;margin:18px 0 26px;max-width:480px}
-.vg-sol .hero-cta{display:flex;gap:12px}
-.vg-sol .hero-art{position:relative;height:430px}
-.vg-sol .hero-art svg{width:100%;height:100%}
-.vg-sol .float1{animation:vgfl 5s ease-in-out infinite}
-.vg-sol .float2{animation:vgfl 6s ease-in-out 1s infinite}
-.vg-sol .float3{animation:vgfl 5.5s ease-in-out .5s infinite}
-.vg-sol .float4{animation:vgfl 6.5s ease-in-out 1.5s infinite}
-.vg-sol .float5{animation:vgfl 5.2s ease-in-out 2s infinite}
-@keyframes vgfl{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
-.vg-sol .dashring{stroke-dasharray:6 10;animation:vgdash 30s linear infinite}
-@keyframes vgdash{to{stroke-dashoffset:-640}}
+.vg-sol .hero .sub{color:var(--muted-fg);font-size:17px;margin:20px auto 32px;max-width:560px}
+.vg-sol .hero-cta{display:flex;gap:12px;justify-content:center}
 .vg-sol .plat{background:linear-gradient(180deg,#fff,var(--muted) 120px,var(--muted) calc(100% - 120px),#fff);padding:56px 0}
 .vg-sol .plat-head{text-align:center;max-width:640px;margin:0 auto 36px}
 .vg-sol .plat-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
