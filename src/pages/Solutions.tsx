@@ -3,6 +3,23 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ChatBubble } from "@/components/site/ChatBubble";
 import { AutomationSection } from "@/components/solutions/AutomationSection";
+import { useCountUp } from "@/hooks/use-count-up";
+
+const MetricCountUp = ({ target, suffix = "" }: { target: number; suffix?: string }) => {
+  const ref = useRef<HTMLSpanElement>(null);
+  const [start, setStart] = useState(false);
+  const value = useCountUp(start ? target : 0, 1600);
+  useEffect(() => {
+    if (!ref.current) return;
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => e.isIntersecting && setStart(true)),
+      { threshold: 0.5 }
+    );
+    io.observe(ref.current);
+    return () => io.disconnect();
+  }, []);
+  return <span ref={ref}>{value}{suffix}</span>;
+};
 import smsBrandnameImg from "@/assets/solutions/sms-brandname.png.asset.json";
 import ottMultiServiceImg from "@/assets/solutions/ott-multi-service.jpg.asset.json";
 import emailServicesImg from "@/assets/solutions/email-services.jpg.asset.json";
