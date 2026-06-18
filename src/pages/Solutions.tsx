@@ -417,7 +417,12 @@ const Solutions = () => {
           {tab === "sms" && (
             <div className="pane show">
               <CatArt caption="Direct carrier connections">
-                <SmsArt />
+                <img
+                  src={smsBrandnameImg.url}
+                  alt="SMS Brandname on mobile keypad"
+                  className="h-full w-full rounded-2xl object-cover"
+                  loading="lazy"
+                />
               </CatArt>
               <div className="svc-grid">
                 <Svc title="SMS Brandname" body="Sender displays your brand name (HSBC, Samsung…) instead of a phone number — authenticated, nationwide.">
