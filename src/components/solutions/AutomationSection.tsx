@@ -159,7 +159,7 @@ export function AutomationSection() {
             <li><span className="dot" />360° customer profiles from every touchpoint</li>
             <li><span className="dot" />Drag-and-drop journey automation, no code</li>
             <li><span className="dot" />Real-time segmentation with AI-driven scoring</li>
-            <li><span className="dot" />Multi-channel data activation — SMS, Zalo, Email, Voice</li>
+            <li><span className="dot" />Multi-channel data activation:  SMS, Zalo, Email, Voice...</li>
           </ul>
           <div className="auto-cta">
             <a className="auto-btn primary" href="#cta">Explore PangoCDP</a>
