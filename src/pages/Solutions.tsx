@@ -500,12 +500,9 @@ const Solutions = () => {
                   loading="lazy"
                 />
               </CatArt>
-              <div className="svc-grid" style={{ gridTemplateColumns: "repeat(2,1fr)" }}>
+              <div className="svc-grid" style={{ gridTemplateColumns: "repeat(1,1fr)" }}>
                 <Svc title="Voice Brandname" body="Calls display your brand name instead of a number — higher answer rates, instant trust.">
                   <IconPhone />
-                </Svc>
-                <Svc title="Voice OTP" body="OTP via automated calls — reach hundreds of users in seconds when SMS isn't an option.">
-                  <IconLockCall />
                 </Svc>
               </div>
             </div>
