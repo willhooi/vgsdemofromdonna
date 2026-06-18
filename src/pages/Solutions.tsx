@@ -464,6 +464,10 @@ const Solutions = () => {
         </div>
       </section>
 
+      <AutomationSection />
+
+
+
       {/* divider white → dark */}
       <div className="divider" style={{ background: "#fff" }}>
         <svg viewBox="0 0 1440 64" preserveAspectRatio="none">
