@@ -38,7 +38,6 @@ const Solutions = () => {
   const [tab, setTab] = useState<TabKey>("sms");
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const heroCanvas = useRef<HTMLCanvasElement>(null);
   const indCanvas = useRef<HTMLCanvasElement>(null);
 
