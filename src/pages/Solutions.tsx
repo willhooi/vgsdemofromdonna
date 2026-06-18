@@ -758,21 +758,6 @@ const CSS = `
 .vg-sol .hero .sub{color:var(--muted-fg);font-size:17px;margin:20px auto 32px;max-width:560px}
 .vg-sol .hero-cta{display:flex;gap:12px;justify-content:center}
 .vg-sol .plat{background:linear-gradient(180deg,#fff,var(--muted) 120px,var(--muted) calc(100% - 120px),#fff);padding:56px 0}
-.vg-sol .plat-head{text-align:center;max-width:640px;margin:0 auto 36px}
-.vg-sol .plat-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.vg-sol .plat-card{border-radius:20px;padding:34px 32px;color:#fff;position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s}
-.vg-sol .plat-card:hover{transform:translateY(-5px);box-shadow:0 22px 50px rgba(0,0,0,.16)}
-.vg-sol .plat-card.pango{background:linear-gradient(135deg,var(--primary-deep),var(--primary))}
-.vg-sol .plat-card.ai{background:linear-gradient(135deg,#15233f,#2b4a7a)}
-.vg-sol .plat-card .new{position:absolute;top:18px;right:18px;background:var(--accent);font-size:9.5px;font-weight:800;letter-spacing:.12em;padding:4px 11px;border-radius:999px}
-.vg-sol .plat-card h3{font-size:22px;font-weight:800;margin:8px 0 8px}
-.vg-sol .plat-card .k{font-size:10.5px;font-weight:800;letter-spacing:.16em;opacity:.7;text-transform:uppercase}
-.vg-sol .plat-card p{font-size:14px;opacity:.9;margin-bottom:14px}
-.vg-sol .plat-card ul{list-style:none;display:flex;flex-wrap:wrap;gap:7px;margin:0 0 18px;padding:0}
-.vg-sol .plat-card li{font-size:11.5px;font-weight:700;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.2);padding:5px 12px;border-radius:999px}
-.vg-sol .plat-card a{color:#fff;font-weight:700;font-size:13.5px;text-decoration:none;border-bottom:2px solid rgba(255,255,255,.4)}
-.vg-sol .plat-card a:hover{border-color:#fff}
-.vg-sol .plat-card .bgnet{position:absolute;right:-30px;bottom:-30px;width:200px;height:200px;opacity:.16;pointer-events:none}
 .vg-sol .cat-head{text-align:center;max-width:640px;margin:0 auto 28px}
 .vg-sol .cat-head p:not(.label){color:var(--muted-fg);margin-top:10px;font-size:15px}
 .vg-sol .tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:30px}
