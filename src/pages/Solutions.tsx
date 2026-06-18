@@ -841,9 +841,6 @@ const CSS = `
 .vg-sol .rv{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
 .vg-sol .rv.in{opacity:1;transform:none}
 .vg-sol .d1{transition-delay:.08s}.vg-sol .d2{transition-delay:.16s}.vg-sol .d3{transition-delay:.24s}
-.vg-sol nav{position:fixed;inset:0 0 auto 0;z-index:50;background:rgba(255,255,255,.65);backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:border .3s}
-.vg-sol nav.scrolled{border-bottom:1px solid var(--border)}
-.vg-sol nav .container{display:flex;align-items:center;justify-content:space-between;height:66px}
 .vg-sol .logo{font-weight:800;font-size:21px}
 .vg-sol .logo span{color:var(--primary)}
 .vg-sol .nav-links{display:flex;gap:30px;font-size:14px;font-weight:600;color:var(--muted-fg)}
@@ -954,17 +951,6 @@ const CSS = `
 .vg-sol .f-note{margin-top:12px;font-size:11.5px;color:rgba(255,255,255,.45);text-align:center;line-height:1.6}
 .vg-sol .divider{display:block;width:100%;height:64px;margin-bottom:-1px}
 .vg-sol .divider svg{display:block;width:100%;height:100%}
-.vg-sol footer{background:#0d1326;color:rgba(255,255,255,.75);padding:60px 0 0;font-size:14px}
-.vg-sol .f-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr 1fr;gap:36px;padding-bottom:44px}
-.vg-sol .f-brand .logo{color:#fff;margin-bottom:14px}
-.vg-sol .f-jp{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:8px 12px;font-size:12px;font-weight:700;margin-bottom:16px}
-.vg-sol .f-jp small{display:block;font-weight:600;color:rgba(255,255,255,.5);letter-spacing:.08em}
-.vg-sol .f-brand p{font-size:13px;color:rgba(255,255,255,.55);line-height:1.7}
-.vg-sol footer h4{font-size:11.5px;font-weight:800;letter-spacing:.16em;color:rgba(255,255,255,.45);margin-bottom:16px;margin-top:0}
-.vg-sol footer ul{list-style:none;padding:0;margin:0}
-.vg-sol footer ul li{margin-bottom:10px}
-.vg-sol footer ul a{color:rgba(255,255,255,.78);text-decoration:none;font-size:13.5px}
-.vg-sol footer ul a:hover{color:var(--lime)}
 .vg-sol .f-badges{display:flex;gap:10px;flex-wrap:wrap;padding:18px 0;border-top:1px solid rgba(255,255,255,.08)}
 .vg-sol .f-badges span{font-size:10.5px;font-weight:700;letter-spacing:.1em;border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:5px 12px;color:rgba(255,255,255,.6)}
 .vg-sol .f-bottom{display:flex;justify-content:space-between;align-items:center;padding:18px 0 26px;border-top:1px solid rgba(255,255,255,.08);font-size:12.5px;color:rgba(255,255,255,.45)}
