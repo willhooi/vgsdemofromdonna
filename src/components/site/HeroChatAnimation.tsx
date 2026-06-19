@@ -317,7 +317,13 @@ export const HeroChatAnimation = () => {
               onPointerDown={(e) => onPointerDown(e, chip.id)}
             >
               <div
-                className={`flex items-center justify-center rounded-2xl bg-white/0 transition-transform duration-300 ${chip.id === 'sms' || chip.id === 'viber' ? 'h-14 w-14 sm:h-16 sm:w-16' : 'h-11 w-11 sm:h-12 sm:w-12'}`}
+                className={`flex items-center justify-center rounded-2xl bg-white/0 transition-transform duration-300 ${
+                  chip.id === 'miniapp' || chip.id === 'zalo'
+                    ? 'h-[60px] w-[60px] sm:h-[68px] sm:w-[68px]'
+                    : chip.id === 'sms' || chip.id === 'viber'
+                    ? 'h-14 w-14 sm:h-16 sm:w-16'
+                    : 'h-11 w-11 sm:h-12 sm:w-12'
+                }`}
                 style={{
                   transform: isActive ? "scale(1.14)" : "scale(1)",
                   filter: editMode
