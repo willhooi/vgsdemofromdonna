@@ -43,18 +43,6 @@ export const FAQ = () => (
         <p className="mt-4 text-base text-muted-foreground">
           Everything you need to know about VietGuys services, security, and deployment.
         </p>
-        <div className="mt-8 rounded-2xl border border-border bg-secondary/40 p-5">
-          <p className="text-sm font-semibold text-foreground">Need a more specific answer?</p>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Our experts are available to advise you 24/7.
-          </p>
-          <a
-            href="tel:02873008027"
-            className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-primary hover:text-primary-deep"
-          >
-            📞 028-7300-8027
-          </a>
-        </div>
       </div>
 
       <Accordion type="single" collapsible className="w-full">
