@@ -35,7 +35,7 @@ const topup = [
 const company = [
   { t: "About Us", h: "/about" },
   { t: "Strategic Partners", h: "/about/strategic-partners" },
-  { t: "Careers", h: "/about/careers" },
+  { t: "Careers", h: "/en/join-us" },
   { t: "Case Studies", h: "/case-studies" },
   { t: "Market Insights", h: "/market-insights" },
 ];
