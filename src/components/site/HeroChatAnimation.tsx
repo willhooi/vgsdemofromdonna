@@ -341,8 +341,8 @@ export const HeroChatAnimation = () => {
         {/* Phone frame */}
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[58%] aspect-[9/16] rounded-[28px] bg-white shadow-[0_22px_60px_-20px_rgba(20,80,30,0.35),0_0_0_1px_hsl(var(--border))] overflow-hidden phone-float">
           <div className="flex items-center gap-2 border-b border-border/70 px-3 py-2">
-            <div className="flex h-7 w-7 items-center justify-center overflow-hidden rounded-full bg-white ring-1 ring-border">
-              <img src={houseAvatar} alt="VietGuys" className="h-full w-full object-contain p-0.5" />
+            <div className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-full bg-white ring-1 ring-border">
+              <img src={houseAvatar} alt="VietGuys" className="h-full w-full object-contain" />
             </div>
             <div className="flex flex-col">
               <span className="text-[10px] font-bold leading-none text-foreground">BRAND NAME</span>
