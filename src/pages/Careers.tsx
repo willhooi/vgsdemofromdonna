@@ -418,6 +418,69 @@ const Careers = () => {
         </div>
       </section>
 
+      {/* WHY JOIN US - GROWTH & CULTURE */}
+      <section className="py-16 md:py-20" style={{ background: "#F9FBF9" }}>
+        <div className="container-tight px-4">
+          <div className="mb-2 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[1.5px]" style={{ color: G }}>
+            <span className="inline-block h-[2px] w-4 rounded-full" style={{ background: G }} />
+            Why Join Us
+          </div>
+          <h2 className="mb-10 text-[28px] font-extrabold tracking-[-0.5px] text-foreground md:text-[36px]">
+            Why Should You Join <span style={{ color: G }}>VietGuys Team?</span>
+          </h2>
+
+          {/* Row 1: image left, text right */}
+          <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2 md:gap-12">
+            <img
+              src="https://www.vietguys.biz/storage/photos/shares/join-us/3.jpg"
+              alt="VietGuys growth opportunities"
+              className="w-full rounded-[14px] object-cover"
+              style={{ aspectRatio: "16/10" }}
+              loading="lazy"
+            />
+            <div>
+              <div
+                className="mb-3 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-bold"
+                style={{ background: "#E8FAE9", color: GD }}
+              >
+                🚀 Growth
+              </div>
+              <h3 className="mb-3 text-[20px] font-extrabold leading-tight tracking-[-0.5px] text-foreground md:text-[24px]">
+                Expansive opportunities — Steady development
+              </h3>
+              <p className="text-[14px] leading-[1.7] text-muted-foreground">
+                Just simply knock firmly on VietGuys opportunity door and introduce yourself. With a wide range of positions available, you're likely to discover the appropriate fit. The success of each individual determines the organization's success. As a result, VietGuys always creates equitable conditions and a clear promotion route for employees to grow and find their limitless potential.
+              </p>
+            </div>
+          </div>
+
+          {/* Row 2: image right, text left */}
+          <div className="mt-12 grid grid-cols-1 items-center gap-8 md:mt-16 md:grid-cols-2 md:gap-12">
+            <div className="order-2 md:order-1">
+              <div
+                className="mb-3 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-bold"
+                style={{ background: "#E8FAE9", color: GD }}
+              >
+                ⚡ Culture
+              </div>
+              <h3 className="mb-3 text-[20px] font-extrabold leading-tight tracking-[-0.5px] text-foreground md:text-[24px]">
+                Dynamic environment — Adapt easily
+              </h3>
+              <p className="text-[14px] leading-[1.7] text-muted-foreground">
+                The culture and environment at VietGuys are built around six basic beliefs. The youthful dynamism, respectful listening, camaraderie, and reciprocal development of each individual and department sustain and preserve these attributes from previous generations. Are you seeking for a technology environment that is always on the cutting edge of the market?
+              </p>
+            </div>
+            <img
+              src="https://www.vietguys.biz/storage/photos/shares/join-us/4.png"
+              alt="VietGuys culture"
+              className="order-1 w-full rounded-[14px] object-cover md:order-2"
+              style={{ aspectRatio: "16/10" }}
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </section>
+
       {/* WHY JOIN US */}
       <section className="py-16 md:py-20" style={{ background: GD }}>
         <div className="container-tight px-4">
