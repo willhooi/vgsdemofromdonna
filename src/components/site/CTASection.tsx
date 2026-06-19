@@ -115,7 +115,7 @@ export const CTASection = () => {
               START THE CONVERSATION
             </span>
             <h2 className="mt-4 font-display text-3xl font-extrabold leading-[1.12] md:text-[44px]">
-              Send your message. We&apos;ll reply in under 2 hours.
+              Let's talk about your customer engagement goals
             </h2>
             <p className="mt-4 max-w-md text-[15.5px] text-white/80">
               Tell us about your goals. A VietGuys strategist will respond with a
