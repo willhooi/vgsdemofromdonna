@@ -118,8 +118,7 @@ export const CTASection = () => {
               Let's talk about your customer engagement goals
             </h2>
             <p className="mt-4 max-w-md text-[15.5px] text-white/80">
-              Tell us about your goals. A VietGuys strategist will respond with a
-              tailored proposal.
+              Tell us about your goals. VietGuys specialists will recommend the right mix of channels, data, and engagement solutions for your business
             </p>
 
             <ul className="mt-7 flex flex-col gap-2.5">
