@@ -10,6 +10,7 @@ import CaseStudies from "./pages/CaseStudies.tsx";
 import MarketInsights from "./pages/MarketInsights.tsx";
 import InsightArticle from "./pages/InsightArticle.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import Careers from "./pages/Careers.tsx";
 import { CookieBanner } from "./components/site/CookieBanner";
 
 const queryClient = new QueryClient();
@@ -41,6 +42,8 @@ const App = () => (
             element={<Navigate to="/market-insights" replace />}
           />
           <Route path="/insights/:slug" element={<InsightSlugRedirect />} />
+          <Route path="/en/join-us" element={<Careers />} />
+          <Route path="/careers" element={<Navigate to="/en/join-us" replace />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
