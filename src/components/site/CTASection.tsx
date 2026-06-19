@@ -47,7 +47,7 @@ const SERVICE_OPTIONS = [
 const TRUST_ITEMS = [
   "Dedicated account strategist, not a generic demo",
   "Channel + data recommendations tailored to your industry",
-  "No commitment required — just a working conversation",
+  "Strategic guidance backed by real-world experience",
 ];
 
 export const CTASection = () => {
@@ -112,7 +112,7 @@ export const CTASection = () => {
               className="text-[11px] font-bold uppercase tracking-[0.22em]"
               style={{ color: "#a7f070" }}
             >
-              Start the conversation
+              START THE CONVERSATION
             </span>
             <h2 className="mt-4 font-display text-3xl font-extrabold leading-[1.12] md:text-[44px]">
               Send your message. We&apos;ll reply in under 2 hours.
