@@ -623,39 +623,6 @@ const CaseStudies = () => {
             </h1>
           </div>
 
-          <div style={{ maxWidth: 360, paddingBottom: 4, flex: "1 1 320px" }}>
-            <p
-              style={{
-                fontSize: 15,
-                lineHeight: 1.75,
-                color: "hsl(0 0% 42%)",
-                marginBottom: 24,
-              }}
-            >
-              From Fortune 500 enterprises to Vietnam's fastest-scaling brands — explore how VietGuys drives measurable growth across every channel.
-            </p>
-            <div style={{ display: "flex", alignItems: "center", gap: 20, flexWrap: "wrap" }}>
-              <a
-                href="#cta"
-                style={{
-                  background: "hsl(128 52% 46%)",
-                  color: "#fff",
-                  padding: "11px 22px",
-                  borderRadius: 999,
-                  fontSize: 14,
-                  fontWeight: 700,
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 6,
-                }}
-              >
-                Talk to a strategist →
-              </a>
-              <span style={{ fontSize: 13, color: "hsl(0 0% 42%)" }}>
-                <strong>20</strong> stories · <strong>5</strong> channels
-              </span>
-            </div>
-          </div>
         </div>
       </section>
 
