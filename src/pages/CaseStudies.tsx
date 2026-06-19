@@ -40,10 +40,13 @@ const studies: Study[] = [
   },
   {
     cat: "sol",
+    featured: true,
     image: CDN + "1rfwp9h2vaqwIVuSfiQVpM0fp0g0a2XsoRCLXtpC.png",
     badge: "Smart Warranty",
     client: "LG Electronics · Consumer Technology",
     title: "From paper warranty cards to a smart digital after-sales ecosystem.",
+    description:
+      "A custom-built digital warranty platform replaced paper cards with QR-driven registration, real-time service tracking, and automated reminders — transforming LG's after-sales experience across Vietnam.",
     metrics: [
       { value: "3×", label: "Registration Rate" },
       { value: "−40%", label: "Support Tickets" },
@@ -52,6 +55,7 @@ const studies: Study[] = [
   },
   {
     cat: "email",
+    featured: true,
     darkThumb: true,
     image: CDN + "5chXSpNDxQbR8Zh394nW0OyOt0nf3JhnjDoUoedO.png",
     badge: "Email Marketing",
@@ -67,6 +71,7 @@ const studies: Study[] = [
   },
   {
     cat: "reward",
+    featured: true,
     darkThumb: true,
     image: CDN + "k5D5WigfUK2ZWtrW7Q3mpq1NHfmPvFrAvPJwsfiA.png",
     badge: "Topup + Zalo Chatbot",
