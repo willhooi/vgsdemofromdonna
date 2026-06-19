@@ -535,8 +535,11 @@ const Card = ({ s, idx, featured }: { s: Study; idx: number; featured?: boolean 
   );
 };
 
+const PAGE_SIZE = 8;
+
 const CaseStudies = () => {
   const [filter, setFilter] = useState<"all" | Cat>("all");
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     document.title = "Case Studies — VietGuys | Enterprise Messaging Vietnam";
@@ -559,7 +562,15 @@ const CaseStudies = () => {
     canonical.setAttribute("href", window.location.origin + "/case-studies");
   }, []);
 
+  useEffect(() => {
+    setPage(1);
+  }, [filter]);
+
   const visible = studies.filter((s) => filter === "all" || s.cat === filter);
+  const totalPages = Math.max(1, Math.ceil(visible.length / PAGE_SIZE));
+  const currentPage = Math.min(page, totalPages);
+  const start = (currentPage - 1) * PAGE_SIZE;
+  const pageItems = visible.slice(start, start + PAGE_SIZE);
 
   return (
     <div className="min-h-screen bg-background" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
