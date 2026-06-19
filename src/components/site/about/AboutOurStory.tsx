@@ -12,31 +12,10 @@ type Milestone = {
 
 const milestones: Milestone[] = [
   {
-    year: "06/2007",
-    title: "VietGuys is founded",
-    body: "Founded in Ho Chi Minh City as a pioneer in mobile and SMS marketing in Vietnam.",
-  },
-  {
-    year: "2008–2018",
-    title: "Growth years",
-    body: "One of Vietnam's leading SMS Brandname providers in the country, serving banks, airlines, retailers, and global consumer brands: Samsung E-warranty Solutions (2008), LG E-warranty Solutions (2017), Top 1 SMS in E-commerce (2018).",
-  },
-  {
-    year: "05/2014",
-    tbc: false,
-    title: "Accrete Inc. is established",
-    body: "Enterprise messaging specialist serving Japan's major mobile carriers — the foundation for the later partnership.",
-  },
-  {
-    year: "03/2022",
-    title: "VietGuys joins the Accrete group",
-    body: "Japanese backing, regional technology and international standards — a Tokyo Stock Exchange–listed partner with the same long-horizon thinking.",
-  },
-  {
-    year: "4/2022",
-    tbc: false,
-    title: "PangoCDP launches",
-    body: "VietGuys' customer data platform — adding data, segmentation and customer journeys to messaging.",
+    year: "UPCOMING",
+    highlight: true,
+    title: "Another I launches",
+    body: "VietGuys' AI-powered customer engagement brand\u00A0 - the move from messaging vendor to AI-led engagement platform.",
   },
   {
     year: "10/2025",
@@ -51,10 +30,31 @@ const milestones: Milestone[] = [
     body: "Officially recognized as a Zalo Trusted Partner and granted License No. 39/GP-CVT for non-facilities-based telecommunications services, reinforcing VietGuys' credibility and regulatory compliance.",
   },
   {
-    year: "UPCOMING",
-    highlight: true,
-    title: "Another I launches",
-    body: "VietGuys' AI-powered customer engagement brand\u00A0 - the move from messaging vendor to AI-led engagement platform.",
+    year: "4/2022",
+    tbc: false,
+    title: "PangoCDP launches",
+    body: "VietGuys' customer data platform — adding data, segmentation and customer journeys to messaging.",
+  },
+  {
+    year: "03/2022",
+    title: "VietGuys joins the Accrete group",
+    body: "Japanese backing, regional technology and international standards — a Tokyo Stock Exchange–listed partner with the same long-horizon thinking.",
+  },
+  {
+    year: "05/2014",
+    tbc: false,
+    title: "Accrete Inc. is established",
+    body: "Enterprise messaging specialist serving Japan's major mobile carriers — the foundation for the later partnership.",
+  },
+  {
+    year: "2008–2018",
+    title: "Growth years",
+    body: "One of Vietnam's leading SMS Brandname providers in the country, serving banks, airlines, retailers, and global consumer brands: Samsung E-warranty Solutions (2008), LG E-warranty Solutions (2017), Top 1 SMS in E-commerce (2018).",
+  },
+  {
+    year: "06/2007",
+    title: "VietGuys is founded",
+    body: "Founded in Ho Chi Minh City as a pioneer in mobile and SMS marketing in Vietnam.",
   },
 ];
 
