@@ -511,7 +511,7 @@ const Solutions = () => {
             <h2>
               Tell us your use case.
               <br />
-              We'll build the stack.
+              We'll build the stack
             </h2>
             <p>
               Share a few details and a VietGuys strategist will map the right
@@ -520,7 +520,7 @@ const Solutions = () => {
             <ul className="cta-trust">
               <li>Dedicated account strategist, not a generic demo</li>
               <li>Channel + data recommendations tailored to your industry</li>
-              <li>No commitment required — just a working conversation</li>
+              <li>Strategic guidance backed by real-world experience</li>
             </ul>
           </div>
           <div className="cta-form">
