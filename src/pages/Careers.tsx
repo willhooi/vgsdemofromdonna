@@ -418,7 +418,7 @@ const Careers = () => {
       </section>
 
       {/* WHY JOIN US - GROWTH & CULTURE */}
-      <section className="py-16 md:py-20" style={{ background: "#F9FBF9" }}>
+      <section id="why-join-us" className="py-16 md:py-20" style={{ background: "#F9FBF9" }}>
         <div className="container-tight px-4">
           <div className="mb-2 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[1.5px]" style={{ color: G }}>
             <span className="inline-block h-[2px] w-4 rounded-full" style={{ background: G }} />
