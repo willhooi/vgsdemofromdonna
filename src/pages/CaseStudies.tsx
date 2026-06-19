@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ChatBubble } from "@/components/site/ChatBubble";
+import { CTASection } from "@/components/site/CTASection";
 
 type Cat = "sms" | "ott" | "email" | "reward" | "sol";
 
