@@ -107,10 +107,10 @@ export const AboutCTAFinal = () => {
                 LOOKING FOR ENTERPRISE MESSAGING?
               </span>
               <h2 className="mt-4 font-display text-3xl font-extrabold leading-[1.12] md:text-[44px]">
-                Let&apos;s discuss the details.
+                Let&apos;s discuss the details
               </h2>
               <p className="mt-4 max-w-md text-white/80 md:text-[15.5px]">
-                Tell us about your goals. A VietGuys strategist will reply within 2 working hours
+                Share a few details and a VietGuys strategist will map the right channels, data layer, and KPIs for your business.
               </p>
             </div>
 
