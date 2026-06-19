@@ -44,6 +44,13 @@ const SERVICE_OPTIONS = [
   "Customized Solutions",
 ];
 
+const TRUST_ITEMS = [
+  "Dedicated account strategist, not a generic demo",
+  "Channel + data recommendations tailored to your industry",
+  "No commitment required — just a working conversation",
+  "Response in Vietnamese, English or Japanese",
+];
+
 export const CTASection = () => {
   const [form, setForm] = useState({
     name: "",
@@ -87,34 +94,62 @@ export const CTASection = () => {
     }
   };
 
+  const fieldBase =
+    "border-white/20 bg-white/10 text-white placeholder:text-white/60 focus-visible:ring-white/40";
+
   return (
     <section id="contact" className="py-14 md:py-20">
       <div className="container-tight">
-        <div className="relative overflow-hidden rounded-[2rem] border border-border bg-background p-8 shadow-[var(--shadow-card)] md:p-14">
-          <div
-            className="pointer-events-none absolute inset-0 opacity-60"
-            style={{ background: "var(--gradient-hero)" }}
-          />
-          <div className="relative grid gap-10 md:grid-cols-[1fr_1.15fr] md:items-start">
-            <div>
-              <span className="eyebrow">Start the conversation</span>
-              <h2 className="heading-section mt-4 text-balance">
-                Send your message. We&apos;ll reply in under 2 hours.
-              </h2>
-              <p className="mt-4 max-w-md text-muted-foreground">
-                Tell us about your goals. A VietGuys strategist will respond with a tailored
-                proposal.
-              </p>
-            </div>
+        <div
+          className="relative grid gap-10 overflow-hidden rounded-[24px] md:grid-cols-[1fr_1.15fr] md:items-start"
+          style={{
+            background:
+              "linear-gradient(120deg, #0c3b20 0%, hsl(var(--primary-deep)) 100%)",
+          }}
+        >
+          {/* Left: text + trust */}
+          <div className="px-8 py-12 text-white md:px-14 md:py-[54px]">
+            <span
+              className="text-[11px] font-bold uppercase tracking-[0.22em]"
+              style={{ color: "#a7f070" }}
+            >
+              Start the conversation
+            </span>
+            <h2 className="mt-4 font-display text-3xl font-extrabold leading-[1.12] md:text-[44px]">
+              Send your message. We&apos;ll reply in under 2 hours.
+            </h2>
+            <p className="mt-4 max-w-md text-[15.5px] text-white/80">
+              Tell us about your goals. A VietGuys strategist will respond with a
+              tailored proposal.
+            </p>
 
-            <form onSubmit={handleSubmit} className="grid gap-4">
-              <div className="grid gap-4 sm:grid-cols-2">
+            <ul className="mt-7 flex flex-col gap-2.5">
+              {TRUST_ITEMS.map((item) => (
+                <li
+                  key={item}
+                  className="flex items-center gap-2.5 text-[13px] text-white/75"
+                >
+                  <span className="text-[#a7f070] font-extrabold text-sm">✓</span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Right: form */}
+          <div className="bg-white/5 px-8 py-10 backdrop-blur-sm md:px-12 md:py-12">
+            <h3 className="mb-5 text-[17px] font-extrabold text-white">
+              Get in touch
+            </h3>
+            <form onSubmit={handleSubmit} className="grid gap-3">
+              <div className="grid gap-3 sm:grid-cols-2">
                 <Input
                   required
                   placeholder="Your full name *"
                   value={form.name}
                   onChange={(e) => update("name")(e.target.value)}
                   maxLength={100}
+                  className={fieldBase}
                 />
                 <Input
                   required
@@ -123,9 +158,10 @@ export const CTASection = () => {
                   value={form.email}
                   onChange={(e) => update("email")(e.target.value)}
                   maxLength={255}
+                  className={fieldBase}
                 />
               </div>
-              <div className="grid gap-4 sm:grid-cols-2">
+              <div className="grid gap-3 sm:grid-cols-2">
                 <Input
                   required
                   type="tel"
@@ -133,17 +169,19 @@ export const CTASection = () => {
                   value={form.phone}
                   onChange={(e) => update("phone")(e.target.value)}
                   maxLength={20}
+                  className={fieldBase}
                 />
                 <Input
                   placeholder="Company"
                   value={form.company}
                   onChange={(e) => update("company")(e.target.value)}
                   maxLength={120}
+                  className={fieldBase}
                 />
               </div>
-              <div className="grid gap-4 sm:grid-cols-2">
+              <div className="grid gap-3 sm:grid-cols-2">
                 <Select value={form.hear} onValueChange={update("hear")}>
-                  <SelectTrigger>
+                  <SelectTrigger className={`${fieldBase} data-[placeholder]:text-white/60`}>
                     <SelectValue placeholder="How did you hear about us? *" />
                   </SelectTrigger>
                   <SelectContent>
@@ -155,7 +193,7 @@ export const CTASection = () => {
                   </SelectContent>
                 </Select>
                 <Select value={form.interest} onValueChange={update("interest")}>
-                  <SelectTrigger>
+                  <SelectTrigger className={`${fieldBase} data-[placeholder]:text-white/60`}>
                     <SelectValue placeholder="Interest *" />
                   </SelectTrigger>
                   <SelectContent>
@@ -168,7 +206,7 @@ export const CTASection = () => {
                 </Select>
               </div>
               <Select value={form.service} onValueChange={update("service")}>
-                <SelectTrigger>
+                <SelectTrigger className={`${fieldBase} data-[placeholder]:text-white/60`}>
                   <SelectValue placeholder="Service of interest *" />
                 </SelectTrigger>
                 <SelectContent>
@@ -185,17 +223,20 @@ export const CTASection = () => {
                 value={form.message}
                 onChange={(e) => update("message")(e.target.value)}
                 maxLength={1000}
+                className={fieldBase}
               />
               <Button
                 type="submit"
-                variant="cta"
-                size="xl"
-                className="vg-cta-slant w-full sm:w-auto sm:justify-self-start"
+                size="lg"
+                className="mt-1 w-full rounded-full bg-[#a7f070] font-extrabold text-[#0c3b20] hover:bg-[#c0ff78] hover:-translate-y-0.5 sm:w-auto sm:justify-self-start"
                 disabled={submitting}
               >
                 {submitting ? "Sending..." : "Send your message"}
                 <Send className="h-4 w-4" />
               </Button>
+              <p className="mt-1 text-[11.5px] text-white/45 text-center sm:text-left">
+                By submitting, you agree to our Privacy Policy. We never share your data with third parties.
+              </p>
             </form>
           </div>
         </div>
