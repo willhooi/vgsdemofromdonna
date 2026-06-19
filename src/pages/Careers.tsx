@@ -125,30 +125,29 @@ const BENEFITS = [
   {
     img: "https://www.vietguys.biz/images/web/join-benefit-1.png",
     title: "Professional Training",
-    desc: "Employees receive comprehensive training on VietGuys culture, customer service, soft skills, and new tech including CDP.",
+    desc: "Employees will receive comprehensive training on VietGuys culture and customer service. In addition, activities to improve soft skills and thinking are emphasized in the VietGuys space.",
   },
   {
     img: "https://www.vietguys.biz/images/web/join-benefit-2.png",
     title: "Compensation Policy",
-    desc: "13th month salary, clear holiday & quarterly/annual bonuses, performance-based raises, and project incentives.",
+    desc: "If you join VietGuys, you will be eligible for 13th month pay, clear holiday bonuses, and quarterly/yearly bonuses. Furthermore, if they do well, they may receive unexpected bonuses or project-based bonuses.",
   },
   {
     img: "https://www.vietguys.biz/images/web/join-benefit-3.png",
-    title: "Learning & Development",
-    desc: "VietGuys supports external course fees by level, plus travel and business expense reimbursements.",
+    title: "Support Learning & Development",
+    desc: "Understanding the importance of knowledge advancement, VietGuys always shares and supports the costs of professional development courses based on the preferences of each individual (by level). VietGuys also offers travel and business allowances.",
   },
   {
     img: "https://www.vietguys.biz/images/web/join-benefit-4.png",
     title: "Work Remotely",
-    desc: "Every employee works remotely at least 1 day/month by job level. Hours: 8:30–18:00, Mon–Fri.",
+    desc: "At VietGuys, every employee is entitled to work remotely for at least 1 day/month depending on job level.",
+  },
+  {
+    img: "https://www.vietguys.biz/images/web/join-benefit-5.png",
+    title: "Play Hard — Work Hard",
+    desc: "Each VietGuys employee is attentively cared for in terms of spiritual life with Chill-out day on the last Friday of the month, annual Company vacation, Fruit days periodically 2 times/week, and so on.",
   },
 ];
-
-const BENEFIT_WIDE = {
-  img: "https://www.vietguys.biz/images/web/join-benefit-5.png",
-  title: "Work Hard — Play Hard",
-  desc: "Chill-out day every last Friday of the month, annual company trip, Fruit days twice a week.",
-};
 
 const CLIENT_LOGOS = [
   { src: vpbank.url, name: "VPBank" },
@@ -481,30 +480,30 @@ const Careers = () => {
         </div>
       </section>
 
-      {/* WHY JOIN US */}
+      {/* BENEFITS */}
       <section className="py-16 md:py-20" style={{ background: GD }}>
         <div className="container-tight px-4">
           <div className="mb-2 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[1.5px] text-white/60">
             <span className="inline-block h-[2px] w-4 rounded-full bg-white/40" />
-            Why Join Us
+            Clear Policy
           </div>
           <h2 className="mb-8 text-[28px] font-extrabold tracking-[-0.5px] text-white md:text-[36px]">
-            Clear policy — abundant benefits.
+            Abundant benefits.
           </h2>
 
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            {BENEFITS.map((b) => (
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            {BENEFITS.slice(0, 4).map((b) => (
               <div
                 key={b.title}
                 className="flex flex-col overflow-hidden rounded-[14px] border border-white/15"
                 style={{ background: "rgba(255,255,255,0.07)" }}
               >
-                <div className="h-[140px] overflow-hidden bg-white/5">
+                <div className="h-[160px] overflow-hidden bg-white/5">
                   <img src={b.img} alt={b.title} className="h-full w-full object-cover" loading="lazy" />
                 </div>
                 <div className="p-5">
                   <h4 className="mb-1 text-[15px] font-bold text-white">{b.title}</h4>
-                  <p className="text-[13px] leading-[1.6] text-white/60">{b.desc}</p>
+                  <p className="text-[13px] leading-[1.6] text-white/55">{b.desc}</p>
                 </div>
               </div>
             ))}
@@ -514,12 +513,12 @@ const Careers = () => {
               className="col-span-1 flex flex-col overflow-hidden rounded-[14px] border border-white/15 md:col-span-2 md:flex-row"
               style={{ background: "rgba(255,255,255,0.07)" }}
             >
-              <div className="h-[160px] w-full shrink-0 overflow-hidden bg-white/5 md:h-auto md:w-[240px]">
-                <img src={BENEFIT_WIDE.img} alt={BENEFIT_WIDE.title} className="h-full w-full object-cover" loading="lazy" />
+              <div className="h-[160px] w-full shrink-0 overflow-hidden bg-white/5 md:h-auto md:w-[320px]">
+                <img src={BENEFITS[4].img} alt={BENEFITS[4].title} className="h-full w-full object-cover" loading="lazy" />
               </div>
               <div className="flex flex-col justify-center p-5 md:p-6">
-                <h4 className="mb-1 text-[15px] font-bold text-white">{BENEFIT_WIDE.title}</h4>
-                <p className="text-[13px] leading-[1.6] text-white/60">{BENEFIT_WIDE.desc}</p>
+                <h4 className="mb-1 text-[15px] font-bold text-white">{BENEFITS[4].title}</h4>
+                <p className="text-[13px] leading-[1.6] text-white/55">{BENEFITS[4].desc}</p>
               </div>
             </div>
           </div>
