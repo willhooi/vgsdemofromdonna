@@ -279,7 +279,7 @@ const Careers = () => {
                 key={l.name}
                 src={l.src}
                 alt={l.name}
-                className="h-9 w-auto object-contain opacity-90 md:h-11"
+                className="h-11 w-auto object-contain opacity-90 md:h-14"
               />
             ))}
           </div>
