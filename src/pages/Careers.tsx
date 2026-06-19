@@ -246,7 +246,7 @@ const Careers = () => {
             {/* Stat cards row */}
             <div className="flex flex-col gap-3 md:flex-row">
               <div
-                className="w-full rounded-[14px] border-[1.5px] p-4 md:w-[19%]"
+                className="flex-1 rounded-[14px] border-[1.5px] p-4"
                 style={{ background: "#E8FAE9", borderColor: "rgba(57,180,74,0.3)" }}
               >
                 <div className="mb-1 text-[10px] font-bold uppercase tracking-[0.08em] text-muted-foreground">
@@ -257,7 +257,7 @@ const Careers = () => {
                 </div>
                 <div className="mt-1 text-[11px] text-muted-foreground">Retail · Finance · Pharma · F&amp;B</div>
               </div>
-              <div className="w-full rounded-[14px] border-[1.5px] border-border bg-white p-4 md:w-[19%]">
+              <div className="flex-1 rounded-[14px] border-[1.5px] border-border bg-white p-4">
                 <div className="mb-1 text-[10px] font-bold uppercase tracking-[0.08em] text-muted-foreground">
                   Years active
                 </div>
