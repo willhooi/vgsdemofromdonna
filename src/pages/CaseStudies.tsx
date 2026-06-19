@@ -315,7 +315,9 @@ const lightBadge: Record<Cat, { bg: string; color: string }> = {
   sol: { bg: "rgba(237,231,246,.92)", color: "#4a148c" },
 };
 
-const Card = ({ s, idx }: { s: Study; idx: number }) => {
+const Card = ({ s, idx, featured }: { s: Study; idx: number; featured?: boolean }) => {
+  const isFeatured = featured ?? s.featured;
+  s = { ...s, featured: isFeatured };
   const ref = useRef<HTMLElement>(null);
   const [hovered, setHovered] = useState(false);
   const [revealed, setRevealed] = useState(false);
@@ -533,8 +535,11 @@ const Card = ({ s, idx }: { s: Study; idx: number }) => {
   );
 };
 
+const PAGE_SIZE = 8;
+
 const CaseStudies = () => {
   const [filter, setFilter] = useState<"all" | Cat>("all");
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     document.title = "Case Studies — VietGuys | Enterprise Messaging Vietnam";
@@ -557,7 +562,15 @@ const CaseStudies = () => {
     canonical.setAttribute("href", window.location.origin + "/case-studies");
   }, []);
 
+  useEffect(() => {
+    setPage(1);
+  }, [filter]);
+
   const visible = studies.filter((s) => filter === "all" || s.cat === filter);
+  const totalPages = Math.max(1, Math.ceil(visible.length / PAGE_SIZE));
+  const currentPage = Math.min(page, totalPages);
+  const start = (currentPage - 1) * PAGE_SIZE;
+  const pageItems = visible.slice(start, start + PAGE_SIZE);
 
   return (
     <div className="min-h-screen bg-background" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif" }}>
@@ -716,10 +729,10 @@ const CaseStudies = () => {
             alignItems: "stretch",
           }}
         >
-          {visible.map((s, i) => (
-            <Card key={s.href} s={s} idx={i} />
+          {pageItems.map((s, i) => (
+            <Card key={s.href} s={s} idx={i} featured={i === 0} />
           ))}
-          {visible.length === 0 && (
+          {pageItems.length === 0 && (
             <div style={{ gridColumn: "1/-1", padding: "80px 0", textAlign: "center" }}>
               <p style={{ fontSize: 15, color: "hsl(0 0% 42%)" }}>
                 No case studies found for this filter.
@@ -727,6 +740,90 @@ const CaseStudies = () => {
             </div>
           )}
         </div>
+
+        {totalPages > 1 && (
+          <nav
+            aria-label="Pagination"
+            style={{
+              marginTop: 48,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: 8,
+              flexWrap: "wrap",
+            }}
+          >
+            <button
+              onClick={() => {
+                setPage((p) => Math.max(1, p - 1));
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+              disabled={currentPage === 1}
+              style={{
+                padding: "9px 16px",
+                borderRadius: 999,
+                fontSize: 13,
+                fontWeight: 700,
+                background: "#fff",
+                border: "1.5px solid hsl(0 0% 88%)",
+                color: currentPage === 1 ? "hsl(0 0% 70%)" : "hsl(0 0% 10%)",
+                cursor: currentPage === 1 ? "not-allowed" : "pointer",
+                transition: "border-color .15s, color .15s",
+              }}
+            >
+              ← Previous
+            </button>
+            {Array.from({ length: totalPages }).map((_, i) => {
+              const p = i + 1;
+              const active = p === currentPage;
+              return (
+                <button
+                  key={p}
+                  onClick={() => {
+                    setPage(p);
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }}
+                  aria-current={active ? "page" : undefined}
+                  style={{
+                    minWidth: 38,
+                    height: 38,
+                    padding: "0 12px",
+                    borderRadius: 999,
+                    fontSize: 13,
+                    fontWeight: 700,
+                    background: active ? "hsl(0 0% 10%)" : "#fff",
+                    color: active ? "#fff" : "hsl(0 0% 42%)",
+                    border: `1.5px solid ${active ? "hsl(0 0% 10%)" : "hsl(0 0% 88%)"}`,
+                    cursor: "pointer",
+                    transition: "all .15s",
+                  }}
+                >
+                  {p}
+                </button>
+              );
+            })}
+            <button
+              onClick={() => {
+                setPage((p) => Math.min(totalPages, p + 1));
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+              disabled={currentPage === totalPages}
+              style={{
+                padding: "9px 16px",
+                borderRadius: 999,
+                fontSize: 13,
+                fontWeight: 700,
+                background: "#fff",
+                border: "1.5px solid hsl(0 0% 88%)",
+                color: currentPage === totalPages ? "hsl(0 0% 70%)" : "hsl(0 0% 10%)",
+                cursor: currentPage === totalPages ? "not-allowed" : "pointer",
+                transition: "border-color .15s, color .15s",
+              }}
+            >
+              Next →
+            </button>
+          </nav>
+        )}
       </section>
 
       {/* CTA STRIP */}
