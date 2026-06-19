@@ -88,6 +88,12 @@ export const AboutCTAFinal = () => {
     }
   };
 
+const TRUST_ITEMS = [
+  "Dedicated account strategist, not a generic demo",
+  "Channel + data recommendations tailored to your industry",
+  "Strategic guidance backed by real-world experience",
+];
+
   return (
     <section id="contact" className="px-6 pb-24 pt-4 md:pb-28">
       <div className="container-tight">
@@ -112,6 +118,17 @@ export const AboutCTAFinal = () => {
               <p className="mt-4 max-w-md text-white/80 md:text-[15.5px]">
                 Share a few details and a VietGuys strategist will map the right channels, data layer, and KPIs for your business.
               </p>
+              <ul className="mt-7 flex flex-col gap-2.5">
+                {TRUST_ITEMS.map((item) => (
+                  <li
+                    key={item}
+                    className="flex items-center gap-2.5 text-[13px] text-white/75"
+                  >
+                    <span className="text-[#a7f070] font-extrabold text-sm">✓</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
 
             <div className="bg-white/5 px-8 py-10 backdrop-blur-sm md:px-12 md:py-12">
