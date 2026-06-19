@@ -48,7 +48,6 @@ const TRUST_ITEMS = [
   "Dedicated account strategist, not a generic demo",
   "Channel + data recommendations tailored to your industry",
   "No commitment required — just a working conversation",
-  "Response in Vietnamese, English or Japanese",
 ];
 
 export const CTASection = () => {
