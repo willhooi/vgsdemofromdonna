@@ -216,6 +216,7 @@ const Careers = () => {
                 View open roles <ArrowDown className="h-4 w-4" />
               </button>
               <button
+                onClick={() => document.getElementById("why-join-us")?.scrollIntoView({ behavior: "smooth" })}
                 className="rounded-full border-[1.5px] border-border bg-white px-5 py-3 text-sm font-semibold text-foreground transition-colors hover:border-foreground/40"
               >
                 Our culture
