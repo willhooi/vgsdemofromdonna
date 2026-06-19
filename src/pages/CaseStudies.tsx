@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ChatBubble } from "@/components/site/ChatBubble";
-import { CTASection } from "@/components/site/CTASection";
 
 type Cat = "sms" | "ott" | "email" | "reward" | "sol";
 
@@ -730,8 +729,108 @@ const CaseStudies = () => {
         </div>
       </section>
 
-      {/* CTA — inherits the home page submit form */}
-      <CTASection />
+      {/* CTA STRIP */}
+      <section
+        id="cta"
+        style={{
+          position: "relative",
+          padding: "72px 24px",
+          background: "linear-gradient(110deg, #0c1a0e 0%, #0c3b20 55%, #143d15 100%)",
+          overflow: "hidden",
+        }}
+      >
+        <div
+          style={{
+            position: "absolute",
+            top: -80,
+            right: -80,
+            width: 400,
+            height: 400,
+            borderRadius: "50%",
+            background: "radial-gradient(circle, rgba(167,240,112,.10) 0%, transparent 70%)",
+            pointerEvents: "none",
+          }}
+        />
+        <div
+          style={{
+            maxWidth: 1160,
+            margin: "0 auto",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            gap: 40,
+            flexWrap: "wrap",
+            position: "relative",
+          }}
+        >
+          <div>
+            <div
+              style={{
+                fontSize: 10.5,
+                fontWeight: 700,
+                letterSpacing: ".1em",
+                textTransform: "uppercase",
+                color: "#a7f070",
+                marginBottom: 10,
+              }}
+            >
+              Start your story
+            </div>
+            <h2
+              style={{
+                fontSize: "clamp(24px, 3vw, 36px)",
+                fontWeight: 800,
+                color: "#fff",
+                letterSpacing: "-.8px",
+                lineHeight: 1.15,
+              }}
+            >
+              Ready to write your
+              <br />
+              <span style={{ color: "#a7f070" }}>own case study?</span>
+            </h2>
+            <p
+              style={{
+                fontSize: 14,
+                color: "rgba(255,255,255,.5)",
+                marginTop: 8,
+                maxWidth: 400,
+                lineHeight: 1.7,
+              }}
+            >
+              Tell us your challenge — our strategists will map the messaging stack, channel mix, and automation that gets you there.
+            </p>
+          </div>
+          <div style={{ display: "flex", gap: 12, flexShrink: 0, flexWrap: "wrap" }}>
+            <a
+              href="/en/contact-us"
+              style={{
+                background: "#a7f070",
+                color: "#0c1a0e",
+                padding: "12px 24px",
+                borderRadius: 999,
+                fontSize: 14,
+                fontWeight: 800,
+              }}
+            >
+              Request a Strategy Call →
+            </a>
+            <a
+              href="/en/services"
+              style={{
+                border: "1.5px solid rgba(255,255,255,.22)",
+                color: "rgba(255,255,255,.78)",
+                padding: "12px 24px",
+                borderRadius: 999,
+                fontSize: 14,
+                fontWeight: 800,
+              }}
+            >
+              Explore Solutions
+            </a>
+          </div>
+        </div>
+      </section>
 
       <Footer />
       <ChatBubble />
