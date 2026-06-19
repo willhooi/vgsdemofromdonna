@@ -521,7 +521,6 @@ const Solutions = () => {
               <li>Dedicated account strategist, not a generic demo</li>
               <li>Channel + data recommendations tailored to your industry</li>
               <li>No commitment required — just a working conversation</li>
-              <li>Response in Vietnamese, English or Japanese</li>
             </ul>
           </div>
           <div className="cta-form">
