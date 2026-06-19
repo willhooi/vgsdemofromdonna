@@ -315,7 +315,9 @@ const lightBadge: Record<Cat, { bg: string; color: string }> = {
   sol: { bg: "rgba(237,231,246,.92)", color: "#4a148c" },
 };
 
-const Card = ({ s, idx }: { s: Study; idx: number }) => {
+const Card = ({ s, idx, featured }: { s: Study; idx: number; featured?: boolean }) => {
+  const isFeatured = featured ?? s.featured;
+  s = { ...s, featured: isFeatured };
   const ref = useRef<HTMLElement>(null);
   const [hovered, setHovered] = useState(false);
   const [revealed, setRevealed] = useState(false);
