@@ -112,13 +112,13 @@ export const CTASection = () => {
               className="text-[11px] font-bold uppercase tracking-[0.22em]"
               style={{ color: "#a7f070" }}
             >
-              START THE CONVERSATION
+              START YOUR STORY
             </span>
             <h2 className="mt-4 font-display text-3xl font-extrabold leading-[1.12] md:text-[44px]">
-              Let's talk about your customer engagement goals
+              Ready to write your own case study?
             </h2>
             <p className="mt-4 max-w-md text-[15.5px] text-white/80">
-              Tell us about your goals. VietGuys specialists will recommend the right mix of channels, data, and engagement solutions for your business
+              Tell us your challenge, our strategists will map the messaging stack, channel mix, and automation that gets you there.
             </p>
 
             <ul className="mt-7 flex flex-col gap-2.5">
