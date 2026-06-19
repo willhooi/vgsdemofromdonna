@@ -345,7 +345,7 @@ export const HeroChatAnimation = () => {
               <img src={vietguysAvatar} alt="VietGuys" className="h-full w-full object-contain p-0.5" />
             </div>
             <div className="flex flex-col">
-              <span className="text-[10px] font-bold leading-none text-foreground">VietGuys</span>
+              <span className="text-[10px] font-bold leading-none text-foreground">BRAND NAME</span>
               <span className="flex items-center gap-1 text-[8px] text-muted-foreground">
                 <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#39b44a]" />
                 Online
