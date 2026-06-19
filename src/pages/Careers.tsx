@@ -192,7 +192,7 @@ const Careers = () => {
           className="pointer-events-none absolute right-[-120px] top-[-80px] h-[420px] w-[420px] rounded-full"
           style={{ background: "radial-gradient(circle, rgba(57,180,74,0.12), transparent 70%)" }}
         />
-        <div className="container-tight relative grid grid-cols-1 items-center gap-10 px-4 py-12 md:grid-cols-2 md:py-20">
+        <div className="container-tight relative grid grid-cols-1 items-start gap-10 px-4 py-12 md:grid-cols-2 md:py-20">
           {/* Left */}
           <div>
             <div
@@ -201,13 +201,12 @@ const Careers = () => {
             >
               ✦ Careers at VietGuys
             </div>
-            <h1 className="mb-4 text-[40px] font-extrabold leading-[1.08] tracking-[-1.5px] text-foreground md:text-[52px]">
+            <h1 className="mb-4 text-[40px] font-extrabold leading-[1.08] tracking-[-2px] text-foreground md:text-[48px]">
               Accompany together —<br />
               <span style={{ color: G }}>Grow together.</span>
             </h1>
             <p className="mb-6 max-w-lg text-[15px] leading-[1.7] text-muted-foreground">
-              VietGuys always creates opportunities for each employee to develop and improve their own capacity.
-              A professional, fair environment — always open for you to explore and grow.
+              VietGuys always creates opportunities for each employee to develop and improve their own capacity. A professional, fair environment — always open for you to explore and develop your own career.
             </p>
             <div className="flex flex-wrap gap-3">
               <button
@@ -224,42 +223,64 @@ const Careers = () => {
               </button>
             </div>
             <p className="mt-4 text-[12px] text-muted-foreground">
-              <b style={{ color: G }}>5 positions open</b> · Ho Chi Minh · Full-time
+              <span style={{ color: G }}>5 positions open</span> · Ho Chi Minh · Full-time
             </p>
           </div>
 
-          {/* Right: stat cards */}
-          <div className="flex flex-col gap-3">
-            <div
-              className="rounded-[14px] border-[1.5px] p-5"
-              style={{ background: "#E8FAE9", borderColor: "rgba(57,180,74,0.3)" }}
-            >
-              <div className="mb-1 text-[10px] font-bold uppercase tracking-[0.08em] text-muted-foreground">
-                Brands trust VietGuys
-              </div>
-              <div className="text-[34px] font-extrabold leading-none tracking-[-1.5px]" style={{ color: GD }}>
-                6,000+
-              </div>
-              <div className="mt-1 text-[12px] text-muted-foreground">Retail · Finance · Pharma · F&amp;B</div>
+          {/* Right: photos + stat cards */}
+          <div className="flex flex-col gap-4">
+            {/* Photos */}
+            <div className="flex gap-3">
+              <img
+                src="https://www.vietguys.biz/storage/photos/shares/join-us/1.png"
+                alt="VietGuys team"
+                className="h-auto w-[45%] rounded-[14px] object-cover"
+                style={{ aspectRatio: "3/4" }}
+              />
+              <img
+                src="https://www.vietguys.biz/storage/photos/shares/join-us/2.png"
+                alt="VietGuys office"
+                className="h-auto w-[55%] rounded-[14px] object-cover"
+                style={{ aspectRatio: "4/3" }}
+              />
             </div>
-            <div className="rounded-[14px] border-[1.5px] border-border bg-white p-5">
-              <div className="mb-1 text-[10px] font-bold uppercase tracking-[0.08em] text-muted-foreground">
-                Years active
-              </div>
-              <div className="text-[34px] font-extrabold leading-none tracking-[-1.5px] text-foreground">19</div>
-              <div className="mt-1 text-[12px] text-muted-foreground">Est. 2007 — Vietnam's pioneer</div>
-            </div>
-            <div
-              className="flex items-center gap-3 rounded-[14px] border-[1.5px] p-4"
-              style={{ background: "#FFF3DC", borderColor: "rgba(245,164,32,0.3)" }}
-            >
-              <img src={accreteLogo} alt="Accrete Inc." className="h-5 w-auto shrink-0 object-contain opacity-80" />
-              <div>
-                <div className="text-[12px] font-bold" style={{ color: "#7A4A00" }}>
-                  Backed by Accrete Inc.
+            {/* Stat cards row */}
+            <div className="flex flex-col gap-3 md:flex-row">
+              <div
+                className="flex-1 rounded-[14px] border-[1.5px] p-4"
+                style={{ background: "#E8FAE9", borderColor: "rgba(57,180,74,0.3)" }}
+              >
+                <div className="mb-1 text-[10px] font-bold uppercase tracking-[0.08em] text-muted-foreground">
+                  Brands trust VietGuys
                 </div>
-                <div className="text-[11px]" style={{ color: "#9A6B20" }}>
-                  Tokyo Stock Exchange
+                <div className="text-[28px] font-extrabold leading-none tracking-[-1.5px]" style={{ color: GD }}>
+                  6,000+
+                </div>
+                <div className="mt-1 text-[11px] text-muted-foreground">Retail · Finance · Pharma · F&amp;B</div>
+              </div>
+              <div className="flex-1 rounded-[14px] border-[1.5px] border-border bg-white p-4">
+                <div className="mb-1 text-[10px] font-bold uppercase tracking-[0.08em] text-muted-foreground">
+                  Years active
+                </div>
+                <div className="text-[28px] font-extrabold leading-none tracking-[-1.5px] text-foreground">19</div>
+                <div className="mt-1 text-[11px] text-muted-foreground">Est. 2007</div>
+              </div>
+              <div
+                className="flex flex-1 items-center gap-2 rounded-[14px] border-[1.5px] p-3"
+                style={{ background: "#FFF3DC", borderColor: "rgba(245,164,32,0.3)" }}
+              >
+                <img
+                  src="https://vgsdemofromdonna.lovable.app/assets/accrete-logo-gpK5hsy4.png"
+                  alt="Accrete Inc."
+                  className="h-5 w-auto shrink-0 object-contain opacity-80"
+                />
+                <div>
+                  <div className="text-[11px] font-bold leading-tight" style={{ color: "#7A4A00" }}>
+                    Backed by Accrete Inc.
+                  </div>
+                  <div className="text-[10px] leading-tight" style={{ color: "#9A6B20" }}>
+                    Tokyo Stock Exchange
+                  </div>
                 </div>
               </div>
             </div>
