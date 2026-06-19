@@ -232,16 +232,15 @@ const Careers = () => {
             {/* Photos */}
             <div className="flex gap-3">
               <img
-                src="https://www.vietguys.biz/storage/photos/shares/join-us/1.png"
+                src="https://www.vietguys.biz/storage/photos/shares/join-us/2.png"
                 alt="VietGuys team"
-                className="h-auto w-[45%] rounded-[14px] object-cover"
-                style={{ aspectRatio: "3/4" }}
+                className="h-auto w-[38%] rounded-[14px] object-cover"
               />
               <img
-                src="https://www.vietguys.biz/storage/photos/shares/join-us/2.png"
+                src="https://www.vietguys.biz/storage/photos/shares/join-us/1.png"
                 alt="VietGuys office"
-                className="h-auto w-[55%] rounded-[14px] object-cover"
-                style={{ aspectRatio: "4/3" }}
+                className="h-auto flex-1 rounded-[14px] object-cover"
+                style={{ aspectRatio: "16/10" }}
               />
             </div>
             {/* Stat cards row */}
