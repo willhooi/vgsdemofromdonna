@@ -395,17 +395,6 @@ const Solutions = () => {
                           <text x="60" y="66" textAnchor="middle" fontSize="30" fontWeight="800" fill="#fff" fontFamily="Plus Jakarta Sans">Zalo</text>
                         </svg>
                       </div>
-                      <div className="ze-apprail">
-                        <div className="ze-app-tile" style={{ background: "#111" }}>
-                          <svg viewBox="0 0 24 24" fill="#fff"><path d="M17 3c.4 2.4 1.9 4.4 4 5.5V12c-1.9 0-3.7-.6-5.3-1.6v6.9c0 3.7-3 6.7-6.7 6.7S2.3 21 2.3 17.3s3-6.7 6.7-6.7c.5 0 .9 0 1.4.2v3.6c-.4-.2-.9-.3-1.4-.3-1.8 0-3.2 1.4-3.2 3.2s1.4 3.2 3.2 3.2 3.2-1.4 3.2-3.2V3H17z"/></svg>
-                        </div>
-                        <div className="ze-app-tile" style={{ background: "#1877f2" }}>
-                          <svg viewBox="0 0 24 24" fill="#fff"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H8v-2.9h2.4V9.8c0-2.4 1.4-3.7 3.6-3.7 1 0 2.1.2 2.1.2v2.3h-1.2c-1.2 0-1.5.7-1.5 1.5V12h2.6l-.4 2.9h-2.2V22A10 10 0 0 0 22 12z"/></svg>
-                        </div>
-                        <div className="ze-app-tile" style={{ background: "#a50064" }}>
-                          <span style={{ color: "#fff", fontWeight: 800, fontSize: 11, lineHeight: 1 }}>mo<br/>mo</span>
-                        </div>
-                      </div>
                     </div>
 
                     <div className="ze-mini">
