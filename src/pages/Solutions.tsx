@@ -358,14 +358,14 @@ const Solutions = () => {
 
           {tab === "otp" && (
             <div className="pane show">
-              <div className="zalo-engagement">
-                <div className="zalo-engagement-head rv">
+              <div className="zalo-engagement" style={{ gridColumn: "1 / -1" }}>
+                <div className="zalo-engagement-head">
                   <h2 className="zalo-engagement-title">Zalo Engagement Solutions</h2>
                   <p className="zalo-engagement-sub">
                     An innovative approach to <strong>growing followers</strong> and maintaining long-term customer engagement through a Super App.
                   </p>
                 </div>
-                <div className="zalo-engagement-figure rv">
+                <div className="zalo-engagement-figure">
                   <img
                     src={zaloEngagementImg.url}
                     alt="Zalo Engagement Solutions — Business, Super App and Customer ecosystem"
