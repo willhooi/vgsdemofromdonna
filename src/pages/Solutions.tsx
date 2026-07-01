@@ -838,7 +838,7 @@ const CSS = `
 .vg-sol .ze2-right{display:flex;flex-direction:column;gap:18px}
 
 /* Feature list */
-.vg-sol .ze2-features{position:absolute;top:50%;left:0;transform:translateY(-50%);display:flex;flex-direction:column;gap:26px;z-index:2}
+.vg-sol .ze2-features{position:absolute;top:44px;left:0;display:flex;flex-direction:column;gap:18px;z-index:2}
 .vg-sol .ze2-feature{display:flex;align-items:center;gap:10px}
 .vg-sol .ze2-feature-badge{width:38px;height:38px;border-radius:50%;background:linear-gradient(180deg,#7BC47F,#4EA860);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 14px rgba(78,168,96,.35)}
 .vg-sol .ze2-feature-badge svg{width:20px;height:20px}
@@ -896,7 +896,7 @@ const CSS = `
 
 @media (max-width:960px){
   .vg-sol .ze2{grid-template-columns:1fr;padding:24px 18px}
-  .vg-sol .ze2-features{position:static;transform:none;flex-direction:row;flex-wrap:wrap;justify-content:center}
+  .vg-sol .ze2-features{position:static;flex-direction:row;flex-wrap:wrap;justify-content:center}
   .vg-sol .ze2-phones{padding-left:0;min-height:auto}
   .vg-sol .ze2-phone{width:130px;height:270px}
 }
