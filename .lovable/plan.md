@@ -1,74 +1,63 @@
-## Goal
-Replace the single `<img>` currently rendered in the `otp` tab of `src/pages/Solutions.tsx` with a fully-coded layout that reproduces the reference infographic using semantic divs, CSS grid, and inline SVG/lucide icons — so the section is responsive, themeable, and editable.
+## Redesign "Zalo Engagement Solutions" tab
 
-## Layout structure
+Replace the current 3-column BUSINESS / Super App / CUSTOMER stage with a new 2-column layout matching the attached reference. Break it into small presentational sub-components (all inside `src/pages/Solutions.tsx`, no new files unless needed).
+
+### New layout
 
 ```text
-.zalo-engagement (section, full-width)
-├── .ze-head
-│   ├── h2  "Zalo Engagement Solutions"      (large blue display)
-│   └── p   "An innovative approach to growing followers…"
-│
-└── .ze-stage                                (CSS grid: 1fr 1.4fr 1fr)
-    │
-    ├── .ze-col ze-business
-    │   ├── .ze-pill  "BUSINESS"             (green pill badge)
-    │   └── .ze-vlist                        (4 vertical cards)
-    │       ├── card: tag "F&B"      + icon (Coffee)
-    │       ├── card: tag "RETAIL"   + icon (Shirt)
-    │       ├── card: tag "FMCG"     + icon (Package)
-    │       └── card: tag "SERVICE"  + icon (HeartHandshake)
-    │
-    ├── .ze-col ze-center
-    │   ├── .ze-pill  "Super App"
-    │   ├── .ze-superapp
-    │   │   ├── big Zalo logo (SVG)
-    │   │   └── .ze-apprail  (TikTok, Facebook, MoMo — SVG tiles)
-    │   ├── .ze-pill  "Mini App"
-    │   ├── .ze-miniapps  (grid 5 cols)
-    │   │   └── each: label + orange rounded icon tile
-    │   │        Gift · Loyalty · Reward · Form · Survey
-    │   ├── .ze-divider   (orange dashed road bar)
-    │   └── .ze-stats     (3 cols)
-    │       ├── "X2 – X5 Response Rate"          + chat-bubble icon
-    │       ├── "Unlimited Experience Design"    + 5-star + thumbs-up
-    │       └── "Saving >60% Communication Cost" + piggy-bank icon
-    │
-    └── .ze-col ze-customer
-        ├── .ze-pill "CUSTOMER"
-        └── .ze-customer-card
-            ├── stylized avatar (SVG silhouette + phone glyph)
-            └── floating chips: LOYALTY (heart), VOUCHER (ticket), GAME (gamepad)
+┌─────────────────────────────────────────────────────────────┐
+│  Soft green gradient background, rounded 28px               │
+│                                                             │
+│  LEFT COLUMN (visual)          RIGHT COLUMN (content)       │
+│  ┌──────────────────────┐     ┌──────────────────────────┐  │
+│  │ • Mini App Game      │     │  Zalo Engagement         │  │
+│  │ • Mini App Voucher   │     │  Solutions Suite (title) │  │
+│  │ • Mini App eCom/Loy  │     │  — blue heading on white │  │
+│  │  (vertical feature   │     ├──────────────────────────┤  │
+│  │   list, left side)   │     │  Dark card (black,       │  │
+│  │                      │     │  rounded 28px):          │  │
+│  │  [Phones mockup /    │     │   ➜ bullet 1             │  │
+│  │   illustration area] │     │   ➜ bullet 2             │  │
+│  │                      │     │   ➜ bullet 3             │  │
+│  │  ┌────────────────┐  │     │   ➜ bullet 4             │  │
+│  │  │ Green caption  │  │     │  (green arrow icons,     │  │
+│  │  │ Automation …   │  │     │   white text)            │  │
+│  │  └────────────────┘  │     └──────────────────────────┘  │
+│  └──────────────────────┘                                    │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-## Styling
-- Add a new `.zalo-engagement` block inside the existing `CSS` constant in `src/pages/Solutions.tsx` (keep the visual system consistent with the rest of the page).
-- Palette: title `#4C7BF4` (blue), pills `#5FBF8B` green with white text, mini-app tiles `#EE6A3C` orange, background soft gradient `linear-gradient(180deg,#F7FBF7 0%,#EEF3FF 100%)`.
-- Radii `20–28px`, soft shadows `0 10px 30px rgba(20,40,80,.06)`.
-- Grid collapses to a single column under `900px`; center column stacks Super App → Mini App → Stats.
+### Component breakdown (local to Solutions.tsx)
 
-## Icons
-Use `lucide-react` (already in the project):
-- Business: `Coffee`, `Shirt`, `Package`, `HeartHandshake`
-- Mini App: `Ticket`, `Heart`, `Trophy`, `ClipboardEdit`, `ListChecks`
-- Stats: `MessageCircle`, `ThumbsUp`, `PiggyBank`
-- Customer chips: `Heart`, `Ticket`, `Gamepad2`
-- Super App tiles: inline SVG for Zalo wordmark, TikTok, Facebook, MoMo (simple brand glyphs, monochrome-safe).
+1. `ZaloEngagementSection` — outer wrapper, green gradient bg, 2-col grid (`1.05fr 1fr`), collapses to 1-col under 900px.
+2. `ZeFeatureList` — 3 rows: icon circle + two-line label ("Mini App / Game", "Mini App / Voucher", "Mini App / eCom/Loyalty"). Icons: `Gamepad2`, `Ticket`, `ShoppingBag` (lucide) in green circular badges.
+3. `ZePhonesVisual` — stylized SVG/CSS composition standing in for the two phone mockups (rounded phone frames with colored screens: one "RETAIL" pink, one "Gifts" orange with a wheel-of-fortune circle). Pure CSS + inline SVG, no image asset.
+4. `ZeAutomationCaption` — soft-green pill card, text: "Automation System – a customer data management platform tightly integrated with Zalo OA and Mini Apps, powered by AI to optimize **Customer Lifetime Value.**"
+5. `ZeTitleCard` — white rounded card with the blue title "Zalo Engagement Solutions Suite" (color `#4C7BF4`, Plus Jakarta Sans, 40–44px, tight leading).
+6. `ZeBenefitsCard` — black rounded card, list of 4 benefits, each row = green circular arrow (`ArrowRight` in mint circle) + white text. Content:
+   - A tool that helps collect data and connect with customers via Zalo, in compliance with Decree 13 and personal data protection laws.
+   - A Mini App library that enables gaming experiences, voucher rewards, and point accumulation directly on Zalo without requiring an app download.
+   - Expand unlimited customer experiences on Zalo with Mini Apps for Games, Gift Wallets, eCommerce, Rewards, Loyalty, and more.
+   - Automation flows powered by AI to nurture customers and grow Customer Lifetime Value.
 
-## Files touched
-1. `src/pages/Solutions.tsx`
-   - Remove the `<img src={zaloEngagementImg.url}>` block (lines ~359–377) and the `zaloEngagementImg` import.
-   - Insert the new JSX described above inside `{tab === "otp" && …}`.
-   - Extend the `CSS` string with `.ze-*` rules and a mobile breakpoint.
-2. (Optional cleanup) delete `src/assets/solutions/zalo-engagement-solutions.png.asset.json` since it will no longer be referenced.
+### Files touched
 
-## Out of scope
-- No changes to other tabs, header/footer, or business logic.
-- No new dependencies; lucide-react is already installed.
+- `src/pages/Solutions.tsx`
+  - Replace the JSX block at lines 361–456 (the `.zalo-engagement` container) with the new `ZaloEngagementSection`.
+  - Remove now-unused imports: `Coffee, Shirt, Package, HeartHandshake, ClipboardEdit, ListChecks, MessageCircle, ThumbsUp, PiggyBank, Star, Smartphone`. Keep/add: `Gamepad2, Ticket, ShoppingBag, ArrowRight, Heart, Trophy` as needed.
+  - Replace all `.ze-*` CSS rules in the `CSS` constant with a new stylesheet for the new layout (green gradient bg `#eaf7d9 → #cfeeae`, blue `#4C7BF4`, green pill `#7BC47F`, dark card `#0f0f10`, arrow badge `#26b673`).
 
-## Open question
-The reference shows a photo of a smiling woman holding a phone on the Customer side. Two options — pick one before I build:
-- **A. Illustrated placeholder** — an SVG silhouette + phone glyph with the floating LOYALTY / VOUCHER / GAME chips (fully code, no asset).
-- **B. Keep a photo** — you upload a transparent-background portrait and I wire it in as the customer visual, chips overlaid via CSS.
+### Technical notes
 
-Default if you don't answer: **Option A** (all-code, matches the "no hard-coded image" request).
+- No new files, no new deps, no image assets — pure JSX + Tailwind-free scoped CSS via the existing `CSS` string.
+- The phone visual is an SVG composition; keep it under ~80 lines of markup.
+- Preserve outer `<div className="pane show">` and `style={{ gridColumn: "1 / -1" }}` wrapper so it still spans the catalog grid.
+- Mobile (<900px): stack columns, phone visual scales down, benefits card full-width.
+
+### Open question
+
+The reference shows realistic phone photos with a wheel-of-fortune. Two options for the left visual:
+- **A. Coded SVG mockup** (proposed above) — no asset, fully themable, slightly stylized.
+- **B. Use an uploaded/generated phone mockup image** — closer to the reference but requires an asset.
+
+Default: **A** unless you say otherwise.
