@@ -358,7 +358,7 @@ const Solutions = () => {
 
           {tab === "otp" && (
             <div className="pane show">
-              <div className="zalo-engagement">
+              <div className="zalo-engagement" style={{ gridColumn: "1 / -1" }}>
                 <div className="zalo-engagement-head">
                   <h2 className="zalo-engagement-title">Zalo Engagement Solutions</h2>
                   <p className="zalo-engagement-sub">
