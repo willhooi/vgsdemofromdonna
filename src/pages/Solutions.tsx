@@ -48,7 +48,7 @@ const TABS: { key: TabKey; label: string }[] = [
   { key: "sms", label: "SMS" },
   { key: "ott", label: "Zalo · Viber · OTT" },
   { key: "emailVoice", label: "Email · Voice" },
-  { key: "otp", label: "Verification" },
+  { key: "otp", label: "Zalo\u00a0 Engagement Solution\u00a0 \u00a0" },
   { key: "rw", label: "Rewards & Loyalty" },
 ];
 
