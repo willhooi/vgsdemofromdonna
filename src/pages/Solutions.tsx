@@ -26,6 +26,7 @@ import emailServicesImg from "@/assets/solutions/email-services.jpg.asset.json";
 
 import mobileTopupImg from "@/assets/solutions/mobile-topup-46.png.asset.json";
 import otpboxImg from "@/assets/solutions/otpbox.jpg.asset.json";
+import zaloEngagementImg from "@/assets/solutions/zalo-engagement-solutions.png.asset.json";
 
 const SOLUTION_OPTIONS = [
   "SMS Brandname",
