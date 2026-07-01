@@ -164,7 +164,7 @@ const TABS: { key: TabKey; label: string }[] = [
 ];
 
 const Solutions = () => {
-  const [tab, setTab] = useState<TabKey>("sms");
+  const [tab, setTab] = useState<TabKey>("otp");
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const heroCanvas = useRef<HTMLCanvasElement>(null);
