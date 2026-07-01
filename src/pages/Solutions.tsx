@@ -391,6 +391,12 @@ const Solutions = () => {
             ))}
           </div>
 
+          {tab === "otp" && (
+            <div className="pane show">
+              <ZaloEngagementSection />
+            </div>
+          )}
+
           {tab === "sms" && (
             <div className="pane show">
               <CatArt caption="Direct carrier connections">
