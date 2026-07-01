@@ -766,6 +766,14 @@ const VoiceArt = () => (
 );
 
 const CSS = `
+.vg-sol .zalo-engagement{padding:8px 0 16px}
+.vg-sol .zalo-engagement-head{text-align:center;max-width:820px;margin:0 auto 28px}
+.vg-sol .zalo-engagement-title{font-size:clamp(32px,4.4vw,54px);font-weight:800;letter-spacing:-.02em;line-height:1.05;color:#4c7bf3;margin:0 0 14px}
+.vg-sol .zalo-engagement-sub{font-size:clamp(15px,1.4vw,18px);color:var(--fg);line-height:1.5}
+.vg-sol .zalo-engagement-sub strong{font-weight:800;color:var(--fg)}
+.vg-sol .zalo-engagement-figure{margin:0 auto;max-width:1100px}
+.vg-sol .zalo-engagement-figure img{width:100%;height:auto;display:block}
+
 .vg-sol{--primary:hsl(128 52% 46%);--primary-deep:hsl(145 100% 25%);--primary-soft:hsl(130 100% 94%);--accent:hsl(35 100% 54%);--accent-soft:hsl(36 100% 93%);--lime:#a7f070;--fg:hsl(0 0% 13%);--muted-fg:hsl(0 0% 36%);--muted:hsl(220 20% 97%);--border:hsl(0 0% 90%);--dark:#0c3b20;--dark2:#0a2f1a;font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:var(--fg);background:#fff;line-height:1.55;overflow-x:hidden}
 .vg-sol *{box-sizing:border-box}
 .vg-sol .container{max-width:1140px;margin:0 auto;padding:0 24px}
