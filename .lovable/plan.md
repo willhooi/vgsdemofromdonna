@@ -1,37 +1,74 @@
-## Mục tiêu
+## Goal
+Replace the single `<img>` currently rendered in the `otp` tab of `src/pages/Solutions.tsx` with a fully-coded layout that reproduces the reference infographic using semantic divs, CSS grid, and inline SVG/lucide icons — so the section is responsive, themeable, and editable.
 
-Chỉnh sửa trang `/market-insights`:
-1. **Hero section**: rút gọn text — tiêu đề "Market Insights" và mô tả phía dưới ít chữ hơn (tách biệt, không liên quan đến list bài viết).
-2. **Featured section**: thay vì 1 bài viết lớn, hiển thị **2 bài viết nổi bật** xếp cạnh nhau theo dạng **2 cột bằng nhau**.
+## Layout structure
 
-## Chi tiết kỹ thuật
+```text
+.zalo-engagement (section, full-width)
+├── .ze-head
+│   ├── h2  "Zalo Engagement Solutions"      (large blue display)
+│   └── p   "An innovative approach to growing followers…"
+│
+└── .ze-stage                                (CSS grid: 1fr 1.4fr 1fr)
+    │
+    ├── .ze-col ze-business
+    │   ├── .ze-pill  "BUSINESS"             (green pill badge)
+    │   └── .ze-vlist                        (4 vertical cards)
+    │       ├── card: tag "F&B"      + icon (Coffee)
+    │       ├── card: tag "RETAIL"   + icon (Shirt)
+    │       ├── card: tag "FMCG"     + icon (Package)
+    │       └── card: tag "SERVICE"  + icon (HeartHandshake)
+    │
+    ├── .ze-col ze-center
+    │   ├── .ze-pill  "Super App"
+    │   ├── .ze-superapp
+    │   │   ├── big Zalo logo (SVG)
+    │   │   └── .ze-apprail  (TikTok, Facebook, MoMo — SVG tiles)
+    │   ├── .ze-pill  "Mini App"
+    │   ├── .ze-miniapps  (grid 5 cols)
+    │   │   └── each: label + orange rounded icon tile
+    │   │        Gift · Loyalty · Reward · Form · Survey
+    │   ├── .ze-divider   (orange dashed road bar)
+    │   └── .ze-stats     (3 cols)
+    │       ├── "X2 – X5 Response Rate"          + chat-bubble icon
+    │       ├── "Unlimited Experience Design"    + 5-star + thumbs-up
+    │       └── "Saving >60% Communication Cost" + piggy-bank icon
+    │
+    └── .ze-col ze-customer
+        ├── .ze-pill "CUSTOMER"
+        └── .ze-customer-card
+            ├── stylized avatar (SVG silhouette + phone glyph)
+            └── floating chips: LOYALTY (heart), VOUCHER (ticket), GAME (gamepad)
+```
 
-### 1. Hero text rút gọn
-- Trong `src/pages/MarketInsights.tsx`, phần hero (dòng 74–102):
-  - Đổi `h1` và `p` mô tả thành nội dung ngắn gọn hơn (tối đa 1 dòng tiêu đề + 1 dòng mô tả).
-  - Giữ lại breadcrumb "Back to home".
+## Styling
+- Add a new `.zalo-engagement` block inside the existing `CSS` constant in `src/pages/Solutions.tsx` (keep the visual system consistent with the rest of the page).
+- Palette: title `#4C7BF4` (blue), pills `#5FBF8B` green with white text, mini-app tiles `#EE6A3C` orange, background soft gradient `linear-gradient(180deg,#F7FBF7 0%,#EEF3FF 100%)`.
+- Radii `20–28px`, soft shadows `0 10px 30px rgba(20,40,80,.06)`.
+- Grid collapses to a single column under `900px`; center column stacks Super App → Mini App → Stats.
 
-### 2. 2 bài viết nổi bật (2 cột)
-- Thay đổi logic `featuredArticles()` hoặc sử dụng trực tiếp `featured[0]` và `featured[1]`.
-- Layout: thay thế card lớn 1 bài (grid 12 cols, 7+5) bằng **grid 2 cột** (`md:grid-cols-2`), mỗi cột là 1 card bài viết.
-- Mỗi card bao gồm:
-  - Ảnh bìa (aspect-ratio ~16/10)
-  - Badge category
-  - Tiêu đề bài viết (giữ nguyên, không rút gọn — vì user chỉ muốn rút gọn text hero)
-  - Excerpt rút gọn (2–3 dòng)
-  - Meta: tác giả, ngày, thời gian đọc
-  - Hover: border primary + shadow
-- Đảm bảo responsive: trên mobile xếp chồng (1 cột), trên tablet/desktop-2 cột.
+## Icons
+Use `lucide-react` (already in the project):
+- Business: `Coffee`, `Shirt`, `Package`, `HeartHandshake`
+- Mini App: `Ticket`, `Heart`, `Trophy`, `ClipboardEdit`, `ListChecks`
+- Stats: `MessageCircle`, `ThumbsUp`, `PiggyBank`
+- Customer chips: `Heart`, `Ticket`, `Gamepad2`
+- Super App tiles: inline SVG for Zalo wordmark, TikTok, Facebook, MoMo (simple brand glyphs, monochrome-safe).
 
-### 3. Data layer
-- Trong `src/content/insights/articles.ts`:
-  - Kiểm tra `featuredArticles()` trả về ít nhất 2 bài có `featured: true`.
-  - Nếu chỉ có 1 bài `featured`, bổ sung thêm 1 bài khác để đủ 2.
+## Files touched
+1. `src/pages/Solutions.tsx`
+   - Remove the `<img src={zaloEngagementImg.url}>` block (lines ~359–377) and the `zaloEngagementImg` import.
+   - Insert the new JSX described above inside `{tab === "otp" && …}`.
+   - Extend the `CSS` string with `.ze-*` rules and a mobile breakpoint.
+2. (Optional cleanup) delete `src/assets/solutions/zalo-engagement-solutions.png.asset.json` since it will no longer be referenced.
 
-### 4. Các phần còn lại
-- Giữ nguyên category chips + grid các bài viết còn lại.
-- Giữ nguyên newsletter CTA và footer.
+## Out of scope
+- No changes to other tabs, header/footer, or business logic.
+- No new dependencies; lucide-react is already installed.
 
-## Files cần chỉnh sửa
-- `src/pages/MarketInsights.tsx`
-- `src/content/insights/articles.ts` (nếu cần bổ sung featured article)
+## Open question
+The reference shows a photo of a smiling woman holding a phone on the Customer side. Two options — pick one before I build:
+- **A. Illustrated placeholder** — an SVG silhouette + phone glyph with the floating LOYALTY / VOUCHER / GAME chips (fully code, no asset).
+- **B. Keep a photo** — you upload a transparent-background portrait and I wire it in as the customer visual, chips overlaid via CSS.
+
+Default if you don't answer: **Option A** (all-code, matches the "no hard-coded image" request).
