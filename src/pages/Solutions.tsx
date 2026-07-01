@@ -26,6 +26,7 @@ import emailServicesImg from "@/assets/solutions/email-services.jpg.asset.json";
 
 import mobileTopupImg from "@/assets/solutions/mobile-topup-46.png.asset.json";
 import otpboxImg from "@/assets/solutions/otpbox.jpg.asset.json";
+import zaloEngagementImg from "@/assets/solutions/zalo-engagement-solutions.png.asset.json";
 
 const SOLUTION_OPTIONS = [
   "SMS Brandname",
@@ -357,18 +358,20 @@ const Solutions = () => {
 
           {tab === "otp" && (
             <div className="pane show">
-              <CatArt caption="Security at login speed">
-                <img
-                  src={otpboxImg.url}
-                  alt="OTP verification on mobile"
-                  className="h-full w-full rounded-2xl object-cover"
-                  loading="lazy"
-                />
-              </CatArt>
-              <div className="svc-grid" style={{ gridTemplateColumns: "repeat(1,1fr)" }}>
-                <Svc title="OTPBox" body="A multi-channel OTP solution that enables businesses to combine primary and backup delivery routes through a single API for maximum reliability." chip="1 API">
-                  <IconLock />
-                </Svc>
+              <div className="zalo-engagement">
+                <div className="zalo-engagement-head rv">
+                  <h2 className="zalo-engagement-title">Zalo Engagement Solutions</h2>
+                  <p className="zalo-engagement-sub">
+                    An innovative approach to <strong>growing followers</strong> and maintaining long-term customer engagement through a Super App.
+                  </p>
+                </div>
+                <div className="zalo-engagement-figure rv">
+                  <img
+                    src={zaloEngagementImg.url}
+                    alt="Zalo Engagement Solutions — Business, Super App and Customer ecosystem"
+                    loading="lazy"
+                  />
+                </div>
               </div>
             </div>
           )}
@@ -763,6 +766,14 @@ const VoiceArt = () => (
 );
 
 const CSS = `
+.vg-sol .zalo-engagement{padding:8px 0 16px}
+.vg-sol .zalo-engagement-head{text-align:center;max-width:820px;margin:0 auto 28px}
+.vg-sol .zalo-engagement-title{font-size:clamp(32px,4.4vw,54px);font-weight:800;letter-spacing:-.02em;line-height:1.05;color:#4c7bf3;margin:0 0 14px}
+.vg-sol .zalo-engagement-sub{font-size:clamp(15px,1.4vw,18px);color:var(--fg);line-height:1.5}
+.vg-sol .zalo-engagement-sub strong{font-weight:800;color:var(--fg)}
+.vg-sol .zalo-engagement-figure{margin:0 auto;max-width:1100px}
+.vg-sol .zalo-engagement-figure img{width:100%;height:auto;display:block}
+
 .vg-sol{--primary:hsl(128 52% 46%);--primary-deep:hsl(145 100% 25%);--primary-soft:hsl(130 100% 94%);--accent:hsl(35 100% 54%);--accent-soft:hsl(36 100% 93%);--lime:#a7f070;--fg:hsl(0 0% 13%);--muted-fg:hsl(0 0% 36%);--muted:hsl(220 20% 97%);--border:hsl(0 0% 90%);--dark:#0c3b20;--dark2:#0a2f1a;font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:var(--fg);background:#fff;line-height:1.55;overflow-x:hidden}
 .vg-sol *{box-sizing:border-box}
 .vg-sol .container{max-width:1140px;margin:0 auto;padding:0 24px}
