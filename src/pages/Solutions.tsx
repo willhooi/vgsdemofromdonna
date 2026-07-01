@@ -26,7 +26,7 @@ import emailServicesImg from "@/assets/solutions/email-services.jpg.asset.json";
 
 import mobileTopupImg from "@/assets/solutions/mobile-topup-46.png.asset.json";
 import otpboxImg from "@/assets/solutions/otpbox.jpg.asset.json";
-import zaloEngagementImg from "@/assets/solutions/zalo-engagement-solutions.png.asset.json";
+import { Coffee, Shirt, Package, HeartHandshake, Ticket, Heart, Trophy, ClipboardEdit, ListChecks, MessageCircle, ThumbsUp, PiggyBank, Gamepad2, Smartphone, Star } from "lucide-react";
 
 const SOLUTION_OPTIONS = [
   "SMS Brandname",
@@ -359,18 +359,110 @@ const Solutions = () => {
           {tab === "otp" && (
             <div className="pane show">
               <div className="zalo-engagement" style={{ gridColumn: "1 / -1" }}>
-                <div className="zalo-engagement-head">
-                  <h2 className="zalo-engagement-title">Zalo Engagement Solutions</h2>
-                  <p className="zalo-engagement-sub">
+                <div className="ze-head">
+                  <h2 className="ze-title">Zalo Engagement Solutions</h2>
+                  <p className="ze-sub">
                     An innovative approach to <strong>growing followers</strong> and maintaining long-term customer engagement through a Super App.
                   </p>
                 </div>
-                <div className="zalo-engagement-figure">
-                  <img
-                    src={zaloEngagementImg.url}
-                    alt="Zalo Engagement Solutions — Business, Super App and Customer ecosystem"
-                    loading="lazy"
-                  />
+
+                <div className="ze-stage">
+                  {/* BUSINESS */}
+                  <div className="ze-col ze-business">
+                    <span className="ze-pill">BUSINESS</span>
+                    <div className="ze-vlist">
+                      {[
+                        { tag: "F&B", Icon: Coffee, tone: "peach" },
+                        { tag: "RETAIL", Icon: Shirt, tone: "mint" },
+                        { tag: "FMCG", Icon: Package, tone: "sky" },
+                        { tag: "SERVICE", Icon: HeartHandshake, tone: "sand" },
+                      ].map(({ tag, Icon, tone }) => (
+                        <div key={tag} className={`ze-vcard tone-${tone}`}>
+                          <span className="ze-vtag">{tag}</span>
+                          <Icon className="ze-vicon" strokeWidth={1.6} />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* SUPER APP / MINI APP / STATS */}
+                  <div className="ze-col ze-center">
+                    <div className="ze-center-top">
+                      <span className="ze-pill ze-pill-sm">Super App</span>
+                      <div className="ze-zalo">
+                        <svg viewBox="0 0 120 120" aria-label="Zalo">
+                          <path d="M18 30c0-6 5-11 11-11h62c6 0 11 5 11 11v42c0 6-5 11-11 11H62l-18 14 3-14h-18c-6 0-11-5-11-11V30z" fill="#4c7bf3"/>
+                          <text x="60" y="66" textAnchor="middle" fontSize="30" fontWeight="800" fill="#fff" fontFamily="Plus Jakarta Sans">Zalo</text>
+                        </svg>
+                      </div>
+                      <div className="ze-apprail">
+                        <div className="ze-app-tile" style={{ background: "#111" }}>
+                          <svg viewBox="0 0 24 24" fill="#fff"><path d="M17 3c.4 2.4 1.9 4.4 4 5.5V12c-1.9 0-3.7-.6-5.3-1.6v6.9c0 3.7-3 6.7-6.7 6.7S2.3 21 2.3 17.3s3-6.7 6.7-6.7c.5 0 .9 0 1.4.2v3.6c-.4-.2-.9-.3-1.4-.3-1.8 0-3.2 1.4-3.2 3.2s1.4 3.2 3.2 3.2 3.2-1.4 3.2-3.2V3H17z"/></svg>
+                        </div>
+                        <div className="ze-app-tile" style={{ background: "#1877f2" }}>
+                          <svg viewBox="0 0 24 24" fill="#fff"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H8v-2.9h2.4V9.8c0-2.4 1.4-3.7 3.6-3.7 1 0 2.1.2 2.1.2v2.3h-1.2c-1.2 0-1.5.7-1.5 1.5V12h2.6l-.4 2.9h-2.2V22A10 10 0 0 0 22 12z"/></svg>
+                        </div>
+                        <div className="ze-app-tile" style={{ background: "#a50064" }}>
+                          <span style={{ color: "#fff", fontWeight: 800, fontSize: 11, lineHeight: 1 }}>mo<br/>mo</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="ze-mini">
+                      <span className="ze-pill ze-pill-sm">Mini App</span>
+                      <div className="ze-mini-grid">
+                        {[
+                          { label: "Gift", Icon: Ticket },
+                          { label: "Loyalty", Icon: Heart },
+                          { label: "Reward", Icon: Trophy },
+                          { label: "Form", Icon: ClipboardEdit },
+                          { label: "Survey", Icon: ListChecks },
+                        ].map(({ label, Icon }) => (
+                          <div key={label} className="ze-mini-item">
+                            <span className="ze-mini-label">{label}</span>
+                            <div className="ze-mini-tile">
+                              <Icon strokeWidth={1.8} />
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="ze-road" aria-hidden="true" />
+
+                    <div className="ze-stats">
+                      <div className="ze-stat">
+                        <p className="ze-stat-text"><strong>X2 – X5</strong><br/>Response Rate</p>
+                        <div className="ze-stat-icon tone-peach"><MessageCircle strokeWidth={1.8}/></div>
+                      </div>
+                      <div className="ze-stat">
+                        <p className="ze-stat-text">Unlimited<br/>Experience Design</p>
+                        <div className="ze-stat-icon tone-peach">
+                          <div className="ze-stars"><Star fill="#fff" strokeWidth={0}/><Star fill="#fff" strokeWidth={0}/><Star fill="#fff" strokeWidth={0}/><Star fill="#fff" strokeWidth={0}/><Star fill="#fff" strokeWidth={0}/></div>
+                          <ThumbsUp className="ze-thumb" strokeWidth={1.8}/>
+                        </div>
+                      </div>
+                      <div className="ze-stat">
+                        <p className="ze-stat-text"><strong>Saving &gt;60%</strong><br/>Communication Cost</p>
+                        <div className="ze-stat-icon tone-peach"><PiggyBank strokeWidth={1.8}/></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* CUSTOMER */}
+                  <div className="ze-col ze-customer">
+                    <span className="ze-pill">CUSTOMER</span>
+                    <div className="ze-customer-card">
+                      <div className="ze-avatar">
+                        <div className="ze-avatar-head" />
+                        <div className="ze-avatar-body" />
+                        <Smartphone className="ze-avatar-phone" strokeWidth={1.6}/>
+                      </div>
+                      <span className="ze-chip ze-chip-loyalty"><Heart fill="#e94b6a" strokeWidth={0}/> LOYALTY</span>
+                      <span className="ze-chip ze-chip-voucher"><Ticket strokeWidth={1.8}/> VOUCHER</span>
+                      <span className="ze-chip ze-chip-game"><Gamepad2 strokeWidth={1.8}/> GAME</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -766,13 +858,60 @@ const VoiceArt = () => (
 );
 
 const CSS = `
-.vg-sol .zalo-engagement{padding:8px 0 16px}
-.vg-sol .zalo-engagement-head{text-align:center;max-width:820px;margin:0 auto 28px}
-.vg-sol .zalo-engagement-title{font-size:clamp(32px,4.4vw,54px);font-weight:800;letter-spacing:-.02em;line-height:1.05;color:#4c7bf3;margin:0 0 14px}
-.vg-sol .zalo-engagement-sub{font-size:clamp(15px,1.4vw,18px);color:var(--fg);line-height:1.5}
-.vg-sol .zalo-engagement-sub strong{font-weight:800;color:var(--fg)}
-.vg-sol .zalo-engagement-figure{margin:0 auto;max-width:1100px}
-.vg-sol .zalo-engagement-figure img{width:100%;height:auto;display:block}
+.vg-sol .zalo-engagement{padding:8px 0 16px;background:linear-gradient(180deg,#f7fbf7 0%,#eef3ff 100%);border-radius:28px;padding:36px 28px}
+.vg-sol .ze-head{text-align:center;max-width:820px;margin:0 auto 28px}
+.vg-sol .ze-title{font-size:clamp(30px,4.2vw,56px);font-weight:800;letter-spacing:-.02em;line-height:1.05;color:#4c7bf3;margin:0 0 12px}
+.vg-sol .ze-sub{font-size:clamp(14px,1.3vw,17px);color:var(--fg);line-height:1.5}
+.vg-sol .ze-sub strong{font-weight:800;color:var(--fg)}
+.vg-sol .ze-stage{display:grid;grid-template-columns:1fr 1.4fr 1fr;gap:20px;align-items:start}
+.vg-sol .ze-col{display:flex;flex-direction:column;align-items:center;gap:14px}
+.vg-sol .ze-pill{display:inline-block;background:linear-gradient(180deg,#7cc99a,#5fbf8b);color:#fff;font-weight:800;letter-spacing:.08em;font-size:13px;padding:9px 22px;border-radius:999px;box-shadow:0 6px 14px rgba(95,191,139,.35)}
+.vg-sol .ze-pill-sm{font-size:12px;padding:7px 18px;letter-spacing:.04em}
+.vg-sol .ze-vlist{display:flex;flex-direction:column;gap:14px;width:100%;max-width:180px}
+.vg-sol .ze-vcard{position:relative;display:flex;align-items:center;justify-content:center;padding:22px 14px;border-radius:18px;box-shadow:0 8px 22px rgba(20,40,80,.06);min-height:96px}
+.vg-sol .ze-vcard.tone-peach{background:#fde7dd}
+.vg-sol .ze-vcard.tone-mint{background:#dcefdc}
+.vg-sol .ze-vcard.tone-sky{background:#dbe7f5}
+.vg-sol .ze-vcard.tone-sand{background:#fbe6c9}
+.vg-sol .ze-vtag{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:#ee6a3c;color:#fff;font-size:11px;font-weight:800;letter-spacing:.05em;padding:4px 12px;border-radius:6px;white-space:nowrap}
+.vg-sol .ze-vcard.tone-mint .ze-vtag{background:#5fbf8b}
+.vg-sol .ze-vcard.tone-sky .ze-vtag{background:#4c7bf3}
+.vg-sol .ze-vcard.tone-sand .ze-vtag{background:#e59a2b}
+.vg-sol .ze-vicon{width:44px;height:44px;color:#333}
+.vg-sol .ze-center{align-items:center;gap:8px}
+.vg-sol .ze-center-top{display:flex;flex-direction:column;align-items:center;gap:10px}
+.vg-sol .ze-zalo svg{width:120px;height:120px;display:block;filter:drop-shadow(0 8px 20px rgba(76,123,243,.25))}
+.vg-sol .ze-apprail{display:flex;gap:12px;margin-top:-6px}
+.vg-sol .ze-app-tile{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 14px rgba(0,0,0,.15)}
+.vg-sol .ze-app-tile svg{width:24px;height:24px}
+.vg-sol .ze-mini{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:18px;width:100%}
+.vg-sol .ze-mini-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;width:100%;max-width:440px}
+.vg-sol .ze-mini-item{display:flex;flex-direction:column;align-items:center;gap:8px}
+.vg-sol .ze-mini-label{font-size:13px;font-weight:600;color:var(--fg)}
+.vg-sol .ze-mini-tile{width:52px;height:52px;border-radius:14px;background:linear-gradient(180deg,#f28560,#ee6a3c);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 14px rgba(238,106,60,.35)}
+.vg-sol .ze-mini-tile svg{width:26px;height:26px}
+.vg-sol .ze-road{width:100%;max-width:460px;height:14px;margin:22px 0 18px;border-radius:999px;background:repeating-linear-gradient(90deg,#ee6a3c 0 18px,#ffb28a 18px 30px);box-shadow:0 6px 14px rgba(238,106,60,.25)}
+.vg-sol .ze-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;width:100%;max-width:460px}
+.vg-sol .ze-stat{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+.vg-sol .ze-stat-text{font-size:13px;line-height:1.3;color:var(--fg)}
+.vg-sol .ze-stat-text strong{font-weight:800}
+.vg-sol .ze-stat-icon{position:relative;width:64px;height:64px;border-radius:16px;background:linear-gradient(180deg,#f28560,#ee6a3c);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 18px rgba(238,106,60,.3)}
+.vg-sol .ze-stat-icon svg{width:30px;height:30px}
+.vg-sol .ze-stars{display:flex;gap:1px}
+.vg-sol .ze-stars svg{width:10px;height:10px}
+.vg-sol .ze-thumb{position:absolute;bottom:-8px;right:-8px;width:26px;height:26px;background:#5fbf8b;color:#fff;border-radius:8px;padding:5px}
+.vg-sol .ze-customer{position:relative;min-height:340px}
+.vg-sol .ze-customer-card{position:relative;width:100%;height:340px;display:flex;align-items:center;justify-content:center}
+.vg-sol .ze-avatar{position:relative;width:150px;height:260px}
+.vg-sol .ze-avatar-head{position:absolute;top:0;left:50%;transform:translateX(-50%);width:74px;height:74px;border-radius:50%;background:linear-gradient(180deg,#f6d0b3,#e9b48a)}
+.vg-sol .ze-avatar-body{position:absolute;top:64px;left:50%;transform:translateX(-50%);width:150px;height:190px;border-radius:60px 60px 20px 20px;background:linear-gradient(180deg,#c8e4c0,#7fbf8f)}
+.vg-sol .ze-avatar-phone{position:absolute;top:150px;left:20px;width:38px;height:38px;color:#333;background:#fff;border-radius:8px;padding:6px;box-shadow:0 4px 10px rgba(0,0,0,.1)}
+.vg-sol .ze-chip{position:absolute;display:inline-flex;align-items:center;gap:6px;background:#fff;padding:7px 12px;border-radius:999px;font-weight:800;font-size:11px;letter-spacing:.06em;box-shadow:0 8px 18px rgba(20,40,80,.12)}
+.vg-sol .ze-chip svg{width:14px;height:14px}
+.vg-sol .ze-chip-loyalty{top:20px;left:0;color:#e94b6a}
+.vg-sol .ze-chip-voucher{top:80px;right:0;color:#5fbf8b}
+.vg-sol .ze-chip-game{bottom:60px;right:10px;color:#ee6a3c}
+@media (max-width:960px){.vg-sol .ze-stage{grid-template-columns:1fr;gap:28px}.vg-sol .ze-mini-grid{max-width:100%}.vg-sol .ze-customer,.vg-sol .ze-customer-card{min-height:320px;height:320px}}
 
 .vg-sol{--primary:hsl(128 52% 46%);--primary-deep:hsl(145 100% 25%);--primary-soft:hsl(130 100% 94%);--accent:hsl(35 100% 54%);--accent-soft:hsl(36 100% 93%);--lime:#a7f070;--fg:hsl(0 0% 13%);--muted-fg:hsl(0 0% 36%);--muted:hsl(220 20% 97%);--border:hsl(0 0% 90%);--dark:#0c3b20;--dark2:#0a2f1a;font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:var(--fg);background:#fff;line-height:1.55;overflow-x:hidden}
 .vg-sol *{box-sizing:border-box}
