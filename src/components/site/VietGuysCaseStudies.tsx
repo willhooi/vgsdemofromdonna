@@ -230,6 +230,21 @@ export const VietGuysCaseStudies = () => {
             );
           })}
         </div>
+
+        <div className="mt-8 flex justify-center">
+          <a
+            href="/case-studies"
+            className="group inline-flex items-center gap-2 text-sm font-semibold text-foreground"
+          >
+            <span>Explore customer stories</span>
+            <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-muted transition-colors duration-300 ease-in-out group-hover:bg-[#39b44a]">
+              <ArrowRight
+                className="h-3.5 w-3.5 transition-transform duration-300 ease-in-out group-hover:-rotate-45 group-hover:text-white"
+                strokeWidth={2.5}
+              />
+            </span>
+          </a>
+        </div>
       </div>
     </section>
   );
