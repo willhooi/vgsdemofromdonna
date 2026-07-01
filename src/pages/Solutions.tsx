@@ -472,11 +472,7 @@ const Solutions = () => {
             </div>
           )}
 
-          {tab === "otp" && (
-            <div className="pane show">
-              <ZaloEngagementSection />
-            </div>
-          )}
+
 
           {tab === "rw" && (
             <div className="pane show">
