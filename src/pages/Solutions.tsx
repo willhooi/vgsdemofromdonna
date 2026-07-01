@@ -358,18 +358,20 @@ const Solutions = () => {
 
           {tab === "otp" && (
             <div className="pane show">
-              <CatArt caption="Security at login speed">
-                <img
-                  src={otpboxImg.url}
-                  alt="OTP verification on mobile"
-                  className="h-full w-full rounded-2xl object-cover"
-                  loading="lazy"
-                />
-              </CatArt>
-              <div className="svc-grid" style={{ gridTemplateColumns: "repeat(1,1fr)" }}>
-                <Svc title="OTPBox" body="A multi-channel OTP solution that enables businesses to combine primary and backup delivery routes through a single API for maximum reliability." chip="1 API">
-                  <IconLock />
-                </Svc>
+              <div className="zalo-engagement">
+                <div className="zalo-engagement-head rv">
+                  <h2 className="zalo-engagement-title">Zalo Engagement Solutions</h2>
+                  <p className="zalo-engagement-sub">
+                    An innovative approach to <strong>growing followers</strong> and maintaining long-term customer engagement through a Super App.
+                  </p>
+                </div>
+                <div className="zalo-engagement-figure rv">
+                  <img
+                    src={zaloEngagementImg.url}
+                    alt="Zalo Engagement Solutions — Business, Super App and Customer ecosystem"
+                    loading="lazy"
+                  />
+                </div>
               </div>
             </div>
           )}
