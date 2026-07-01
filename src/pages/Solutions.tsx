@@ -896,7 +896,7 @@ const CSS = `
 
 @media (max-width:960px){
   .vg-sol .ze2{grid-template-columns:1fr;padding:24px 18px}
-  .vg-sol .ze2-features{position:static;flex-direction:row;flex-wrap:wrap;justify-content:center}
+  .vg-sol .ze2-features{position:static;transform:none;flex-direction:row;flex-wrap:wrap;justify-content:center}
   .vg-sol .ze2-phones{padding-left:0;min-height:auto}
   .vg-sol .ze2-phone{width:130px;height:270px}
 }
