@@ -847,7 +847,9 @@ const CSS = `
 .vg-sol .ze2-feature-text strong{font-size:14px;color:#0f172a;font-weight:800}
 
 /* Phones visual */
-.vg-sol .ze2-phones{position:relative;display:flex;justify-content:center;gap:14px;padding-left:120px;min-height:340px}
+.vg-sol .ze2-phones{position:relative;display:flex;justify-content:center;align-items:center;padding-left:110px;min-height:360px;overflow:hidden}
+.vg-sol .ze2-phones-img{width:100%;max-width:520px;height:auto;object-fit:contain;display:block;transform:scale(1.15);transform-origin:center;filter:drop-shadow(0 20px 40px rgba(20,40,20,.18))}
+@media (max-width:900px){.vg-sol .ze2-phones{padding-left:0}.vg-sol .ze2-phones-img{transform:none}}
 .vg-sol .ze2-phone{width:150px;height:310px;background:#1a1a1e;border-radius:28px;padding:8px;box-shadow:0 24px 50px rgba(20,40,20,.25);position:relative}
 .vg-sol .ze2-phone-a{transform:rotate(-6deg) translateY(6px)}
 .vg-sol .ze2-phone-b{transform:rotate(4deg)}
