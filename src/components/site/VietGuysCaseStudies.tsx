@@ -112,18 +112,6 @@ export const VietGuysCaseStudies = () => {
             Leading brands trust VietGuys for enterprise messaging infrastructure.
           </p>
 
-          <a
-            href="#vg-case-studies"
-            className="group mx-auto mt-6 inline-flex items-center gap-2 text-sm font-semibold text-foreground"
-          >
-            <span>Explore customer stories</span>
-            <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-muted transition-colors duration-300 ease-in-out group-hover:bg-[#39b44a]">
-              <ArrowRight
-                className="h-3.5 w-3.5 transition-transform duration-300 ease-in-out group-hover:-rotate-45 group-hover:text-white"
-                strokeWidth={2.5}
-              />
-            </span>
-          </a>
         </div>
 
         {/* Expandable row */}
