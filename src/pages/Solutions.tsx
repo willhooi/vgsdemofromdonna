@@ -26,7 +26,9 @@ import emailServicesImg from "@/assets/solutions/email-services.jpg.asset.json";
 
 import mobileTopupImg from "@/assets/solutions/mobile-topup-46.png.asset.json";
 import otpboxImg from "@/assets/solutions/otpbox.jpg.asset.json";
+import zaloPhonesMockup from "@/assets/solutions/zalo-phones-mockup.png.asset.json";
 import { Gamepad2, Ticket, ShoppingBag, ArrowRight, Sparkles } from "lucide-react";
+
 
 // ---------- Zalo Engagement sub-components ----------
 const ZeFeatureList = () => {
@@ -49,49 +51,15 @@ const ZeFeatureList = () => {
 
 const ZePhonesVisual = () => (
   <div className="ze2-phones" aria-hidden="true">
-    {/* Phone 1 — Retail */}
-    <div className="ze2-phone ze2-phone-a">
-      <div className="ze2-notch" />
-      <div className="ze2-screen">
-        <div className="ze2-hdr ze2-hdr-blue">VietGuys Retail</div>
-        <div className="ze2-hero-retail">
-          <span className="ze2-retail-tag">RETAIL</span>
-        </div>
-        <div className="ze2-card-row">
-          <div className="ze2-avatar-sm" />
-          <div className="ze2-lines"><i /><i /></div>
-        </div>
-        <div className="ze2-lines-block"><i /><i /><i /></div>
-        <div className="ze2-chips"><span /><span /><span /></div>
-      </div>
-    </div>
-    {/* Phone 2 — Gifts / Wheel */}
-    <div className="ze2-phone ze2-phone-b">
-      <div className="ze2-notch" />
-      <div className="ze2-screen">
-        <div className="ze2-hdr ze2-hdr-orange">VietGuys Gifts</div>
-        <div className="ze2-wheel">
-          <svg viewBox="0 0 120 120">
-            {[0,1,2,3,4,5,6,7].map(i => {
-              const colors = ["#f5a623","#e94b6a","#f7d34a","#9b59b6","#f5a623","#e94b6a","#f7d34a","#9b59b6"];
-              const a1 = (i * 45 - 90) * Math.PI / 180;
-              const a2 = ((i + 1) * 45 - 90) * Math.PI / 180;
-              const x1 = 60 + 50 * Math.cos(a1), y1 = 60 + 50 * Math.sin(a1);
-              const x2 = 60 + 50 * Math.cos(a2), y2 = 60 + 50 * Math.sin(a2);
-              return <path key={i} d={`M60,60 L${x1},${y1} A50,50 0 0,1 ${x2},${y2} Z`} fill={colors[i]} />;
-            })}
-            <circle cx="60" cy="60" r="10" fill="#0f0f10" />
-            <polygon points="60,4 54,18 66,18" fill="#e94b6a" />
-          </svg>
-        </div>
-        <div className="ze2-voucher">
-          <div className="ze2-voucher-badge">50<span>K</span></div>
-          <div className="ze2-lines"><i /><i /></div>
-        </div>
-      </div>
-    </div>
+    <img
+      src={zaloPhonesMockup.url}
+      alt=""
+      className="ze2-phones-img"
+      loading="lazy"
+    />
   </div>
 );
+
 
 const ZeAutomationCaption = () => (
   <div className="ze2-caption">
