@@ -156,15 +156,15 @@ const SOLUTION_OPTIONS = [
 type TabKey = "sms" | "ott" | "emailVoice" | "otp" | "rw";
 
 const TABS: { key: TabKey; label: string }[] = [
+  { key: "otp", label: "Zalo\u00a0 Engagement Solution\u00a0 \u00a0" },
   { key: "sms", label: "SMS" },
   { key: "ott", label: "Zalo ZBS · Viber · OTT" },
   { key: "emailVoice", label: "Email · Voice" },
-  { key: "otp", label: "Zalo\u00a0 Engagement Solution\u00a0 \u00a0" },
   { key: "rw", label: "Rewards & Loyalty" },
 ];
 
 const Solutions = () => {
-  const [tab, setTab] = useState<TabKey>("sms");
+  const [tab, setTab] = useState<TabKey>("otp");
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const heroCanvas = useRef<HTMLCanvasElement>(null);
@@ -391,6 +391,12 @@ const Solutions = () => {
             ))}
           </div>
 
+          {tab === "otp" && (
+            <div className="pane show">
+              <ZaloEngagementSection />
+            </div>
+          )}
+
           {tab === "sms" && (
             <div className="pane show">
               <CatArt caption="Direct carrier connections">
@@ -466,11 +472,7 @@ const Solutions = () => {
             </div>
           )}
 
-          {tab === "otp" && (
-            <div className="pane show">
-              <ZaloEngagementSection />
-            </div>
-          )}
+
 
           {tab === "rw" && (
             <div className="pane show">
