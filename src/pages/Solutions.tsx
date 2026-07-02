@@ -199,11 +199,6 @@ const ZePhonesVisual = () => {
   );
 };
 
-const ZeAutomationCaption = () => (
-  <div className="ze2-caption">
-    Automation System – a customer data management platform tightly integrated with Zalo OA and Mini Apps, powered by AI to optimize <strong>Customer Lifetime Value.</strong>
-  </div>
-);
 
 const ZeTitleCard = () => (
   <div className="ze2-title-card">
@@ -233,9 +228,8 @@ const ZeBenefitsCard = () => {
 const ZaloEngagementSection = () => (
   <div className="ze2" style={{ gridColumn: "1 / -1" }}>
     <div className="ze2-left">
-      <ZeFeatureList />
       <ZePhonesVisual />
-      <ZeAutomationCaption />
+      <ZeFeatureList />
     </div>
     <div className="ze2-right">
       <ZeTitleCard />
@@ -976,7 +970,7 @@ const CSS = `
 .vg-sol .ze2-right{display:flex;flex-direction:column;gap:18px}
 
 /* Feature list */
-.vg-sol .ze2-features{position:absolute;top:44px;left:0;display:flex;flex-direction:column;gap:18px;z-index:2}
+.vg-sol .ze2-features{display:flex;flex-direction:row;gap:18px;justify-content:center;margin-top:22px}
 .vg-sol .ze2-feature{display:flex;align-items:center;gap:10px}
 .vg-sol .ze2-feature-badge{width:38px;height:38px;border-radius:50%;background:linear-gradient(180deg,#7BC47F,#4EA860);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 14px rgba(78,168,96,.35)}
 .vg-sol .ze2-feature-badge svg{width:20px;height:20px}
