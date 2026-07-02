@@ -989,36 +989,106 @@ const CSS = `
 .vg-sol .ze2-feature-text span{font-size:12px;color:#334155;font-weight:600}
 .vg-sol .ze2-feature-text strong{font-size:14px;color:#0f172a;font-weight:800}
 
-/* Phones visual */
-.vg-sol .ze2-phones{position:relative;display:flex;justify-content:center;gap:14px;padding-left:120px;min-height:340px}
-.vg-sol .ze2-phone{width:150px;height:310px;background:#1a1a1e;border-radius:28px;padding:8px;box-shadow:0 24px 50px rgba(20,40,20,.25);position:relative}
-.vg-sol .ze2-phone-a{transform:rotate(-6deg) translateY(6px)}
-.vg-sol .ze2-phone-b{transform:rotate(4deg)}
-.vg-sol .ze2-notch{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:44px;height:14px;background:#1a1a1e;border-radius:0 0 10px 10px;z-index:2}
-.vg-sol .ze2-screen{width:100%;height:100%;border-radius:22px;overflow:hidden;background:#fff;display:flex;flex-direction:column}
-.vg-sol .ze2-hdr{padding:8px 10px 6px;font-size:10px;font-weight:700;color:#fff;text-align:center}
-.vg-sol .ze2-hdr-blue{background:#4C7BF4}
-.vg-sol .ze2-hdr-orange{background:#EE6A3C}
-.vg-sol .ze2-hero-retail{height:78px;margin:6px;border-radius:12px;background:linear-gradient(135deg,#f472b6,#e94b6a);display:flex;align-items:center;justify-content:flex-end;padding:0 8px;position:relative}
-.vg-sol .ze2-retail-tag{color:#fff;font-weight:900;font-size:16px;letter-spacing:.02em;text-shadow:0 2px 6px rgba(0,0,0,.25)}
-.vg-sol .ze2-card-row{display:flex;align-items:center;gap:6px;padding:6px 10px}
-.vg-sol .ze2-avatar-sm{width:20px;height:20px;border-radius:50%;background:linear-gradient(180deg,#a78bfa,#7c5cd6);flex-shrink:0}
-.vg-sol .ze2-lines{flex:1;display:flex;flex-direction:column;gap:3px}
-.vg-sol .ze2-lines i{height:4px;background:#e2e8f0;border-radius:3px;display:block}
-.vg-sol .ze2-lines i:last-child{width:60%}
-.vg-sol .ze2-lines-block{padding:2px 10px;display:flex;flex-direction:column;gap:4px}
-.vg-sol .ze2-lines-block i{height:4px;background:#eef2f7;border-radius:3px;display:block}
-.vg-sol .ze2-lines-block i:nth-child(2){width:80%}
-.vg-sol .ze2-lines-block i:nth-child(3){width:55%}
-.vg-sol .ze2-chips{display:flex;gap:4px;padding:8px 10px}
-.vg-sol .ze2-chips span{width:26px;height:14px;background:#dbe7f5;border-radius:4px}
-.vg-sol .ze2-chips span:nth-child(2){background:#fde7dd}
-.vg-sol .ze2-chips span:nth-child(3){background:#dcefdc}
-.vg-sol .ze2-wheel{display:flex;justify-content:center;padding:8px 0}
-.vg-sol .ze2-wheel svg{width:120px;height:120px;filter:drop-shadow(0 6px 12px rgba(0,0,0,.15))}
-.vg-sol .ze2-voucher{margin:6px 10px;padding:6px;background:#EAF3FE;border-radius:10px;display:flex;align-items:center;gap:6px}
-.vg-sol .ze2-voucher-badge{background:#4C7BF4;color:#fff;font-weight:900;font-size:13px;padding:4px 6px;border-radius:6px;display:inline-flex;align-items:baseline;gap:1px}
-.vg-sol .ze2-voucher-badge span{font-size:9px;font-weight:700}
+/* Phones visual — realistic iPhone mockups matching reference */
+.vg-sol .ze2-phones{position:relative;display:flex;justify-content:center;align-items:center;gap:0;padding-left:110px;min-height:440px}
+.vg-sol .ze2-phone{position:relative}
+.vg-sol .ze2-phone-a{transform:rotate(-8deg) translate(-10px,30px);z-index:1}
+.vg-sol .ze2-phone-b{transform:rotate(6deg) translate(-20px,-10px);z-index:2}
+.vg-sol .ze2-frame{width:180px;height:370px;background:linear-gradient(145deg,#4a6a8a,#2b3d54);border-radius:32px;padding:5px;box-shadow:0 30px 60px -10px rgba(20,40,60,.35),inset 0 0 0 1.5px rgba(255,255,255,.15)}
+.vg-sol .ze2-phone-b .ze2-frame{width:190px;height:400px}
+.vg-sol .ze2-notch{position:absolute;top:12px;left:50%;transform:translateX(-50%);width:60px;height:16px;background:#0b0b0d;border-radius:12px;z-index:3}
+.vg-sol .ze2-screen{width:100%;height:100%;border-radius:27px;overflow:hidden;background:#fff;display:flex;flex-direction:column;font-family:'SF Pro Text',system-ui,sans-serif;position:relative}
+
+/* status bar */
+.vg-sol .ze2-status{display:flex;justify-content:space-between;align-items:center;padding:6px 14px 2px;font-size:9px;font-weight:700;color:#0f172a}
+.vg-sol .ze2-status-icons{display:inline-flex;gap:3px;align-items:center}
+.vg-sol .ze2-status-icons i{display:inline-block;background:#0f172a}
+.vg-sol .ze2-sig{width:10px;height:7px;clip-path:polygon(0 100%,25% 100%,25% 75%,50% 75%,50% 50%,75% 50%,75% 25%,100% 25%,100% 100%)}
+.vg-sol .ze2-wifi{width:9px;height:7px;border-radius:1px;clip-path:polygon(0 60%,50% 20%,100% 60%,80% 80%,50% 55%,20% 80%)}
+.vg-sol .ze2-bat{width:14px;height:6px;border-radius:1px;border:1px solid #0f172a;background:linear-gradient(90deg,#0f172a 80%,transparent 80%)}
+.vg-sol .ze2-status-light{color:#fff}
+.vg-sol .ze2-status-light i{background:#fff}
+.vg-sol .ze2-status-light .ze2-bat{border-color:#fff;background:linear-gradient(90deg,#fff 80%,transparent 80%)}
+
+/* topbar */
+.vg-sol .ze2-topbar{display:flex;justify-content:space-between;align-items:center;padding:5px 10px 7px;font-size:10px;font-weight:700;color:#fff}
+.vg-sol .ze2-topbar-blue{background:#fff;color:#0f172a}
+.vg-sol .ze2-topbar-orange{background:linear-gradient(180deg,#f97316,#ea580c)}
+.vg-sol .ze2-topbar-title{font-size:10.5px;font-weight:700}
+.vg-sol .ze2-back{font-size:14px;color:#0f172a}
+.vg-sol .ze2-close{font-size:9px;opacity:.9}
+
+/* Phone A — yellow hero */
+.vg-sol .ze2-hero-retail{position:relative;height:78px;background:linear-gradient(135deg,#fde047 0%,#facc15 60%,#f59e0b 100%);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.vg-sol .ze2-hero-arrows{position:absolute;right:6px;top:50%;transform:translateY(-50%);display:flex;gap:1px;color:rgba(255,255,255,.6);font-size:11px;font-weight:900}
+.vg-sol .ze2-hero-woman{position:absolute;left:0;top:0;width:38%;height:100%;background:radial-gradient(ellipse at 30% 40%,#f9a8d4,#be185d 70%,transparent);opacity:.85}
+.vg-sol .ze2-hero-text{display:flex;flex-direction:column;align-items:center;line-height:.9;z-index:1;margin-left:20px}
+.vg-sol .ze2-hero-tmc{font-size:8px;font-weight:800;color:#7c3aed;letter-spacing:.15em}
+.vg-sol .ze2-hero-retail-word{font-family:'Plus Jakarta Sans',sans-serif;font-size:22px;font-weight:900;color:#7c3aed;letter-spacing:-.02em;text-shadow:1px 1px 0 rgba(255,255,255,.4)}
+.vg-sol .ze2-hero-sub{font-size:5px;font-weight:700;color:#7c3aed;letter-spacing:.15em;margin-top:1px}
+.vg-sol .ze2-hero-bags{position:absolute;left:22%;bottom:8px;width:22px;height:26px;background:linear-gradient(135deg,#f472b6,#a855f7);clip-path:polygon(15% 20%,85% 20%,100% 100%,0 100%);border-radius:2px}
+
+/* Profile row */
+.vg-sol .ze2-profile{display:flex;align-items:center;gap:6px;padding:8px 10px 4px}
+.vg-sol .ze2-oa-badge{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#c026d3,#7c3aed);color:#fff;font-size:6px;font-weight:900;display:flex;align-items:center;justify-content:center;letter-spacing:.02em}
+.vg-sol .ze2-profile-info{flex:1;min-width:0}
+.vg-sol .ze2-profile-name{font-size:10px;font-weight:800;color:#0f172a;display:flex;align-items:center;gap:3px}
+.vg-sol .ze2-verified{color:#3b82f6;font-size:8px}
+.vg-sol .ze2-profile-sub{font-size:7.5px;color:#64748b;margin-top:1px}
+.vg-sol .ze2-dots{color:#94a3b8;font-size:11px;letter-spacing:1px}
+
+.vg-sol .ze2-msg-btn{margin:4px 10px 6px;background:linear-gradient(180deg,#4899f5,#2563eb);color:#fff;text-align:center;padding:6px;border-radius:8px;font-size:9px;font-weight:700;box-shadow:0 2px 6px rgba(37,99,235,.3)}
+
+.vg-sol .ze2-desc{padding:0 10px;display:flex;flex-direction:column;gap:3px}
+.vg-sol .ze2-desc i{height:3.5px;background:#e2e8f0;border-radius:2px;display:block}
+.vg-sol .ze2-desc i:last-child{width:70%}
+.vg-sol .ze2-xemthem{padding:4px 10px 6px;color:#3b82f6;font-size:8px;font-weight:600}
+.vg-sol .ze2-quick-label{padding:2px 10px;font-size:9px;font-weight:700;color:#0f172a}
+.vg-sol .ze2-quick-chips{display:flex;gap:4px;padding:4px 8px;overflow:hidden}
+.vg-sol .ze2-quick-chips span{background:#eaf3ff;color:#2563eb;font-size:7px;font-weight:600;padding:4px 6px;border-radius:10px;white-space:nowrap}
+
+/* Phone B — Gift wheel */
+.vg-sol .ze2-greet{display:flex;align-items:center;gap:5px;padding:5px 8px;background:#fff}
+.vg-sol .ze2-greet-avatar{width:18px;height:18px;border-radius:4px;background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#7c3aed;font-size:7px;font-weight:900;display:flex;align-items:center;justify-content:center}
+.vg-sol .ze2-greet-body{flex:1;min-width:0}
+.vg-sol .ze2-greet-name{font-size:8px;color:#64748b;font-weight:600}
+.vg-sol .ze2-greet-msg{font-size:9px;color:#0f172a;font-weight:700;font-style:italic}
+.vg-sol .ze2-greet-cta{width:16px;height:14px;background:#fbbf24;border-radius:3px;color:#fff;font-size:9px;display:flex;align-items:center;justify-content:center;font-weight:900}
+
+.vg-sol .ze2-tabs{display:flex;justify-content:space-around;padding:5px 6px 3px;background:#fff;border-bottom:1px solid #f1f5f9;font-size:8px;color:#64748b;font-weight:600}
+.vg-sol .ze2-tabs .active{color:#f97316;border-bottom:2px solid #f97316;padding-bottom:2px}
+.vg-sol .ze2-sort{padding:3px 8px;font-size:7px;color:#64748b;text-align:right}
+
+.vg-sol .ze2-wheel-wrap{position:relative;display:flex;justify-content:center;align-items:center;padding:4px 0 8px;background:linear-gradient(180deg,#fff,#fff5eb)}
+.vg-sol .ze2-wheel-pointer{position:absolute;top:2px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:9px solid #ec4899;z-index:2;filter:drop-shadow(0 1px 1px rgba(0,0,0,.2))}
+.vg-sol .ze2-wheel-ring{background:conic-gradient(from 0deg,#ec4899,#f97316,#fbbf24,#f97316,#ec4899,#a855f7,#ec4899);padding:4px;border-radius:50%;box-shadow:0 6px 16px rgba(236,72,153,.35),inset 0 0 0 2px rgba(0,0,0,.85)}
+.vg-sol .ze2-wheel-svg{width:130px;height:130px;display:block;border-radius:50%;background:#fff}
+.vg-sol .ze2-wheel-use{position:absolute;right:8px;bottom:6px;font-size:7px;color:#f97316;font-weight:700;font-style:italic}
+
+.vg-sol .ze2-voucher-row{margin:6px 8px;padding:5px;background:#fff;border-radius:8px;display:flex;align-items:center;gap:6px;box-shadow:0 2px 6px rgba(0,0,0,.08);position:relative}
+.vg-sol .ze2-voucher-tile{background:#dbeafe;border-radius:5px;padding:5px 7px;display:flex;flex-direction:column;align-items:center;min-width:36px}
+.vg-sol .ze2-v-label{font-size:5px;font-weight:800;color:#2563eb;letter-spacing:.05em}
+.vg-sol .ze2-v-amt{font-size:11px;font-weight:900;color:#2563eb;line-height:1}
+.vg-sol .ze2-v-amt b{font-size:8px}
+.vg-sol .ze2-voucher-info{flex:1;min-width:0}
+.vg-sol .ze2-v-tag{font-size:6px;color:#94a3b8;font-weight:700;display:flex;align-items:center;gap:3px}
+.vg-sol .ze2-new{background:#ef4444;color:#fff;padding:1px 3px;border-radius:2px;font-size:5.5px}
+.vg-sol .ze2-v-title{font-size:9px;font-weight:800;color:#0f172a;margin-top:1px}
+.vg-sol .ze2-v-sub{font-size:6.5px;color:#94a3b8;margin-top:1px}
+
+.vg-sol .ze2-nav{margin-top:auto;display:flex;justify-content:space-around;padding:5px 4px 6px;background:#fff;border-top:1px solid #f1f5f9}
+.vg-sol .ze2-nav-item{display:flex;flex-direction:column;align-items:center;gap:1px;color:#94a3b8;font-size:5.5px;font-weight:600;position:relative}
+.vg-sol .ze2-nav-item span{font-size:10px}
+.vg-sol .ze2-nav-item.active{color:#f97316}
+.vg-sol .ze2-nav-gift{position:relative}
+.vg-sol .ze2-nav-gift b{position:absolute;top:-3px;right:-6px;background:#ef4444;color:#fff;font-size:5px;padding:1px 3px;border-radius:6px;font-weight:800}
+.vg-sol .ze2-nav-ava{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,#fbbf24,#f97316);display:inline-block}
+
+@media (max-width:960px){
+  .vg-sol .ze2{grid-template-columns:1fr;padding:24px 18px}
+  .vg-sol .ze2-features{position:static;flex-direction:row;flex-wrap:wrap;justify-content:center}
+  .vg-sol .ze2-phones{padding-left:0;min-height:auto;transform:scale(.9)}
+}
 
 /* Automation caption */
 .vg-sol .ze2-caption{background:linear-gradient(180deg,#8ec894,#6fb47a);color:#f4fff4;padding:18px 22px;border-radius:16px;font-size:14px;line-height:1.5;font-weight:500;box-shadow:0 10px 24px rgba(78,168,96,.25)}
