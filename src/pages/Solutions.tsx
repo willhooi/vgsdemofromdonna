@@ -47,51 +47,162 @@ const ZeFeatureList = () => {
   );
 };
 
-const ZePhonesVisual = () => (
-  <div className="ze2-phones" aria-hidden="true">
-    {/* Phone 1 — Retail */}
-    <div className="ze2-phone ze2-phone-a">
-      <div className="ze2-notch" />
-      <div className="ze2-screen">
-        <div className="ze2-hdr ze2-hdr-blue">VietGuys Retail</div>
-        <div className="ze2-hero-retail">
-          <span className="ze2-retail-tag">RETAIL</span>
+const ZePhonesVisual = () => {
+  // Wheel: 6 slices alternating gift/voucher tiles
+  const sliceColors = ["#fbbf24", "#ffffff", "#f97316", "#ffffff", "#fb923c", "#ffffff"];
+  const slices = sliceColors.map((c, i) => {
+    const a1 = (i * 60 - 90) * Math.PI / 180;
+    const a2 = ((i + 1) * 60 - 90) * Math.PI / 180;
+    const x1 = 70 + 60 * Math.cos(a1), y1 = 70 + 60 * Math.sin(a1);
+    const x2 = 70 + 60 * Math.cos(a2), y2 = 70 + 60 * Math.sin(a2);
+    return <path key={i} d={`M70,70 L${x1},${y1} A60,60 0 0,1 ${x2},${y2} Z`} fill={c} />;
+  });
+  // Center-angle icon positions (r=38 from center)
+  const iconPositions = [0, 1, 2, 3, 4, 5].map(i => {
+    const a = ((i * 60) + 30 - 90) * Math.PI / 180;
+    return { x: 70 + 38 * Math.cos(a), y: 70 + 38 * Math.sin(a), isGift: i % 2 === 0 };
+  });
+
+  return (
+    <div className="ze2-phones" aria-hidden="true">
+      {/* Phone A — TMC Retail OA */}
+      <div className="ze2-phone ze2-phone-a">
+        <div className="ze2-frame">
+          <div className="ze2-notch" />
+          <div className="ze2-screen">
+            {/* Status bar */}
+            <div className="ze2-status">
+              <span>17:42</span>
+              <span className="ze2-status-icons">
+                <i className="ze2-sig" /><i className="ze2-wifi" /><i className="ze2-bat" />
+              </span>
+            </div>
+            {/* Top bar */}
+            <div className="ze2-topbar ze2-topbar-blue">
+              <span className="ze2-back">‹</span>
+              <span className="ze2-topbar-title">TMC Retail</span>
+              <span />
+            </div>
+            {/* Yellow hero */}
+            <div className="ze2-hero-retail">
+              <div className="ze2-hero-arrows"><span>›</span><span>›</span><span>›</span></div>
+              <div className="ze2-hero-woman" />
+              <div className="ze2-hero-text">
+                <span className="ze2-hero-tmc">TMC</span>
+                <span className="ze2-hero-retail-word">RETAIL</span>
+                <span className="ze2-hero-sub">THE MASTER CHANNEL</span>
+              </div>
+              <div className="ze2-hero-bags" />
+            </div>
+            {/* Profile row */}
+            <div className="ze2-profile">
+              <div className="ze2-oa-badge">RETAIL</div>
+              <div className="ze2-profile-info">
+                <div className="ze2-profile-name">TMC Retail <span className="ze2-verified">✓</span></div>
+                <div className="ze2-profile-sub">Doanh nghiệp</div>
+              </div>
+              <span className="ze2-dots">···</span>
+            </div>
+            {/* Message button */}
+            <div className="ze2-msg-btn">Nhắn tin</div>
+            {/* Description lines */}
+            <div className="ze2-desc"><i /><i /><i /></div>
+            <div className="ze2-xemthem">Xem thêm</div>
+            {/* Quick actions */}
+            <div className="ze2-quick-label">Tương tác nhanh</div>
+            <div className="ze2-quick-chips">
+              <span>🔍 Về PangoCDP</span>
+              <span>🛍 Shop gần bạn</span>
+              <span>🎁 Kho q…</span>
+            </div>
+          </div>
         </div>
-        <div className="ze2-card-row">
-          <div className="ze2-avatar-sm" />
-          <div className="ze2-lines"><i /><i /></div>
+      </div>
+
+      {/* Phone B — Gifts + Wheel */}
+      <div className="ze2-phone ze2-phone-b">
+        <div className="ze2-frame">
+          <div className="ze2-notch" />
+          <div className="ze2-screen">
+            <div className="ze2-status ze2-status-light">
+              <span>9:41</span>
+              <span className="ze2-status-icons">
+                <i className="ze2-sig" /><i className="ze2-wifi" /><i className="ze2-bat" />
+              </span>
+            </div>
+            <div className="ze2-topbar ze2-topbar-orange">
+              <span className="ze2-topbar-title">The Master Channel Gift</span>
+              <span className="ze2-close">···  ×</span>
+            </div>
+            {/* Chat greeting row */}
+            <div className="ze2-greet">
+              <div className="ze2-greet-avatar">R</div>
+              <div className="ze2-greet-body">
+                <div className="ze2-greet-name">TMC Retail</div>
+                <div className="ze2-greet-msg">Chào buổi sáng!</div>
+              </div>
+              <div className="ze2-greet-cta">↗</div>
+            </div>
+            {/* Tabs */}
+            <div className="ze2-tabs">
+              <span className="active">Tất cả quà</span>
+              <span>Mã QR quà tặng</span>
+              <span>Mã giảm giá</span>
+            </div>
+            <div className="ze2-sort">Sắp xếp ↕</div>
+            {/* Wheel */}
+            <div className="ze2-wheel-wrap">
+              <div className="ze2-wheel-pointer" />
+              <div className="ze2-wheel-ring">
+                <svg viewBox="0 0 140 140" className="ze2-wheel-svg">
+                  {slices}
+                  {iconPositions.map((p, i) => (
+                    <g key={i} transform={`translate(${p.x - 8},${p.y - 8})`}>
+                      {p.isGift ? (
+                        <>
+                          <rect x="0" y="4" width="16" height="12" rx="1.5" fill="#60a5fa" />
+                          <rect x="0" y="4" width="16" height="3" fill="#3b82f6" />
+                          <rect x="7" y="0" width="2" height="16" fill="#fbbf24" />
+                        </>
+                      ) : (
+                        <>
+                          <rect x="0" y="3" width="16" height="10" rx="2" fill="#ef4444" />
+                          <text x="8" y="11" textAnchor="middle" fontSize="7" fill="#fff" fontWeight="700">%</text>
+                        </>
+                      )}
+                    </g>
+                  ))}
+                  <circle cx="70" cy="70" r="10" fill="#0f0f10" />
+                </svg>
+              </div>
+              <div className="ze2-wheel-use">Dùng ngay</div>
+            </div>
+            {/* Voucher card */}
+            <div className="ze2-voucher-row">
+              <div className="ze2-voucher-tile">
+                <span className="ze2-v-label">VOUCHER</span>
+                <span className="ze2-v-amt">50 <b>K</b></span>
+              </div>
+              <div className="ze2-voucher-info">
+                <div className="ze2-v-tag"><span className="ze2-new">MỚI</span> MÃ GIẢM GIÁ</div>
+                <div className="ze2-v-title">Voucher 50k</div>
+                <div className="ze2-v-sub">Hết hạn một tháng tới</div>
+              </div>
+            </div>
+            {/* Bottom nav */}
+            <div className="ze2-nav">
+              <div className="ze2-nav-item"><span>▤</span><small>Khám phá</small></div>
+              <div className="ze2-nav-item"><span>▦</span><small>Quét QR</small></div>
+              <div className="ze2-nav-item active"><span className="ze2-nav-gift">🎁<b>9</b></span><small>Quà tặng</small></div>
+              <div className="ze2-nav-item"><span>⟲</span><small>Lịch sử</small></div>
+              <div className="ze2-nav-item"><span className="ze2-nav-ava" /><small>Cá nhân</small></div>
+            </div>
+          </div>
         </div>
-        <div className="ze2-lines-block"><i /><i /><i /></div>
-        <div className="ze2-chips"><span /><span /><span /></div>
       </div>
     </div>
-    {/* Phone 2 — Gifts / Wheel */}
-    <div className="ze2-phone ze2-phone-b">
-      <div className="ze2-notch" />
-      <div className="ze2-screen">
-        <div className="ze2-hdr ze2-hdr-orange">VietGuys Gifts</div>
-        <div className="ze2-wheel">
-          <svg viewBox="0 0 120 120">
-            {[0,1,2,3,4,5,6,7].map(i => {
-              const colors = ["#f5a623","#e94b6a","#f7d34a","#9b59b6","#f5a623","#e94b6a","#f7d34a","#9b59b6"];
-              const a1 = (i * 45 - 90) * Math.PI / 180;
-              const a2 = ((i + 1) * 45 - 90) * Math.PI / 180;
-              const x1 = 60 + 50 * Math.cos(a1), y1 = 60 + 50 * Math.sin(a1);
-              const x2 = 60 + 50 * Math.cos(a2), y2 = 60 + 50 * Math.sin(a2);
-              return <path key={i} d={`M60,60 L${x1},${y1} A50,50 0 0,1 ${x2},${y2} Z`} fill={colors[i]} />;
-            })}
-            <circle cx="60" cy="60" r="10" fill="#0f0f10" />
-            <polygon points="60,4 54,18 66,18" fill="#e94b6a" />
-          </svg>
-        </div>
-        <div className="ze2-voucher">
-          <div className="ze2-voucher-badge">50<span>K</span></div>
-          <div className="ze2-lines"><i /><i /></div>
-        </div>
-      </div>
-    </div>
-  </div>
-);
+  );
+};
 
 const ZeAutomationCaption = () => (
   <div className="ze2-caption">
