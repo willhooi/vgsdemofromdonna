@@ -80,7 +80,7 @@ const ZePhonesVisual = () => {
             {/* Top bar */}
             <div className="ze2-topbar ze2-topbar-blue">
               <span className="ze2-back">‹</span>
-              <span className="ze2-topbar-title">TMC Retail</span>
+              <span className="ze2-topbar-title">VietGuys Retail</span>
               <span />
             </div>
             {/* Yellow hero */}
