@@ -106,7 +106,7 @@ const ZePhonesVisual = () => {
             {/* Quick actions */}
             <div className="ze2-quick-label">Tương tác nhanh</div>
             <div className="ze2-quick-chips">
-              <span>🔍 Về PangoCDP</span>
+              <span>🔍 Về VietGuys</span>
               <span>🛍 Shop gần bạn</span>
               <span>🎁 Kho q…</span>
             </div>
