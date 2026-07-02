@@ -87,11 +87,6 @@ const ZePhonesVisual = () => {
             <div className="ze2-hero-retail">
               <div className="ze2-hero-arrows"><span>›</span><span>›</span><span>›</span></div>
               <div className="ze2-hero-woman" />
-              <div className="ze2-hero-text">
-                <span className="ze2-hero-tmc">TMC</span>
-                <span className="ze2-hero-retail-word">RETAIL</span>
-                <span className="ze2-hero-sub">THE MASTER CHANNEL</span>
-              </div>
               <div className="ze2-hero-bags" />
             </div>
             {/* Profile row */}
