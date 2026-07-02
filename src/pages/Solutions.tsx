@@ -98,7 +98,7 @@ const ZePhonesVisual = () => {
             <div className="ze2-profile">
               <div className="ze2-oa-badge">RETAIL</div>
               <div className="ze2-profile-info">
-                <div className="ze2-profile-name">TMC Retail <span className="ze2-verified">✓</span></div>
+                <div className="ze2-profile-name">VietGuys Retail <span className="ze2-verified">✓</span></div>
                 <div className="ze2-profile-sub">Doanh nghiệp</div>
               </div>
               <span className="ze2-dots">···</span>
@@ -131,14 +131,14 @@ const ZePhonesVisual = () => {
               </span>
             </div>
             <div className="ze2-topbar ze2-topbar-orange">
-              <span className="ze2-topbar-title">The Master Channel Gift</span>
+              <span className="ze2-topbar-title">VietGuys Gift</span>
               <span className="ze2-close">···  ×</span>
             </div>
             {/* Chat greeting row */}
             <div className="ze2-greet">
               <div className="ze2-greet-avatar">R</div>
               <div className="ze2-greet-body">
-                <div className="ze2-greet-name">TMC Retail</div>
+                <div className="ze2-greet-name">VietGuys Retail</div>
                 <div className="ze2-greet-msg">Chào buổi sáng!</div>
               </div>
               <div className="ze2-greet-cta">↗</div>
